@@ -1,0 +1,43 @@
+{
+  "theme": "romantic",
+  "font": "1",
+  "effects": {
+    "bgEffect": "hearts",
+    "openEffect": "burst",
+    "typewriter": true,
+    "clickSparkles": true,
+    "soundFX": true
+  },
+  "recipient": "Sarah",
+  "sender": "David",
+  "startDate": "2024-05-20",
+  "dateCounterLabel": "Days We've Loved",
+  "musicUrl": "https://assets.mixkit.co/music/preview/mixkit-romantic-moment-50.mp3",
+  "letter": [
+    "From the moment you walked into my life, everything became brighter and warmer.",
+    "Every laugh we shared, every late-night conversation, and every little moment means the world to me.",
+    "Happy Anniversary, my favorite person."
+  ],
+  "photos": [
+    {
+      "url": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&auto=format&fit=crop&q=80",
+      "caption": "Our first sunset walk together (Tap to flip back)"
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&auto=format&fit=crop&q=80",
+      "caption": "Making memories that last a lifetime ❤"
+    }
+  ],
+  "scratchCard": {
+    "enabled": true,
+    "promptText": "Scratch here to reveal a secret promise ✨",
+    "secretText": "🎟 Free Dinner Date + Endless Hugs Ticket!"
+  },
+  "runawayQuestion": {
+    "enabled": true,
+    "question": "Will you be my Valentine forever? 💍",
+    "yesBtn": "Yes, absolutely! ❤",
+    "noBtn": "No way 😜",
+    "successMessage": "Yay! You made me the happiest person alive! 🎉✨"
+  }
+}
