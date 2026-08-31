@@ -298,7 +298,7 @@
 
     async function loadData() {
       try {
-        const res = await fetch(`data/${orderId}.json`);
+        const res = await fetch(`data/${orderId}.json?t=${Date.now()}`);
         configData = res.ok ? await res.json() : getFallback();
       } catch (err) {
         configData = getFallback();
@@ -370,7 +370,10 @@
       if (data.scratchCard && data.scratchCard.enabled) initScratch(data.scratchCard);
       if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
 
-      if (data.musicUrl) bgMusic.src = data.musicUrl;
+      if (data.musicUrl) {
+        bgMusic.src = data.musicUrl;
+        bgMusic.load();
+      }
       initBackgroundParticles(data.effects ? data.effects.bgEffect : theme.bg);
     }
 
