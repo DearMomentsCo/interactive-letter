@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>A Special Letter For You</title>
+
+  <!-- 预加载 9 款 Google 商用免费字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #d9777f;
+      --envelope-bg: #f3ede2;
+      --envelope-dark: #e5dccb;
+      --paper-bg: #fffdfa;
+      --text-color: #333333;
+      --seal-color: #b33939;
+      --letter-font: 'Playfair Display', serif;
+      --letter-font-size: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #141414;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      color: var(--text-color);
+      position: relative;
+    }
+
+    #particle-canvas, #sparkle-canvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+    }
+    #particle-canvas { z-index: 1; }
+    #sparkle-canvas { z-index: 99; }
+
+    /* 悬浮音乐按钮 */
+    .music-btn {
+      position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4); display: flex; justify-content: center;
+      align-items: center; cursor: pointer; z-index: 100; color: #ffffff; opacity: 0;
+      transition: opacity 0.5s ease, transform 0.3s ease;
+    }
+    .music-btn.visible { opacity: 1; }
+    .music-btn.playing svg { animation: spin 4s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* 信封舞台与 3D 折叠 */
+    .envelope-stage {
+      position: relative; width: 320px; height: 220px; perspective: 1000px;
+      z-index: 10; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .envelope-stage.opened { transform: translateY(120px) scale(0.9); opacity: 0; pointer-events: none; }
+    .envelope-wrapper {
+      position: relative; width: 100%; height: 100%; background: var(--envelope-bg);
+      border-radius: 6px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); cursor: pointer;
+    }
+    .envelope-lid {
+      position: absolute; top: 0; left: 0; width: 0; height: 0;
+      border-left: 160px solid transparent; border-right: 160px solid transparent;
+      border-top: 120px solid var(--envelope-dark); transform-origin: top center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
+    }
+    .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
+    
+    .wax-seal {
+      position: absolute; top: 75px; left: 50%; transform: translateX(-50%);
+      width: 48px; height: 48px; background: radial-gradient(circle, var(--seal-color) 60%, #801f1f);
+      border-radius: 50%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); display: flex;
+      justify-content: center; align-items: center; font-size: 20px; z-index: 6;
+      transition: all 0.4s ease; user-select: none;
+    }
+    .envelope-stage.is-opening .wax-seal.burst-anim {
+      transform: translateX(-50%) scale(2.2); opacity: 0; filter: blur(4px);
+    }
+    .envelope-hint {
+      position: absolute; bottom: -40px; left: 0; width: 100%; text-align: center;
+      color: rgba(255, 255, 255, 0.75); font-size: 13px; letter-spacing: 1.5px; animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* 信纸容器 */
+    .letter-container {
+      position: absolute; top: 30px; left: 50%; transform: translateX(-50%) translateY(50px) scale(0.9);
+      width: 92%; max-width: 440px; background: var(--paper-bg); border-radius: 12px;
+      padding: 30px 22px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); opacity: 0;
+      pointer-events: none; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      z-index: 20; margin-bottom: 50px; font-family: var(--letter-font);
+    }
+    .letter-container.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+
+    .letter-header { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 14px; margin-bottom: 20px; text-align: center; }
+    .recipient-name { font-size: 26px; font-weight: 700; color: var(--primary-color); margin-bottom: 6px; }
+    .days-badge {
+      display: inline-block; background: rgba(217, 119, 127, 0.12); color: var(--primary-color);
+      padding: 4px 14px; border-radius: 20px; font-size: 13px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 500;
+    }
+    .days-num { font-weight: 700; font-size: 15px; }
+
+    /* 3D 翻转拍立得相册 */
+    .polaroid-gallery {
+      position: relative; width: 100%; height: 260px; margin-bottom: 24px; perspective: 1000px;
+    }
+    .polaroid-card {
+      position: absolute; width: 100%; height: 100%; border-radius: 8px; background: #ffffff;
+      padding: 10px 10px 30px 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer; display: none;
+    }
+    .polaroid-card.active { display: block; }
+    .polaroid-card.flipped { transform: rotateY(180deg); }
+    .polaroid-front, .polaroid-back {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 8px; padding: 10px;
+    }
+    .polaroid-front img { width: 100%; height: 210px; object-fit: cover; border-radius: 4px; }
+    .polaroid-front-hint { font-size: 11px; color: #999; text-align: center; margin-top: 6px; font-family: sans-serif; }
+    .polaroid-back {
+      background: #faf8f5; transform: rotateY(180deg); display: flex;
+      flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 25px; color: #444; border: 1px dashed rgba(0,0,0,0.15);
+    }
+    .polaroid-back-text { font-size: 18px; line-height: 1.6; }
+
+    /* 信件正文与打字机光标 */
+    .letter-body {
+      font-size: var(--letter-font-size); line-height: 1.85; color: #3d3d3d; margin-bottom: 24px; min-height: 60px;
+    }
+    .letter-body p { margin-bottom: 14px; }
+    .typewriter-cursor {
+      display: inline-block; width: 2px; height: 1.1em; background: var(--primary-color);
+      vertical-align: middle; animation: blink 0.8s infinite; margin-left: 2px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+    /* 刮刮乐区域 */
+    .scratch-section {
+      margin-bottom: 24px; padding: 16px; background: rgba(0, 0, 0, 0.02);
+      border-radius: 10px; text-align: center; border: 1px solid rgba(0,0,0,0.06);
+    }
+    .scratch-prompt { font-size: 13px; font-family: sans-serif; color: #777; margin-bottom: 10px; }
+    .scratch-wrapper {
+      position: relative; width: 100%; max-width: 320px; height: 75px; margin: 0 auto;
+      border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .scratch-secret {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff5f5;
+      display: flex; justify-content: center; align-items: center; font-size: 16px;
+      font-weight: 700; color: var(--primary-color); padding: 10px;
+    }
+    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
+
+    /* 互动逃跑按钮 */
+    .runaway-section {
+      margin-bottom: 24px; padding: 18px 12px; background: rgba(217, 119, 127, 0.06);
+      border-radius: 10px; text-align: center;
+    }
+    .runaway-question { font-size: 17px; font-weight: 700; margin-bottom: 14px; color: #333; }
+    .runaway-btns {
+      position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 15px;
+    }
+    .btn-yes, .btn-no {
+      padding: 10px 22px; border-radius: 20px; border: none; font-size: 14px;
+      font-weight: 600; cursor: pointer; transition: transform 0.15s ease; font-family: sans-serif;
+    }
+    .btn-yes { background: var(--primary-color); color: #fff; box-shadow: 0 4px 12px rgba(217,119,127,0.3); }
+    .btn-no { background: #e0e0e0; color: #666; position: relative; }
+    .runaway-success { font-size: 16px; font-weight: 700; color: var(--primary-color); margin-top: 10px; display: none; }
+
+    .letter-footer { text-align: right; font-size: var(--letter-font-size); color: #555555; margin-top: 15px; }
+    .sender-name { font-size: 24px; font-weight: 700; color: var(--primary-color); margin-top: 4px; }
+  </style>
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+  <canvas id="sparkle-canvas"></canvas>
+
+  <div class="music-btn" id="musicBtn" aria-label="Toggle Music">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
+    </svg>
+  </div>
+  <audio id="bgMusic" loop preload="auto"></audio>
+
+  <div class="envelope-stage" id="envelopeStage">
+    <div class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope-lid"></div>
+      <div class="wax-seal" id="waxSeal">❤</div>
+    </div>
+    <div class="envelope-hint">TAP TO OPEN</div>
+  </div>
+
+  <div class="letter-container" id="letterContainer">
+    <div class="letter-header">
+      <div class="recipient-name" id="recipientText">Dearest</div>
+      <div class="days-badge" id="daysBadge">
+        <span id="dateLabel">Together</span>: <span class="days-num" id="daysCount">0</span> Days
+      </div>
+    </div>
+
+    <div class="polaroid-gallery" id="polaroidGallery"></div>
+    <div class="letter-body" id="letterBody"></div>
+
+    <div class="scratch-section" id="scratchSection" style="display:none;">
+      <div class="scratch-prompt" id="scratchPrompt">Scratch here for a surprise ✨</div>
+      <div class="scratch-wrapper">
+        <div class="scratch-secret" id="scratchSecret">Surprise!</div>
+        <canvas id="scratchCanvas"></canvas>
+      </div>
+    </div>
+
+    <div class="runaway-section" id="runawaySection" style="display:none;">
+      <div class="runaway-question" id="runawayQuestion">Are you ready?</div>
+      <div class="runaway-btns" id="runawayBounds">
+        <button class="btn-yes" id="btnYes">Yes!</button>
+        <button class="btn-no" id="btnNo">No</button>
+      </div>
+      <div class="runaway-success" id="runawaySuccess"></div>
+    </div>
+
+    <div class="letter-footer">
+      <div>Forever yours,</div>
+      <div class="sender-name" id="senderText"></div>
+    </div>
+  </div>
+
+  <script>
+    const THEME_MAP = {
+      "romantic": { color: "#d9777f", seal: "❤", bg: "hearts" },
+      "birthday": { color: "#e67e22", seal: "🎂", bg: "confetti" },
+      "graduation": { color: "#2980b9", seal: "🎓", bg: "stars" },
+      "vintage": { color: "#8d6e63", seal: "✉", bg: "sakura" },
+      "warmth": { color: "#27ae60", seal: "🌿", bg: "stars" },
+      "christmas": { color: "#c0392b", seal: "🎄", bg: "snow" }
+    };
+
+    const FONT_MAP = {
+      "1": { family: "'Great Vibes', cursive", size: "20px" },
+      "2": { family: "'Dancing Script', cursive", size: "18px" },
+      "3": { family: "'Parisienne', cursive", size: "19px" },
+      "4": { family: "'Sacramento', cursive", size: "21px" },
+      "5": { family: "'Caveat', cursive", size: "19px" },
+      "6": { family: "'Playfair Display', serif", size: "15px" },
+      "7": { family: "'Cormorant Garamond', serif", size: "17px" },
+      "8": { family: "'Cinzel', serif", size: "14px" },
+      "9": { family: "'Quicksand', sans-serif", size: "15px" }
+    };
+
+    let configData = {};
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
+
+    // 拟真音效系统
+    function playSound(type) {
+      if (!configData.effects || !configData.effects.soundFX) return;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (type === 'seal') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(280, audioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(); osc.stop(audioCtx.currentTime + 0.12);
+        } else if (type === 'paper') {
+          const bufferSize = audioCtx.sampleRate * 0.12;
+          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+          const noise = audioCtx.createBufferSource(); noise.buffer = buffer;
+          const filter = audioCtx.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.value = 1000;
+          const gain = audioCtx.createGain(); gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+          noise.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+          noise.start(); noise.stop(audioCtx.currentTime + 0.12);
+        }
+      } catch (e) {}
+    }
+
+    // 动态拉取数据
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id') || 'default';
+
+    async function loadData() {
+      try {
+        const res = await fetch(`data/${orderId}.json`);
+        configData = res.ok ? await res.json() : getFallback();
+      } catch (err) {
+        configData = getFallback();
+      }
+      renderUI(configData);
+    }
+
+    function getFallback() {
+      return {
+        theme: "romantic", font: "1",
+        effects: { bgEffect: "hearts", openEffect: "burst", typewriter: true, clickSparkles: true, soundFX: true },
+        recipient: "Sarah", sender: "David", startDate: "2024-05-20", dateCounterLabel: "Days Together",
+        letter: ["From the moment you walked into my life, everything became brighter.", "Happy Anniversary, my love."],
+        photos: [{ url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600", caption: "Forever & Always ❤" }]
+      };
+    }
+
+    function renderUI(data) {
+      const theme = THEME_MAP[data.theme] || THEME_MAP["romantic"];
+      document.documentElement.style.setProperty("--primary-color", (data.meta && data.meta.themeColor) || theme.color);
+      document.getElementById("waxSeal").innerText = theme.seal;
+
+      const font = FONT_MAP[data.font] || FONT_MAP["1"];
+      document.documentElement.style.setProperty("--letter-font", font.family);
+      document.documentElement.style.setProperty("--letter-font-size", font.size);
+
+      document.getElementById("recipientText").innerText = data.recipient;
+      document.getElementById("senderText").innerText = data.sender;
+
+      if (data.startDate) {
+        const diffDays = Math.ceil(Math.abs(new Date() - new Date(data.startDate)) / (1000 * 60 * 60 * 24));
+        document.getElementById("daysCount").innerText = diffDays;
+        if (data.dateCounterLabel) document.getElementById("dateLabel").innerText = data.dateCounterLabel;
+      } else {
+        document.getElementById("daysBadge").style.display = "none";
+      }
+
+      // 渲染拍立得相册
+      const gallery = document.getElementById("polaroidGallery");
+      gallery.innerHTML = "";
+      if (data.photos && data.photos.length > 0) {
+        data.photos.forEach((item, idx) => {
+          const url = typeof item === 'string' ? item : item.url;
+          const cap = typeof item === 'string' ? 'Tap to flip' : (item.caption || 'Tap to flip');
+          const card = document.createElement("div");
+          card.className = `polaroid-card ${idx === 0 ? 'active' : ''}`;
+          card.innerHTML = `
+            <div class="polaroid-front"><img src="${url}"><div class="polaroid-front-hint">Tap to see note ↻</div></div>
+            <div class="polaroid-back"><div class="polaroid-back-text">${cap}</div></div>
+          `;
+          card.addEventListener("click", () => card.classList.toggle("flipped"));
+          gallery.appendChild(card);
+        });
+
+        if (data.photos.length > 1) {
+          let current = 0;
+          setInterval(() => {
+            const cards = gallery.querySelectorAll(".polaroid-card");
+            cards[current].classList.remove("active", "flipped");
+            current = (current + 1) % cards.length;
+            cards[current].classList.add("active");
+          }, 4500);
+        }
+      } else {
+        gallery.style.display = "none";
+      }
+
+      // 刮刮乐与逃跑按钮
+      if (data.scratchCard && data.scratchCard.enabled) initScratch(data.scratchCard);
+      if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
+
+      if (data.musicUrl) bgMusic.src = data.musicUrl;
+      initBackgroundParticles(data.effects ? data.effects.bgEffect : theme.bg);
+    }
+
+    // 拆信动作
+    const envelopeWrapper = document.getElementById("envelopeWrapper");
+    envelopeWrapper.addEventListener("click", () => {
+      document.getElementById("envelopeStage").classList.add("is-opening");
+      playSound('seal');
+
+      if (configData.effects && configData.effects.openEffect === "burst") {
+        document.getElementById("waxSeal").classList.add("burst-anim");
+      }
+
+      if (configData.musicUrl) {
+        bgMusic.play().then(() => { isPlaying = true; musicBtn.classList.add("playing"); }).catch(e => {});
+      }
+
+      setTimeout(() => {
+        playSound('paper');
+        document.getElementById("envelopeStage").classList.add("opened");
+        document.getElementById("letterContainer").classList.add("show");
+        if (configData.musicUrl) musicBtn.classList.add("visible");
+        startLetterContent();
+      }, 700);
+    });
+
+    // 打字机效果
+    async function startLetterContent() {
+      const container = document.getElementById("letterBody");
+      container.innerHTML = "";
+      const isTypewriter = configData.effects ? configData.effects.typewriter : true;
+
+      if (!isTypewriter) {
+        configData.letter.forEach(p => {
+          const el = document.createElement("p");
+          el.innerText = p;
+          container.appendChild(el);
+        });
+        return;
+      }
+
+      for (let pText of configData.letter) {
+        const p = document.createElement("p");
+        container.appendChild(p);
+        const cursor = document.createElement("span");
+        cursor.className = "typewriter-cursor";
+        p.appendChild(cursor);
+
+        for (let char of pText) {
+          p.insertBefore(document.createTextNode(char), cursor);
+          await new Promise(r => setTimeout(r, 28));
+        }
+        cursor.remove();
+        await new Promise(r => setTimeout(r, 180));
+      }
+    }
+
+    // 刮刮乐初始化
+    function initScratch(cfg) {
+      const sec = document.getElementById("scratchSection");
+      sec.style.display = "block";
+      document.getElementById("scratchPrompt").innerText = cfg.promptText || "Scratch for a surprise";
+      document.getElementById("scratchSecret").innerText = cfg.secretText || "Surprise!";
+
+      const canvas = document.getElementById("scratchCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      ctx.fillStyle = "#c5a059";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 13px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("✦ SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2 + 5);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 16, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener("mousedown", () => isScratching = true);
+      canvas.addEventListener("touchstart", () => isScratching = true);
+      window.addEventListener("mouseup", () => isScratching = false);
+      window.addEventListener("touchend", () => isScratching = false);
+      canvas.addEventListener("mousemove", scratch);
+      canvas.addEventListener("touchmove", scratch);
+    }
+
+    // 逃跑按钮初始化
+    function initRunaway(cfg) {
+      const sec = document.getElementById("runawaySection");
+      sec.style.display = "block";
+      document.getElementById("runawayQuestion").innerText = cfg.question;
+      const btnYes = document.getElementById("btnYes");
+      const btnNo = document.getElementById("btnNo");
+      const successEl = document.getElementById("runawaySuccess");
+
+      btnYes.innerText = cfg.yesBtn || "Yes!";
+      btnNo.innerText = cfg.noBtn || "No";
+      successEl.innerText = cfg.successMessage || "Yay! ❤";
+
+      function dodge() {
+        const x = (Math.random() - 0.5) * 160;
+        const y = (Math.random() - 0.5) * 60;
+        btnNo.style.transform = `translate(${x}px, ${y}px)`;
+      }
+
+      btnNo.addEventListener("mouseenter", dodge);
+      btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); });
+
+      btnYes.addEventListener("click", () => {
+        document.getElementById("runawayBounds").style.display = "none";
+        successEl.style.display = "block";
+        initBackgroundParticles("confetti");
+      });
+    }
+
+    // 音乐按钮事件
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) { bgMusic.pause(); musicBtn.classList.remove("playing"); }
+      else { bgMusic.play(); musicBtn.classList.add("playing"); }
+      isPlaying = !isPlaying;
+    });
+
+    // 粒子引擎
+    const pCanvas = document.getElementById("particle-canvas");
+    const pCtx = pCanvas.getContext("2d");
+    let particles = [];
+    function resizeP() { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
+    window.addEventListener("resize", resizeP);
+    resizeP();
+
+    class Particle {
+      constructor(type) { this.type = type; this.reset(); }
+      reset() {
+        this.x = Math.random() * pCanvas.width;
+        this.opacity = Math.random() * 0.6 + 0.2;
+        if (this.type === 'stars') {
+          this.y = Math.random() * pCanvas.height; this.size = Math.random() * 2.5 + 1;
+          this.speedO = (Math.random() * 0.02 + 0.005) * (Math.random() > 0.5 ? 1 : -1);
+        } else if (this.type === 'confetti') {
+          this.y = -20; this.size = Math.random() * 7 + 4; this.speedY = Math.random() * 2.5 + 1.2;
+          this.speedX = Math.random() * 2 - 1;
+          this.color = ["#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3", "#54a0ff"][Math.floor(Math.random() * 5)];
+          this.angle = Math.random() * Math.PI * 2;
+        } else if (this.type === 'sakura') {
+          this.y = -20; this.size = Math.random() * 8 + 5; this.speedY = Math.random() * 1.5 + 0.8;
+          this.speedX = Math.random() * 1.5 - 0.5; this.angle = Math.random() * Math.PI * 2;
+        } else if (this.type === 'snow') {
+          this.y = -20; this.size = Math.random() * 4 + 2; this.speedY = Math.random() * 1.5 + 0.5;
+          this.speedX = Math.random() * 0.8 - 0.4;
+        } else {
+          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6;
+          this.speedX = Math.random() * 0.6 - 0.3;
+        }
+      }
+      update() {
+        if (this.type === 'stars') {
+          this.opacity += this.speedO;
+          if (this.opacity > 0.8 || this.opacity < 0.1) this.speedO = -this.speedO;
+        } else {
+          this.y += this.speedY; this.x += this.speedX;
+          if (this.type === 'sakura' || this.type === 'confetti') this.angle += 0.02;
+          if (this.y > pCanvas.height + 20) this.reset();
+        }
+      }
+      draw() {
+        if (this.type === 'stars' || this.type === 'snow') {
+          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'confetti') {
+          pCtx.save(); pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+          pCtx.fillStyle = this.color; pCtx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+          pCtx.restore();
+        } else if (this.type === 'sakura') {
+          pCtx.save(); pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+          pCtx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
+          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2); pCtx.fill();
+          pCtx.restore();
+        } else {
+          pCtx.fillStyle = `rgba(217, 119, 127, ${this.opacity})`;
+          pCtx.beginPath(); const h = this.size * 0.3;
+          pCtx.moveTo(this.x, this.y + h);
+          pCtx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + h);
+          pCtx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + h) / 2, this.x, this.y + (this.size + h) / 1.4, this.x, this.y + this.size);
+          pCtx.bezierCurveTo(this.x, this.y + (this.size + h) / 1.4, this.x + this.size / 2, this.y + (this.size + h) / 2, this.x + this.size / 2, this.y + h);
+          pCtx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + h);
+          pCtx.closePath(); pCtx.fill();
+        }
+      }
+    }
+
+    function initBackgroundParticles(type) {
+      particles = [];
+      const count = type === 'stars' ? 50 : 25;
+      for (let i = 0; i < count; i++) particles.push(new Particle(type || 'hearts'));
+    }
+
+    function animateP() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateP);
+    }
+    animateP();
+
+    // 屏幕点击微光
+    const sCanvas = document.getElementById("sparkle-canvas");
+    const sCtx = sCanvas.getContext("2d");
+    let sparkles = [];
+    function resizeS() { sCanvas.width = window.innerWidth; sCanvas.height = window.innerHeight; }
+    window.addEventListener("resize", resizeS);
+    resizeS();
+
+    window.addEventListener("pointerdown", (e) => {
+      if (!configData.effects || configData.effects.clickSparkles !== false) {
+        for (let i = 0; i < 6; i++) {
+          sparkles.push({
+            x: e.clientX, y: e.clientY,
+            vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4,
+            life: 1, color: `hsl(${Math.random() * 50 + 340}, 80%, 70%)`
+          });
+        }
+      }
+    });
+
+    function animateSparkles() {
+      sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
+      sparkles.forEach((s, idx) => {
+        s.x += s.vx; s.y += s.vy; s.life -= 0.03;
+        sCtx.fillStyle = s.color; sCtx.globalAlpha = Math.max(s.life, 0);
+        sCtx.beginPath(); sCtx.arc(s.x, s.y, 3, 0, Math.PI * 2); sCtx.fill();
+        if (s.life <= 0) sparkles.splice(idx, 1);
+      });
+      requestAnimationFrame(animateSparkles);
+    }
+    animateSparkles();
+
+    loadData();
+  </script>
+</body>
+</html>
