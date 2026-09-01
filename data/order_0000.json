@@ -1,0 +1,40 @@
+{
+  "theme": "romantic",
+  "fontFamily": "font-caveat",
+  "recipient": "Lucas ❤",
+  "sender": "Forever Yours, Emily ✨",
+  "dateLabel": "Days of Loving You",
+  "specialDate": "2025-12-20",
+  "letterTitle": "Happy 4th Anniversary, My Love",
+  "letterContent": [
+    "Looking back on the day we met at that little coffee shop in Seattle, I never could have imagined how deeply you would change my entire life.",
+    "Thank you for making me laugh until my stomach hurts, for making the best Sunday morning pancakes, and for holding my hand through every storm.",
+    "You are my home, my peace, and my greatest adventure. Here's to a lifetime more of silly jokes, road trips, and endless love."
+  ],
+  "photos": [
+    {
+      "url": "images/order_0000_1.jpg",
+      "caption": "Our first trip to the coast 🌊"
+    },
+    {
+      "url": "images/order_0000_2.jpg",
+      "caption": "The night we said I love you ✨"
+    }
+  ],
+  "musicUrl": "audio/romantic.mp3",
+  "scratchCard": {
+    "enabled": true,
+    "title": "Scratch for a Sweet Surprise 🎁",
+    "hiddenText": "Surprise! See you soon at Hangzhou this NOV! ✨"
+  },
+  "runawayQuestion": {
+    "enabled": true,
+    "question": "Do you promise to love me even when I'm hangry?",
+    "yesText": "I PROMISE! ❤",
+    "noText": "NO"
+  },
+  "effects": {
+    "bgEffect": "stars",
+    "sealColor": "gold"
+  }
+}
