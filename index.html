@@ -107,38 +107,75 @@
     }
     .days-num { font-weight: 700; font-size: 15px; }
 
-    /* 3D 翻转拍立得相册（优化自适应比例） */
+    /* 3D 翻转拍立得相册（真实 Instax 拍立得相纸比例） */
     .polaroid-gallery {
-      position: relative; width: 100%; height: 300px; margin: 15px auto 25px auto; perspective: 1000px;
+      position: relative;
+      width: 100%;
+      max-width: 310px;
+      height: 390px;
+      margin: 15px auto 25px auto;
+      perspective: 1000px;
     }
     .polaroid-card {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; background: #ffffff;
-      padding: 10px 10px 32px 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer; display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: #ffffff;
+      padding: 12px 12px 35px 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      display: none;
     }
     .polaroid-card.active { display: block; }
     .polaroid-card.flipped { transform: rotateY(180deg); }
     .polaroid-front, .polaroid-back {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 8px; padding: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 6px;
+      padding: 12px 12px 35px 12px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
     }
     .polaroid-front img {
-  width: 100%;
-  height: 245px;
-  object-fit: contain;
-  object-position: center;
-  background: #f7f4ee;
-  border-radius: 4px;
-  display: block;
-}
-    .polaroid-front-hint { font-size: 12px; color: #888; text-align: center; margin-top: 8px; font-family: sans-serif; }
-    .polaroid-back {
-      background: #fffdf9; transform: rotateY(180deg); display: flex;
-      flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; padding: 25px; color: #333; border: 1px dashed rgba(0,0,0,0.15);
+      width: 100%;
+      height: 315px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 3px;
+      display: block;
+      background: #f5f5f5;
     }
-    .polaroid-back-text { font-size: 19px; line-height: 1.6; }
+    .polaroid-front-hint {
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+      margin-top: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .polaroid-back {
+      background: #fffdf9;
+      transform: rotateY(180deg);
+      justify-content: center;
+      padding: 30px 20px;
+      color: #333;
+      border: 1px dashed rgba(0, 0, 0, 0.15);
+    }
+    .polaroid-back-text {
+      font-size: 19px;
+      line-height: 1.6;
+    }
 
     /* 信件正文与打字机 */
     .letter-body {
