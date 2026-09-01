@@ -455,7 +455,17 @@
       }, 700);
     });
 
-    // 核心正文渲染（兼容 letterContent / letter / paragraphs 数组）
+    // 智能打字机：长文自动加速 + 点击信纸瞬间跳过并出全文
+    let isTypingFinished = false;
+    let skipTyping = false;
+
+    // 点击信纸任意位置即可跳过动画，瞬间查看全文
+    document.getElementById("letterContainer").addEventListener("click", () => {
+      if (!isTypingFinished) {
+        skipTyping = true;
+      }
+    });
+
     async function startLetterContent() {
       const container = document.getElementById("letterBody");
       container.innerHTML = "";
@@ -465,31 +475,52 @@
 
       const isTypewriter = configData.effects ? (configData.effects.typewriter !== false) : true;
 
+      // 如果关闭了打字机特效，直接全量渲染
       if (!isTypewriter) {
         paragraphs.forEach(pText => {
           const el = document.createElement("p");
           el.innerText = pText;
           container.appendChild(el);
         });
+        isTypingFinished = true;
         return;
       }
+
+      // 计算信件总字数：字数越多自动加速越快
+      const totalChars = paragraphs.join("").length;
+      const typeSpeed = totalChars > 800 ? 10 : 22;
+
+      isTypingFinished = false;
+      skipTyping = false;
 
       for (let pText of paragraphs) {
         const p = document.createElement("p");
         container.appendChild(p);
+
+        if (skipTyping) {
+          p.innerText = pText;
+          continue;
+        }
+
         const cursor = document.createElement("span");
         cursor.className = "typewriter-cursor";
         p.appendChild(cursor);
 
         for (let char of pText) {
+          if (skipTyping) {
+            p.innerText = pText;
+            break;
+          }
           p.insertBefore(document.createTextNode(char), cursor);
-          await new Promise(r => setTimeout(r, 25));
+          await new Promise(r => setTimeout(r, typeSpeed));
         }
-        cursor.remove();
-        await new Promise(r => setTimeout(r, 160));
-      }
-    }
 
+        if (cursor.parentNode) cursor.remove();
+        if (!skipTyping) await new Promise(r => setTimeout(r, 100));
+      }
+
+      isTypingFinished = true;
+    }
     // 刮刮乐初始化（修复隐藏文字与自适应画板）
     function initScratch(cfg) {
       const sec = document.getElementById("scratchSection");
