@@ -1,38 +1,38 @@
 {
   "theme": "apology",
-  "envelopeStyle": "kintsugi",
+  "envelopeStyle": "whiteflag",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Love",
-  "sender": "Forever Yours",
+  "recipient": "My Commander & Chief ❤",
+  "sender": "Your Humbled Soldier",
   "letterContent": [
-    "I am so truly sorry for upsetting you.",
-    "Looking through our memories together, all I could think about is how much your smile means to me.",
-    "Can we hug it out and start over? I promise to listen more and hold you tighter."
+    "This is an official document of unconditional surrender.",
+    "I was completely wrong, and I have officially raised the white flag.",
+    "Please accept this peace treaty. All future terms and conditions will be 100% dictated by you."
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "My favorite memory with you ❤"
+      "caption": "Throwing my weapons down for you 🏳"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "Forever by your side ✨"
+      "caption": "Lifetime truce guaranteed ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "Peel to heal my heart 🩹",
-    "hiddenText": "Redeemable: 1x Dinner of your choice + Unlimited Hugs! 🍦"
+    "title": "✦ OFFICIAL CEASEFIRE CLAUSE ✦",
+    "hiddenText": "Clause 1: 100x Kisses + Free Food Forever + I Admit Defeat! 📜"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Are you still super mad at me?",
-    "yesText": "STILL MAD",
-    "noText": "NO (I FORGIVE YOU ❤)",
-    "runawayTarget": "yes",
-    "successMessage": "Yay! Thank you for forgiving me! ❤"
+    "question": "Do you accept my surrender & truce?",
+    "yesText": "TRUCE ACCEPTED ❤",
+    "noText": "REJECT SURRENDER",
+    "runawayTarget": "no",
+    "successMessage": "Phew! The war is officially over! I love you! 🕊"
   },
   "effects": {
-    "bgEffect": "gold-dust"
+    "bgEffect": "rain-to-sunshine"
   }
 }
