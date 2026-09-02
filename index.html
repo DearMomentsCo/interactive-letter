@@ -6,7 +6,7 @@
   <title>A Special Keepsake Letter</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 
   <style>
@@ -63,15 +63,7 @@
       cursor: pointer; overflow: visible;
     }
 
-    .kintsugi-gold-overlay {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 6; overflow: hidden; border-radius: 8px;
-    }
-    .kintsugi-gold-overlay svg path {
-      stroke: url(#goldGradient); stroke-width: 2.2; fill: none;
-      stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
-    }
-
+    /* 信封盖 */
     .envelope-lid {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
       border-left: 165px solid transparent; border-right: 165px solid transparent;
@@ -81,6 +73,47 @@
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
 
+    /* ================= 专属信封样式库 ================= */
+    /* 1. 金缮愈合款 */
+    .env-kintsugi { background: #24272e !important; }
+    .env-kintsugi .envelope-lid { border-top-color: #1e2026 !important; }
+    .kintsugi-gold-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 6; overflow: hidden; border-radius: 8px; display: none;
+    }
+    .env-kintsugi .kintsugi-gold-overlay { display: block; }
+    .kintsugi-gold-overlay svg path {
+      stroke: url(#goldGradient); stroke-width: 2.2; fill: none;
+      stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
+    }
+
+    /* 2. 官方白旗款 */
+    .env-whiteflag { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
+    .env-whiteflag .envelope-lid { border-top-color: #f2f2f2 !important; }
+    .env-whiteflag::after {
+      content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 14px; left: 16px;
+      font-size: 10px; font-weight: 700; color: #b73229; border: 1.5px solid #b73229;
+      padding: 3px 6px; transform: rotate(-5deg); border-radius: 3px; letter-spacing: 1px; font-family: 'Cinzel', serif;
+    }
+
+    /* 3. 折角手账便签款 */
+    .env-origami { background: #fffdf2 !important; border: 1px dashed #d8cfb7 !important; }
+    .env-origami .envelope-lid { border-top-color: #f5eedb !important; }
+    .env-origami::before {
+      content: ""; position: absolute; top: 15px; left: 50%;
+      width: 80px; height: 18px; background: rgba(255, 182, 193, 0.65); z-index: 7;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12); transform: translateX(-50%) rotate(-3deg);
+    }
+
+    /* 4. 雨过天晴款 */
+    .env-slate { background: #5a728b !important; }
+    .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
+
+    /* 5. 橄榄和解款 */
+    .env-olive { background: #e8e2d3 !important; border: 1px solid #cfc7b4 !important; }
+    .env-olive .envelope-lid { border-top-color: #dbd4c3 !important; }
+
+    /* 3D 浮雕火漆印 */
     .wax-seal {
       position: absolute; top: 82px; left: 50%; transform: translateX(-50%);
       width: 54px; height: 54px; border-radius: 50%;
@@ -90,7 +123,7 @@
       transition: all 0.4s ease; border: 1.5px solid rgba(255, 215, 0, 0.4);
     }
     .wax-seal svg {
-      width: 26px; height: 26px; fill: none; stroke: #fff6d6; stroke-width: 1.8;
+      width: 24px; height: 24px; fill: none; stroke: #fff6d6; stroke-width: 1.8;
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
     }
     .envelope-stage.is-opening .wax-seal { transform: translateX(-50%) scale(1.8); opacity: 0; filter: blur(4px); }
@@ -102,14 +135,49 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
+    /* ================= 专属成套信纸材质库 ================= */
     .letter-container {
       position: absolute; top: 25px; left: 50%; transform: translateX(-50%) translateY(40px) scale(0.92);
-      width: 92%; max-width: 440px; background: var(--paper-cream); border-radius: 12px;
-      padding: 34px 26px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0,0,0,0.06);
+      width: 92%; max-width: 440px; border-radius: 12px;
+      padding: 34px 26px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
       opacity: 0; pointer-events: none; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
       z-index: 20; margin-bottom: 50px; font-family: var(--letter-font); color: var(--text-main);
     }
     .letter-container.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+
+    /* 1. 金缮专属信纸：象牙和纸 + 烫金双细线边框 */
+    .paper-kintsugi {
+      background: #fcf9f2 !important;
+      border: 1px solid rgba(212, 175, 55, 0.45) !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 5px #fcf9f2, inset 0 0 0 6px rgba(212, 175, 55, 0.3) !important;
+    }
+
+    /* 2. 白旗专属信纸：纯白官方羊皮纸 + 居中暗水印 */
+    .paper-whiteflag {
+      background: #ffffff !important;
+      border: 1px solid #e2e4e8 !important;
+      background-image: radial-gradient(circle at center, rgba(183, 50, 41, 0.03) 0%, transparent 65%) !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* 3. 折角便签信纸：手账稿纸横格线 */
+    .paper-origami {
+      background: #fffdf5 !important;
+      background-image: repeating-linear-gradient(#fffdf5 0px, #fffdf5 27px, #e8dfc8 28px) !important;
+      border: 1px solid #dcd1ba !important;
+    }
+
+    /* 4. 雨过天晴信纸：破晓双色渐变 */
+    .paper-slate {
+      background: linear-gradient(180deg, #f0f4f9 0%, #fffdfa 35%, #fffaf0 100%) !important;
+      border: 1px solid #d4dfe8 !important;
+    }
+
+    /* 5. 橄榄和解信纸：手工撕边棉麻纸 */
+    .paper-olive {
+      background: #f6f3eb !important;
+      border: 2px dashed #cfc7b4 !important;
+    }
 
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
@@ -118,6 +186,7 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
+    /* 拍立得 */
     .polaroid-gallery {
       position: relative; width: 100%; max-width: 300px; height: 380px; margin: 15px auto 26px auto; perspective: 1000px;
     }
@@ -153,6 +222,7 @@
     }
     @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
+    /* 创可贴刮刮乐 */
     .scratch-section {
       margin-bottom: 26px; padding: 18px 12px; background: rgba(0, 0, 0, 0.02);
       border-radius: 12px; text-align: center; border: 1px dashed rgba(197, 160, 89, 0.3);
@@ -178,6 +248,7 @@
     }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
 
+    /* 逃跑按钮 */
     .runaway-section {
       margin-bottom: 24px; padding: 18px 14px; background: rgba(197, 160, 89, 0.06);
       border-radius: 12px; text-align: center;
@@ -292,6 +363,14 @@
     }
 
     function renderUI(data) {
+      const envStyle = data.envelopeStyle || "kintsugi";
+      const envWrapper = document.getElementById("envelopeWrapper");
+      const letterBox = document.getElementById("letterContainer");
+
+      // 清除旧样式并挂载信封与专属信纸
+      envWrapper.className = `envelope-wrapper env-${envStyle}`;
+      letterBox.className = `letter-container paper-${envStyle}`;
+
       document.getElementById("recipientText").innerText = data.recipient || "My Dearest";
       document.getElementById("senderText").innerText = data.sender || "Always with Love";
 
@@ -330,24 +409,22 @@
       if (data.scratchCard && data.scratchCard.enabled) initBandaidScratch(data.scratchCard);
       if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
 
-      // 设置音频源
       if (data.musicUrl) {
         bgMusic.src = data.musicUrl;
       }
 
-      initGoldDustParticles();
+      // 初始化专属粒子
+      const bgType = (data.effects && data.effects.bgEffect) ? data.effects.bgEffect : "gold-dust";
+      initParticles(bgType);
     }
 
-    // 核心：点击信封的第一瞬间同步触发音频
     const envelopeWrapper = document.getElementById("envelopeWrapper");
     envelopeWrapper.addEventListener("click", () => {
-      // 第一优先级唤醒音频播放
       if (bgMusic && bgMusic.src) {
         bgMusic.play().then(() => {
           isPlaying = true;
           musicBtn.classList.add("playing", "visible");
         }).catch(e => {
-          console.log("Autoplay was held, toggle button ready:", e);
           musicBtn.classList.add("visible");
         });
       }
@@ -474,7 +551,6 @@
       });
     }
 
-    // 顶部独立音乐按钮控制
     musicBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       if (isPlaying) {
@@ -489,6 +565,7 @@
       }
     });
 
+    // 多粒子渲染引擎
     const pCanvas = document.getElementById("particle-canvas");
     const pCtx = pCanvas.getContext("2d");
     let particles = [];
@@ -496,36 +573,59 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    class GoldDust {
-      constructor() { this.reset(); }
+    class UniversalParticle {
+      constructor(type) { this.type = type; this.reset(); }
       reset() {
         this.x = Math.random() * pCanvas.width;
-        this.y = pCanvas.height + 20;
-        this.size = Math.random() * 2.2 + 1;
-        this.speedY = -(Math.random() * 0.9 + 0.3);
-        this.speedX = Math.random() * 0.6 - 0.3;
-        this.opacity = Math.random() * 0.5 + 0.2;
+        this.opacity = Math.random() * 0.5 + 0.25;
+        this.angle = Math.random() * Math.PI * 2;
+
+        if (this.type === 'gold-dust') {
+          this.y = pCanvas.height + 20; this.size = Math.random() * 2.2 + 1;
+          this.speedY = -(Math.random() * 0.9 + 0.3); this.speedX = Math.random() * 0.6 - 0.3;
+        } else if (this.type === 'rain-to-sunshine') {
+          this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.5; this.len = Math.random() * 10 + 6;
+        } else if (this.type === 'olive-leaves') {
+          this.y = -20; this.size = Math.random() * 8 + 5; this.speedY = Math.random() * 1.2 + 0.5; this.speedX = Math.random() * 1 - 0.5;
+        } else {
+          this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0;
+        }
       }
       update() {
-        this.y += this.speedY;
-        this.x += Math.sin(this.y * 0.03) * 0.35;
-        if (this.y < -20) this.reset();
+        if (this.type === 'gold-dust') {
+          this.y += this.speedY; this.x += Math.sin(this.y * 0.03) * 0.35;
+          if (this.y < -20) this.reset();
+        } else if (this.type === 'rain-to-sunshine') {
+          this.y += this.speedY; this.x += this.speedX;
+          if (this.y > pCanvas.height + 20) this.reset();
+        } else if (this.type === 'olive-leaves') {
+          this.y += this.speedY; this.x += this.speedX; this.angle += 0.02;
+          if (this.y > pCanvas.height + 20) this.reset();
+        }
       }
       draw() {
         pCtx.save();
-        pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-        pCtx.shadowColor = "#f1c40f";
-        pCtx.shadowBlur = 6;
-        pCtx.beginPath();
-        pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        pCtx.fill();
+        if (this.type === 'gold-dust') {
+          pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+          pCtx.shadowColor = "#f1c40f"; pCtx.shadowBlur = 6;
+          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'rain-to-sunshine') {
+          pCtx.strokeStyle = `rgba(180, 205, 230, ${this.opacity * 0.6})`;
+          pCtx.lineWidth = 1.2; pCtx.beginPath();
+          pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
+        } else if (this.type === 'olive-leaves') {
+          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+          pCtx.fillStyle = `rgba(120, 145, 120, ${this.opacity})`;
+          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.45, 0, 0, Math.PI * 2); pCtx.fill();
+        }
         pCtx.restore();
       }
     }
 
-    function initGoldDustParticles() {
+    function initParticles(type) {
       particles = [];
-      for (let i = 0; i < 40; i++) particles.push(new GoldDust());
+      const count = (type === 'rain-to-sunshine' || type === 'gold-dust') ? 40 : 25;
+      for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
     }
 
     function animateParticles() {
