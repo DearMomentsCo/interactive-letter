@@ -3,16 +3,21 @@
   "envelopeStyle": "kintsugi",
   "fontFamily": "font-caveat",
   "recipient": "My Love",
-  "sender": "Forever Yours, Alex",
+  "sender": "Forever Yours",
+  "musicUrl": "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3",
   "letterContent": [
     "I am so truly sorry for upsetting you.",
-    "Looking through our photos, all I could think about is how much your happiness means to me.",
-    "Can we hug it out and start over? I promise to listen more and treat you even better."
+    "Looking through our memories together, all I could think about is how much your smile means to me.",
+    "Can we hug it out and start over? I promise to listen more and hold you tighter."
   ],
   "photos": [
     {
-      "url": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600",
-      "caption": "Always in my heart ❤"
+      "url": "order_0000_1.jpg",
+      "caption": "My favorite memory with you ❤"
+    },
+    {
+      "url": "order_0000_2.jpg",
+      "caption": "Forever by your side ✨"
     }
   ],
   "scratchCard": {
@@ -29,7 +34,6 @@
     "successMessage": "Yay! Thank you for forgiving me! ❤"
   },
   "effects": {
-    "bgEffect": "gold-dust",
-    "sealIcon": "🩹"
+    "bgEffect": "gold-dust"
   }
 }
