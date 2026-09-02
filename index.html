@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>A Special Letter For You</title>
+  <title>A Special Interactive Letter</title>
 
-  <!-- 预加载 Google 商用免费字体 -->
+  <!-- 预加载经典商业字体 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;700&family=Sacramento&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -25,7 +25,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #141414;
+      background: #121214;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
@@ -56,39 +56,99 @@
 
     /* 信封舞台与 3D 折叠 */
     .envelope-stage {
-      position: relative; width: 320px; height: 220px; perspective: 1000px;
+      position: relative; width: 330px; height: 230px; perspective: 1000px;
       z-index: 10; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .envelope-stage.opened { transform: translateY(120px) scale(0.9); opacity: 0; pointer-events: none; }
     .envelope-wrapper {
       position: relative; width: 100%; height: 100%; background: var(--envelope-bg);
       border-radius: 6px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); cursor: pointer;
+      transition: all 0.4s ease;
     }
     .envelope-lid {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
-      border-left: 160px solid transparent; border-right: 160px solid transparent;
-      border-top: 120px solid var(--envelope-dark); transform-origin: top center;
+      border-left: 165px solid transparent; border-right: 165px solid transparent;
+      border-top: 125px solid var(--envelope-dark); transform-origin: top center;
       transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
     
     .wax-seal {
-      position: absolute; top: 75px; left: 50%; transform: translateX(-50%);
-      width: 50px; height: 50px; background: radial-gradient(circle, var(--seal-color) 60%, #801f1f);
-      border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); display: flex;
-      justify-content: center; align-items: center; font-size: 22px; z-index: 6;
+      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 52px; height: 52px; background: radial-gradient(circle, var(--seal-color) 60%, #3a0e0e);
+      border-radius: 50%; box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35); display: flex;
+      justify-content: center; align-items: center; font-size: 24px; z-index: 6;
       transition: all 0.4s ease; user-select: none;
     }
     .envelope-stage.is-opening .wax-seal.burst-anim {
       transform: translateX(-50%) scale(2.2); opacity: 0; filter: blur(4px);
     }
     .envelope-hint {
-      position: absolute; bottom: -40px; left: 0; width: 100%; text-align: center;
-      color: rgba(255, 255, 255, 0.75); font-size: 13px; letter-spacing: 1.5px; animation: pulse 1.8s infinite;
+      position: absolute; bottom: -45px; left: 0; width: 100%; text-align: center;
+      color: rgba(255, 255, 255, 0.75); font-size: 13px; letter-spacing: 2px; animation: pulse 1.8s infinite;
     }
     @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-    /* 信纸容器 */
+    /* ==================== 10款高定信封专属样式 ==================== */
+    /* 道歉 1: 金缮流光款 */
+    .env-kintsugi { background: #262930 !important; border: 1px solid #d4af37; box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(212,175,55,0.2) !important; }
+    .env-kintsugi .envelope-lid { border-top-color: #1f2228 !important; }
+    .env-kintsugi .wax-seal { background: radial-gradient(circle, #f39c12 50%, #b7791f) !important; box-shadow: 0 0 15px rgba(243,156,18,0.6); }
+
+    /* 道歉 2: 官方白旗投降款 */
+    .env-whiteflag { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
+    .env-whiteflag .envelope-lid { border-top-color: #f0f0f0 !important; }
+    .env-whiteflag::after {
+      content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 12px; left: 15px;
+      font-size: 10px; font-weight: 700; color: #c0392b; border: 1.5px solid #c0392b;
+      padding: 3px 6px; transform: rotate(-6deg); border-radius: 3px; letter-spacing: 1px;
+    }
+
+    /* 道歉 3: 折角手账便签条 */
+    .env-origami { background: #fffbf0 !important; border: 1px dashed #dcd0ba !important; }
+    .env-origami .envelope-lid { border-top-color: #f5eedb !important; }
+    .env-origami::before {
+      content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 18px; background: rgba(255, 182, 193, 0.6); z-index: 7;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1); transform: translateX(-50%) rotate(-3deg);
+    }
+
+    /* 道歉 4: 雨过天晴灰蓝款 */
+    .env-slate { background: #5f758d !important; }
+    .env-slate .envelope-lid { border-top-color: #4f6377 !important; }
+    .env-slate .wax-seal { background: radial-gradient(circle, #f1c40f 50%, #d68910) !important; }
+
+    /* 道歉 5: 自然系橄榄枝款 */
+    .env-olive { background: #e8e3d5 !important; border: 1px solid #d5cfbf !important; }
+    .env-olive .envelope-lid { border-top-color: #dbd5c5 !important; }
+    .env-olive .wax-seal { background: radial-gradient(circle, #5b7058 50%, #3e4f3c) !important; }
+
+    /* 万圣 1: 哥特暗黑黑红 */
+    .env-gothic { background: #111113 !important; border: 1px solid #7a1d1d !important; box-shadow: 0 15px 40px rgba(122,29,29,0.25) !important; }
+    .env-gothic .envelope-lid { border-top-color: #0b0b0c !important; }
+    .env-gothic .wax-seal { background: radial-gradient(circle, #900c3f 50%, #4a041f) !important; }
+
+    /* 万圣 2: 南瓜炭黑双色款 */
+    .env-pumpkin { background: #1c1a17 !important; border: 2px solid #e67e22 !important; }
+    .env-pumpkin .envelope-lid { border-top-color: #141311 !important; }
+    .env-pumpkin .wax-seal { background: radial-gradient(circle, #e67e22 50%, #b35400) !important; }
+
+    /* 万圣 3: 幽灵古堡霓虹紫款 */
+    .env-violet { background: #20132e !important; border: 1px solid #2ecc71 !important; }
+    .env-violet .envelope-lid { border-top-color: #170b22 !important; }
+    .env-violet .wax-seal { background: radial-gradient(circle, #2ecc71 50%, #196f3d) !important; }
+
+    /* 万圣 4: 女巫墨绿坩埚款 */
+    .env-cauldron { background: #13241b !important; border: 1px solid #27ae60 !important; }
+    .env-cauldron .envelope-lid { border-top-color: #0d1a13 !important; }
+    .env-cauldron .wax-seal { background: radial-gradient(circle, #a569bd 50%, #5b2c6f) !important; }
+
+    /* 万圣 5: 木乃伊亚麻绷带款 */
+    .env-mummy { background: #ded7c6 !important; border: 1px solid #c2baa5 !important; }
+    .env-mummy .envelope-lid { border-top-color: #ccc3af !important; }
+    .env-mummy .wax-seal { background: radial-gradient(circle, #34495e 50%, #1a252f) !important; }
+
+    /* ==================== 信纸与核心内容 ==================== */
     .letter-container {
       position: absolute; top: 25px; left: 50%; transform: translateX(-50%) translateY(50px) scale(0.9);
       width: 92%; max-width: 440px; background: var(--paper-bg); border-radius: 12px;
@@ -101,86 +161,42 @@
     .letter-header { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 14px; margin-bottom: 20px; text-align: center; }
     .recipient-name { font-size: 28px; font-weight: 700; color: var(--primary-color); margin-bottom: 6px; }
     .days-badge {
-      display: inline-block; background: rgba(217, 119, 127, 0.12); color: var(--primary-color);
+      display: inline-block; background: rgba(0, 0, 0, 0.06); color: var(--primary-color);
       padding: 4px 14px; border-radius: 20px; font-size: 13px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 500;
     }
     .days-num { font-weight: 700; font-size: 15px; }
 
-    /* 3D 翻转拍立得相册（真实 Instax 拍立得相纸比例） */
+    /* 3D 拍立得 */
     .polaroid-gallery {
-      position: relative;
-      width: 100%;
-      max-width: 310px;
-      height: 390px;
-      margin: 15px auto 25px auto;
-      perspective: 1000px;
+      position: relative; width: 100%; max-width: 310px; height: 390px; margin: 15px auto 25px auto; perspective: 1000px;
     }
     .polaroid-card {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 6px;
-      background: #ffffff;
-      padding: 12px 12px 35px 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.05);
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      display: none;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 6px; background: #ffffff;
+      padding: 12px 12px 35px 12px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer; display: none;
     }
     .polaroid-card.active { display: block; }
     .polaroid-card.flipped { transform: rotateY(180deg); }
     .polaroid-front, .polaroid-back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 6px;
-      padding: 12px 12px 35px 12px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 6px; padding: 12px 12px 35px 12px;
+      box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
     }
     .polaroid-front img {
-      width: 100%;
-      height: 315px;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 3px;
-      display: block;
-      background: #f5f5f5;
+      width: 100%; height: 315px; object-fit: cover; object-position: center;
+      border-radius: 3px; display: block; background: #f5f5f5;
     }
-    .polaroid-front-hint {
-      font-size: 12px;
-      color: #999;
-      text-align: center;
-      margin-top: 10px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+    .polaroid-front-hint { font-size: 12px; color: #999; text-align: center; margin-top: 10px; font-family: sans-serif; }
     .polaroid-back {
-      background: #fffdf9;
-      transform: rotateY(180deg);
-      justify-content: center;
-      padding: 30px 20px;
-      color: #333;
-      border: 1px dashed rgba(0, 0, 0, 0.15);
+      background: #fffdf9; transform: rotateY(180deg); justify-content: center;
+      padding: 30px 20px; color: #333; border: 1px dashed rgba(0, 0, 0, 0.15);
     }
-    .polaroid-back-text {
-      font-size: 19px;
-      line-height: 1.6;
-    }
+    .polaroid-back-text { font-size: 19px; line-height: 1.6; }
 
     /* 信件正文与打字机 */
-    .letter-body {
-      font-size: var(--letter-font-size); line-height: 1.85; color: #3d3d3d; margin-bottom: 24px; min-height: 60px;
-    }
+    .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #3d3d3d; margin-bottom: 24px; min-height: 60px; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
     .typewriter-cursor {
       display: inline-block; width: 2px; height: 1.1em; background: var(--primary-color);
@@ -188,7 +204,7 @@
     }
     @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-    /* 刮刮乐（支持多行文字自动换行与弹性自适应） */
+    /* 刮刮乐模块 */
     .scratch-section {
       margin-bottom: 24px; padding: 16px; background: rgba(0, 0, 0, 0.02);
       border-radius: 10px; text-align: center; border: 1px solid rgba(0,0,0,0.06);
@@ -206,9 +222,9 @@
     }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
 
-    /* 逃跑互动按钮 */
+    /* 互动按钮 */
     .runaway-section {
-      margin-bottom: 24px; padding: 18px 12px; background: rgba(217, 119, 127, 0.06);
+      margin-bottom: 24px; padding: 18px 12px; background: rgba(0, 0, 0, 0.03);
       border-radius: 10px; text-align: center;
     }
     .runaway-question { font-size: 17px; font-weight: 700; margin-bottom: 14px; color: #333; }
@@ -219,7 +235,7 @@
       padding: 10px 22px; border-radius: 20px; border: none; font-size: 14px;
       font-weight: 600; cursor: pointer; transition: transform 0.15s ease; font-family: sans-serif;
     }
-    .btn-yes { background: var(--primary-color); color: #fff; box-shadow: 0 4px 12px rgba(217,119,127,0.3); }
+    .btn-yes { background: var(--primary-color); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .btn-no { background: #e0e0e0; color: #666; position: relative; }
     .runaway-success { font-size: 16px; font-weight: 700; color: var(--primary-color); margin-top: 10px; display: none; }
 
@@ -251,7 +267,7 @@
     <div class="letter-header">
       <div class="recipient-name" id="recipientText">Dearest</div>
       <div class="days-badge" id="daysBadge">
-        <span id="dateLabel">Together</span>: <span class="days-num" id="daysCount">0</span> Days
+        <span id="dateLabel">Together</span>: <span class="days-num" id="daysCount">0</span>
       </div>
     </div>
 
@@ -283,33 +299,18 @@
 
   <script>
     const THEME_MAP = {
-      "romantic": { color: "#d9777f", seal: "❤", bg: "hearts" },
-      "birthday": { color: "#e67e22", seal: "🎂", bg: "confetti" },
-      "graduation": { color: "#2980b9", seal: "🎓", bg: "stars" },
-      "vintage": { color: "#8d6e63", seal: "✉", bg: "sakura" },
-      "warmth": { color: "#27ae60", seal: "🌿", bg: "stars" },
-      "christmas": { color: "#c0392b", seal: "🎄", bg: "snow" }
+      "romantic": { color: "#d9777f", seal: "❤", bg: "hearts", envBg: "#f3ede2", envDark: "#e5dccb" },
+      "apology": { color: "#546e7a", seal: "🌿", bg: "rain-to-sunshine", envBg: "#e8ecf1", envDark: "#d2dbe3" },
+      "halloween": { color: "#e67e22", seal: "🎃", bg: "pumpkins", envBg: "#1e1b24", envDark: "#131017" }
     };
 
     const FONT_MAP = {
-      "1": { family: "'Great Vibes', cursive", size: "22px" },
-      "2": { family: "'Dancing Script', cursive", size: "20px" },
-      "3": { family: "'Parisienne', cursive", size: "21px" },
-      "4": { family: "'Sacramento', cursive", size: "23px" },
-      "5": { family: "'Caveat', cursive", size: "21px" },
-      "6": { family: "'Playfair Display', serif", size: "16px" },
-      "7": { family: "'Cormorant Garamond', serif", size: "18px" },
-      "8": { family: "'Cinzel', serif", size: "15px" },
-      "9": { family: "'Quicksand', sans-serif", size: "16px" },
-      "font-greatvibes": { family: "'Great Vibes', cursive", size: "22px" },
+      "font-caveat": { family: "'Caveat', cursive", size: "21px" },
       "font-dancing": { family: "'Dancing Script', cursive", size: "20px" },
       "font-parisienne": { family: "'Parisienne', cursive", size: "21px" },
-      "font-sacramento": { family: "'Sacramento', cursive", size: "23px" },
-      "font-caveat": { family: "'Caveat', cursive", size: "21px" },
       "font-playfair": { family: "'Playfair Display', serif", size: "16px" },
-      "font-cormorant": { family: "'Cormorant Garamond', serif", size: "18px" },
       "font-cinzel": { family: "'Cinzel', serif", size: "15px" },
-      "font-quicksand": { family: "'Quicksand', sans-serif", size: "16px" }
+      "font-specialelite": { family: "'Special Elite', cursive", size: "15px" }
     };
 
     let configData = {};
@@ -360,37 +361,46 @@
 
     function getFallback() {
       return {
-        theme: "romantic", fontFamily: "font-dancing",
-        recipient: "Sarah", sender: "David", specialDate: "2024-05-20", dateLabel: "Days Together",
-        letterContent: ["From the moment you walked into my life, everything became brighter.", "Happy Anniversary, my love."],
-        photos: [{ url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600", caption: "Forever & Always ❤" }]
+        theme: "apology", envelopeStyle: "kintsugi",
+        fontFamily: "font-caveat", recipient: "My Love", sender: "Forever Yours",
+        letterContent: ["I am so truly sorry for upsetting you.", "Can we hug it out and start over?"],
+        photos: [{ url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600", caption: "Always in my heart ❤" }]
       };
     }
 
     function renderUI(data) {
       const theme = THEME_MAP[data.theme] || THEME_MAP["romantic"];
       document.documentElement.style.setProperty("--primary-color", (data.meta && data.meta.themeColor) || theme.color);
-      document.getElementById("waxSeal").innerText = theme.seal;
+      document.documentElement.style.setProperty("--envelope-bg", theme.envBg);
+      document.documentElement.style.setProperty("--envelope-dark", theme.envDark);
 
-      const fontKey = data.fontFamily || data.font || "font-dancing";
-      const font = FONT_MAP[fontKey] || FONT_MAP["2"];
+      // 信封样式匹配
+      const envWrapper = document.getElementById("envelopeWrapper");
+      if (data.envelopeStyle) {
+        envWrapper.classList.add(`env-${data.envelopeStyle}`);
+      }
+
+      const sealIcon = (data.effects && data.effects.sealIcon) || theme.seal;
+      document.getElementById("waxSeal").innerText = sealIcon;
+
+      const fontKey = data.fontFamily || "font-caveat";
+      const font = FONT_MAP[fontKey] || FONT_MAP["font-caveat"];
       document.documentElement.style.setProperty("--letter-font", font.family);
       document.documentElement.style.setProperty("--letter-font-size", font.size);
 
       document.getElementById("recipientText").innerText = data.recipient || "Dearest";
       document.getElementById("senderText").innerText = data.sender || "";
 
-      // 纪念日计算兼容
       const targetDate = data.specialDate || data.startDate;
       if (targetDate) {
         const diffDays = Math.ceil(Math.abs(new Date() - new Date(targetDate)) / (1000 * 60 * 60 * 24));
         document.getElementById("daysCount").innerText = diffDays;
-        document.getElementById("dateLabel").innerText = data.dateLabel || data.dateCounterLabel || "Together";
+        document.getElementById("dateLabel").innerText = data.dateLabel || "Together";
       } else {
         document.getElementById("daysBadge").style.display = "none";
       }
 
-      // 渲染拍立得相册
+      // 拍立得
       const gallery = document.getElementById("polaroidGallery");
       gallery.innerHTML = "";
       if (data.photos && data.photos.length > 0) {
@@ -422,8 +432,7 @@
         gallery.style.display = "none";
       }
 
-      // 刮刮乐与逃跑按钮兼容
-      if (data.scratchCard && data.scratchCard.enabled) initScratch(data.scratchCard);
+      if (data.scratchCard && data.scratchCard.enabled) initScratch(data.scratchCard, data.theme);
       if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
 
       if (data.musicUrl) {
@@ -435,7 +444,6 @@
       initBackgroundParticles(bgType);
     }
 
-    // 拆信动作
     const envelopeWrapper = document.getElementById("envelopeWrapper");
     envelopeWrapper.addEventListener("click", () => {
       document.getElementById("envelopeStage").classList.add("is-opening");
@@ -455,15 +463,11 @@
       }, 700);
     });
 
-    // 智能打字机：长文自动加速 + 点击信纸瞬间跳过并出全文
     let isTypingFinished = false;
     let skipTyping = false;
 
-    // 点击信纸任意位置即可跳过动画，瞬间查看全文
     document.getElementById("letterContainer").addEventListener("click", () => {
-      if (!isTypingFinished) {
-        skipTyping = true;
-      }
+      if (!isTypingFinished) skipTyping = true;
     });
 
     async function startLetterContent() {
@@ -473,20 +477,6 @@
       const paragraphs = configData.letterContent || configData.letter || configData.paragraphs || [];
       if (!paragraphs || paragraphs.length === 0) return;
 
-      const isTypewriter = configData.effects ? (configData.effects.typewriter !== false) : true;
-
-      // 如果关闭了打字机特效，直接全量渲染
-      if (!isTypewriter) {
-        paragraphs.forEach(pText => {
-          const el = document.createElement("p");
-          el.innerText = pText;
-          container.appendChild(el);
-        });
-        isTypingFinished = true;
-        return;
-      }
-
-      // 计算信件总字数：字数越多自动加速越快
       const totalChars = paragraphs.join("").length;
       const typeSpeed = totalChars > 800 ? 10 : 22;
 
@@ -521,14 +511,13 @@
 
       isTypingFinished = true;
     }
-    // 刮刮乐初始化（修复隐藏文字与自适应画板）
-    function initScratch(cfg) {
+
+    // 主题化刮刮乐
+    function initScratch(cfg, theme) {
       const sec = document.getElementById("scratchSection");
       sec.style.display = "block";
-      document.getElementById("scratchPrompt").innerText = cfg.title || cfg.promptText || "Scratch for a surprise ✨";
-      
-      const secretEl = document.getElementById("scratchSecret");
-      secretEl.innerText = cfg.hiddenText || cfg.secretText || "Surprise!";
+      document.getElementById("scratchPrompt").innerText = cfg.title || "Scratch for a surprise ✨";
+      document.getElementById("scratchSecret").innerText = cfg.hiddenText || cfg.secretText || "Surprise!";
 
       setTimeout(() => {
         const wrapper = document.getElementById("scratchWrapper");
@@ -538,12 +527,29 @@
         canvas.width = wrapper.offsetWidth;
         canvas.height = wrapper.offsetHeight;
 
-        ctx.fillStyle = "#c5a059";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 13px sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("✦ SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2 + 5);
+        // 根据主题定制涂层质感
+        if (theme === 'halloween') {
+          ctx.fillStyle = "#2c1c38";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#e67e22";
+          ctx.font = "bold 13px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("🎃 SCRATCH FOR TREAT 🍬", canvas.width / 2, canvas.height / 2 + 5);
+        } else if (theme === 'apology') {
+          ctx.fillStyle = "#8aa0af";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 13px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("🩹 PEEL TO HEAL 🕊", canvas.width / 2, canvas.height / 2 + 5);
+        } else {
+          ctx.fillStyle = "#c5a059";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 13px sans-serif";
+          ctx.textAlign = "center";
+          ctx.fillText("✦ SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2 + 5);
+        }
 
         let isScratching = false;
         function scratch(e) {
@@ -556,7 +562,7 @@
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 18, 0, Math.PI * 2);
+          ctx.arc(x, y, 20, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -569,7 +575,7 @@
       }, 300);
     }
 
-    // 逃跑按钮初始化
+    // 智能逃跑按钮（支持正向与反向逃跑）
     function initRunaway(cfg) {
       const sec = document.getElementById("runawaySection");
       sec.style.display = "block";
@@ -578,34 +584,37 @@
       const btnNo = document.getElementById("btnNo");
       const successEl = document.getElementById("runawaySuccess");
 
-      btnYes.innerText = cfg.yesText || cfg.yesBtn || "YES! ❤";
-      btnNo.innerText = cfg.noText || cfg.noBtn || "NO";
+      btnYes.innerText = cfg.yesText || "YES! ❤";
+      btnNo.innerText = cfg.noText || "NO";
       successEl.innerText = cfg.successMessage || "Yay! I knew it! ❤";
 
+      // 如果目标是让 YES 逃跑（例如道歉题：你还在生气吗？）
+      const runawayBtn = (cfg.runawayTarget === "yes") ? btnYes : btnNo;
+      const targetWinBtn = (cfg.runawayTarget === "yes") ? btnNo : btnYes;
+
       function dodge() {
-        const x = (Math.random() - 0.5) * 150;
-        const y = (Math.random() - 0.5) * 50;
-        btnNo.style.transform = `translate(${x}px, ${y}px)`;
+        const x = (Math.random() - 0.5) * 160;
+        const y = (Math.random() - 0.5) * 60;
+        runawayBtn.style.transform = `translate(${x}px, ${y}px)`;
       }
 
-      btnNo.addEventListener("mouseenter", dodge);
-      btnNo.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); });
+      runawayBtn.addEventListener("mouseenter", dodge);
+      runawayBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); });
 
-      btnYes.addEventListener("click", () => {
+      targetWinBtn.addEventListener("click", () => {
         document.getElementById("runawayBounds").style.display = "none";
         successEl.style.display = "block";
         initBackgroundParticles("confetti");
       });
     }
 
-    // 音乐按钮事件
     musicBtn.addEventListener("click", () => {
       if (isPlaying) { bgMusic.pause(); musicBtn.classList.remove("playing"); }
       else { bgMusic.play(); musicBtn.classList.add("playing"); }
       isPlaying = !isPlaying;
     });
 
-    // 粒子背景引擎
+    // ==================== 10 种专属物理粒子系统 ====================
     const pCanvas = document.getElementById("particle-canvas");
     const pCtx = pCanvas.getContext("2d");
     let particles = [];
@@ -617,49 +626,83 @@
       constructor(type) { this.type = type; this.reset(); }
       reset() {
         this.x = Math.random() * pCanvas.width;
-        this.opacity = Math.random() * 0.6 + 0.2;
-        if (this.type === 'stars') {
-          this.y = Math.random() * pCanvas.height; this.size = Math.random() * 2.5 + 1;
-          this.speedO = (Math.random() * 0.02 + 0.005) * (Math.random() > 0.5 ? 1 : -1);
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.angle = Math.random() * Math.PI * 2;
+
+        if (this.type === 'rain-to-sunshine') {
+          this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.6; this.len = Math.random() * 10 + 6;
+        } else if (this.type === 'olive-leaves') {
+          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6; this.speedX = Math.random() * 1.2 - 0.6;
+        } else if (this.type === 'gold-dust') {
+          this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.5; this.speedY = -(Math.random() * 1.2 + 0.4); this.speedX = Math.random() * 0.8 - 0.4;
+        } else if (this.type === 'clouds') {
+          this.x = -80; this.y = Math.random() * (pCanvas.height * 0.4); this.size = Math.random() * 40 + 30; this.speedX = Math.random() * 0.4 + 0.2;
+        } else if (this.type === 'pumpkins') {
+          this.y = -30; this.size = Math.random() * 12 + 10; this.speedY = Math.random() * 1.8 + 1; this.speedX = Math.random() * 1 - 0.5;
+        } else if (this.type === 'bats') {
+          this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6); this.size = Math.random() * 14 + 10; this.speedX = Math.random() * 2 + 1.2;
+        } else if (this.type === 'ghosts') {
+          this.y = pCanvas.height + 30; this.size = Math.random() * 16 + 12; this.speedY = -(Math.random() * 1.2 + 0.6); this.speedX = Math.random() * 0.8 - 0.4;
+        } else if (this.type === 'candies') {
+          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 2 + 1; this.speedX = Math.random() * 1 - 0.5;
+          this.color = ["#e67e22", "#9b59b6", "#2ecc71", "#f1c40f"][Math.floor(Math.random() * 4)];
         } else if (this.type === 'confetti') {
-          this.y = -20; this.size = Math.random() * 7 + 4; this.speedY = Math.random() * 2.5 + 1.2;
-          this.speedX = Math.random() * 2 - 1;
+          this.y = -20; this.size = Math.random() * 7 + 4; this.speedY = Math.random() * 2.5 + 1.2; this.speedX = Math.random() * 2 - 1;
           this.color = ["#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3", "#54a0ff"][Math.floor(Math.random() * 5)];
-          this.angle = Math.random() * Math.PI * 2;
-        } else if (this.type === 'sakura') {
-          this.y = -20; this.size = Math.random() * 8 + 5; this.speedY = Math.random() * 1.5 + 0.8;
-          this.speedX = Math.random() * 1.5 - 0.5; this.angle = Math.random() * Math.PI * 2;
-        } else if (this.type === 'snow') {
-          this.y = -20; this.size = Math.random() * 4 + 2; this.speedY = Math.random() * 1.5 + 0.5;
-          this.speedX = Math.random() * 0.8 - 0.4;
         } else {
-          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6;
-          this.speedX = Math.random() * 0.6 - 0.3;
+          // 默认爱心
+          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6; this.speedX = Math.random() * 0.6 - 0.3;
         }
       }
       update() {
-        if (this.type === 'stars') {
-          this.opacity += this.speedO;
-          if (this.opacity > 0.8 || this.opacity < 0.1) this.speedO = -this.speedO;
-        } else {
+        if (this.type === 'rain-to-sunshine') {
           this.y += this.speedY; this.x += this.speedX;
-          if (this.type === 'sakura' || this.type === 'confetti') this.angle += 0.02;
           if (this.y > pCanvas.height + 20) this.reset();
+        } else if (this.type === 'gold-dust' || this.type === 'ghosts') {
+          this.y += this.speedY; this.x += Math.sin(this.y * 0.05) * 0.5;
+          if (this.y < -30) this.reset();
+        } else if (this.type === 'clouds' || this.type === 'bats') {
+          this.x += this.speedX; this.y += Math.sin(this.x * 0.03) * 0.6;
+          if (this.x > pCanvas.width + 80) this.reset();
+        } else {
+          this.y += this.speedY; this.x += this.speedX; this.angle += 0.02;
+          if (this.y > pCanvas.height + 30) this.reset();
         }
       }
       draw() {
-        if (this.type === 'stars' || this.type === 'snow') {
-          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        pCtx.save();
+        if (this.type === 'rain-to-sunshine') {
+          pCtx.strokeStyle = `rgba(180, 205, 230, ${this.opacity * 0.6})`;
+          pCtx.lineWidth = 1.2; pCtx.beginPath();
+          pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
+        } else if (this.type === 'olive-leaves') {
+          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+          pCtx.fillStyle = `rgba(120, 145, 120, ${this.opacity})`;
+          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.45, 0, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'gold-dust') {
+          pCtx.fillStyle = `rgba(243, 156, 18, ${this.opacity})`;
+          pCtx.shadowColor = "#f1c40f"; pCtx.shadowBlur = 8;
           pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'confetti') {
-          pCtx.save(); pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+        } else if (this.type === 'clouds') {
+          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.25})`;
+          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.arc(this.x + 25, this.y - 10, this.size * 0.8, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'pumpkins') {
+          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
+          pCtx.fillStyle = "#e67e22"; pCtx.beginPath(); pCtx.arc(0, 0, this.size * 0.6, 0, Math.PI * 2); pCtx.fill();
+          pCtx.fillStyle = "#27ae60"; pCtx.fillRect(-2, -this.size * 0.8, 4, 6);
+        } else if (this.type === 'bats') {
+          pCtx.fillStyle = `rgba(20, 20, 24, ${this.opacity * 0.9})`;
+          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size * 0.3, 0, Math.PI * 2); pCtx.fill();
+          pCtx.beginPath(); pCtx.ellipse(this.x - this.size * 0.4, this.y, this.size * 0.5, this.size * 0.2, -0.3, 0, Math.PI * 2); pCtx.fill();
+          pCtx.beginPath(); pCtx.ellipse(this.x + this.size * 0.4, this.y, this.size * 0.5, this.size * 0.2, 0.3, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'ghosts') {
+          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.8})`;
+          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size * 0.5, Math.PI, 0);
+          pCtx.lineTo(this.x + this.size * 0.5, this.y + this.size * 0.6); pCtx.lineTo(this.x - this.size * 0.5, this.y + this.size * 0.6); pCtx.fill();
+          pCtx.fillStyle = "#111"; pCtx.beginPath(); pCtx.arc(this.x - 3, this.y, 1.5, 0, Math.PI * 2); pCtx.arc(this.x + 3, this.y, 1.5, 0, Math.PI * 2); pCtx.fill();
+        } else if (this.type === 'candies' || this.type === 'confetti') {
+          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
           pCtx.fillStyle = this.color; pCtx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
-          pCtx.restore();
-        } else if (this.type === 'sakura') {
-          pCtx.save(); pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-          pCtx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
-          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2); pCtx.fill();
-          pCtx.restore();
         } else {
           pCtx.fillStyle = `rgba(217, 119, 127, ${this.opacity})`;
           pCtx.beginPath(); const h = this.size * 0.3;
@@ -670,12 +713,13 @@
           pCtx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + h);
           pCtx.closePath(); pCtx.fill();
         }
+        pCtx.restore();
       }
     }
 
     function initBackgroundParticles(type) {
       particles = [];
-      const count = type === 'stars' ? 50 : 25;
+      const count = (type === 'rain-to-sunshine' || type === 'gold-dust') ? 45 : (type === 'bats' ? 12 : 25);
       for (let i = 0; i < count; i++) particles.push(new Particle(type || 'hearts'));
     }
 
@@ -686,7 +730,7 @@
     }
     animateP();
 
-    // 屏幕微光效果
+    // 点击微光
     const sCanvas = document.getElementById("sparkle-canvas");
     const sCtx = sCanvas.getContext("2d");
     let sparkles = [];
