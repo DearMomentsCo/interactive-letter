@@ -1,10 +1,9 @@
 {
   "theme": "apology",
   "envelopeStyle": "kintsugi",
-  "fontFamily": "font-caveat",
+  "musicUrl": "audio/order_0000.mp3",
   "recipient": "My Love",
   "sender": "Forever Yours",
-  "musicUrl": "audio/order_0000.mp3",
   "letterContent": [
     "I am so truly sorry for upsetting you.",
     "Looking through our memories together, all I could think about is how much your smile means to me.",
@@ -12,11 +11,11 @@
   ],
   "photos": [
     {
-      "url": "images/order_0000_1.jpg",
+      "url": "images/photo1.jpg",
       "caption": "My favorite memory with you ❤"
     },
     {
-      "url": "images/order_0000_2.jpg",
+      "url": "images/photo2.jpg",
       "caption": "Forever by your side ✨"
     }
   ],
