@@ -40,11 +40,10 @@
     #particle-canvas { z-index: 1; }
     #sparkle-canvas { z-index: 99; }
 
-    /* 悬浮音乐控制器 */
     .music-btn {
       position: fixed; top: 22px; right: 22px; width: 44px; height: 44px; border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: center;
+      background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25); display: flex; justify-content: center;
       align-items: center; cursor: pointer; z-index: 100; color: #d4af37; opacity: 0;
       transition: all 0.5s ease;
     }
@@ -52,7 +51,6 @@
     .music-btn.playing svg { animation: spin 5s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* 信封舞台 */
     .envelope-stage {
       position: relative; width: 330px; height: 230px; perspective: 1200px;
       z-index: 10; transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,7 +63,6 @@
       cursor: pointer; overflow: visible;
     }
 
-    /* 金缮裂纹 SVG 覆盖层 */
     .kintsugi-gold-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 6; overflow: hidden; border-radius: 8px;
@@ -84,7 +81,6 @@
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
 
-    /* 高定 3D 浮雕金属火漆印 */
     .wax-seal {
       position: absolute; top: 82px; left: 50%; transform: translateX(-50%);
       width: 54px; height: 54px; border-radius: 50%;
@@ -106,7 +102,6 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
-    /* 信纸容器 */
     .letter-container {
       position: absolute; top: 25px; left: 50%; transform: translateX(-50%) translateY(40px) scale(0.92);
       width: 92%; max-width: 440px; background: var(--paper-cream); border-radius: 12px;
@@ -123,7 +118,6 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
-    /* 3D 拍立得 */
     .polaroid-gallery {
       position: relative; width: 100%; max-width: 300px; height: 380px; margin: 15px auto 26px auto; perspective: 1000px;
     }
@@ -151,7 +145,6 @@
     }
     .polaroid-back-text { font-size: 20px; line-height: 1.6; font-family: 'Caveat', cursive; }
 
-    /* 正文 */
     .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
     .typewriter-cursor {
@@ -160,7 +153,6 @@
     }
     @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-    /* 拟真医疗织物创可贴刮刮乐 */
     .scratch-section {
       margin-bottom: 26px; padding: 18px 12px; background: rgba(0, 0, 0, 0.02);
       border-radius: 12px; text-align: center; border: 1px dashed rgba(197, 160, 89, 0.3);
@@ -172,7 +164,6 @@
       background: #eadecd; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0,0,0,0.06);
       display: flex; justify-content: center; align-items: center;
     }
-    /* 创可贴微孔纹理 */
     .bandaid-wrapper::before, .bandaid-wrapper::after {
       content: ""; position: absolute; top: 12px; bottom: 12px; width: 48px;
       background-image: radial-gradient(#caa98d 1.5px, transparent 1.5px);
@@ -187,12 +178,11 @@
     }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
 
-    /* 互动按钮 */
     .runaway-section {
       margin-bottom: 24px; padding: 18px 14px; background: rgba(197, 160, 89, 0.06);
       border-radius: 12px; text-align: center;
     }
-    .runaway-question { font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #2c323d; font-family: 'Caveat', cursive; font-size: 24px; }
+    .runaway-question { font-size: 24px; font-weight: 700; margin-bottom: 14px; color: #2c323d; font-family: 'Caveat', cursive; }
     .runaway-btns {
       position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 18px;
     }
@@ -203,7 +193,7 @@
     }
     .btn-yes { background: #3e4450; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .btn-no { background: #dcd7cb; color: #444; position: relative; }
-    .runaway-success { font-size: 18px; font-weight: 700; color: #8c6d2d; margin-top: 12px; display: none; font-family: 'Caveat', cursive; font-size: 22px; }
+    .runaway-success { font-size: 22px; font-weight: 700; color: #8c6d2d; margin-top: 12px; display: none; font-family: 'Caveat', cursive; }
 
     .letter-footer { text-align: right; margin-top: 20px; color: #666; font-size: 18px; font-family: 'Caveat', cursive; }
     .sender-name { font-size: 26px; font-weight: 700; color: #2c323d; margin-top: 2px; }
@@ -219,14 +209,12 @@
       <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
     </svg>
   </div>
-  <audio id="bgMusic" loop preload="auto"></audio>
+  <audio id="bgMusic" loop preload="auto" playsinline webkit-playsinline></audio>
 
-  <!-- 金缮信封 -->
   <div class="envelope-stage" id="envelopeStage">
     <div class="envelope-wrapper" id="envelopeWrapper">
       <div class="envelope-lid"></div>
       
-      <!-- 金漆裂纹 SVG -->
       <div class="kintsugi-gold-overlay">
         <svg width="330" height="230" viewBox="0 0 330 230">
           <defs>
@@ -241,7 +229,6 @@
         </svg>
       </div>
 
-      <!-- 3D 烫金火漆印章 (立体橄榄枝与爱心浮雕) -->
       <div class="wax-seal" id="waxSeal">
         <svg viewBox="0 0 24 24">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -262,7 +249,6 @@
     <div class="polaroid-gallery" id="polaroidGallery"></div>
     <div class="letter-body" id="letterBody"></div>
 
-    <!-- 拟真创可贴刮刮乐 -->
     <div class="scratch-section" id="scratchSection" style="display:none;">
       <div class="scratch-prompt">✦ PEEL OFF THE BANDAGE TO HEAL ✦</div>
       <div class="bandaid-wrapper" id="bandaidWrapper">
@@ -271,7 +257,6 @@
       </div>
     </div>
 
-    <!-- 智能逃跑破冰模块 -->
     <div class="runaway-section" id="runawaySection" style="display:none;">
       <div class="runaway-question" id="runawayQuestion">Are you still super mad at me?</div>
       <div class="runaway-btns" id="runawayBounds">
@@ -292,24 +277,6 @@
     const bgMusic = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
     let isPlaying = false;
-
-    // 音频合成引擎（开信声效）
-    function playTactileSound(type) {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        if (type === 'seal') {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(180, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.15);
-          gain.gain.setValueAtTime(0.5, ctx.currentTime);
-          gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-          osc.connect(gain); gain.connect(ctx.destination);
-          osc.start(); osc.stop(ctx.currentTime + 0.15);
-        }
-      } catch (e) {}
-    }
 
     const urlParams = new URLSearchParams(window.location.search);
     const orderId = urlParams.get('id') || 'order_0000';
@@ -338,7 +305,7 @@
           const card = document.createElement("div");
           card.className = `polaroid-card ${idx === 0 ? 'active' : ''}`;
           card.innerHTML = `
-            <div class="polaroid-front"><img src="${url}" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600'"><div class="polaroid-front-hint">Tap photo to read note ↻</div></div>
+            <div class="polaroid-front"><img src="${url}"><div class="polaroid-front-hint">Tap photo to read note ↻</div></div>
             <div class="polaroid-back"><div class="polaroid-back-text">${cap}</div></div>
           `;
           card.addEventListener("click", () => card.classList.toggle("flipped"));
@@ -363,30 +330,29 @@
       if (data.scratchCard && data.scratchCard.enabled) initBandaidScratch(data.scratchCard);
       if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
 
+      // 设置音频源
       if (data.musicUrl) {
         bgMusic.src = data.musicUrl;
-        bgMusic.load();
       }
 
       initGoldDustParticles();
     }
 
-    // 信封开启交互
+    // 核心：点击信封的第一瞬间同步触发音频
     const envelopeWrapper = document.getElementById("envelopeWrapper");
     envelopeWrapper.addEventListener("click", () => {
-      document.getElementById("envelopeStage").classList.add("is-opening");
-      playTactileSound('seal');
-
-      // 唤醒背景音频
-      if (configData.musicUrl) {
+      // 第一优先级唤醒音频播放
+      if (bgMusic && bgMusic.src) {
         bgMusic.play().then(() => {
           isPlaying = true;
-          musicBtn.classList.add("playing");
-          musicBtn.classList.add("visible");
+          musicBtn.classList.add("playing", "visible");
         }).catch(e => {
+          console.log("Autoplay was held, toggle button ready:", e);
           musicBtn.classList.add("visible");
         });
       }
+
+      document.getElementById("envelopeStage").classList.add("is-opening");
 
       setTimeout(() => {
         document.getElementById("envelopeStage").classList.add("opened");
@@ -395,7 +361,6 @@
       }, 750);
     });
 
-    // 打字机
     let isTypingDone = false;
     let forceSkip = false;
 
@@ -431,7 +396,6 @@
       isTypingDone = true;
     }
 
-    // 拟真织物创可贴刮刮乐
     function initBandaidScratch(cfg) {
       const sec = document.getElementById("scratchSection");
       sec.style.display = "block";
@@ -445,11 +409,9 @@
         canvas.width = wrapper.offsetWidth;
         canvas.height = wrapper.offsetHeight;
 
-        // 绘制高阶医用织物纹理涂层
         ctx.fillStyle = "#d8c4ae";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 创可贴中心防护垫微阴影
         ctx.fillStyle = "rgba(0,0,0,0.04)";
         ctx.fillRect(canvas.width * 0.25, 0, canvas.width * 0.5, canvas.height);
 
@@ -482,7 +444,6 @@
       }, 300);
     }
 
-    // 智能逃跑按钮
     function initRunaway(cfg) {
       const sec = document.getElementById("runawaySection");
       sec.style.display = "block";
@@ -510,17 +471,24 @@
       winBtn.addEventListener("click", () => {
         document.getElementById("runawayBounds").style.display = "none";
         successEl.style.display = "block";
-        initConfettiParticles();
       });
     }
 
-    musicBtn.addEventListener("click", () => {
-      if (isPlaying) { bgMusic.pause(); musicBtn.classList.remove("playing"); }
-      else { bgMusic.play(); musicBtn.classList.add("playing"); }
-      isPlaying = !isPlaying;
+    // 顶部独立音乐按钮控制
+    musicBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.classList.remove("playing");
+        isPlaying = false;
+      } else {
+        bgMusic.play().then(() => {
+          musicBtn.classList.add("playing");
+          isPlaying = true;
+        }).catch(err => console.error("Play failed:", err));
+      }
     });
 
-    // 金缮流光粒子系统
     const pCanvas = document.getElementById("particle-canvas");
     const pCtx = pCanvas.getContext("2d");
     let particles = [];
