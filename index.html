@@ -152,12 +152,42 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 5px #fcf9f2, inset 0 0 0 6px rgba(212, 175, 55, 0.3) !important;
     }
 
-    /* 2. 白旗专属信纸：纯白官方羊皮纸 + 居中暗水印 */
+    /* 2. 白旗专属信纸：官方停战公函 / 契约文书质感 */
     .paper-whiteflag {
-      background: #ffffff !important;
-      border: 1px solid #e2e4e8 !important;
-      background-image: radial-gradient(circle at center, rgba(183, 50, 41, 0.03) 0%, transparent 65%) !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
+      background: #fdfdf9 !important;
+      border: 2px solid #8b261e !important;
+      outline: 1px solid rgba(139, 38, 30, 0.35) !important;
+      outline-offset: -7px !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 35px rgba(139, 38, 30, 0.04) !important;
+      position: absolute;
+    }
+    .paper-whiteflag::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 240px;
+      height: 240px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' stroke='%238b261e' stroke-width='2' fill='none' stroke-dasharray='4 3'/%3E%3Ccircle cx='50' cy='50' r='38' stroke='%238b261e' stroke-width='1.5' fill='none'/%3E%3Ctext x='50' y='28' font-size='7' font-family='serif' text-anchor='middle' fill='%238b261e' letter-spacing='2'%3EOFFICIAL TREATY%3C/text%3E%3Ctext x='50' y='78' font-size='6.5' font-family='serif' text-anchor='middle' fill='%238b261e' letter-spacing='1.5'%3EPEACE %26 SURRENDER%3C/text%3E%3Cpath d='M50 36 C42 43 36 49 42 62 C46 56 50 54 50 54 C50 54 54 56 58 62 C64 49 58 43 50 36 Z' fill='%238b261e'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.09;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .paper-whiteflag .recipient-name {
+      color: #8b261e !important;
+      font-family: 'Cinzel', serif !important;
+      font-size: 21px !important;
+      letter-spacing: 1.5px !important;
+    }
+    .paper-whiteflag .days-badge {
+      background: rgba(139, 38, 30, 0.08) !important;
+      color: #8b261e !important;
+      border: 1px solid rgba(139, 38, 30, 0.25) !important;
+      font-weight: 700 !important;
     }
 
     /* 3. 折角便签信纸：手账稿纸横格线 */
