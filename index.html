@@ -3,36 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>A Special Interactive Letter</title>
+  <title>A Special Keepsake Letter</title>
 
-  <!-- 预加载经典商业字体 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Parisienne&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Quicksand:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary-color: #d9777f;
-      --envelope-bg: #f3ede2;
-      --envelope-dark: #e5dccb;
-      --paper-bg: #fffdfa;
-      --text-color: #333333;
-      --seal-color: #b33939;
-      --letter-font: 'Playfair Display', serif;
-      --letter-font-size: 17px;
+      --primary-accent: #c5a059;
+      --envelope-base: #24272e;
+      --envelope-flap: #1e2026;
+      --paper-cream: #faf7f2;
+      --text-main: #2b2b2b;
+      --letter-font: 'Caveat', cursive;
+      --letter-font-size: 21px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #121214;
+      background: radial-gradient(circle at center, #1b1d24 0%, #0d0e12 100%);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       overflow-x: hidden;
-      color: var(--text-color);
+      color: #fff;
       position: relative;
     }
 
@@ -42,138 +40,96 @@
     #particle-canvas { z-index: 1; }
     #sparkle-canvas { z-index: 99; }
 
-    /* 悬浮音乐按钮 */
+    /* 悬浮音乐控制器 */
     .music-btn {
-      position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.4); display: flex; justify-content: center;
-      align-items: center; cursor: pointer; z-index: 100; color: #ffffff; opacity: 0;
-      transition: opacity 0.5s ease, transform 0.3s ease;
+      position: fixed; top: 22px; right: 22px; width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: center;
+      align-items: center; cursor: pointer; z-index: 100; color: #d4af37; opacity: 0;
+      transition: all 0.5s ease;
     }
     .music-btn.visible { opacity: 1; }
-    .music-btn.playing svg { animation: spin 4s linear infinite; }
+    .music-btn.playing svg { animation: spin 5s linear infinite; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* 信封舞台与 3D 折叠 */
+    /* 信封舞台 */
     .envelope-stage {
-      position: relative; width: 330px; height: 230px; perspective: 1000px;
-      z-index: 10; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative; width: 330px; height: 230px; perspective: 1200px;
+      z-index: 10; transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .envelope-stage.opened { transform: translateY(120px) scale(0.9); opacity: 0; pointer-events: none; }
+    .envelope-stage.opened { transform: translateY(140px) scale(0.88); opacity: 0; pointer-events: none; }
+    
     .envelope-wrapper {
-      position: relative; width: 100%; height: 100%; background: var(--envelope-bg);
-      border-radius: 6px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); cursor: pointer;
-      transition: all 0.4s ease;
+      position: relative; width: 100%; height: 100%; background: var(--envelope-base);
+      border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      cursor: pointer; overflow: visible;
     }
+
+    /* 金缮裂纹 SVG 覆盖层 */
+    .kintsugi-gold-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 6; overflow: hidden; border-radius: 8px;
+    }
+    .kintsugi-gold-overlay svg path {
+      stroke: url(#goldGradient); stroke-width: 2.2; fill: none;
+      stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
+    }
+
     .envelope-lid {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
       border-left: 165px solid transparent; border-right: 165px solid transparent;
-      border-top: 125px solid var(--envelope-dark); transform-origin: top center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
+      border-top: 125px solid var(--envelope-flap); transform-origin: top center;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
-    
+
+    /* 高定 3D 浮雕金属火漆印 */
     .wax-seal {
-      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
-      width: 52px; height: 52px; background: radial-gradient(circle, var(--seal-color) 60%, #3a0e0e);
-      border-radius: 50%; box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35); display: flex;
-      justify-content: center; align-items: center; font-size: 24px; z-index: 6;
-      transition: all 0.4s ease; user-select: none;
+      position: absolute; top: 82px; left: 50%; transform: translateX(-50%);
+      width: 54px; height: 54px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #e6c875 0%, #b8860b 60%, #5c4308 100%);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+      display: flex; justify-content: center; align-items: center; z-index: 7;
+      transition: all 0.4s ease; border: 1.5px solid rgba(255, 215, 0, 0.4);
     }
-    .envelope-stage.is-opening .wax-seal.burst-anim {
-      transform: translateX(-50%) scale(2.2); opacity: 0; filter: blur(4px);
+    .wax-seal svg {
+      width: 26px; height: 26px; fill: none; stroke: #fff6d6; stroke-width: 1.8;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
     }
+    .envelope-stage.is-opening .wax-seal { transform: translateX(-50%) scale(1.8); opacity: 0; filter: blur(4px); }
+
     .envelope-hint {
       position: absolute; bottom: -45px; left: 0; width: 100%; text-align: center;
-      color: rgba(255, 255, 255, 0.75); font-size: 13px; letter-spacing: 2px; animation: pulse 1.8s infinite;
+      color: rgba(212, 175, 55, 0.75); font-size: 11px; letter-spacing: 3px; font-weight: 600;
+      animation: pulse 2s infinite; font-family: 'Cinzel', serif;
     }
-    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+    @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
 
-    /* ==================== 10款高定信封专属样式 ==================== */
-    /* 道歉 1: 金缮流光款 */
-    .env-kintsugi { background: #262930 !important; border: 1px solid #d4af37; box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 0 15px rgba(212,175,55,0.2) !important; }
-    .env-kintsugi .envelope-lid { border-top-color: #1f2228 !important; }
-    .env-kintsugi .wax-seal { background: radial-gradient(circle, #f39c12 50%, #b7791f) !important; box-shadow: 0 0 15px rgba(243,156,18,0.6); }
-
-    /* 道歉 2: 官方白旗投降款 */
-    .env-whiteflag { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
-    .env-whiteflag .envelope-lid { border-top-color: #f0f0f0 !important; }
-    .env-whiteflag::after {
-      content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 12px; left: 15px;
-      font-size: 10px; font-weight: 700; color: #c0392b; border: 1.5px solid #c0392b;
-      padding: 3px 6px; transform: rotate(-6deg); border-radius: 3px; letter-spacing: 1px;
-    }
-
-    /* 道歉 3: 折角手账便签条 */
-    .env-origami { background: #fffbf0 !important; border: 1px dashed #dcd0ba !important; }
-    .env-origami .envelope-lid { border-top-color: #f5eedb !important; }
-    .env-origami::before {
-      content: ""; position: absolute; top: 15px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 18px; background: rgba(255, 182, 193, 0.6); z-index: 7;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1); transform: translateX(-50%) rotate(-3deg);
-    }
-
-    /* 道歉 4: 雨过天晴灰蓝款 */
-    .env-slate { background: #5f758d !important; }
-    .env-slate .envelope-lid { border-top-color: #4f6377 !important; }
-    .env-slate .wax-seal { background: radial-gradient(circle, #f1c40f 50%, #d68910) !important; }
-
-    /* 道歉 5: 自然系橄榄枝款 */
-    .env-olive { background: #e8e3d5 !important; border: 1px solid #d5cfbf !important; }
-    .env-olive .envelope-lid { border-top-color: #dbd5c5 !important; }
-    .env-olive .wax-seal { background: radial-gradient(circle, #5b7058 50%, #3e4f3c) !important; }
-
-    /* 万圣 1: 哥特暗黑黑红 */
-    .env-gothic { background: #111113 !important; border: 1px solid #7a1d1d !important; box-shadow: 0 15px 40px rgba(122,29,29,0.25) !important; }
-    .env-gothic .envelope-lid { border-top-color: #0b0b0c !important; }
-    .env-gothic .wax-seal { background: radial-gradient(circle, #900c3f 50%, #4a041f) !important; }
-
-    /* 万圣 2: 南瓜炭黑双色款 */
-    .env-pumpkin { background: #1c1a17 !important; border: 2px solid #e67e22 !important; }
-    .env-pumpkin .envelope-lid { border-top-color: #141311 !important; }
-    .env-pumpkin .wax-seal { background: radial-gradient(circle, #e67e22 50%, #b35400) !important; }
-
-    /* 万圣 3: 幽灵古堡霓虹紫款 */
-    .env-violet { background: #20132e !important; border: 1px solid #2ecc71 !important; }
-    .env-violet .envelope-lid { border-top-color: #170b22 !important; }
-    .env-violet .wax-seal { background: radial-gradient(circle, #2ecc71 50%, #196f3d) !important; }
-
-    /* 万圣 4: 女巫墨绿坩埚款 */
-    .env-cauldron { background: #13241b !important; border: 1px solid #27ae60 !important; }
-    .env-cauldron .envelope-lid { border-top-color: #0d1a13 !important; }
-    .env-cauldron .wax-seal { background: radial-gradient(circle, #a569bd 50%, #5b2c6f) !important; }
-
-    /* 万圣 5: 木乃伊亚麻绷带款 */
-    .env-mummy { background: #ded7c6 !important; border: 1px solid #c2baa5 !important; }
-    .env-mummy .envelope-lid { border-top-color: #ccc3af !important; }
-    .env-mummy .wax-seal { background: radial-gradient(circle, #34495e 50%, #1a252f) !important; }
-
-    /* ==================== 信纸与核心内容 ==================== */
+    /* 信纸容器 */
     .letter-container {
-      position: absolute; top: 25px; left: 50%; transform: translateX(-50%) translateY(50px) scale(0.9);
-      width: 92%; max-width: 440px; background: var(--paper-bg); border-radius: 12px;
-      padding: 32px 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); opacity: 0;
-      pointer-events: none; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-      z-index: 20; margin-bottom: 50px; font-family: var(--letter-font);
+      position: absolute; top: 25px; left: 50%; transform: translateX(-50%) translateY(40px) scale(0.92);
+      width: 92%; max-width: 440px; background: var(--paper-cream); border-radius: 12px;
+      padding: 34px 26px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(0,0,0,0.06);
+      opacity: 0; pointer-events: none; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+      z-index: 20; margin-bottom: 50px; font-family: var(--letter-font); color: var(--text-main);
     }
     .letter-container.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; pointer-events: auto; }
 
-    .letter-header { border-bottom: 1px solid rgba(0, 0, 0, 0.08); padding-bottom: 14px; margin-bottom: 20px; text-align: center; }
-    .recipient-name { font-size: 28px; font-weight: 700; color: var(--primary-color); margin-bottom: 6px; }
+    .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
+    .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
     .days-badge {
-      display: inline-block; background: rgba(0, 0, 0, 0.06); color: var(--primary-color);
-      padding: 4px 14px; border-radius: 20px; font-size: 13px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 500;
+      display: inline-block; background: rgba(197, 160, 89, 0.12); color: #8c6d2d;
+      padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
-    .days-num { font-weight: 700; font-size: 15px; }
 
     /* 3D 拍立得 */
     .polaroid-gallery {
-      position: relative; width: 100%; max-width: 310px; height: 390px; margin: 15px auto 25px auto; perspective: 1000px;
+      position: relative; width: 100%; max-width: 300px; height: 380px; margin: 15px auto 26px auto; perspective: 1000px;
     }
     .polaroid-card {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 6px; background: #ffffff;
-      padding: 12px 12px 35px 12px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.05);
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; background: #ffffff;
+      padding: 12px 12px 35px 12px; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
       transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer; display: none;
     }
@@ -181,66 +137,76 @@
     .polaroid-card.flipped { transform: rotateY(180deg); }
     .polaroid-front, .polaroid-back {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 6px; padding: 12px 12px 35px 12px;
+      backface-visibility: hidden; border-radius: 4px; padding: 12px 12px 35px 12px;
       box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
     }
     .polaroid-front img {
-      width: 100%; height: 315px; object-fit: cover; object-position: center;
-      border-radius: 3px; display: block; background: #f5f5f5;
+      width: 100%; height: 305px; object-fit: cover; object-position: center;
+      border-radius: 2px; display: block; background: #f0f0f0;
     }
-    .polaroid-front-hint { font-size: 12px; color: #999; text-align: center; margin-top: 10px; font-family: sans-serif; }
+    .polaroid-front-hint { font-size: 12px; color: #888; text-align: center; margin-top: 10px; font-family: sans-serif; }
     .polaroid-back {
-      background: #fffdf9; transform: rotateY(180deg); justify-content: center;
-      padding: 30px 20px; color: #333; border: 1px dashed rgba(0, 0, 0, 0.15);
+      background: #faf7f2; transform: rotateY(180deg); justify-content: center;
+      padding: 26px; color: #444; border: 1px dashed rgba(197, 160, 89, 0.35); text-align: center;
     }
-    .polaroid-back-text { font-size: 19px; line-height: 1.6; }
+    .polaroid-back-text { font-size: 20px; line-height: 1.6; font-family: 'Caveat', cursive; }
 
-    /* 信件正文与打字机 */
-    .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #3d3d3d; margin-bottom: 24px; min-height: 60px; }
+    /* 正文 */
+    .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
     .typewriter-cursor {
-      display: inline-block; width: 2px; height: 1.1em; background: var(--primary-color);
+      display: inline-block; width: 2px; height: 1.1em; background: #c5a059;
       vertical-align: middle; animation: blink 0.8s infinite; margin-left: 2px;
     }
     @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
 
-    /* 刮刮乐模块 */
+    /* 拟真医疗织物创可贴刮刮乐 */
     .scratch-section {
-      margin-bottom: 24px; padding: 16px; background: rgba(0, 0, 0, 0.02);
-      border-radius: 10px; text-align: center; border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 26px; padding: 18px 12px; background: rgba(0, 0, 0, 0.02);
+      border-radius: 12px; text-align: center; border: 1px dashed rgba(197, 160, 89, 0.3);
     }
-    .scratch-prompt { font-size: 13px; font-family: sans-serif; color: #777; margin-bottom: 10px; }
-    .scratch-wrapper {
-      position: relative; width: 100%; max-width: 340px; min-height: 80px; margin: 0 auto;
-      border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      display: flex; justify-content: center; align-items: center; background: #fff5f5;
+    .scratch-prompt { font-size: 12px; font-family: 'Cinzel', serif; color: #7a6e5d; margin-bottom: 12px; letter-spacing: 1px; }
+    .bandaid-wrapper {
+      position: relative; width: 290px; height: 86px; margin: 0 auto;
+      border-radius: 43px; overflow: hidden;
+      background: #eadecd; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0,0,0,0.06);
+      display: flex; justify-content: center; align-items: center;
     }
+    /* 创可贴微孔纹理 */
+    .bandaid-wrapper::before, .bandaid-wrapper::after {
+      content: ""; position: absolute; top: 12px; bottom: 12px; width: 48px;
+      background-image: radial-gradient(#caa98d 1.5px, transparent 1.5px);
+      background-size: 7px 7px; opacity: 0.55; pointer-events: none;
+    }
+    .bandaid-wrapper::before { left: 16px; }
+    .bandaid-wrapper::after { right: 16px; }
+
     .scratch-secret {
-      width: 100%; min-height: 80px; display: flex; justify-content: center; align-items: center;
-      font-size: 15px; font-weight: 700; color: var(--primary-color); padding: 14px 16px;
-      line-height: 1.5; text-align: center; word-break: break-word; white-space: normal;
+      width: 100%; padding: 12px 45px; font-size: 14px; font-weight: 600;
+      color: #6d5320; text-align: center; line-height: 1.5; font-family: sans-serif;
     }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
 
     /* 互动按钮 */
     .runaway-section {
-      margin-bottom: 24px; padding: 18px 12px; background: rgba(0, 0, 0, 0.03);
-      border-radius: 10px; text-align: center;
+      margin-bottom: 24px; padding: 18px 14px; background: rgba(197, 160, 89, 0.06);
+      border-radius: 12px; text-align: center;
     }
-    .runaway-question { font-size: 17px; font-weight: 700; margin-bottom: 14px; color: #333; }
+    .runaway-question { font-size: 18px; font-weight: 700; margin-bottom: 14px; color: #2c323d; font-family: 'Caveat', cursive; font-size: 24px; }
     .runaway-btns {
-      position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 15px;
+      position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 18px;
     }
     .btn-yes, .btn-no {
-      padding: 10px 22px; border-radius: 20px; border: none; font-size: 14px;
+      padding: 9px 24px; border-radius: 20px; border: none; font-size: 13px;
       font-weight: 600; cursor: pointer; transition: transform 0.15s ease; font-family: sans-serif;
+      letter-spacing: 0.5px;
     }
-    .btn-yes { background: var(--primary-color); color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .btn-no { background: #e0e0e0; color: #666; position: relative; }
-    .runaway-success { font-size: 16px; font-weight: 700; color: var(--primary-color); margin-top: 10px; display: none; }
+    .btn-yes { background: #3e4450; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn-no { background: #dcd7cb; color: #444; position: relative; }
+    .runaway-success { font-size: 18px; font-weight: 700; color: #8c6d2d; margin-top: 12px; display: none; font-family: 'Caveat', cursive; font-size: 22px; }
 
-    .letter-footer { text-align: right; font-size: var(--letter-font-size); color: #555555; margin-top: 15px; }
-    .sender-name { font-size: 24px; font-weight: 700; color: var(--primary-color); margin-top: 4px; }
+    .letter-footer { text-align: right; margin-top: 20px; color: #666; font-size: 18px; font-family: 'Caveat', cursive; }
+    .sender-name { font-size: 26px; font-weight: 700; color: #2c323d; margin-top: 2px; }
   </style>
 </head>
 <body>
@@ -248,45 +214,69 @@
   <canvas id="particle-canvas"></canvas>
   <canvas id="sparkle-canvas"></canvas>
 
-  <div class="music-btn" id="musicBtn" aria-label="Toggle Music">
+  <div class="music-btn" id="musicBtn" aria-label="Toggle Audio">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle>
     </svg>
   </div>
   <audio id="bgMusic" loop preload="auto"></audio>
 
+  <!-- 金缮信封 -->
   <div class="envelope-stage" id="envelopeStage">
     <div class="envelope-wrapper" id="envelopeWrapper">
       <div class="envelope-lid"></div>
-      <div class="wax-seal" id="waxSeal">❤</div>
+      
+      <!-- 金漆裂纹 SVG -->
+      <div class="kintsugi-gold-overlay">
+        <svg width="330" height="230" viewBox="0 0 330 230">
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffeb99" />
+              <stop offset="50%" stop-color="#d4af37" />
+              <stop offset="100%" stop-color="#996515" />
+            </linearGradient>
+          </defs>
+          <path d="M 0 40 Q 60 70 120 45 T 210 90 T 330 65" />
+          <path d="M 120 45 Q 150 110 165 140 T 190 230" />
+        </svg>
+      </div>
+
+      <!-- 3D 烫金火漆印章 (立体橄榄枝与爱心浮雕) -->
+      <div class="wax-seal" id="waxSeal">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
     </div>
-    <div class="envelope-hint">TAP TO OPEN</div>
+    <div class="envelope-hint">TAP SEAL TO BREAK SILENCE</div>
   </div>
 
   <div class="letter-container" id="letterContainer">
     <div class="letter-header">
-      <div class="recipient-name" id="recipientText">Dearest</div>
+      <div class="recipient-name" id="recipientText">My Love</div>
       <div class="days-badge" id="daysBadge">
-        <span id="dateLabel">Together</span>: <span class="days-num" id="daysCount">0</span>
+        <span id="dateLabel">OFFICIAL PEACE TREATY</span>
       </div>
     </div>
 
     <div class="polaroid-gallery" id="polaroidGallery"></div>
     <div class="letter-body" id="letterBody"></div>
 
+    <!-- 拟真创可贴刮刮乐 -->
     <div class="scratch-section" id="scratchSection" style="display:none;">
-      <div class="scratch-prompt" id="scratchPrompt">Scratch here for a surprise ✨</div>
-      <div class="scratch-wrapper" id="scratchWrapper">
+      <div class="scratch-prompt">✦ PEEL OFF THE BANDAGE TO HEAL ✦</div>
+      <div class="bandaid-wrapper" id="bandaidWrapper">
         <div class="scratch-secret" id="scratchSecret">Surprise!</div>
         <canvas id="scratchCanvas"></canvas>
       </div>
     </div>
 
+    <!-- 智能逃跑破冰模块 -->
     <div class="runaway-section" id="runawaySection" style="display:none;">
-      <div class="runaway-question" id="runawayQuestion">Are you ready?</div>
+      <div class="runaway-question" id="runawayQuestion">Are you still super mad at me?</div>
       <div class="runaway-btns" id="runawayBounds">
-        <button class="btn-yes" id="btnYes">Yes!</button>
-        <button class="btn-no" id="btnNo">No</button>
+        <button class="btn-yes" id="btnYes">STILL MAD</button>
+        <button class="btn-no" id="btnNo">NO (I FORGIVE YOU ❤)</button>
       </div>
       <div class="runaway-success" id="runawaySuccess"></div>
     </div>
@@ -298,109 +288,47 @@
   </div>
 
   <script>
-    const THEME_MAP = {
-      "romantic": { color: "#d9777f", seal: "❤", bg: "hearts", envBg: "#f3ede2", envDark: "#e5dccb" },
-      "apology": { color: "#546e7a", seal: "🌿", bg: "rain-to-sunshine", envBg: "#e8ecf1", envDark: "#d2dbe3" },
-      "halloween": { color: "#e67e22", seal: "🎃", bg: "pumpkins", envBg: "#1e1b24", envDark: "#131017" }
-    };
-
-    const FONT_MAP = {
-      "font-caveat": { family: "'Caveat', cursive", size: "21px" },
-      "font-dancing": { family: "'Dancing Script', cursive", size: "20px" },
-      "font-parisienne": { family: "'Parisienne', cursive", size: "21px" },
-      "font-playfair": { family: "'Playfair Display', serif", size: "16px" },
-      "font-cinzel": { family: "'Cinzel', serif", size: "15px" },
-      "font-specialelite": { family: "'Special Elite', cursive", size: "15px" }
-    };
-
     let configData = {};
     const bgMusic = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
     let isPlaying = false;
 
-    function playSound(type) {
+    // 音频合成引擎（开信声效）
+    function playTactileSound(type) {
       try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
         if (type === 'seal') {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(280, audioCtx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.12);
-          gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
-          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-          osc.connect(gain); gain.connect(audioCtx.destination);
-          osc.start(); osc.stop(audioCtx.currentTime + 0.12);
-        } else if (type === 'paper') {
-          const bufferSize = audioCtx.sampleRate * 0.12;
-          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-          const data = buffer.getChannelData(0);
-          for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
-          const noise = audioCtx.createBufferSource(); noise.buffer = buffer;
-          const filter = audioCtx.createBiquadFilter(); filter.type = 'bandpass'; filter.frequency.value = 1000;
-          const gain = audioCtx.createGain(); gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-          gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
-          noise.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-          noise.start(); noise.stop(audioCtx.currentTime + 0.12);
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(180, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.5, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(); osc.stop(ctx.currentTime + 0.15);
         }
       } catch (e) {}
     }
 
     const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('id') || 'default';
+    const orderId = urlParams.get('id') || 'order_0000';
 
     async function loadData() {
       try {
         const res = await fetch(`data/${orderId}.json?t=${Date.now()}`);
-        configData = res.ok ? await res.json() : getFallback();
+        configData = res.ok ? await res.json() : {};
       } catch (err) {
-        configData = getFallback();
+        configData = {};
       }
       renderUI(configData);
     }
 
-    function getFallback() {
-      return {
-        theme: "apology", envelopeStyle: "kintsugi",
-        fontFamily: "font-caveat", recipient: "My Love", sender: "Forever Yours",
-        letterContent: ["I am so truly sorry for upsetting you.", "Can we hug it out and start over?"],
-        photos: [{ url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600", caption: "Always in my heart ❤" }]
-      };
-    }
-
     function renderUI(data) {
-      const theme = THEME_MAP[data.theme] || THEME_MAP["romantic"];
-      document.documentElement.style.setProperty("--primary-color", (data.meta && data.meta.themeColor) || theme.color);
-      document.documentElement.style.setProperty("--envelope-bg", theme.envBg);
-      document.documentElement.style.setProperty("--envelope-dark", theme.envDark);
+      document.getElementById("recipientText").innerText = data.recipient || "My Dearest";
+      document.getElementById("senderText").innerText = data.sender || "Always with Love";
 
-      // 信封样式匹配
-      const envWrapper = document.getElementById("envelopeWrapper");
-      if (data.envelopeStyle) {
-        envWrapper.classList.add(`env-${data.envelopeStyle}`);
-      }
-
-      const sealIcon = (data.effects && data.effects.sealIcon) || theme.seal;
-      document.getElementById("waxSeal").innerText = sealIcon;
-
-      const fontKey = data.fontFamily || "font-caveat";
-      const font = FONT_MAP[fontKey] || FONT_MAP["font-caveat"];
-      document.documentElement.style.setProperty("--letter-font", font.family);
-      document.documentElement.style.setProperty("--letter-font-size", font.size);
-
-      document.getElementById("recipientText").innerText = data.recipient || "Dearest";
-      document.getElementById("senderText").innerText = data.sender || "";
-
-      const targetDate = data.specialDate || data.startDate;
-      if (targetDate) {
-        const diffDays = Math.ceil(Math.abs(new Date() - new Date(targetDate)) / (1000 * 60 * 60 * 24));
-        document.getElementById("daysCount").innerText = diffDays;
-        document.getElementById("dateLabel").innerText = data.dateLabel || "Together";
-      } else {
-        document.getElementById("daysBadge").style.display = "none";
-      }
-
-      // 拍立得
+      // 拍立得照片渲染
       const gallery = document.getElementById("polaroidGallery");
       gallery.innerHTML = "";
       if (data.photos && data.photos.length > 0) {
@@ -410,7 +338,7 @@
           const card = document.createElement("div");
           card.className = `polaroid-card ${idx === 0 ? 'active' : ''}`;
           card.innerHTML = `
-            <div class="polaroid-front"><img src="${url}"><div class="polaroid-front-hint">Tap to see note ↻</div></div>
+            <div class="polaroid-front"><img src="${url}" onerror="this.src='https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600'"><div class="polaroid-front-hint">Tap photo to read note ↻</div></div>
             <div class="polaroid-back"><div class="polaroid-back-text">${cap}</div></div>
           `;
           card.addEventListener("click", () => card.classList.toggle("flipped"));
@@ -432,7 +360,7 @@
         gallery.style.display = "none";
       }
 
-      if (data.scratchCard && data.scratchCard.enabled) initScratch(data.scratchCard, data.theme);
+      if (data.scratchCard && data.scratchCard.enabled) initBandaidScratch(data.scratchCard);
       if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
 
       if (data.musicUrl) {
@@ -440,120 +368,99 @@
         bgMusic.load();
       }
 
-      const bgType = (data.effects && data.effects.bgEffect) ? data.effects.bgEffect : theme.bg;
-      initBackgroundParticles(bgType);
+      initGoldDustParticles();
     }
 
+    // 信封开启交互
     const envelopeWrapper = document.getElementById("envelopeWrapper");
     envelopeWrapper.addEventListener("click", () => {
       document.getElementById("envelopeStage").classList.add("is-opening");
-      playSound('seal');
-      document.getElementById("waxSeal").classList.add("burst-anim");
+      playTactileSound('seal');
 
+      // 唤醒背景音频
       if (configData.musicUrl) {
-        bgMusic.play().then(() => { isPlaying = true; musicBtn.classList.add("playing"); }).catch(e => {});
+        bgMusic.play().then(() => {
+          isPlaying = true;
+          musicBtn.classList.add("playing");
+          musicBtn.classList.add("visible");
+        }).catch(e => {
+          musicBtn.classList.add("visible");
+        });
       }
 
       setTimeout(() => {
-        playSound('paper');
         document.getElementById("envelopeStage").classList.add("opened");
         document.getElementById("letterContainer").classList.add("show");
-        if (configData.musicUrl) musicBtn.classList.add("visible");
-        startLetterContent();
-      }, 700);
+        startLetterTyping();
+      }, 750);
     });
 
-    let isTypingFinished = false;
-    let skipTyping = false;
+    // 打字机
+    let isTypingDone = false;
+    let forceSkip = false;
 
     document.getElementById("letterContainer").addEventListener("click", () => {
-      if (!isTypingFinished) skipTyping = true;
+      if (!isTypingDone) forceSkip = true;
     });
 
-    async function startLetterContent() {
+    async function startLetterTyping() {
       const container = document.getElementById("letterBody");
       container.innerHTML = "";
-      
-      const paragraphs = configData.letterContent || configData.letter || configData.paragraphs || [];
-      if (!paragraphs || paragraphs.length === 0) return;
+      const paras = configData.letterContent || ["Thinking of you always."];
 
-      const totalChars = paragraphs.join("").length;
-      const typeSpeed = totalChars > 800 ? 10 : 22;
+      isTypingDone = false; forceSkip = false;
 
-      isTypingFinished = false;
-      skipTyping = false;
-
-      for (let pText of paragraphs) {
+      for (let pText of paras) {
         const p = document.createElement("p");
         container.appendChild(p);
 
-        if (skipTyping) {
-          p.innerText = pText;
-          continue;
-        }
+        if (forceSkip) { p.innerText = pText; continue; }
 
         const cursor = document.createElement("span");
         cursor.className = "typewriter-cursor";
         p.appendChild(cursor);
 
         for (let char of pText) {
-          if (skipTyping) {
-            p.innerText = pText;
-            break;
-          }
+          if (forceSkip) { p.innerText = pText; break; }
           p.insertBefore(document.createTextNode(char), cursor);
-          await new Promise(r => setTimeout(r, typeSpeed));
+          await new Promise(r => setTimeout(r, 22));
         }
-
         if (cursor.parentNode) cursor.remove();
-        if (!skipTyping) await new Promise(r => setTimeout(r, 100));
+        if (!forceSkip) await new Promise(r => setTimeout(r, 120));
       }
-
-      isTypingFinished = true;
+      isTypingDone = true;
     }
 
-    // 主题化刮刮乐
-    function initScratch(cfg, theme) {
+    // 拟真织物创可贴刮刮乐
+    function initBandaidScratch(cfg) {
       const sec = document.getElementById("scratchSection");
       sec.style.display = "block";
-      document.getElementById("scratchPrompt").innerText = cfg.title || "Scratch for a surprise ✨";
-      document.getElementById("scratchSecret").innerText = cfg.hiddenText || cfg.secretText || "Surprise!";
+      document.getElementById("scratchSecret").innerText = cfg.hiddenText || "Unlimited Hugs & Dinner! ❤";
 
       setTimeout(() => {
-        const wrapper = document.getElementById("scratchWrapper");
+        const wrapper = document.getElementById("bandaidWrapper");
         const canvas = document.getElementById("scratchCanvas");
         const ctx = canvas.getContext("2d");
         
         canvas.width = wrapper.offsetWidth;
         canvas.height = wrapper.offsetHeight;
 
-        // 根据主题定制涂层质感
-        if (theme === 'halloween') {
-          ctx.fillStyle = "#2c1c38";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = "#e67e22";
-          ctx.font = "bold 13px sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText("🎃 SCRATCH FOR TREAT 🍬", canvas.width / 2, canvas.height / 2 + 5);
-        } else if (theme === 'apology') {
-          ctx.fillStyle = "#8aa0af";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 13px sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText("🩹 PEEL TO HEAL 🕊", canvas.width / 2, canvas.height / 2 + 5);
-        } else {
-          ctx.fillStyle = "#c5a059";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 13px sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText("✦ SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2 + 5);
-        }
+        // 绘制高阶医用织物纹理涂层
+        ctx.fillStyle = "#d8c4ae";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        let isScratching = false;
+        // 创可贴中心防护垫微阴影
+        ctx.fillStyle = "rgba(0,0,0,0.04)";
+        ctx.fillRect(canvas.width * 0.25, 0, canvas.width * 0.5, canvas.height);
+
+        ctx.fillStyle = "#8a6d4e";
+        ctx.font = "bold 12px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("✦ SCRATCH TO HEAL ✦", canvas.width / 2, canvas.height / 2 + 4);
+
+        let scratching = false;
         function scratch(e) {
-          if (!isScratching) return;
+          if (!scratching) return;
           const rect = canvas.getBoundingClientRect();
           const clientX = e.touches ? e.touches[0].clientX : e.clientX;
           const clientY = e.touches ? e.touches[0].clientY : e.clientY;
@@ -562,20 +469,20 @@
 
           ctx.globalCompositeOperation = 'destination-out';
           ctx.beginPath();
-          ctx.arc(x, y, 20, 0, Math.PI * 2);
+          ctx.arc(x, y, 18, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        canvas.addEventListener("mousedown", () => isScratching = true);
-        canvas.addEventListener("touchstart", () => isScratching = true);
-        window.addEventListener("mouseup", () => isScratching = false);
-        window.addEventListener("touchend", () => isScratching = false);
+        canvas.addEventListener("mousedown", () => scratching = true);
+        canvas.addEventListener("touchstart", () => scratching = true);
+        window.addEventListener("mouseup", () => scratching = false);
+        window.addEventListener("touchend", () => scratching = false);
         canvas.addEventListener("mousemove", scratch);
         canvas.addEventListener("touchmove", scratch);
       }, 300);
     }
 
-    // 智能逃跑按钮（支持正向与反向逃跑）
+    // 智能逃跑按钮
     function initRunaway(cfg) {
       const sec = document.getElementById("runawaySection");
       sec.style.display = "block";
@@ -584,13 +491,12 @@
       const btnNo = document.getElementById("btnNo");
       const successEl = document.getElementById("runawaySuccess");
 
-      btnYes.innerText = cfg.yesText || "YES! ❤";
+      btnYes.innerText = cfg.yesText || "YES";
       btnNo.innerText = cfg.noText || "NO";
-      successEl.innerText = cfg.successMessage || "Yay! I knew it! ❤";
+      successEl.innerText = cfg.successMessage || "Thank you for forgiving me! ❤";
 
-      // 如果目标是让 YES 逃跑（例如道歉题：你还在生气吗？）
       const runawayBtn = (cfg.runawayTarget === "yes") ? btnYes : btnNo;
-      const targetWinBtn = (cfg.runawayTarget === "yes") ? btnNo : btnYes;
+      const winBtn = (cfg.runawayTarget === "yes") ? btnNo : btnYes;
 
       function dodge() {
         const x = (Math.random() - 0.5) * 160;
@@ -601,10 +507,10 @@
       runawayBtn.addEventListener("mouseenter", dodge);
       runawayBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); });
 
-      targetWinBtn.addEventListener("click", () => {
+      winBtn.addEventListener("click", () => {
         document.getElementById("runawayBounds").style.display = "none";
         successEl.style.display = "block";
-        initBackgroundParticles("confetti");
+        initConfettiParticles();
       });
     }
 
@@ -614,151 +520,52 @@
       isPlaying = !isPlaying;
     });
 
-    // ==================== 10 种专属物理粒子系统 ====================
+    // 金缮流光粒子系统
     const pCanvas = document.getElementById("particle-canvas");
     const pCtx = pCanvas.getContext("2d");
     let particles = [];
-    function resizeP() { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
-    window.addEventListener("resize", resizeP);
-    resizeP();
+    function resizeCanvas() { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
 
-    class Particle {
-      constructor(type) { this.type = type; this.reset(); }
+    class GoldDust {
+      constructor() { this.reset(); }
       reset() {
         this.x = Math.random() * pCanvas.width;
-        this.opacity = Math.random() * 0.6 + 0.3;
-        this.angle = Math.random() * Math.PI * 2;
-
-        if (this.type === 'rain-to-sunshine') {
-          this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.6; this.len = Math.random() * 10 + 6;
-        } else if (this.type === 'olive-leaves') {
-          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6; this.speedX = Math.random() * 1.2 - 0.6;
-        } else if (this.type === 'gold-dust') {
-          this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.5; this.speedY = -(Math.random() * 1.2 + 0.4); this.speedX = Math.random() * 0.8 - 0.4;
-        } else if (this.type === 'clouds') {
-          this.x = -80; this.y = Math.random() * (pCanvas.height * 0.4); this.size = Math.random() * 40 + 30; this.speedX = Math.random() * 0.4 + 0.2;
-        } else if (this.type === 'pumpkins') {
-          this.y = -30; this.size = Math.random() * 12 + 10; this.speedY = Math.random() * 1.8 + 1; this.speedX = Math.random() * 1 - 0.5;
-        } else if (this.type === 'bats') {
-          this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6); this.size = Math.random() * 14 + 10; this.speedX = Math.random() * 2 + 1.2;
-        } else if (this.type === 'ghosts') {
-          this.y = pCanvas.height + 30; this.size = Math.random() * 16 + 12; this.speedY = -(Math.random() * 1.2 + 0.6); this.speedX = Math.random() * 0.8 - 0.4;
-        } else if (this.type === 'candies') {
-          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 2 + 1; this.speedX = Math.random() * 1 - 0.5;
-          this.color = ["#e67e22", "#9b59b6", "#2ecc71", "#f1c40f"][Math.floor(Math.random() * 4)];
-        } else if (this.type === 'confetti') {
-          this.y = -20; this.size = Math.random() * 7 + 4; this.speedY = Math.random() * 2.5 + 1.2; this.speedX = Math.random() * 2 - 1;
-          this.color = ["#ff6b6b", "#feca57", "#48dbfb", "#ff9ff3", "#54a0ff"][Math.floor(Math.random() * 5)];
-        } else {
-          // 默认爱心
-          this.y = -20; this.size = Math.random() * 8 + 6; this.speedY = Math.random() * 1.2 + 0.6; this.speedX = Math.random() * 0.6 - 0.3;
-        }
+        this.y = pCanvas.height + 20;
+        this.size = Math.random() * 2.2 + 1;
+        this.speedY = -(Math.random() * 0.9 + 0.3);
+        this.speedX = Math.random() * 0.6 - 0.3;
+        this.opacity = Math.random() * 0.5 + 0.2;
       }
       update() {
-        if (this.type === 'rain-to-sunshine') {
-          this.y += this.speedY; this.x += this.speedX;
-          if (this.y > pCanvas.height + 20) this.reset();
-        } else if (this.type === 'gold-dust' || this.type === 'ghosts') {
-          this.y += this.speedY; this.x += Math.sin(this.y * 0.05) * 0.5;
-          if (this.y < -30) this.reset();
-        } else if (this.type === 'clouds' || this.type === 'bats') {
-          this.x += this.speedX; this.y += Math.sin(this.x * 0.03) * 0.6;
-          if (this.x > pCanvas.width + 80) this.reset();
-        } else {
-          this.y += this.speedY; this.x += this.speedX; this.angle += 0.02;
-          if (this.y > pCanvas.height + 30) this.reset();
-        }
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.03) * 0.35;
+        if (this.y < -20) this.reset();
       }
       draw() {
         pCtx.save();
-        if (this.type === 'rain-to-sunshine') {
-          pCtx.strokeStyle = `rgba(180, 205, 230, ${this.opacity * 0.6})`;
-          pCtx.lineWidth = 1.2; pCtx.beginPath();
-          pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
-        } else if (this.type === 'olive-leaves') {
-          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-          pCtx.fillStyle = `rgba(120, 145, 120, ${this.opacity})`;
-          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.45, 0, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'gold-dust') {
-          pCtx.fillStyle = `rgba(243, 156, 18, ${this.opacity})`;
-          pCtx.shadowColor = "#f1c40f"; pCtx.shadowBlur = 8;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'clouds') {
-          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.25})`;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.arc(this.x + 25, this.y - 10, this.size * 0.8, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'pumpkins') {
-          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-          pCtx.fillStyle = "#e67e22"; pCtx.beginPath(); pCtx.arc(0, 0, this.size * 0.6, 0, Math.PI * 2); pCtx.fill();
-          pCtx.fillStyle = "#27ae60"; pCtx.fillRect(-2, -this.size * 0.8, 4, 6);
-        } else if (this.type === 'bats') {
-          pCtx.fillStyle = `rgba(20, 20, 24, ${this.opacity * 0.9})`;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size * 0.3, 0, Math.PI * 2); pCtx.fill();
-          pCtx.beginPath(); pCtx.ellipse(this.x - this.size * 0.4, this.y, this.size * 0.5, this.size * 0.2, -0.3, 0, Math.PI * 2); pCtx.fill();
-          pCtx.beginPath(); pCtx.ellipse(this.x + this.size * 0.4, this.y, this.size * 0.5, this.size * 0.2, 0.3, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'ghosts') {
-          pCtx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.8})`;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size * 0.5, Math.PI, 0);
-          pCtx.lineTo(this.x + this.size * 0.5, this.y + this.size * 0.6); pCtx.lineTo(this.x - this.size * 0.5, this.y + this.size * 0.6); pCtx.fill();
-          pCtx.fillStyle = "#111"; pCtx.beginPath(); pCtx.arc(this.x - 3, this.y, 1.5, 0, Math.PI * 2); pCtx.arc(this.x + 3, this.y, 1.5, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'candies' || this.type === 'confetti') {
-          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-          pCtx.fillStyle = this.color; pCtx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
-        } else {
-          pCtx.fillStyle = `rgba(217, 119, 127, ${this.opacity})`;
-          pCtx.beginPath(); const h = this.size * 0.3;
-          pCtx.moveTo(this.x, this.y + h);
-          pCtx.bezierCurveTo(this.x, this.y, this.x - this.size / 2, this.y, this.x - this.size / 2, this.y + h);
-          pCtx.bezierCurveTo(this.x - this.size / 2, this.y + (this.size + h) / 2, this.x, this.y + (this.size + h) / 1.4, this.x, this.y + this.size);
-          pCtx.bezierCurveTo(this.x, this.y + (this.size + h) / 1.4, this.x + this.size / 2, this.y + (this.size + h) / 2, this.x + this.size / 2, this.y + h);
-          pCtx.bezierCurveTo(this.x + this.size / 2, this.y, this.x, this.y, this.x, this.y + h);
-          pCtx.closePath(); pCtx.fill();
-        }
+        pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        pCtx.shadowColor = "#f1c40f";
+        pCtx.shadowBlur = 6;
+        pCtx.beginPath();
+        pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        pCtx.fill();
         pCtx.restore();
       }
     }
 
-    function initBackgroundParticles(type) {
+    function initGoldDustParticles() {
       particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust') ? 45 : (type === 'bats' ? 12 : 25);
-      for (let i = 0; i < count; i++) particles.push(new Particle(type || 'hearts'));
+      for (let i = 0; i < 40; i++) particles.push(new GoldDust());
     }
 
-    function animateP() {
+    function animateParticles() {
       pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
       particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(animateP);
+      requestAnimationFrame(animateParticles);
     }
-    animateP();
-
-    // 点击微光
-    const sCanvas = document.getElementById("sparkle-canvas");
-    const sCtx = sCanvas.getContext("2d");
-    let sparkles = [];
-    function resizeS() { sCanvas.width = window.innerWidth; sCanvas.height = window.innerHeight; }
-    window.addEventListener("resize", resizeS);
-    resizeS();
-
-    window.addEventListener("pointerdown", (e) => {
-      for (let i = 0; i < 6; i++) {
-        sparkles.push({
-          x: e.clientX, y: e.clientY,
-          vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4,
-          life: 1, color: `hsl(${Math.random() * 50 + 340}, 80%, 70%)`
-        });
-      }
-    });
-
-    function animateSparkles() {
-      sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
-      sparkles.forEach((s, idx) => {
-        s.x += s.vx; s.y += s.vy; s.life -= 0.03;
-        sCtx.fillStyle = s.color; sCtx.globalAlpha = Math.max(s.life, 0);
-        sCtx.beginPath(); sCtx.arc(s.x, s.y, 3, 0, Math.PI * 2); sCtx.fill();
-        if (s.life <= 0) sparkles.splice(idx, 1);
-      });
-      requestAnimationFrame(animateSparkles);
-    }
-    animateSparkles();
+    animateParticles();
 
     loadData();
   </script>
