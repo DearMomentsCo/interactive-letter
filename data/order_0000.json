@@ -1,42 +1,35 @@
 {
-  "theme": "romantic",
+  "theme": "apology",
+  "envelopeStyle": "kintsugi",
   "fontFamily": "font-caveat",
-  "recipient": "Lucas ❤",
-  "sender": "Forever Yours, Emily ✨",
-  "dateLabel": "Days of Loving You",
-  "specialDate": "2025-12-20",
-  "letterTitle": "Happy 4th Anniversary, My Love",
+  "recipient": "My Love",
+  "sender": "Forever Yours, Alex",
   "letterContent": [
-    "Happy 4th Anniversary, my love! Looking back on the rainy afternoon when we first met at that little coffee shop in Seattle, I never could have imagined how deeply you would transform my entire universe. In a world that is constantly rushing and chaotic, you have always been my quiet harbor, my gentle safe haven, and the one place where my heart feels completely at home.",
-    "Thank you for all the little everyday things that mean more to me than words can ever capture. Thank you for making me laugh until my stomach hurts on the hardest days, for always brewing my coffee just the way I like it, for making those delicious Sunday morning pancakes, and for holding my hand tightly through every unexpected storm life threw at us.",
-    "I still remember the late-night road trips where we sang at the top of our lungs, the quiet beach walks where we shared our wildest dreams, and every silly conversation that kept us smiling into the early hours of the morning. With you, even the most mundane grocery runs feel like a cozy little romantic comedy.",
-    "As we celebrate another wonderful milestone together, I want to promise you my endless patience, my unwavering support, and all my love for all the tomorrows to come. I promise to cheer for your victories, stand by you through every challenge, and never stop choosing you every single day.",
-    "You are my best friend, my greatest adventure, and my true soulmate. Happy Anniversary, Lucas. Here is to a lifetime more of warm hugs, spontaneous road trips, sweet memories, and an everlasting love that only grows deeper with time."
+    "I am so truly sorry for upsetting you.",
+    "Looking through our photos, all I could think about is how much your happiness means to me.",
+    "Can we hug it out and start over? I promise to listen more and treat you even better."
   ],
   "photos": [
     {
-      "url": "images/order_0000_1.jpg",
-      "caption": "Our first trip to the coast 🌊"
-    },
-    {
-      "url": "images/order_0000_2.jpg",
-      "caption": "The night we said I love you ✨"
+      "url": "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600",
+      "caption": "Always in my heart ❤"
     }
   ],
-  "musicUrl": "audio/romantic.mp3",
   "scratchCard": {
     "enabled": true,
-    "title": "Scratch for a Sweet Surprise 🎁",
-    "hiddenText": "Surprise! See you soon at Hangzhou this NOV! ✨"
+    "title": "Peel to heal my heart 🩹",
+    "hiddenText": "Redeemable: 1x Dinner of your choice + Unlimited Hugs! 🍦"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Do you promise to love me even when I'm hangry?",
-    "yesText": "I PROMISE! ❤",
-    "noText": "NO"
+    "question": "Are you still super mad at me?",
+    "yesText": "STILL MAD",
+    "noText": "NO (I FORGIVE YOU ❤)",
+    "runawayTarget": "yes",
+    "successMessage": "Yay! Thank you for forgiving me! ❤"
   },
   "effects": {
-    "bgEffect": "stars",
-    "sealColor": "gold"
+    "bgEffect": "gold-dust",
+    "sealIcon": "🩹"
   }
 }
