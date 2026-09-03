@@ -1,36 +1,36 @@
 {
   "theme": "halloween",
-  "envelopeStyle": "gothic",
+  "envelopeStyle": "pumpkin",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Dark Enchantress 🦇",
-  "sender": "Yours in Eternity",
+  "recipient": "My Little Pumpkin 🎃",
+  "sender": "Your Spooky Sweetheart",
   "letterContent": [
-    "The clock strikes midnight, and every ghoul is out searching for treats...",
-    "Yet out of all the shadows in this haunted world, my eyes are bewitched only by you.",
-    "Will you join me on a midnight adventure under the blood moon tonight?"
+    "No tricks, just the sweetest treat in my life—you.",
+    "Carving pumpkins, drinking hot cider, and bundling up in cozy scarves would mean nothing without your warmth.",
+    "Thank you for bringing so much golden light into my spooky season."
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "Under your spell forever 🕯"
+      "caption": "Cutest pumpkin in the patch 🎃"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "My favorite nightmare with you ✨"
+      "caption": "Spooky sweet memories with you ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ BREAK THE MIDNIGHT CURSE ✦",
-    "hiddenText": "Spell Unlocked: 1x Midnight Movie Marathon + All The Candy You Want! 🎃"
+    "title": "✦ UNLOCK THE TRICK OR TREAT BASKET ✦",
+    "hiddenText": "Treat Claimed: 1x Pumpkin Spice Latte + Spooky Movie Cuddle Night ☕🍿"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Will you let me haunt your heart forever?",
-    "yesText": "YES, HAUNT ME ❤",
-    "noText": "EXORCISE GHOST",
+    "question": "Will you be my pumpkin forever?",
+    "yesText": "YES, MY PUMPKIN 🎃",
+    "noText": "RUN AWAY",
     "runawayTarget": "no",
-    "successMessage": "Curse bound! You are officially mine this Spooky Season! 🦇🎃"
+    "successMessage": "Yay! You're stuck in my pumpkin patch forever! 🎃❤"
   },
   "effects": {
     "bgEffect": "spooky-embers"
