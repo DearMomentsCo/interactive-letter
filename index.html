@@ -96,15 +96,37 @@
       padding: 3px 6px; transform: rotate(-5deg); border-radius: 3px; letter-spacing: 1px; font-family: 'Cinzel', serif;
     }
 
-    /* 3. 折角手账便签款 */
-    .env-origami { background: #fffdf2 !important; border: 1px dashed #d8cfb7 !important; }
-    .env-origami .envelope-lid { border-top-color: #f5eedb !important; }
-    .env-origami::before {
-      content: ""; position: absolute; top: 15px; left: 50%;
-      width: 80px; height: 18px; background: rgba(255, 182, 193, 0.65); z-index: 7;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12); transform: translateX(-50%) rotate(-3deg);
+/* 3. 折角手账便签款：隐藏沉重火漆，采用居中和纸胶带撕边封口 */
+    .env-origami { background: #fdfbf7 !important; border: 1px dashed #cfc5af !important; }
+    .env-origami .envelope-lid { border-top-color: #f3ecdb !important; }
+    .env-origami .wax-seal { display: none !important; }
+    .env-origami::after {
+      content: "PEACE OFFERING ♡";
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-3.5deg);
+      width: 145px;
+      height: 32px;
+      background: rgba(255, 182, 193, 0.85);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #8c4a55;
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      z-index: 8;
+      clip-path: polygon(4% 0%, 96% 0%, 100% 15%, 96% 30%, 100% 45%, 96% 60%, 100% 75%, 96% 90%, 100% 100%, 0% 100%, 4% 85%, 0% 70%, 4% 55%, 0% 40%, 4% 25%, 0% 10%);
+      transition: all 0.4s ease;
     }
-
+    .envelope-stage.is-opening .env-origami::after {
+      opacity: 0;
+      transform: translateX(-50%) rotate(-3.5deg) scale(1.15);
+    }
     /* 4. 雨过天晴款 */
     .env-slate { background: #5a728b !important; }
     .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
@@ -190,13 +212,26 @@
       font-weight: 700 !important;
     }
 
-    /* 3. 折角便签信纸：手账稿纸横格线 */
+    /* 3. 折角便签信纸：字字精准压线排版 */
     .paper-origami {
-      background: #fffdf5 !important;
-      background-image: repeating-linear-gradient(#fffdf5 0px, #fffdf5 27px, #e8dfc8 28px) !important;
-      border: 1px solid #dcd1ba !important;
+      background: #fffdf6 !important;
+      border: 1px solid #ded5c0 !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important;
     }
-
+    .paper-origami .letter-body {
+      font-size: 22px !important;
+      line-height: 36px !important;
+      background-image: repeating-linear-gradient(transparent 0px, transparent 35px, #d8cfb7 35px, #d8cfb7 36px) !important;
+      background-size: 100% 36px !important;
+      background-position: 0 28px !important;
+      background-attachment: local !important;
+      padding: 0 !important;
+    }
+    .paper-origami .letter-body p {
+      margin: 0 0 36px 0 !important;
+      line-height: 36px !important;
+      word-break: break-word !important;
+    }
     /* 4. 雨过天晴信纸：破晓双色渐变 */
     .paper-slate {
       background: linear-gradient(180deg, #f0f4f9 0%, #fffdfa 35%, #fffaf0 100%) !important;
