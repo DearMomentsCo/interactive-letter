@@ -1,38 +1,38 @@
 {
-  "theme": "apology",
-  "envelopeStyle": "olive",
+  "theme": "halloween",
+  "envelopeStyle": "gothic",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Peaceful Soul 🌿",
-  "sender": "Yours, Wholeheartedly",
+  "recipient": "My Dark Enchantress 🦇",
+  "sender": "Yours in Eternity",
   "letterContent": [
-    "They say extending an olive branch is a silent promise to protect each other's peace.",
-    "I am holding this branch out to you with both hands. I cherish what we share far too much to let anger stay between us.",
-    "Let’s let bygones be bygones and nurture our bond back to full bloom."
+    "The clock strikes midnight, and every ghoul is out searching for treats...",
+    "Yet out of all the shadows in this haunted world, my eyes are bewitched only by you.",
+    "Will you join me on a midnight adventure under the blood moon tonight?"
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "Cherishing our peaceful days 🌿"
+      "caption": "Under your spell forever 🕯"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "Growing together, always ✨"
+      "caption": "My favorite nightmare with you ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ OLIVE BRANCH PLEDGE ✦",
-    "hiddenText": "Truce Gift: 1x Home-Cooked Dinner + Full Evening Foot Massage 🍵"
+    "title": "✦ BREAK THE MIDNIGHT CURSE ✦",
+    "hiddenText": "Spell Unlocked: 1x Midnight Movie Marathon + All The Candy You Want! 🎃"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Will you take the olive branch?",
-    "yesText": "TAKE THE BRANCH 🌿",
-    "noText": "LET IT WITHER",
+    "question": "Will you let me haunt your heart forever?",
+    "yesText": "YES, HAUNT ME ❤",
+    "noText": "EXORCISE GHOST",
     "runawayTarget": "no",
-    "successMessage": "You took it! Our peace is restored! 🌿❤"
+    "successMessage": "Curse bound! You are officially mine this Spooky Season! 🦇🎃"
   },
   "effects": {
-    "bgEffect": "olive-leaves"
+    "bgEffect": "spooky-embers"
   }
 }
