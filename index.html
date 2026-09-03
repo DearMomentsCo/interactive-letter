@@ -335,6 +335,66 @@
       color: #44593d !important;
     }
 
+    /* 6. 暗夜哥特信封：黑曜石磨砂 + 绯红血色立体火漆 */
+    .env-gothic {
+      background: #151419 !important;
+      border: 1px solid #36291c !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 35px rgba(0, 0, 0, 0.75) !important;
+    }
+    .env-gothic .envelope-lid {
+      border-top-color: #100f14 !important;
+    }
+    .env-gothic .wax-seal {
+      background: radial-gradient(circle at 30% 28%, #ff4d4d 0%, #a81818 45%, #420606 100%) !important;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.8), inset 1.5px 2px 3px rgba(255, 130, 130, 0.6), inset -2.5px -3px 5px rgba(0, 0, 0, 0.85) !important;
+    }
+
+    /* 6. 暗夜哥特专属信纸：曜黑天鹅绒纸基 + 维多利亚暗金双框 + 骨白暖金排版 */
+    .paper-gothic {
+      background: #17161d !important;
+      border: 1px solid #4a3824 !important;
+      outline: 1px solid rgba(212, 175, 55, 0.35) !important;
+      outline-offset: -7px !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 50px rgba(0, 0, 0, 0.8) !important;
+      color: #e5dfd3 !important;
+    }
+    .paper-gothic .letter-header {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25) !important;
+    }
+    .paper-gothic .recipient-name {
+      color: #f1c96d !important;
+      font-family: 'Cinzel', serif !important;
+      letter-spacing: 2px !important;
+    }
+    .paper-gothic .days-badge {
+      background: rgba(168, 24, 24, 0.25) !important;
+      color: #ff7d7d !important;
+      border: 1px solid rgba(168, 24, 24, 0.45) !important;
+      font-weight: 700 !important;
+    }
+    .paper-gothic .letter-body {
+      color: #dcd4c5 !important;
+    }
+    .paper-gothic .scratch-section {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .paper-gothic .scratch-prompt {
+      color: #c9a55c !important;
+    }
+    .paper-gothic .runaway-section {
+      background: rgba(255, 255, 255, 0.03) !important;
+    }
+    .paper-gothic .runaway-question {
+      color: #f1c96d !important;
+    }
+    .paper-gothic .letter-footer {
+      color: #999083 !important;
+    }
+    .paper-gothic .letter-footer .sender-name {
+      color: #f1c96d !important;
+    }
+
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
     .days-badge {
@@ -748,7 +808,6 @@
           this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.5; this.len = Math.random() * 10 + 6;
           this.opacity = Math.random() * 0.5 + 0.25;
         } else if (this.type === 'olive-leaves') {
-          // 35% 温暖晨曦金色浮光（破除压抑），65% 3D双面橄榄叶
           this.isSunMote = Math.random() < 0.35;
           if (this.isSunMote) {
             this.y = Math.random() * pCanvas.height;
@@ -761,9 +820,17 @@
             this.size = Math.random() * 12 + 10;
             this.speedY = Math.random() * 0.9 + 0.6;
             this.speedX = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.3 + 0.7; // 明亮通透
+            this.opacity = Math.random() * 0.3 + 0.7;
             this.depth = Math.random() * 0.4 + 0.7;
           }
+        } else if (this.type === 'spooky-embers') {
+          // 万圣节升腾火星余烬（血橙、熔岩金、微光）
+          this.y = pCanvas.height + 20;
+          this.size = Math.random() * 2.8 + 1.2;
+          this.speedY = -(Math.random() * 1.4 + 0.7);
+          this.speedX = (Math.random() - 0.5) * 0.7;
+          this.opacity = Math.random() * 0.6 + 0.35;
+          this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0;
           this.opacity = 0.5;
@@ -789,6 +856,10 @@
             this.pitch += this.pitchSpeed;
             if (this.y > pCanvas.height + 40) this.reset();
           }
+        } else if (this.type === 'spooky-embers') {
+          this.y += this.speedY;
+          this.x += Math.sin(this.y * 0.025) * 0.7 + this.speedX;
+          if (this.y < -20) this.reset();
         }
       }
       draw() {
@@ -803,7 +874,6 @@
           pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
         } else if (this.type === 'olive-leaves') {
           if (this.isSunMote) {
-            // 晨曦金色微光暖阳粒子
             pCtx.beginPath();
             pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             pCtx.fillStyle = `rgba(255, 222, 130, ${this.opacity * 0.75})`;
@@ -811,7 +881,6 @@
             pCtx.shadowBlur = 10;
             pCtx.fill();
           } else {
-            // 3D 真实双面光影橄榄叶
             pCtx.translate(this.x, this.y);
             pCtx.rotate(this.angle);
 
@@ -823,7 +892,6 @@
             const width = len * 0.44;
             const isFront = scaleX >= 0;
 
-            // 绘制自然流线型柳叶形轮廓
             pCtx.beginPath();
             pCtx.moveTo(-len, 0);
             pCtx.bezierCurveTo(-len * 0.3, -width, len * 0.5, -width * 0.9, len, 0);
@@ -832,14 +900,12 @@
 
             const grad = pCtx.createLinearGradient(-len, -width, len, width);
             if (isFront) {
-              // 正面：鲜活阳光金绿（晨曦高光 -> 饱满橄榄绿 -> 下陷暗绿）
               grad.addColorStop(0, `rgba(178, 205, 82, ${this.opacity})`);
               grad.addColorStop(0.5, `rgba(122, 154, 60, ${this.opacity})`);
               grad.addColorStop(1, `rgba(72, 98, 38, ${this.opacity})`);
               pCtx.shadowColor = "rgba(45, 65, 20, 0.45)";
               pCtx.shadowBlur = 7;
             } else {
-              // 背面：真橄榄叶银白珍珠绒毛质感（微光翻转）
               grad.addColorStop(0, `rgba(244, 248, 242, ${this.opacity * 0.92})`);
               grad.addColorStop(0.6, `rgba(202, 216, 198, ${this.opacity * 0.88})`);
               grad.addColorStop(1, `rgba(156, 172, 150, ${this.opacity * 0.82})`);
@@ -849,7 +915,6 @@
             pCtx.fillStyle = grad;
             pCtx.fill();
 
-            // 3D 高光立体叶脉
             pCtx.beginPath();
             pCtx.moveTo(-len * 0.88, 0);
             pCtx.quadraticCurveTo(0, -width * 0.08, len * 0.9, 0);
@@ -859,6 +924,14 @@
             pCtx.lineWidth = 1.1;
             pCtx.stroke();
           }
+        } else if (this.type === 'spooky-embers') {
+          // 渲染发光火星余烬
+          pCtx.beginPath();
+          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          pCtx.fillStyle = `${this.color} ${this.opacity})`;
+          pCtx.shadowColor = "#ff5500";
+          pCtx.shadowBlur = 10;
+          pCtx.fill();
         }
         pCtx.restore();
       }
@@ -866,7 +939,7 @@
 
     function initParticles(type) {
       particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust') ? 40 : 25;
+      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers') ? 45 : 30;
       for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
     }
 
