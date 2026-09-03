@@ -129,36 +129,34 @@
     }
     .env-olive .envelope-lid { border-top-color: #dcd3c1 !important; }
 
-    /* 6. 万圣暗夜哥特信封：3D物理折痕交叠 + 维多利亚暗金高光 + 极致悬浮光影 */
+    /* 6. 万圣暗夜哥特信封：深邃古堡折纸 + 超细若隐若现银丝蛛网 */
     .env-gothic {
       background:
-        /* 真实左右下三折纸折线交叠阴影 */
         linear-gradient(135deg, rgba(0,0,0,0.55) 0%, transparent 48%),
         linear-gradient(225deg, rgba(0,0,0,0.55) 0%, transparent 48%),
         linear-gradient(0deg, rgba(15, 11, 20, 0.8) 0%, transparent 40%),
-        linear-gradient(150deg, #281d33 0%, #171320 60%, #0d0b12 100%) !important;
-      border: 1.5px solid #d4af37 !important;
-      border-top: 1.5px solid #ffeb99 !important; /* 顶部受光高亮金线 */
-      outline: 1px dashed rgba(212, 175, 55, 0.5) !important;
+        linear-gradient(150deg, #261b30 0%, #16121f 60%, #0d0b12 100%) !important;
+      border: 1.5px solid #c5a059 !important;
+      border-top: 1.5px solid #ffe6a3 !important;
+      outline: 1px dashed rgba(197, 160, 89, 0.4) !important;
       outline-offset: -6px !important;
-      /* 三层真实悬浮阴影：紧贴接触阴影 + 深邃漫反射 + 幽暗血橙外晕光 */
       box-shadow:
         0 35px 70px -15px rgba(0, 0, 0, 0.95),
         0 15px 25px rgba(0, 0, 0, 0.7),
-        0 0 30px rgba(212, 175, 55, 0.22),
-        inset 0 1px 1px rgba(255, 235, 160, 0.4) !important;
+        0 0 25px rgba(255, 120, 20, 0.12),
+        inset 0 1px 1px rgba(255, 235, 160, 0.3) !important;
       position: relative;
     }
     .env-gothic .envelope-lid {
-      border-top-color: #22182c !important;
-      /* 封盖投射在信封本体上的深邃立体下沉阴影 */
+      border-top-color: #201729 !important;
       filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.9)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6)) !important;
     }
-    /* 左右上角精美暗金蛛网 */
+    /* 超细若隐若现如雾蚕丝蛛网（淡香槟银金，0.75px超细弧形悬垂，柔和融入阴影） */
     .env-gothic::before, .env-gothic::after {
-      content: ""; position: absolute; width: 70px; height: 70px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0 L100 0 M0 0 L0 100 M0 0 L70 70 M0 0 L30 90 M0 0 L90 30' stroke='%23d4af37' stroke-width='1.5' opacity='0.65'/%3E%3Cpath d='M25 0 Q20 20 0 25 M55 0 Q45 45 0 55 M85 0 Q70 70 0 85' stroke='%23d4af37' stroke-width='1.5' fill='none' opacity='0.65'/%3E%3C/svg%3E");
+      content: ""; position: absolute; width: 85px; height: 85px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg stroke='%23e6c88b' stroke-width='0.75' fill='none' opacity='0.24'%3E%3Cpath d='M0 0 L100 0 M0 0 L0 100 M0 0 L75 75 M0 0 L35 90 M0 0 L90 35'/%3E%3Cpath d='M15 0 Q11 11 0 15 M32 0 Q24 24 0 32 M52 0 Q38 38 0 52 M74 0 Q55 55 0 74 M96 0 Q72 72 0 96'/%3E%3C/g%3E%3C/svg%3E");
       background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 6;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
     }
     .env-gothic::before { top: 6px; left: 6px; }
     .env-gothic::after { top: 6px; right: 6px; transform: scaleX(-1); }
@@ -266,25 +264,44 @@
     .paper-olive .recipient-name { color: #44593d !important; }
     .paper-olive .days-badge { background: rgba(100, 120, 92, 0.12) !important; color: #3b5034 !important; border: 1px solid rgba(100, 120, 92, 0.3) !important; }
 
-    /* 6. 万圣暗夜魔法羊皮卷信纸（居中正常，具备焦黑/血月光晕与古董暗金边框） */
+   /* 6. 万圣暗夜魔法禁典古卷（全套万圣节高定装裱） */
     .paper-gothic {
-      background: radial-gradient(circle at 50% 0%, #2f213b 0%, #17141f 65%, #100e16 100%) !important;
-      border: 2px solid #d4af37 !important;
-      outline: 1px dashed rgba(212, 175, 55, 0.4) !important;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 100, 20, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, #251c2e 0%, #15121b 75%, #0d0b12 100%) !important;
+      border: 1.5px solid #d4af37 !important;
+      outline: 1px dashed rgba(212, 175, 55, 0.35) !important;
       outline-offset: -8px !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(230, 126, 34, 0.15) !important;
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.95),
+        inset 0 0 50px rgba(0, 0, 0, 0.9),
+        inset 0 0 18px rgba(230, 126, 34, 0.15) !important;
       color: #eae3d5 !important;
+      position: relative;
     }
+    /* 信纸正中央：血月月牙 + 展翅蝙蝠 + 炼金暗纹水印 */
     .paper-gothic::before {
       content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 260px; height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 12 C44 26 34 32 18 30 C30 40 32 56 22 66 C38 60 45 68 50 84 C55 68 62 60 78 66 C68 56 70 40 82 30 C66 32 56 26 50 12 Z' fill='%23ff7700' opacity='0.08'/%3E%3C/svg%3E");
+      width: 270px; height: 270px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' stroke='%23d4af37' stroke-width='0.8' fill='none' stroke-dasharray='3 3' opacity='0.12'/%3E%3Ccircle cx='50' cy='50' r='38' stroke='%23ff7700' stroke-width='0.8' fill='none' opacity='0.1'/%3E%3Cpath d='M50 8 C40 22 30 28 14 26 C26 36 28 52 18 62 C34 56 42 64 50 80 C58 64 66 56 82 62 C72 52 74 36 86 26 C70 28 60 22 50 8 Z' fill='%23ff7700' opacity='0.08'/%3E%3Cpath d='M50 16 A34 34 0 0 0 50 84 A28 28 0 0 1 50 16 Z' fill='%23d4af37' opacity='0.06'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
-    .paper-gothic .letter-header { border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important; }
+    /* 抬头：万圣节专属古典花烛图腾分隔线（取代平淡金线） */
+    .paper-gothic .letter-header {
+      border-bottom: none !important;
+      position: relative;
+      padding-bottom: 22px !important;
+      margin-bottom: 24px !important;
+    }
+    .paper-gothic .letter-header::after {
+      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 82%; height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M10 10 L80 10 M120 10 L190 10' stroke='%23d4af37' stroke-width='0.8' opacity='0.45'/%3E%3Ccircle cx='100' cy='10' r='3.5' fill='%23ff7700'/%3E%3Cpath d='M91 10 Q100 1 109 10 Q100 19 91 10 Z' fill='none' stroke='%23d4af37' stroke-width='0.9'/%3E%3Ccircle cx='68' cy='10' r='1.5' fill='%23d4af37'/%3E%3Ccircle cx='132' cy='10' r='1.5' fill='%23d4af37'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain;
+    }
     .paper-gothic .recipient-name {
-      color: #ffb834 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important;
-      text-shadow: 0 2px 10px rgba(255, 184, 52, 0.25);
+      color: #ffb834 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2.5px !important;
+      text-shadow: 0 2px 12px rgba(255, 184, 52, 0.35);
     }
     .paper-gothic .days-badge {
       background: rgba(180, 20, 20, 0.35) !important; color: #ff8e8e !important;
@@ -292,7 +309,10 @@
     }
     .paper-gothic .letter-body { color: #ded6c8 !important; }
     .paper-gothic .letter-footer { color: #a3998b !important; }
-    .paper-gothic .letter-footer .sender-name { color: #ffb834 !important; }
+    .paper-gothic .letter-footer .sender-name {
+      color: #ffb834 !important;
+      text-shadow: 0 1px 8px rgba(255, 184, 52, 0.3);
+    }
 
     /* 万圣节专属刮刮乐容器与去除创可贴孔洞 */
     .paper-gothic .scratch-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px dashed rgba(212, 175, 55, 0.35) !important; }
