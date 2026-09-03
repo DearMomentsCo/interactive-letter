@@ -135,18 +135,43 @@
     .env-olive { background: #e8e2d3 !important; border: 1px solid #cfc7b4 !important; }
     .env-olive .envelope-lid { border-top-color: #dbd4c3 !important; }
 
-    /* 3D 浮雕火漆印 */
+    /* 拟真手工融蜡 3D 火漆印（不规则液态溢边 + 印章凹陷环 + 双向光影浮雕） */
     .wax-seal {
-      position: absolute; top: 82px; left: 50%; transform: translateX(-50%);
-      width: 54px; height: 54px; border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #e6c875 0%, #b8860b 60%, #5c4308 100%);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5), inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+      position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 60px;
+      /* 真实液态融蜡边缘（非正圆） */
+      border-radius: 46% 54% 51% 49% / 52% 47% 53% 48%;
+      background: radial-gradient(circle at 30% 28%, #ffeb99 0%, #d4af37 28%, #966418 68%, #4f3308 100%);
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.65),
+        0 3px 6px rgba(0, 0, 0, 0.45),
+        inset 1.5px 2px 3px rgba(255, 255, 255, 0.6),
+        inset -2.5px -3px 5px rgba(0, 0, 0, 0.6);
       display: flex; justify-content: center; align-items: center; z-index: 7;
-      transition: all 0.4s ease; border: 1.5px solid rgba(255, 215, 0, 0.4);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
     }
+    /* 金属印头压入蜡油形成的下陷凹槽与凸起外圈 */
+    .wax-seal::before {
+      content: "";
+      position: absolute;
+      width: 45px; height: 45px;
+      border-radius: 52% 48% 49% 51% / 48% 52% 48% 52%;
+      border: 1.5px solid rgba(255, 235, 160, 0.45);
+      box-shadow:
+        inset 0 3px 6px rgba(0, 0, 0, 0.65),
+        0 1px 2px rgba(255, 255, 255, 0.35);
+      background: radial-gradient(circle at 38% 38%, rgba(212, 175, 55, 0.15) 0%, rgba(70, 45, 10, 0.45) 100%);
+      pointer-events: none;
+    }
+    /* 印章立体雕刻徽标（顶部受光高亮 + 底部下陷投影） */
     .wax-seal svg {
-      width: 24px; height: 24px; fill: none; stroke: #fff6d6; stroke-width: 1.8;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+      width: 23px; height: 23px;
+      fill: none;
+      stroke: #fff1b8;
+      stroke-width: 2.2;
+      filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.85)) drop-shadow(0 -1px 0.5px rgba(255, 255, 255, 0.7));
+      z-index: 2;
     }
     .envelope-stage.is-opening .wax-seal { transform: translateX(-50%) scale(1.8); opacity: 0; filter: blur(4px); }
 
@@ -232,10 +257,24 @@
       line-height: 36px !important;
       word-break: break-word !important;
     }
-    /* 4. 雨过天晴信纸：破晓双色渐变 */
+/* 4. 雨过天晴专属信纸：雨雾灰蓝明显过渡至晨曦破晓暖金 */
     .paper-slate {
-      background: linear-gradient(180deg, #f0f4f9 0%, #fffdfa 35%, #fffaf0 100%) !important;
-      border: 1px solid #d4dfe8 !important;
+      background: linear-gradient(180deg, #c2d5e6 0%, #dfeaf4 28%, #fbf8f2 62%, #ffeed1 100%) !important;
+      border: 1.5px solid #a4bdd6 !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 35px rgba(255, 255, 255, 0.6) !important;
+      position: relative;
+    }
+    .paper-slate .letter-header {
+      border-bottom: 1px solid rgba(80, 106, 133, 0.28) !important;
+    }
+    .paper-slate .recipient-name {
+      color: #314b66 !important;
+    }
+    .paper-slate .days-badge {
+      background: rgba(80, 106, 133, 0.14) !important;
+      color: #2b4560 !important;
+      border: 1px solid rgba(80, 106, 133, 0.3) !important;
+      font-weight: 600 !important;
     }
 
     /* 5. 橄榄和解信纸：手工撕边棉麻纸 */
