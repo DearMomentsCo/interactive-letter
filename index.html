@@ -733,33 +733,40 @@
       constructor(type) { this.type = type; this.reset(); }
       reset() {
         this.x = Math.random() * pCanvas.width;
-        this.opacity = Math.random() * 0.45 + 0.35;
         this.angle = Math.random() * Math.PI * 2;
-        this.spinSpeed = (Math.random() - 0.5) * 0.03;
-        // 3D 翻转相位
-        this.flipAngle = Math.random() * Math.PI * 2;
-        this.flipSpeed = Math.random() * 0.04 + 0.02;
+        this.spinSpeed = (Math.random() - 0.5) * 0.025;
+        this.roll = Math.random() * Math.PI * 2;
+        this.rollSpeed = Math.random() * 0.035 + 0.02;
+        this.pitch = Math.random() * Math.PI * 2;
+        this.pitchSpeed = Math.random() * 0.025 + 0.01;
 
         if (this.type === 'gold-dust') {
           this.y = pCanvas.height + 20; this.size = Math.random() * 2.2 + 1;
           this.speedY = -(Math.random() * 0.9 + 0.3); this.speedX = Math.random() * 0.6 - 0.3;
+          this.opacity = Math.random() * 0.5 + 0.25;
         } else if (this.type === 'rain-to-sunshine') {
           this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.5; this.len = Math.random() * 10 + 6;
+          this.opacity = Math.random() * 0.5 + 0.25;
         } else if (this.type === 'olive-leaves') {
-          this.y = -30;
-          this.size = Math.random() * 10 + 9; // 修长橄榄叶尺寸
-          this.speedY = Math.random() * 0.8 + 0.5; // 舒缓落速
-          this.speedX = (Math.random() - 0.5) * 0.6;
-          // 高级莫兰迪植系灰绿配色板
-          const olivePalette = [
-            'rgba(110, 128, 102,', // 经典橄榄叶绿
-            'rgba(138, 154, 131,', // 柔和鼠尾草绿
-            'rgba(93, 110, 86,',   // 深邃森林橄榄
-            'rgba(168, 178, 160,'  // 银绿叶背光泽
-          ];
-          this.colorPrefix = olivePalette[Math.floor(Math.random() * olivePalette.length)];
+          // 35% 温暖晨曦金色浮光（破除压抑），65% 3D双面橄榄叶
+          this.isSunMote = Math.random() < 0.35;
+          if (this.isSunMote) {
+            this.y = Math.random() * pCanvas.height;
+            this.size = Math.random() * 3.5 + 1.5;
+            this.speedY = -(Math.random() * 0.4 + 0.2);
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.opacity = Math.random() * 0.45 + 0.25;
+          } else {
+            this.y = -35;
+            this.size = Math.random() * 12 + 10;
+            this.speedY = Math.random() * 0.9 + 0.6;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.3 + 0.7; // 明亮通透
+            this.depth = Math.random() * 0.4 + 0.7;
+          }
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0;
+          this.opacity = 0.5;
         }
       }
       update() {
@@ -770,11 +777,18 @@
           this.y += this.speedY; this.x += this.speedX;
           if (this.y > pCanvas.height + 20) this.reset();
         } else if (this.type === 'olive-leaves') {
-          this.y += this.speedY;
-          this.x += Math.sin(this.y * 0.015) * 0.7 + this.speedX;
-          this.angle += this.spinSpeed;
-          this.flipAngle += this.flipSpeed;
-          if (this.y > pCanvas.height + 35) this.reset();
+          if (this.isSunMote) {
+            this.y += this.speedY;
+            this.x += Math.sin(this.y * 0.02) * 0.4;
+            if (this.y < -20) this.reset();
+          } else {
+            this.y += this.speedY;
+            this.x += Math.sin(this.y * 0.016) * 1.0 + this.speedX;
+            this.angle += this.spinSpeed;
+            this.roll += this.rollSpeed;
+            this.pitch += this.pitchSpeed;
+            if (this.y > pCanvas.height + 40) this.reset();
+          }
         }
       }
       draw() {
@@ -788,28 +802,63 @@
           pCtx.lineWidth = 1.2; pCtx.beginPath();
           pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
         } else if (this.type === 'olive-leaves') {
-          // 拟真 3D 叶片翻转与平面自旋
-          pCtx.translate(this.x, this.y);
-          pCtx.rotate(this.angle);
-          pCtx.scale(1, Math.sin(this.flipAngle)); // 模拟叶片翻面
+          if (this.isSunMote) {
+            // 晨曦金色微光暖阳粒子
+            pCtx.beginPath();
+            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            pCtx.fillStyle = `rgba(255, 222, 130, ${this.opacity * 0.75})`;
+            pCtx.shadowColor = "#ffd666";
+            pCtx.shadowBlur = 10;
+            pCtx.fill();
+          } else {
+            // 3D 真实双面光影橄榄叶
+            pCtx.translate(this.x, this.y);
+            pCtx.rotate(this.angle);
 
-          // 绘制优美的流线型修长橄榄柳叶轮廓（非椭圆）
-          pCtx.beginPath();
-          pCtx.moveTo(-this.size, 0);
-          pCtx.quadraticCurveTo(0, -this.size * 0.42, this.size, 0);
-          pCtx.quadraticCurveTo(0, this.size * 0.42, -this.size, 0);
-          pCtx.closePath();
+            const scaleX = Math.cos(this.roll);
+            const scaleY = Math.sin(this.pitch) * 0.35 + 0.65;
+            pCtx.scale(scaleX, scaleY);
 
-          pCtx.fillStyle = `${this.colorPrefix} ${this.opacity})`;
-          pCtx.fill();
+            const len = this.size * this.depth;
+            const width = len * 0.44;
+            const isFront = scaleX >= 0;
 
-          // 微距主叶脉线条
-          pCtx.strokeStyle = `rgba(255, 255, 255, ${this.opacity * 0.45})`;
-          pCtx.lineWidth = 0.9;
-          pCtx.beginPath();
-          pCtx.moveTo(-this.size * 0.85, 0);
-          pCtx.quadraticCurveTo(0, -this.size * 0.05, this.size * 0.85, 0);
-          pCtx.stroke();
+            // 绘制自然流线型柳叶形轮廓
+            pCtx.beginPath();
+            pCtx.moveTo(-len, 0);
+            pCtx.bezierCurveTo(-len * 0.3, -width, len * 0.5, -width * 0.9, len, 0);
+            pCtx.bezierCurveTo(len * 0.5, width * 0.9, -len * 0.3, width, -len, 0);
+            pCtx.closePath();
+
+            const grad = pCtx.createLinearGradient(-len, -width, len, width);
+            if (isFront) {
+              // 正面：鲜活阳光金绿（晨曦高光 -> 饱满橄榄绿 -> 下陷暗绿）
+              grad.addColorStop(0, `rgba(178, 205, 82, ${this.opacity})`);
+              grad.addColorStop(0.5, `rgba(122, 154, 60, ${this.opacity})`);
+              grad.addColorStop(1, `rgba(72, 98, 38, ${this.opacity})`);
+              pCtx.shadowColor = "rgba(45, 65, 20, 0.45)";
+              pCtx.shadowBlur = 7;
+            } else {
+              // 背面：真橄榄叶银白珍珠绒毛质感（微光翻转）
+              grad.addColorStop(0, `rgba(244, 248, 242, ${this.opacity * 0.92})`);
+              grad.addColorStop(0.6, `rgba(202, 216, 198, ${this.opacity * 0.88})`);
+              grad.addColorStop(1, `rgba(156, 172, 150, ${this.opacity * 0.82})`);
+              pCtx.shadowColor = "rgba(0, 0, 0, 0.28)";
+              pCtx.shadowBlur = 5;
+            }
+            pCtx.fillStyle = grad;
+            pCtx.fill();
+
+            // 3D 高光立体叶脉
+            pCtx.beginPath();
+            pCtx.moveTo(-len * 0.88, 0);
+            pCtx.quadraticCurveTo(0, -width * 0.08, len * 0.9, 0);
+            pCtx.strokeStyle = isFront
+              ? `rgba(245, 255, 205, ${this.opacity * 0.7})`
+              : `rgba(255, 255, 255, ${this.opacity * 0.8})`;
+            pCtx.lineWidth = 1.1;
+            pCtx.stroke();
+          }
         }
         pCtx.restore();
       }
