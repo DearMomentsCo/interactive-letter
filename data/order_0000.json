@@ -1,38 +1,38 @@
 {
   "theme": "apology",
-  "envelopeStyle": "slate",
+  "envelopeStyle": "olive",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Sunshine ⛅",
-  "sender": "Yours, Always",
+  "recipient": "My Peaceful Soul 🌿",
+  "sender": "Yours, Wholeheartedly",
   "letterContent": [
-    "Every storm runs out of rain, just like every argument reminds me how much I value our warmth.",
-    "I hate being on opposite sides of the storm. Let the dark clouds pass and let's welcome the sunshine back into our days.",
-    "I'm right here waiting with an umbrella and an open heart."
+    "They say extending an olive branch is a silent promise to protect each other's peace.",
+    "I am holding this branch out to you with both hands. I cherish what we share far too much to let anger stay between us.",
+    "Let’s let bygones be bygones and nurture our bond back to full bloom."
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "The storm always passes ⛅"
+      "caption": "Cherishing our peaceful days 🌿"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "Brighter days ahead with you ✨"
+      "caption": "Growing together, always ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ CLEAR THE RAIN CLOUDS ✦",
-    "hiddenText": "Sunny Forecast: 1x Cozy Coffee Date + Warm Hugs All Day! ☕"
+    "title": "✦ OLIVE BRANCH PLEDGE ✦",
+    "hiddenText": "Truce Gift: 1x Home-Cooked Dinner + Full Evening Foot Massage 🍵"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Will you let the sun shine between us again?",
-    "yesText": "LET'S MAKE UP ☀️",
-    "noText": "STILL CLOUDY",
+    "question": "Will you take the olive branch?",
+    "yesText": "TAKE THE BRANCH 🌿",
+    "noText": "LET IT WITHER",
     "runawayTarget": "no",
-    "successMessage": "The storm is over! Thank you for letting the sun back in! ☀️❤"
+    "successMessage": "You took it! Our peace is restored! 🌿❤"
   },
   "effects": {
-    "bgEffect": "rain-to-sunshine"
+    "bgEffect": "olive-leaves"
   }
 }
