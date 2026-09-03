@@ -131,9 +131,22 @@
     .env-slate { background: #5a728b !important; }
     .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
 
-    /* 5. 橄榄和解款 */
-    .env-olive { background: #e8e2d3 !important; border: 1px solid #cfc7b4 !important; }
-    .env-olive .envelope-lid { border-top-color: #dbd4c3 !important; }
+   /* 5. 橄榄和解款：高密经纬交错棉麻粗布纹理 + 纤维微凹凸光影 */
+    .env-olive {
+      background-color: #e4ddcf !important;
+      background-image:
+        linear-gradient(rgba(70, 60, 45, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(70, 60, 45, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px) !important;
+      background-size: 3px 3px, 3px 3px, 7px 7px, 7px 7px !important;
+      border: 1px solid #cac1ad !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), inset 0 0 45px rgba(95, 82, 65, 0.16) !important;
+    }
+    .env-olive .envelope-lid {
+      border-top-color: #dcd3c1 !important;
+      filter: drop-shadow(0 6px 12px rgba(60, 50, 40, 0.35)) !important;
+    }
 
     /* 拟真手工融蜡 3D 火漆印（不规则液态溢边 + 印章凹陷环 + 双向光影浮雕） */
     .wax-seal {
@@ -276,10 +289,50 @@
       font-weight: 700 !important;
     }
 
-    /* 5. 橄榄和解信纸：手工撕边棉麻纸 */
+    /* 5. 橄榄和解专属信纸：草木植物压花手工纸 + 橄榄枝叶淡雅水印 */
     .paper-olive {
-      background: #f6f3eb !important;
-      border: 2px dashed #cfc7b4 !important;
+      background-color: #faf8f2 !important;
+      /* 天然草木纸微距纤维微斑与漫反射光影 */
+      background-image:
+        radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.7) 0%, rgba(235, 230, 218, 0.35) 100%),
+        radial-gradient(#b0a996 0.75px, transparent 0.75px) !important;
+      background-size: 100% 100%, 18px 18px !important;
+      border: 1.5px solid #b8c4b0 !important;
+      outline: 1px solid rgba(100, 120, 92, 0.32) !important;
+      outline-offset: -7px !important;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 45px rgba(110, 128, 102, 0.07) !important;
+    }
+    /* 正中央高定手绘橄榄枝淡水印 */
+    .paper-olive::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      height: 250px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M25 80 C40 65 55 45 75 20' stroke='%23586e50' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 62 C35 55 35 48 42 47 C48 47 50 54 40 62 Z' fill='%23586e50'/%3E%3Cpath d='M46 54 C54 52 58 46 54 40 C50 38 43 45 46 54 Z' fill='%23586e50'/%3E%3Cpath d='M55 43 C52 35 53 28 60 28 C66 29 67 36 55 43 Z' fill='%23586e50'/%3E%3Cpath d='M63 34 C71 33 76 27 72 21 C68 19 61 25 63 34 Z' fill='%23586e50'/%3E%3Cpath d='M30 73 C23 68 22 61 29 60 C35 60 37 67 30 73 Z' fill='%23586e50'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      opacity: 0.085;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .paper-olive .letter-header {
+      border-bottom: 1px solid rgba(100, 120, 92, 0.25) !important;
+    }
+    .paper-olive .recipient-name {
+      color: #44593d !important;
+    }
+    .paper-olive .days-badge {
+      background: rgba(100, 120, 92, 0.12) !important;
+      color: #3b5034 !important;
+      border: 1px solid rgba(100, 120, 92, 0.3) !important;
+      font-weight: 700 !important;
+    }
+    .paper-olive .letter-footer .sender-name {
+      color: #44593d !important;
     }
 
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
@@ -680,8 +733,12 @@
       constructor(type) { this.type = type; this.reset(); }
       reset() {
         this.x = Math.random() * pCanvas.width;
-        this.opacity = Math.random() * 0.5 + 0.25;
+        this.opacity = Math.random() * 0.45 + 0.35;
         this.angle = Math.random() * Math.PI * 2;
+        this.spinSpeed = (Math.random() - 0.5) * 0.03;
+        // 3D 翻转相位
+        this.flipAngle = Math.random() * Math.PI * 2;
+        this.flipSpeed = Math.random() * 0.04 + 0.02;
 
         if (this.type === 'gold-dust') {
           this.y = pCanvas.height + 20; this.size = Math.random() * 2.2 + 1;
@@ -689,7 +746,18 @@
         } else if (this.type === 'rain-to-sunshine') {
           this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.5; this.len = Math.random() * 10 + 6;
         } else if (this.type === 'olive-leaves') {
-          this.y = -20; this.size = Math.random() * 8 + 5; this.speedY = Math.random() * 1.2 + 0.5; this.speedX = Math.random() * 1 - 0.5;
+          this.y = -30;
+          this.size = Math.random() * 10 + 9; // 修长橄榄叶尺寸
+          this.speedY = Math.random() * 0.8 + 0.5; // 舒缓落速
+          this.speedX = (Math.random() - 0.5) * 0.6;
+          // 高级莫兰迪植系灰绿配色板
+          const olivePalette = [
+            'rgba(110, 128, 102,', // 经典橄榄叶绿
+            'rgba(138, 154, 131,', // 柔和鼠尾草绿
+            'rgba(93, 110, 86,',   // 深邃森林橄榄
+            'rgba(168, 178, 160,'  // 银绿叶背光泽
+          ];
+          this.colorPrefix = olivePalette[Math.floor(Math.random() * olivePalette.length)];
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0;
         }
@@ -702,8 +770,11 @@
           this.y += this.speedY; this.x += this.speedX;
           if (this.y > pCanvas.height + 20) this.reset();
         } else if (this.type === 'olive-leaves') {
-          this.y += this.speedY; this.x += this.speedX; this.angle += 0.02;
-          if (this.y > pCanvas.height + 20) this.reset();
+          this.y += this.speedY;
+          this.x += Math.sin(this.y * 0.015) * 0.7 + this.speedX;
+          this.angle += this.spinSpeed;
+          this.flipAngle += this.flipSpeed;
+          if (this.y > pCanvas.height + 35) this.reset();
         }
       }
       draw() {
@@ -717,9 +788,28 @@
           pCtx.lineWidth = 1.2; pCtx.beginPath();
           pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
         } else if (this.type === 'olive-leaves') {
-          pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-          pCtx.fillStyle = `rgba(120, 145, 120, ${this.opacity})`;
-          pCtx.beginPath(); pCtx.ellipse(0, 0, this.size, this.size * 0.45, 0, 0, Math.PI * 2); pCtx.fill();
+          // 拟真 3D 叶片翻转与平面自旋
+          pCtx.translate(this.x, this.y);
+          pCtx.rotate(this.angle);
+          pCtx.scale(1, Math.sin(this.flipAngle)); // 模拟叶片翻面
+
+          // 绘制优美的流线型修长橄榄柳叶轮廓（非椭圆）
+          pCtx.beginPath();
+          pCtx.moveTo(-this.size, 0);
+          pCtx.quadraticCurveTo(0, -this.size * 0.42, this.size, 0);
+          pCtx.quadraticCurveTo(0, this.size * 0.42, -this.size, 0);
+          pCtx.closePath();
+
+          pCtx.fillStyle = `${this.colorPrefix} ${this.opacity})`;
+          pCtx.fill();
+
+          // 微距主叶脉线条
+          pCtx.strokeStyle = `rgba(255, 255, 255, ${this.opacity * 0.45})`;
+          pCtx.lineWidth = 0.9;
+          pCtx.beginPath();
+          pCtx.moveTo(-this.size * 0.85, 0);
+          pCtx.quadraticCurveTo(0, -this.size * 0.05, this.size * 0.85, 0);
+          pCtx.stroke();
         }
         pCtx.restore();
       }
