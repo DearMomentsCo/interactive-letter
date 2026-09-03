@@ -421,42 +421,62 @@
       box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
     }
 
-    /* 7. 焦糖南瓜专属信纸：复古烤奶茶羊皮纸 + 温暖烛光微晕 + 丰收南瓜暗纹 */
+    /* 7. 焦糖南瓜专属信纸：焦糖肉桂烘焙羊皮纸 + 维多利亚铜版雕刻水印 + 典雅暖调排版 */
     .paper-pumpkin {
-      background:
-        radial-gradient(ellipse at 50% 18%, rgba(255, 165, 0, 0.14) 0%, transparent 60%),
-        linear-gradient(180deg, #fdf7ee 0%, #faecd8 50%, #f4dec3 100%) !important;
-      border: 1.8px solid #c87d32 !important;
-      outline: 1px dashed rgba(180, 95, 30, 0.35) !important;
+      background-color: #fbf5eb !important;
+      background-image:
+        radial-gradient(ellipse at 50% 15%, rgba(255, 175, 60, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, #fbf5eb 0%, #f5e7d0 70%, #ebd4b5 100%) !important;
+      border: 1.8px solid #c97a29 !important;
+      outline: 1px dashed rgba(185, 95, 25, 0.45) !important;
       outline-offset: -8px !important;
       box-shadow:
-        0 25px 65px rgba(0, 0, 0, 0.65),
-        inset 0 0 45px rgba(180, 100, 30, 0.08) !important;
-      color: #3b2314 !important;
+        0 25px 65px rgba(0, 0, 0, 0.7),
+        inset 0 0 50px rgba(160, 80, 20, 0.1),
+        inset 0 0 20px rgba(255, 240, 200, 0.6) !important;
+      color: #382013 !important;
+      position: relative;
     }
+    /* 正中央维多利亚古典铜版蚀刻南瓜与麦穗暗纹水印（告别简笔画） */
     .paper-pumpkin::before {
-      content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 260px; height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 C32 20 22 36 22 55 C22 72 34 82 50 82 C66 82 78 72 78 55 C78 36 68 20 50 20 Z' fill='none' stroke='%23d35400' stroke-width='1.2' opacity='0.12'/%3E%3Cpath d='M50 12 C48 16 52 20 50 22' stroke='%2327ae60' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.25'/%3E%3Cpath d='M36 48 L44 54 L36 58 Z M64 48 L56 54 L64 58 Z' fill='%23d35400' opacity='0.1'/%3E%3Cpath d='M38 66 Q50 74 62 66 Q50 78 38 66 Z' fill='%23d35400' opacity='0.1'/%3E%3C/svg%3E");
+      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
+      width: 270px; height: 270px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='94' stroke='%23b85209' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.16'/%3E%3Ccircle cx='100' cy='100' r='86' stroke='%23b85209' stroke-width='0.7' fill='none' opacity='0.13'/%3E%3Cpath d='M100 25 L102 32 L100 35 L98 32 Z M100 165 L102 172 L100 175 L98 172 Z' fill='%23b85209' opacity='0.2'/%3E%3Cpath d='M100 58 C82 58 64 72 64 98 C64 124 82 138 100 138 C118 138 136 124 136 98 C136 72 118 58 100 58 Z' fill='none' stroke='%23b85209' stroke-width='1.4' opacity='0.14'/%3E%3Cpath d='M88 62 C76 70 76 126 88 134 M112 62 C124 70 124 126 112 134' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.12'/%3E%3Cpath d='M100 58 L100 138' fill='none' stroke='%23b85209' stroke-width='0.8' stroke-dasharray='2 2' opacity='0.12'/%3E%3Cpath d='M100 45 Q98 52 100 58 Q103 52 101 45 Z' fill='%23b85209' opacity='0.2'/%3E%3Cpath d='M102 48 Q118 42 120 54 Q122 64 112 62' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.15'/%3E%3Cpath d='M98 48 Q82 42 80 54 Q78 64 88 62' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
     .paper-pumpkin .letter-header {
-      border-bottom: 1px solid rgba(200, 110, 40, 0.25) !important;
+      border-bottom: 1px solid rgba(185, 95, 25, 0.25) !important;
+      position: relative;
+      padding-bottom: 20px !important;
+      margin-bottom: 22px !important;
+    }
+    .paper-pumpkin .letter-header::after {
+      content: ""; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+      width: 75%; height: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 12'%3E%3Cpath d='M0 6 L65 6 M95 6 L160 6' stroke='%23c97a29' stroke-width='0.8' opacity='0.4'/%3E%3Ccircle cx='80' cy='6' r='3.5' fill='%23d96b14'/%3E%3Ccircle cx='70' cy='6' r='1.5' fill='%23c97a29'/%3E%3Ccircle cx='90' cy='6' r='1.5' fill='%23c97a29'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain;
     }
     .paper-pumpkin .recipient-name {
-      color: #a0490b !important;
+      color: #9c4509 !important;
       font-family: 'Cinzel', serif !important;
       letter-spacing: 2px !important;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     .paper-pumpkin .days-badge {
-      background: rgba(211, 84, 0, 0.12) !important;
-      color: #a0490b !important;
-      border: 1px solid rgba(211, 84, 0, 0.3) !important;
+      background: rgba(201, 122, 41, 0.15) !important;
+      color: #8c3b04 !important;
+      border: 1px solid rgba(201, 122, 41, 0.35) !important;
       font-weight: 700 !important;
     }
-    .paper-pumpkin .letter-body { color: #402919 !important; }
-    .paper-pumpkin .letter-footer { color: #825a36 !important; }
-    .paper-pumpkin .letter-footer .sender-name { color: #a0490b !important; }
+    .paper-pumpkin .letter-body {
+      color: #3b2214 !important;
+      line-height: 1.95 !important;
+    }
+    .paper-pumpkin .letter-footer { color: #855c3c !important; }
+    .paper-pumpkin .letter-footer .sender-name {
+      color: #9c4509 !important;
+      font-weight: 700 !important;
+    }
 
     /* 焦糖南瓜糖果盒刮刮乐 */
     .paper-pumpkin .scratch-section {
@@ -687,11 +707,17 @@
 
       if (isHalloween) {
         if (envStyle === 'pumpkin') {
-          hintEl.innerText = "✦ CARVE THE PUMPKIN SEAL 🎃 ✦";
+          hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
           dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
           waxSeal.innerHTML = `
-            <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff4d4; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.8));">
-              <path d="M12 2 C11.5 3 12.5 4 12 5 C7 5 3 9 3 14 C3 18.5 7 22 12 22 C17 22 21 18.5 21 14 C21 9 17 5 12 5 Z M8.5 11 L10.5 13 L8.5 14.5 Z M15.5 11 L13.5 13 L15.5 14.5 Z M8 17 Q12 20 16 17 Q12 18 8 17 Z"/>
+            <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(60,20,0,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.7));">
+              <!-- 瓜柄 -->
+              <path d="M15 3.5 C15.5 5 16 6 17 6.5 L14.5 6.5 C14 5 13.5 4 13 3.5 Z" fill="#fff1b8"/>
+              <!-- 南瓜主体浮雕外廓 -->
+              <path d="M16 6.5 C11 6.5 5.5 10 5.5 17 C5.5 24 11 27.5 16 27.5 C21 27.5 26.5 24 26.5 17 C26.5 10 21 6.5 16 6.5 Z" fill="#fff1b8"/>
+              <!-- 雕刻下陷深色镂空五官（高反差三角眼与锯齿笑脸） -->
+              <path d="M9.5 13.5 L13 14.5 L10.5 17 Z M22.5 13.5 L21.5 17 L19 14.5 Z M16 15.5 L17.5 18 L14.5 18 Z" fill="#6e2700"/>
+              <path d="M9.5 20 Q16 26 22.5 20 C21 22 19 21 17.5 22.5 C16 21 15 22.5 13.5 21 C12 22.5 10.5 21.5 9.5 20 Z" fill="#6e2700"/>
             </svg>
           `;
         } else {
@@ -752,7 +778,19 @@
         bgMusic.src = data.musicUrl;
       }
 
-      const bgType = (data.effects && data.effects.bgEffect) ? data.effects.bgEffect : (isHalloween ? "spooky-embers" : "gold-dust");
+      // 核心资产映射库：每个款式专属绑定自己的专属背景动效（接单免配置）
+      const styleAutoEffects = {
+        "kintsugi":  "gold-dust",         // 金缮款 -> 专属流光金粉
+        "whiteflag": "gold-dust",         // 和平白旗 -> 专属微光金粉
+        "origami":   "gold-dust",         // 折角便签 -> 专属柔金
+        "slate":     "rain-to-sunshine",  // 雨过天晴 -> 专属细雨破晓
+        "olive":     "olive-leaves",      // 橄榄和解 -> 专属3D双面落叶与晨曦暖阳
+        "gothic":    "spooky-embers",     // 暗夜哥特 -> 专属血月余烬与夜空暗蝠
+        "pumpkin":   "pumpkin-glow"       // 焦糖南瓜 -> 专属温暖荧火虫与焦糖落叶
+      };
+
+      // 优先读取客户自定义，若未填则根据款式秒级自动匹配专属动效
+      const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
     }
 
@@ -976,6 +1014,30 @@
             this.opacity = Math.random() * 0.6 + 0.35;
             this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
           }
+        } else if (this.type === 'pumpkin-glow') {
+          // 焦糖南瓜专属：55% 温暖金黄南瓜荧火虫 + 45% 飘落旋转秋日枫叶
+          this.isMote = Math.random() < 0.55;
+          if (this.isMote) {
+            this.y = Math.random() * pCanvas.height;
+            this.size = Math.random() * 3.8 + 2;
+            this.speedY = -(Math.random() * 0.45 + 0.2);
+            this.speedX = (Math.random() - 0.5) * 0.4;
+            this.opacity = Math.random() * 0.5 + 0.35;
+            this.pulseSpeed = Math.random() * 0.04 + 0.02;
+            this.pulsePhase = Math.random() * Math.PI * 2;
+          } else {
+            this.y = -25;
+            this.size = Math.random() * 10 + 8;
+            this.speedY = Math.random() * 0.85 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.6;
+            this.opacity = Math.random() * 0.35 + 0.65;
+            const autumnColors = [
+              'rgba(235, 130, 40,',
+              'rgba(215, 160, 30,',
+              'rgba(180, 75, 25,'
+            ];
+            this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
+          }
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
         }
@@ -1005,6 +1067,19 @@
             this.y += this.speedY; this.x += Math.sin(this.y * 0.025) * 0.7 + this.speedX;
             if (this.y < -20) this.reset();
           }
+        } else if (this.type === 'pumpkin-glow') {
+          if (this.isMote) {
+            this.y += this.speedY;
+            this.x += Math.sin(this.y * 0.02) * 0.5 + this.speedX;
+            this.pulsePhase += this.pulseSpeed;
+            if (this.y < -20) this.reset();
+          } else {
+            this.y += this.speedY;
+            this.x += Math.sin(this.y * 0.018) * 0.9 + this.speedX;
+            this.angle += this.spinSpeed;
+            this.roll += this.rollSpeed;
+            if (this.y > pCanvas.height + 30) this.reset();
+          }
         }
       }
       draw() {
@@ -1027,12 +1102,10 @@
             const scaleX = Math.cos(this.roll); const scaleY = Math.sin(this.pitch) * 0.35 + 0.65;
             pCtx.scale(scaleX, scaleY);
             const len = this.size * this.depth; const width = len * 0.44; const isFront = scaleX >= 0;
-
             pCtx.beginPath(); pCtx.moveTo(-len, 0);
             pCtx.bezierCurveTo(-len * 0.3, -width, len * 0.5, -width * 0.9, len, 0);
             pCtx.bezierCurveTo(len * 0.5, width * 0.9, -len * 0.3, width, -len, 0);
             pCtx.closePath();
-
             const grad = pCtx.createLinearGradient(-len, -width, len, width);
             if (isFront) {
               grad.addColorStop(0, `rgba(178, 205, 82, ${this.opacity})`);
@@ -1046,7 +1119,6 @@
               pCtx.shadowColor = "rgba(0, 0, 0, 0.28)"; pCtx.shadowBlur = 5;
             }
             pCtx.fillStyle = grad; pCtx.fill();
-
             pCtx.beginPath(); pCtx.moveTo(-len * 0.88, 0);
             pCtx.quadraticCurveTo(0, -width * 0.08, len * 0.9, 0);
             pCtx.strokeStyle = isFront ? `rgba(245, 255, 205, ${this.opacity * 0.7})` : `rgba(255, 255, 255, ${this.opacity * 0.8})`;
@@ -1069,6 +1141,28 @@
             pCtx.fillStyle = `${this.color} ${this.opacity})`;
             pCtx.shadowColor = "#ff5500"; pCtx.shadowBlur = 10; pCtx.fill();
           }
+        } else if (this.type === 'pumpkin-glow') {
+          if (this.isMote) {
+            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
+            pCtx.beginPath();
+            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
+            pCtx.shadowColor = "#ffaa00";
+            pCtx.shadowBlur = 12;
+            pCtx.fill();
+          } else {
+            pCtx.translate(this.x, this.y);
+            pCtx.rotate(this.angle);
+            pCtx.scale(Math.cos(this.roll), 1);
+            pCtx.beginPath();
+            pCtx.moveTo(0, -this.size);
+            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
+            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
+            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
+            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
+            pCtx.shadowBlur = 4;
+            pCtx.fill();
+          }
         }
         pCtx.restore();
       }
@@ -1076,7 +1170,7 @@
 
     function initParticles(type) {
       particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers') ? 45 : 30;
+      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow') ? 45 : 30;
       for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
     }
 
