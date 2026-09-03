@@ -31,8 +31,5 @@
     "noText": "RUN AWAY",
     "runawayTarget": "no",
     "successMessage": "Yay! You're stuck in my pumpkin patch forever! 🎃❤"
-  },
-  "effects": {
-    "bgEffect": "spooky-embers"
   }
 }
