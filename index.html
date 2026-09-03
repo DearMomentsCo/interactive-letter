@@ -395,6 +395,98 @@
       text-shadow: 0 1px 8px rgba(255, 212, 102, 0.25);
     }
 
+    /* 7. 焦糖南瓜灯款信封（复古暖棕琥珀 + 金铜折边 + 3D立体微光） */
+    .env-pumpkin {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(0deg, rgba(80, 35, 10, 0.45) 0%, transparent 45%),
+        linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
+      border: 1.5px solid #d37a28 !important;
+      border-top: 2px solid #ffb066 !important;
+      outline: 1px dashed rgba(243, 156, 18, 0.45) !important;
+      outline-offset: -6px !important;
+      box-shadow:
+        0 35px 70px -15px rgba(0, 0, 0, 0.9),
+        0 15px 25px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(230, 126, 34, 0.25),
+        inset 0 1px 2px rgba(255, 200, 140, 0.5) !important;
+    }
+    .env-pumpkin .envelope-lid {
+      border-top-color: #48220d !important;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
+    }
+    .env-pumpkin .wax-seal {
+      background: radial-gradient(circle at 30% 28%, #ffaa44 0%, #d35400 45%, #6e2700 100%) !important;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    /* 7. 焦糖南瓜专属信纸：复古烤奶茶羊皮纸 + 温暖烛光微晕 + 丰收南瓜暗纹 */
+    .paper-pumpkin {
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255, 165, 0, 0.14) 0%, transparent 60%),
+        linear-gradient(180deg, #fdf7ee 0%, #faecd8 50%, #f4dec3 100%) !important;
+      border: 1.8px solid #c87d32 !important;
+      outline: 1px dashed rgba(180, 95, 30, 0.35) !important;
+      outline-offset: -8px !important;
+      box-shadow:
+        0 25px 65px rgba(0, 0, 0, 0.65),
+        inset 0 0 45px rgba(180, 100, 30, 0.08) !important;
+      color: #3b2314 !important;
+    }
+    .paper-pumpkin::before {
+      content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 260px; height: 260px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 20 C32 20 22 36 22 55 C22 72 34 82 50 82 C66 82 78 72 78 55 C78 36 68 20 50 20 Z' fill='none' stroke='%23d35400' stroke-width='1.2' opacity='0.12'/%3E%3Cpath d='M50 12 C48 16 52 20 50 22' stroke='%2327ae60' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.25'/%3E%3Cpath d='M36 48 L44 54 L36 58 Z M64 48 L56 54 L64 58 Z' fill='%23d35400' opacity='0.1'/%3E%3Cpath d='M38 66 Q50 74 62 66 Q50 78 38 66 Z' fill='%23d35400' opacity='0.1'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
+    }
+    .paper-pumpkin .letter-header {
+      border-bottom: 1px solid rgba(200, 110, 40, 0.25) !important;
+    }
+    .paper-pumpkin .recipient-name {
+      color: #a0490b !important;
+      font-family: 'Cinzel', serif !important;
+      letter-spacing: 2px !important;
+    }
+    .paper-pumpkin .days-badge {
+      background: rgba(211, 84, 0, 0.12) !important;
+      color: #a0490b !important;
+      border: 1px solid rgba(211, 84, 0, 0.3) !important;
+      font-weight: 700 !important;
+    }
+    .paper-pumpkin .letter-body { color: #402919 !important; }
+    .paper-pumpkin .letter-footer { color: #825a36 !important; }
+    .paper-pumpkin .letter-footer .sender-name { color: #a0490b !important; }
+
+    /* 焦糖南瓜糖果盒刮刮乐 */
+    .paper-pumpkin .scratch-section {
+      background: rgba(211, 84, 0, 0.04) !important;
+      border-color: rgba(211, 84, 0, 0.25) !important;
+    }
+    .paper-pumpkin .scratch-prompt { color: #a0490b !important; font-family: 'Cinzel', serif !important; }
+    .paper-pumpkin .bandaid-wrapper {
+      background: #f7e1c8 !important;
+      border: 1px solid #d49f6a !important;
+      border-radius: 8px !important;
+    }
+    .paper-pumpkin .bandaid-wrapper::before,
+    .paper-pumpkin .bandaid-wrapper::after { display: none !important; }
+    .paper-pumpkin .scratch-secret { color: #873600 !important; font-weight: 700 !important; }
+
+    /* 焦糖南瓜专属互动按钮 */
+    .paper-pumpkin .runaway-section {
+      background: rgba(211, 84, 0, 0.04) !important;
+      border: 1px solid rgba(211, 84, 0, 0.15) !important;
+    }
+    .paper-pumpkin .runaway-question { color: #a0490b !important; }
+    .paper-pumpkin .btn-yes {
+      background: linear-gradient(135deg, #e67e22 0%, #b94e00 100%) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35) !important;
+    }
+    .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
+    .paper-pumpkin .runaway-success { color: #a0490b !important; }
+    
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
@@ -594,13 +686,23 @@
       const waxSeal = document.getElementById("waxSeal");
 
       if (isHalloween) {
-        hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
-        dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
-        waxSeal.innerHTML = `
-          <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff1b8; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.9));">
-            <path d="M12 4.5 C10.5 7.5 8 8.5 4 8 C6.5 11 7 14 5 17 C9 16 10.5 18 12 21 C13.5 18 15 16 19 17 C17 14 17.5 11 20 8 C16 8.5 13.5 7.5 12 4.5 Z"/>
-          </svg>
-        `;
+        if (envStyle === 'pumpkin') {
+          hintEl.innerText = "✦ CARVE THE PUMPKIN SEAL 🎃 ✦";
+          dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
+          waxSeal.innerHTML = `
+            <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff4d4; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.8));">
+              <path d="M12 2 C11.5 3 12.5 4 12 5 C7 5 3 9 3 14 C3 18.5 7 22 12 22 C17 22 21 18.5 21 14 C21 9 17 5 12 5 Z M8.5 11 L10.5 13 L8.5 14.5 Z M15.5 11 L13.5 13 L15.5 14.5 Z M8 17 Q12 20 16 17 Q12 18 8 17 Z"/>
+            </svg>
+          `;
+        } else {
+          hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
+          dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
+          waxSeal.innerHTML = `
+            <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff1b8; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.9));">
+              <path d="M12 4.5 C10.5 7.5 8 8.5 4 8 C6.5 11 7 14 5 17 C9 16 10.5 18 12 21 C13.5 18 15 16 19 17 C17 14 17.5 11 20 8 C16 8.5 13.5 7.5 12 4.5 Z"/>
+            </svg>
+          `;
+        }
       } else {
         hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
         dateBadge.innerText = "OFFICIAL PEACE TREATY";
