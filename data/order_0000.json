@@ -1,38 +1,38 @@
 {
   "theme": "apology",
-  "envelopeStyle": "whiteflag",
+  "envelopeStyle": "origami",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Commander & Chief ❤",
-  "sender": "Your Humbled Soldier",
+  "recipient": "Hey Angry Bird 🥺",
+  "sender": "Your Clumsy Person",
   "letterContent": [
-    "This is an official document of unconditional surrender.",
-    "I was completely wrong, and I have officially raised the white flag.",
-    "Please accept this peace treaty. All future terms and conditions will be 100% dictated by you."
+    "I know I was stubborn and made you upset... I've been kicking myself all day.",
+    "Remember when we used to pass tiny folded notes across the table? I miss your smile so much.",
+    "Can we please call a truce? I'm ready to listen, whenever you're ready to talk."
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "Throwing my weapons down for you 🏳"
+      "caption": "Back when you weren't mad at me 🥺"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "Lifetime truce guaranteed ✨"
+      "caption": "I promise to make you smile again ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ OFFICIAL CEASEFIRE CLAUSE ✦",
-    "hiddenText": "Clause 1: 100x Kisses + Free Food Forever + I Admit Defeat! 📜"
+    "title": "✦ SECRET PEACE OFFERING ✦",
+    "hiddenText": "Redeemable: 1x Midnight Ice Cream Run + Your Favorite Boba 🧋"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Do you accept my surrender & truce?",
-    "yesText": "TRUCE ACCEPTED ❤",
-    "noText": "REJECT SURRENDER",
+    "question": "Will you stop giving me the silent treatment?",
+    "yesText": "FINE, I'LL TALK ❤",
+    "noText": "KEEP SILENT",
     "runawayTarget": "no",
-    "successMessage": "Phew! The war is officially over! I love you! 🕊"
+    "successMessage": "Yay! Text me right now, I'm waiting! 🥺❤"
   },
   "effects": {
-    "bgEffect": "rain-to-sunshine"
+    "bgEffect": "gold-dust"
   }
 }
