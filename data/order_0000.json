@@ -1,38 +1,38 @@
 {
   "theme": "apology",
-  "envelopeStyle": "origami",
+  "envelopeStyle": "slate",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "Hey Angry Bird 🥺",
-  "sender": "Your Clumsy Person",
+  "recipient": "My Sunshine ⛅",
+  "sender": "Yours, Always",
   "letterContent": [
-    "I know I was stubborn and made you upset... I've been kicking myself all day.",
-    "Remember when we used to pass tiny folded notes across the table? I miss your smile so much.",
-    "Can we please call a truce? I'm ready to listen, whenever you're ready to talk."
+    "Every storm runs out of rain, just like every argument reminds me how much I value our warmth.",
+    "I hate being on opposite sides of the storm. Let the dark clouds pass and let's welcome the sunshine back into our days.",
+    "I'm right here waiting with an umbrella and an open heart."
   ],
   "photos": [
     {
-      "url": "images/order_0000_1.jpg",
-      "caption": "Back when you weren't mad at me 🥺"
+      "url": "images/photo1.jpg",
+      "caption": "The storm always passes ⛅"
     },
     {
-      "url": "images/order_0000_2.jpg",
-      "caption": "I promise to make you smile again ✨"
+      "url": "images/photo2.jpg",
+      "caption": "Brighter days ahead with you ✨"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ SECRET PEACE OFFERING ✦",
-    "hiddenText": "Redeemable: 1x Midnight Ice Cream Run + Your Favorite Boba 🧋"
+    "title": "✦ CLEAR THE RAIN CLOUDS ✦",
+    "hiddenText": "Sunny Forecast: 1x Cozy Coffee Date + Warm Hugs All Day! ☕"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Will you stop giving me the silent treatment?",
-    "yesText": "FINE, I'LL TALK ❤",
-    "noText": "KEEP SILENT",
+    "question": "Will you let the sun shine between us again?",
+    "yesText": "LET'S MAKE UP ☀️",
+    "noText": "STILL CLOUDY",
     "runawayTarget": "no",
-    "successMessage": "Yay! Text me right now, I'm waiting! 🥺❤"
+    "successMessage": "The storm is over! Thank you for letting the sun back in! ☀️❤"
   },
   "effects": {
-    "bgEffect": "gold-dust"
+    "bgEffect": "rain-to-sunshine"
   }
 }
