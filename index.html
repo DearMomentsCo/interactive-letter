@@ -436,7 +436,7 @@
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
 
-    /* 8. Pastel Spooky (粉紫小幽灵专属信纸全套设计) */
+    /* 8. Pastel Spooky (粉紫小幽灵专属信纸) */
     .paper-ghost {
       background-color: #fdf8fc !important;
       background-image:
@@ -465,21 +465,46 @@
     .paper-ghost .letter-footer { color: #784877 !important; }
     .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
 
-    /* 粉紫小幽灵专属刮刮乐糖果盒（彻底告别创可贴） */
+    /* ===== 万圣节高定糖果盒刮刮乐重构（Candy Box Confectionery） ===== */
     .paper-ghost .scratch-section {
-      background: rgba(255, 245, 252, 0.75) !important; border: 1.5px dashed #c88abf !important; border-radius: 12px !important;
+      background: #fdf5fa !important;
+      border: 2px solid #e2b3d8 !important;
+      border-radius: 14px !important;
+      padding: 16px 12px 18px 12px !important;
+      box-shadow: 0 8px 24px rgba(184, 93, 168, 0.18) !important;
+      position: relative;
+    }
+    /* 糖果盒顶部立体粉金缎带蝴蝶结 */
+    .paper-ghost .scratch-section::before {
+      content: "🎀 TRICK OR TREAT CANDY BOX 🍬";
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #d88ec7 0%, #a94b99 100%);
+      color: #ffffff; font-family: 'Cinzel', serif; font-size: 9.5px; font-weight: 700;
+      letter-spacing: 1px; padding: 3px 12px; border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 3px 8px rgba(169, 75, 153, 0.35); white-space: nowrap; z-index: 5;
     }
     .paper-ghost .scratch-prompt {
-      color: #8c327a !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important; letter-spacing: 1.5px !important;
+      color: #8c327a !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important;
+      letter-spacing: 1.2px !important; font-size: 11px !important; margin-top: 6px !important; margin-bottom: 12px !important;
     }
+    /* 糖果盒内衬托盘（彻底告别创可贴椭圆） */
     .paper-ghost .bandaid-wrapper {
-      background: #fbeef7 !important; border: 1.5px solid #d49ec9 !important; border-radius: 10px !important;
-      box-shadow: 0 6px 16px rgba(80, 20, 70, 0.12) !important;
+      background: #faeaf6 !important;
+      border: 2px solid #d49ec9 !important;
+      outline: 1px dashed rgba(184, 93, 168, 0.45) !important;
+      outline-offset: -5px !important;
+      border-radius: 12px !important;
+      width: 100% !important; max-width: 300px !important; height: 90px !important;
+      box-shadow: inset 0 3px 10px rgba(90, 20, 75, 0.12), 0 4px 12px rgba(184, 93, 168, 0.15) !important;
     }
     .paper-ghost .bandaid-wrapper::before, .paper-ghost .bandaid-wrapper::after { display: none !important; }
-    .paper-ghost .scratch-secret { color: #7b2568 !important; font-weight: 700 !important; }
+    .paper-ghost .scratch-secret {
+      color: #7b2568 !important; font-weight: 700 !important; font-size: 13.5px !important;
+      line-height: 1.4 !important; font-family: 'Cinzel', serif !important; padding: 12px 18px !important;
+    }
 
-    /* 粉紫小幽灵专属甜酷互动按钮 */
+    /* 甜酷粉紫追逐按钮 */
     .paper-ghost .runaway-section {
       background: rgba(255, 245, 252, 0.7) !important; border: 1px solid rgba(200, 138, 191, 0.35) !important;
     }
@@ -526,22 +551,61 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
-    /* 拍立得照片墙（自适应单张/多张列表与优雅错落投影） */
+    /* ===== 核心重构：3D 翻转拍立得卡片轮播（Flipover Carousel） ===== */
     .polaroid-gallery {
-      display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 24px 0; width: 100%;
+      position: relative; width: 100%; max-width: 290px; height: 380px; margin: 15px auto 10px auto; perspective: 1000px;
     }
     .polaroid-card {
-      background: #ffffff; padding: 10px 10px 14px 10px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.06);
-      border-radius: 4px; width: 88%; max-width: 320px; box-sizing: border-box;
-      transform: rotate(-1.5deg); transition: transform 0.25s ease;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; background: #ffffff;
+      padding: 12px 12px 35px 12px; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
+      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer; display: none; box-sizing: border-box;
     }
-    .polaroid-card:nth-child(even) { transform: rotate(1.8deg); }
-    .polaroid-card:hover { transform: rotate(0deg) scale(1.02); }
-    .polaroid-card img { width: 100%; max-height: 250px; object-fit: cover; display: block; border-radius: 2px; }
-    .polaroid-card .photo-caption {
-      font-size: 13px; color: #555555; text-align: center; margin-top: 10px; font-family: 'Caveat', cursive;
+    .polaroid-card.active { display: block; }
+    .polaroid-card.flipped { transform: rotateY(180deg); }
+    .polaroid-front, .polaroid-back {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      backface-visibility: hidden; border-radius: 4px; padding: 12px 12px 25px 12px;
+      box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
     }
+    .polaroid-front img {
+      width: 100%; height: 305px; object-fit: cover; object-position: center;
+      border-radius: 2px; display: block; background: #f0f0f0;
+    }
+    .polaroid-front-hint {
+      font-size: 11.5px; color: #888; text-align: center; margin-top: 8px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
+    }
+    .polaroid-back {
+      background: #faf7f2; transform: rotateY(180deg); justify-content: center;
+      padding: 26px; color: #444; border: 1px dashed rgba(197, 160, 89, 0.35); text-align: center;
+    }
+    .polaroid-back-text { font-size: 21px; line-height: 1.6; font-family: 'Caveat', cursive; color: #3b2214; }
+    .polaroid-back-hint { margin-top: 18px; font-size: 11px; opacity: 0.6; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+
+    /* 小幽灵专属拍立得质感 */
+    .paper-ghost .polaroid-card {
+      border: 1px solid rgba(200, 138, 191, 0.4) !important;
+      box-shadow: 0 16px 36px rgba(60, 20, 70, 0.15), 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+    }
+    .paper-ghost .polaroid-front-hint { color: #8c327a !important; font-weight: 700; }
+    .paper-ghost .polaroid-back {
+      background: #fcf4fa !important; border: 1px dashed #d49ec9 !important;
+    }
+    .paper-ghost .polaroid-back-text { color: #5e1c53 !important; }
+
+    /* 轮播切换按钮条 */
+    .polaroid-controls {
+      display: flex; justify-content: center; align-items: center; gap: 18px;
+      margin: 6px auto 24px auto; font-family: 'Cinzel', serif;
+    }
+    .polaroid-nav-btn {
+      background: rgba(200, 138, 191, 0.18); border: 1px solid rgba(200, 138, 191, 0.4);
+      color: #8c327a; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+      display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold;
+      transition: all 0.2s ease;
+    }
+    .polaroid-nav-btn:active { transform: scale(0.9); }
+    .polaroid-indicator { font-size: 12px; font-weight: 700; color: #8c327a; letter-spacing: 2px; }
 
     .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
@@ -651,7 +715,14 @@
       </div>
     </div>
 
+    <!-- 3D 翻转相册与控制栏 -->
     <div class="polaroid-gallery" id="polaroidGallery"></div>
+    <div class="polaroid-controls" id="polaroidControls" style="display:none;">
+      <button class="polaroid-nav-btn" id="prevCardBtn">❮</button>
+      <span class="polaroid-indicator" id="cardIndicator">1 / 1</span>
+      <button class="polaroid-nav-btn" id="nextCardBtn">❯</button>
+    </div>
+
     <div class="letter-body" id="letterBody"></div>
 
     <div class="scratch-section" id="scratchSection" style="display:none;">
@@ -683,7 +754,6 @@
     let configData = null;
     let isPlaying = false;
 
-    // 严密对接你真实 HTML 中的所有 ID 与 Class
     const getEl = (id, cls) => document.getElementById(id) || document.querySelector(cls);
 
     const bgMusic = getEl("bgMusic", "#bgMusic");
@@ -791,33 +861,16 @@
         }
       }
 
-      // 抬头与署名对齐
+      // 抬头与署名
       const recEl = getEl("recipientText", ".recipient-name");
       const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
       if (sendEl && data.sender) sendEl.innerText = data.sender;
 
-      // 照片墙精准挂载到 #polaroidGallery
-      const photoGallery = getEl("polaroidGallery", ".polaroid-gallery");
-      if (photoGallery) {
-        if (data.photos && data.photos.length > 0) {
-          photoGallery.style.display = "flex";
-          photoGallery.innerHTML = "";
-          data.photos.forEach(p => {
-            const card = document.createElement("div");
-            card.className = "polaroid-card";
-            card.innerHTML = `
-              <img src="${p.url}" alt="Memory">
-              <div class="photo-caption">${p.caption || ""}</div>
-            `;
-            photoGallery.appendChild(card);
-          });
-        } else {
-          photoGallery.style.display = "none";
-        }
-      }
+      // 4. 核心：3D 翻转拍立得卡片轮播渲染
+      initPolaroidFlipGallery(data.photos);
 
-      // 刮刮乐对齐 #scratchPrompt 与 #scratchSecret
+      // 5. 刮刮乐糖果盒
       const scSection = getEl("scratchSection", ".scratch-section");
       if (data.scratchCard && data.scratchCard.enabled) {
         if (scSection) scSection.style.display = "block";
@@ -826,7 +879,7 @@
         if (scSection) scSection.style.display = "none";
       }
 
-      // 追逐按钮对齐 #runawayQuestion, #btnYes, #btnNo
+      // 6. 追逐按钮
       const rqSection = getEl("runawaySection", ".runaway-section");
       if (data.runawayQuestion && data.runawayQuestion.enabled) {
         if (rqSection) rqSection.style.display = "block";
@@ -839,7 +892,7 @@
         bgMusic.src = data.musicUrl;
       }
 
-      // 款式专属动效映射（所有经典旧模版严格保留）
+      // 款式专属背景粒子动效自适应
       const styleAutoEffects = {
         "kintsugi":  "gold-dust",
         "whiteflag": "gold-dust",
@@ -862,6 +915,87 @@
           const posY = e.clientY || 80;
           createCandyPopout(posX, posY);
         };
+      }
+    }
+
+    // 拍立得 3D 翻转卡片与轮播控制引擎
+    function initPolaroidFlipGallery(photos) {
+      const gallery = getEl("polaroidGallery", ".polaroid-gallery");
+      const controls = getEl("polaroidControls", ".polaroid-controls");
+      const indicator = getEl("cardIndicator", ".polaroid-indicator");
+      const prevBtn = document.getElementById("prevCardBtn");
+      const nextBtn = document.getElementById("nextCardBtn");
+
+      if (!gallery) return;
+
+      if (!photos || photos.length === 0) {
+        gallery.style.display = "none";
+        if (controls) controls.style.display = "none";
+        return;
+      }
+
+      gallery.style.display = "block";
+      gallery.innerHTML = "";
+
+      let currentIndex = 0;
+      const total = photos.length;
+
+      // 逐张生成支持 3D 翻转的正反面卡片
+      photos.forEach((p, idx) => {
+        const card = document.createElement("div");
+        card.className = `polaroid-card ${idx === 0 ? "active" : ""}`;
+        card.setAttribute("data-index", idx);
+        
+        card.innerHTML = `
+          <div class="polaroid-front">
+            <img src="${p.url}" alt="Memory ${idx + 1}">
+            <div class="polaroid-front-hint">✦ TAP TO FLIP ↻ ✦</div>
+          </div>
+          <div class="polaroid-back">
+            <div class="polaroid-back-text">${p.caption || "Every sweet moment with you is my favorite memory ✨"}</div>
+            <div class="polaroid-back-hint">TAP TO FLIP BACK ↺</div>
+          </div>
+        `;
+
+        // 点击卡片本体：触发 3D 翻转
+        card.onclick = (e) => {
+          e.stopPropagation();
+          card.classList.toggle("flipped");
+        };
+
+        gallery.appendChild(card);
+      });
+
+      // 如果有 2 张或以上照片，激活底部轮播控制器
+      if (total > 1 && controls && indicator) {
+        controls.style.display = "flex";
+        indicator.innerText = `1 / ${total}`;
+
+        const updateActiveCard = (newIndex) => {
+          const allCards = gallery.querySelectorAll(".polaroid-card");
+          allCards[currentIndex].classList.remove("active", "flipped");
+          currentIndex = newIndex;
+          allCards[currentIndex].classList.add("active");
+          indicator.innerText = `${currentIndex + 1} / ${total}`;
+        };
+
+        if (nextBtn) {
+          nextBtn.onclick = (e) => {
+            e.stopPropagation();
+            const nextIdx = (currentIndex + 1) % total;
+            updateActiveCard(nextIdx);
+          };
+        }
+
+        if (prevBtn) {
+          prevBtn.onclick = (e) => {
+            e.stopPropagation();
+            const prevIdx = (currentIndex - 1 + total) % total;
+            updateActiveCard(prevIdx);
+          };
+        }
+      } else if (controls) {
+        controls.style.display = "none";
       }
     }
 
@@ -890,7 +1024,7 @@
       }
     }
 
-    // 开信爆裂特效（隔离保护：非万圣模版仅喷金光）
+    // 开信爆裂礼花（根据款式主题隔离分流）
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -966,7 +1100,7 @@
         if (envelopeStage) envelopeStage.classList.add("is-opening");
 
         setTimeout(() => {
-          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
+          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'ghost') : 'ghost');
         }, 180);
 
         setTimeout(() => {
@@ -1022,35 +1156,45 @@
       typeNext();
     }
 
-    // 刮刮乐引擎（对齐 #scratchPrompt 与 #scratchSecret）
+    // 刮刮乐高定糖果盒引擎
     function initScratchCard(cfg, style) {
       const cardTitle = getEl("scratchPrompt", ".scratch-prompt");
       const cardText = getEl("scratchSecret", ".scratch-secret");
       const canvas = document.getElementById("scratchCanvas");
       if (!canvas) return;
-      if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
+
+      if (style === 'ghost') {
+        if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNWRAP FOR SWEET TREAT 🍬 ✦";
+      } else {
+        if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
+      }
       if (cardText && cfg.hiddenText) cardText.innerText = cfg.hiddenText;
 
       const ctx = canvas.getContext("2d");
-      canvas.width = canvas.offsetWidth || 260;
-      canvas.height = canvas.offsetHeight || 80;
+      canvas.width = canvas.offsetWidth || 290;
+      canvas.height = canvas.offsetHeight || 90;
 
+      // 糖霜与糖纸刮层渲染
       if (style === 'ghost') {
-        ctx.fillStyle = "#cca0c5"; // 柔雾梦幻浅紫
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, "#d8a3cc");
+        grad.addColorStop(0.5, "#cca0c5");
+        grad.addColorStop(1, "#ba7bb2");
+        ctx.fillStyle = grad;
       } else if (style === 'pumpkin') {
-        ctx.fillStyle = "#cf782b"; // 焦糖南瓜金
+        ctx.fillStyle = "#cf782b";
       } else if (style === 'gothic') {
-        ctx.fillStyle = "#2c1c1c"; // 暗夜古堡黑
+        ctx.fillStyle = "#2c1c1c";
       } else {
-        ctx.fillStyle = "#8a7d6e"; // 默认和解创可贴灰
+        ctx.fillStyle = "#8a7d6e";
       }
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 13px Cinzel, serif";
+      ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
+      ctx.fillText(style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
       function scratch(e) {
@@ -1075,7 +1219,7 @@
       canvas.addEventListener("touchmove", scratch);
     }
 
-    // 追逐按钮引擎（对齐 #runawayQuestion, #btnYes, #btnNo）
+    // 追逐按钮引擎
     function initRunawayButton(cfg) {
       const qEl = getEl("runawayQuestion", ".runaway-question");
       const btnYes = getEl("btnYes", ".btn-yes");
@@ -1108,7 +1252,7 @@
       };
     }
 
-    // 背景物理粒子引擎（已同时兼容 particleCanvas 与 particle-canvas）
+    // 背景物理粒子引擎
     const pCanvas = getEl("particleCanvas", "#particle-canvas") || document.querySelector("canvas");
     const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
     let particles = [];
@@ -1184,6 +1328,7 @@
             this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
           }
         } else if (this.type === 'ghostly-pastels') {
+          const dynOpacity = this.opacity * (0.8 + Math.sin(this.pulsePhase) * 0.2);
           this.y = pCanvas.height + 20;
           this.size = Math.random() * 3.8 + 1.8;
           this.speedY = -(Math.random() * 0.65 + 0.25);
