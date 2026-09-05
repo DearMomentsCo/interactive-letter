@@ -436,7 +436,7 @@
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
 
-    /* 8. Pastel Spooky (粉紫小幽灵专属信纸) */
+    /* 8. Pastel Spooky (粉紫小幽灵专属：高浓度万圣节设计) */
     .paper-ghost {
       background-color: #fdf8fc !important;
       background-image:
@@ -449,12 +449,43 @@
       color: #3b1f3c !important;
       position: relative;
     }
+
+    /* 正中央高定铜版小幽灵与星轨浮雕水印 */
     .paper-ghost::before {
       content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
       width: 260px; height: 260px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b865a7' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='84' stroke='%23b865a7' stroke-width='0.7' fill='none' opacity='0.14'/%3E%3Cpath d='M100 20 L102 28 L100 32 L98 28 Z M100 168 L102 176 L100 180 L98 176 Z' fill='%23b865a7' opacity='0.22'/%3E%3Cpath d='M100 62 C84 62 76 74 76 96 C76 114 72 124 78 132 C82 135 88 130 92 133 C96 135 100 130 104 133 C108 130 112 135 116 132 C122 124 118 114 118 96 C118 74 110 62 100 62 Z' fill='none' stroke='%23b865a7' stroke-width='1.4' opacity='0.16'/%3E%3Ccircle cx='92' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Ccircle cx='108' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cellipse cx='100' cy='102' rx='2.5' ry='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cpath d='M126 75 L129 82 L136 84 L130 88 L131 95 L125 90 L119 94 L122 87 L116 83 L123 82 Z' fill='none' stroke='%23b865a7' stroke-width='0.9' opacity='0.15'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
+
+    /* 信纸左右上角：维多利亚梦幻蜘蛛网与垂坠小星饰（Spooky Lace Webs） */
+    .paper-ghost::after {
+      content: ""; position: absolute; top: 8px; left: 8px; right: 8px; height: 60px;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M0 0 L50 0 M0 0 L0 50 M0 0 L40 40 M0 0 L18 45 M0 0 L45 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M12 0 Q10 10 0 12 M25 0 Q20 20 0 25 M38 0 Q30 30 0 38 M50 0 Q40 40 0 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='40' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M40 40 L40 52 M37 52 L43 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M60 0 L10 0 M60 0 L60 50 M60 0 L20 40 M60 0 L42 45 M60 0 L15 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M48 0 Q50 10 60 12 M35 0 Q40 20 60 25 M22 0 Q30 30 60 38 M10 0 Q20 40 60 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='20' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M20 40 L20 52 M17 52 L23 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E");
+      background-position: left top, right top;
+      background-repeat: no-repeat;
+      background-size: 55px 55px;
+      pointer-events: none; z-index: 2;
+    }
+
+    /* 抬头万圣节专属：南瓜桶小幽灵与星月浮雕分隔饰带 */
+    .paper-ghost .letter-header {
+      border-bottom: none !important;
+      position: relative;
+      padding-bottom: 22px !important;
+      margin-bottom: 22px !important;
+      padding-left: 45px !important;
+      padding-right: 45px !important;
+    }
+    .paper-ghost .letter-header::after {
+      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 82%; height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16'%3E%3Cpath d='M0 8 L80 8 M120 8 L200 8' stroke='%23c88abf' stroke-width='0.8' opacity='0.45'/%3E%3C!-- 飞行小幽灵提着南瓜篮 --%3E%3Cpath d='M100 2 C96 2 93 5 93 9 C93 13 95 14 97 13 C99 14 101 13 103 14 C105 13 107 14 107 9 C107 5 104 2 100 2 Z' fill='%23b85fa7'/%3E%3Ccircle cx='98' cy='6' r='0.8' fill='%23ffffff'/%3E%3Ccircle cx='102' cy='6' r='0.8' fill='%23ffffff'/%3E%3C!-- 南瓜糖果桶 --%3E%3Ccircle cx='104' cy='11' r='2' fill='%23ff9f43'/%3E%3Ccircle cx='85' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Ccircle cx='115' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Cpath d='M70 8 L72 5 L74 8 L72 11 Z M126 8 L128 5 L130 8 L128 11 Z' fill='%23ffd166' opacity='0.8'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain;
+    }
+
     .paper-ghost .recipient-name {
       color: #8c327a !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
@@ -464,6 +495,37 @@
     .paper-ghost .letter-body { color: #401b42 !important; line-height: 1.95 !important; }
     .paper-ghost .letter-footer { color: #784877 !important; }
     .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
+
+    /* 小幽灵专属拍立得：粉紫蝙蝠翅膀相片角贴（Bat Photo Corners） */
+    .paper-ghost .polaroid-card {
+      border: 1px solid rgba(200, 138, 191, 0.45) !important;
+      box-shadow: 0 16px 36px rgba(60, 20, 70, 0.18), 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+      position: relative;
+    }
+    .paper-ghost .polaroid-front::before, .paper-ghost .polaroid-front::after {
+      content: ""; position: absolute; width: 34px; height: 26px; pointer-events: none; z-index: 6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Cpath d='M0 0 L16 0 C14 6 10 10 4 12 C10 12 12 16 10 24 C6 18 0 16 0 16 Z' fill='%23b85fa7' opacity='0.85'/%3E%3Ccircle cx='5' cy='5' r='1.2' fill='%23ffd166'/%3E%3C/svg%3E");
+      background-size: contain; background-repeat: no-repeat;
+    }
+    .paper-ghost .polaroid-front::before { top: 4px; left: 4px; }
+    .paper-ghost .polaroid-front::after { top: 4px; right: 4px; transform: scaleX(-1); }
+
+    .paper-ghost .polaroid-front-hint { color: #8c327a !important; font-weight: 700; }
+    .paper-ghost .polaroid-back { background: #fcf4fa !important; border: 1px dashed #d49ec9 !important; }
+    .paper-ghost .polaroid-back-text { color: #5e1c53 !important; }
+
+    /* 小幽灵款专属外挂邮票（带萌鬼图案与塞勒姆 10.31 波浪印） */
+    .paper-ghost .ghost-stamp {
+      display: block !important;
+      position: absolute; top: -20px; left: -10px; width: 52px; height: 64px;
+      background: #fdf5fb; padding: 3.5px;
+      box-shadow: 0 6px 16px rgba(45, 15, 60, 0.28), 0 1px 3px rgba(0, 0, 0, 0.15);
+      border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .paper-ghost .ghost-stamp:hover { transform: rotate(-6deg) scale(1.06); }
+    .paper-ghost .ghost-stamp:active { transform: rotate(-6deg) scale(0.94); }
+    .ghost-stamp { display: none; }
 
     /* ===== 万圣节高定糖果盒刮刮乐重构（Candy Box Confectionery） ===== */
     .paper-ghost .scratch-section {
@@ -696,6 +758,33 @@
 
   <div class="letter-container" id="letterContainer">
     <div class="halloween-stamp" id="halloweenStamp" title="Tap for a treat! 🎃">
+      <div class="halloween-stamp" id="halloweenStamp" title="Tap for a treat! 🎃">
+      <div class="stamp-inner">
+        <span class="stamp-price">31¢</span>
+        <svg viewBox="0 0 24 24" class="stamp-icon">
+          <path d="M12 3 C11.5 4 12.5 5 12 6 C7.5 6 4 9.5 4 14 C4 18.5 7.5 21.5 12 21.5 C16.5 21.5 20 18.5 20 14 C20 9.5 16.5 6 12 6 Z" fill="#d35400"/>
+          <path d="M8.5 11.5 L10.5 13.5 L8.5 15 Z M15.5 11.5 L13.5 13.5 L15.5 15 Z" fill="#fff5eb"/>
+          <path d="M9 17.5 Q12 20 15 17.5 Q12 18.5 9 17.5 Z" fill="#fff5eb"/>
+        </svg>
+        <span class="stamp-label">PUMPKIN POST</span>
+      </div>
+      <div class="postmark-overlay"></div>
+    </div>
+
+    <!-- 小幽灵专属万圣邮票：BOO EXPRESS -->
+    <div class="ghost-stamp" id="ghostStamp" title="Tap for a sweet boo! 👻">
+      <div class="stamp-inner" style="border-color:#d49ec9; background:#fff8fc;">
+        <span class="stamp-price" style="color:#8c327a;">31¢</span>
+        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(184,93,168,0.3));">
+          <path d="M12 3 C8 3 6 6 6 11 C6 15 5 17 6.5 19 C7.5 20 9 19 10 20 C11 20.5 12 19.5 13 20 C14 19.5 15 20.5 16 20 C17 19 18.5 20 19.5 19 C21 17 20 15 20 11 C20 6 18 3 12 3 Z" fill="#b85fa7"/>
+          <circle cx="9.5" cy="10" r="1.2" fill="#ffffff"/>
+          <circle cx="14.5" cy="10" r="1.2" fill="#ffffff"/>
+          <ellipse cx="12" cy="13" rx="1.2" ry="1.6" fill="#ffffff"/>
+        </svg>
+        <span class="stamp-label" style="color:#8c327a;">BOO POST</span>
+      </div>
+      <div class="postmark-overlay"></div>
+    </div>
       <div class="stamp-inner">
         <span class="stamp-price">31¢</span>
         <svg viewBox="0 0 24 24" class="stamp-icon">
@@ -908,6 +997,27 @@
 
       // 左侧南瓜邮票点击喷发彩蛋
       const stamp = getEl("halloweenStamp", ".halloween-stamp");
+      // 左侧南瓜邮票点击喷发彩蛋
+      const stamp = getEl("halloweenStamp", ".halloween-stamp");
+      if (stamp) {
+        stamp.onclick = (e) => {
+          e.stopPropagation();
+          const posX = e.clientX || 60;
+          const posY = e.clientY || 80;
+          createCandyPopout(posX, posY);
+        };
+      }
+
+      // 小幽灵邮票点击喷发萌鬼彩蛋
+      const gStamp = getEl("ghostStamp", ".ghost-stamp");
+      if (gStamp) {
+        gStamp.onclick = (e) => {
+          e.stopPropagation();
+          const posX = e.clientX || 60;
+          const posY = e.clientY || 80;
+          createCandyPopout(posX, posY);
+        };
+      }
       if (stamp) {
         stamp.onclick = (e) => {
           e.stopPropagation();
