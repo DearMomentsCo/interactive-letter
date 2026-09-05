@@ -506,6 +506,101 @@
     }
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
+    /* ===== 万圣信纸专属破框 Popout 组件 ===== */
+    /* 1. 顶部焦糖半透明和纸胶带 */
+    .paper-pumpkin .washi-tape {
+      position: absolute;
+      top: -12px;
+      left: 36px;
+      width: 95px;
+      height: 24px;
+      background: rgba(224, 130, 50, 0.65);
+      backdrop-filter: blur(1px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transform: rotate(-3deg);
+      clip-path: polygon(4% 0%, 96% 0%, 100% 20%, 97% 40%, 100% 60%, 96% 80%, 100% 100%, 0% 100%, 3% 80%, 0% 60%, 4% 40%, 0% 20%);
+      z-index: 25;
+      pointer-events: none;
+    }
+
+    /* 2. 右上角破框复古万圣节邮票（带真实齿孔边缘与下沉波浪邮戳） */
+    .paper-pumpkin .halloween-stamp {
+      display: block !important;
+      position: absolute;
+      top: -16px;
+      right: 18px;
+      width: 62px;
+      height: 74px;
+      background: #faf4e8;
+      padding: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+      border: 1px dashed #c9935a;
+      transform: rotate(4.5deg);
+      cursor: pointer;
+      z-index: 26;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .paper-pumpkin .halloween-stamp:active {
+      transform: rotate(4.5deg) scale(0.92);
+    }
+
+    .halloween-stamp { display: none; } /* 其他非万圣节款式默认隐藏 */
+
+    .stamp-inner {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #d48a3f;
+      background: #fdfaf3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 2px;
+      box-sizing: border-box;
+    }
+    .stamp-price {
+      font-size: 8px;
+      font-weight: 800;
+      color: #9c4509;
+      font-family: 'Cinzel', serif;
+      align-self: flex-end;
+      padding-right: 2px;
+    }
+    .stamp-icon {
+      width: 26px;
+      height: 26px;
+      filter: drop-shadow(0 1px 2px rgba(180, 80, 10, 0.3));
+    }
+    .stamp-label {
+      font-size: 6px;
+      font-weight: 700;
+      color: #9c4509;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* 仿真实塞勒姆 1892 黑色波浪邮戳印记 */
+    .postmark-overlay {
+      position: absolute;
+      top: -6px;
+      left: -12px;
+      width: 75px;
+      height: 50px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 65'%3E%3Ccircle cx='26' cy='32' r='22' stroke='%233b2214' stroke-width='1.2' fill='none' stroke-dasharray='3 2' opacity='0.55'/%3E%3Ctext x='26' y='28' font-size='5.5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' font-weight='bold' opacity='0.6'%3ESALEM%3C/text%3E%3Ctext x='26' y='38' font-size='5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' opacity='0.6'%3EOCT 31%3C/text%3E%3Cpath d='M48 20 Q65 14 82 20 T100 20 M48 30 Q65 24 82 30 T100 30 M48 40 Q65 34 82 40 T100 40' stroke='%233b2214' stroke-width='1.2' fill='none' opacity='0.45'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      pointer-events: none;
+      transform: rotate(-10deg);
+    }
+
+    /* 3. 糖果雨飞溅动画粒子 */
+    .candy-pop {
+      position: fixed;
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 999;
+      transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1);
+    }
     
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
@@ -635,7 +730,23 @@
     <div class="envelope-hint" id="envelopeHint">TAP SEAL TO BREAK SILENCE</div>
   </div>
 
-  <div class="letter-container" id="letterContainer">
+ <div class="letter-container" id="letterContainer">
+    <!-- 破框而出的万圣节手账纸胶带与复古邮票 -->
+    <div class="washi-tape" id="washiTape"></div>
+    <div class="halloween-stamp" id="halloweenStamp" title="Tap for a treat! 🎃">
+      <div class="stamp-inner">
+        <span class="stamp-price">31¢</span>
+        <svg viewBox="0 0 24 24" class="stamp-icon">
+          <path d="M12 3 C11.5 4 12.5 5 12 6 C7.5 6 4 9.5 4 14 C4 18.5 7.5 21.5 12 21.5 C16.5 21.5 20 18.5 20 14 C20 9.5 16.5 6 12 6 Z" fill="#d35400"/>
+          <path d="M8.5 11.5 L10.5 13.5 L8.5 15 Z M15.5 11.5 L13.5 13.5 L15.5 15 Z" fill="#fff5eb"/>
+          <path d="M9 17.5 Q12 20 15 17.5 Q12 18.5 9 17.5 Z" fill="#fff5eb"/>
+        </svg>
+        <span class="stamp-label">PUMPKIN POST</span>
+      </div>
+      <!-- 黑色波浪邮戳印记 -->
+      <div class="postmark-overlay"></div>
+    </div>
+
     <div class="letter-header">
       <div class="recipient-name" id="recipientText">My Love</div>
       <div class="days-badge" id="daysBadge">
@@ -792,6 +903,40 @@
       // 优先读取客户自定义，若未填则根据款式秒级自动匹配专属动效
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
+      // 万圣节专属彩蛋：点击邮票喷涌万圣糖果雨（Candy Popout）
+      const stamp = document.getElementById("halloweenStamp");
+      if (stamp) {
+        stamp.onclick = (e) => {
+          e.stopPropagation();
+          const posX = e.clientX || (window.innerWidth - 60);
+          const posY = e.clientY || 80;
+          createCandyPopout(posX, posY);
+        };
+      }
+    }
+
+    function createCandyPopout(x, y) {
+      const treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
+      for (let i = 0; i < 16; i++) {
+        const el = document.createElement('div');
+        el.className = 'candy-pop';
+        el.innerText = treats[Math.floor(Math.random() * treats.length)];
+        el.style.left = `${x}px`;
+        el.style.top = `${y}px`;
+        document.body.appendChild(el);
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 110 + 40;
+        const targetX = x + Math.cos(angle) * dist;
+        const targetY = y + Math.sin(angle) * dist - 30;
+
+        requestAnimationFrame(() => {
+          el.style.transform = `translate(${targetX - x}px, ${targetY - y}px) scale(${Math.random() * 0.6 + 0.9}) rotate(${Math.random() * 360}deg)`;
+          el.style.opacity = '0';
+        });
+
+        setTimeout(() => el.remove(), 800);
+      }
     }
 
     const envelopeWrapper = document.getElementById("envelopeWrapper");
