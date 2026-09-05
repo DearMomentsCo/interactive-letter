@@ -665,6 +665,65 @@
       will-change: transform, opacity;
       transition: transform 1.25s cubic-bezier(0.12, 0.85, 0.32, 1), opacity 1.25s cubic-bezier(0.65, 0, 1, 1);
     }
+
+    /* ===== 8. Pastel Spooky (粉紫幽灵专属：完全独立封装，不污染其他模版) ===== */
+    .env-ghost {
+      --env-primary: #2d173d;
+      --env-secondary: #3d2052;
+    }
+    .env-ghost .envelope-front,
+    .env-ghost .envelope-back,
+    .env-ghost .envelope-flap,
+    .env-ghost .envelope-pocket {
+      background: linear-gradient(135deg, #281438 0%, #3e2054 50%, #1f0e2b 100%) !important;
+      border-color: rgba(225, 175, 245, 0.45) !important;
+      box-shadow: 0 15px 40px rgba(20, 8, 30, 0.8), inset 0 0 25px rgba(185, 120, 220, 0.25) !important;
+    }
+    .env-ghost .wax-seal {
+      background: radial-gradient(circle at 35% 30%, #fae1f5 0%, #e5a7da 50%, #b85fa7 100%) !important;
+      border: 1.5px solid rgba(255, 245, 255, 0.8) !important;
+      box-shadow: 0 4px 15px rgba(50, 15, 60, 0.65), inset 0 0 8px rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .paper-ghost {
+      background-color: #fdf8fc !important;
+      background-image:
+        radial-gradient(ellipse at 50% 15%, rgba(248, 205, 240, 0.28) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, #fdf8fc 0%, #faeef8 70%, #f2daf0 100%) !important;
+      border: 1.8px solid #c88abf !important;
+      outline: 1px dashed rgba(185, 110, 175, 0.5) !important;
+      outline-offset: -8px !important;
+      box-shadow: 0 25px 65px rgba(35, 15, 45, 0.6), inset 0 0 50px rgba(180, 110, 170, 0.12), inset 0 0 20px rgba(255, 245, 255, 0.8) !important;
+      color: #3b1f3c !important;
+      position: relative;
+    }
+    .paper-ghost::before {
+      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
+      width: 260px; height: 260px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b865a7' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='84' stroke='%23b865a7' stroke-width='0.7' fill='none' opacity='0.14'/%3E%3Cpath d='M100 20 L102 28 L100 32 L98 28 Z M100 168 L102 176 L100 180 L98 176 Z' fill='%23b865a7' opacity='0.22'/%3E%3Cpath d='M100 62 C84 62 76 74 76 96 C76 114 72 124 78 132 C82 135 88 130 92 133 C96 135 100 130 104 133 C108 130 112 135 116 132 C122 124 118 114 118 96 C118 74 110 62 100 62 Z' fill='none' stroke='%23b865a7' stroke-width='1.4' opacity='0.16'/%3E%3Ccircle cx='92' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Ccircle cx='108' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cellipse cx='100' cy='102' rx='2.5' ry='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cpath d='M126 75 L129 82 L136 84 L130 88 L131 95 L125 90 L119 94 L122 87 L116 83 L123 82 Z' fill='none' stroke='%23b865a7' stroke-width='0.9' opacity='0.15'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
+    }
+    .paper-ghost .recipient-name {
+      color: #8c327a !important;
+      font-family: 'Cinzel', serif !important;
+      letter-spacing: 2px !important;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+    .paper-ghost .days-badge {
+      background: rgba(200, 138, 191, 0.18) !important;
+      color: #802870 !important;
+      border: 1px solid rgba(200, 138, 191, 0.4) !important;
+      font-weight: 700 !important;
+    }
+    .paper-ghost .letter-body {
+      color: #401b42 !important;
+      line-height: 1.95 !important;
+    }
+    .paper-ghost .letter-footer { color: #784877 !important; }
+    .paper-ghost .letter-footer .sender-name {
+      color: #8c327a !important;
+      font-weight: 700 !important;
+    }
     
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
@@ -850,14 +909,17 @@
     let configData = null;
     let isPlaying = false;
 
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-    const dateBadge = document.getElementById("dateBadge");
-    const waxSeal = document.getElementById("waxSeal");
-    const hintEl = document.getElementById("tapHint");
-    const letterContainer = document.getElementById("letterContainer");
-    const envelopeStage = document.getElementById("envelopeStage");
-    const envelopeWrapper = document.getElementById("envelopeWrapper");
+    // 安全双重元素获取器（优先获取ID，若无则获取Class，避免任何 null 错误）
+    const getEl = (id, cls) => document.getElementById(id) || document.querySelector(cls);
+
+    const bgMusic = getEl("bgMusic", "#bgMusic");
+    const musicBtn = getEl("musicBtn", ".music-btn");
+    const envelopeStage = getEl("envelopeStage", ".envelope-stage");
+    const envelopeWrapper = getEl("envelopeWrapper", ".envelope-wrapper") || getEl("envelopeWrapper", ".envelope");
+    const letterContainer = getEl("letterContainer", ".letter-container");
+    const waxSeal = getEl("waxSeal", ".wax-seal") || getEl("waxSeal", ".seal");
+    const hintEl = getEl("tapHint", ".tap-hint") || getEl("tapHint", ".seal-hint") || getEl("tapHint", ".hint");
+    const dateBadge = getEl("dateBadge", ".days-badge") || getEl("dateBadge", ".date-badge") || getEl("dateBadge", ".treaty-badge");
 
     // 1. 音乐控制
     if (musicBtn) {
@@ -888,106 +950,123 @@
         renderUI(data);
       })
       .catch(err => {
-        console.error(err);
+        console.error("Order Load Error:", err);
         if (hintEl) hintEl.innerText = "✦ ORDER NOT FOUND ✦";
       });
 
-    // 3. 页面渲染与模版自适应引擎
+    // 3. UI 安全渲染装配
     function renderUI(data) {
       const theme = data.theme || "peace";
       const envStyle = data.envelopeStyle || (theme === "halloween" ? "gothic" : "olive");
       const isHalloween = (theme === "halloween");
 
-      envelopeStage.className = "envelope-stage env-" + envStyle;
-      letterContainer.className = "letter-container paper-" + envStyle;
+      if (envelopeStage) envelopeStage.className = "envelope-stage env-" + envStyle;
+      if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
-      // 专属火漆与文案自适应判定
+      // 专属火漆与文案逻辑分流
       if (isHalloween) {
         if (envStyle === "pumpkin") {
-          hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
-          dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
-          waxSeal.innerHTML = `
-            <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(60,20,0,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.7));">
-              <path d="M15 3.5 C15.5 5 16 6 17 6.5 L14.5 6.5 C14 5 13.5 4 13 3.5 Z" fill="#fff1b8"/>
-              <path d="M16 6.5 C11 6.5 5.5 10 5.5 17 C5.5 24 11 27.5 16 27.5 C21 27.5 26.5 24 26.5 17 C26.5 10 21 6.5 16 6.5 Z" fill="#fff1b8"/>
-              <path d="M9.5 13.5 L13 14.5 L10.5 17 Z M22.5 13.5 L21.5 17 L19 14.5 Z M16 15.5 L17.5 18 L14.5 18 Z" fill="#6e2700"/>
-              <path d="M9.5 20 Q16 26 22.5 20 C21 22 19 21 17.5 22.5 C16 21 15 22.5 13.5 21 C12 22.5 10.5 21.5 9.5 20 Z" fill="#6e2700"/>
-            </svg>
-          `;
+          if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
+          if (dateBadge) dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
+          if (waxSeal) {
+            waxSeal.innerHTML = `
+              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(60,20,0,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.7));">
+                <path d="M15 3.5 C15.5 5 16 6 17 6.5 L14.5 6.5 C14 5 13.5 4 13 3.5 Z" fill="#fff1b8"/>
+                <path d="M16 6.5 C11 6.5 5.5 10 5.5 17 C5.5 24 11 27.5 16 27.5 C21 27.5 26.5 24 26.5 17 C26.5 10 21 6.5 16 6.5 Z" fill="#fff1b8"/>
+                <path d="M9.5 13.5 L13 14.5 L10.5 17 Z M22.5 13.5 L21.5 17 L19 14.5 Z M16 15.5 L17.5 18 L14.5 18 Z" fill="#6e2700"/>
+                <path d="M9.5 20 Q16 26 22.5 20 C21 22 19 21 17.5 22.5 C16 21 15 22.5 13.5 21 C12 22.5 10.5 21.5 9.5 20 Z" fill="#6e2700"/>
+              </svg>
+            `;
+          }
         } else if (envStyle === "ghost") {
-          hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
-          dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
-          waxSeal.innerHTML = `
-            <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(45,15,60,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-              <path d="M16 5 C11 5 8 9 8 15 C8 20 6.5 23 8.5 26 C9.5 27 11 25.5 12.5 26 C14 26.5 15 25 16 26 C17 25 18 26.5 19.5 26 C21 25.5 22.5 27 23.5 26 C25.5 23 24 20 24 15 C24 9 21 5 16 5 Z" fill="#fff5fc"/>
-              <ellipse cx="12" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
-              <ellipse cx="20" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
-              <ellipse cx="16" cy="17.5" rx="1.5" ry="1.8" fill="#431852"/>
-              <ellipse cx="10" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
-              <ellipse cx="22" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
-              <path d="M21 7 L22 9 L24 10 L22 11 L21 13 L20 11 L18 10 L20 9 Z" fill="#ffd166"/>
-            </svg>
-          `;
+          if (hintEl) hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
+          if (dateBadge) dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
+          if (waxSeal) {
+            waxSeal.innerHTML = `
+              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(45,15,60,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
+                <path d="M16 5 C11 5 8 9 8 15 C8 20 6.5 23 8.5 26 C9.5 27 11 25.5 12.5 26 C14 26.5 15 25 16 26 C17 25 18 26.5 19.5 26 C21 25.5 22.5 27 23.5 26 C25.5 23 24 20 24 15 C24 9 21 5 16 5 Z" fill="#fff5fc"/>
+                <ellipse cx="12" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
+                <ellipse cx="20" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
+                <ellipse cx="16" cy="17.5" rx="1.5" ry="1.8" fill="#431852"/>
+                <ellipse cx="10" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
+                <ellipse cx="22" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
+                <path d="M21 7 L22 9 L24 10 L22 11 L21 13 L20 11 L18 10 L20 9 Z" fill="#ffd166"/>
+              </svg>
+            `;
+          }
         } else {
-          // 哥特暗夜款
-          hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
-          dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
+          if (hintEl) hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
+          if (dateBadge) dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
+          if (waxSeal) {
+            waxSeal.innerHTML = `
+              <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff1b8; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.9));">
+                <path d="M12 4.5 C10.5 7.5 8 8.5 4 8 C6.5 11 7 14 5 17 C9 16 10.5 18 12 21 C13.5 18 15 16 19 17 C17 14 17.5 11 20 8 C16 8.5 13.5 7.5 12 4.5 Z"/>
+              </svg>
+            `;
+          }
+        }
+      } else {
+        // 非万圣节通用和解公约火漆（原封不动）
+        if (hintEl) hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
+        if (dateBadge) dateBadge.innerText = "OFFICIAL PEACE TREATY";
+        if (waxSeal) {
           waxSeal.innerHTML = `
-            <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff1b8; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.9));">
-              <path d="M12 4.5 C10.5 7.5 8 8.5 4 8 C6.5 11 7 14 5 17 C9 16 10.5 18 12 21 C13.5 18 15 16 19 17 C17 14 17.5 11 20 8 C16 8.5 13.5 7.5 12 4.5 Z"/>
+            <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:#ffffff; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5));">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           `;
         }
-      } else {
-        // 非万圣节通用官方和解火漆
-        hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
-        dateBadge.innerText = "OFFICIAL PEACE TREATY";
-        waxSeal.innerHTML = `
-          <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:#ffffff; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5));">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
-        `;
       }
 
-      // 文本与照片墙
-      if (data.recipient) document.getElementById("recipientName").innerText = data.recipient;
-      if (data.sender) document.getElementById("senderName").innerText = data.sender;
-      if (data.signature) {
-        const sigEl = document.getElementById("signatureText");
-        if (sigEl) sigEl.innerText = data.signature;
+      // 文本与署名渲染
+      const recEl = getEl("recipientName", ".recipient-name");
+      const sendEl = getEl("senderName", ".sender-name");
+      const sigEl = getEl("signatureText", ".signature-text");
+      if (recEl && data.recipient) recEl.innerText = data.recipient;
+      if (sendEl && data.sender) sendEl.innerText = data.sender;
+      if (sigEl && data.signature) sigEl.innerText = data.signature;
+
+      // 照片墙
+      const photoGallery = getEl("photoGallery", ".photo-gallery");
+      if (photoGallery) {
+        if (data.photos && data.photos.length > 0) {
+          photoGallery.style.display = "flex";
+          photoGallery.innerHTML = "";
+          data.photos.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "photo-card";
+            card.innerHTML = `<img src="${p.url}" alt="Memory"><div class="photo-caption">${p.caption || ""}</div>`;
+            photoGallery.appendChild(card);
+          });
+        } else {
+          photoGallery.style.display = "none";
+        }
       }
 
-      const photoGallery = document.getElementById("photoGallery");
-      if (photoGallery && data.photos && data.photos.length > 0) {
-        photoGallery.innerHTML = "";
-        data.photos.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "photo-card";
-          card.innerHTML = `<img src="${p.url}" alt="Memory"><div class="photo-caption">${p.caption || ""}</div>`;
-          photoGallery.appendChild(card);
-        });
-      }
-
-      // 刮刮乐与追逐按钮装配
+      // 刮刮乐
+      const scSection = getEl("scratchSection", ".scratch-section");
       if (data.scratchCard && data.scratchCard.enabled) {
+        if (scSection) scSection.style.display = "block";
         initScratchCard(data.scratchCard);
       } else {
-        const scEl = document.getElementById("scratchSection");
-        if (scEl) scEl.style.display = "none";
+        if (scSection) scSection.style.display = "none";
       }
 
+      // 调皮追逐按钮
+      const rqSection = getEl("runawaySection", ".runaway-section");
       if (data.runawayQuestion && data.runawayQuestion.enabled) {
+        if (rqSection) rqSection.style.display = "block";
         initRunawayButton(data.runawayQuestion);
       } else {
-        const rqEl = document.getElementById("runawaySection");
-        if (rqEl) rqEl.style.display = "none";
+        if (rqSection) rqSection.style.display = "none";
       }
 
+      // 注入背景音乐
       if (data.musicUrl && bgMusic) {
         bgMusic.src = data.musicUrl;
       }
 
-      // 核心动效自动映射表（全款式自适应）
+      // 款式专属动效映射（所有老模版原汁原味）
       const styleAutoEffects = {
         "kintsugi":  "gold-dust",
         "whiteflag": "gold-dust",
@@ -996,14 +1075,13 @@
         "olive":     "olive-leaves",
         "gothic":    "spooky-embers",
         "pumpkin":   "pumpkin-glow",
-        "ghost":     "ghostly-pastels",
-        "witchy":    "celestial-sparks"
+        "ghost":     "ghostly-pastels"
       };
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
 
-      // 左侧邮票点击糖果喷涌彩蛋
-      const stamp = document.getElementById("halloweenStamp");
+      // 左侧复古邮票点击喷涌糖果彩蛋
+      const stamp = getEl("halloweenStamp", ".halloween-stamp");
       if (stamp) {
         stamp.onclick = (e) => {
           e.stopPropagation();
@@ -1014,7 +1092,7 @@
       }
     }
 
-    // 4. 独立喷涌彩蛋逻辑
+    // 独立喷发彩蛋
     function createCandyPopout(x, y) {
       const treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
       for (let i = 0; i < 16; i++) {
@@ -1039,9 +1117,9 @@
       }
     }
 
-    // 5. 开信爆裂特效（已加入主题防护隔离，绝对不污染其他款式）
+    // 开信爆裂特效（主题严格防护：非万圣节款式只喷洒典雅金色微星）
     function triggerEnvelopeBurst(style) {
-      const stage = document.getElementById("envelopeStage");
+      const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
       const rect = stage.getBoundingClientRect();
       const originX = rect.left + rect.width / 2;
@@ -1061,7 +1139,6 @@
           items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
         }
       } else {
-        // 非万圣节款式（金缮/橄榄/雨过天晴等）：仅喷射纯净唯美的金色微星
         items = ['✨', '⭐', '🌟', '💛'];
       }
 
@@ -1101,36 +1178,38 @@
       }
     }
 
-    // 6. 开信交互监听
-    envelopeWrapper.addEventListener("click", () => {
-      if (bgMusic && bgMusic.src) {
-        bgMusic.play().then(() => {
-          isPlaying = true;
-          musicBtn.classList.add("playing", "visible");
-        }).catch(e => {
-          musicBtn.classList.add("visible");
-        });
-      }
+    // 点击信封开信
+    if (envelopeWrapper) {
+      envelopeWrapper.addEventListener("click", () => {
+        if (bgMusic && bgMusic.src) {
+          bgMusic.play().then(() => {
+            isPlaying = true;
+            if (musicBtn) musicBtn.classList.add("playing", "visible");
+          }).catch(e => {
+            if (musicBtn) musicBtn.classList.add("visible");
+          });
+        }
 
-      document.getElementById("envelopeStage").classList.add("is-opening");
+        if (envelopeStage) envelopeStage.classList.add("is-opening");
 
-      setTimeout(() => {
-        triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
-      }, 180);
+        setTimeout(() => {
+          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
+        }, 180);
 
-      setTimeout(() => {
-        document.getElementById("envelopeStage").classList.add("opened");
-        document.getElementById("letterContainer").classList.add("show");
-        startLetterTyping();
-      }, 750);
-    });
+        setTimeout(() => {
+          if (envelopeStage) envelopeStage.classList.add("opened");
+          if (letterContainer) letterContainer.classList.add("show");
+          startLetterTyping();
+        }, 750);
+      });
+    }
 
-    // 7. 打字机组件
+    // 打字机逻辑
     let isTypingDone = false;
     let forceSkip = false;
     function startLetterTyping() {
       if (!configData || !configData.letterContent) return;
-      const container = document.getElementById("letterBody");
+      const container = getEl("letterBody", ".letter-body");
       if (!container) return;
       container.innerHTML = "";
       
@@ -1170,18 +1249,18 @@
       typeNext();
     }
 
-    // 8. 刮刮乐手势引擎
+    // 刮刮乐引擎
     function initScratchCard(cfg) {
-      const cardTitle = document.getElementById("scratchTitle");
-      const cardText = document.getElementById("scratchHiddenText");
-      const canvas = document.getElementById("scratchCanvas");
+      const cardTitle = getEl("scratchTitle", ".scratch-title");
+      const cardText = getEl("scratchHiddenText", ".scratch-hidden-text");
+      const canvas = getEl("scratchCanvas", ".scratch-canvas") || document.querySelector("#scratchSection canvas");
       if (!canvas) return;
       if (cardTitle) cardTitle.innerText = cfg.title || "✦ SCRATCH TO REVEAL ✦";
       if (cardText) cardText.innerText = cfg.hiddenText || "";
 
       const ctx = canvas.getContext("2d");
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      canvas.width = canvas.offsetWidth || 260;
+      canvas.height = canvas.offsetHeight || 80;
 
       ctx.fillStyle = "#8a7d6e";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -1214,12 +1293,12 @@
       canvas.addEventListener("touchmove", scratch);
     }
 
-    // 9. 调皮追逐按钮
+    // 追逐按钮引擎
     function initRunawayButton(cfg) {
-      const qEl = document.getElementById("runawayQuestionText");
-      const btnYes = document.getElementById("btnRunawayYes");
-      const btnNo = document.getElementById("btnRunawayNo");
-      const msgEl = document.getElementById("runawaySuccess");
+      const qEl = getEl("runawayQuestionText", ".runaway-question");
+      const btnYes = getEl("btnRunawayYes", ".btn-runaway-yes") || getEl("btnYes", "#btnYes");
+      const btnNo = getEl("btnRunawayNo", ".btn-runaway-no") || getEl("btnNo", "#btnNo");
+      const msgEl = getEl("runawaySuccess", ".runaway-success") || getEl("runawaySuccess", "#runawaySuccess");
       if (!qEl || !btnYes || !btnNo) return;
 
       qEl.innerText = cfg.question || "Will you be with me?";
@@ -1247,12 +1326,13 @@
       };
     }
 
-    // 10. 全局物理粒子渲染引擎（支持金粉、雨过天晴、橄榄叶、哥特余烬、南瓜落叶、粉紫幽灵光晕）
-    const pCanvas = document.getElementById("particleCanvas");
-    const pCtx = pCanvas.getContext("2d");
+    // 全局背景物理粒子（金粉、雨过天晴、橄榄叶、哥特火星、南瓜落叶、粉紫幽灵光晕全部保留）
+    const pCanvas = getEl("particleCanvas", "canvas");
+    const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
     let particles = [];
 
     function resizeCanvas() {
+      if (!pCanvas) return;
       pCanvas.width = window.innerWidth;
       pCanvas.height = window.innerHeight;
     }
@@ -1262,6 +1342,7 @@
     class UniversalParticle {
       constructor(type) { this.type = type; this.reset(); }
       reset() {
+        if (!pCanvas) return;
         this.x = Math.random() * pCanvas.width;
         this.angle = Math.random() * Math.PI * 2;
         this.spinSpeed = (Math.random() - 0.5) * 0.025;
@@ -1321,6 +1402,7 @@
             this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
           }
         } else if (this.type === 'ghostly-pastels') {
+          const dynOpacity = this.opacity * (0.8 + Math.sin(this.pulsePhase) * 0.2);
           this.y = pCanvas.height + 20;
           this.size = Math.random() * 3.8 + 1.8;
           this.speedY = -(Math.random() * 0.65 + 0.25);
@@ -1335,6 +1417,7 @@
         }
       }
       update() {
+        if (!pCanvas) return;
         if (this.type === 'gold-dust') {
           this.y += this.speedY; this.x += Math.sin(this.y * 0.03) * 0.35;
           if (this.y < -20) this.reset();
@@ -1380,6 +1463,7 @@
         }
       }
       draw() {
+        if (!pCtx) return;
         pCtx.save();
         if (this.type === 'gold-dust') {
           pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
@@ -1474,16 +1558,19 @@
     }
 
     function initParticles(type) {
+      if (!pCanvas) return;
       particles = [];
       const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow' || type === 'ghostly-pastels') ? 45 : 30;
       for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
     }
 
     function animateParticles() {
-      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-      for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
+      if (pCtx && pCanvas) {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+        }
       }
       requestAnimationFrame(animateParticles);
     }
