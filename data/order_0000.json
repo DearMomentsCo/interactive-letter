@@ -1,35 +1,35 @@
 {
   "theme": "halloween",
-  "envelopeStyle": "pumpkin",
+  "envelopeStyle": "ghost",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Little Pumpkin 🎃",
-  "sender": "Your Spooky Sweetheart",
+  "recipient": "My Cutest Boo 👻",
+  "sender": "Your Favorite Ghost",
   "letterContent": [
-    "No tricks, just the sweetest treat in my life—you.",
-    "Carving pumpkins, drinking hot cider, and bundling up in cozy scarves would mean nothing without your warmth.",
-    "Thank you for bringing so much golden light into my spooky season."
+    "You are my absolute favorite boo in the entire universe.",
+    "No tricks, just infinite cuddles, sweet treats, and magic with you.",
+    "Happy Spooky Season to the sweetest girl in my life! 💖"
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "Cutest pumpkin in the patch 🎃"
+      "caption": "Spooky cute memories with you ✨"
     },
     {
       "url": "images/order_0000_2.jpg",
-      "caption": "Spooky sweet memories with you ✨"
+      "caption": "My forever favorite boo 👻"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ UNLOCK THE TRICK OR TREAT BASKET ✦",
-    "hiddenText": "Treat Claimed: 1x Pumpkin Spice Latte + Spooky Movie Cuddle Night ☕🍿"
+    "title": "✦ UNLOCK SPOOKY CUTE TREAT ✦",
+    "hiddenText": "Treat Claimed: Unlimited Hugs + Hot Chocolate Date ☕🎀"
   },
   "runawayQuestion": {
     "enabled": true,
-    "question": "Will you be my pumpkin forever?",
-    "yesText": "YES, MY PUMPKIN 🎃",
+    "question": "Will you be my boo forever?",
+    "yesText": "YES, FOREVER BOO 👻",
     "noText": "RUN AWAY",
     "runawayTarget": "no",
-    "successMessage": "Yay! You're stuck in my pumpkin patch forever! 🎃❤"
+    "successMessage": "Yay! We're haunting this love forever! 💖✨"
   }
 }
