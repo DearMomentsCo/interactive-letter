@@ -845,43 +845,65 @@
   </div>
 
   <script>
-    let configData = {};
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get("id") || "order_0000";
+    let configData = null;
     let isPlaying = false;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('id') || 'order_0000';
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const dateBadge = document.getElementById("dateBadge");
+    const waxSeal = document.getElementById("waxSeal");
+    const hintEl = document.getElementById("tapHint");
+    const letterContainer = document.getElementById("letterContainer");
+    const envelopeStage = document.getElementById("envelopeStage");
+    const envelopeWrapper = document.getElementById("envelopeWrapper");
 
-    async function loadData() {
-      try {
-        const res = await fetch(`data/${orderId}.json?t=${Date.now()}`);
-        configData = res.ok ? await res.json() : {};
-      } catch (err) {
-        configData = {};
-      }
-      renderUI(configData);
+    // 1. 音乐控制
+    if (musicBtn) {
+      musicBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!bgMusic) return;
+        if (isPlaying) {
+          bgMusic.pause();
+          isPlaying = false;
+          musicBtn.classList.remove("playing");
+        } else {
+          bgMusic.play().then(() => {
+            isPlaying = true;
+            musicBtn.classList.add("playing");
+          }).catch(err => console.log(err));
+        }
+      });
     }
 
+    // 2. 加载订单数据
+    fetch("data/" + orderId + ".json")
+      .then(res => {
+        if (!res.ok) throw new Error("Order not found");
+        return res.json();
+      })
+      .then(data => {
+        configData = data;
+        renderUI(data);
+      })
+      .catch(err => {
+        console.error(err);
+        if (hintEl) hintEl.innerText = "✦ ORDER NOT FOUND ✦";
+      });
+
+    // 3. 页面渲染与模版自适应引擎
     function renderUI(data) {
-      const envStyle = data.envelopeStyle || "kintsugi";
-      const isHalloween = (data.theme === 'halloween' || envStyle === 'gothic');
-      const envWrapper = document.getElementById("envelopeWrapper");
-      const letterBox = document.getElementById("letterContainer");
+      const theme = data.theme || "peace";
+      const envStyle = data.envelopeStyle || (theme === "halloween" ? "gothic" : "olive");
+      const isHalloween = (theme === "halloween");
 
-      envWrapper.className = `envelope-wrapper env-${envStyle}`;
-      letterBox.className = `letter-container paper-${envStyle}`;
+      envelopeStage.className = "envelope-stage env-" + envStyle;
+      letterContainer.className = "letter-container paper-" + envStyle;
 
-      document.getElementById("recipientText").innerText = data.recipient || "My Dearest";
-      document.getElementById("senderText").innerText = data.sender || "Always with Love";
-
-      // 动态标语联动
-      const hintEl = document.getElementById("envelopeHint");
-      const dateBadge = document.getElementById("dateLabel");
-      const waxSeal = document.getElementById("waxSeal");
-
+      // 专属火漆与文案自适应判定
       if (isHalloween) {
-        if (envStyle === 'pumpkin') {
+        if (envStyle === "pumpkin") {
           hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
           dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
           waxSeal.innerHTML = `
@@ -892,24 +914,22 @@
               <path d="M9.5 20 Q16 26 22.5 20 C21 22 19 21 17.5 22.5 C16 21 15 22.5 13.5 21 C12 22.5 10.5 21.5 9.5 20 Z" fill="#6e2700"/>
             </svg>
           `;
-        } else if (envStyle === 'ghost') {
+        } else if (envStyle === "ghost") {
           hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
           dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
           waxSeal.innerHTML = `
             <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(45,15,60,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-              <!-- 软萌幽灵波浪裙边浮雕 -->
               <path d="M16 5 C11 5 8 9 8 15 C8 20 6.5 23 8.5 26 C9.5 27 11 25.5 12.5 26 C14 26.5 15 25 16 26 C17 25 18 26.5 19.5 26 C21 25.5 22.5 27 23.5 26 C25.5 23 24 20 24 15 C24 9 21 5 16 5 Z" fill="#fff5fc"/>
-              <!-- 萌系大眼睛与小腮红 -->
               <ellipse cx="12" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
               <ellipse cx="20" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
               <ellipse cx="16" cy="17.5" rx="1.5" ry="1.8" fill="#431852"/>
               <ellipse cx="10" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
               <ellipse cx="22" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
-              <!-- 头顶金色小星芒 -->
               <path d="M21 7 L22 9 L24 10 L22 11 L21 13 L20 11 L18 10 L20 9 Z" fill="#ffd166"/>
             </svg>
           `;
         } else {
+          // 哥特暗夜款
           hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
           dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
           waxSeal.innerHTML = `
@@ -919,82 +939,82 @@
           `;
         }
       } else {
+        // 非万圣节通用官方和解火漆
         hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
         dateBadge.innerText = "OFFICIAL PEACE TREATY";
         waxSeal.innerHTML = `
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:#ffffff; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5));">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
           </svg>
         `;
       }
 
-      // 拍立得照片渲染
-      const gallery = document.getElementById("polaroidGallery");
-      gallery.innerHTML = "";
-      if (data.photos && data.photos.length > 0) {
-        data.photos.forEach((item, idx) => {
-          const url = typeof item === 'string' ? item : item.url;
-          const cap = typeof item === 'string' ? 'Tap to flip' : (item.caption || 'Tap to flip');
-          const card = document.createElement("div");
-          card.className = `polaroid-card ${idx === 0 ? 'active' : ''}`;
-          card.innerHTML = `
-            <div class="polaroid-front"><img src="${url}"><div class="polaroid-front-hint">Tap photo to read note ↻</div></div>
-            <div class="polaroid-back"><div class="polaroid-back-text">${cap}</div></div>
-          `;
-          card.addEventListener("click", () => card.classList.toggle("flipped"));
-          gallery.appendChild(card);
-        });
-
-        if (data.photos.length > 1) {
-          let current = 0;
-          setInterval(() => {
-            const cards = gallery.querySelectorAll(".polaroid-card");
-            if (cards.length > 1) {
-              cards[current].classList.remove("active", "flipped");
-              current = (current + 1) % cards.length;
-              cards[current].classList.add("active");
-            }
-          }, 4500);
-        }
-      } else {
-        gallery.style.display = "none";
+      // 文本与照片墙
+      if (data.recipient) document.getElementById("recipientName").innerText = data.recipient;
+      if (data.sender) document.getElementById("senderName").innerText = data.sender;
+      if (data.signature) {
+        const sigEl = document.getElementById("signatureText");
+        if (sigEl) sigEl.innerText = data.signature;
       }
 
-      if (data.scratchCard && data.scratchCard.enabled) initUniversalScratch(data.scratchCard, isHalloween);
-      if (data.runawayQuestion && data.runawayQuestion.enabled) initRunaway(data.runawayQuestion);
+      const photoGallery = document.getElementById("photoGallery");
+      if (photoGallery && data.photos && data.photos.length > 0) {
+        photoGallery.innerHTML = "";
+        data.photos.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "photo-card";
+          card.innerHTML = `<img src="${p.url}" alt="Memory"><div class="photo-caption">${p.caption || ""}</div>`;
+          photoGallery.appendChild(card);
+        });
+      }
 
-      if (data.musicUrl) {
+      // 刮刮乐与追逐按钮装配
+      if (data.scratchCard && data.scratchCard.enabled) {
+        initScratchCard(data.scratchCard);
+      } else {
+        const scEl = document.getElementById("scratchSection");
+        if (scEl) scEl.style.display = "none";
+      }
+
+      if (data.runawayQuestion && data.runawayQuestion.enabled) {
+        initRunawayButton(data.runawayQuestion);
+      } else {
+        const rqEl = document.getElementById("runawaySection");
+        if (rqEl) rqEl.style.display = "none";
+      }
+
+      if (data.musicUrl && bgMusic) {
         bgMusic.src = data.musicUrl;
       }
 
-      // 核心资产映射库：每个款式专属绑定自己的专属背景动效（接单免配置）
+      // 核心动效自动映射表（全款式自适应）
       const styleAutoEffects = {
-        "kintsugi":  "gold-dust",         // 金缮款 -> 专属流光金粉
-        "whiteflag": "gold-dust",         // 和平白旗 -> 专属微光金粉
-        "origami":   "gold-dust",         // 折角便签 -> 专属柔金
-        "slate":     "rain-to-sunshine",  // 雨过天晴 -> 专属细雨破晓
-        "olive":     "olive-leaves",      // 橄榄和解 -> 专属3D双面落叶与晨曦暖阳
-        "gothic":    "spooky-embers",     // 暗夜哥特 -> 专属血月余烬与夜空暗蝠
-        "pumpkin":   "pumpkin-glow"       // 焦糖南瓜 -> 专属温暖荧火虫与焦糖落叶
-        "ghost":     "ghostly-pastels",   // 粉紫幽灵专属：梦幻星芒与漂浮幽灵光斑
-        "witchy":    "celestial-sparks"   // 女巫占星专属：奥术金色星轨微尘
+        "kintsugi":  "gold-dust",
+        "whiteflag": "gold-dust",
+        "origami":   "gold-dust",
+        "slate":     "rain-to-sunshine",
+        "olive":     "olive-leaves",
+        "gothic":    "spooky-embers",
+        "pumpkin":   "pumpkin-glow",
+        "ghost":     "ghostly-pastels",
+        "witchy":    "celestial-sparks"
       };
-
-      // 优先读取客户自定义，若未填则根据款式秒级自动匹配专属动效
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
-      // 万圣节专属彩蛋：点击邮票喷涌万圣糖果雨（Candy Popout）
+
+      // 左侧邮票点击糖果喷涌彩蛋
       const stamp = document.getElementById("halloweenStamp");
       if (stamp) {
         stamp.onclick = (e) => {
           e.stopPropagation();
-          const posX = e.clientX || (window.innerWidth - 60);
+          const posX = e.clientX || 60;
           const posY = e.clientY || 80;
           createCandyPopout(posX, posY);
         };
       }
     }
 
+    // 4. 独立喷涌彩蛋逻辑
     function createCandyPopout(x, y) {
       const treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
       for (let i = 0; i < 16; i++) {
@@ -1019,7 +1039,7 @@
       }
     }
 
-    // 开信万圣节元素高能喷涌特效（纯行内自驱动，无需依赖外部CSS）
+    // 5. 开信爆裂特效（已加入主题防护隔离，绝对不污染其他款式）
     function triggerEnvelopeBurst(style) {
       const stage = document.getElementById("envelopeStage");
       if (!stage) return;
@@ -1027,13 +1047,22 @@
       const originX = rect.left + rect.width / 2;
       const originY = rect.top + rect.height * 0.45;
 
-      const isGothic = (style === 'gothic' || (configData && configData.envelopeStyle === 'gothic'));
-      const isGhost = (style === 'ghost' || (configData && configData.envelopeStyle === 'ghost'));
-      let items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
-      if (isGothic) {
-        items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
-      } else if (isGhost) {
-        items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
+      const isHalloween = (configData && configData.theme === "halloween");
+      const isGothic = (style === 'gothic');
+      const isGhost = (style === 'ghost');
+
+      let items;
+      if (isHalloween) {
+        if (isGothic) {
+          items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
+        } else if (isGhost) {
+          items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
+        } else {
+          items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
+        }
+      } else {
+        // 非万圣节款式（金缮/橄榄/雨过天晴等）：仅喷射纯净唯美的金色微星
+        items = ['✨', '⭐', '🌟', '💛'];
       }
 
       for (let i = 0; i < 28; i++) {
@@ -1061,7 +1090,7 @@
         const rotate = (Math.random() - 0.5) * 500;
         const scale = Math.random() * 0.5 + 0.9;
 
-        void p.offsetHeight; // 强制手机图层重绘
+        void p.offsetHeight;
 
         requestAnimationFrame(() => {
           p.style.transform = `translate(calc(-50% + ${targetX}px), calc(-50% + ${targetY}px)) scale(${scale}) rotate(${rotate}deg)`;
@@ -1072,7 +1101,7 @@
       }
     }
 
-    const envelopeWrapper = document.getElementById("envelopeWrapper");
+    // 6. 开信交互监听
     envelopeWrapper.addEventListener("click", () => {
       if (bgMusic && bgMusic.src) {
         bgMusic.play().then(() => {
@@ -1085,9 +1114,8 @@
 
       document.getElementById("envelopeStage").classList.add("is-opening");
 
-      // 掀盖瞬间（180毫秒）触发喷涌
       setTimeout(() => {
-        triggerEnvelopeBurst(configData.envelopeStyle || 'pumpkin');
+        triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
       }, 180);
 
       setTimeout(() => {
@@ -1097,161 +1125,137 @@
       }, 750);
     });
 
+    // 7. 打字机组件
     let isTypingDone = false;
     let forceSkip = false;
-
-    document.getElementById("letterContainer").addEventListener("click", () => {
-      if (!isTypingDone) forceSkip = true;
-    });
-
-    async function startLetterTyping() {
+    function startLetterTyping() {
+      if (!configData || !configData.letterContent) return;
       const container = document.getElementById("letterBody");
+      if (!container) return;
       container.innerHTML = "";
-      const paras = configData.letterContent || ["Thinking of you always."];
+      
+      container.onclick = () => { forceSkip = true; };
 
-      isTypingDone = false; forceSkip = false;
+      const lines = configData.letterContent;
+      let lineIdx = 0;
+      let charIdx = 0;
+      let curP = document.createElement("p");
+      container.appendChild(curP);
 
-      for (let pText of paras) {
-        const p = document.createElement("p");
-        container.appendChild(p);
-
-        if (forceSkip) { p.innerText = pText; continue; }
-
-        const cursor = document.createElement("span");
-        cursor.className = "typewriter-cursor";
-        p.appendChild(cursor);
-
-        for (let char of pText) {
-          if (forceSkip) { p.innerText = pText; break; }
-          p.insertBefore(document.createTextNode(char), cursor);
-          await new Promise(r => setTimeout(r, 22));
+      function typeNext() {
+        if (forceSkip) {
+          container.innerHTML = lines.map(l => `<p>${l}</p>`).join("");
+          isTypingDone = true;
+          return;
         }
-        if (cursor.parentNode) cursor.remove();
-        if (!forceSkip) await new Promise(r => setTimeout(r, 120));
+        if (lineIdx < lines.length) {
+          const curLine = lines[lineIdx];
+          if (charIdx < curLine.length) {
+            curP.textContent += curLine[charIdx];
+            charIdx++;
+            setTimeout(typeNext, 28);
+          } else {
+            lineIdx++;
+            charIdx = 0;
+            if (lineIdx < lines.length) {
+              curP = document.createElement("p");
+              container.appendChild(curP);
+              setTimeout(typeNext, 200);
+            } else {
+              isTypingDone = true;
+            }
+          }
+        }
       }
-      isTypingDone = true;
+      typeNext();
     }
 
-    // 刮刮乐通用引擎（区分万圣节暗夜契约与普通创可贴）
-    function initUniversalScratch(cfg, isHalloween) {
-      const sec = document.getElementById("scratchSection");
-      sec.style.display = "block";
-      document.getElementById("scratchSecret").innerText = cfg.hiddenText || "Surprise! ❤";
+    // 8. 刮刮乐手势引擎
+    function initScratchCard(cfg) {
+      const cardTitle = document.getElementById("scratchTitle");
+      const cardText = document.getElementById("scratchHiddenText");
+      const canvas = document.getElementById("scratchCanvas");
+      if (!canvas) return;
+      if (cardTitle) cardTitle.innerText = cfg.title || "✦ SCRATCH TO REVEAL ✦";
+      if (cardText) cardText.innerText = cfg.hiddenText || "";
 
-      const promptEl = document.getElementById("scratchPrompt");
-      if (isHalloween) {
-        promptEl.innerText = cfg.title || "✦ BREAK THE MIDNIGHT CURSE ✦";
-      } else {
-        promptEl.innerText = cfg.title || "✦ PEEL OFF THE BANDAGE TO HEAL ✦";
+      const ctx = canvas.getContext("2d");
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      ctx.fillStyle = "#8a7d6e";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 13px Cinzel, serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(x, y, 16, 0, Math.PI * 2);
+        ctx.fill();
       }
 
-      setTimeout(() => {
-        const wrapper = document.getElementById("bandaidWrapper");
-        const canvas = document.getElementById("scratchCanvas");
-        const ctx = canvas.getContext("2d");
-        
-        canvas.width = wrapper.offsetWidth;
-        canvas.height = wrapper.offsetHeight;
-
-        if (isHalloween) {
-          // 万圣节：黑曜石金粉涂层
-          ctx.fillStyle = "#2c2438";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
-          ctx.lineWidth = 1;
-          ctx.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
-
-          ctx.fillStyle = "#ffb834";
-          ctx.font = "bold 12px 'Cinzel', serif";
-          ctx.textAlign = "center";
-          ctx.fillText("✦ SCRATCH TO BREAK CURSE ✦", canvas.width / 2, canvas.height / 2 + 4);
-        } else {
-          // 致歉求和：经典创可贴涂层
-          ctx.fillStyle = "#d8c4ae";
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-          ctx.fillStyle = "rgba(0,0,0,0.04)";
-          ctx.fillRect(canvas.width * 0.25, 0, canvas.width * 0.5, canvas.height);
-
-          ctx.fillStyle = "#8a6d4e";
-          ctx.font = "bold 12px sans-serif";
-          ctx.textAlign = "center";
-          ctx.fillText("✦ SCRATCH TO HEAL ✦", canvas.width / 2, canvas.height / 2 + 4);
-        }
-
-        let scratching = false;
-        function scratch(e) {
-          if (!scratching) return;
-          const rect = canvas.getBoundingClientRect();
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-          const x = clientX - rect.left;
-          const y = clientY - rect.top;
-
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.beginPath();
-          ctx.arc(x, y, 20, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        canvas.addEventListener("mousedown", () => scratching = true);
-        canvas.addEventListener("touchstart", () => scratching = true);
-        window.addEventListener("mouseup", () => scratching = false);
-        window.addEventListener("touchend", () => scratching = false);
-        canvas.addEventListener("mousemove", scratch);
-        canvas.addEventListener("touchmove", scratch);
-      }, 300);
+      canvas.addEventListener("mousedown", () => isScratching = true);
+      window.addEventListener("mouseup", () => isScratching = false);
+      canvas.addEventListener("mousemove", scratch);
+      canvas.addEventListener("touchstart", (e) => { isScratching = true; scratch(e); });
+      window.addEventListener("touchend", () => isScratching = false);
+      canvas.addEventListener("touchmove", scratch);
     }
 
-    function initRunaway(cfg) {
-      const sec = document.getElementById("runawaySection");
-      sec.style.display = "block";
-      document.getElementById("runawayQuestion").innerText = cfg.question;
-      const btnYes = document.getElementById("btnYes");
-      const btnNo = document.getElementById("btnNo");
-      const successEl = document.getElementById("runawaySuccess");
+    // 9. 调皮追逐按钮
+    function initRunawayButton(cfg) {
+      const qEl = document.getElementById("runawayQuestionText");
+      const btnYes = document.getElementById("btnRunawayYes");
+      const btnNo = document.getElementById("btnRunawayNo");
+      const msgEl = document.getElementById("runawaySuccess");
+      if (!qEl || !btnYes || !btnNo) return;
 
+      qEl.innerText = cfg.question || "Will you be with me?";
       btnYes.innerText = cfg.yesText || "YES";
       btnNo.innerText = cfg.noText || "NO";
-      successEl.innerText = cfg.successMessage || "Thank you! ❤";
 
-      const runawayBtn = (cfg.runawayTarget === "yes") ? btnYes : btnNo;
+      const targetBtn = (cfg.runawayTarget === "yes") ? btnYes : btnNo;
+      targetBtn.onmouseenter = targetBtn.ontouchstart = (e) => {
+        e.preventDefault();
+        const maxX = 110;
+        const maxY = 55;
+        const randX = (Math.random() - 0.5) * maxX * 2;
+        const randY = (Math.random() - 0.5) * maxY * 2;
+        targetBtn.style.transform = `translate(${randX}px, ${randY}px)`;
+      };
+
       const winBtn = (cfg.runawayTarget === "yes") ? btnNo : btnYes;
-
-      function dodge() {
-        const x = (Math.random() - 0.5) * 160;
-        const y = (Math.random() - 0.5) * 60;
-        runawayBtn.style.transform = `translate(${x}px, ${y}px)`;
-      }
-
-      runawayBtn.addEventListener("mouseenter", dodge);
-      runawayBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodge(); });
-
-      winBtn.addEventListener("click", () => {
-        document.getElementById("runawayBounds").style.display = "none";
-        successEl.style.display = "block";
-      });
+      winBtn.onclick = () => {
+        if (msgEl) {
+          msgEl.innerText = cfg.successMessage || "Yay! ❤";
+          msgEl.style.display = "block";
+        }
+        btnYes.style.display = "none";
+        btnNo.style.display = "none";
+      };
     }
 
-    musicBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (isPlaying) {
-        bgMusic.pause();
-        musicBtn.classList.remove("playing");
-        isPlaying = false;
-      } else {
-        bgMusic.play().then(() => {
-          musicBtn.classList.add("playing");
-          isPlaying = true;
-        }).catch(err => console.error("Play failed:", err));
-      }
-    });
-
-    const pCanvas = document.getElementById("particle-canvas");
+    // 10. 全局物理粒子渲染引擎（支持金粉、雨过天晴、橄榄叶、哥特余烬、南瓜落叶、粉紫幽灵光晕）
+    const pCanvas = document.getElementById("particleCanvas");
     const pCtx = pCanvas.getContext("2d");
     let particles = [];
-    function resizeCanvas() { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
+
+    function resizeCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
@@ -1317,7 +1321,6 @@
             this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
           }
         } else if (this.type === 'ghostly-pastels') {
-          // 粉紫小幽灵专属：60% 柔美粉紫星光光斑 + 40% 梦幻上升微晕
           this.y = pCanvas.height + 20;
           this.size = Math.random() * 3.8 + 1.8;
           this.speedY = -(Math.random() * 0.65 + 0.25);
@@ -1325,11 +1328,7 @@
           this.opacity = Math.random() * 0.5 + 0.35;
           this.pulsePhase = Math.random() * Math.PI * 2;
           this.pulseSpeed = Math.random() * 0.035 + 0.02;
-          const pastelHues = [
-            'rgba(240, 160, 230,', // 梦幻粉色
-            'rgba(195, 145, 245,', // 薰衣草浅紫
-            'rgba(255, 215, 160,'  // 柔金香槟
-          ];
+          const pastelHues = ['rgba(240, 160, 230,', 'rgba(195, 145, 245,', 'rgba(255, 215, 160,'];
           this.hue = pastelHues[Math.floor(Math.random() * pastelHues.length)];
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
@@ -1482,12 +1481,13 @@
 
     function animateParticles() {
       pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
       requestAnimationFrame(animateParticles);
     }
     animateParticles();
-
-    loadData();
   </script>
 </body>
 </html>
