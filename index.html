@@ -34,10 +34,10 @@
       position: relative;
     }
 
-    #particle-canvas, #sparkle-canvas {
+    #particleCanvas, #particle-canvas, #sparkle-canvas {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
     }
-    #particle-canvas { z-index: 1; }
+    #particleCanvas, #particle-canvas { z-index: 1; }
     #sparkle-canvas { z-index: 99; }
 
     .music-btn {
@@ -74,7 +74,7 @@
 
     /* ================= 信封样式库 ================= */
     /* 1. 金缮款 */
-    .env-kintsugi { background: #24272e !important; }
+    .env-kintsugi .envelope-wrapper { background: #24272e !important; }
     .env-kintsugi .envelope-lid { border-top-color: #1e2026 !important; }
     .kintsugi-gold-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -87,7 +87,7 @@
     }
 
     /* 2. 白旗款 */
-    .env-whiteflag { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
+    .env-whiteflag .envelope-wrapper { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
     .env-whiteflag .envelope-lid { border-top-color: #f2f2f2 !important; }
     .env-whiteflag::after {
       content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 14px; left: 16px;
@@ -96,7 +96,7 @@
     }
 
     /* 3. 折角便签款 */
-    .env-origami { background: #fdfbf7 !important; border: 1px dashed #cfc5af !important; }
+    .env-origami .envelope-wrapper { background: #fdfbf7 !important; border: 1px dashed #cfc5af !important; }
     .env-origami .envelope-lid { border-top-color: #f3ecdb !important; }
     .env-origami .wax-seal { display: none !important; }
     .env-origami::after {
@@ -112,11 +112,11 @@
     .envelope-stage.is-opening .env-origami::after { opacity: 0; transform: translateX(-50%) rotate(-3.5deg) scale(1.15); }
 
     /* 4. 雨过天晴款 */
-    .env-slate { background: #5a728b !important; }
+    .env-slate .envelope-wrapper { background: #5a728b !important; }
     .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
 
     /* 5. 橄榄和解款 */
-    .env-olive {
+    .env-olive .envelope-wrapper {
       background-color: #e4ddcf !important;
       background-image:
         linear-gradient(rgba(70, 60, 45, 0.045) 1px, transparent 1px),
@@ -129,8 +129,8 @@
     }
     .env-olive .envelope-lid { border-top-color: #dcd3c1 !important; }
 
-    /* 6. 万圣暗夜哥特信封：3D立体折叠厚纸 + 维多利亚暗金巴洛克金属包角 */
-    .env-gothic {
+    /* 6. 万圣暗夜哥特信封 */
+    .env-gothic .envelope-wrapper {
       background:
         linear-gradient(135deg, rgba(0,0,0,0.65) 0%, transparent 48%),
         linear-gradient(225deg, rgba(0,0,0,0.65) 0%, transparent 48%),
@@ -150,19 +150,73 @@
       border-top-color: #23162c !important;
       filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)) !important;
     }
-    /* 左右上角重工巴洛克暗金雕花包角（彻底告别突兀蛛网） */
-    .env-gothic::before, .env-gothic::after {
+    .env-gothic .envelope-wrapper::before, .env-gothic .envelope-wrapper::after {
       content: ""; position: absolute; width: 65px; height: 65px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M4 4 L30 4 C24 8 20 14 18 20 C22 20 25 24 23 28 C18 26 14 30 14 36 C10 32 4 36 4 45 Z' fill='%23c5a059' opacity='0.7'/%3E%3Cpath d='M4 4 L55 4 M4 4 L4 55 M10 10 L42 10 M10 10 L10 42' stroke='%23ffd885' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='10' r='2.5' fill='%23ff9f43'/%3E%3Ccircle cx='22' cy='22' r='1.8' fill='%23ffd885'/%3E%3C/svg%3E");
       background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 6;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
     }
-    .env-gothic::before { top: 6px; left: 6px; }
-    .env-gothic::after { top: 6px; right: 6px; transform: scaleX(-1); }
-
+    .env-gothic .envelope-wrapper::before { top: 6px; left: 6px; }
+    .env-gothic .envelope-wrapper::after { top: 6px; right: 6px; transform: scaleX(-1); }
     .env-gothic .wax-seal {
       background: radial-gradient(circle at 30% 28%, #ff3b3b 0%, #9e1414 45%, #420606 100%) !important;
       box-shadow: 0 12px 26px rgba(0, 0, 0, 0.9), inset 1.5px 2px 3px rgba(255, 130, 130, 0.7), inset -2.5px -3px 5px rgba(0, 0, 0, 0.95) !important;
+    }
+
+    /* 7. 焦糖南瓜款信封 */
+    .env-pumpkin .envelope-wrapper {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(0deg, rgba(80, 35, 10, 0.45) 0%, transparent 45%),
+        linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
+      border: 1.5px solid #d37a28 !important;
+      border-top: 2px solid #ffb066 !important;
+      outline: 1px dashed rgba(243, 156, 18, 0.45) !important;
+      outline-offset: -6px !important;
+      box-shadow:
+        0 35px 70px -15px rgba(0, 0, 0, 0.9),
+        0 15px 25px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(230, 126, 34, 0.25),
+        inset 0 1px 2px rgba(255, 200, 140, 0.5) !important;
+    }
+    .env-pumpkin .envelope-lid {
+      border-top-color: #48220d !important;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
+    }
+    .env-pumpkin .wax-seal {
+      background: radial-gradient(circle at 30% 28%, #ffaa44 0%, #d35400 45%, #6e2700 100%) !important;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    /* 8. Pastel Spooky (粉紫小幽灵专属立体信封) */
+    .env-ghost .envelope-wrapper {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
+        linear-gradient(0deg, rgba(55, 20, 65, 0.55) 0%, transparent 45%),
+        linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important;
+      border: 1.5px solid #c88abf !important;
+      border-top: 2px solid #f6c0eb !important;
+      outline: 1px dashed rgba(225, 165, 240, 0.45) !important;
+      outline-offset: -6px !important;
+      box-shadow:
+        0 35px 70px -15px rgba(0, 0, 0, 0.9),
+        0 15px 25px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(184, 98, 168, 0.25),
+        inset 0 1px 2px rgba(255, 225, 250, 0.6) !important;
+    }
+    .env-ghost .envelope-lid {
+      border-top-color: #261135 !important;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
+    }
+    .env-ghost .wax-seal {
+      background: radial-gradient(circle at 35% 30%, #fae1f5 0%, #e5a7da 50%, #b85fa7 100%) !important;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 245, 255, 0.85), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
+    }
+    .env-ghost .envelope-hint {
+      color: #e5a7da !important;
+      text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
     }
 
     /* 3D 浮雕火漆印通用 */
@@ -267,10 +321,9 @@
     .paper-olive .recipient-name { color: #44593d !important; }
     .paper-olive .days-badge { background: rgba(100, 120, 92, 0.12) !important; color: #3b5034 !important; border: 1px solid rgba(100, 120, 92, 0.3) !important; }
 
-   /* 6. 万圣专属信纸：女巫古法焦痕魔典（南瓜烛火微光晕 + 血月飞蝠饰带） */
+    /* 6. 万圣专属暗夜哥特信纸 */
     .paper-gothic {
       background:
-        /* 顶部与中央呈现温暖摇曳的南瓜烛火暖晕，四周焦黑收缩 */
         radial-gradient(ellipse at 50% 18%, rgba(255, 120, 30, 0.18) 0%, rgba(45, 20, 35, 0.6) 45%, #110d16 85%),
         #110d16 !important;
       border: 1.8px solid #d4af37 !important;
@@ -282,19 +335,14 @@
         inset 0 0 25px rgba(255, 117, 24, 0.22) !important;
       color: #f3ece1 !important;
     }
-    /* 正中央高定万圣南瓜与月夜蝠群淡水印 */
     .paper-gothic::before {
       content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
       width: 270px; height: 270px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 25 C30 25 20 40 20 58 C20 75 32 85 50 85 C68 85 80 75 80 58 C80 40 70 25 50 25 Z' fill='none' stroke='%23ff7518' stroke-width='1.2' stroke-dasharray='3 3' opacity='0.15'/%3E%3Cpath d='M50 16 L53 25 L47 25 Z' fill='%23ff7518' opacity='0.2'/%3E%3Cpath d='M34 50 L42 56 L34 60 Z M66 50 L58 56 L66 60 Z' fill='%23ff7518' opacity='0.15'/%3E%3Cpath d='M35 70 Q50 78 65 70 Q50 85 35 70 Z' fill='%23ff7518' opacity='0.15'/%3E%3Cpath d='M25 28 Q30 20 38 24 Q34 26 30 29 Z M75 28 Q70 20 62 24 Q66 26 70 29 Z' fill='%23d4af37' opacity='0.12'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
-    /* 抬头部分：万圣节专属南瓜恶魔角与双翼浮雕分隔饰带 */
     .paper-gothic .letter-header {
-      border-bottom: none !important;
-      position: relative;
-      padding-bottom: 24px !important;
-      margin-bottom: 24px !important;
+      border-bottom: none !important; position: relative; padding-bottom: 24px !important; margin-bottom: 24px !important;
     }
     .paper-gothic .letter-header::after {
       content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -303,29 +351,15 @@
       background-repeat: no-repeat; background-position: center; background-size: contain;
     }
     .paper-gothic .recipient-name {
-      color: #ff9f43 !important;
-      font-family: 'Cinzel', serif !important;
-      letter-spacing: 3px !important;
-      text-shadow: 0 2px 14px rgba(255, 159, 67, 0.45);
+      color: #ff9f43 !important; font-family: 'Cinzel', serif !important; letter-spacing: 3px !important; text-shadow: 0 2px 14px rgba(255, 159, 67, 0.45);
     }
     .paper-gothic .days-badge {
-      background: rgba(180, 20, 20, 0.35) !important;
-      color: #ff8e8e !important;
-      border: 1px solid rgba(220, 40, 40, 0.6) !important;
-      font-weight: 700 !important;
+      background: rgba(180, 20, 20, 0.35) !important; color: #ff8e8e !important; border: 1px solid rgba(220, 40, 40, 0.6) !important; font-weight: 700 !important;
     }
-    /* 正文：文字透出南瓜暖金与微光感 */
-    .paper-gothic .letter-body {
-      color: #f1e7d8 !important;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-    }
+    .paper-gothic .letter-body { color: #f1e7d8 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
     .paper-gothic .letter-footer { color: #b5a895 !important; }
-    .paper-gothic .letter-footer .sender-name {
-      color: #ff9f43 !important;
-      text-shadow: 0 2px 10px rgba(255, 159, 67, 0.4);
-    }
+    .paper-gothic .letter-footer .sender-name { color: #ff9f43 !important; text-shadow: 0 2px 10px rgba(255, 159, 67, 0.4); }
 
-    /* 万圣节专属刮刮乐容器与去除创可贴孔洞 */
     .paper-gothic .scratch-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px dashed rgba(212, 175, 55, 0.35) !important; }
     .paper-gothic .scratch-prompt { color: #ffae34 !important; font-family: 'Cinzel', serif !important; letter-spacing: 1.5px !important; }
     .paper-gothic .bandaid-wrapper {
@@ -335,93 +369,16 @@
     .paper-gothic .bandaid-wrapper::before, .paper-gothic .bandaid-wrapper::after { display: none !important; }
     .paper-gothic .scratch-secret { color: #ffd369 !important; font-weight: 700 !important; }
 
-    /* 万圣节专属逃跑与胜利按钮 */
     .paper-gothic .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(212, 175, 55, 0.15) !important; }
     .paper-gothic .runaway-question { color: #ffb834 !important; font-size: 26px !important; }
     .paper-gothic .btn-yes {
       background: linear-gradient(135deg, #ff7b25 0%, #c43a00 100%) !important; color: #fff !important;
       box-shadow: 0 4px 15px rgba(255, 123, 37, 0.45) !important; font-weight: 700 !important;
     }
-    .paper-gothic .btn-no {
-      background: #24202e !important; color: #b0a6be !important; border: 1px solid #4a3e59 !important;
-    }
+    .paper-gothic .btn-no { background: #24202e !important; color: #b0a6be !important; border: 1px solid #4a3e59 !important; }
     .paper-gothic .runaway-success { color: #ffb834 !important; text-shadow: 0 2px 10px rgba(255, 184, 52, 0.3); }
-    /* 万圣节专属相框：维多利亚暗金古董相框 + 黄铜四角包角 */
-    .paper-gothic .polaroid-card {
-      background: linear-gradient(145deg, #221d2b 0%, #15121b 100%) !important;
-      border: 1.5px solid #d4af37 !important;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 18px rgba(212, 175, 55, 0.2) !important;
-      padding: 12px 12px 35px 12px !important;
-      position: relative;
-    }
-    .paper-gothic .polaroid-front {
-      background: transparent !important;
-    }
-    .paper-gothic .polaroid-front img {
-      border: 1px solid rgba(212, 175, 55, 0.35) !important;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.4) !important;
-      filter: contrast(1.05) brightness(0.95) !important;
-    }
-    .paper-gothic .polaroid-front-hint {
-      color: #ffb834 !important;
-      font-family: 'Cinzel', serif !important;
-      letter-spacing: 1px !important;
-      font-size: 11px !important;
-      margin-top: 10px !important;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-    }
-    /* 相框正反两面四角专属黄铜雕花包角（Antique Brass Photo Corners） */
-    .paper-gothic .polaroid-front::before, .paper-gothic .polaroid-front::after,
-    .paper-gothic .polaroid-back::before, .paper-gothic .polaroid-back::after {
-      content: ""; position: absolute; width: 22px; height: 22px;
-      border-color: #ffd466; border-style: solid; pointer-events: none; z-index: 5;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
-    }
-    .paper-gothic .polaroid-front::before, .paper-gothic .polaroid-back::before {
-      top: 6px; left: 6px; border-width: 2.5px 0 0 2.5px;
-    }
-    .paper-gothic .polaroid-front::after, .paper-gothic .polaroid-back::after {
-      top: 6px; right: 6px; border-width: 2.5px 2.5px 0 0;
-    }
-    /* 相片翻转背面：中世纪焦边魔药羊皮卷手稿 */
-    .paper-gothic .polaroid-back {
-      background: #251e2f !important;
-      border: 1px dashed rgba(212, 175, 55, 0.45) !important;
-      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7) !important;
-    }
-    .paper-gothic .polaroid-back-text {
-      color: #ffd466 !important;
-      font-family: 'Caveat', cursive !important;
-      text-shadow: 0 1px 8px rgba(255, 212, 102, 0.25);
-    }
 
-    /* 7. 焦糖南瓜灯款信封（复古暖棕琥珀 + 金铜折边 + 3D立体微光） */
-    .env-pumpkin {
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(0deg, rgba(80, 35, 10, 0.45) 0%, transparent 45%),
-        linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
-      border: 1.5px solid #d37a28 !important;
-      border-top: 2px solid #ffb066 !important;
-      outline: 1px dashed rgba(243, 156, 18, 0.45) !important;
-      outline-offset: -6px !important;
-      box-shadow:
-        0 35px 70px -15px rgba(0, 0, 0, 0.9),
-        0 15px 25px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(230, 126, 34, 0.25),
-        inset 0 1px 2px rgba(255, 200, 140, 0.5) !important;
-    }
-    .env-pumpkin .envelope-lid {
-      border-top-color: #48220d !important;
-      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
-    }
-    .env-pumpkin .wax-seal {
-      background: radial-gradient(circle at 30% 28%, #ffaa44 0%, #d35400 45%, #6e2700 100%) !important;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
-    }
-
-    /* 7. 焦糖南瓜专属信纸：焦糖肉桂烘焙羊皮纸 + 维多利亚铜版雕刻水印 + 典雅暖调排版 */
+    /* 7. 焦糖南瓜专属信纸 */
     .paper-pumpkin {
       background-color: #fbf5eb !important;
       background-image:
@@ -437,7 +394,6 @@
       color: #382013 !important;
       position: relative;
     }
-    /* 正中央维多利亚古典铜版蚀刻南瓜与麦穗暗纹水印（告别简笔画） */
     .paper-pumpkin::before {
       content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
       width: 270px; height: 270px;
@@ -446,9 +402,8 @@
     }
     .paper-pumpkin .letter-header {
       border-bottom: 1px solid rgba(185, 95, 25, 0.25) !important;
-      position: relative;
-      padding-bottom: 20px !important;
-      margin-bottom: 22px !important;
+      position: relative; padding-bottom: 20px !important; margin-bottom: 22px !important;
+      padding-left: 45px !important; padding-right: 45px !important;
     }
     .paper-pumpkin .letter-header::after {
       content: ""; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
@@ -457,234 +412,31 @@
       background-repeat: no-repeat; background-position: center; background-size: contain;
     }
     .paper-pumpkin .recipient-name {
-      color: #9c4509 !important;
-      font-family: 'Cinzel', serif !important;
-      letter-spacing: 2px !important;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+      color: #9c4509 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     .paper-pumpkin .days-badge {
-      background: rgba(201, 122, 41, 0.15) !important;
-      color: #8c3b04 !important;
-      border: 1px solid rgba(201, 122, 41, 0.35) !important;
-      font-weight: 700 !important;
+      background: rgba(201, 122, 41, 0.15) !important; color: #8c3b04 !important; border: 1px solid rgba(201, 122, 41, 0.35) !important; font-weight: 700 !important;
     }
-    .paper-pumpkin .letter-body {
-      color: #3b2214 !important;
-      line-height: 1.95 !important;
-    }
+    .paper-pumpkin .letter-body { color: #3b2214 !important; line-height: 1.95 !important; }
     .paper-pumpkin .letter-footer { color: #855c3c !important; }
-    .paper-pumpkin .letter-footer .sender-name {
-      color: #9c4509 !important;
-      font-weight: 700 !important;
-    }
+    .paper-pumpkin .letter-footer .sender-name { color: #9c4509 !important; font-weight: 700 !important; }
 
-    /* 焦糖南瓜糖果盒刮刮乐 */
-    .paper-pumpkin .scratch-section {
-      background: rgba(211, 84, 0, 0.04) !important;
-      border-color: rgba(211, 84, 0, 0.25) !important;
-    }
+    .paper-pumpkin .scratch-section { background: rgba(211, 84, 0, 0.04) !important; border-color: rgba(211, 84, 0, 0.25) !important; }
     .paper-pumpkin .scratch-prompt { color: #a0490b !important; font-family: 'Cinzel', serif !important; }
-    .paper-pumpkin .bandaid-wrapper {
-      background: #f7e1c8 !important;
-      border: 1px solid #d49f6a !important;
-      border-radius: 8px !important;
-    }
-    .paper-pumpkin .bandaid-wrapper::before,
-    .paper-pumpkin .bandaid-wrapper::after { display: none !important; }
+    .paper-pumpkin .bandaid-wrapper { background: #f7e1c8 !important; border: 1px solid #d49f6a !important; border-radius: 8px !important; }
+    .paper-pumpkin .bandaid-wrapper::before, .paper-pumpkin .bandaid-wrapper::after { display: none !important; }
     .paper-pumpkin .scratch-secret { color: #873600 !important; font-weight: 700 !important; }
 
-    /* 焦糖南瓜专属互动按钮 */
-    .paper-pumpkin .runaway-section {
-      background: rgba(211, 84, 0, 0.04) !important;
-      border: 1px solid rgba(211, 84, 0, 0.15) !important;
-    }
+    .paper-pumpkin .runaway-section { background: rgba(211, 84, 0, 0.04) !important; border: 1px solid rgba(211, 84, 0, 0.15) !important; }
     .paper-pumpkin .runaway-question { color: #a0490b !important; }
     .paper-pumpkin .btn-yes {
-      background: linear-gradient(135deg, #e67e22 0%, #b94e00 100%) !important;
-      color: #fff !important;
+      background: linear-gradient(135deg, #e67e22 0%, #b94e00 100%) !important; color: #fff !important;
       box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35) !important;
     }
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
-    /* ===== 8. Pastel Spooky (粉紫小幽灵) 专属信封与信纸 ===== */
-    /* 暮光薰衣草暗紫信封 + 柔光金粉边框 */
-    .env-ghost .envelope-front,
-    .env-ghost .envelope-back,
-    .env-ghost .envelope-flap {
-      background: linear-gradient(135deg, #2e1a3d 0%, #3f2454 50%, #20112c 100%) !important;
-      border: 1px solid rgba(235, 185, 255, 0.45) !important;
-      box-shadow: inset 0 0 25px rgba(185, 120, 220, 0.25) !important;
-    }
-    /* 奶昔粉紫珍珠光泽火漆 */
-    .env-ghost .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #fae1f5 0%, #e5a7da 50%, #b85fa7 100%) !important;
-      border: 1.5px solid rgba(255, 245, 255, 0.8) !important;
-      box-shadow: 0 4px 15px rgba(50, 15, 60, 0.65), inset 0 0 8px rgba(255, 255, 255, 0.6) !important;
-    }
 
-    /* 奶油粉白羊皮纸 + 典雅淡紫烫金边框 */
-    .paper-ghost {
-      background-color: #fdf8fc !important;
-      background-image:
-        radial-gradient(ellipse at 50% 15%, rgba(248, 205, 240, 0.28) 0%, transparent 60%),
-        radial-gradient(circle at 50% 50%, #fdf8fc 0%, #faeef8 70%, #f2daf0 100%) !important;
-      border: 1.8px solid #c88abf !important;
-      outline: 1px dashed rgba(185, 110, 175, 0.5) !important;
-      outline-offset: -8px !important;
-      box-shadow:
-        0 25px 65px rgba(35, 15, 45, 0.6),
-        inset 0 0 50px rgba(180, 110, 170, 0.12),
-        inset 0 0 20px rgba(255, 245, 255, 0.8) !important;
-      color: #3b1f3c !important;
-      position: relative;
-    }
-
-    /* 正中央高定铜版小幽灵与星轨浮雕水印（告别低质简笔画） */
-    .paper-ghost::before {
-      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
-      width: 260px; height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b865a7' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='84' stroke='%23b865a7' stroke-width='0.7' fill='none' opacity='0.14'/%3E%3Cpath d='M100 20 L102 28 L100 32 L98 28 Z M100 168 L102 176 L100 180 L98 176 Z' fill='%23b865a7' opacity='0.22'/%3E%3C!-- 维多利亚细线波浪小幽灵 --%3E%3Cpath d='M100 62 C84 62 76 74 76 96 C76 114 72 124 78 132 C82 135 88 130 92 133 C96 135 100 130 104 133 C108 130 112 135 116 132 C122 124 118 114 118 96 C118 74 110 62 100 62 Z' fill='none' stroke='%23b865a7' stroke-width='1.4' opacity='0.16'/%3E%3Ccircle cx='92' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Ccircle cx='108' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cellipse cx='100' cy='102' rx='2.5' ry='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cpath d='M126 75 L129 82 L136 84 L130 88 L131 95 L125 90 L119 94 L122 87 L116 83 L123 82 Z' fill='none' stroke='%23b865a7' stroke-width='0.9' opacity='0.15'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
-    }
-
-    .paper-ghost .recipient-name {
-      color: #8c327a !important;
-      font-family: 'Cinzel', serif !important;
-      letter-spacing: 2px !important;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    }
-    .paper-ghost .days-badge {
-      background: rgba(200, 138, 191, 0.18) !important;
-      color: #802870 !important;
-      border: 1px solid rgba(200, 138, 191, 0.4) !important;
-      font-weight: 700 !important;
-    }
-    .paper-ghost .letter-body {
-      color: #401b42 !important;
-      line-height: 1.95 !important;
-    }
-    .paper-ghost .letter-footer { color: #784877 !important; }
-    .paper-ghost .letter-footer .sender-name {
-      color: #8c327a !important;
-      font-weight: 700 !important;
-    }
-    /* ===== 万圣信纸专属挂角 Popout 组件（电脑端防遮挡优化） ===== */
-    /* 1. 外悬浮复古南瓜邮票（移至左上外角，完美避开右上角音乐按钮） */
-    .paper-pumpkin .halloween-stamp {
-      display: block !important;
-      position: absolute;
-      top: -20px;
-      left: -10px; /* 移到左侧微外悬 */
-      width: 52px;
-      height: 64px;
-      background: #faf4e8;
-      padding: 3.5px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.18);
-      border: 1px dashed #c9935a;
-      transform: rotate(-6deg); /* 自然向左微倾 */
-      cursor: pointer;
-      z-index: 26;
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .paper-pumpkin .halloween-stamp:hover {
-      transform: rotate(-6deg) scale(1.06);
-    }
-    .paper-pumpkin .halloween-stamp:active {
-      transform: rotate(-6deg) scale(0.94);
-    }
-
-    .halloween-stamp { display: none; }
-
-    .stamp-inner {
-      width: 100%;
-      height: 100%;
-      border: 1px solid #d48a3f;
-      background: #fdfaf3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 3px 2px;
-      box-sizing: border-box;
-    }
-    .stamp-price {
-      font-size: 7.5px;
-      font-weight: 800;
-      color: #9c4509;
-      font-family: 'Cinzel', serif;
-      align-self: flex-end;
-      padding-right: 2px;
-    }
-    .stamp-icon {
-      width: 22px;
-      height: 22px;
-      filter: drop-shadow(0 1px 2px rgba(180, 80, 10, 0.3));
-    }
-    .stamp-label {
-      font-size: 5.5px;
-      font-weight: 700;
-      color: #9c4509;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 0.5px;
-    }
-
-    /* 塞勒姆波浪邮戳（向右自然横跨盖在邮票与信纸交界处） */
-    .postmark-overlay {
-      position: absolute;
-      top: -6px;
-      right: -15px; /* 邮戳波浪线向信纸内侧延伸 */
-      width: 68px;
-      height: 46px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 65'%3E%3Ccircle cx='26' cy='32' r='22' stroke='%233b2214' stroke-width='1.2' fill='none' stroke-dasharray='3 2' opacity='0.55'/%3E%3Ctext x='26' y='28' font-size='5.5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' font-weight='bold' opacity='0.6'%3ESALEM%3C/text%3E%3Ctext x='26' y='38' font-size='5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' opacity='0.6'%3EOCT 31%3C/text%3E%3Cpath d='M48 20 Q65 14 82 20 T100 20 M48 30 Q65 24 82 30 T100 30 M48 40 Q65 34 82 40 T100 40' stroke='%233b2214' stroke-width='1.2' fill='none' opacity='0.45'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: contain;
-      pointer-events: none;
-      transform: rotate(8deg);
-    }
-
-    /* 2. 抬头两侧安全保护边距（电脑端与手机端绝不遮挡文字） */
-    .paper-pumpkin .letter-header {
-      padding-left: 45px !important;
-      padding-right: 45px !important;
-    }
-
-    /* 3. 糖果雨飞溅动画粒子 */
-    .candy-pop {
-      position: fixed;
-      font-size: 20px;
-      pointer-events: none;
-      z-index: 999;
-      transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    /* 开信万圣节爆裂礼花粒子 */
-    .burst-particle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 999;
-      user-select: none;
-      will-change: transform, opacity;
-      transition: transform 1.25s cubic-bezier(0.12, 0.85, 0.32, 1), opacity 1.25s cubic-bezier(0.65, 0, 1, 1);
-    }
-
-    /* ===== 8. Pastel Spooky (粉紫幽灵专属：完全独立封装，不污染其他模版) ===== */
-    .env-ghost {
-      --env-primary: #2d173d;
-      --env-secondary: #3d2052;
-    }
-    .env-ghost .envelope-front,
-    .env-ghost .envelope-back,
-    .env-ghost .envelope-flap,
-    .env-ghost .envelope-pocket {
-      background: linear-gradient(135deg, #281438 0%, #3e2054 50%, #1f0e2b 100%) !important;
-      border-color: rgba(225, 175, 245, 0.45) !important;
-      box-shadow: 0 15px 40px rgba(20, 8, 30, 0.8), inset 0 0 25px rgba(185, 120, 220, 0.25) !important;
-    }
-    .env-ghost .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #fae1f5 0%, #e5a7da 50%, #b85fa7 100%) !important;
-      border: 1.5px solid rgba(255, 245, 255, 0.8) !important;
-      box-shadow: 0 4px 15px rgba(50, 15, 60, 0.65), inset 0 0 8px rgba(255, 255, 255, 0.6) !important;
-    }
-
+    /* 8. Pastel Spooky (粉紫小幽灵专属信纸全套设计) */
     .paper-ghost {
       background-color: #fdf8fc !important;
       background-image:
@@ -704,27 +456,68 @@
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
     .paper-ghost .recipient-name {
-      color: #8c327a !important;
-      font-family: 'Cinzel', serif !important;
-      letter-spacing: 2px !important;
-      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+      color: #8c327a !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     .paper-ghost .days-badge {
-      background: rgba(200, 138, 191, 0.18) !important;
-      color: #802870 !important;
-      border: 1px solid rgba(200, 138, 191, 0.4) !important;
-      font-weight: 700 !important;
+      background: rgba(200, 138, 191, 0.18) !important; color: #802870 !important; border: 1px solid rgba(200, 138, 191, 0.4) !important; font-weight: 700 !important;
     }
-    .paper-ghost .letter-body {
-      color: #401b42 !important;
-      line-height: 1.95 !important;
-    }
+    .paper-ghost .letter-body { color: #401b42 !important; line-height: 1.95 !important; }
     .paper-ghost .letter-footer { color: #784877 !important; }
-    .paper-ghost .letter-footer .sender-name {
-      color: #8c327a !important;
-      font-weight: 700 !important;
+    .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
+
+    /* 粉紫小幽灵专属刮刮乐糖果盒（彻底告别创可贴） */
+    .paper-ghost .scratch-section {
+      background: rgba(255, 245, 252, 0.75) !important; border: 1.5px dashed #c88abf !important; border-radius: 12px !important;
     }
-    
+    .paper-ghost .scratch-prompt {
+      color: #8c327a !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important; letter-spacing: 1.5px !important;
+    }
+    .paper-ghost .bandaid-wrapper {
+      background: #fbeef7 !important; border: 1.5px solid #d49ec9 !important; border-radius: 10px !important;
+      box-shadow: 0 6px 16px rgba(80, 20, 70, 0.12) !important;
+    }
+    .paper-ghost .bandaid-wrapper::before, .paper-ghost .bandaid-wrapper::after { display: none !important; }
+    .paper-ghost .scratch-secret { color: #7b2568 !important; font-weight: 700 !important; }
+
+    /* 粉紫小幽灵专属甜酷互动按钮 */
+    .paper-ghost .runaway-section {
+      background: rgba(255, 245, 252, 0.7) !important; border: 1px solid rgba(200, 138, 191, 0.35) !important;
+    }
+    .paper-ghost .runaway-question { color: #7b2568 !important; }
+    .paper-ghost .btn-yes {
+      background: linear-gradient(135deg, #d88ec7 0%, #b85da8 100%) !important; color: #fff !important;
+      box-shadow: 0 4px 15px rgba(184, 93, 168, 0.4) !important; font-weight: 700 !important;
+    }
+    .paper-ghost .btn-no { background: #f3e1ef !important; color: #7b2568 !important; border: 1px solid #d49ec9 !important; }
+    .paper-ghost .runaway-success { color: #8c327a !important; font-weight: 700 !important; }
+
+    /* 南瓜邮票组件 */
+    .paper-pumpkin .halloween-stamp {
+      display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px;
+      background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.18);
+      border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .paper-pumpkin .halloween-stamp:hover { transform: rotate(-6deg) scale(1.06); }
+    .paper-pumpkin .halloween-stamp:active { transform: rotate(-6deg) scale(0.94); }
+    .halloween-stamp { display: none; }
+
+    .stamp-inner {
+      width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
+      flex-direction: column; align-items: center; justify-content: space-between; padding: 3px 2px; box-sizing: border-box;
+    }
+    .stamp-price { font-size: 7.5px; font-weight: 800; color: #9c4509; font-family: 'Cinzel', serif; align-self: flex-end; padding-right: 2px; }
+    .stamp-icon { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px rgba(180, 80, 10, 0.3)); }
+    .stamp-label { font-size: 5.5px; font-weight: 700; color: #9c4509; font-family: 'Cinzel', serif; letter-spacing: 0.5px; }
+
+    .postmark-overlay {
+      position: absolute; top: -6px; right: -15px; width: 68px; height: 46px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 65'%3E%3Ccircle cx='26' cy='32' r='22' stroke='%233b2214' stroke-width='1.2' fill='none' stroke-dasharray='3 2' opacity='0.55'/%3E%3Ctext x='26' y='28' font-size='5.5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' font-weight='bold' opacity='0.6'%3ESALEM%3C/text%3E%3Ctext x='26' y='38' font-size='5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' opacity='0.6'%3EOCT 31%3C/text%3E%3Cpath d='M48 20 Q65 14 82 20 T100 20 M48 30 Q65 24 82 30 T100 30 M48 40 Q65 34 82 40 T100 40' stroke='%233b2214' stroke-width='1.2' fill='none' opacity='0.45'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-size: contain; pointer-events: none; transform: rotate(8deg);
+    }
+
+    .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
+
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
@@ -733,40 +526,25 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
+    /* 拍立得照片墙（自适应单张/多张列表与优雅错落投影） */
     .polaroid-gallery {
-      position: relative; width: 100%; max-width: 300px; height: 380px; margin: 15px auto 26px auto; perspective: 1000px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 24px 0; width: 100%;
     }
     .polaroid-card {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; background: #ffffff;
-      padding: 12px 12px 35px 12px; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
-      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer; display: none;
+      background: #ffffff; padding: 10px 10px 14px 10px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.06);
+      border-radius: 4px; width: 88%; max-width: 320px; box-sizing: border-box;
+      transform: rotate(-1.5deg); transition: transform 0.25s ease;
     }
-    .polaroid-card.active { display: block; }
-    .polaroid-card.flipped { transform: rotateY(180deg); }
-    .polaroid-front, .polaroid-back {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 4px; padding: 12px 12px 35px 12px;
-      box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+    .polaroid-card:nth-child(even) { transform: rotate(1.8deg); }
+    .polaroid-card:hover { transform: rotate(0deg) scale(1.02); }
+    .polaroid-card img { width: 100%; max-height: 250px; object-fit: cover; display: block; border-radius: 2px; }
+    .polaroid-card .photo-caption {
+      font-size: 13px; color: #555555; text-align: center; margin-top: 10px; font-family: 'Caveat', cursive;
     }
-    .polaroid-front img {
-      width: 100%; height: 305px; object-fit: cover; object-position: center;
-      border-radius: 2px; display: block; background: #f0f0f0;
-    }
-    .polaroid-front-hint { font-size: 12px; color: #888; text-align: center; margin-top: 10px; font-family: sans-serif; }
-    .polaroid-back {
-      background: #faf7f2; transform: rotateY(180deg); justify-content: center;
-      padding: 26px; color: #444; border: 1px dashed rgba(197, 160, 89, 0.35); text-align: center;
-    }
-    .polaroid-back-text { font-size: 20px; line-height: 1.6; font-family: 'Caveat', cursive; }
 
     .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
-    .typewriter-cursor {
-      display: inline-block; width: 2px; height: 1.1em; background: #c5a059;
-      vertical-align: middle; animation: blink 0.8s infinite; margin-left: 2px;
-    }
-    @keyframes blink { 0%, 100% { opacity: 0.8; } 50% { opacity: 0; } }
 
     .scratch-section {
       margin-bottom: 26px; padding: 18px 12px; background: rgba(0, 0, 0, 0.02);
@@ -816,8 +594,7 @@
 </head>
 <body>
 
-  <canvas id="particle-canvas"></canvas>
-  <canvas id="sparkle-canvas"></canvas>
+  <canvas id="particleCanvas"></canvas>
 
   <div class="music-btn" id="musicBtn" aria-label="Toggle Audio">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -853,9 +630,7 @@
     <div class="envelope-hint" id="envelopeHint">TAP SEAL TO BREAK SILENCE</div>
   </div>
 
- <div class="letter-container" id="letterContainer">
-    <!-- 破框而出的万圣节手账纸胶带与复古邮票 -->
-    
+  <div class="letter-container" id="letterContainer">
     <div class="halloween-stamp" id="halloweenStamp" title="Tap for a treat! 🎃">
       <div class="stamp-inner">
         <span class="stamp-price">31¢</span>
@@ -866,7 +641,6 @@
         </svg>
         <span class="stamp-label">PUMPKIN POST</span>
       </div>
-      <!-- 黑色波浪邮戳印记 -->
       <div class="postmark-overlay"></div>
     </div>
 
@@ -909,17 +683,17 @@
     let configData = null;
     let isPlaying = false;
 
-    // 安全双重元素获取器（优先获取ID，若无则获取Class，避免任何 null 错误）
+    // 严密对接你真实 HTML 中的所有 ID 与 Class
     const getEl = (id, cls) => document.getElementById(id) || document.querySelector(cls);
 
     const bgMusic = getEl("bgMusic", "#bgMusic");
     const musicBtn = getEl("musicBtn", ".music-btn");
     const envelopeStage = getEl("envelopeStage", ".envelope-stage");
-    const envelopeWrapper = getEl("envelopeWrapper", ".envelope-wrapper") || getEl("envelopeWrapper", ".envelope");
+    const envelopeWrapper = getEl("envelopeWrapper", ".envelope-wrapper");
     const letterContainer = getEl("letterContainer", ".letter-container");
-    const waxSeal = getEl("waxSeal", ".wax-seal") || getEl("waxSeal", ".seal");
-    const hintEl = getEl("tapHint", ".tap-hint") || getEl("tapHint", ".seal-hint") || getEl("tapHint", ".hint");
-    const dateBadge = getEl("dateBadge", ".days-badge") || getEl("dateBadge", ".date-badge") || getEl("dateBadge", ".treaty-badge");
+    const waxSeal = getEl("waxSeal", ".wax-seal");
+    const hintEl = getEl("envelopeHint", ".envelope-hint");
+    const dateBadge = getEl("daysBadge", ".days-badge");
 
     // 1. 音乐控制
     if (musicBtn) {
@@ -954,7 +728,7 @@
         if (hintEl) hintEl.innerText = "✦ ORDER NOT FOUND ✦";
       });
 
-    // 3. UI 安全渲染装配
+    // 3. UI 精准渲染
     function renderUI(data) {
       const theme = data.theme || "peace";
       const envStyle = data.envelopeStyle || (theme === "halloween" ? "gothic" : "olive");
@@ -963,7 +737,7 @@
       if (envelopeStage) envelopeStage.className = "envelope-stage env-" + envStyle;
       if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
-      // 专属火漆与文案逻辑分流
+      // 专属火漆与文案自适应
       if (isHalloween) {
         if (envStyle === "pumpkin") {
           if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
@@ -1006,7 +780,6 @@
           }
         }
       } else {
-        // 非万圣节通用和解公约火漆（原封不动）
         if (hintEl) hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
         if (dateBadge) dateBadge.innerText = "OFFICIAL PEACE TREATY";
         if (waxSeal) {
@@ -1018,24 +791,25 @@
         }
       }
 
-      // 文本与署名渲染
-      const recEl = getEl("recipientName", ".recipient-name");
-      const sendEl = getEl("senderName", ".sender-name");
-      const sigEl = getEl("signatureText", ".signature-text");
+      // 抬头与署名对齐
+      const recEl = getEl("recipientText", ".recipient-name");
+      const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
       if (sendEl && data.sender) sendEl.innerText = data.sender;
-      if (sigEl && data.signature) sigEl.innerText = data.signature;
 
-      // 照片墙
-      const photoGallery = getEl("photoGallery", ".photo-gallery");
+      // 照片墙精准挂载到 #polaroidGallery
+      const photoGallery = getEl("polaroidGallery", ".polaroid-gallery");
       if (photoGallery) {
         if (data.photos && data.photos.length > 0) {
           photoGallery.style.display = "flex";
           photoGallery.innerHTML = "";
           data.photos.forEach(p => {
             const card = document.createElement("div");
-            card.className = "photo-card";
-            card.innerHTML = `<img src="${p.url}" alt="Memory"><div class="photo-caption">${p.caption || ""}</div>`;
+            card.className = "polaroid-card";
+            card.innerHTML = `
+              <img src="${p.url}" alt="Memory">
+              <div class="photo-caption">${p.caption || ""}</div>
+            `;
             photoGallery.appendChild(card);
           });
         } else {
@@ -1043,16 +817,16 @@
         }
       }
 
-      // 刮刮乐
+      // 刮刮乐对齐 #scratchPrompt 与 #scratchSecret
       const scSection = getEl("scratchSection", ".scratch-section");
       if (data.scratchCard && data.scratchCard.enabled) {
         if (scSection) scSection.style.display = "block";
-        initScratchCard(data.scratchCard);
+        initScratchCard(data.scratchCard, envStyle);
       } else {
         if (scSection) scSection.style.display = "none";
       }
 
-      // 调皮追逐按钮
+      // 追逐按钮对齐 #runawayQuestion, #btnYes, #btnNo
       const rqSection = getEl("runawaySection", ".runaway-section");
       if (data.runawayQuestion && data.runawayQuestion.enabled) {
         if (rqSection) rqSection.style.display = "block";
@@ -1061,12 +835,11 @@
         if (rqSection) rqSection.style.display = "none";
       }
 
-      // 注入背景音乐
       if (data.musicUrl && bgMusic) {
         bgMusic.src = data.musicUrl;
       }
 
-      // 款式专属动效映射（所有老模版原汁原味）
+      // 款式专属动效映射（所有经典旧模版严格保留）
       const styleAutoEffects = {
         "kintsugi":  "gold-dust",
         "whiteflag": "gold-dust",
@@ -1080,7 +853,7 @@
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
 
-      // 左侧复古邮票点击喷涌糖果彩蛋
+      // 左侧南瓜邮票点击喷发彩蛋
       const stamp = getEl("halloweenStamp", ".halloween-stamp");
       if (stamp) {
         stamp.onclick = (e) => {
@@ -1117,7 +890,7 @@
       }
     }
 
-    // 开信爆裂特效（主题严格防护：非万圣节款式只喷洒典雅金色微星）
+    // 开信爆裂特效（隔离保护：非万圣模版仅喷金光）
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -1249,21 +1022,30 @@
       typeNext();
     }
 
-    // 刮刮乐引擎
-    function initScratchCard(cfg) {
-      const cardTitle = getEl("scratchTitle", ".scratch-title");
-      const cardText = getEl("scratchHiddenText", ".scratch-hidden-text");
-      const canvas = getEl("scratchCanvas", ".scratch-canvas") || document.querySelector("#scratchSection canvas");
+    // 刮刮乐引擎（对齐 #scratchPrompt 与 #scratchSecret）
+    function initScratchCard(cfg, style) {
+      const cardTitle = getEl("scratchPrompt", ".scratch-prompt");
+      const cardText = getEl("scratchSecret", ".scratch-secret");
+      const canvas = document.getElementById("scratchCanvas");
       if (!canvas) return;
-      if (cardTitle) cardTitle.innerText = cfg.title || "✦ SCRATCH TO REVEAL ✦";
-      if (cardText) cardText.innerText = cfg.hiddenText || "";
+      if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
+      if (cardText && cfg.hiddenText) cardText.innerText = cfg.hiddenText;
 
       const ctx = canvas.getContext("2d");
       canvas.width = canvas.offsetWidth || 260;
       canvas.height = canvas.offsetHeight || 80;
 
-      ctx.fillStyle = "#8a7d6e";
+      if (style === 'ghost') {
+        ctx.fillStyle = "#cca0c5"; // 柔雾梦幻浅紫
+      } else if (style === 'pumpkin') {
+        ctx.fillStyle = "#cf782b"; // 焦糖南瓜金
+      } else if (style === 'gothic') {
+        ctx.fillStyle = "#2c1c1c"; // 暗夜古堡黑
+      } else {
+        ctx.fillStyle = "#8a7d6e"; // 默认和解创可贴灰
+      }
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+
       ctx.fillStyle = "#ffffff";
       ctx.font = "bold 13px Cinzel, serif";
       ctx.textAlign = "center";
@@ -1293,12 +1075,12 @@
       canvas.addEventListener("touchmove", scratch);
     }
 
-    // 追逐按钮引擎
+    // 追逐按钮引擎（对齐 #runawayQuestion, #btnYes, #btnNo）
     function initRunawayButton(cfg) {
-      const qEl = getEl("runawayQuestionText", ".runaway-question");
-      const btnYes = getEl("btnRunawayYes", ".btn-runaway-yes") || getEl("btnYes", "#btnYes");
-      const btnNo = getEl("btnRunawayNo", ".btn-runaway-no") || getEl("btnNo", "#btnNo");
-      const msgEl = getEl("runawaySuccess", ".runaway-success") || getEl("runawaySuccess", "#runawaySuccess");
+      const qEl = getEl("runawayQuestion", ".runaway-question");
+      const btnYes = getEl("btnYes", ".btn-yes");
+      const btnNo = getEl("btnNo", ".btn-no");
+      const msgEl = getEl("runawaySuccess", ".runaway-success");
       if (!qEl || !btnYes || !btnNo) return;
 
       qEl.innerText = cfg.question || "Will you be with me?";
@@ -1326,8 +1108,8 @@
       };
     }
 
-    // 全局背景物理粒子（金粉、雨过天晴、橄榄叶、哥特火星、南瓜落叶、粉紫幽灵光晕全部保留）
-    const pCanvas = getEl("particleCanvas", "canvas");
+    // 背景物理粒子引擎（已同时兼容 particleCanvas 与 particle-canvas）
+    const pCanvas = getEl("particleCanvas", "#particle-canvas") || document.querySelector("canvas");
     const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
     let particles = [];
 
@@ -1402,7 +1184,6 @@
             this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
           }
         } else if (this.type === 'ghostly-pastels') {
-          const dynOpacity = this.opacity * (0.8 + Math.sin(this.pulsePhase) * 0.2);
           this.y = pCanvas.height + 20;
           this.size = Math.random() * 3.8 + 1.8;
           this.speedY = -(Math.random() * 0.65 + 0.25);
