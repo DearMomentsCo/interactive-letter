@@ -507,28 +507,28 @@
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
     /* ===== 万圣信纸专属挂角 Popout 组件（电脑端防遮挡优化） ===== */
-    /* 1. 外悬浮复古南瓜邮票（挂在右上外角，不侵占信纸正文空间） */
+    /* 1. 外悬浮复古南瓜邮票（移至左上外角，完美避开右上角音乐按钮） */
     .paper-pumpkin .halloween-stamp {
       display: block !important;
       position: absolute;
       top: -20px;
-      right: -10px; /* 微微向外悬挂破框，远离正文 */
+      left: -10px; /* 移到左侧微外悬 */
       width: 52px;
       height: 64px;
       background: #faf4e8;
       padding: 3.5px;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.18);
       border: 1px dashed #c9935a;
-      transform: rotate(6deg);
+      transform: rotate(-6deg); /* 自然向左微倾 */
       cursor: pointer;
       z-index: 26;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .paper-pumpkin .halloween-stamp:hover {
-      transform: rotate(6deg) scale(1.06);
+      transform: rotate(-6deg) scale(1.06);
     }
     .paper-pumpkin .halloween-stamp:active {
-      transform: rotate(6deg) scale(0.94);
+      transform: rotate(-6deg) scale(0.94);
     }
 
     .halloween-stamp { display: none; }
@@ -566,18 +566,18 @@
       letter-spacing: 0.5px;
     }
 
-    /* 黑色塞勒姆 1892 波浪邮戳印记 */
+    /* 塞勒姆波浪邮戳（向右自然横跨盖在邮票与信纸交界处） */
     .postmark-overlay {
       position: absolute;
       top: -6px;
-      left: -12px;
+      right: -15px; /* 邮戳波浪线向信纸内侧延伸 */
       width: 68px;
       height: 46px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 65'%3E%3Ccircle cx='26' cy='32' r='22' stroke='%233b2214' stroke-width='1.2' fill='none' stroke-dasharray='3 2' opacity='0.55'/%3E%3Ctext x='26' y='28' font-size='5.5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' font-weight='bold' opacity='0.6'%3ESALEM%3C/text%3E%3Ctext x='26' y='38' font-size='5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' opacity='0.6'%3EOCT 31%3C/text%3E%3Cpath d='M48 20 Q65 14 82 20 T100 20 M48 30 Q65 24 82 30 T100 30 M48 40 Q65 34 82 40 T100 40' stroke='%233b2214' stroke-width='1.2' fill='none' opacity='0.45'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-size: contain;
       pointer-events: none;
-      transform: rotate(-10deg);
+      transform: rotate(8deg);
     }
 
     /* 2. 抬头两侧安全保护边距（电脑端与手机端绝不遮挡文字） */
