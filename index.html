@@ -73,7 +73,6 @@
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
 
     /* ================= 信封样式库 ================= */
-    /* 1. 金缮款 */
     .env-kintsugi .envelope-wrapper { background: #24272e !important; }
     .env-kintsugi .envelope-lid { border-top-color: #1e2026 !important; }
     .kintsugi-gold-overlay {
@@ -86,109 +85,61 @@
       stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
     }
 
-    /* 2. 白旗款 */
     .env-whiteflag .envelope-wrapper { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
     .env-whiteflag .envelope-lid { border-top-color: #f2f2f2 !important; }
-    .env-whiteflag::after {
-      content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 14px; left: 16px;
-      font-size: 10px; font-weight: 700; color: #8b261e; border: 1.5px solid #8b261e;
-      padding: 3px 6px; transform: rotate(-5deg); border-radius: 3px; letter-spacing: 1px; font-family: 'Cinzel', serif;
-    }
 
-    /* 3. 折角便签款 */
     .env-origami .envelope-wrapper { background: #fdfbf7 !important; border: 1px dashed #cfc5af !important; }
     .env-origami .envelope-lid { border-top-color: #f3ecdb !important; }
     .env-origami .wax-seal { display: none !important; }
-    .env-origami::after {
-      content: "PEACE OFFERING ♡"; position: absolute; top: 110px; left: 50%;
-      transform: translateX(-50%) rotate(-3.5deg); width: 145px; height: 32px;
-      background: rgba(255, 182, 193, 0.85); backdrop-filter: blur(2px);
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12); display: flex; justify-content: center;
-      align-items: center; color: #8c4a55; font-family: 'Caveat', cursive; font-size: 15px;
-      font-weight: 700; letter-spacing: 1px; z-index: 8;
-      clip-path: polygon(4% 0%, 96% 0%, 100% 15%, 96% 30%, 100% 45%, 96% 60%, 100% 75%, 96% 90%, 100% 100%, 0% 100%, 4% 85%, 0% 70%, 4% 55%, 0% 40%, 4% 25%, 0% 10%);
-      transition: all 0.4s ease;
-    }
-    .envelope-stage.is-opening .env-origami::after { opacity: 0; transform: translateX(-50%) rotate(-3.5deg) scale(1.15); }
 
-    /* 4. 雨过天晴款 */
     .env-slate .envelope-wrapper { background: #5a728b !important; }
     .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
 
-    /* 5. 橄榄和解款 */
-    .env-olive .envelope-wrapper {
-      background-color: #e4ddcf !important;
-      background-image:
-        linear-gradient(rgba(70, 60, 45, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(70, 60, 45, 0.045) 1px, transparent 1px),
-        linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px) !important;
-      background-size: 3px 3px, 3px 3px, 7px 7px, 7px 7px !important;
-      border: 1px solid #cac1ad !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65), inset 0 0 45px rgba(95, 82, 65, 0.16) !important;
-    }
+    .env-olive .envelope-wrapper { background-color: #e4ddcf !important; border: 1px solid #cac1ad !important; }
     .env-olive .envelope-lid { border-top-color: #dcd3c1 !important; }
 
-    /* 6. 万圣暗夜哥特信封 */
-    .env-gothic .envelope-wrapper {
-      background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%) !important;
-      border: 1.5px solid #d4af37 !important; border-top: 2px solid #ffe89e !important;
-    }
-    .env-gothic .envelope-lid { border-top-color: #23162c !important; }
+    .env-gothic .envelope-wrapper { background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%) !important; }
+    .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
+    .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
 
-    /* 7. 焦糖南瓜款信封 */
-    .env-pumpkin .envelope-wrapper {
-      background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
-      border: 1.5px solid #d37a28 !important; border-top: 2px solid #ffb066 !important;
-    }
-    .env-pumpkin .envelope-lid { border-top-color: #48220d !important; }
-
-    /* 8. Pastel Spooky (粉紫小幽灵专属立体信封) */
-    .env-ghost .envelope-wrapper {
-      background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important;
-      border: 1.5px solid #c88abf !important; border-top: 2px solid #f6c0eb !important;
-    }
-    .env-ghost .envelope-lid { border-top-color: #261135 !important; }
-
-    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒 + 经典V型折痕 + 巴洛克角饰) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒，自然立体折痕与光影) */
     .env-witchy .envelope-wrapper {
       background:
-        radial-gradient(circle at 50% 30%, rgba(46, 204, 113, 0.28) 0%, transparent 65%),
-        linear-gradient(150deg, #071f17 0%, #030c09 60%, #000302 100%) !important;
-      border: 2px solid #d4af37 !important;
-      border-top: 2.5px solid #ffe89e !important;
-      outline: 2px solid rgba(212, 175, 55, 0.7) !important;
-      outline-offset: -7px !important;
+        radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.22) 0%, transparent 60%),
+        linear-gradient(150deg, #09241b 0%, #04100c 60%, #010403 100%) !important;
+      border: 1.8px solid #d4af37 !important;
+      border-top: 2.2px solid #ffe89e !important;
       box-shadow:
-        0 50px 100px -15px rgba(0, 0, 0, 0.99),
-        0 20px 40px rgba(0, 0, 0, 0.92),
-        0 0 60px rgba(46, 204, 113, 0.35),
-        inset 0 1px 5px rgba(255, 235, 160, 0.95),
-        inset 0 0 40px rgba(5, 40, 20, 0.6) !important;
+        0 45px 90px -15px rgba(0, 0, 0, 0.98),
+        0 15px 30px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(46, 204, 113, 0.25),
+        inset 0 1px 3px rgba(255, 235, 160, 0.7),
+        inset 0 0 30px rgba(2, 20, 12, 0.8) !important;
     }
     .env-witchy .envelope-lid {
-      border-top-color: #020a07 !important;
-      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.99)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9)) !important;
+      border-top-color: #04100c !important;
+      filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8)) !important;
     }
-    /* 显式恢复经典信封V型折痕线与斜向压纹 */
+    /* 采用高雅柔和的纸张光影折痕（非生硬硬线），完美还原正常信封立体口袋感 */
     .env-witchy .envelope-wrapper::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
-      background: linear-gradient(116deg, transparent 49.2%, rgba(212, 175, 55, 0.4) 49.8%, rgba(212, 175, 55, 0.65) 50%, transparent 50.8%),
-                  linear-gradient(64deg, transparent 49.2%, rgba(212, 175, 55, 0.4) 49.8%, rgba(212, 175, 55, 0.65) 50%, transparent 50.8%),
-                  linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%);
+      background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.45) 100%),
+                  linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%),
+                  linear-gradient(225deg, rgba(0,0,0,0.35) 0%, transparent 50%);
     }
+    /* 四角重工巴洛克烫金角花 */
     .env-witchy .envelope-wrapper::before {
-      content: ""; position: absolute; inset: 6px; border: 1px dashed rgba(212, 175, 55, 0.45); pointer-events: none; z-index: 3;
+      content: ""; position: absolute; inset: 8px; border: 1px dashed rgba(212, 175, 55, 0.35); pointer-events: none; z-index: 3;
     }
 
-    /* 女巫毒药锅火漆印 (Poison Cauldron Wax Seal) */
+    /* 女巫毒药锅火漆印 */
     .env-witchy .wax-seal {
       background: radial-gradient(circle at 35% 30%, #aef3c7 0%, #2ecc71 28%, #145a32 70%, #010805 100%) !important;
-      border: 2.5px solid #ffe89e !important;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.99), inset 2.5px 3.5px 7px rgba(255, 255, 255, 0.9), inset -3.5px -4.5px 10px rgba(0,0,0,0.98) !important;
+      border: 2px solid #ffe89e !important;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.98), inset 2px 3px 6px rgba(255, 255, 255, 0.85), inset -3px -4px 9px rgba(0,0,0,0.95) !important;
     }
     .env-witchy .envelope-hint {
-      color: #ffe89e !important; text-shadow: 0 0 18px rgba(212, 175, 55, 0.95) !important;
+      color: #ffe89e !important; text-shadow: 0 0 14px rgba(212, 175, 55, 0.85) !important;
     }
 
     /* 3D 浮雕火漆印通用 */
@@ -343,7 +294,7 @@
     .paper-witchy .scratch-secret { color: #ffe89e !important; font-weight: 700 !important; font-family: 'Cinzel', serif !important; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
 
     /* 女巫款追逐按钮 */
-    .paper-witchy .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; z-index: 3; position: relative; }
+    .paper-witchy .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(184, 151, 66, 0.3) !important; z-index: 3; position: relative; }
     .paper-witchy .runaway-question { color: #ffe89e !important; }
     .paper-witchy .btn-yes {
       background: linear-gradient(135deg, #d4af37 0%, #96710e 100%) !important; color: #051911 !important;
@@ -365,7 +316,7 @@
     .halloween-stamp, .ghost-stamp, .witchy-stamp { display: none; }
     .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
     .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
-    .paper-witchy .witchy-stamp { display: none !important; } /* 使用毒苹果替代 */
+    .paper-witchy .witchy-stamp { display: none !important; }
 
     .stamp-inner {
       width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
