@@ -34,11 +34,9 @@
       position: relative;
     }
 
-    #particleCanvas, #particle-canvas, #sparkle-canvas {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+    #particleCanvas {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
     }
-    #particleCanvas, #particle-canvas { z-index: 1; }
-    #sparkle-canvas { z-index: 99; }
 
     .music-btn {
       position: fixed; top: 22px; right: 22px; width: 44px; height: 44px; border-radius: 50%;
@@ -59,7 +57,7 @@
     
     .envelope-wrapper {
       position: relative; width: 100%; height: 100%; background: var(--envelope-base);
-      border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
       cursor: pointer; overflow: visible;
     }
 
@@ -72,54 +70,64 @@
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
 
-    /* ================= 信封样式库 ================= */
-    .env-kintsugi .envelope-wrapper { background: #24272e !important; }
-    .env-kintsugi .envelope-lid { border-top-color: #1e2026 !important; }
+    /* ================= 独立主题 1：金缮款 (Kintsugi) ================= */
+    .env-kintsugi .envelope-wrapper { background: #24272e; }
+    .env-kintsugi .envelope-lid { border-top-color: #1e2026; }
     .kintsugi-gold-overlay {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       pointer-events: none; z-index: 6; overflow: hidden; border-radius: 8px; display: none;
     }
     .env-kintsugi .kintsugi-gold-overlay { display: block; }
-    .kintsugi-gold-overlay svg path {
-      stroke: url(#goldGradient); stroke-width: 2.2; fill: none;
-      stroke-linecap: round; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.7));
+    .paper-kintsugi { background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important; color: #2b2b2b !important; }
+
+    /* ================= 独立主题 2：白旗款 (Whiteflag) ================= */
+    .env-whiteflag .envelope-wrapper { background: #fdfdfd; border: 1px solid #e0e0e0; }
+    .env-whiteflag .envelope-lid { border-top-color: #f2f2f2; }
+    .env-whiteflag::after {
+      content: "OFFICIAL PEACE TREATY 🕊"; position: absolute; bottom: 14px; left: 16px;
+      font-size: 10px; font-weight: 700; color: #8b261e; border: 1.5px solid #8b261e;
+      padding: 3px 6px; transform: rotate(-5deg); border-radius: 3px; letter-spacing: 1px; font-family: 'Cinzel', serif;
     }
+    .paper-whiteflag { background: #fdfdf9 !important; border: 2px solid #8b261e !important; color: #8b261e !important; }
+    .paper-whiteflag .recipient-name { color: #8b261e !important; font-family: 'Cinzel', serif !important; }
 
-    .env-whiteflag .envelope-wrapper { background: #fdfdfd !important; border: 1px solid #e0e0e0 !important; }
-    .env-whiteflag .envelope-lid { border-top-color: #f2f2f2 !important; }
-
-    .env-origami .envelope-wrapper { background: #fdfbf7 !important; border: 1px dashed #cfc5af !important; }
-    .env-origami .envelope-lid { border-top-color: #f3ecdb !important; }
+    /* ================= 独立主题 3：折角便签 (Origami) ================= */
+    .env-origami .envelope-wrapper { background: #fdfbf7; border: 1px dashed #cfc5af; }
+    .env-origami .envelope-lid { border-top-color: #f3ecdb; }
     .env-origami .wax-seal { display: none !important; }
+    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; }
 
-    .env-slate .envelope-wrapper { background: #5a728b !important; }
-    .env-slate .envelope-lid { border-top-color: #4a5f75 !important; }
+    /* ================= 独立主题 4：雨过天晴 (Slate) ================= */
+    .env-slate .envelope-wrapper { background: #5a728b; }
+    .env-slate .envelope-lid { border-top-color: #4a5f75; }
+    .paper-slate { background: linear-gradient(180deg, #b8cde0 0%, #faf7f0 65%) !important; color: #283e54 !important; }
 
-    .env-olive .envelope-wrapper { background-color: #e4ddcf !important; border: 1px solid #cac1ad !important; }
-    .env-olive .envelope-lid { border-top-color: #dcd3c1 !important; }
+    /* ================= 独立主题 5：橄榄和解 (Olive) ================= */
+    .env-olive .envelope-wrapper { background-color: #e4ddcf; border: 1px solid #cac1ad; }
+    .env-olive .envelope-lid { border-top-color: #dcd3c1; }
+    .paper-olive { background-color: #faf8f2 !important; border: 1.5px solid #b8c4b0 !important; color: #44593d !important; }
 
-    .env-gothic .envelope-wrapper { background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%) !important; }
-    .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
-    .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
+    /* ================= 独立主题 6：万圣哥特 (Gothic) ================= */
+    .env-gothic .envelope-wrapper { background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%); border: 1.5px solid #d4af37; }
+    .env-gothic .envelope-lid { border-top-color: #23162c; }
+    .paper-gothic { background: #110d16 !important; border: 1.8px solid #d4af37 !important; color: #f3ece1 !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款信封) */
+    /* ================= 独立主题 7：焦糖南瓜 (Pumpkin) ================= */
+    .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%); border: 1.5px solid #d37a28; }
+    .env-pumpkin .envelope-lid { border-top-color: #48220d; }
+    .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
+
+    /* ================= 独立主题 8：粉紫小幽灵 (Ghost) ================= */
+    .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%); border: 1.5px solid #c88abf; }
+    .env-ghost .envelope-lid { border-top-color: #261135; }
+    .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
+
+    /* ================= 独立主题 9：午夜鬼屋女巫款 (Witchy) ================= */
     .env-witchy .envelope-wrapper {
-      background:
-        radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%),
-        linear-gradient(150deg, #09241b 0%, #04100c 60%, #010403 100%) !important;
-      border: 1.8px solid #d4af37 !important;
-      border-top: 2.2px solid #ffe89e !important;
-      box-shadow:
-        0 45px 90px -15px rgba(0, 0, 0, 0.98),
-        0 15px 30px rgba(0, 0, 0, 0.85),
-        0 0 35px rgba(46, 204, 113, 0.25),
-        inset 0 1px 3px rgba(255, 235, 160, 0.7),
-        inset 0 0 30px rgba(2, 20, 12, 0.8) !important;
+      background: radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%), linear-gradient(150deg, #09241b 0%, #04100c 60%, #010403 100%) !important;
+      border: 1.8px solid #d4af37 !important; border-top: 2.2px solid #ffe89e !important;
     }
-    .env-witchy .envelope-lid {
-      border-top-color: #04100c !important;
-      filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8)) !important;
-    }
+    .env-witchy .envelope-lid { border-top-color: #04100c !important; }
     .env-witchy .envelope-wrapper::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
       background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%);
@@ -127,38 +135,28 @@
     .env-witchy .envelope-wrapper::before {
       content: ""; position: absolute; inset: 8px; border: 1px dashed rgba(212, 175, 55, 0.35); pointer-events: none; z-index: 3;
     }
-
-    .env-witchy .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #aef3c7 0%, #2ecc71 28%, #145a32 70%, #010805 100%) !important;
-      border: 2px solid #ffe89e !important;
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.98), inset 2px 3px 6px rgba(255, 255, 255, 0.85), inset -3px -4px 9px rgba(0,0,0,0.95) !important;
+    .paper-witchy {
+      background-color: #061511 !important;
+      background-image: radial-gradient(circle at 50% 28%, rgba(46, 204, 113, 0.22) 0%, rgba(6, 21, 17, 0.95) 60%, #010403 100%) !important;
+      border: 2.2px solid #d4af37 !important; color: #f3ece1 !important; position: relative;
     }
-    .env-witchy .envelope-hint {
-      color: #ffe89e !important; text-shadow: 0 0 14px rgba(212, 175, 55, 0.85) !important;
+    .paper-witchy::before {
+      content: ""; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
+      width: 290px; height: 290px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='hauntedGlow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%232ecc71' stop-opacity='0.45'/%3E%3Cstop offset='70%25' stop-color='%23145a32' stop-opacity='0.18'/%3E%3Cstop offset='100%25' stop-color='%23061511' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='125' r='65' fill='url(%23hauntedGlow)'/%3E%3Cpath d='M105,215 L105,140 L95,130 L95,120 L102,115 L105,90 L110,65 L115,90 L118,115 L125,120 L125,130 L120,140 L120,215 Z' fill='%230b2e21'/%3E%3Cpath d='M125,215 L125,110 L150,65 L175,110 L175,215 Z' fill='%230f3d2e'/%3E%3Cpath d='M175,215 L175,130 L182,120 L182,115 L185,90 L190,55 L195,90 L198,115 L205,120 L205,130 L195,140 L195,215 Z' fill='%230b2e21'/%3E%3Crect x='142' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Crect x='151' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Cpolygon points='150,45 141,64 159,64' fill='%23d4af37' opacity='0.95'/>%3Ccircle cx='132' cy='205' r='7' fill='%23d4af37' opacity='0.75'/>%3Ccircle cx='168' cy='206' r='6' fill='%232ecc71' opacity='0.75'/>%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1; opacity: 0.42;
     }
+    .paper-witchy .recipient-name { color: #ffe89e !important; font-family: 'Cinzel', serif !important; }
+    .paper-witchy .letter-body { color: #e6f5ec !important; z-index: 3; position: relative; }
 
+    /* 通用组件样式 */
     .wax-seal {
       position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
       width: 60px; height: 60px; border-radius: 46% 54% 51% 49% / 52% 47% 53% 48%;
       background: radial-gradient(circle at 30% 28%, #ffeb99 0%, #d4af37 28%, #966418 68%, #4f3308 100%);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.65), 0 3px 6px rgba(0, 0, 0, 0.45),
-                  inset 1.5px 2px 3px rgba(255, 255, 255, 0.6), inset -2.5px -3px 5px rgba(0, 0, 0, 0.6);
-      display: flex; justify-content: center; align-items: center; z-index: 7;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.65); display: flex; justify-content: center; align-items: center; z-index: 7; cursor: pointer;
     }
-    .wax-seal::before {
-      content: ""; position: absolute; width: 45px; height: 45px;
-      border-radius: 52% 48% 49% 51% / 48% 52% 48% 52%;
-      border: 1.5px solid rgba(255, 235, 160, 0.45);
-      box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.65), 0 1px 2px rgba(255, 255, 255, 0.35);
-      background: radial-gradient(circle at 38% 38%, rgba(212, 175, 55, 0.15) 0%, rgba(70, 45, 10, 0.45) 100%);
-      pointer-events: none;
-    }
-    .wax-seal svg {
-      width: 23px; height: 23px; fill: none; stroke: #fff1b8; stroke-width: 2.2;
-      filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.85)) drop-shadow(0 -1px 0.5px rgba(255, 255, 255, 0.7));
-      z-index: 2;
-    }
+    .wax-seal svg { width: 23px; height: 23px; fill: none; stroke: #fff1b8; stroke-width: 2.2; z-index: 2; }
     .envelope-stage.is-opening .wax-seal { transform: translateX(-50%) scale(1.8); opacity: 0; filter: blur(4px); }
 
     .envelope-hint {
@@ -168,170 +166,21 @@
     }
     @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-    /* ================= 信纸全局定位与专属材质 ================= */
     .letter-container {
       position: absolute !important; top: 25px !important; left: 50% !important;
       transform: translateX(-50%) translateY(40px) scale(0.92) !important;
       width: 92%; max-width: 440px; border-radius: 12px;
       padding: 34px 26px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
       opacity: 0; pointer-events: none; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-      z-index: 20; margin-bottom: 50px; font-family: var(--letter-font); color: var(--text-main);
+      z-index: 20; margin-bottom: 50px; font-family: var(--letter-font);
     }
     .letter-container.show {
       transform: translateX(-50%) translateY(0) scale(1) !important;
       opacity: 1 !important; pointer-events: auto !important;
     }
 
-    .paper-kintsugi { background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important; }
-    .paper-whiteflag { background: #fdfdf9 !important; border: 2px solid #8b261e !important; }
-    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; }
-    .paper-slate { background: linear-gradient(180deg, #b8cde0 0%, #faf7f0 65%) !important; }
-    .paper-olive { background-color: #faf8f2 !important; border: 1.5px solid #b8c4b0 !important; }
-    .paper-gothic { background: #110d16 !important; border: 1.8px solid #d4af37 !important; color: #f3ece1 !important; }
-    .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
-    .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
-
-    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡) */
-    .paper-witchy {
-      background-color: #061511 !important;
-      background-image:
-        radial-gradient(circle at 50% 28%, rgba(46, 204, 113, 0.22) 0%, rgba(6, 21, 17, 0.95) 60%, #010403 100%) !important;
-      border: 2.2px solid #d4af37 !important;
-      outline: 1.5px solid rgba(212, 175, 55, 0.6) !important;
-      outline-offset: -7px !important;
-      box-shadow:
-        0 35px 80px rgba(0, 0, 0, 0.95),
-        inset 0 0 90px rgba(0, 0, 0, 0.95),
-        inset 0 0 30px rgba(46, 204, 113, 0.15) !important;
-      color: #f3ece1 !important;
-      position: relative;
-    }
-    .paper-witchy::before {
-      content: ""; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
-      width: 290px; height: 290px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='hauntedGlow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%232ecc71' stop-opacity='0.45'/%3E%3Cstop offset='70%25' stop-color='%23145a32' stop-opacity='0.18'/%3E%3Cstop offset='100%25' stop-color='%23061511' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='125' r='65' fill='url(%23hauntedGlow)'/%3E%3Cpath d='M105,215 L105,140 L95,130 L95,120 L102,115 L105,90 L110,65 L115,90 L118,115 L125,120 L125,130 L120,140 L120,215 Z' fill='%230b2e21'/%3E%3Cpath d='M125,215 L125,110 L150,65 L175,110 L175,215 Z' fill='%230f3d2e'/%3E%3Cpath d='M175,215 L175,130 L182,120 L182,115 L185,90 L190,55 L195,90 L198,115 L205,120 L205,130 L195,140 L195,215 Z' fill='%230b2e21'/%3E%3Crect x='142' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Crect x='151' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Cpolygon points='150,45 141,64 159,64' fill='%23d4af37' opacity='0.95'/>%3Ccircle cx='132' cy='205' r='7' fill='%23d4af37' opacity='0.75'/>%3Ccircle cx='168' cy='206' r='6' fill='%232ecc71' opacity='0.75'/>%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1; opacity: 0.42;
-    }
-    .paper-witchy::after {
-      content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-      border: 1px solid rgba(212, 175, 55, 0.45); pointer-events: none; z-index: 2;
-    }
-    .paper-witchy .letter-header {
-      border-bottom: none !important; position: relative; padding-bottom: 26px !important; margin-bottom: 24px !important; padding-left: 45px !important; padding-right: 45px !important; z-index: 3;
-    }
-    .paper-witchy .letter-header::after {
-      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 85%; height: 18px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 20'%3E%3Cpath d='M10 10 L90 10 M150 10 L230 10' stroke='%23d4af37' stroke-width='1.2' opacity='0.75'/%3E%3Ccircle cx='120' cy='10' r='5' fill='%232ecc71'/%3E%3Cpath d='M102 10 C102 3, 110 3, 114 10 C110 17, 102 17, 102 10 Z' fill='none' stroke='%23d4af37' stroke-width='1.5'/%3E%3Cpath d='M138 10 C138 3, 130 3, 126 10 C130 17, 138 17, 138 10 Z' fill='none' stroke='%23d4af37' stroke-width='1.5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain;
-    }
-    .paper-witchy .recipient-name {
-      color: #ffe89e !important; font-family: 'Cinzel', serif !important; letter-spacing: 3px !important; text-shadow: 0 2px 12px rgba(46, 204, 113, 0.5);
-    }
-    .paper-witchy .days-badge {
-      background: rgba(20, 70, 45, 0.65) !important; color: #aef3c7 !important; border: 1.2px solid rgba(212, 175, 55, 0.6) !important; font-weight: 700 !important;
-    }
-    .paper-witchy .letter-body { color: #e6f5ec !important; text-shadow: 0 1px 3px rgba(0,0,0,0.9); z-index: 3; position: relative; }
-    .paper-witchy .letter-footer { color: #b5c4b8 !important; z-index: 3; position: relative; }
-    .paper-witchy .letter-footer .sender-name {
-      color: #ffe89e !important; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
-    }
-
-    .paper-witchy .polaroid-card {
-      background: linear-gradient(145deg, #0d2820 0%, #04100c 100%) !important;
-      border: 1.8px solid #d4af37 !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 25px rgba(46, 204, 113, 0.2) !important;
-      padding: 14px 14px 40px 14px !important; position: relative; z-index: 3;
-    }
-    .paper-witchy .polaroid-front::before, .paper-witchy .polaroid-front::after {
-      content: ""; position: absolute; width: 36px; height: 36px; pointer-events: none; z-index: 6;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Cpath d='M2 2 L18 2 C18 10, 10 18, 2 18 Z' fill='%23d4af37'/%3E%3Ccircle cx='7' cy='7' r='2' fill='%230b221b'/%3E%3C/svg%3E");
-      background-size: contain; background-repeat: no-repeat;
-    }
-    .paper-witchy .polaroid-front::before { top: 5px; left: 5px; }
-    .paper-witchy .polaroid-front::after { top: 5px; right: 5px; transform: scaleX(-1); }
-    .paper-witchy .polaroid-front img {
-      border: 1px solid rgba(212, 175, 55, 0.4) !important;
-      filter: contrast(1.08) brightness(0.92) !important;
-    }
-    .paper-witchy .polaroid-front-hint {
-      color: #ffe89e !important; font-family: 'Cinzel', serif !important; font-weight: 700; letter-spacing: 1.2px;
-    }
-    .paper-witchy .polaroid-back { background: #061813 !important; border: 1.5px dashed #d4af37 !important; }
-    .paper-witchy .polaroid-back-text { color: #f3e5ab !important; }
-
-    .paper-witchy .scratch-section {
-      position: relative !important;
-      background: rgba(255, 255, 255, 0.03) !important;
-      border: 1.8px solid #d4af37 !important; border-radius: 16px !important; padding: 26px 16px 20px 16px !important;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), inset 0 0 30px rgba(46, 204, 113, 0.1) !important;
-      z-index: 3;
-    }
-    .paper-witchy .scratch-section::before {
-      content: "🔮 HAUNTED HOUSE VAULT 🌙" !important;
-      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: linear-gradient(135deg, #d4af37 0%, #96710e 100%);
-      color: #051911; font-family: 'Cinzel', serif; font-size: 9.5px; font-weight: 700;
-      letter-spacing: 1.5px; padding: 3px 14px; border-radius: 10px; border: 1px solid #ffe89e;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.6); white-space: nowrap; z-index: 5;
-    }
-    .paper-witchy .scratch-prompt { color: #ffe89e !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
-    .paper-witchy .bandaid-wrapper {
-      background: #091c16 !important;
-      border: 2px solid #d4af37 !important; border-radius: 50px !important; width: 100% !important; max-width: 290px !important; height: 92px !important;
-      box-shadow: inset 0 6px 18px rgba(0, 0, 0, 0.95), 0 5px 18px rgba(212, 175, 55, 0.25) !important;
-    }
-    .paper-witchy .bandaid-wrapper::before, .paper-witchy .bandaid-wrapper::after { display: none !important; }
-    .paper-witchy .scratch-secret { color: #ffe89e !important; font-weight: 700 !important; font-family: 'Cinzel', serif !important; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
-
-    .paper-witchy .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(184, 151, 66, 0.3) !important; z-index: 3; position: relative; }
-    .paper-witchy .runaway-question { color: #ffe89e !important; }
-    .paper-witchy .btn-yes {
-      background: linear-gradient(135deg, #d4af37 0%, #96710e 100%) !important; color: #051911 !important;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important; font-weight: 700 !important;
-    }
-    .paper-witchy .btn-no { background: #162e26 !important; color: #d4af37 !important; border: 1px solid #d4af37 !important; }
-    .paper-witchy .runaway-success { color: #ffe89e !important; }
-
-    .poison-apple-interactive {
-      position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
-      cursor: pointer; z-index: 28; transition: transform 0.2s ease;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
-    }
-    .poison-apple-interactive:hover { transform: scale(1.15) rotate(-8deg); }
-    .poison-apple-interactive:active { transform: scale(0.9); }
-
-    .halloween-stamp, .ghost-stamp, .witchy-stamp { display: none; }
-    .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
-    .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
-    .paper-witchy .witchy-stamp { display: none !important; }
-
-    .stamp-inner {
-      width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
-      flex-direction: column; align-items: center; justify-content: space-between; padding: 3px 2px; box-sizing: border-box;
-    }
-
-    .postmark-overlay {
-      position: absolute; top: -6px; right: -15px; width: 68px; height: 46px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 65'%3E%3Ccircle cx='26' cy='32' r='22' stroke='%233b2214' stroke-width='1.2' fill='none' stroke-dasharray='3 2' opacity='0.55'/%3E%3Ctext x='26' y='28' font-size='5.5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' font-weight='bold' opacity='0.6'%3ESALEM%3C/text%3E%3Ctext x='26' y='38' font-size='5' font-family='sans-serif' text-anchor='middle' fill='%233b2214' opacity='0.6'%3EOCT 31%3C/text%3E%3Cpath d='M48 20 Q65 14 82 20 T100 20 M48 30 Q65 24 82 30 T100 30 M48 40 Q65 34 82 40 T100 40' stroke='%233b2214' stroke-width='1.2' fill='none' opacity='0.45'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-size: contain; pointer-events: none; transform: rotate(8deg);
-    }
-
-    .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
-
-    .creepy-crawly {
-      position: fixed; font-size: 24px; pointer-events: none; z-index: 999999;
-      animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
-    }
-    @keyframes crawlOut {
-      0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
-    }
-
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
-    .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
+    .recipient-name { font-size: 30px; font-weight: 700; margin-bottom: 4px; font-family: 'Caveat', cursive; }
     .days-badge {
       display: inline-block; background: rgba(197, 160, 89, 0.12); color: #8c6d2d;
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
@@ -342,90 +191,71 @@
     }
     .polaroid-card {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; background: #ffffff;
-      padding: 12px 12px 35px 12px; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.05);
-      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer; display: none; box-sizing: border-box;
+      padding: 12px 12px 35px 12px; box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+      transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: none; box-sizing: border-box;
     }
     .polaroid-card.active { display: block; }
     .polaroid-card.flipped { transform: rotateY(180deg); }
     .polaroid-front, .polaroid-back {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      backface-visibility: hidden; border-radius: 4px; padding: 12px 12px 25px 12px;
-      box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+      backface-visibility: hidden; border-radius: 4px; padding: 12px; box-sizing: border-box;
+      display: flex; flex-direction: column; justify-content: space-between; align-items: center;
     }
-    .polaroid-front img {
-      width: 100%; height: 305px; object-fit: cover; object-position: center;
-      border-radius: 2px; display: block; background: #f0f0f0;
-    }
-    .polaroid-front-hint {
-      font-size: 11.5px; color: #888; text-align: center; margin-top: 8px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
-    }
-    .polaroid-back {
-      background: #faf7f2; transform: rotateY(180deg); justify-content: center;
-      padding: 26px; color: #444; border: 1px dashed rgba(197, 160, 89, 0.35); text-align: center;
-    }
-    .polaroid-back-text { font-size: 21px; line-height: 1.6; font-family: 'Caveat', cursive; color: #3b2214; }
-    .polaroid-back-hint { margin-top: 18px; font-size: 11px; opacity: 0.6; font-family: 'Cinzel', serif; letter-spacing: 1px; }
+    .polaroid-front img { width: 100%; height: 305px; object-fit: cover; border-radius: 2px; background: #f0f0f0; }
+    .polaroid-back { background: #faf7f2; transform: rotateY(180deg); justify-content: center; text-align: center; color: #444; }
 
     .polaroid-controls {
-      display: flex; justify-content: center; align-items: center; gap: 18px;
-      margin: 6px auto 24px auto; font-family: 'Cinzel', serif; z-index: 3; position: relative;
+      display: flex; justify-content: center; align-items: center; gap: 18px; margin: 6px auto 24px auto; font-family: 'Cinzel', serif; z-index: 3; position: relative;
     }
     .polaroid-nav-btn {
       background: rgba(200, 138, 191, 0.18); border: 1px solid rgba(200, 138, 191, 0.4);
       color: #8c327a; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
       display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold;
-      transition: all 0.2s ease;
     }
     .polaroid-indicator { font-size: 12px; font-weight: 700; color: #8c327a; letter-spacing: 2px; }
 
-    .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; z-index: 3; position: relative; }
+    .letter-body { font-size: var(--letter-font-size); line-height: 1.85; margin-bottom: 26px; min-height: 50px; z-index: 3; position: relative; }
     .letter-body p { margin-bottom: 16px; word-break: break-word; }
 
     .scratch-section {
       margin-bottom: 26px; padding: 18px 12px; background: rgba(0, 0, 0, 0.02);
-      border-radius: 12px; text-align: center; border: 1px dashed rgba(197, 160, 89, 0.3);
+      border-radius: 12px; text-align: center; border: 1px dashed rgba(197, 160, 89, 0.3); z-index: 3; position: relative;
     }
-    .scratch-prompt { font-size: 12px; font-family: 'Cinzel', serif; color: #7a6e5d; margin-bottom: 12px; letter-spacing: 1px; }
+    .scratch-prompt { font-size: 12px; font-family: 'Cinzel', serif; margin-bottom: 12px; letter-spacing: 1px; }
     .bandaid-wrapper {
-      position: relative; width: 290px; height: 86px; margin: 0 auto;
-      border-radius: 43px; overflow: hidden;
-      background: #eadecd; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0,0,0,0.06);
-      display: flex; justify-content: center; align-items: center;
+      position: relative; width: 290px; height: 86px; margin: 0 auto; border-radius: 43px; overflow: hidden;
+      background: #eadecd; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06); display: flex; justify-content: center; align-items: center;
     }
-    .bandaid-wrapper::before, .bandaid-wrapper::after {
-      content: ""; position: absolute; top: 12px; bottom: 12px; width: 48px;
-      background-image: radial-gradient(#caa98d 1.5px, transparent 1.5px);
-      background-size: 7px 7px; opacity: 0.55; pointer-events: none;
-    }
-    .bandaid-wrapper::before { left: 16px; }
-    .bandaid-wrapper::after { right: 16px; }
-
-    .scratch-secret {
-      width: 100%; padding: 12px 45px; font-size: 14px; font-weight: 600;
-      color: #6d5320; text-align: center; line-height: 1.5; font-family: sans-serif;
-    }
+    .scratch-secret { width: 100%; padding: 12px 45px; font-size: 14px; font-weight: 600; text-align: center; line-height: 1.5; }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; }
 
-    .runaway-section {
-      margin-bottom: 24px; padding: 18px 14px; background: rgba(197, 160, 89, 0.06);
-      border-radius: 12px; text-align: center;
-    }
-    .runaway-question { font-size: 24px; font-weight: 700; margin-bottom: 14px; color: #2c323d; font-family: 'Caveat', cursive; }
-    .runaway-btns {
-      position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 18px;
-    }
-    .btn-yes, .btn-no {
-      padding: 9px 24px; border-radius: 20px; border: none; font-size: 13px;
-      font-weight: 600; cursor: pointer; transition: transform 0.15s ease; font-family: sans-serif;
-      letter-spacing: 0.5px;
-    }
-    .btn-yes { background: #3e4450; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-    .btn-no { background: #dcd7cb; color: #444; position: relative; }
-    .runaway-success { font-size: 22px; font-weight: 700; color: #8c6d2d; margin-top: 12px; display: none; font-family: 'Caveat', cursive; }
+    .runaway-section { margin-bottom: 24px; padding: 18px 14px; border-radius: 12px; text-align: center; z-index: 3; position: relative; }
+    .runaway-question { font-size: 24px; font-weight: 700; margin-bottom: 14px; font-family: 'Caveat', cursive; }
+    .runaway-btns { position: relative; height: 50px; display: flex; justify-content: center; align-items: center; gap: 18px; }
+    .btn-yes, .btn-no { padding: 9px 24px; border-radius: 20px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .runaway-success { font-size: 22px; font-weight: 700; margin-top: 12px; display: none; font-family: 'Caveat', cursive; }
 
-    .letter-footer { text-align: right; margin-top: 20px; color: #666; font-size: 18px; font-family: 'Caveat', cursive; }
-    .sender-name { font-size: 26px; font-weight: 700; color: #2c323d; margin-top: 2px; }
+    .letter-footer { text-align: right; margin-top: 20px; font-size: 18px; font-family: 'Caveat', cursive; z-index: 3; position: relative; }
+    .sender-name { font-size: 26px; font-weight: 700; margin-top: 2px; }
+
+    /* 毒苹果与彩蛋互动 */
+    .poison-apple-interactive {
+      position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
+      cursor: pointer; z-index: 28; transition: transform 0.2s ease;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+    }
+    .poison-apple-interactive:hover { transform: scale(1.15) rotate(-8deg); }
+    .poison-apple-interactive:active { transform: scale(0.9); }
+    .creepy-crawly {
+      position: fixed; font-size: 24px; pointer-events: none; z-index: 999999;
+      animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+    }
+    @keyframes crawlOut {
+      0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -467,33 +297,7 @@
   </div>
 
   <div class="letter-container" id="letterContainer">
-    <div class="halloween-stamp" id="halloweenStamp" title="Pumpkin Post 🎃">
-      <div class="stamp-inner">
-        <span class="stamp-price">31¢</span>
-        <svg viewBox="0 0 24 24" class="stamp-icon">
-          <path d="M12 3 C11.5 4 12.5 5 12 6 C7.5 6 4 9.5 4 14 C4 18.5 7.5 21.5 12 21.5 C16.5 21.5 20 18.5 20 14 C20 9.5 16.5 6 12 6 Z" fill="#d35400"/>
-          <path d="M8.5 11.5 L10.5 13.5 L8.5 15 Z M15.5 11.5 L13.5 13.5 L15.5 15 Z" fill="#fff5eb"/>
-          <path d="M9 17.5 Q12 20 15 17.5 Q12 18.5 9 17.5 Z" fill="#fff5eb"/>
-        </svg>
-        <span class="stamp-label">PUMPKIN POST</span>
-      </div>
-      <div class="postmark-overlay"></div>
-    </div>
-
-    <div class="ghost-stamp" id="ghostStamp" title="Boo Post 👻">
-      <div class="stamp-inner" style="border-color:#d49ec9; background:#fff8fc;">
-        <span class="stamp-price" style="color:#8c327a;">31¢</span>
-        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(184,93,168,0.3));">
-          <path d="M12 3 C8 3 6 6 6 11 C6 15 5 17 6.5 19 C7.5 20 9 19 10 20 C11 20.5 12 19.5 13 20 C14 19.5 15 20.5 16 20 C17 19 18.5 20 19.5 19 C21 17 20 15 20 11 C20 6 18 3 12 3 Z" fill="#b85fa7"/>
-          <circle cx="9.5" cy="10" r="1.2" fill="#ffffff"/>
-          <circle cx="14.5" cy="10" r="1.2" fill="#ffffff"/>
-          <ellipse cx="12" cy="13" rx="1.2" ry="1.6" fill="#ffffff"/>
-        </svg>
-        <span class="stamp-label" style="color:#8c327a;">BOO POST</span>
-      </div>
-      <div class="postmark-overlay"></div>
-    </div>
-
+    <!-- 毒苹果彩蛋按钮 -->
     <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy magic surprise! 🍎">
       <svg viewBox="0 0 36 36" style="width:100%; height:100%;">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
@@ -520,7 +324,7 @@
     <div class="letter-body" id="letterBody"></div>
 
     <div class="scratch-section" id="scratchSection" style="display:none;">
-      <div class="scratch-prompt" id="scratchPrompt">✦ PEEL OFF THE BANDAGE TO HEAL ✦</div>
+      <div class="scratch-prompt" id="scratchPrompt">✦ SCRY INTO THE HAUNTED HOUSE 🏰 ✦</div>
       <div class="bandaid-wrapper" id="bandaidWrapper">
         <div class="scratch-secret" id="scratchSecret">Surprise!</div>
         <canvas id="scratchCanvas"></canvas>
@@ -559,7 +363,6 @@
     const hintEl = getEl("envelopeHint", ".envelope-hint");
     const dateBadge = getEl("daysBadge", ".days-badge");
 
-    // 1. 音乐控制
     if (musicBtn) {
       musicBtn.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -577,7 +380,6 @@
       });
     }
 
-    // 2. 加载订单数据 (带时间戳防缓存)
     fetch("data/" + orderId + ".json?t=" + Date.now())
       .then(res => {
         if (!res.ok) throw new Error("Order not found");
@@ -592,7 +394,6 @@
         if (hintEl) hintEl.innerText = "✦ ORDER NOT FOUND ✦";
       });
 
-    // 3. UI 精准渲染
     function renderUI(data) {
       const theme = data.theme || "peace";
       const envStyle = data.envelopeStyle || (theme === "halloween" ? "gothic" : "olive");
@@ -604,76 +405,21 @@
       if (envStyle === "witchy") {
         if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
         if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
+      } else if (envStyle === "ghost") {
+        if (hintEl) hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
+        if (dateBadge) dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
       }
 
       if (isHalloween) {
         if (envStyle === "pumpkin") {
           if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
           if (dateBadge) dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
-          if (waxSeal) {
-            waxSeal.innerHTML = `
-              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 2px rgba(60,20,0,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.7));">
-                <path d="M15 3.5 C15.5 5 16 6 17 6.5 L14.5 6.5 C14 5 13.5 4 13 3.5 Z" fill="#fff1b8"/>
-                <path d="M16 6.5 C11 6.5 5.5 10 5.5 17 C5.5 24 11 27.5 16 27.5 C21 27.5 26.5 24 26.5 17 C26.5 10 21 6.5 16 6.5 Z" fill="#fff1b8"/>
-                <path d="M9.5 13.5 L13 14.5 L10.5 17 Z M22.5 13.5 L21.5 17 L19 14.5 Z M16 15.5 L17.5 18 L14.5 18 Z" fill="#6e2700"/>
-                <path d="M9.5 20 Q16 26 22.5 20 C21 22 19 21 17.5 22.5 C16 21 15 22.5 13.5 21 C12 22.5 10.5 21.5 9.5 20 Z" fill="#6e2700"/>
-              </svg>
-            `;
-          }
-        } else if (envStyle === "ghost") {
-          if (hintEl) hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
-          if (dateBadge) dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
-          if (waxSeal) {
-            waxSeal.innerHTML = `
-              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(45,15,60,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-                <path d="M16 5 C11 5 8 9 8 15 C8 20 6.5 23 8.5 26 C9.5 27 11 25.5 12.5 26 C14 26.5 15 25 16 26 C17 25 18 26.5 19.5 26 C21 25.5 22.5 27 23.5 26 C25.5 23 24 20 24 15 C24 9 21 5 16 5 Z" fill="#fff5fc"/>
-                <ellipse cx="12" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
-                <ellipse cx="20" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
-                <ellipse cx="16" cy="17.5" rx="1.5" ry="1.8" fill="#431852"/>
-                <ellipse cx="10" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
-                <ellipse cx="22" cy="17" rx="1.8" ry="1" fill="#ff94b8" opacity="0.8"/>
-                <path d="M21 7 L22 9 L24 10 L22 11 L21 13 L20 11 L18 10 L20 9 Z" fill="#ffd166"/>
-              </svg>
-            `;
-          }
         } else if (envStyle === "witchy") {
           if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
           if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
-          if (waxSeal) {
-            waxSeal.innerHTML = `
-              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(10,30,20,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-                <path d="M7 14 C7 24, 25 24, 25 14 Z" fill="#f3e5ab" stroke="#145a32" stroke-width="1"/>
-                <path d="M5 11 L27 11 L26 14 L6 14 Z" fill="#f3e5ab"/>
-                <circle cx="14" cy="9" r="2" fill="#2ecc71"/>
-                <circle cx="19" cy="8" r="1.5" fill="#2ecc71"/>
-                <path d="M10 24 L8 28 M22 24 L24 28" stroke="#f3e5ab" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            `;
-          }
-        } else {
-          if (hintEl) hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
-          if (dateBadge) dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
-          if (waxSeal) {
-            waxSeal.innerHTML = `
-              <svg viewBox="0 0 24 24" style="width:26px; height:26px; fill:#fff1b8; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.9));">
-                <path d="M12 4.5 C10.5 7.5 8 8.5 4 8 C6.5 11 7 14 5 17 C9 16 10.5 18 12 21 C13.5 18 15 16 19 17 C17 14 17.5 11 20 8 C16 8.5 13.5 7.5 12 4.5 Z"/>
-              </svg>
-            `;
-          }
-        }
-      } else {
-        if (hintEl) hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
-        if (dateBadge) dateBadge.innerText = "OFFICIAL PEACE TREATY";
-        if (waxSeal) {
-          waxSeal.innerHTML = `
-            <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:#ffffff; stroke:none; filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5));">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          `;
         }
       }
 
-      // 完美信任并直接读取 JSON 中的 recipient 与 sender，绝不强行覆盖
       const recEl = getEl("recipientText", ".recipient-name");
       const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
@@ -702,15 +448,9 @@
       }
 
       const styleAutoEffects = {
-        "kintsugi":  "gold-dust",
-        "whiteflag": "gold-dust",
-        "origami":   "gold-dust",
-        "slate":     "rain-to-sunshine",
-        "olive":     "olive-leaves",
-        "gothic":    "spooky-embers",
-        "pumpkin":   "pumpkin-glow",
-        "ghost":     "ghostly-pastels",
-        "witchy":    "celestial-sparks"
+        "kintsugi": "gold-dust", "whiteflag": "gold-dust", "origami": "gold-dust",
+        "slate": "rain-to-sunshine", "olive": "olive-leaves", "gothic": "spooky-embers",
+        "pumpkin": "pumpkin-glow", "ghost": "ghostly-pastels", "witchy": "celestial-sparks"
       };
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
@@ -720,9 +460,7 @@
         poisonAppleBtn.onclick = (e) => {
           e.stopPropagation();
           const rect = poisonAppleBtn.getBoundingClientRect();
-          const startX = rect.left + rect.width / 2;
-          const startY = rect.top + rect.height / 2;
-          createCreepyCrawlies(startX, startY);
+          createCreepyCrawlies(rect.left + rect.width / 2, rect.top + rect.height / 2);
         };
       }
     }
@@ -735,17 +473,11 @@
         el.innerText = crawlies[Math.floor(Math.random() * crawlies.length)];
         el.style.left = `${x}px`;
         el.style.top = `${y}px`;
-
         const angle = Math.random() * Math.PI * 2;
         const dist = Math.random() * 220 + 80;
-        const endX = Math.cos(angle) * dist;
-        const endY = Math.sin(angle) * dist;
-        const endRot = (Math.random() - 0.5) * 360;
-
-        el.style.setProperty('--end-x', `${endX}px`);
-        el.style.setProperty('--end-y', `${endY}px`);
-        el.style.setProperty('--end-rot', `${endRot}deg`);
-
+        el.style.setProperty('--end-x', `${Math.cos(angle) * dist}px`);
+        el.style.setProperty('--end-y', `${Math.sin(angle) * dist}px`);
+        el.style.setProperty('--end-rot', `${(Math.random() - 0.5) * 360}deg`);
         document.body.appendChild(el);
         setTimeout(() => el.remove(), 2500);
       }
@@ -759,7 +491,6 @@
       const nextBtn = document.getElementById("nextCardBtn");
 
       if (!gallery) return;
-
       if (!photos || photos.length === 0) {
         gallery.style.display = "none";
         if (controls) controls.style.display = "none";
@@ -768,63 +499,38 @@
 
       gallery.style.display = "block";
       gallery.innerHTML = "";
-
       let currentIndex = 0;
       const total = photos.length;
 
       photos.forEach((p, idx) => {
         const card = document.createElement("div");
         card.className = `polaroid-card ${idx === 0 ? "active" : ""}`;
-        card.setAttribute("data-index", idx);
-        
         card.innerHTML = `
           <div class="polaroid-front">
             <img src="${p.url}" alt="Memory ${idx + 1}">
             <div class="polaroid-front-hint">✦ TAP TO FLIP ↻ ✦</div>
           </div>
           <div class="polaroid-back">
-            <div class="polaroid-back-text">${p.caption || "Every sweet moment with you is my favorite memory ✨"}</div>
-            <div class="polaroid-back-hint">TAP TO FLIP BACK ↺</div>
+            <div class="polaroid-back-text">${p.caption || "Every sweet moment with you ✨"}</div>
           </div>
         `;
-
-        card.onclick = (e) => {
-          e.stopPropagation();
-          card.classList.toggle("flipped");
-        };
-
+        card.onclick = (e) => { e.stopPropagation(); card.classList.toggle("flipped"); };
         gallery.appendChild(card);
       });
 
       if (total > 1 && controls && indicator) {
         controls.style.display = "flex";
         indicator.innerText = `1 / ${total}`;
+        if (nextBtn) nextBtn.onclick = (e) => { e.stopPropagation(); updateCard((currentIndex + 1) % total); };
+        if (prevBtn) prevBtn.onclick = (e) => { e.stopPropagation(); updateCard((currentIndex - 1 + total) % total); };
+      }
 
-        const updateActiveCard = (newIndex) => {
-          const allCards = gallery.querySelectorAll(".polaroid-card");
-          allCards[currentIndex].classList.remove("active", "flipped");
-          currentIndex = newIndex;
-          allCards[currentIndex].classList.add("active");
-          indicator.innerText = `${currentIndex + 1} / ${total}`;
-        };
-
-        if (nextBtn) {
-          nextBtn.onclick = (e) => {
-            e.stopPropagation();
-            const nextIdx = (currentIndex + 1) % total;
-            updateActiveCard(nextIdx);
-          };
-        }
-
-        if (prevBtn) {
-          prevBtn.onclick = (e) => {
-            e.stopPropagation();
-            const prevIdx = (currentIndex - 1 + total) % total;
-            updateActiveCard(prevIdx);
-          };
-        }
-      } else if (controls) {
-        controls.style.display = "none";
+      function updateCard(newIdx) {
+        const cards = gallery.querySelectorAll(".polaroid-card");
+        cards[currentIndex].classList.remove("active", "flipped");
+        currentIndex = newIdx;
+        cards[currentIndex].classList.add("active");
+        indicator.innerText = `${currentIndex + 1} / ${total}`;
       }
     }
 
@@ -832,56 +538,18 @@
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
       const rect = stage.getBoundingClientRect();
-      const originX = rect.left + rect.width / 2;
-      const originY = rect.top + rect.height * 0.45;
-
-      const isHalloween = (configData && configData.theme === "halloween");
-      const isGothic = (style === 'gothic');
-      const isGhost = (style === 'ghost');
-      const isWitchy = (style === 'witchy');
-
-      let items;
-      if (isHalloween) {
-        if (isGothic) items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
-        else if (isGhost) items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
-        else if (isWitchy) items = ['🧙‍♀️', '🧹', '🐦‍⬛', '🧪', '🔮', '🌙', '✨', '🌿'];
-        else items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
-      } else {
-        items = ['✨', '⭐', '🌟', '💛'];
-      }
-
+      const items = style === 'ghost' ? ['👻', '🎀', '💖', '🍬'] : ['🧙‍♀️', '🧹', '🐦‍⬛', '🔮'];
       for (let i = 0; i < 28; i++) {
         const p = document.createElement("div");
         p.innerText = items[Math.floor(Math.random() * items.length)];
-        const size = Math.random() * 12 + 20;
-
-        p.style.position = 'fixed';
-        p.style.zIndex = '999999';
-        p.style.pointerEvents = 'none';
-        p.style.fontSize = `${size}px`;
-        p.style.left = `${originX}px`;
-        p.style.top = `${originY}px`;
-        p.style.userSelect = 'none';
-        p.style.opacity = '1';
-        p.style.transform = 'translate(-50%, -50%) scale(0.3) rotate(0deg)';
-        p.style.transition = 'transform 1.1s cubic-bezier(0.12, 0.85, 0.32, 1), opacity 1.1s cubic-bezier(0.65, 0, 1, 1)';
-
+        p.style.cssText = `position:fixed; z-index:999999; pointer-events:none; font-size:${Math.random()*12+20}px; left:${rect.left+rect.width/2}px; top:${rect.top+rect.height*0.45}px; transition:transform 1.1s cubic-bezier(0.12,0.85,0.32,1), opacity 1.1s cubic-bezier(0.65,0,1,1);`;
         document.body.appendChild(p);
-
         const angle = -Math.PI / 2 + (Math.random() - 0.5) * (Math.PI * 0.85);
         const velocity = Math.random() * 220 + 90;
-        const targetX = Math.cos(angle) * velocity;
-        const targetY = Math.sin(angle) * velocity + (Math.random() * 60 + 30);
-        const rotate = (Math.random() - 0.5) * 500;
-        const scale = Math.random() * 0.5 + 0.9;
-
-        void p.offsetHeight;
-
         requestAnimationFrame(() => {
-          p.style.transform = `translate(calc(-50% + ${targetX}px), calc(-50% + ${targetY}px)) scale(${scale}) rotate(${rotate}deg)`;
+          p.style.transform = `translate(calc(-50% + ${Math.cos(angle)*velocity}px), calc(-50% + ${Math.sin(angle)*velocity}px)) scale(${Math.random()*0.5+0.9}) rotate(${(Math.random()-0.5)*500}deg)`;
           p.style.opacity = '0';
         });
-
         setTimeout(() => p.remove(), 1200);
       }
     }
@@ -889,20 +557,10 @@
     if (envelopeWrapper) {
       envelopeWrapper.addEventListener("click", () => {
         if (bgMusic && bgMusic.src) {
-          bgMusic.play().then(() => {
-            isPlaying = true;
-            if (musicBtn) musicBtn.classList.add("playing", "visible");
-          }).catch(e => {
-            if (musicBtn) musicBtn.classList.add("visible");
-          });
+          bgMusic.play().then(() => { isPlaying = true; if (musicBtn) musicBtn.classList.add("playing", "visible"); }).catch(() => { if (musicBtn) musicBtn.classList.add("visible"); });
         }
-
         if (envelopeStage) envelopeStage.classList.add("is-opening");
-
-        setTimeout(() => {
-          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
-        }, 180);
-
+        setTimeout(() => triggerEnvelopeBurst(configData ? configData.envelopeStyle : 'pumpkin'), 180);
         setTimeout(() => {
           if (envelopeStage) envelopeStage.classList.add("opened");
           if (letterContainer) letterContainer.classList.add("show");
@@ -911,44 +569,23 @@
       });
     }
 
-    let isTypingDone = false;
-    let forceSkip = false;
     function startLetterTyping() {
       if (!configData || !configData.letterContent) return;
       const container = getEl("letterBody", ".letter-body");
       if (!container) return;
       container.innerHTML = "";
-      
-      container.onclick = () => { forceSkip = true; };
-
       const lines = configData.letterContent;
-      let lineIdx = 0;
-      let charIdx = 0;
-      let curP = document.createElement("p");
+      let lineIdx = 0, charIdx = 0, curP = document.createElement("p");
       container.appendChild(curP);
 
       function typeNext() {
-        if (forceSkip) {
-          container.innerHTML = lines.map(l => `<p>${l}</p>`).join("");
-          isTypingDone = true;
-          return;
-        }
         if (lineIdx < lines.length) {
-          const curLine = lines[lineIdx];
-          if (charIdx < curLine.length) {
-            curP.textContent += curLine[charIdx];
-            charIdx++;
+          if (charIdx < lines[lineIdx].length) {
+            curP.textContent += lines[lineIdx][charIdx++];
             setTimeout(typeNext, 28);
           } else {
-            lineIdx++;
-            charIdx = 0;
-            if (lineIdx < lines.length) {
-              curP = document.createElement("p");
-              container.appendChild(curP);
-              setTimeout(typeNext, 200);
-            } else {
-              isTypingDone = true;
-            }
+            lineIdx++; charIdx = 0;
+            if (lineIdx < lines.length) { curP = document.createElement("p"); container.appendChild(curP); setTimeout(typeNext, 200); }
           }
         }
       }
@@ -961,53 +598,31 @@
       const canvas = document.getElementById("scratchCanvas");
       if (!canvas) return;
 
-      // 彻底解耦：上方小标题完全听从 JSON 里的 scratchCard.title
-      if (cardTitle && cfg.title) {
-        cardTitle.innerText = cfg.title;
-      }
+      if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
       if (cardText && cfg.hiddenText) cardText.innerText = cfg.hiddenText;
 
       const ctx = canvas.getContext("2d");
       canvas.width = canvas.offsetWidth || 290;
       canvas.height = canvas.offsetHeight || 92;
-
-      if (style === 'ghost') {
-        ctx.fillStyle = "#cca0c5";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      } else if (style === 'witchy') {
-        ctx.fillStyle = "#061511";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      } else {
-        if (style === 'pumpkin') ctx.fillStyle = "#cf782b";
-        else if (style === 'gothic') ctx.fillStyle = "#2c1c1c";
-        else ctx.fillStyle = "#8a7d6e";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-
+      ctx.fillStyle = style === 'ghost' ? "#cca0c5" : (style === 'witchy' ? "#061511" : "#cf782b");
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#ffe89e";
       ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      // 涂层上的文字统一为清晰的交互提示
-      ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : "SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
-      function scratch(e) {
+      const scratch = (e) => {
         if (!isScratching) return;
         const rect = canvas.getBoundingClientRect();
         const clientX = e.touches ? e.touches[0].clientX : e.clientX;
         const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        const scaleX = canvas.width / (rect.width || canvas.width);
-        const scaleY = canvas.height / (rect.height || canvas.height);
-        const x = (clientX - rect.left) * scaleX;
-        const y = (clientY - rect.top) * scaleY;
-
         ctx.globalCompositeOperation = "destination-out";
         ctx.beginPath();
-        ctx.arc(x, y, 16, 0, Math.PI * 2);
+        ctx.arc((clientX - rect.left) * (canvas.width / rect.width), (clientY - rect.top) * (canvas.height / rect.height), 16, 0, Math.PI * 2);
         ctx.fill();
-      }
-
+      };
       canvas.addEventListener("mousedown", () => isScratching = true);
       window.addEventListener("mouseup", () => isScratching = false);
       canvas.addEventListener("mousemove", scratch);
@@ -1030,33 +645,21 @@
       const targetBtn = (cfg.runawayTarget === "yes") ? btnYes : btnNo;
       targetBtn.onmouseenter = targetBtn.ontouchstart = (e) => {
         e.preventDefault();
-        const maxX = 110;
-        const maxY = 55;
-        const randX = (Math.random() - 0.5) * maxX * 2;
-        const randY = (Math.random() - 0.5) * maxY * 2;
-        targetBtn.style.transform = `translate(${randX}px, ${randY}px)`;
+        targetBtn.style.transform = `translate(${(Math.random()-0.5)*220}px, ${(Math.random()-0.5)*110}px)`;
       };
 
       const winBtn = (cfg.runawayTarget === "yes") ? btnNo : btnYes;
       winBtn.onclick = () => {
-        if (msgEl) {
-          msgEl.innerText = cfg.successMessage || "Yay! ❤";
-          msgEl.style.display = "block";
-        }
-        btnYes.style.display = "none";
-        btnNo.style.display = "none";
+        if (msgEl) { msgEl.innerText = cfg.successMessage || "Yay! ❤"; msgEl.style.display = "block"; }
+        btnYes.style.display = "none"; btnNo.style.display = "none";
       };
     }
 
-    const pCanvas = getEl("particleCanvas", "#particle-canvas") || document.querySelector("canvas");
+    const pCanvas = getEl("particleCanvas", "#particleCanvas");
     const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
     let particles = [];
 
-    function resizeCanvas() {
-      if (!pCanvas) return;
-      pCanvas.width = window.innerWidth;
-      pCanvas.height = window.innerHeight;
-    }
+    function resizeCanvas() { if (pCanvas) { pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; } }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
@@ -1065,239 +668,22 @@
       reset() {
         if (!pCanvas) return;
         this.x = Math.random() * pCanvas.width;
-        this.angle = Math.random() * Math.PI * 2;
-        this.spinSpeed = (Math.random() - 0.5) * 0.025;
-        this.roll = Math.random() * Math.PI * 2;
-        this.rollSpeed = Math.random() * 0.035 + 0.02;
-        this.pitch = Math.random() * Math.PI * 2;
-        this.pitchSpeed = Math.random() * 0.025 + 0.01;
-
-        if (this.type === 'gold-dust') {
-          this.y = pCanvas.height + 20; this.size = Math.random() * 2.2 + 1;
-          this.speedY = -(Math.random() * 0.9 + 0.3); this.speedX = Math.random() * 0.6 - 0.3;
-          this.opacity = Math.random() * 0.5 + 0.25;
-        } else if (this.type === 'rain-to-sunshine') {
-          this.y = -20; this.speedY = Math.random() * 6 + 4; this.speedX = -0.5; this.len = Math.random() * 10 + 6;
-          this.opacity = Math.random() * 0.5 + 0.25;
-        } else if (this.type === 'olive-leaves') {
-          this.isSunMote = Math.random() < 0.35;
-          if (this.isSunMote) {
-            this.y = Math.random() * pCanvas.height; this.size = Math.random() * 3.5 + 1.5;
-            this.speedY = -(Math.random() * 0.4 + 0.2); this.speedX = (Math.random() - 0.5) * 0.3;
-            this.opacity = Math.random() * 0.45 + 0.25;
-          } else {
-            this.y = -35; this.size = Math.random() * 12 + 10;
-            this.speedY = Math.random() * 0.9 + 0.6; this.speedX = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.3 + 0.7; this.depth = Math.random() * 0.4 + 0.7;
-          }
-        } else if (this.type === 'spooky-embers') {
-          this.isBat = Math.random() < 0.15;
-          if (this.isBat) {
-            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          this.isMote = Math.random() < 0.55;
-          if (this.isMote) {
-            this.y = Math.random() * pCanvas.height;
-            this.size = Math.random() * 3.8 + 2;
-            this.speedY = -(Math.random() * 0.45 + 0.2);
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.opacity = Math.random() * 0.5 + 0.35;
-            this.pulseSpeed = Math.random() * 0.04 + 0.02;
-            this.pulsePhase = Math.random() * Math.PI * 2;
-          } else {
-            this.y = -25;
-            this.size = Math.random() * 10 + 8;
-            this.speedY = Math.random() * 0.85 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.6;
-            this.opacity = Math.random() * 0.35 + 0.65;
-            const autumnColors = ['rgba(235, 130, 40,', 'rgba(215, 160, 30,', 'rgba(180, 75, 25,'];
-            this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
-          }
-        } else if (this.type === 'ghostly-pastels') {
-          this.y = pCanvas.height + 20;
-          this.size = Math.random() * 3.8 + 1.8;
-          this.speedY = -(Math.random() * 0.65 + 0.25);
-          this.speedX = (Math.random() - 0.5) * 0.45;
-          this.opacity = Math.random() * 0.5 + 0.35;
-          this.pulsePhase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = Math.random() * 0.035 + 0.02;
-          const pastelHues = ['rgba(240, 160, 230,', 'rgba(195, 145, 245,', 'rgba(255, 215, 160,'];
-          this.hue = pastelHues[Math.floor(Math.random() * pastelHues.length)];
-        } else if (this.type === 'celestial-sparks') {
-          this.y = pCanvas.height + 20;
-          this.size = Math.random() * 3 + 1.5;
-          this.speedY = -(Math.random() * 0.5 + 0.2);
-          this.speedX = (Math.random() - 0.5) * 0.3;
-          this.opacity = Math.random() * 0.6 + 0.3;
-          this.pulsePhase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = Math.random() * 0.04 + 0.02;
-        } else {
-          this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
-        }
+        this.y = pCanvas.height + 20;
+        this.size = Math.random() * 3 + 1;
+        this.speedY = -(Math.random() * 0.8 + 0.3);
+        this.speedX = Math.random() * 0.6 - 0.3;
+        this.opacity = Math.random() * 0.5 + 0.25;
       }
       update() {
         if (!pCanvas) return;
-        if (this.type === 'gold-dust') {
-          this.y += this.speedY; this.x += Math.sin(this.y * 0.03) * 0.35;
-          if (this.y < -20) this.reset();
-        } else if (this.type === 'rain-to-sunshine') {
-          this.y += this.speedY; this.x += this.speedX;
-          if (this.y > pCanvas.height + 20) this.reset();
-        } else if (this.type === 'olive-leaves') {
-          if (this.isSunMote) {
-            this.y += this.speedY; this.x += Math.sin(this.y * 0.02) * 0.4;
-            if (this.y < -20) this.reset();
-          } else {
-            this.y += this.speedY; this.x += Math.sin(this.y * 0.016) * 1.0 + this.speedX;
-            this.angle += this.spinSpeed; this.roll += this.rollSpeed; this.pitch += this.pitchSpeed;
-            if (this.y > pCanvas.height + 40) this.reset();
-          }
-        } else if (this.type === 'spooky-embers') {
-          if (this.isBat) {
-            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          if (this.isMote) {
-            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-            pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
-            pCtx.shadowColor = "#ffaa00";
-            pCtx.shadowBlur = 12;
-            pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y);
-            pCtx.rotate(this.angle);
-            pCtx.scale(Math.cos(this.roll), 1);
-            pCtx.beginPath();
-            pCtx.moveTo(0, -this.size);
-            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
-            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
-            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
-            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
-            pCtx.shadowBlur = 4;
-            pCtx.fill();
-          }
-        } else if (this.type === 'ghostly-pastels' || this.type === 'celestial-sparks') {
-          this.y += this.speedY;
-          this.x += Math.sin(this.y * 0.02) * 0.6 + this.speedX;
-          this.pulsePhase += this.pulseSpeed;
-          if (this.y < -20) this.reset();
-        }
+        this.y += this.speedY; this.x += Math.sin(this.y * 0.03) * 0.35;
+        if (this.y < -20) this.reset();
       }
       draw() {
         if (!pCtx) return;
         pCtx.save();
-        if (this.type === 'gold-dust') {
-          pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-          pCtx.shadowColor = "#f1c40f"; pCtx.shadowBlur = 6;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'rain-to-sunshine') {
-          pCtx.strokeStyle = `rgba(180, 205, 230, ${this.opacity * 0.6})`;
-          pCtx.lineWidth = 1.2; pCtx.beginPath();
-          pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
-        } else if (this.type === 'olive-leaves') {
-          if (this.isSunMote) {
-            pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 222, 130, ${this.opacity * 0.75})`;
-            pCtx.shadowColor = "#ffd666"; pCtx.shadowBlur = 10; pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-            const scaleX = Math.cos(this.roll); const scaleY = Math.sin(this.pitch) * 0.35 + 0.65;
-            pCtx.scale(scaleX, scaleY);
-            const len = this.size * this.depth; const width = len * 0.44; const isFront = scaleX >= 0;
-            pCtx.beginPath(); pCtx.moveTo(-len, 0);
-            pCtx.bezierCurveTo(-len * 0.3, -width, len * 0.5, -width * 0.9, len, 0);
-            pCtx.bezierCurveTo(len * 0.5, width * 0.9, -len * 0.3, width, -len, 0);
-            pCtx.closePath();
-            const grad = pCtx.createLinearGradient(-len, -width, len, width);
-            if (isFront) {
-              grad.addColorStop(0, `rgba(178, 205, 82, ${this.opacity})`);
-              grad.addColorStop(0.5, `rgba(122, 154, 60, ${this.opacity})`);
-              grad.addColorStop(1, `rgba(72, 98, 38, ${this.opacity})`);
-              pCtx.shadowColor = "rgba(45, 65, 20, 0.45)"; pCtx.shadowBlur = 7;
-            } else {
-              grad.addColorStop(0, `rgba(244, 248, 242, ${this.opacity * 0.92})`);
-              grad.addColorStop(0.6, `rgba(202, 216, 198, ${this.opacity * 0.88})`);
-              grad.addColorStop(1, `rgba(156, 172, 150, ${this.opacity * 0.82})`);
-              pCtx.shadowColor = "rgba(0, 0, 0, 0.28)"; pCtx.shadowBlur = 5;
-            }
-            pCtx.fillStyle = grad; pCtx.fill();
-            pCtx.beginPath(); pCtx.moveTo(-len * 0.88, 0);
-            pCtx.quadraticCurveTo(0, -width * 0.08, len * 0.9, 0);
-            pCtx.strokeStyle = isFront ? `rgba(245, 255, 205, ${this.opacity * 0.7})` : `rgba(255, 255, 255, ${this.opacity * 0.8})`;
-            pCtx.lineWidth = 1.1; pCtx.stroke();
-          }
-        } else if (this.type === 'spooky-embers') {
-          if (this.isBat) {
-            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          if (this.isMote) {
-            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-            pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
-            pCtx.shadowColor = "#ffaa00";
-            pCtx.shadowBlur = 12;
-            pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y);
-            pCtx.rotate(this.angle);
-            pCtx.scale(Math.cos(this.roll), 1);
-            pCtx.beginPath();
-            pCtx.moveTo(0, -this.size);
-            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
-            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
-            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
-            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
-            pCtx.shadowBlur = 4;
-            pCtx.fill();
-          }
-        } else if (this.type === 'ghostly-pastels') {
-          const dynOpacity = this.opacity * (0.8 + Math.sin(this.pulsePhase) * 0.2);
-          pCtx.beginPath();
-          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          pCtx.fillStyle = `${this.hue} ${dynOpacity})`;
-          pCtx.shadowColor = "#e6a8d7";
-          pCtx.shadowBlur = 10;
-          pCtx.fill();
-        } else if (this.type === 'celestial-sparks') {
-          const dynOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-          pCtx.beginPath();
-          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          pCtx.fillStyle = `rgba(243, 229, 171, ${dynOpacity})`;
-          pCtx.shadowColor = "#2ecc71";
-          pCtx.shadowBlur = 10;
-          pCtx.fill();
-        } else {
-          this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
-        }
+        pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+        pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
         pCtx.restore();
       }
     }
@@ -1305,8 +691,7 @@
     function initParticles(type) {
       if (!pCanvas) return;
       particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow' || type === 'ghostly-pastels' || type === 'celestial-sparks') ? 45 : 30;
-      for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
+      for (let i = 0; i < 40; i++) particles.push(new UniversalParticle(type));
     }
 
     function animateParticles() {
