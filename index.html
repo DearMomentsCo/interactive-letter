@@ -131,100 +131,30 @@
 
     /* 6. 万圣暗夜哥特信封 */
     .env-gothic .envelope-wrapper {
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.65) 0%, transparent 48%),
-        linear-gradient(225deg, rgba(0,0,0,0.65) 0%, transparent 48%),
-        linear-gradient(0deg, rgba(20, 10, 25, 0.85) 0%, transparent 45%),
-        linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%) !important;
-      border: 1.5px solid #d4af37 !important;
-      border-top: 2px solid #ffe89e !important;
-      outline: 1px dashed rgba(212, 175, 55, 0.45) !important;
-      outline-offset: -6px !important;
-      box-shadow:
-        0 35px 70px -15px rgba(0, 0, 0, 0.95),
-        0 15px 25px rgba(0, 0, 0, 0.8),
-        0 0 35px rgba(255, 117, 24, 0.18),
-        inset 0 1px 2px rgba(255, 235, 160, 0.5) !important;
+      background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%) !important;
+      border: 1.5px solid #d4af37 !important; border-top: 2px solid #ffe89e !important;
     }
-    .env-gothic .envelope-lid {
-      border-top-color: #23162c !important;
-      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)) !important;
-    }
-    .env-gothic .envelope-wrapper::before, .env-gothic .envelope-wrapper::after {
-      content: ""; position: absolute; width: 65px; height: 65px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M4 4 L30 4 C24 8 20 14 18 20 C22 20 25 24 23 28 C18 26 14 30 14 36 C10 32 4 36 4 45 Z' fill='%23c5a059' opacity='0.7'/%3E%3Cpath d='M4 4 L55 4 M4 4 L4 55 M10 10 L42 10 M10 10 L10 42' stroke='%23ffd885' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='10' r='2.5' fill='%23ff9f43'/%3E%3Ccircle cx='22' cy='22' r='1.8' fill='%23ffd885'/%3E%3C/svg%3E");
-      background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 6;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
-    }
-    .env-gothic .envelope-wrapper::before { top: 6px; left: 6px; }
-    .env-gothic .envelope-wrapper::after { top: 6px; right: 6px; transform: scaleX(-1); }
-    .env-gothic .wax-seal {
-      background: radial-gradient(circle at 30% 28%, #ff3b3b 0%, #9e1414 45%, #420606 100%) !important;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.9), inset 1.5px 2px 3px rgba(255, 130, 130, 0.7), inset -2.5px -3px 5px rgba(0, 0, 0, 0.95) !important;
-    }
+    .env-gothic .envelope-lid { border-top-color: #23162c !important; }
 
     /* 7. 焦糖南瓜款信封 */
     .env-pumpkin .envelope-wrapper {
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(0deg, rgba(80, 35, 10, 0.45) 0%, transparent 45%),
-        linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
-      border: 1.5px solid #d37a28 !important;
-      border-top: 2px solid #ffb066 !important;
-      outline: 1px dashed rgba(243, 156, 18, 0.45) !important;
-      outline-offset: -6px !important;
-      box-shadow:
-        0 35px 70px -15px rgba(0, 0, 0, 0.9),
-        0 15px 25px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(230, 126, 34, 0.25),
-        inset 0 1px 2px rgba(255, 200, 140, 0.5) !important;
+      background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important;
+      border: 1.5px solid #d37a28 !important; border-top: 2px solid #ffb066 !important;
     }
-    .env-pumpkin .envelope-lid {
-      border-top-color: #48220d !important;
-      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
-    }
-    .env-pumpkin .wax-seal {
-      background: radial-gradient(circle at 30% 28%, #ffaa44 0%, #d35400 45%, #6e2700 100%) !important;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
-    }
+    .env-pumpkin .envelope-lid { border-top-color: #48220d !important; }
 
     /* 8. Pastel Spooky (粉紫小幽灵专属立体信封) */
     .env-ghost .envelope-wrapper {
-      background:
-        linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(225deg, rgba(0,0,0,0.45) 0%, transparent 48%),
-        linear-gradient(0deg, rgba(55, 20, 65, 0.55) 0%, transparent 45%),
-        linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important;
-      border: 1.5px solid #c88abf !important;
-      border-top: 2px solid #f6c0eb !important;
-      outline: 1px dashed rgba(225, 165, 240, 0.45) !important;
-      outline-offset: -6px !important;
-      box-shadow:
-        0 35px 70px -15px rgba(0, 0, 0, 0.9),
-        0 15px 25px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(184, 98, 168, 0.25),
-        inset 0 1px 2px rgba(255, 225, 250, 0.6) !important;
+      background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important;
+      border: 1.5px solid #c88abf !important; border-top: 2px solid #f6c0eb !important;
     }
-    .env-ghost .envelope-lid {
-      border-top-color: #261135 !important;
-      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
-    }
-    .env-ghost .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #fae1f5 0%, #e5a7da 50%, #b85fa7 100%) !important;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 245, 255, 0.85), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
-    }
-    .env-ghost .envelope-hint {
-      color: #e5a7da !important; text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
-    }
+    .env-ghost .envelope-lid { border-top-color: #261135 !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工 3D 暗夜墨绿皮革 + 显式立体折痕 + 黄金烫金边框) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒 + 经典V型折痕 + 巴洛克角饰) */
     .env-witchy .envelope-wrapper {
       background:
-        radial-gradient(circle at 50% 30%, rgba(46, 204, 113, 0.25) 0%, transparent 65%),
-        linear-gradient(135deg, rgba(0,0,0,0.85) 0%, transparent 45%),
-        linear-gradient(225deg, rgba(0,0,0,0.85) 0%, transparent 45%),
-        linear-gradient(150deg, #051912 0%, #020907 60%, #000302 100%) !important;
+        radial-gradient(circle at 50% 30%, rgba(46, 204, 113, 0.28) 0%, transparent 65%),
+        linear-gradient(150deg, #071f17 0%, #030c09 60%, #000302 100%) !important;
       border: 2px solid #d4af37 !important;
       border-top: 2.5px solid #ffe89e !important;
       outline: 2px solid rgba(212, 175, 55, 0.7) !important;
@@ -240,15 +170,15 @@
       border-top-color: #020a07 !important;
       filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.99)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9)) !important;
     }
-    /* 显式恢复经典信封折痕线（V型口袋与斜向压纹） */
+    /* 显式恢复经典信封V型折痕线与斜向压纹 */
     .env-witchy .envelope-wrapper::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
-      background: linear-gradient(116deg, transparent 49.2%, rgba(212, 175, 55, 0.35) 49.8%, rgba(212, 175, 55, 0.6) 50%, transparent 50.8%),
-                  linear-gradient(64deg, transparent 49.2%, rgba(212, 175, 55, 0.35) 49.8%, rgba(212, 175, 55, 0.6) 50%, transparent 50.8%);
+      background: linear-gradient(116deg, transparent 49.2%, rgba(212, 175, 55, 0.4) 49.8%, rgba(212, 175, 55, 0.65) 50%, transparent 50.8%),
+                  linear-gradient(64deg, transparent 49.2%, rgba(212, 175, 55, 0.4) 49.8%, rgba(212, 175, 55, 0.65) 50%, transparent 50.8%),
+                  linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%);
     }
-    /* 四角重工黄金巴洛克角饰 */
     .env-witchy .envelope-wrapper::before {
-      content: ""; position: absolute; inset: 6px; border: 1px dashed rgba(212, 175, 55, 0.4); pointer-events: none; z-index: 3;
+      content: ""; position: absolute; inset: 6px; border: 1px dashed rgba(212, 175, 55, 0.45); pointer-events: none; z-index: 3;
     }
 
     /* 女巫毒药锅火漆印 (Poison Cauldron Wax Seal) */
@@ -307,241 +237,36 @@
       opacity: 1 !important; pointer-events: auto !important;
     }
 
-    /* 1. 金缮信纸 */
-    .paper-kintsugi {
-      background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 0 0 5px #fcf9f2, inset 0 0 0 6px rgba(212, 175, 55, 0.3) !important;
-    }
+    /* 各类基础信纸 */
+    .paper-kintsugi { background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important; }
+    .paper-whiteflag { background: #fdfdf9 !important; border: 2px solid #8b261e !important; }
+    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; }
+    .paper-slate { background: linear-gradient(180deg, #b8cde0 0%, #faf7f0 65%) !important; }
+    .paper-olive { background-color: #faf8f2 !important; border: 1.5px solid #b8c4b0 !important; }
+    .paper-gothic { background: #110d16 !important; border: 1.8px solid #d4af37 !important; color: #f3ece1 !important; }
+    .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
+    .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* 2. 白旗信纸 */
-    .paper-whiteflag {
-      background: #fdfdf9 !important; border: 2px solid #8b261e !important;
-      outline: 1px solid rgba(139, 38, 30, 0.35) !important; outline-offset: -7px !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 35px rgba(139, 38, 30, 0.04) !important;
-    }
-    .paper-whiteflag::before {
-      content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 240px; height: 240px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' stroke='%238b261e' stroke-width='2' fill='none' stroke-dasharray='4 3'/%3E%3Ccircle cx='50' cy='50' r='38' stroke='%238b261e' stroke-width='1.5' fill='none'/%3E%3Ctext x='50' y='28' font-size='7' font-family='serif' text-anchor='middle' fill='%238b261e' letter-spacing='2'%3EOFFICIAL TREATY%3C/text%3E%3Ctext x='50' y='78' font-size='6.5' font-family='serif' text-anchor='middle' fill='%238b261e' letter-spacing='1.5'%3EPEACE %26 SURRENDER%3C/text%3E%3Cpath d='M50 36 C42 43 36 49 42 62 C46 56 50 54 50 54 C50 54 54 56 58 62 C64 49 58 43 50 36 Z' fill='%238b261e'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.09; pointer-events: none; z-index: 1;
-    }
-    .paper-whiteflag .recipient-name { color: #8b261e !important; font-family: 'Cinzel', serif !important; font-size: 21px !important; }
-    .paper-whiteflag .days-badge { background: rgba(139, 38, 30, 0.08) !important; color: #8b261e !important; border: 1px solid rgba(139, 38, 30, 0.25) !important; }
-
-    /* 3. 折角便签信纸 */
-    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5) !important; }
-    .paper-origami .letter-body {
-      font-size: 22px !important; line-height: 36px !important;
-      background-image: repeating-linear-gradient(transparent 0px, transparent 35px, #d8cfb7 35px, #d8cfb7 36px) !important;
-      background-size: 100% 36px !important; background-position: 0 28px !important; background-attachment: local !important; padding: 0 !important;
-    }
-    .paper-origami .letter-body p { margin: 0 0 36px 0 !important; line-height: 36px !important; }
-
-    /* 4. 雨过天晴信纸 */
-    .paper-slate {
-      background: linear-gradient(180deg, #b8cde0 0%, #d8e5f0 30%, #faf7f0 65%, #ffe6be 100%) !important;
-      border: 1.5px solid #9bb5cc !important; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 35px rgba(255, 255, 255, 0.6) !important;
-    }
-    .paper-slate .recipient-name { color: #283e54 !important; }
-    .paper-slate .days-badge { background: rgba(60, 85, 110, 0.12) !important; color: #203548 !important; border: 1px solid rgba(60, 85, 110, 0.25) !important; }
-
-    /* 5. 橄榄和解信纸 */
-    .paper-olive {
-      background-color: #faf8f2 !important;
-      background-image: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.7) 0%, rgba(235, 230, 218, 0.35) 100%),
-                        radial-gradient(#b0a996 0.75px, transparent 0.75px) !important;
-      background-size: 100% 100%, 18px 18px !important;
-      border: 1.5px solid #b8c4b0 !important; outline: 1px solid rgba(100, 120, 92, 0.32) !important; outline-offset: -7px !important;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), inset 0 0 45px rgba(110, 128, 102, 0.07) !important;
-    }
-    .paper-olive::before {
-      content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 250px; height: 250px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M25 80 C40 65 55 45 75 20' stroke='%23586e50' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 62 C35 55 35 48 42 47 C48 47 50 54 40 62 Z' fill='%23586e50'/%3E%3Cpath d='M46 54 C54 52 58 46 54 40 C50 38 43 45 46 54 Z' fill='%23586e50'/%3E%3Cpath d='M55 43 C52 35 53 28 60 28 C66 29 67 36 55 43 Z' fill='%23586e50'/%3E%3Cpath d='M63 34 C71 33 76 27 72 21 C68 19 61 25 63 34 Z' fill='%23586e50'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; opacity: 0.085; pointer-events: none; z-index: 1;
-    }
-    .paper-olive .recipient-name { color: #44593d !important; }
-    .paper-olive .days-badge { background: rgba(100, 120, 92, 0.12) !important; color: #3b5034 !important; border: 1px solid rgba(100, 120, 92, 0.3) !important; }
-
-    /* 6. 万圣专属暗夜哥特信纸 */
-    .paper-gothic {
-      background:
-        radial-gradient(ellipse at 50% 18%, rgba(255, 120, 30, 0.18) 0%, rgba(45, 20, 35, 0.6) 45%, #110d16 85%),
-        #110d16 !important;
-      border: 1.8px solid #d4af37 !important;
-      outline: 1px dashed rgba(255, 159, 67, 0.4) !important;
-      outline-offset: -8px !important;
-      box-shadow:
-        0 25px 65px rgba(0, 0, 0, 0.95),
-        inset 0 0 60px rgba(0, 0, 0, 0.9),
-        inset 0 0 25px rgba(255, 117, 24, 0.22) !important;
-      color: #f3ece1 !important;
-    }
-    .paper-gothic::before {
-      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
-      width: 270px; height: 270px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 25 C30 25 20 40 20 58 C20 75 32 85 50 85 C68 85 80 75 80 58 C80 40 70 25 50 25 Z' fill='none' stroke='%23ff7518' stroke-width='1.2' stroke-dasharray='3 3' opacity='0.15'/%3E%3Cpath d='M50 16 L53 25 L47 25 Z' fill='%23ff7518' opacity='0.2'/%3E%3Cpath d='M34 50 L42 56 L34 60 Z M66 50 L58 56 L66 60 Z' fill='%23ff7518' opacity='0.15'/%3E%3Cpath d='M35 70 Q50 78 65 70 Q50 85 35 70 Z' fill='%23ff7518' opacity='0.15'/%3E%3Cpath d='M25 28 Q30 20 38 24 Q34 26 30 29 Z M75 28 Q70 20 62 24 Q66 26 70 29 Z' fill='%23d4af37' opacity='0.12'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
-    }
-    .paper-gothic .letter-header {
-      border-bottom: none !important; position: relative; padding-bottom: 24px !important; margin-bottom: 24px !important;
-    }
-    .paper-gothic .letter-header::after {
-      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 86%; height: 20px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 24'%3E%3Cpath d='M10 12 L90 12 M150 12 L230 12' stroke='%23d4af37' stroke-width='1' opacity='0.45'/%3E%3Ccircle cx='120' cy='12' r='5' fill='%23ff7518'/%3E%3Cpath d='M116 11 L118 8 L120 11 L122 8 L124 11 Z' fill='%23221526'/%3E%3Cpath d='M106 12 Q112 5 116 12 Q112 19 106 12 Z M134 12 Q128 5 124 12 Q128 19 134 12 Z' fill='%23ff9f43' opacity='0.6'/%3E%3Ccircle cx='70' cy='12' r='2' fill='%23d4af37'/%3E%3Ccircle cx='170' cy='12' r='2' fill='%23d4af37'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain;
-    }
-    .paper-gothic .recipient-name {
-      color: #ff9f43 !important; font-family: 'Cinzel', serif !important; letter-spacing: 3px !important; text-shadow: 0 2px 14px rgba(255, 159, 67, 0.45);
-    }
-    .paper-gothic .days-badge {
-      background: rgba(180, 20, 20, 0.35) !important; color: #ff8e8e !important; border: 1px solid rgba(220, 40, 40, 0.6) !important; font-weight: 700 !important;
-    }
-    .paper-gothic .letter-body { color: #f1e7d8 !important; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
-    .paper-gothic .letter-footer { color: #b5a895 !important; }
-    .paper-gothic .letter-footer .sender-name { color: #ff9f43 !important; text-shadow: 0 2px 10px rgba(255, 159, 67, 0.4); }
-
-    .paper-gothic .scratch-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px dashed rgba(212, 175, 55, 0.35) !important; }
-    .paper-gothic .scratch-prompt { color: #ffae34 !important; font-family: 'Cinzel', serif !important; letter-spacing: 1.5px !important; }
-    .paper-gothic .bandaid-wrapper {
-      background: #1c1824 !important; border: 1.5px solid #5a422d !important;
-      border-radius: 8px !important; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
-    }
-    .paper-gothic .bandaid-wrapper::before, .paper-gothic .bandaid-wrapper::after { display: none !important; }
-    .paper-gothic .scratch-secret { color: #ffd369 !important; font-weight: 700 !important; }
-
-    .paper-gothic .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(212, 175, 55, 0.15) !important; }
-    .paper-gothic .runaway-question { color: #ffb834 !important; font-size: 26px !important; }
-    .paper-gothic .btn-yes {
-      background: linear-gradient(135deg, #ff7b25 0%, #c43a00 100%) !important; color: #fff !important;
-      box-shadow: 0 4px 15px rgba(255, 123, 37, 0.45) !important; font-weight: 700 !important;
-    }
-    .paper-gothic .btn-no { background: #24202e !important; color: #b0a6be !important; border: 1px solid #4a3e59 !important; }
-    .paper-gothic .runaway-success { color: #ffb834 !important; text-shadow: 0 2px 10px rgba(255, 184, 52, 0.3); }
-
-    /* 7. 焦糖南瓜专属信纸 */
-    .paper-pumpkin {
-      background-color: #fbf5eb !important;
-      background-image:
-        radial-gradient(ellipse at 50% 15%, rgba(255, 175, 60, 0.18) 0%, transparent 60%),
-        radial-gradient(circle at 50% 50%, #fbf5eb 0%, #f5e7d0 70%, #ebd4b5 100%) !important;
-      border: 1.8px solid #c97a29 !important;
-      outline: 1px dashed rgba(185, 95, 25, 0.45) !important;
-      outline-offset: -8px !important;
-      box-shadow:
-        0 25px 65px rgba(0, 0, 0, 0.7),
-        inset 0 0 50px rgba(160, 80, 20, 0.1),
-        inset 0 0 20px rgba(255, 240, 200, 0.6) !important;
-      color: #382013 !important;
-      position: relative;
-    }
-    .paper-pumpkin::before {
-      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
-      width: 270px; height: 270px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='94' stroke='%23b85209' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.16'/%3E%3Ccircle cx='100' cy='100' r='86' stroke='%23b85209' stroke-width='0.7' fill='none' opacity='0.13'/%3E%3Cpath d='M100 25 L102 32 L100 35 L98 32 Z M100 165 L102 172 L100 175 L98 172 Z' fill='%23b85209' opacity='0.2'/%3E%3Cpath d='M100 58 C82 58 64 72 64 98 C64 124 82 138 100 138 C118 138 136 124 136 98 C136 72 118 58 100 58 Z' fill='none' stroke='%23b85209' stroke-width='1.4' opacity='0.14'/%3E%3Cpath d='M88 62 C76 70 76 126 88 134 M112 62 C124 70 124 126 112 134' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.12'/%3E%3Cpath d='M100 58 L100 138' fill='none' stroke='%23b85209' stroke-width='0.8' stroke-dasharray='2 2' opacity='0.12'/%3E%3Cpath d='M100 45 Q98 52 100 58 Q103 52 101 45 Z' fill='%23b85209' opacity='0.2'/%3E%3Cpath d='M102 48 Q118 42 120 54 Q122 64 112 62' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.15'/%3E%3Cpath d='M98 48 Q82 42 80 54 Q78 64 88 62' fill='none' stroke='%23b85209' stroke-width='1' opacity='0.15'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
-    }
-    .paper-pumpkin .letter-header {
-      border-bottom: 1px solid rgba(185, 95, 25, 0.25) !important;
-      position: relative; padding-bottom: 20px !important; margin-bottom: 22px !important;
-      padding-left: 45px !important; padding-right: 45px !important;
-    }
-    .paper-pumpkin .letter-header::after {
-      content: ""; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-      width: 75%; height: 12px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 12'%3E%3Cpath d='M0 6 L65 6 M95 6 L160 6' stroke='%23c97a29' stroke-width='0.8' opacity='0.4'/%3E%3Ccircle cx='80' cy='6' r='3.5' fill='%23d96b14'/%3E%3Ccircle cx='70' cy='6' r='1.5' fill='%23c97a29'/%3E%3Ccircle cx='90' cy='6' r='1.5' fill='%23c97a29'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain;
-    }
-    .paper-pumpkin .recipient-name {
-      color: #9c4509 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    }
-    .paper-pumpkin .days-badge {
-      background: rgba(201, 122, 41, 0.15) !important; color: #8c3b04 !important; border: 1px solid rgba(201, 122, 41, 0.35) !important; font-weight: 700 !important;
-    }
-    .paper-pumpkin .letter-body { color: #3b2214 !important; line-height: 1.95 !important; }
-    .paper-pumpkin .letter-footer { color: #855c3c !important; }
-    .paper-pumpkin .letter-footer .sender-name {
-      color: #9c4509 !important; font-weight: 700 !important;
-    }
-
-    .paper-pumpkin .scratch-section { background: rgba(211, 84, 0, 0.04) !important; border-color: rgba(211, 84, 0, 0.25) !important; }
-    .paper-pumpkin .scratch-prompt { color: #a0490b !important; font-family: 'Cinzel', serif !important; }
-    .paper-pumpkin .bandaid-wrapper { background: #f7e1c8 !important; border: 1px solid #d49f6a !important; border-radius: 8px !important; }
-    .paper-pumpkin .bandaid-wrapper::before, .paper-pumpkin .bandaid-wrapper::after { display: none !important; }
-    .paper-pumpkin .scratch-secret { color: #873600 !important; font-weight: 700 !important; }
-
-    .paper-pumpkin .runaway-section { background: rgba(211, 84, 0, 0.04) !important; border: 1px solid rgba(211, 84, 0, 0.15) !important; }
-    .paper-pumpkin .runaway-question { color: #a0490b !important; }
-    .paper-pumpkin .btn-yes {
-      background: linear-gradient(135deg, #e67e22 0%, #b94e00 100%) !important; color: #fff !important;
-      box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35) !important;
-    }
-    .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
-    .paper-pumpkin .runaway-success { color: #a0490b !important; }
-
-    /* 8. Pastel Spooky (粉紫小幽灵专属信纸) */
-    .paper-ghost {
-      background-color: #fdf8fc !important;
-      background-image:
-        radial-gradient(ellipse at 50% 15%, rgba(248, 205, 240, 0.28) 0%, transparent 60%),
-        radial-gradient(circle at 50% 50%, #fdf8fc 0%, #faeef8 70%, #f2daf0 100%) !important;
-      border: 1.8px solid #c88abf !important;
-      outline: 1px dashed rgba(185, 110, 175, 0.5) !important;
-      outline-offset: -8px !important;
-      box-shadow: 0 25px 65px rgba(35, 15, 45, 0.6), inset 0 0 50px rgba(180, 110, 170, 0.12), inset 0 0 20px rgba(255, 245, 255, 0.8) !important;
-      color: #3b1f3c !important;
-      position: relative;
-    }
-    .paper-ghost::before {
-      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
-      width: 260px; height: 260px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b865a7' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='84' stroke='%23b865a7' stroke-width='0.7' fill='none' opacity='0.14'/%3E%3Cpath d='M100 20 L102 28 L100 32 L98 28 Z M100 168 L102 176 L100 180 L98 176 Z' fill='%23b865a7' opacity='0.22'/%3E%3Cpath d='M100 62 C84 62 76 74 76 96 C76 114 72 124 78 132 C82 135 88 130 92 133 C96 135 100 130 104 133 C108 130 112 135 116 132 C122 124 118 114 118 96 C118 74 110 62 100 62 Z' fill='none' stroke='%23b865a7' stroke-width='1.4' opacity='0.16'/%3E%3Ccircle cx='92' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Ccircle cx='108' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cellipse cx='100' cy='102' rx='2.5' ry='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cpath d='M126 75 L129 82 L136 84 L130 88 L131 95 L125 90 L119 94 L122 87 L116 83 L123 82 Z' fill='none' stroke='%23b865a7' stroke-width='0.9' opacity='0.15'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
-    }
-    .paper-ghost::after {
-      content: ""; position: absolute; top: 8px; left: 8px; right: 8px; height: 60px;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M0 0 L50 0 M0 0 L0 50 M0 0 L40 40 M0 0 L18 45 M0 0 L45 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M12 0 Q10 10 0 12 M25 0 Q20 20 0 25 M38 0 Q30 30 0 38 M50 0 Q40 40 0 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='40' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M40 40 L40 52 M37 52 L43 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M60 0 L10 0 M60 0 L60 50 M60 0 L20 40 M60 0 L42 45 M60 0 L15 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M48 0 Q50 10 60 12 M35 0 Q40 20 60 25 M22 0 Q30 30 60 38 M10 0 Q20 40 60 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='20' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M20 40 L20 52 M17 52 L23 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E");
-      background-position: left top, right top; background-repeat: no-repeat; background-size: 55px 55px; pointer-events: none; z-index: 2;
-    }
-    .paper-ghost .letter-header {
-      border-bottom: none !important; position: relative; padding-bottom: 22px !important; margin-bottom: 22px !important; padding-left: 45px !important; padding-right: 45px !important;
-    }
-    .paper-ghost .letter-header::after {
-      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 82%; height: 16px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16'%3E%3Cpath d='M0 8 L80 8 M120 8 L200 8' stroke='%23c88abf' stroke-width='0.8' opacity='0.45'/%3E%3Cpath d='M100 2 C96 2 93 5 93 9 C93 13 95 14 97 13 C99 14 101 13 103 14 C105 13 107 14 107 9 C107 5 104 2 100 2 Z' fill='%23b85fa7'/%3E%3Ccircle cx='98' cy='6' r='0.8' fill='%23ffffff'/%3E%3Ccircle cx='102' cy='6' r='0.8' fill='%23ffffff'/%3E%3Ccircle cx='104' cy='11' r='2' fill='%23ff9f43'/%3E%3Ccircle cx='85' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Ccircle cx='115' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Cpath d='M70 8 L72 5 L74 8 L72 11 Z M126 8 L128 5 L130 8 L128 11 Z' fill='none' stroke='%23c88abf' stroke-width='1' opacity='0.8'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain;
-    }
-    .paper-ghost .recipient-name { color: #8c327a !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); }
-    .paper-ghost .days-badge { background: rgba(200, 138, 191, 0.18) !important; color: #802870 !important; border: 1px solid rgba(200, 138, 191, 0.4) !important; font-weight: 700 !important; }
-    .paper-ghost .letter-body { color: #401b42 !important; line-height: 1.95 !important; }
-    .paper-ghost .letter-footer { color: #784877 !important; }
-    .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
-
-    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜剪影插画魔典) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜剪影插画魔典，完美防重叠) */
     .paper-witchy {
       background-color: #061511 !important;
       background-image:
-        radial-gradient(circle at 50% 28%, rgba(46, 204, 113, 0.22) 0%, rgba(6, 21, 17, 0.9) 60%, #020806 100%) !important;
+        radial-gradient(circle at 50% 28%, rgba(46, 204, 113, 0.22) 0%, rgba(6, 21, 17, 0.95) 60%, #010403 100%) !important;
       border: 2.2px solid #d4af37 !important;
       outline: 1.5px solid rgba(212, 175, 55, 0.6) !important;
       outline-offset: -7px !important;
       box-shadow:
         0 35px 80px rgba(0, 0, 0, 0.95),
-        inset 0 0 90px rgba(0, 0, 0, 0.9),
-        inset 0 0 30px rgba(46, 204, 113, 0.18) !important;
+        inset 0 0 90px rgba(0, 0, 0, 0.95),
+        inset 0 0 30px rgba(46, 204, 113, 0.15) !important;
       color: #f3ece1 !important;
       position: relative;
     }
-    /* 正中央重工暗夜剪影插画：魔幻圆月、尖顶古堡、飞蝠与枯树 */
     .paper-witchy::before {
       content: ""; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
       width: 290px; height: 290px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='fullMoon' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23aef3c7' stop-opacity='0.35'/%3E%3Cstop offset='70%25' stop-color='%232ecc71' stop-opacity='0.12'/%3E%3Cstop offset='100%25' stop-color='%23051912' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='120' r='55' fill='url(%23fullMoon)'/%3E%3Ccircle cx='150' cy='120' r='48' fill='none' stroke='%23aef3c7' stroke-width='1' opacity='0.4'/%3E%3Cpath d='M80 60 Q95 40 110 55 T140 50' fill='none' stroke='%23d4af37' stroke-width='0.8' opacity='0.35'/%3E%3Cpath d='M30 220 L35 180 L40 195 L45 165 L50 195 L55 175 L60 220 Z' fill='%23040c09'/%3E%3Cpath d='M235 220 L240 170 L245 185 L252 145 L258 185 L265 175 L270 220 Z' fill='%23040c09'/%3E%3Cpath d='M120 220 L125 155 L132 170 L138 135 L145 125 L152 135 L158 170 L165 155 L170 220 Z' fill='%23040c09'/%3E%3Cpath d='M143 125 L143 115 L145 112 L147 115 L147 125 Z' fill='%23d4af37' opacity='0.8'/%3E%3Cpath d='M100 80 Q110 70 125 78' fill='%23d4af37' opacity='0.7'/%3E%3Cpath d='M180 90 Q195 82 205 92' fill='%23d4af37' opacity='0.7'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1; opacity: 0.28;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='fullMoon' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23aef3c7' stop-opacity='0.25'/%3E%3Cstop offset='70%25' stop-color='%232ecc71' stop-opacity='0.08'/%3E%3Cstop offset='100%25' stop-color='%23051912' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='120' r='55' fill='url(%23fullMoon)'/%3E%3Cpath d='M30 220 L35 180 L40 195 L45 165 L50 195 L55 175 L60 220 Z' fill='%23020605'/%3E%3Cpath d='M235 220 L240 170 L245 185 L252 145 L258 185 L265 175 L270 220 Z' fill='%23020605'/%3E%3Cpath d='M120 220 L125 155 L132 170 L138 135 L145 125 L152 135 L158 170 L165 155 L170 220 Z' fill='%23020605'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1; opacity: 0.2;
     }
     .paper-witchy::after {
       content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
@@ -550,7 +275,6 @@
     .paper-witchy .letter-header {
       border-bottom: none !important; position: relative; padding-bottom: 26px !important; margin-bottom: 24px !important; padding-left: 45px !important; padding-right: 45px !important; z-index: 3;
     }
-    /* 抬头分隔饰带：三相女神月相 */
     .paper-witchy .letter-header::after {
       content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 85%; height: 18px;
@@ -569,7 +293,7 @@
       color: #ffe89e !important; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
     }
 
-    /* 女巫款拍立得相框：维多利亚古董黄铜雕花角贴 */
+    /* 女巫款拍立得相框 */
     .paper-witchy .polaroid-card {
       background: linear-gradient(145deg, #0d2820 0%, #04100c 100%) !important;
       border: 1.8px solid #d4af37 !important;
@@ -593,7 +317,7 @@
     .paper-witchy .polaroid-back { background: #061813 !important; border: 1.5px dashed #d4af37 !important; }
     .paper-witchy .polaroid-back-text { color: #f3e5ab !important; }
 
-    /* 女巫款刮刮乐：奥术水晶球宝箱 (Scrying Crystal Vault) */
+    /* 女巫款刮刮乐：奥术水晶球宝箱 */
     .paper-witchy .scratch-section {
       position: relative !important;
       background: rgba(255, 255, 255, 0.03) !important;
@@ -628,22 +352,25 @@
     .paper-witchy .btn-no { background: #162e26 !important; color: #d4af37 !important; border: 1px solid #d4af37 !important; }
     .paper-witchy .runaway-success { color: #ffe89e !important; }
 
+    /* 毒苹果互动按钮（完美固定在左上角外角） */
+    .poison-apple-interactive {
+      position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
+      cursor: pointer; z-index: 28; transition: transform 0.2s ease;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+    }
+    .poison-apple-interactive:hover { transform: scale(1.15) rotate(-8deg); }
+    .poison-apple-interactive:active { transform: scale(0.9); }
+
     /* 各类外挂邮票选择性显示 */
     .halloween-stamp, .ghost-stamp, .witchy-stamp { display: none; }
     .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
     .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
-    .paper-witchy .witchy-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #071712; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.6); border: 1px dashed #d4af37; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
+    .paper-witchy .witchy-stamp { display: none !important; } /* 使用毒苹果替代 */
 
     .stamp-inner {
       width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
       flex-direction: column; align-items: center; justify-content: space-between; padding: 3px 2px; box-sizing: border-box;
     }
-    .paper-witchy .witchy-stamp .stamp-inner { border-color: #d4af37; background: #071712; }
-    .paper-witchy .witchy-stamp .stamp-price, .paper-witchy .witchy-stamp .stamp-label { color: #ffe89e !important; }
-
-    .stamp-price { font-size: 7.5px; font-weight: 800; color: #9c4509; font-family: 'Cinzel', serif; align-self: flex-end; padding-right: 2px; }
-    .stamp-icon { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px rgba(180, 80, 10, 0.3)); }
-    .stamp-label { font-size: 5.5px; font-weight: 700; color: #9c4509; font-family: 'Cinzel', serif; letter-spacing: 0.5px; }
 
     .postmark-overlay {
       position: absolute; top: -6px; right: -15px; width: 68px; height: 46px;
@@ -652,6 +379,18 @@
     }
 
     .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
+
+    /* 虫子蝎子蜘蛛爬行彩蛋样式 */
+    .creepy-crawly {
+      position: fixed; font-size: 24px; pointer-events: none; z-index: 999999;
+      animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+    }
+    @keyframes crawlOut {
+      0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
+    }
 
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
@@ -822,27 +561,14 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 女巫占星毒苹果互动装置（替代原邮票位置） -->
-    <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy surprise! 🍎">
-      <svg viewBox="0 0 36 36" style="width:100%; height:100%; filter:drop-shadow(0 2px 5px rgba(46,204,113,0.7));">
+    <!-- 女巫占星毒苹果互动装置（完美固定在左上角，点击释放虫子、蝎子、蜘蛛） -->
+    <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy magic surprise! 🍎">
+      <svg viewBox="0 0 36 36" style="width:100%; height:100%;">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
         <path d="M18 4 L18 8 M18 4 Q21 2 23 4" fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round"/>
         <circle cx="12" cy="18" r="3" fill="#2ecc71" opacity="0.7"/>
         <path d="M15 14 Q18 17 21 14" fill="none" stroke="#ffe89e" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-    </div>
-
-    <!-- 女巫占星邮票 (其他款式时显示) -->
-    <div class="witchy-stamp" id="witchyStamp" title="Astro Post 🌙">
-      <div class="stamp-inner" style="border-color:#b89742; background:#f4f8f5;">
-        <span class="stamp-price" style="color:#145a32;">31¢</span>
-        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(46,204,113,0.3));">
-          <path d="M12 2 L14.5 9 L22 11.5 L14.5 14 L12 21 L9.5 14 L2 11.5 L9.5 9 Z" fill="#2ecc71"/>
-          <circle cx="12" cy="11.5" r="3" fill="#f3e5ab"/>
-        </svg>
-        <span class="stamp-label" style="color:#145a32;">ASTRO POST</span>
-      </div>
-      <div class="postmark-overlay"></div>
     </div>
 
     <div class="letter-header">
@@ -976,7 +702,7 @@
             `;
           }
         } else if (envStyle === "witchy") {
-          if (hintEl) hintEl.innerText = "✦ BREW THE MAGICAL POTION 🧪 ✦";
+          if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
           if (dateBadge) dateBadge.innerText = "✦ TRIPLE MOON COVEN 🔮 ✦";
           if (waxSeal) {
             waxSeal.innerHTML = `
@@ -1174,7 +900,7 @@
       }
     }
 
-    // 开信爆裂礼花（女巫款加入女巫帽、扫帚、乌鸦、魔药瓶等元素）
+    // 开信爆裂礼花
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -1328,7 +1054,7 @@
         ctx.fillStyle = "#cca0c5";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else if (style === 'witchy') {
-        ctx.fillStyle = "#0a2917";
+        ctx.fillStyle = "#0d2820";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else {
         if (style === 'pumpkin') ctx.fillStyle = "#cf782b";
