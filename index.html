@@ -102,7 +102,7 @@
     .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
     .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒，自然立体折痕与光影) */
+    /* 9. Witchy Celestial (午夜女巫占星款：纯净墨绿丝绒，已移除所有金色折痕线条) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.22) 0%, transparent 60%),
@@ -120,12 +120,10 @@
       border-top-color: #04100c !important;
       filter: drop-shadow(0 15px 22px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8)) !important;
     }
-    /* 采用高雅柔和的纸张光影折痕（非生硬硬线），完美还原正常信封立体口袋感 */
+    /* 仅保留高雅的自然光影阴影，彻底去掉任何生硬折痕线条 */
     .env-witchy .envelope-wrapper::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
-      background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.45) 100%),
-                  linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 50%),
-                  linear-gradient(225deg, rgba(0,0,0,0.35) 0%, transparent 50%);
+      background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%);
     }
     /* 四角重工巴洛克烫金角花 */
     .env-witchy .envelope-wrapper::before {
@@ -198,7 +196,7 @@
     .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
     .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜剪影插画魔典，完美防重叠) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜剪影插画魔典) */
     .paper-witchy {
       background-color: #061511 !important;
       background-image:
@@ -303,7 +301,7 @@
     .paper-witchy .btn-no { background: #162e26 !important; color: #d4af37 !important; border: 1px solid #d4af37 !important; }
     .paper-witchy .runaway-success { color: #ffe89e !important; }
 
-    /* 毒苹果互动按钮（完美固定在左上角外角） */
+    /* 毒苹果互动按钮 */
     .poison-apple-interactive {
       position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
       cursor: pointer; z-index: 28; transition: transform 0.2s ease;
@@ -512,7 +510,7 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 女巫占星毒苹果互动装置（完美固定在左上角，点击释放虫子、蝎子、蜘蛛） -->
+    <!-- 女巫占星毒苹果互动装置 -->
     <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy magic surprise! 🍎">
       <svg viewBox="0 0 36 36" style="width:100%; height:100%;">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
@@ -621,7 +619,12 @@
       if (envelopeStage) envelopeStage.className = "envelope-stage env-" + envStyle;
       if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
-      // 专属火漆与文案自适应
+      if (envStyle === "witchy") {
+        if (!data.recipient || data.recipient === "My Love") data.recipient = "My Celestial Soulmate";
+        if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
+        if (dateBadge) dateBadge.innerText = "✦ TRIPLE MOON COVEN 🔮 ✦";
+      }
+
       if (isHalloween) {
         if (envStyle === "pumpkin") {
           if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
@@ -689,16 +692,13 @@
         }
       }
 
-      // 抬头与署名
       const recEl = getEl("recipientText", ".recipient-name");
       const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
       if (sendEl && data.sender) sendEl.innerText = data.sender;
 
-      // 4. 核心：3D 翻转拍立得卡片轮播渲染
       initPolaroidFlipGallery(data.photos);
 
-      // 5. 刮刮乐模块
       const scSection = getEl("scratchSection", ".scratch-section");
       if (data.scratchCard && data.scratchCard.enabled) {
         if (scSection) scSection.style.display = "block";
@@ -707,7 +707,6 @@
         if (scSection) scSection.style.display = "none";
       }
 
-      // 6. 追逐按钮
       const rqSection = getEl("runawaySection", ".runaway-section");
       if (data.runawayQuestion && data.runawayQuestion.enabled) {
         if (rqSection) rqSection.style.display = "block";
@@ -720,7 +719,6 @@
         bgMusic.src = data.musicUrl;
       }
 
-      // 款式专属背景粒子动效自适应
       const styleAutoEffects = {
         "kintsugi":  "gold-dust",
         "whiteflag": "gold-dust",
@@ -735,7 +733,6 @@
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
 
-      // 毒苹果互动点击事件：触发虫子、蝎子、蜘蛛爬行彩蛋
       const poisonAppleBtn = document.getElementById("poisonAppleBtn");
       if (poisonAppleBtn) {
         poisonAppleBtn.onclick = (e) => {
@@ -748,7 +745,6 @@
       }
     }
 
-    // 虫子、蝎子、蜘蛛爬行生成器
     function createCreepyCrawlies(x, y) {
       const crawlies = ['🕷️', '🦂', '🪲', '🐛', '🕷️', '🐞'];
       for (let i = 0; i < 12; i++) {
@@ -773,7 +769,6 @@
       }
     }
 
-    // 拍立得 3D 翻转卡片与轮播控制引擎
     function initPolaroidFlipGallery(photos) {
       const gallery = getEl("polaroidGallery", ".polaroid-gallery");
       const controls = getEl("polaroidControls", ".polaroid-controls");
@@ -851,7 +846,6 @@
       }
     }
 
-    // 开信爆裂礼花
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -910,7 +904,6 @@
       }
     }
 
-    // 点击信封开信
     if (envelopeWrapper) {
       envelopeWrapper.addEventListener("click", () => {
         if (bgMusic && bgMusic.src) {
@@ -936,7 +929,6 @@
       });
     }
 
-    // 打字机逻辑
     let isTypingDone = false;
     let forceSkip = false;
     function startLetterTyping() {
@@ -981,7 +973,6 @@
       typeNext();
     }
 
-    // 刮刮乐引擎
     function initScratchCard(cfg, style) {
       const cardTitle = getEl("scratchPrompt", ".scratch-prompt");
       const cardText = getEl("scratchSecret", ".scratch-secret");
@@ -1045,7 +1036,6 @@
       canvas.addEventListener("touchmove", scratch);
     }
 
-    // 追逐按钮引擎
     function initRunawayButton(cfg) {
       const qEl = getEl("runawayQuestion", ".runaway-question");
       const btnYes = getEl("btnYes", ".btn-yes");
@@ -1078,7 +1068,6 @@
       };
     }
 
-    // 背景物理粒子引擎
     const pCanvas = getEl("particleCanvas", "#particle-canvas") || document.querySelector("canvas");
     const pCtx = pCanvas ? pCanvas.getContext("2d") : null;
     let particles = [];
