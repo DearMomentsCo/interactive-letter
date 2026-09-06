@@ -12,8 +12,6 @@
   <style>
     :root {
       --primary-accent: #c5a059;
-      --envelope-base: #24272e;
-      --envelope-flap: #1e2026;
       --paper-cream: #faf7f2;
       --text-main: #2b2b2b;
       --letter-font: 'Caveat', cursive;
@@ -56,7 +54,7 @@
     .envelope-stage.opened { transform: translateY(140px) scale(0.88); opacity: 0; pointer-events: none; }
     
     .envelope-wrapper {
-      position: relative; width: 100%; height: 100%; background: var(--envelope-base);
+      position: relative; width: 100%; height: 100%;
       border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
       cursor: pointer; overflow: visible;
     }
@@ -64,13 +62,16 @@
     .envelope-lid {
       position: absolute; top: 0; left: 0; width: 0; height: 0;
       border-left: 165px solid transparent; border-right: 165px solid transparent;
-      border-top: 125px solid var(--envelope-flap); transform-origin: top center;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
+      transform-origin: top center; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5;
       filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
     }
     .envelope-stage.is-opening .envelope-lid { transform: rotateX(180deg); z-index: 1; }
 
-    /* ================= 独立主题 1：金缮款 (Kintsugi) ================= */
+    /* ========================================================
+       模块化隔离区：9 大主题独立 CSS 作用域
+       ======================================================== */
+
+    /* 1. 金缮修复款 (Kintsugi) */
     .env-kintsugi .envelope-wrapper { background: #24272e; }
     .env-kintsugi .envelope-lid { border-top-color: #1e2026; }
     .kintsugi-gold-overlay {
@@ -80,7 +81,7 @@
     .env-kintsugi .kintsugi-gold-overlay { display: block; }
     .paper-kintsugi { background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important; color: #2b2b2b !important; }
 
-    /* ================= 独立主题 2：白旗款 (Whiteflag) ================= */
+    /* 2. 白旗停战条约款 (White Flag) */
     .env-whiteflag .envelope-wrapper { background: #fdfdfd; border: 1px solid #e0e0e0; }
     .env-whiteflag .envelope-lid { border-top-color: #f2f2f2; }
     .env-whiteflag::after {
@@ -91,38 +92,51 @@
     .paper-whiteflag { background: #fdfdf9 !important; border: 2px solid #8b261e !important; color: #8b261e !important; }
     .paper-whiteflag .recipient-name { color: #8b261e !important; font-family: 'Cinzel', serif !important; }
 
-    /* ================= 独立主题 3：折角便签 (Origami) ================= */
+    /* 3. 折角便签手写款 (Origami) */
     .env-origami .envelope-wrapper { background: #fdfbf7; border: 1px dashed #cfc5af; }
     .env-origami .envelope-lid { border-top-color: #f3ecdb; }
     .env-origami .wax-seal { display: none !important; }
-    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; }
+    .env-origami::after {
+      content: "PEACE OFFERING ♡"; position: absolute; top: 110px; left: 50%;
+      transform: translateX(-50%) rotate(-3.5deg); width: 145px; height: 32px;
+      background: rgba(255, 182, 193, 0.85); backdrop-filter: blur(2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12); display: flex; justify-content: center;
+      align-items: center; color: #8c4a55; font-family: 'Caveat', cursive; font-size: 15px;
+      font-weight: 700; z-index: 8;
+      clip-path: polygon(4% 0%, 96% 0%, 100% 15%, 96% 30%, 100% 45%, 96% 60%, 100% 75%, 96% 90%, 100% 100%, 0% 100%, 4% 85%, 0% 70%, 4% 55%, 0% 40%, 4% 25%, 0% 10%);
+    }
+    .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; color: #3b2214 !important; }
+    .paper-origami .letter-body {
+      background-image: repeating-linear-gradient(transparent 0px, transparent 35px, #d8cfb7 35px, #d8cfb7 36px) !important;
+      background-size: 100% 36px !important; background-position: 0 28px !important; background-attachment: local !important;
+    }
 
-    /* ================= 独立主题 4：雨过天晴 (Slate) ================= */
+    /* 4. 雨过天晴款 (Slate) */
     .env-slate .envelope-wrapper { background: #5a728b; }
     .env-slate .envelope-lid { border-top-color: #4a5f75; }
     .paper-slate { background: linear-gradient(180deg, #b8cde0 0%, #faf7f0 65%) !important; color: #283e54 !important; }
 
-    /* ================= 独立主题 5：橄榄和解 (Olive) ================= */
+    /* 5. 橄榄枝和解款 (Olive) */
     .env-olive .envelope-wrapper { background-color: #e4ddcf; border: 1px solid #cac1ad; }
     .env-olive .envelope-lid { border-top-color: #dcd3c1; }
     .paper-olive { background-color: #faf8f2 !important; border: 1.5px solid #b8c4b0 !important; color: #44593d !important; }
 
-    /* ================= 独立主题 6：万圣哥特 (Gothic) ================= */
+    /* 6. 万圣暗夜哥特款 (Gothic) */
     .env-gothic .envelope-wrapper { background: linear-gradient(150deg, #2a1b35 0%, #15101a 60%, #0c0810 100%); border: 1.5px solid #d4af37; }
     .env-gothic .envelope-lid { border-top-color: #23162c; }
     .paper-gothic { background: #110d16 !important; border: 1.8px solid #d4af37 !important; color: #f3ece1 !important; }
 
-    /* ================= 独立主题 7：焦糖南瓜 (Pumpkin) ================= */
+    /* 7. 焦糖南瓜暖秋款 (Pumpkin) */
     .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%); border: 1.5px solid #d37a28; }
     .env-pumpkin .envelope-lid { border-top-color: #48220d; }
     .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
 
-    /* ================= 独立主题 8：粉紫小幽灵 (Ghost) ================= */
+    /* 8. 粉紫小幽灵治愈款 (Ghost) */
     .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%); border: 1.5px solid #c88abf; }
     .env-ghost .envelope-lid { border-top-color: #261135; }
     .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* ================= 独立主题 9：午夜鬼屋女巫款 (Witchy) ================= */
+    /* 9. 万圣鬼屋女巫款 (Witchy) */
     .env-witchy .envelope-wrapper {
       background: radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%), linear-gradient(150deg, #09241b 0%, #04100c 60%, #010403 100%) !important;
       border: 1.8px solid #d4af37 !important; border-top: 2.2px solid #ffe89e !important;
@@ -242,10 +256,12 @@
     .poison-apple-interactive {
       position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
       cursor: pointer; z-index: 28; transition: transform 0.2s ease;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7));
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.7)); display: none;
     }
+    .paper-witchy .poison-apple-interactive { display: block !important; }
     .poison-apple-interactive:hover { transform: scale(1.15) rotate(-8deg); }
     .poison-apple-interactive:active { transform: scale(0.9); }
+
     .creepy-crawly {
       position: fixed; font-size: 24px; pointer-events: none; z-index: 999999;
       animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -297,7 +313,7 @@
   </div>
 
   <div class="letter-container" id="letterContainer">
-    <!-- 毒苹果彩蛋按钮 -->
+    <!-- 女巫专属毒苹果彩蛋按钮 -->
     <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy magic surprise! 🍎">
       <svg viewBox="0 0 36 36" style="width:100%; height:100%;">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
@@ -324,7 +340,7 @@
     <div class="letter-body" id="letterBody"></div>
 
     <div class="scratch-section" id="scratchSection" style="display:none;">
-      <div class="scratch-prompt" id="scratchPrompt">✦ SCRY INTO THE HAUNTED HOUSE 🏰 ✦</div>
+      <div class="scratch-prompt" id="scratchPrompt">✦ SCRATCH HERE ✦</div>
       <div class="bandaid-wrapper" id="bandaidWrapper">
         <div class="scratch-secret" id="scratchSecret">Surprise!</div>
         <canvas id="scratchCanvas"></canvas>
@@ -397,27 +413,46 @@
     function renderUI(data) {
       const theme = data.theme || "peace";
       const envStyle = data.envelopeStyle || (theme === "halloween" ? "gothic" : "olive");
-      const isHalloween = (theme === "halloween");
 
       if (envelopeStage) envelopeStage.className = "envelope-stage env-" + envStyle;
       if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
+      // 主题专属提示语与火漆印定制
       if (envStyle === "witchy") {
         if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
         if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
+        if (waxSeal) {
+          waxSeal.innerHTML = `
+            <svg viewBox="0 0 32 32">
+              <path d="M7 14 C7 24, 25 24, 25 14 Z" fill="#f3e5ab" stroke="#145a32" stroke-width="1"/>
+              <path d="M5 11 L27 11 L26 14 L6 14 Z" fill="#f3e5ab"/>
+              <circle cx="14" cy="9" r="2" fill="#2ecc71"/>
+              <circle cx="19" cy="8" r="1.5" fill="#2ecc71"/>
+              <path d="M10 24 L8 28 M22 24 L24 28" stroke="#f3e5ab" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          `;
+        }
       } else if (envStyle === "ghost") {
         if (hintEl) hintEl.innerText = "✦ WAKE UP THE SWEET GHOST 👻 ✦";
         if (dateBadge) dateBadge.innerText = "✦ SPOOKY CUTE CLUB 💖 ✦";
-      }
-
-      if (isHalloween) {
-        if (envStyle === "pumpkin") {
-          if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
-          if (dateBadge) dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
-        } else if (envStyle === "witchy") {
-          if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
-          if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
+        if (waxSeal) {
+          waxSeal.innerHTML = `
+            <svg viewBox="0 0 32 32">
+              <path d="M16 5 C11 5 8 9 8 15 C8 20 6.5 23 8.5 26 C9.5 27 11 25.5 12.5 26 C14 26.5 15 25 16 26 C17 25 18 26.5 19.5 26 C21 25.5 22.5 27 23.5 26 C25.5 23 24 20 24 15 C24 9 21 5 16 5 Z" fill="#fff5fc"/>
+              <ellipse cx="12" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
+              <ellipse cx="20" cy="14" rx="1.6" ry="2.2" fill="#431852"/>
+            </svg>
+          `;
         }
+      } else if (envStyle === "pumpkin") {
+        if (hintEl) hintEl.innerText = "✦ TAP TO CARVE THE PUMPKIN 🎃 ✦";
+        if (dateBadge) dateBadge.innerText = "✦ SPOOKY & SWEET 🎃 ✦";
+      } else if (envStyle === "whiteflag") {
+        if (hintEl) hintEl.innerText = "✦ ACCEPT THE PEACE TREATY 🕊 ✦";
+        if (dateBadge) dateBadge.innerText = "OFFICIAL PEACE TREATY";
+      } else {
+        if (hintEl) hintEl.innerText = "TAP SEAL TO BREAK SILENCE";
+        if (dateBadge) dateBadge.innerText = "OFFICIAL PEACE TREATY";
       }
 
       const recEl = getEl("recipientText", ".recipient-name");
@@ -452,8 +487,7 @@
         "slate": "rain-to-sunshine", "olive": "olive-leaves", "gothic": "spooky-embers",
         "pumpkin": "pumpkin-glow", "ghost": "ghostly-pastels", "witchy": "celestial-sparks"
       };
-      const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
-      initParticles(bgType);
+      initParticles(styleAutoEffects[envStyle] || "gold-dust");
 
       const poisonAppleBtn = document.getElementById("poisonAppleBtn");
       if (poisonAppleBtn) {
@@ -538,7 +572,12 @@
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
       const rect = stage.getBoundingClientRect();
-      const items = style === 'ghost' ? ['👻', '🎀', '💖', '🍬'] : ['🧙‍♀️', '🧹', '🐦‍⬛', '🔮'];
+      let items = ['✨', '⭐', '🌟', '💛'];
+      if (style === 'ghost') items = ['👻', '🎀', '💖', '🍬'];
+      else if (style === 'witchy') items = ['🧙‍♀️', '🧹', '🐦‍⬛', '🔮'];
+      else if (style === 'gothic') items = ['🦇', '🕷️', '🔥', '🕸️'];
+      else if (style === 'pumpkin') items = ['🎃', '🍬', '🍂', '🍁'];
+
       for (let i = 0; i < 28; i++) {
         const p = document.createElement("div");
         p.innerText = items[Math.floor(Math.random() * items.length)];
@@ -610,7 +649,7 @@
       ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : "SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
+      ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : (style === 'ghost' ? "SCRATCH TO OPEN 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
       const scratch = (e) => {
