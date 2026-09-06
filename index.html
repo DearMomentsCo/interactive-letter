@@ -191,7 +191,7 @@
     .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
     .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡背景，高对比度不压字) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡) */
     .paper-witchy {
       background-color: #061511 !important;
       background-image:
@@ -577,7 +577,7 @@
       });
     }
 
-    // 2. 加载订单数据 (加入时间戳防缓存)
+    // 2. 加载订单数据 (带时间戳防缓存)
     fetch("data/" + orderId + ".json?t=" + Date.now())
       .then(res => {
         if (!res.ok) throw new Error("Order not found");
@@ -673,7 +673,7 @@
         }
       }
 
-      // 完全绑定 JSON 中的 recipient
+      // 完美信任并直接读取 JSON 中的 recipient 与 sender，绝不强行覆盖
       const recEl = getEl("recipientText", ".recipient-name");
       const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
@@ -961,13 +961,9 @@
       const canvas = document.getElementById("scratchCanvas");
       if (!canvas) return;
 
-      if (style === 'ghost') {
-        if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNWRAP FOR SWEET TREAT 🍬 ✦";
-      } else if (style === 'witchy') {
-        // 采用你确认的最地道文案
-        if (cardTitle) cardTitle.innerText = cfg.title || "✦ SCRY INTO THE HAUNTED HOUSE 🏰 ✦";
-      } else {
-        if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
+      // 彻底解耦：上方小标题完全听从 JSON 里的 scratchCard.title
+      if (cardTitle && cfg.title) {
+        cardTitle.innerText = cfg.title;
       }
       if (cardText && cfg.hiddenText) cardText.innerText = cfg.hiddenText;
 
@@ -992,6 +988,7 @@
       ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+      // 涂层上的文字统一为清晰的交互提示
       ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
