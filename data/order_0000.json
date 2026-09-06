@@ -1,18 +1,18 @@
 {
   "theme": "halloween",
-  "envelopeStyle": "witchy",
+  "envelopeStyle": "ghost",
   "musicUrl": "audio/order_0000.mp3",
-  "recipient": "My Cutest Boo 👻Ben",
-  "sender": "Your Favorite Ghost",
+  "recipient": "My Cutest Boo 👻",
+  "sender": "Your Friendly Ghost",
   "letterContent": [
-    "Welcome to the haunted house of our own magical story.",
-    "Every corner holds a sweet memory, and every shadow whispers your name.",
-    "May our spell last forever and ever! 🔮✨"
+    "You are my absolute favorite boo in the entire universe.",
+    "No tricks, just infinite cuddles, sweet treats, and pink magic with you.",
+    "Happy Spooky Season to the cutest ghost in my life! 💖👻"
   ],
   "photos": [
     {
       "url": "images/order_0000_1.jpg",
-      "caption": "Our spooky cute adventure ✨"
+      "caption": "Spooky cute memories with you ✨"
     },
     {
       "url": "images/order_0000_2.jpg",
@@ -21,15 +21,15 @@
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ DARE TO OPEN? 🏰 ✦",
-    "hiddenText": "Treat Claimed: Unlimited Hugs + Hot Chocolate Date ☕🎀"
+    "title": "✦ UNWRAP FOR SWEET TREAT 🍬 ✦",
+    "hiddenText": "Treat Claimed: Unlimited Hugs + Pink Macaron Date 🌸🎀"
   },
   "runawayQuestion": {
     "enabled": true,
     "question": "Will you be my boo forever?",
     "yesText": "YES, FOREVER BOO 👻",
-    "noText": "RUN AWAY",
+    "noText": "NO",
     "runawayTarget": "no",
-    "successMessage": "Yay! We're haunting this love forever! 💖✨"
+    "successMessage": "Yay! Spooky love forever! 💖✨"
   }
 }
