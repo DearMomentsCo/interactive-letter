@@ -219,6 +219,36 @@
       text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
     }
 
+    /* 9. Witchy Celestial (午夜女巫占星款专属信封) */
+    .env-witchy .envelope-wrapper {
+      background:
+        linear-gradient(135deg, rgba(0,0,0,0.5) 0%, transparent 48%),
+        linear-gradient(225deg, rgba(0,0,0,0.5) 0%, transparent 48%),
+        linear-gradient(0deg, rgba(15, 45, 35, 0.6) 0%, transparent 45%),
+        linear-gradient(150deg, #0d231d 0%, #081613 60%, #040c0a 100%) !important;
+      border: 1.5px solid #d4af37 !important;
+      border-top: 2px solid #aef3c7 !important;
+      outline: 1px dashed rgba(46, 204, 113, 0.45) !important;
+      outline-offset: -6px !important;
+      box-shadow:
+        0 35px 70px -15px rgba(0, 0, 0, 0.9),
+        0 15px 25px rgba(0, 0, 0, 0.6),
+        0 0 35px rgba(46, 204, 113, 0.2),
+        inset 0 1px 2px rgba(170, 245, 205, 0.5) !important;
+    }
+    .env-witchy .envelope-lid {
+      border-top-color: #0a1c18 !important;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
+    }
+    .env-witchy .wax-seal {
+      background: radial-gradient(circle at 35% 30%, #f3e5ab 0%, #2ecc71 40%, #145a32 100%) !important;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 255, 255, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
+    }
+    .env-witchy .envelope-hint {
+      color: #aef3c7 !important;
+      text-shadow: 0 0 10px rgba(46, 204, 113, 0.6) !important;
+    }
+
     /* 3D 浮雕火漆印通用 */
     .wax-seal {
       position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
@@ -436,7 +466,7 @@
     .paper-pumpkin .btn-no { background: #edd8c4 !important; color: #5d4037 !important; border: 1px solid #d7ba9d !important; }
     .paper-pumpkin .runaway-success { color: #a0490b !important; }
 
-    /* 8. Pastel Spooky (粉紫小幽灵专属：高浓度万圣节设计) */
+    /* 8. Pastel Spooky (粉紫小幽灵专属信纸) */
     .paper-ghost {
       background-color: #fdf8fc !important;
       background-image:
@@ -449,35 +479,21 @@
       color: #3b1f3c !important;
       position: relative;
     }
-
-    /* 正中央高定铜版小幽灵与星轨浮雕水印 */
     .paper-ghost::before {
       content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
       width: 260px; height: 260px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b865a7' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='84' stroke='%23b865a7' stroke-width='0.7' fill='none' opacity='0.14'/%3E%3Cpath d='M100 20 L102 28 L100 32 L98 28 Z M100 168 L102 176 L100 180 L98 176 Z' fill='%23b865a7' opacity='0.22'/%3E%3Cpath d='M100 62 C84 62 76 74 76 96 C76 114 72 124 78 132 C82 135 88 130 92 133 C96 135 100 130 104 133 C108 130 112 135 116 132 C122 124 118 114 118 96 C118 74 110 62 100 62 Z' fill='none' stroke='%23b865a7' stroke-width='1.4' opacity='0.16'/%3E%3Ccircle cx='92' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Ccircle cx='108' cy='92' r='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cellipse cx='100' cy='102' rx='2.5' ry='3.5' fill='%23b865a7' opacity='0.16'/%3E%3Cpath d='M126 75 L129 82 L136 84 L130 88 L131 95 L125 90 L119 94 L122 87 L116 83 L123 82 Z' fill='none' stroke='%23b865a7' stroke-width='0.9' opacity='0.15'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
     }
-
-    /* 信纸左右上角：维多利亚梦幻蜘蛛网与垂坠小星饰 */
     .paper-ghost::after {
       content: ""; position: absolute; top: 8px; left: 8px; right: 8px; height: 60px;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M0 0 L50 0 M0 0 L0 50 M0 0 L40 40 M0 0 L18 45 M0 0 L45 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M12 0 Q10 10 0 12 M25 0 Q20 20 0 25 M38 0 Q30 30 0 38 M50 0 Q40 40 0 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='40' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M40 40 L40 52 M37 52 L43 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E"),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M60 0 L10 0 M60 0 L60 50 M60 0 L20 40 M60 0 L42 45 M60 0 L15 18' stroke='%23c88abf' stroke-width='0.9' opacity='0.35' fill='none'/%3E%3Cpath d='M48 0 Q50 10 60 12 M35 0 Q40 20 60 25 M22 0 Q30 30 60 38 M10 0 Q20 40 60 50' stroke='%23c88abf' stroke-width='0.8' opacity='0.35' fill='none'/%3E%3Ccircle cx='20' cy='40' r='1.5' fill='%23b85fa7' opacity='0.5'/%3E%3Cpath d='M20 40 L20 52 M17 52 L23 52' stroke='%23c88abf' stroke-width='0.8' opacity='0.4'/%3E%3C/svg%3E");
-      background-position: left top, right top;
-      background-repeat: no-repeat;
-      background-size: 55px 55px;
-      pointer-events: none; z-index: 2;
+      background-position: left top, right top; background-repeat: no-repeat; background-size: 55px 55px; pointer-events: none; z-index: 2;
     }
-
-    /* 抬头万圣节专属：南瓜桶小幽灵与星月浮雕分隔饰带 */
     .paper-ghost .letter-header {
-      border-bottom: none !important;
-      position: relative;
-      padding-bottom: 22px !important;
-      margin-bottom: 22px !important;
-      padding-left: 45px !important;
-      padding-right: 45px !important;
+      border-bottom: none !important; position: relative; padding-bottom: 22px !important; margin-bottom: 22px !important; padding-left: 45px !important; padding-right: 45px !important;
     }
     .paper-ghost .letter-header::after {
       content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -485,137 +501,89 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16'%3E%3Cpath d='M0 8 L80 8 M120 8 L200 8' stroke='%23c88abf' stroke-width='0.8' opacity='0.45'/%3E%3Cpath d='M100 2 C96 2 93 5 93 9 C93 13 95 14 97 13 C99 14 101 13 103 14 C105 13 107 14 107 9 C107 5 104 2 100 2 Z' fill='%23b85fa7'/%3E%3Ccircle cx='98' cy='6' r='0.8' fill='%23ffffff'/%3E%3Ccircle cx='102' cy='6' r='0.8' fill='%23ffffff'/%3E%3Ccircle cx='104' cy='11' r='2' fill='%23ff9f43'/%3E%3Ccircle cx='85' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Ccircle cx='115' cy='8' r='1.5' fill='%23d88ec7'/%3E%3Cpath d='M70 8 L72 5 L74 8 L72 11 Z M126 8 L128 5 L130 8 L128 11 Z' fill='%23ffd166' opacity='0.8'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain;
     }
-
-    .paper-ghost .recipient-name {
-      color: #8c327a !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    }
-    .paper-ghost .days-badge {
-      background: rgba(200, 138, 191, 0.18) !important; color: #802870 !important; border: 1px solid rgba(200, 138, 191, 0.4) !important; font-weight: 700 !important;
-    }
+    .paper-ghost .recipient-name { color: #8c327a !important; font-family: 'Cinzel', serif !important; letter-spacing: 2px !important; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8); }
+    .paper-ghost .days-badge { background: rgba(200, 138, 191, 0.18) !important; color: #802870 !important; border: 1px solid rgba(200, 138, 191, 0.4) !important; font-weight: 700 !important; }
     .paper-ghost .letter-body { color: #401b42 !important; line-height: 1.95 !important; }
     .paper-ghost .letter-footer { color: #784877 !important; }
     .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
-
-    /* 小幽灵款专属外挂邮票 */
     .paper-ghost .ghost-stamp {
-      display: block !important;
-      position: absolute; top: -20px; left: -10px; width: 52px; height: 64px;
-      background: #fdf5fb; padding: 3.5px;
-      box-shadow: 0 6px 16px rgba(45, 15, 60, 0.28), 0 1px 3px rgba(0, 0, 0, 0.15);
+      display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px;
+      background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45, 15, 60, 0.28), 0 1px 3px rgba(0, 0, 0, 0.15);
       border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .paper-ghost .ghost-stamp:hover { transform: rotate(-6deg) scale(1.06); }
-    .paper-ghost .ghost-stamp:active { transform: rotate(-6deg) scale(0.94); }
     .ghost-stamp { display: none; }
 
-    /* ===== 万圣节高定糖果盒刮刮乐重构 ===== */
-    .paper-ghost .scratch-section {
-      position: relative !important;
-      background-color: #fdf5fa !important;
-      background-image: linear-gradient(
-        to right,
-        transparent calc(50% - 22px),
-        rgba(216, 142, 199, 0.45) calc(50% - 22px),
-        rgba(255, 230, 250, 0.9) calc(50% - 18px),
-        rgba(240, 185, 225, 0.85) calc(50% - 18px),
-        rgba(240, 185, 225, 0.85) calc(50% + 18px),
-        rgba(255, 230, 250, 0.9) calc(50% + 18px),
-        rgba(216, 142, 199, 0.45) calc(50% + 22px),
-        transparent calc(50% + 22px)
-      ) !important;
-      border: 2px solid #d49ec9 !important;
-      outline: 1.5px dashed rgba(184, 93, 168, 0.5) !important;
-      outline-offset: -5px !important;
-      border-radius: 16px !important;
-      padding: 26px 14px 18px 14px !important;
-      margin: 32px 0 24px 0 !important;
-      box-shadow: 0 12px 30px rgba(75, 20, 65, 0.16), inset 0 0 20px rgba(255, 255, 255, 0.8) !important;
+    /* 9. Witchy Celestial (午夜女巫占星款专属信纸) */
+    .paper-witchy {
+      background-color: #f7f9f7 !important;
+      background-image:
+        radial-gradient(ellipse at 50% 15%, rgba(46, 204, 113, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 50% 50%, #f7f9f7 0%, #edf2ee 70%, #dfe7e1 100%) !important;
+      border: 1.8px solid #b89742 !important;
+      outline: 1px dashed rgba(184, 151, 66, 0.45) !important;
+      outline-offset: -8px !important;
+      box-shadow: 0 25px 65px rgba(10, 25, 20, 0.65), inset 0 0 50px rgba(46, 204, 113, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.8) !important;
+      color: #1d2d2b !important;
+      position: relative;
     }
+    /* 正中央古典天文星盘与三相女神月亮水印 */
+    .paper-witchy::before {
+      content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
+      width: 270px; height: 270px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='92' stroke='%23b89742' stroke-width='1' fill='none' stroke-dasharray='4 3' opacity='0.2'/%3E%3Ccircle cx='100' cy='100' r='75' stroke='%23b89742' stroke-width='0.7' fill='none' opacity='0.16'/%3E%3Cpath d='M100 8 L100 192 M8 100 L192 100' stroke='%23b89742' stroke-width='0.7' opacity='0.15'/%3E%3Cpath d='M60 40 Q100 70 140 40 Q170 100 140 160 Q100 130 60 160 Q30 100 60 40 Z' fill='none' stroke='%23b89742' stroke-width='0.8' opacity='0.18'/%3E%3Ccircle cx='100' cy='100' r='14' fill='none' stroke='%232ecc71' stroke-width='1.2' opacity='0.25'/%3E%3Cpath d='M92 100 C92 95 96 92 100 92 C104 92 108 95 108 100 C108 105 100 112 100 112 C100 112 92 105 92 100 Z' fill='%232ecc71' opacity='0.25'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
+    }
+    /* 信纸四角天体八芒星阵装饰 */
+    .paper-witchy::after {
+      content: ""; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+      border: 1px solid rgba(184, 151, 66, 0.25); pointer-events: none; z-index: 2;
+    }
+    .paper-witchy .letter-header {
+      border-bottom: none !important; position: relative; padding-bottom: 22px !important; margin-bottom: 22px !important; padding-left: 45px !important; padding-right: 45px !important;
+    }
+    .paper-witchy .letter-header::after {
+      content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 82%; height: 16px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16'%3E%3Cpath d='M0 8 L80 8 M120 8 L200 8' stroke='%23b89742' stroke-width='0.8' opacity='0.5'/%3E%3Ccircle cx='100' cy='8' r='4' fill='%232ecc71'/%3E%3Cpath d='M92 8 Q100 2 108 8 Q100 14 92 8 Z' fill='none' stroke='%23b89742' stroke-width='1'/%3E%3Ccircle cx='60' cy='8' r='2' fill='%23b89742'/%3E%3Ccircle cx='140' cy='8' r='2' fill='%23b89742'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: contain;
+    }
+    .paper-witchy .recipient-name { color: #145a32 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2.5px !important; text-shadow: 0 1px 3px rgba(46, 204, 113, 0.3); }
+    .paper-witchy .days-badge { background: rgba(46, 204, 113, 0.15) !important; color: #0e3a21 !important; border: 1px solid rgba(46, 204, 113, 0.35) !important; font-weight: 700 !important; }
+    .paper-witchy .letter-body { color: #162b26 !important; line-height: 1.95 !important; }
+    .paper-witchy .letter-footer { color: #2d5a4c !important; }
+    .paper-witchy .letter-footer .sender-name { color: #145a32 !important; font-weight: 700 !important; }
 
-    /* 盒顶正中央：3D 立体粉金缎带蝴蝶结与双侧垂落飘带 */
-    .paper-ghost .scratch-section::before {
-      content: "" !important;
-      position: absolute !important;
-      top: -24px !important;
-      left: 50% !important;
-      transform: translateX(-50%) !important;
-      width: 84px !important;
-      height: 52px !important;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 74'%3E%3Cpath d='M46 36 L18 68 L36 60 L50 44 Z' fill='%238a2e75' opacity='0.85'/%3E%3Cpath d='M74 36 L102 68 L84 60 L70 44 Z' fill='%238a2e75' opacity='0.85'/%3E%3Cpath d='M46 36 L24 65 L36 60 Z' fill='%23b85fa7'/%3E%3Cpath d='M74 36 L96 65 L84 60 Z' fill='%23b85fa7'/%3E%3Cpath d='M60 32 C42 6, 8 10, 12 34 C14 50, 42 45, 60 35 Z' fill='%23d88ec7' stroke='%23ffffff' stroke-width='1.2'/%3E%3Cpath d='M56 32 C44 14, 20 16, 22 32 C24 42, 44 38, 56 34 Z' fill='%23efa4df' opacity='0.7'/%3E%3Cpath d='M60 32 C78 6, 112 10, 108 34 C106 50, 78 45, 60 35 Z' fill='%23d88ec7' stroke='%23ffffff' stroke-width='1.2'/%3E%3Cpath d='M64 32 C76 14, 100 16, 98 32 C96 42, 76 38, 64 34 Z' fill='%23efa4df' opacity='0.7'/%3E%3Cellipse cx='60' cy='33' rx='11' ry='9.5' fill='%239e3887' stroke='%23ffffff' stroke-width='1.2'/%3E%3Cellipse cx='60' cy='32' rx='7.5' ry='6.5' fill='%23f6c0eb'/%3E%3Ccircle cx='58' cy='30' r='1.8' fill='%23ffffff'/%3E%3C/svg%3E") !important;
-      background-repeat: no-repeat !important;
-      background-size: contain !important;
-      background-position: center !important;
-      filter: drop-shadow(0 4px 6px rgba(60, 15, 50, 0.35)) !important;
-      pointer-events: none !important;
-      z-index: 8 !important;
-    }
-
-    .paper-ghost .scratch-prompt {
-      color: #8c327a !important;
-      font-family: 'Cinzel', serif !important;
-      font-weight: 700 !important;
-      font-size: 11px !important;
-      letter-spacing: 1.5px !important;
-      margin-top: 4px !important;
-      margin-bottom: 12px !important;
-      text-align: center !important;
-    }
-
-    /* 糖果盒内芯托盘（深色高级甜品托盘凹槽） */
-    .paper-ghost .bandaid-wrapper {
-      position: relative !important;
-      background: #250d22 !important;
-      border: 2px solid #b85fa7 !important;
-      border-radius: 12px !important;
-      width: 100% !important;
-      max-width: 290px !important;
-      height: 88px !important;
-      margin: 0 auto !important;
-      overflow: hidden !important;
-      box-shadow: inset 0 5px 14px rgba(0, 0, 0, 0.7), 0 4px 14px rgba(90, 20, 75, 0.2) !important;
-    }
-    .paper-ghost .bandaid-wrapper::before,
-    .paper-ghost .bandaid-wrapper::after {
-      display: none !important;
-    }
-
-    /* 刮开后的惊喜文案（烫金糖纸金箔字体） */
-    .paper-ghost .scratch-secret {
-      width: 100% !important;
-      padding: 14px 20px !important;
-      font-size: 13.5px !important;
-      font-weight: 700 !important;
-      color: #ffdf9e !important;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9) !important;
-      font-family: 'Cinzel', serif !important;
-      line-height: 1.5 !important;
-      text-align: center !important;
-      box-sizing: border-box !important;
-    }
-
-    /* 甜酷粉紫追逐按钮 */
-    .paper-ghost .runaway-section {
-      background: rgba(255, 245, 252, 0.7) !important; border: 1px solid rgba(200, 138, 191, 0.35) !important;
-    }
-    .paper-ghost .runaway-question { color: #7b2568 !important; }
-    .paper-ghost .btn-yes {
-      background: linear-gradient(135deg, #d88ec7 0%, #b85da8 100%) !important; color: #fff !important;
-      box-shadow: 0 4px 15px rgba(184, 93, 168, 0.4) !important; font-weight: 700 !important;
-    }
-    .paper-ghost .btn-no { background: #f3e1ef !important; color: #7b2568 !important; border: 1px solid #d49ec9 !important; }
-    .paper-ghost .runaway-success { color: #8c327a !important; font-weight: 700 !important; }
-
-    /* 南瓜邮票组件 */
-    .paper-pumpkin .halloween-stamp {
+    /* 女巫占星款外挂邮票：ASTRO POST */
+    .paper-witchy .witchy-stamp {
       display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px;
-      background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28), 0 1px 3px rgba(0, 0, 0, 0.18);
-      border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26;
+      background: #f4f8f5; padding: 3.5px; box-shadow: 0 6px 16px rgba(10, 30, 20, 0.28), 0 1px 3px rgba(0, 0, 0, 0.15);
+      border: 1px dashed #b89742; transform: rotate(-6deg); cursor: pointer; z-index: 26;
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .paper-pumpkin .halloween-stamp:hover { transform: rotate(-6deg) scale(1.06); }
-    .paper-pumpkin .halloween-stamp:active { transform: rotate(-6deg) scale(0.94); }
-    .halloween-stamp { display: none; }
+    .witchy-stamp { display: none; }
+
+    /* 纸上刮刮乐与按钮适配女巫款 */
+    .paper-witchy .scratch-section { background: rgba(46, 204, 113, 0.04) !important; border: 1.5px dashed #b89742 !important; }
+    .paper-witchy .scratch-prompt { color: #145a32 !important; font-family: 'Cinzel', serif !important; }
+    .paper-witchy .bandaid-wrapper { background: #16262a !important; border: 1.5px solid #b89742 !important; border-radius: 10px !important; }
+    .paper-witchy .bandaid-wrapper::before, .paper-witchy .bandaid-wrapper::after { display: none !important; }
+    .paper-witchy .scratch-secret { color: #f3e5ab !important; font-weight: 700 !important; }
+
+    .paper-witchy .runaway-section { background: rgba(46, 204, 113, 0.04) !important; border: 1px solid rgba(184, 151, 66, 0.3) !important; }
+    .paper-witchy .runaway-question { color: #145a32 !important; }
+    .paper-witchy .btn-yes {
+      background: linear-gradient(135deg, #2ecc71 0%, #145a32 100%) !important; color: #fff !important;
+      box-shadow: 0 4px 15px rgba(46, 204, 113, 0.35) !important; font-weight: 700 !important;
+    }
+    .paper-witchy .btn-no { background: #d0e1d4 !important; color: #145a32 !important; border: 1px solid #b89742 !important; }
+    .paper-witchy .runaway-success { color: #145a32 !important; }
+
+    /* 南瓜邮票与幽灵邮票通用隐藏 */
+    .halloween-stamp, .ghost-stamp { display: none; }
+    .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
+    .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
+    .paper-witchy .witchy-stamp { display: block !important; }
 
     .stamp-inner {
       width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
@@ -641,7 +609,7 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
-    /* ===== 核心：3D 翻转拍立得卡片轮播（Flipover Carousel） ===== */
+    /* 3D 翻转拍立得卡片轮播 */
     .polaroid-gallery {
       position: relative; width: 100%; max-width: 290px; height: 380px; margin: 15px auto 10px auto; perspective: 1000px;
     }
@@ -672,24 +640,6 @@
     .polaroid-back-text { font-size: 21px; line-height: 1.6; font-family: 'Caveat', cursive; color: #3b2214; }
     .polaroid-back-hint { margin-top: 18px; font-size: 11px; opacity: 0.6; font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-    /* 小幽灵专属拍立得：粉紫蝙蝠翅膀相片角贴 */
-    .paper-ghost .polaroid-card {
-      border: 1px solid rgba(200, 138, 191, 0.45) !important;
-      box-shadow: 0 16px 36px rgba(60, 20, 70, 0.18), 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-      position: relative;
-    }
-    .paper-ghost .polaroid-front::before, .paper-ghost .polaroid-front::after {
-      content: ""; position: absolute; width: 34px; height: 26px; pointer-events: none; z-index: 6;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 26'%3E%3Cpath d='M0 0 L16 0 C14 6 10 10 4 12 C10 12 12 16 10 24 C6 18 0 16 0 16 Z' fill='%23b85fa7' opacity='0.85'/%3E%3Ccircle cx='5' cy='5' r='1.2' fill='%23ffd166'/%3E%3C/svg%3E");
-      background-size: contain; background-repeat: no-repeat;
-    }
-    .paper-ghost .polaroid-front::before { top: 4px; left: 4px; }
-    .paper-ghost .polaroid-front::after { top: 4px; right: 4px; transform: scaleX(-1); }
-
-    .paper-ghost .polaroid-front-hint { color: #8c327a !important; font-weight: 700; }
-    .paper-ghost .polaroid-back { background: #fcf4fa !important; border: 1px dashed #d49ec9 !important; }
-    .paper-ghost .polaroid-back-text { color: #5e1c53 !important; }
-
     /* 轮播切换按钮条 */
     .polaroid-controls {
       display: flex; justify-content: center; align-items: center; gap: 18px;
@@ -701,7 +651,6 @@
       display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold;
       transition: all 0.2s ease;
     }
-    .polaroid-nav-btn:active { transform: scale(0.9); }
     .polaroid-indicator { font-size: 12px; font-weight: 700; color: #8c327a; letter-spacing: 2px; }
 
     .letter-body { font-size: var(--letter-font-size); line-height: 1.85; color: #383838; margin-bottom: 26px; min-height: 50px; }
@@ -792,8 +741,8 @@
   </div>
 
   <div class="letter-container" id="letterContainer">
-    <!-- 万圣节南瓜邮票 -->
-    <div class="halloween-stamp" id="halloweenStamp" title="Tap for a treat! 🎃">
+    <!-- 南瓜邮票 -->
+    <div class="halloween-stamp" id="halloweenStamp" title="Pumpkin Post 🎃">
       <div class="stamp-inner">
         <span class="stamp-price">31¢</span>
         <svg viewBox="0 0 24 24" class="stamp-icon">
@@ -806,8 +755,8 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 万圣节粉紫小幽灵专属邮票 -->
-    <div class="ghost-stamp" id="ghostStamp" title="Tap for a sweet boo! 👻">
+    <!-- 幽灵邮票 -->
+    <div class="ghost-stamp" id="ghostStamp" title="Boo Post 👻">
       <div class="stamp-inner" style="border-color:#d49ec9; background:#fff8fc;">
         <span class="stamp-price" style="color:#8c327a;">31¢</span>
         <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(184,93,168,0.3));">
@@ -817,6 +766,19 @@
           <ellipse cx="12" cy="13" rx="1.2" ry="1.6" fill="#ffffff"/>
         </svg>
         <span class="stamp-label" style="color:#8c327a;">BOO POST</span>
+      </div>
+      <div class="postmark-overlay"></div>
+    </div>
+
+    <!-- 女巫占星邮票 -->
+    <div class="witchy-stamp" id="witchyStamp" title="Astro Post 🌙">
+      <div class="stamp-inner" style="border-color:#b89742; background:#f4f8f5;">
+        <span class="stamp-price" style="color:#145a32;">31¢</span>
+        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(46,204,113,0.3));">
+          <path d="M12 2 L14.5 9 L22 11.5 L14.5 14 L12 21 L9.5 14 L2 11.5 L9.5 9 Z" fill="#2ecc71"/>
+          <circle cx="12" cy="11.5" r="3" fill="#f3e5ab"/>
+        </svg>
+        <span class="stamp-label" style="color:#145a32;">ASTRO POST</span>
       </div>
       <div class="postmark-overlay"></div>
     </div>
@@ -951,6 +913,18 @@
               </svg>
             `;
           }
+        } else if (envStyle === "witchy") {
+          if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
+          if (dateBadge) dateBadge.innerText = "✦ TRIPLE MOON COVEN 🔮 ✦";
+          if (waxSeal) {
+            waxSeal.innerHTML = `
+              <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(10,30,20,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
+                <circle cx="16" cy="16" r="10" fill="none" stroke="#f3e5ab" stroke-width="1.5"/>
+                <path d="M16 6 L18.5 12.5 L25.5 13.5 L20.5 18.5 L22 25.5 L16 22 L10 25.5 L11.5 18.5 L6.5 13.5 L13.5 12.5 Z" fill="#f3e5ab"/>
+                <circle cx="16" cy="16" r="3" fill="#145a32"/>
+              </svg>
+            `;
+          }
         } else {
           if (hintEl) hintEl.innerText = "✦ BREAK THE MIDNIGHT SEAL 🎃 ✦";
           if (dateBadge) dateBadge.innerText = "✦ MIDNIGHT SUMMONS 🎃 ✦";
@@ -983,7 +957,7 @@
       // 4. 核心：3D 翻转拍立得卡片轮播渲染
       initPolaroidFlipGallery(data.photos);
 
-      // 5. 刮刮乐糖果盒
+      // 5. 刮刮乐模块
       const scSection = getEl("scratchSection", ".scratch-section");
       if (data.scratchCard && data.scratchCard.enabled) {
         if (scSection) scSection.style.display = "block";
@@ -1014,32 +988,24 @@
         "olive":     "olive-leaves",
         "gothic":    "spooky-embers",
         "pumpkin":   "pumpkin-glow",
-        "ghost":     "ghostly-pastels"
+        "ghost":     "ghostly-pastels",
+        "witchy":    "celestial-sparks"
       };
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
 
-      // 左侧南瓜邮票点击喷发彩蛋
-      const stamp = getEl("halloweenStamp", ".halloween-stamp");
-      if (stamp) {
-        stamp.onclick = (e) => {
-          e.stopPropagation();
-          const posX = e.clientX || 60;
-          const posY = e.clientY || 80;
-          createCandyPopout(posX, posY);
-        };
-      }
-
-      // 小幽灵邮票点击喷发彩蛋
-      const gStamp = getEl("ghostStamp", ".ghost-stamp");
-      if (gStamp) {
-        gStamp.onclick = (e) => {
-          e.stopPropagation();
-          const posX = e.clientX || 60;
-          const posY = e.clientY || 80;
-          createCandyPopout(posX, posY);
-        };
-      }
+      // 各类邮票点击喷发彩蛋
+      ["halloweenStamp", "ghostStamp", "witchyStamp"].forEach(id => {
+        const s = document.getElementById(id);
+        if (s) {
+          s.onclick = (e) => {
+            e.stopPropagation();
+            const posX = e.clientX || 60;
+            const posY = e.clientY || 80;
+            createCandyPopout(posX, posY, envStyle);
+          };
+        }
+      });
     }
 
     // 拍立得 3D 翻转卡片与轮播控制引擎
@@ -1064,7 +1030,6 @@
       let currentIndex = 0;
       const total = photos.length;
 
-      // 逐张生成支持 3D 翻转的正反面卡片
       photos.forEach((p, idx) => {
         const card = document.createElement("div");
         card.className = `polaroid-card ${idx === 0 ? "active" : ""}`;
@@ -1081,7 +1046,6 @@
           </div>
         `;
 
-        // 点击卡片本体：触发 3D 翻转
         card.onclick = (e) => {
           e.stopPropagation();
           card.classList.toggle("flipped");
@@ -1090,7 +1054,6 @@
         gallery.appendChild(card);
       });
 
-      // 如果有 2 张或以上照片，激活底部轮播控制器
       if (total > 1 && controls && indicator) {
         controls.style.display = "flex";
         indicator.innerText = `1 / ${total}`;
@@ -1124,8 +1087,12 @@
     }
 
     // 独立喷发彩蛋
-    function createCandyPopout(x, y) {
-      const treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
+    function createCandyPopout(x, y, style) {
+      let treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
+      if (style === 'witchy') treats = ['🌙', '⭐', '🔮', '✨', '🪐', '🌟'];
+      else if (style === 'ghost') treats = ['👻', '🎀', '💖', '🍬', '🍭', '✨'];
+      else if (style === 'gothic') treats = ['🦇', '🕷️', '✨', '🔥', '🕸️'];
+
       for (let i = 0; i < 16; i++) {
         const el = document.createElement('div');
         el.className = 'candy-pop';
@@ -1148,7 +1115,7 @@
       }
     }
 
-    // 开信爆裂礼花（根据款式主题隔离分流）
+    // 开信爆裂礼花
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -1159,16 +1126,14 @@
       const isHalloween = (configData && configData.theme === "halloween");
       const isGothic = (style === 'gothic');
       const isGhost = (style === 'ghost');
+      const isWitchy = (style === 'witchy');
 
       let items;
       if (isHalloween) {
-        if (isGothic) {
-          items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
-        } else if (isGhost) {
-          items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
-        } else {
-          items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
-        }
+        if (isGothic) items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
+        else if (isGhost) items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
+        else if (isWitchy) items = ['🌙', '⭐', '🔮', '✨', '🪐', '🌟', '💫', '🌿'];
+        else items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
       } else {
         items = ['✨', '⭐', '🌟', '💛'];
       }
@@ -1224,7 +1189,7 @@
         if (envelopeStage) envelopeStage.classList.add("is-opening");
 
         setTimeout(() => {
-          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'ghost') : 'ghost');
+          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
         }, 180);
 
         setTimeout(() => {
@@ -1280,7 +1245,7 @@
       typeNext();
     }
 
-    // 刮刮乐高定糖果盒引擎
+    // 刮刮乐引擎
     function initScratchCard(cfg, style) {
       const cardTitle = getEl("scratchPrompt", ".scratch-prompt");
       const cardText = getEl("scratchSecret", ".scratch-secret");
@@ -1289,6 +1254,8 @@
 
       if (style === 'ghost') {
         if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNWRAP FOR SWEET TREAT 🍬 ✦";
+      } else if (style === 'witchy') {
+        if (cardTitle) cardTitle.innerText = cfg.title || "✦ REVEAL YOUR CELESTIAL FATE 🔮 ✦";
       } else {
         if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
       }
@@ -1301,53 +1268,27 @@
       if (style === 'ghost') {
         ctx.fillStyle = "#cca0c5";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.strokeStyle = "rgba(255, 235, 250, 0.35)";
-        ctx.lineWidth = 6;
-        for (let x = -canvas.height; x < canvas.width + canvas.height; x += 18) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x + canvas.height, canvas.height);
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = "#a84b96";
-        const tagW = 190;
-        const tagH = 34;
-        const tagX = (canvas.width - tagW) / 2;
-        const tagY = (canvas.height - tagH) / 2;
-        ctx.beginPath();
-        if (ctx.roundRect) {
-          ctx.roundRect(tagX, tagY, tagW, tagH, 8);
-        } else {
-          ctx.rect(tagX, tagY, tagW, tagH);
-        }
-        ctx.fill();
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 1.2;
-        ctx.stroke();
-
-        ctx.fillStyle = "#ffffff";
+      } else if (style === 'witchy') {
+        ctx.fillStyle = "#1b4f3b";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#f3e5ab";
         ctx.font = "bold 11px Cinzel, serif";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("✦ SCRATCH TO UNWRAP 🍬 ✦", canvas.width / 2, canvas.height / 2);
+        ctx.fillText("✦ SCRATCH THE ASTROLOGY BALL 🔮 ✦", canvas.width / 2, canvas.height / 2);
+        return;
       } else {
-        if (style === 'pumpkin') {
-          ctx.fillStyle = "#cf782b";
-        } else if (style === 'gothic') {
-          ctx.fillStyle = "#2c1c1c";
-        } else {
-          ctx.fillStyle = "#8a7d6e";
-        }
+        if (style === 'pumpkin') ctx.fillStyle = "#cf782b";
+        else if (style === 'gothic') ctx.fillStyle = "#2c1c1c";
+        else ctx.fillStyle = "#8a7d6e";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 12px Cinzel, serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
       }
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 12px Cinzel, serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦", canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
       function scratch(e) {
@@ -1492,6 +1433,14 @@
           this.pulseSpeed = Math.random() * 0.035 + 0.02;
           const pastelHues = ['rgba(240, 160, 230,', 'rgba(195, 145, 245,', 'rgba(255, 215, 160,'];
           this.hue = pastelHues[Math.floor(Math.random() * pastelHues.length)];
+        } else if (this.type === 'celestial-sparks') {
+          this.y = pCanvas.height + 20;
+          this.size = Math.random() * 3 + 1.5;
+          this.speedY = -(Math.random() * 0.5 + 0.2);
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.6 + 0.3;
+          this.pulsePhase = Math.random() * Math.PI * 2;
+          this.pulseSpeed = Math.random() * 0.04 + 0.02;
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
         }
@@ -1535,7 +1484,7 @@
             this.roll += this.rollSpeed;
             if (this.y > pCanvas.height + 30) this.reset();
           }
-        } else if (this.type === 'ghostly-pastels') {
+        } else if (this.type === 'ghostly-pastels' || this.type === 'celestial-sparks') {
           this.y += this.speedY;
           this.x += Math.sin(this.y * 0.02) * 0.6 + this.speedX;
           this.pulsePhase += this.pulseSpeed;
@@ -1632,6 +1581,14 @@
           pCtx.shadowColor = "#e6a8d7";
           pCtx.shadowBlur = 10;
           pCtx.fill();
+        } else if (this.type === 'celestial-sparks') {
+          const dynOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
+          pCtx.beginPath();
+          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          pCtx.fillStyle = `rgba(243, 229, 171, ${dynOpacity})`;
+          pCtx.shadowColor = "#2ecc71";
+          pCtx.shadowBlur = 10;
+          pCtx.fill();
         } else {
           this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
         }
@@ -1642,7 +1599,7 @@
     function initParticles(type) {
       if (!pCanvas) return;
       particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow' || type === 'ghostly-pastels') ? 45 : 30;
+      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow' || type === 'ghostly-pastels' || type === 'celestial-sparks') ? 45 : 30;
       for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
     }
 
