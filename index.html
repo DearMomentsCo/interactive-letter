@@ -189,7 +189,7 @@
       box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 220, 160, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
     }
 
-    /* 8. Pastel Spooky (粉紫小幽灵专属信封) */
+    /* 8. Pastel Spooky (粉紫小幽灵专属立体信封) */
     .env-ghost .envelope-wrapper {
       background:
         linear-gradient(135deg, rgba(0,0,0,0.45) 0%, transparent 48%),
@@ -218,42 +218,45 @@
       color: #e5a7da !important; text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
     }
 
-    /* 9. Witchy Celestial (午夜女巫占星款专属信封：墨绿丝绒 + 金箔八芒星阵) */
+    /* 9. Witchy Celestial (午夜女巫占星款专属信封：墨绿深邃质感 + 3D 金叶压纹) */
     .env-witchy .envelope-wrapper {
       background:
-        linear-gradient(135deg, rgba(0,0,0,0.5) 0%, transparent 48%),
-        linear-gradient(225deg, rgba(0,0,0,0.5) 0%, transparent 48%),
-        linear-gradient(0deg, rgba(10, 40, 30, 0.6) 0%, transparent 45%),
-        linear-gradient(150deg, #0b221b 0%, #061410 60%, #030807 100%) !important;
+        linear-gradient(135deg, rgba(0,0,0,0.55) 0%, transparent 48%),
+        linear-gradient(225deg, rgba(0,0,0,0.55) 0%, transparent 48%),
+        linear-gradient(0deg, rgba(10, 35, 25, 0.7) 0%, transparent 45%),
+        linear-gradient(150deg, #091d17 0%, #04100d 60%, #020705 100%) !important;
       border: 1.5px solid #d4af37 !important;
-      border-top: 2px solid #aef3c7 !important;
-      outline: 1px dashed rgba(46, 204, 113, 0.45) !important;
+      border-top: 2px solid #f3e5ab !important;
+      outline: 1px dashed rgba(212, 175, 55, 0.4) !important;
       outline-offset: -6px !important;
       box-shadow:
-        0 35px 70px -15px rgba(0, 0, 0, 0.9),
-        0 15px 25px rgba(0, 0, 0, 0.6),
-        0 0 35px rgba(46, 204, 113, 0.2),
-        inset 0 1px 2px rgba(170, 245, 205, 0.5) !important;
+        0 35px 70px -15px rgba(0, 0, 0, 0.95),
+        0 15px 25px rgba(0, 0, 0, 0.8),
+        0 0 35px rgba(212, 175, 55, 0.2),
+        inset 0 1px 3px rgba(255, 235, 160, 0.4) !important;
     }
     .env-witchy .envelope-lid {
-      border-top-color: #081613 !important;
-      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.6)) !important;
+      border-top-color: #061511 !important;
+      filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.9)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)) !important;
     }
+    /* 左右上角重工 3D 金叶压纹角饰 */
     .env-witchy .envelope-wrapper::before, .env-witchy .envelope-wrapper::after {
-      content: ""; position: absolute; width: 55px; height: 55px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M25 2 L29 18 L45 18 L32 28 L37 44 L25 34 L13 44 L18 28 L5 18 L21 18 Z' fill='none' stroke='%23d4af37' stroke-width='1.2' opacity='0.75'/%3E%3Ccircle cx='25' cy='25' r='3' fill='%232ecc71'/%3E%3C/svg%3E");
+      content: ""; position: absolute; width: 50px; height: 50px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2 C22 12, 28 18, 38 20 C28 22, 22 28, 20 38 C18 28, 12 22, 2 20 C12 18, 18 12, 20 2 Z' fill='%23d4af37'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%232ecc71'/%3E%3C/svg%3E");
       background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 6;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
     }
     .env-witchy .envelope-wrapper::before { top: 8px; left: 8px; }
     .env-witchy .envelope-wrapper::after { top: 8px; right: 8px; transform: scaleX(-1); }
 
+    /* 三相女神月相火漆印 */
     .env-witchy .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #f3e5ab 0%, #1b4f3b 40%, #0b2e1f 100%) !important;
-      border: 1.5px solid #d4af37 !important;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.85), inset 1.5px 2px 3px rgba(255, 245, 210, 0.8), inset -2.5px -3px 5px rgba(0, 0, 0, 0.9) !important;
+      background: radial-gradient(circle at 35% 30%, #f3e5ab 0%, #d4af37 30%, #145a32 70%, #062313 100%) !important;
+      border: 1.5px solid #ffe89e !important;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9), inset 2px 3px 4px rgba(255, 255, 255, 0.6), inset -3px -4px 6px rgba(0,0,0,0.95) !important;
     }
     .env-witchy .envelope-hint {
-      color: #aef3c7 !important; text-shadow: 0 0 10px rgba(46, 204, 113, 0.6) !important;
+      color: #f3e5ab !important; text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
     }
 
     /* 3D 浮雕火漆印通用 */
@@ -514,36 +517,34 @@
     .paper-ghost .letter-footer { color: #784877 !important; }
     .paper-ghost .letter-footer .sender-name { color: #8c327a !important; font-weight: 700 !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款专属信纸) */
+    /* 9. Witchy Celestial (午夜女巫占星款专属信纸：3D 真实化重构) */
     .paper-witchy {
       background-color: #f7f9f7 !important;
       background-image:
         radial-gradient(ellipse at 50% 15%, rgba(46, 204, 113, 0.12) 0%, transparent 60%),
         radial-gradient(circle at 50% 50%, #f7f9f7 0%, #edf2ee 70%, #dfe7e1 100%) !important;
-      border: 1.8px solid #b89742 !important;
-      outline: 1px dashed rgba(184, 151, 66, 0.45) !important;
-      outline-offset: -8px !important;
-      box-shadow: 0 25px 65px rgba(10, 25, 20, 0.65), inset 0 0 50px rgba(46, 204, 113, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.8) !important;
-      color: #1d2d2b !important;
+      border: 2px solid #b89742 !important;
+      outline: 1.5px solid rgba(184, 151, 66, 0.5) !important;
+      outline-offset: -7px !important;
+      box-shadow: 0 30px 70px rgba(10, 30, 20, 0.7), inset 0 0 60px rgba(46, 204, 113, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.9) !important;
+      color: #162b26 !important;
       position: relative;
     }
+    /* 正中央 3D 浮雕天文星盘与月相轨道水印 */
     .paper-witchy::before {
       content: ""; position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
-      width: 270px; height: 270px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' stroke='%23b89742' stroke-width='0.9' fill='none' stroke-dasharray='4 3' opacity='0.25'/%3E%3Ccircle cx='100' cy='100' r='75' stroke='%23b89742' stroke-width='0.7' fill='none' opacity='0.2'/%3E%3Cpath d='M100 10 L100 190 M10 100 L190 100' stroke='%23b89742' stroke-width='0.7' opacity='0.18'/%3E%3Cpath d='M50 50 Q100 80 150 50 Q180 100 150 150 Q100 120 50 150 Q20 100 50 50 Z' fill='none' stroke='%23b89742' stroke-width='0.8' opacity='0.2'/%3E%3Ccircle cx='100' cy='100' r='12' fill='none' stroke='%232ecc71' stroke-width='1.2' opacity='0.3'/%3E%3Cpath d='M94 100 C94 96 97 93 100 93 C103 93 106 96 106 100 C106 104 100 110 100 110 C100 110 94 104 94 100 Z' fill='%232ecc71' opacity='0.3'/%3E%3C/svg%3E");
+      width: 290px; height: 290px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='wWatermark' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23b89742' stop-opacity='0.25'/%3E%3Cstop offset='100%25' stop-color='%23145a32' stop-opacity='0.05'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='150' r='130' fill='none' stroke='url(%23wWatermark)' stroke-width='2' stroke-dasharray='6 4'/%3E%3Ccircle cx='150' cy='150' r='110' fill='none' stroke='%23b89742' stroke-width='1' opacity='0.3'/%3E%3Ccircle cx='150' cy='150' r='85' fill='none' stroke='%23b89742' stroke-width='1.5' opacity='0.35'/%3E%3Cpath d='M150 20 L150 280 M20 150 L280 150 M58 58 L242 242 M58 242 L242 58' stroke='%23b89742' stroke-width='0.8' opacity='0.25'/%3E%3Cpolygon points='150,40 165,110 235,110 178,145 200,215 150,175 100,215 122,145 65,110 135,110' fill='none' stroke='%23b89742' stroke-width='1.2' opacity='0.3'/%3E%3Ccircle cx='150' cy='150' r='25' fill='none' stroke='%232ecc71' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1;
-    }
-    .paper-witchy::after {
-      content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-      border: 1px solid rgba(184, 151, 66, 0.3); pointer-events: none; z-index: 2;
     }
     .paper-witchy .letter-header {
       border-bottom: none !important; position: relative; padding-bottom: 22px !important; margin-bottom: 22px !important; padding-left: 45px !important; padding-right: 45px !important;
     }
+    /* 抬头分隔饰带：三相女神月相 */
     .paper-witchy .letter-header::after {
       content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 82%; height: 16px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 16'%3E%3Cpath d='M0 8 L80 8 M120 8 L200 8' stroke='%23b89742' stroke-width='0.8' opacity='0.5'/%3E%3Ccircle cx='100' cy='8' r='4' fill='%232ecc71'/%3E%3Cpath d='M92 8 Q100 2 108 8 Q100 14 92 8 Z' fill='none' stroke='%23b89742' stroke-width='1'/%3E%3Ccircle cx='60' cy='8' r='2' fill='%23b89742'/%3E%3Ccircle cx='140' cy='8' r='2' fill='%23b89742'/%3E%3C/svg%3E");
+      width: 85%; height: 18px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 20'%3E%3Cpath d='M10 10 L95 10 M145 10 L230 10' stroke='%23b89742' stroke-width='1' opacity='0.6'/%3E%3Ccircle cx='120' cy='10' r='5' fill='%232ecc71'/%3E%3Cpath d='M105 10 C105 4, 112 4, 115 10 C112 16, 105 16, 105 10 Z' fill='none' stroke='%23b89742' stroke-width='1.2'/%3E%3Cpath d='M135 10 C135 4, 128 4, 125 10 C128 16, 135 16, 135 10 Z' fill='none' stroke='%23b89742' stroke-width='1.2'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain;
     }
     .paper-witchy .recipient-name { color: #145a32 !important; font-family: 'Cinzel', serif !important; letter-spacing: 2.5px !important; text-shadow: 0 1px 3px rgba(46, 204, 113, 0.3); }
@@ -552,30 +553,43 @@
     .paper-witchy .letter-footer { color: #2d5a4c !important; }
     .paper-witchy .letter-footer .sender-name { color: #145a32 !important; font-weight: 700 !important; }
 
-    /* 女巫款拍立得相框：金色星座边框与星象角贴 */
+    /* 女巫款拍立得相框：古董黄铜雕花相片角贴 */
     .paper-witchy .polaroid-card {
-      border: 1px solid rgba(184, 151, 66, 0.5) !important;
-      box-shadow: 0 16px 36px rgba(10, 40, 30, 0.2), 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-      position: relative;
+      background: #ffffff !important; border: 1px solid #d4af37 !important;
+      box-shadow: 0 20px 45px rgba(10, 35, 25, 0.25), 0 4px 10px rgba(0,0,0,0.1) !important;
+      padding: 14px 14px 38px 14px !important; position: relative;
     }
     .paper-witchy .polaroid-front::before, .paper-witchy .polaroid-front::after {
-      content: ""; position: absolute; width: 24px; height: 24px; pointer-events: none; z-index: 6;
-      border-color: #b89742; border-style: solid;
+      content: ""; position: absolute; width: 30px; height: 30px; pointer-events: none; z-index: 6;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath d='M0 0 L15 0 C15 8, 8 15, 0 15 Z' fill='%23d4af37'/%3E%3Ccircle cx='5' cy='5' r='1.5' fill='%230b221b'/%3E%3C/svg%3E");
+      background-size: contain; background-repeat: no-repeat;
     }
-    .paper-witchy .polaroid-front::before { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
-    .paper-witchy .polaroid-front::after { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+    .paper-witchy .polaroid-front::before { top: 6px; left: 6px; }
+    .paper-witchy .polaroid-front::after { top: 6px; right: 6px; transform: scaleX(-1); }
     .paper-witchy .polaroid-front-hint { color: #145a32 !important; font-family: 'Cinzel', serif !important; font-weight: 700; }
-    .paper-witchy .polaroid-back { background: #f0f5f2 !important; border: 1px dashed #b89742 !important; }
-    .paper-witchy .polaroid-back-text { color: #162b26 !important; }
+    .paper-witchy .polaroid-back { background: #0e241e !important; border: 1px dashed #d4af37 !important; }
+    .paper-witchy .polaroid-back-text { color: #f3e5ab !important; }
 
-    /* 女巫款刮刮乐：奥术水晶球 (Astro Crystal Ball Vault) */
+    /* 女巫款刮刮乐：奥术水晶球宝箱 (Scrying Crystal Vault) */
     .paper-witchy .scratch-section {
-      background: #edf5f0 !important; border: 2px solid #b89742 !important; border-radius: 14px !important; padding: 18px 14px !important;
+      position: relative !important;
+      background: radial-gradient(circle at 50% 50%, #112e25 0%, #071713 100%) !important;
+      border: 2px solid #d4af37 !important; border-radius: 16px !important; padding: 24px 16px !important;
+      box-shadow: 0 15px 35px rgba(10, 30, 20, 0.35), inset 0 0 25px rgba(46, 204, 113, 0.15) !important;
     }
-    .paper-witchy .scratch-prompt { color: #145a32 !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
+    .paper-witchy .scratch-section::before {
+      content: "🔮 Scrying Crystal Vault 🌙" !important;
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+      color: #081613; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; padding: 3px 14px; border-radius: 10px; border: 1px solid #ffe89e;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5); white-space: nowrap; z-index: 5;
+    }
+    .paper-witchy .scratch-prompt { color: #f3e5ab !important; font-family: 'Cinzel', serif !important; font-weight: 700 !important; letter-spacing: 1.5px !important; }
     .paper-witchy .bandaid-wrapper {
-      background: #0b221b !important; border: 2px solid #2ecc71 !important; border-radius: 50px !important; width: 290px !important; height: 90px !important;
-      box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.8), 0 4px 15px rgba(46, 204, 113, 0.25) !important;
+      background: radial-gradient(circle at 50% 50%, #061c16 0%, #020b08 100%) !important;
+      border: 2px solid #2ecc71 !important; border-radius: 50px !important; width: 100% !important; max-width: 290px !important; height: 90px !important;
+      box-shadow: inset 0 6px 18px rgba(0, 0, 0, 0.9), 0 5px 18px rgba(46, 204, 113, 0.3) !important;
     }
     .paper-witchy .bandaid-wrapper::before, .paper-witchy .bandaid-wrapper::after { display: none !important; }
     .paper-witchy .scratch-secret { color: #f3e5ab !important; font-weight: 700 !important; font-family: 'Cinzel', serif !important; }
@@ -1201,7 +1215,7 @@
         if (envelopeStage) envelopeStage.classList.add("is-opening");
 
         setTimeout(() => {
-          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || ' pumpkin') : 'pumpkin');
+          triggerEnvelopeBurst(configData ? (configData.envelopeStyle || 'pumpkin') : 'pumpkin');
         }, 180);
 
         setTimeout(() => {
@@ -1257,7 +1271,7 @@
       typeNext();
     }
 
-    // 刮刮乐引擎（已修复 witchy 模式下事件监听被拦截的 Bug）
+    // 刮刮乐引擎（已修复无法刮开的 Bug）
     function initScratchCard(cfg, style) {
       const cardTitle = getEl("scratchPrompt", ".scratch-prompt");
       const cardText = getEl("scratchSecret", ".scratch-secret");
@@ -1281,7 +1295,7 @@
         ctx.fillStyle = "#cca0c5";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else if (style === 'witchy') {
-        ctx.fillStyle = "#1b4f3b";
+        ctx.fillStyle = "#145a32";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else {
         if (style === 'pumpkin') ctx.fillStyle = "#cf782b";
