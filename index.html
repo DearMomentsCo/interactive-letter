@@ -102,7 +102,7 @@
     .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
     .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒，经典折痕与光影) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%),
@@ -128,7 +128,6 @@
       content: ""; position: absolute; inset: 8px; border: 1px dashed rgba(212, 175, 55, 0.35); pointer-events: none; z-index: 3;
     }
 
-    /* 女巫毒药锅火漆印 */
     .env-witchy .wax-seal {
       background: radial-gradient(circle at 35% 30%, #aef3c7 0%, #2ecc71 28%, #145a32 70%, #010805 100%) !important;
       border: 2px solid #ffe89e !important;
@@ -138,7 +137,6 @@
       color: #ffe89e !important; text-shadow: 0 0 14px rgba(212, 175, 55, 0.85) !important;
     }
 
-    /* 3D 浮雕火漆印通用 */
     .wax-seal {
       position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
       width: 60px; height: 60px; border-radius: 46% 54% 51% 49% / 52% 47% 53% 48%;
@@ -184,7 +182,6 @@
       opacity: 1 !important; pointer-events: auto !important;
     }
 
-    /* 各类基础信纸 */
     .paper-kintsugi { background: #fcf9f2 !important; border: 1px solid rgba(212, 175, 55, 0.45) !important; }
     .paper-whiteflag { background: #fdfdf9 !important; border: 2px solid #8b261e !important; }
     .paper-origami { background: #fffdf6 !important; border: 1px solid #ded5c0 !important; }
@@ -194,31 +191,30 @@
     .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
     .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：色系统一为墨绿丝绒，鬼屋城堡水印明显清晰) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡) */
     .paper-witchy {
       background-color: #061511 !important;
       background-image:
-        radial-gradient(circle at 50% 32%, rgba(46, 204, 113, 0.28) 0%, rgba(6, 21, 17, 0.94) 65%, #010403 100%) !important;
+        radial-gradient(circle at 50% 28%, rgba(46, 204, 113, 0.22) 0%, rgba(6, 21, 17, 0.95) 60%, #010403 100%) !important;
       border: 2.2px solid #d4af37 !important;
-      outline: 1.5px solid rgba(212, 175, 55, 0.7) !important;
+      outline: 1.5px solid rgba(212, 175, 55, 0.6) !important;
       outline-offset: -7px !important;
       box-shadow:
         0 35px 80px rgba(0, 0, 0, 0.95),
         inset 0 0 90px rgba(0, 0, 0, 0.95),
-        inset 0 0 35px rgba(46, 204, 113, 0.22) !important;
+        inset 0 0 30px rgba(46, 204, 113, 0.15) !important;
       color: #f3ece1 !important;
       position: relative;
     }
-    /* 正中央高对比度、清晰可见的万圣鬼屋城堡水印 */
     .paper-witchy::before {
       content: ""; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%);
-      width: 310px; height: 310px;
+      width: 290px; height: 290px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Cdefs%3E%3CradialGradient id='hauntedGlow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%232ecc71' stop-opacity='0.45'/%3E%3Cstop offset='70%25' stop-color='%23145a32' stop-opacity='0.18'/%3E%3Cstop offset='100%25' stop-color='%23061511' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='150' cy='125' r='65' fill='url(%23hauntedGlow)'/%3E%3Cpath d='M105,215 L105,140 L95,130 L95,120 L102,115 L105,90 L110,65 L115,90 L118,115 L125,120 L125,130 L120,140 L120,215 Z' fill='%230b2e21'/%3E%3Cpath d='M125,215 L125,110 L150,65 L175,110 L175,215 Z' fill='%230f3d2e'/%3E%3Cpath d='M175,215 L175,130 L182,120 L182,115 L185,90 L190,55 L195,90 L198,115 L205,120 L205,130 L195,140 L195,215 Z' fill='%230b2e21'/%3E%3Crect x='142' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Crect x='151' y='85' width='7' height='12' rx='3' fill='%23ffe89e' opacity='0.9'/>%3Cpolygon points='150,45 141,64 159,64' fill='%23d4af37' opacity='0.95'/>%3Ccircle cx='132' cy='205' r='7' fill='%23d4af37' opacity='0.75'/>%3Ccircle cx='168' cy='206' r='6' fill='%232ecc71' opacity='0.75'/>%3C/svg%3E");
       background-repeat: no-repeat; background-position: center; background-size: contain; pointer-events: none; z-index: 1; opacity: 0.42;
     }
     .paper-witchy::after {
       content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-      border: 1px solid rgba(212, 175, 55, 0.5); pointer-events: none; z-index: 2;
+      border: 1px solid rgba(212, 175, 55, 0.45); pointer-events: none; z-index: 2;
     }
     .paper-witchy .letter-header {
       border-bottom: none !important; position: relative; padding-bottom: 26px !important; margin-bottom: 24px !important; padding-left: 45px !important; padding-right: 45px !important; z-index: 3;
@@ -230,18 +226,17 @@
       background-repeat: no-repeat; background-position: center; background-size: contain;
     }
     .paper-witchy .recipient-name {
-      color: #ffe89e !important; font-family: 'Cinzel', serif !important; letter-spacing: 3px !important; text-shadow: 0 2px 12px rgba(46, 204, 113, 0.6);
+      color: #ffe89e !important; font-family: 'Cinzel', serif !important; letter-spacing: 3px !important; text-shadow: 0 2px 12px rgba(46, 204, 113, 0.5);
     }
     .paper-witchy .days-badge {
-      background: rgba(14, 50, 35, 0.8) !important; color: #aef3c7 !important; border: 1.2px solid rgba(212, 175, 55, 0.7) !important; font-weight: 700 !important;
+      background: rgba(20, 70, 45, 0.65) !important; color: #aef3c7 !important; border: 1.2px solid rgba(212, 175, 55, 0.6) !important; font-weight: 700 !important;
     }
-    .paper-witchy .letter-body { color: #f7f9f7 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.95); z-index: 3; position: relative; }
+    .paper-witchy .letter-body { color: #f3ece1 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.95); z-index: 3; position: relative; }
     .paper-witchy .letter-footer { color: #b5c4b8 !important; z-index: 3; position: relative; }
     .paper-witchy .letter-footer .sender-name {
-      color: #ffe89e !important; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.5);
+      color: #ffe89e !important; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
     }
 
-    /* 女巫款拍立得相框 */
     .paper-witchy .polaroid-card {
       background: linear-gradient(145deg, #0d2820 0%, #04100c 100%) !important;
       border: 1.8px solid #d4af37 !important;
@@ -265,7 +260,6 @@
     .paper-witchy .polaroid-back { background: #061813 !important; border: 1.5px dashed #d4af37 !important; }
     .paper-witchy .polaroid-back-text { color: #f3e5ab !important; }
 
-    /* 女巫款刮刮乐：奥术水晶球宝箱 */
     .paper-witchy .scratch-section {
       position: relative !important;
       background: rgba(255, 255, 255, 0.03) !important;
@@ -290,7 +284,6 @@
     .paper-witchy .bandaid-wrapper::before, .paper-witchy .bandaid-wrapper::after { display: none !important; }
     .paper-witchy .scratch-secret { color: #ffe89e !important; font-weight: 700 !important; font-family: 'Cinzel', serif !important; text-shadow: 0 1px 4px rgba(0,0,0,0.9); }
 
-    /* 女巫款追逐按钮 */
     .paper-witchy .runaway-section { background: rgba(255, 255, 255, 0.02) !important; border: 1px solid rgba(184, 151, 66, 0.3) !important; z-index: 3; position: relative; }
     .paper-witchy .runaway-question { color: #ffe89e !important; }
     .paper-witchy .btn-yes {
@@ -300,7 +293,6 @@
     .paper-witchy .btn-no { background: #162e26 !important; color: #d4af37 !important; border: 1px solid #d4af37 !important; }
     .paper-witchy .runaway-success { color: #ffe89e !important; }
 
-    /* 毒苹果互动按钮 */
     .poison-apple-interactive {
       position: absolute; top: -18px; left: -10px; width: 42px; height: 42px;
       cursor: pointer; z-index: 28; transition: transform 0.2s ease;
@@ -309,11 +301,9 @@
     .poison-apple-interactive:hover { transform: scale(1.15) rotate(-8deg); }
     .poison-apple-interactive:active { transform: scale(0.9); }
 
-    /* 各类外挂邮票选择性显示 */
     .halloween-stamp, .ghost-stamp, .witchy-stamp { display: none; }
     .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
     .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
-    .paper-witchy .witchy-stamp { display: none !important; }
 
     .stamp-inner {
       width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
@@ -328,7 +318,6 @@
 
     .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
 
-    /* 虫子蝎子蜘蛛爬行彩蛋样式 */
     .creepy-crawly {
       position: fixed; font-size: 24px; pointer-events: none; z-index: 999999;
       animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -340,7 +329,6 @@
       100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
     }
 
-    /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
     .days-badge {
@@ -348,7 +336,6 @@
       padding: 4px 14px; border-radius: 14px; font-size: 12px; font-family: 'Cinzel', serif; letter-spacing: 0.5px;
     }
 
-    /* 3D 翻转拍立得卡片轮播 */
     .polaroid-gallery {
       position: relative; width: 100%; max-width: 290px; height: 380px; margin: 15px auto 10px auto; perspective: 1000px; z-index: 3;
     }
@@ -379,7 +366,6 @@
     .polaroid-back-text { font-size: 21px; line-height: 1.6; font-family: 'Caveat', cursive; color: #3b2214; }
     .polaroid-back-hint { margin-top: 18px; font-size: 11px; opacity: 0.6; font-family: 'Cinzel', serif; letter-spacing: 1px; }
 
-    /* 轮播切换按钮条 */
     .polaroid-controls {
       display: flex; justify-content: center; align-items: center; gap: 18px;
       margin: 6px auto 24px auto; font-family: 'Cinzel', serif; z-index: 3; position: relative;
@@ -594,8 +580,8 @@
       });
     }
 
-    // 2. 加载订单数据
-    fetch("data/" + orderId + ".json")
+    // 2. 加载订单数据 (加入时间戳防缓存)
+    fetch("data/" + orderId + ".json?t=" + Date.now())
       .then(res => {
         if (!res.ok) throw new Error("Order not found");
         return res.json();
@@ -1182,12 +1168,15 @@
           }
         } else if (this.type === 'spooky-embers') {
           if (this.isBat) {
-            this.x += this.speedX; this.y += Math.sin(this.x * 0.03) * 1.2 + this.speedY;
-            this.wingPhase += 0.22;
-            if (this.x > pCanvas.width + 40) this.reset();
+            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
+            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
+            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
+            this.opacity = Math.random() * 0.4 + 0.35;
           } else {
-            this.y += this.speedY; this.x += Math.sin(this.y * 0.025) * 0.7 + this.speedX;
-            if (this.y < -20) this.reset();
+            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
+            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
+            this.opacity = Math.random() * 0.6 + 0.35;
+            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
           }
         } else if (this.type === 'pumpkin-glow') {
           if (this.isMote) {
