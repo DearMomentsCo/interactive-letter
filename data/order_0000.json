@@ -5,17 +5,17 @@
   "recipient": "My Cutest Boo 👻Ben",
   "sender": "Your Favorite Ghost",
   "letterContent": [
-    "You are my absolute favorite boo in the entire universe.",
-    "No tricks, just infinite cuddles, sweet treats, and magic with you.",
-    "Happy Spooky Season to the sweetest girl in my life! 💖"
+    "Welcome to the haunted house of our own magical story.",
+    "Every corner holds a sweet memory, and every shadow whispers your name.",
+    "May our spell last forever and ever! 🔮✨"
   ],
   "photos": [
     {
-      "url": "images/order_0000_1.jpg",
-      "caption": "Spooky cute memories with you ✨"
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+      "caption": "Our spooky cute adventure ✨"
     },
     {
-      "url": "images/order_0000_2.jpg",
+      "url": "https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=600&auto=format&fit=crop",
       "caption": "My forever favorite boo 👻"
     }
   ],
