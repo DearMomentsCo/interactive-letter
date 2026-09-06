@@ -218,7 +218,7 @@
       color: #e5a7da !important; text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
     }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工 3D 暗夜魔绿皮革 + 女巫扫帚与毒药锅烫金角花) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工 3D 暗夜墨绿皮革 + 黄金烫金边框 + 真实折痕线) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 30%, rgba(46, 204, 113, 0.25) 0%, transparent 65%),
@@ -240,21 +240,22 @@
       border-top-color: #020a07 !important;
       filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.99)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9)) !important;
     }
-    /* 四角重工女巫扫帚与法阵角饰 */
-    .env-witchy .envelope-wrapper::before, .env-witchy .envelope-wrapper::after {
-      content: ""; position: absolute; width: 68px; height: 68px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Cpath d='M8 52 C15 45, 30 35, 45 20 C40 30, 30 40, 18 48 Z' fill='%23d4af37'/%3E%3Cpath d='M42 16 L52 10 L48 24 Z' fill='%232ecc71'/%3E%3Ccircle cx='12' cy='48' r='4' fill='%23d4af37'/%3E%3C/svg%3E");
-      background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 6;
-      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.99));
+    /* 显式恢复并增强信封袋折痕线条（斜向压纹折线） */
+    .env-witchy .envelope-wrapper::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
+      background: linear-gradient(116deg, transparent 49.2%, rgba(212, 175, 55, 0.35) 49.8%, rgba(212, 175, 55, 0.6) 50%, transparent 50.8%),
+                  linear-gradient(64deg, transparent 49.2%, rgba(212, 175, 55, 0.35) 49.8%, rgba(212, 175, 55, 0.6) 50%, transparent 50.8%);
     }
-    .env-witchy .envelope-wrapper::before { top: 6px; left: 6px; }
-    .env-witchy .envelope-wrapper::after { top: 6px; right: 6px; transform: scaleX(-1); }
+    /* 四角重工黄金巴洛克角饰 */
+    .env-witchy .envelope-wrapper::before {
+      content: ""; position: absolute; inset: 6px; border: 1px dashed rgba(212, 175, 55, 0.4); pointer-events: none; z-index: 3;
+    }
 
-    /* 三相女神月相与八芒星浮雕金漆印 */
+    /* 女巫毒药锅火漆印 (Poison Cauldron Wax Seal) */
     .env-witchy .wax-seal {
-      background: radial-gradient(circle at 35% 30%, #fff8d6 0%, #d4af37 32%, #145a32 75%, #010805 100%) !important;
+      background: radial-gradient(circle at 35% 30%, #aef3c7 0%, #2ecc71 28%, #145a32 70%, #010805 100%) !important;
       border: 2.5px solid #ffe89e !important;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.99), inset 2.5px 3.5px 7px rgba(255, 255, 255, 0.95), inset -3.5px -4.5px 10px rgba(0,0,0,0.99) !important;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.99), inset 2.5px 3.5px 7px rgba(255, 255, 255, 0.9), inset -3.5px -4.5px 10px rgba(0,0,0,0.98) !important;
     }
     .env-witchy .envelope-hint {
       color: #ffe89e !important; text-shadow: 0 0 18px rgba(212, 175, 55, 0.95) !important;
@@ -652,6 +653,30 @@
 
     .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
 
+    /* 虫子蝎子蜘蛛爬行彩蛋样式 */
+    .creepy-crawly {
+      position: fixed;
+      font-size: 24px;
+      pointer-events: none;
+      z-index: 999999;
+      animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+    }
+    @keyframes crawlOut {
+      0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
+    }
+
+    /* 毒苹果互动按钮样式 */
+    .poison-apple-interactive {
+      position: absolute; top: -22px; left: 16px; width: 44px; height: 44px;
+      cursor: pointer; z-index: 28; transition: transform 0.2s ease;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    }
+    .poison-apple-interactive:hover { transform: scale(1.12) rotate(-8deg); }
+    .poison-apple-interactive:active { transform: scale(0.92); }
+
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
@@ -821,17 +846,15 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 女巫占星邮票 -->
-    <div class="witchy-stamp" id="witchyStamp" title="Astro Post 🌙">
-      <div class="stamp-inner" style="border-color:#d49ec9; background:#f4f8f5;">
-        <span class="stamp-price" style="color:#145a32;">31¢</span>
-        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(46,204,113,0.3));">
-          <path d="M12 2 L14.5 9 L22 11.5 L14.5 14 L12 21 L9.5 14 L2 11.5 L9.5 9 Z" fill="#2ecc71"/>
-          <circle cx="12" cy="11.5" r="3" fill="#f3e5ab"/>
-        </svg>
-        <span class="stamp-label" style="color:#145a32;">ASTRO POST</span>
-      </div>
-      <div class="postmark-overlay"></div>
+    <!-- 女巫占星毒苹果互动装置（替代原邮票位置） -->
+    <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a magic surprise! 🍎">
+      <svg viewBox="0 0 36 36" style="width:100%; height:100%; filter:drop-shadow(0 2px 5px rgba(46,204,113,0.6));">
+        <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
+        <!-- 毒苹果高光与绿色毒液光晕 -->
+        <path d="M18 4 L18 8 M18 4 Q21 2 23 4" fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="12" cy="18" r="3" fill="#2ecc71" opacity="0.6"/>
+        <path d="M15 14 Q18 17 21 14" fill="none" stroke="#ffe89e" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
     </div>
 
     <div class="letter-header">
@@ -965,15 +988,17 @@
             `;
           }
         } else if (envStyle === "witchy") {
-          if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
+          if (hintEl) hintEl.innerText = "✦ BREW THE MAGICAL POTION 🧪 ✦";
           if (dateBadge) dateBadge.innerText = "✦ TRIPLE MOON COVEN 🔮 ✦";
           if (waxSeal) {
             waxSeal.innerHTML = `
               <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(10,30,20,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-                <circle cx="16" cy="16" r="11" fill="none" stroke="#f3e5ab" stroke-width="1.5"/>
-                <path d="M16 5 L18.5 12.5 L26 14 L19.5 18.5 L21 26 L16 22 L11 26 L12.5 18.5 L6 14 L13.5 12.5 Z" fill="#f3e5ab"/>
-                <path d="M8 13 C11 13 13 14.5 13 16 C13 17.5 11 19 8 19 C10 16.5 10 15.5 8 13 Z" fill="#2ecc71" opacity="0.85"/>
-                <path d="M24 13 C21 13 19 14.5 19 16 C19 17.5 21 19 24 19 C22 16.5 22 15.5 24 13 Z" fill="#2ecc71" opacity="0.85"/>
+                <!-- 女巫毒药锅火漆样式 -->
+                <path d="M7 14 C7 24, 25 24, 25 14 Z" fill="#f3e5ab" stroke="#145a32" stroke-width="1"/>
+                <path d="M5 11 L27 11 L26 14 L6 14 Z" fill="#f3e5ab"/>
+                <circle cx="14" cy="9" r="2" fill="#2ecc71"/>
+                <circle cx="19" cy="8" r="1.5" fill="#2ecc71"/>
+                <path d="M10 24 L8 28 M22 24 L24 28" stroke="#f3e5ab" stroke-width="2" stroke-linecap="round"/>
               </svg>
             `;
           }
@@ -1046,18 +1071,42 @@
       const bgType = (data.effects && data.effects.bgEffect) || styleAutoEffects[envStyle] || "gold-dust";
       initParticles(bgType);
 
-      // 各类邮票点击事件绑定
-      ["halloweenStamp", "ghostStamp", "witchyStamp"].forEach(id => {
-        const s = document.getElementById(id);
-        if (s) {
-          s.onclick = (e) => {
-            e.stopPropagation();
-            const posX = e.clientX || 60;
-            const posY = e.clientY || 80;
-            createCandyPopout(posX, posY, envStyle);
-          };
-        }
-      });
+      // 毒苹果互动点击事件：触发虫子、蝎子、蜘蛛爬行彩蛋
+      const poisonAppleBtn = document.getElementById("poisonAppleBtn");
+      if (poisonAppleBtn) {
+        poisonAppleBtn.onclick = (e) => {
+          e.stopPropagation();
+          const rect = poisonAppleBtn.getBoundingClientRect();
+          const startX = rect.left + rect.width / 2;
+          const startY = rect.top + rect.height / 2;
+          createCreepyCrawlies(startX, startY);
+        };
+      }
+    }
+
+    // 虫子、蝎子、蜘蛛爬行生成器
+    function createCreepyCrawlies(x, y) {
+      const crawlies = ['🕷️', '🦂', '🪲', '🐛', '🕷️', '🐞'];
+      for (let i = 0; i < 12; i++) {
+        const el = document.createElement('div');
+        el.className = 'creepy-crawly';
+        el.innerText = crawlies[Math.floor(Math.random() * crawlies.length)];
+        el.style.left = `${x}px`;
+        el.style.top = `${y}px`;
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 220 + 80;
+        const endX = Math.cos(angle) * dist;
+        const endY = Math.sin(angle) * dist;
+        const endRot = (Math.random() - 0.5) * 360;
+
+        el.style.setProperty('--end-x', `${endX}px`);
+        el.style.setProperty('--end-y', `${endY}px`);
+        el.style.setProperty('--end-rot', `${endRot}deg`);
+
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 2500);
+      }
     }
 
     // 拍立得 3D 翻转卡片与轮播控制引擎
@@ -1138,35 +1187,6 @@
       }
     }
 
-    // 独立喷发彩蛋
-    function createCandyPopout(x, y, style) {
-      let treats = ['🍬', '🎃', '🍭', '✨', '🍫', '🍂'];
-      if (style === 'witchy') treats = ['🌙', '⭐', '🔮', '✨', '🪐', '🌟'];
-      else if (style === 'ghost') treats = ['👻', '🎀', '💖', '🍬', '🍭', '✨'];
-      else if (style === 'gothic') treats = ['🦇', '🕷️', '✨', '🔥', '🕸️'];
-
-      for (let i = 0; i < 16; i++) {
-        const el = document.createElement('div');
-        el.className = 'candy-pop';
-        el.innerText = treats[Math.floor(Math.random() * treats.length)];
-        el.style.left = `${x}px`;
-        el.style.top = `${y}px`;
-        document.body.appendChild(el);
-
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 110 + 40;
-        const targetX = x + Math.cos(angle) * dist;
-        const targetY = y + Math.sin(angle) * dist - 30;
-
-        requestAnimationFrame(() => {
-          el.style.transform = `translate(${targetX - x}px, ${targetY - y}px) scale(${Math.random() * 0.6 + 0.9}) rotate(${Math.random() * 360}deg)`;
-          el.style.opacity = '0';
-        });
-
-        setTimeout(() => el.remove(), 800);
-      }
-    }
-
     // 开信爆裂礼花
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
@@ -1184,7 +1204,7 @@
       if (isHalloween) {
         if (isGothic) items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
         else if (isGhost) items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
-        else if (isWitchy) items = ['🌙', '⭐', '🔮', '✨', '🪐', '🌟', '💫', '🌿'];
+        else if (isWitchy) items = ['🔮', '🧪', '🌿', '✨', '🕷️', '🌙', '💫', '🪄'];
         else items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
       } else {
         items = ['✨', '⭐', '🌟', '💛'];
@@ -1307,7 +1327,7 @@
       if (style === 'ghost') {
         if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNWRAP FOR SWEET TREAT 🍬 ✦";
       } else if (style === 'witchy') {
-        if (cardTitle) cardTitle.innerText = cfg.title || "✦ REVEAL YOUR CELESTIAL FATE 🔮 ✦";
+        if (cardTitle) cardTitle.innerText = cfg.title || "✦ BREW THE MAGICAL POTION 🧪 ✦";
       } else {
         if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
       }
@@ -1334,7 +1354,7 @@
       ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(style === 'witchy' ? "SCRY THE CRYSTAL BALL 🔮" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(style === 'witchy' ? "SCRY THE CAULDRON 🧪" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
       function scratch(e) {
