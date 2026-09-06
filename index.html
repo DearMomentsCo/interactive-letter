@@ -102,7 +102,7 @@
     .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
     .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工墨绿丝绒) */
+    /* 9. Witchy Celestial (午夜女巫占星款) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%),
@@ -231,7 +231,7 @@
     .paper-witchy .days-badge {
       background: rgba(20, 70, 45, 0.65) !important; color: #aef3c7 !important; border: 1.2px solid rgba(212, 175, 55, 0.6) !important; font-weight: 700 !important;
     }
-    .paper-witchy .letter-body { color: #f3ece1 !important; text-shadow: 0 1px 4px rgba(0,0,0,0.95); z-index: 3; position: relative; }
+    .paper-witchy .letter-body { color: #e6f5ec !important; text-shadow: 0 1px 3px rgba(0,0,0,0.9); z-index: 3; position: relative; }
     .paper-witchy .letter-footer { color: #b5c4b8 !important; z-index: 3; position: relative; }
     .paper-witchy .letter-footer .sender-name {
       color: #ffe89e !important; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
@@ -304,6 +304,7 @@
     .halloween-stamp, .ghost-stamp, .witchy-stamp { display: none; }
     .paper-pumpkin .halloween-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #faf4e8; padding: 3.5px; box-shadow: 0 6px 16px rgba(0,0,0,0.28); border: 1px dashed #c9935a; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
     .paper-ghost .ghost-stamp { display: block !important; position: absolute; top: -20px; left: -10px; width: 52px; height: 64px; background: #fdf5fb; padding: 3.5px; box-shadow: 0 6px 16px rgba(45,15,60,0.28); border: 1px dashed #c88abf; transform: rotate(-6deg); cursor: pointer; z-index: 26; }
+    .paper-witchy .witchy-stamp { display: none !important; }
 
     .stamp-inner {
       width: 100%; height: 100%; border: 1px solid #d48a3f; background: #fdfaf3; display: flex;
@@ -580,7 +581,7 @@
       });
     }
 
-    // 2. 加载订单数据 (加入时间戳防缓存)
+    // 2. 加载订单数据 (带时间戳防缓存)
     fetch("data/" + orderId + ".json?t=" + Date.now())
       .then(res => {
         if (!res.ok) throw new Error("Order not found");
@@ -605,7 +606,7 @@
       if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
       if (envStyle === "witchy") {
-        if (!data.recipient || data.recipient === "My Love" || data.recipient.includes("Boo")) data.recipient = "My Celestial Soulmate";
+        // 完全尊重 JSON 里配置的名字，绝不强行覆盖
         if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
         if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
       }
@@ -1180,16 +1181,25 @@
           }
         } else if (this.type === 'pumpkin-glow') {
           if (this.isMote) {
-            this.y += this.speedY;
-            this.x += Math.sin(this.y * 0.02) * 0.5 + this.speedX;
-            this.pulsePhase += this.pulseSpeed;
-            if (this.y < -20) this.reset();
+            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
+            pCtx.beginPath();
+            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
+            pCtx.shadowColor = "#ffaa00";
+            pCtx.shadowBlur = 12;
+            pCtx.fill();
           } else {
-            this.y += this.speedY;
-            this.x += Math.sin(this.y * 0.018) * 0.9 + this.speedX;
-            this.angle += this.spinSpeed;
-            this.roll += this.rollSpeed;
-            if (this.y > pCanvas.height + 30) this.reset();
+            pCtx.translate(this.x, this.y);
+            pCtx.rotate(this.angle);
+            pCtx.scale(Math.cos(this.roll), 1);
+            pCtx.beginPath();
+            pCtx.moveTo(0, -this.size);
+            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
+            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
+            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
+            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
+            pCtx.shadowBlur = 4;
+            pCtx.fill();
           }
         } else if (this.type === 'ghostly-pastels' || this.type === 'celestial-sparks') {
           this.y += this.speedY;
