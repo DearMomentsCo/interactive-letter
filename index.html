@@ -218,7 +218,7 @@
       color: #e5a7da !important; text-shadow: 0 0 10px rgba(229, 167, 218, 0.6) !important;
     }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工 3D 暗夜墨绿皮革 + 黄金烫金边框 + 真实折痕线) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工 3D 暗夜墨绿皮革 + 显式立体折痕 + 黄金烫金边框) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 30%, rgba(46, 204, 113, 0.25) 0%, transparent 65%),
@@ -240,7 +240,7 @@
       border-top-color: #020a07 !important;
       filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.99)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9)) !important;
     }
-    /* 显式恢复并增强信封袋折痕线条（斜向压纹折线） */
+    /* 显式恢复经典信封折痕线（V型口袋与斜向压纹） */
     .env-witchy .envelope-wrapper::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 4;
       background: linear-gradient(116deg, transparent 49.2%, rgba(212, 175, 55, 0.35) 49.8%, rgba(212, 175, 55, 0.6) 50%, transparent 50.8%),
@@ -653,30 +653,6 @@
 
     .candy-pop { position: fixed; font-size: 20px; pointer-events: none; z-index: 999; transition: all 0.75s cubic-bezier(0.25, 1, 0.5, 1); }
 
-    /* 虫子蝎子蜘蛛爬行彩蛋样式 */
-    .creepy-crawly {
-      position: fixed;
-      font-size: 24px;
-      pointer-events: none;
-      z-index: 999999;
-      animation: crawlOut 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
-    }
-    @keyframes crawlOut {
-      0% { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
-      20% { opacity: 1; }
-      100% { transform: translate(var(--end-x), var(--end-y)) scale(1) rotate(var(--end-rot)); opacity: 0; }
-    }
-
-    /* 毒苹果互动按钮样式 */
-    .poison-apple-interactive {
-      position: absolute; top: -22px; left: 16px; width: 44px; height: 44px;
-      cursor: pointer; z-index: 28; transition: transform 0.2s ease;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
-    }
-    .poison-apple-interactive:hover { transform: scale(1.12) rotate(-8deg); }
-    .poison-apple-interactive:active { transform: scale(0.92); }
-
     /* 通用组件 */
     .letter-header { border-bottom: 1px solid rgba(197, 160, 89, 0.25); padding-bottom: 14px; margin-bottom: 22px; text-align: center; }
     .recipient-name { font-size: 30px; font-weight: 700; color: #3a414d; margin-bottom: 4px; font-family: 'Caveat', cursive; }
@@ -847,14 +823,26 @@
     </div>
 
     <!-- 女巫占星毒苹果互动装置（替代原邮票位置） -->
-    <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a magic surprise! 🍎">
-      <svg viewBox="0 0 36 36" style="width:100%; height:100%; filter:drop-shadow(0 2px 5px rgba(46,204,113,0.6));">
+    <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy surprise! 🍎">
+      <svg viewBox="0 0 36 36" style="width:100%; height:100%; filter:drop-shadow(0 2px 5px rgba(46,204,113,0.7));">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
-        <!-- 毒苹果高光与绿色毒液光晕 -->
         <path d="M18 4 L18 8 M18 4 Q21 2 23 4" fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="12" cy="18" r="3" fill="#2ecc71" opacity="0.6"/>
+        <circle cx="12" cy="18" r="3" fill="#2ecc71" opacity="0.7"/>
         <path d="M15 14 Q18 17 21 14" fill="none" stroke="#ffe89e" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
+    </div>
+
+    <!-- 女巫占星邮票 (其他款式时显示) -->
+    <div class="witchy-stamp" id="witchyStamp" title="Astro Post 🌙">
+      <div class="stamp-inner" style="border-color:#b89742; background:#f4f8f5;">
+        <span class="stamp-price" style="color:#145a32;">31¢</span>
+        <svg viewBox="0 0 24 24" class="stamp-icon" style="filter:drop-shadow(0 1px 2px rgba(46,204,113,0.3));">
+          <path d="M12 2 L14.5 9 L22 11.5 L14.5 14 L12 21 L9.5 14 L2 11.5 L9.5 9 Z" fill="#2ecc71"/>
+          <circle cx="12" cy="11.5" r="3" fill="#f3e5ab"/>
+        </svg>
+        <span class="stamp-label" style="color:#145a32;">ASTRO POST</span>
+      </div>
+      <div class="postmark-overlay"></div>
     </div>
 
     <div class="letter-header">
@@ -993,7 +981,6 @@
           if (waxSeal) {
             waxSeal.innerHTML = `
               <svg viewBox="0 0 32 32" style="width:30px; height:30px; filter:drop-shadow(0 2px 3px rgba(10,30,20,0.85)) drop-shadow(0 -1px 0.5px rgba(255,255,255,0.8));">
-                <!-- 女巫毒药锅火漆样式 -->
                 <path d="M7 14 C7 24, 25 24, 25 14 Z" fill="#f3e5ab" stroke="#145a32" stroke-width="1"/>
                 <path d="M5 11 L27 11 L26 14 L6 14 Z" fill="#f3e5ab"/>
                 <circle cx="14" cy="9" r="2" fill="#2ecc71"/>
@@ -1187,7 +1174,7 @@
       }
     }
 
-    // 开信爆裂礼花
+    // 开信爆裂礼花（女巫款加入女巫帽、扫帚、乌鸦、魔药瓶等元素）
     function triggerEnvelopeBurst(style) {
       const stage = envelopeStage || document.getElementById("envelopeStage");
       if (!stage) return;
@@ -1204,7 +1191,7 @@
       if (isHalloween) {
         if (isGothic) items = ['🦇', '🕷️', '✨', '🔥', '🕸️', '🩸'];
         else if (isGhost) items = ['👻', '🎀', '💖', '🍬', '🍭', '✨', '⭐', '🌸'];
-        else if (isWitchy) items = ['🔮', '🧪', '🌿', '✨', '🕷️', '🌙', '💫', '🪄'];
+        else if (isWitchy) items = ['🧙‍♀️', '🧹', '🐦‍⬛', '🧪', '🔮', '🌙', '✨', '🌿'];
         else items = ['🎃', '🍬', '🍭', '✨', '🍫', '🍂', '⭐', '🍁'];
       } else {
         items = ['✨', '⭐', '🌟', '💛'];
@@ -1341,7 +1328,7 @@
         ctx.fillStyle = "#cca0c5";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else if (style === 'witchy') {
-        ctx.fillStyle = "#0d2820";
+        ctx.fillStyle = "#0a2917";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       } else {
         if (style === 'pumpkin') ctx.fillStyle = "#cf782b";
