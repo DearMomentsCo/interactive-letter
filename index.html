@@ -102,7 +102,7 @@
     .env-pumpkin .envelope-wrapper { background: linear-gradient(150deg, #5c2d14 0%, #3a1a0b 60%, #200e05 100%) !important; }
     .env-ghost .envelope-wrapper { background: linear-gradient(150deg, #321844 0%, #200f2e 60%, #150820 100%) !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款) */
+    /* 9. Witchy Celestial (午夜女巫占星款信封) */
     .env-witchy .envelope-wrapper {
       background:
         radial-gradient(circle at 50% 25%, rgba(46, 204, 113, 0.28) 0%, transparent 60%),
@@ -191,7 +191,7 @@
     .paper-pumpkin { background-color: #fbf5eb !important; border: 1.8px solid #c97a29 !important; color: #382013 !important; }
     .paper-ghost { background-color: #fdf8fc !important; border: 1.8px solid #c88abf !important; color: #3b1f3c !important; }
 
-    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡) */
+    /* 9. Witchy Celestial (午夜女巫占星款：重工暗夜鬼屋城堡背景，高对比度不压字) */
     .paper-witchy {
       background-color: #061511 !important;
       background-image:
@@ -467,7 +467,6 @@
   </div>
 
   <div class="letter-container" id="letterContainer">
-    <!-- 南瓜邮票 -->
     <div class="halloween-stamp" id="halloweenStamp" title="Pumpkin Post 🎃">
       <div class="stamp-inner">
         <span class="stamp-price">31¢</span>
@@ -481,7 +480,6 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 幽灵邮票 -->
     <div class="ghost-stamp" id="ghostStamp" title="Boo Post 👻">
       <div class="stamp-inner" style="border-color:#d49ec9; background:#fff8fc;">
         <span class="stamp-price" style="color:#8c327a;">31¢</span>
@@ -496,7 +494,6 @@
       <div class="postmark-overlay"></div>
     </div>
 
-    <!-- 女巫占星毒苹果互动装置 -->
     <div class="poison-apple-interactive" id="poisonAppleBtn" title="Tap for a creepy magic surprise! 🍎">
       <svg viewBox="0 0 36 36" style="width:100%; height:100%;">
         <path d="M18 6 C17 6 15 8 15 10 L15 12 C10 12 6 16 6 21 C6 27 11 31 18 31 C25 31 30 27 30 21 C30 16 26 12 21 12 L21 10 C21 8 19 6 18 6 Z" fill="#8e0d22" stroke="#d4af37" stroke-width="1.2"/>
@@ -513,7 +510,6 @@
       </div>
     </div>
 
-    <!-- 3D 翻转相册与轮播控制器 -->
     <div class="polaroid-gallery" id="polaroidGallery"></div>
     <div class="polaroid-controls" id="polaroidControls" style="display:none;">
       <button class="polaroid-nav-btn" id="prevCardBtn">❮</button>
@@ -581,7 +577,7 @@
       });
     }
 
-    // 2. 加载订单数据 (带时间戳防缓存)
+    // 2. 加载订单数据 (加入时间戳防缓存)
     fetch("data/" + orderId + ".json?t=" + Date.now())
       .then(res => {
         if (!res.ok) throw new Error("Order not found");
@@ -606,7 +602,6 @@
       if (letterContainer) letterContainer.className = "letter-container paper-" + envStyle;
 
       if (envStyle === "witchy") {
-        // 完全尊重 JSON 里配置的名字，绝不强行覆盖
         if (hintEl) hintEl.innerText = "✦ READ THE CELESTIAL STARS 🌙 ✦";
         if (dateBadge) dateBadge.innerText = "✦ HAUNTED HOUSE COVEN 🔮 ✦";
       }
@@ -678,6 +673,7 @@
         }
       }
 
+      // 完全绑定 JSON 中的 recipient
       const recEl = getEl("recipientText", ".recipient-name");
       const sendEl = getEl("senderText", ".sender-name");
       if (recEl && data.recipient) recEl.innerText = data.recipient;
@@ -968,7 +964,8 @@
       if (style === 'ghost') {
         if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNWRAP FOR SWEET TREAT 🍬 ✦";
       } else if (style === 'witchy') {
-        if (cardTitle) cardTitle.innerText = cfg.title || "✦ UNLOCK THE HAUNTED VAULT 🔮 ✦";
+        // 采用你确认的最地道文案
+        if (cardTitle) cardTitle.innerText = cfg.title || "✦ SCRY INTO THE HAUNTED HOUSE 🏰 ✦";
       } else {
         if (cardTitle && cfg.title) cardTitle.innerText = cfg.title;
       }
@@ -995,7 +992,7 @@
       ctx.font = "bold 12px Cinzel, serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(style === 'witchy' ? "SCRY THE HAUNTED HOUSE 🏰" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(style === 'witchy' ? "SCRY INTO HAUNTED HOUSE 🏰" : (style === 'ghost' ? "SCRATCH TO OPEN BOX 🍬" : "SCRATCH HERE ✦"), canvas.width / 2, canvas.height / 2);
 
       let isScratching = false;
       function scratch(e) {
@@ -1100,232 +1097,4 @@
           this.isBat = Math.random() < 0.15;
           if (this.isBat) {
             this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          this.isMote = Math.random() < 0.55;
-          if (this.isMote) {
-            this.y = Math.random() * pCanvas.height;
-            this.size = Math.random() * 3.8 + 2;
-            this.speedY = -(Math.random() * 0.45 + 0.2);
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.opacity = Math.random() * 0.5 + 0.35;
-            this.pulseSpeed = Math.random() * 0.04 + 0.02;
-            this.pulsePhase = Math.random() * Math.PI * 2;
-          } else {
-            this.y = -25;
-            this.size = Math.random() * 10 + 8;
-            this.speedY = Math.random() * 0.85 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.6;
-            this.opacity = Math.random() * 0.35 + 0.65;
-            const autumnColors = ['rgba(235, 130, 40,', 'rgba(215, 160, 30,', 'rgba(180, 75, 25,'];
-            this.leafColor = autumnColors[Math.floor(Math.random() * autumnColors.length)];
-          }
-        } else if (this.type === 'ghostly-pastels') {
-          this.y = pCanvas.height + 20;
-          this.size = Math.random() * 3.8 + 1.8;
-          this.speedY = -(Math.random() * 0.65 + 0.25);
-          this.speedX = (Math.random() - 0.5) * 0.45;
-          this.opacity = Math.random() * 0.5 + 0.35;
-          this.pulsePhase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = Math.random() * 0.035 + 0.02;
-          const pastelHues = ['rgba(240, 160, 230,', 'rgba(195, 145, 245,', 'rgba(255, 215, 160,'];
-          this.hue = pastelHues[Math.floor(Math.random() * pastelHues.length)];
-        } else if (this.type === 'celestial-sparks') {
-          this.y = pCanvas.height + 20;
-          this.size = Math.random() * 3 + 1.5;
-          this.speedY = -(Math.random() * 0.5 + 0.2);
-          this.speedX = (Math.random() - 0.5) * 0.3;
-          this.opacity = Math.random() * 0.6 + 0.3;
-          this.pulsePhase = Math.random() * Math.PI * 2;
-          this.pulseSpeed = Math.random() * 0.04 + 0.02;
-        } else {
-          this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
-        }
-      }
-      update() {
-        if (!pCanvas) return;
-        if (this.type === 'gold-dust') {
-          this.y += this.speedY; this.x += Math.sin(this.y * 0.03) * 0.35;
-          if (this.y < -20) this.reset();
-        } else if (this.type === 'rain-to-sunshine') {
-          this.y += this.speedY; this.x += this.speedX;
-          if (this.y > pCanvas.height + 20) this.reset();
-        } else if (this.type === 'olive-leaves') {
-          if (this.isSunMote) {
-            this.y += this.speedY; this.x += Math.sin(this.y * 0.02) * 0.4;
-            if (this.y < -20) this.reset();
-          } else {
-            this.y += this.speedY; this.x += Math.sin(this.y * 0.016) * 1.0 + this.speedX;
-            this.angle += this.spinSpeed; this.roll += this.rollSpeed; this.pitch += this.pitchSpeed;
-            if (this.y > pCanvas.height + 40) this.reset();
-          }
-        } else if (this.type === 'spooky-embers') {
-          if (this.isBat) {
-            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          if (this.isMote) {
-            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-            pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
-            pCtx.shadowColor = "#ffaa00";
-            pCtx.shadowBlur = 12;
-            pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y);
-            pCtx.rotate(this.angle);
-            pCtx.scale(Math.cos(this.roll), 1);
-            pCtx.beginPath();
-            pCtx.moveTo(0, -this.size);
-            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
-            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
-            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
-            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
-            pCtx.shadowBlur = 4;
-            pCtx.fill();
-          }
-        } else if (this.type === 'ghostly-pastels' || this.type === 'celestial-sparks') {
-          this.y += this.speedY;
-          this.x += Math.sin(this.y * 0.02) * 0.6 + this.speedX;
-          this.pulsePhase += this.pulseSpeed;
-          if (this.y < -20) this.reset();
-        }
-      }
-      draw() {
-        if (!pCtx) return;
-        pCtx.save();
-        if (this.type === 'gold-dust') {
-          pCtx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-          pCtx.shadowColor = "#f1c40f"; pCtx.shadowBlur = 6;
-          pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2); pCtx.fill();
-        } else if (this.type === 'rain-to-sunshine') {
-          pCtx.strokeStyle = `rgba(180, 205, 230, ${this.opacity * 0.6})`;
-          pCtx.lineWidth = 1.2; pCtx.beginPath();
-          pCtx.moveTo(this.x, this.y); pCtx.lineTo(this.x + this.speedX * 2, this.y + this.len); pCtx.stroke();
-        } else if (this.type === 'olive-leaves') {
-          if (this.isSunMote) {
-            pCtx.beginPath(); pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 222, 130, ${this.opacity * 0.75})`;
-            pCtx.shadowColor = "#ffd666"; pCtx.shadowBlur = 10; pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y); pCtx.rotate(this.angle);
-            const scaleX = Math.cos(this.roll); const scaleY = Math.sin(this.pitch) * 0.35 + 0.65;
-            pCtx.scale(scaleX, scaleY);
-            const len = this.size * this.depth; const width = len * 0.44; const isFront = scaleX >= 0;
-            pCtx.beginPath(); pCtx.moveTo(-len, 0);
-            pCtx.bezierCurveTo(-len * 0.3, -width, len * 0.5, -width * 0.9, len, 0);
-            pCtx.bezierCurveTo(len * 0.5, width * 0.9, -len * 0.3, width, -len, 0);
-            pCtx.closePath();
-            const grad = pCtx.createLinearGradient(-len, -width, len, width);
-            if (isFront) {
-              grad.addColorStop(0, `rgba(178, 205, 82, ${this.opacity})`);
-              grad.addColorStop(0.5, `rgba(122, 154, 60, ${this.opacity})`);
-              grad.addColorStop(1, `rgba(72, 98, 38, ${this.opacity})`);
-              pCtx.shadowColor = "rgba(45, 65, 20, 0.45)"; pCtx.shadowBlur = 7;
-            } else {
-              grad.addColorStop(0, `rgba(244, 248, 242, ${this.opacity * 0.92})`);
-              grad.addColorStop(0.6, `rgba(202, 216, 198, ${this.opacity * 0.88})`);
-              grad.addColorStop(1, `rgba(156, 172, 150, ${this.opacity * 0.82})`);
-              pCtx.shadowColor = "rgba(0, 0, 0, 0.28)"; pCtx.shadowBlur = 5;
-            }
-            pCtx.fillStyle = grad; pCtx.fill();
-            pCtx.beginPath(); pCtx.moveTo(-len * 0.88, 0);
-            pCtx.quadraticCurveTo(0, -width * 0.08, len * 0.9, 0);
-            pCtx.strokeStyle = isFront ? `rgba(245, 255, 205, ${this.opacity * 0.7})` : `rgba(255, 255, 255, ${this.opacity * 0.8})`;
-            pCtx.lineWidth = 1.1; pCtx.stroke();
-          }
-        } else if (this.type === 'spooky-embers') {
-          if (this.isBat) {
-            this.x = -30; this.y = Math.random() * (pCanvas.height * 0.6);
-            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5) * 1.2;
-            this.size = Math.random() * 8 + 12; this.wingPhase = Math.random() * Math.PI * 2;
-            this.opacity = Math.random() * 0.4 + 0.35;
-          } else {
-            this.y = pCanvas.height + 20; this.size = Math.random() * 3 + 1.2;
-            this.speedY = -(Math.random() * 1.4 + 0.7); this.speedX = (Math.random() - 0.5) * 0.7;
-            this.opacity = Math.random() * 0.6 + 0.35;
-            this.color = Math.random() < 0.65 ? 'rgba(255, 90, 20,' : 'rgba(255, 170, 30,';
-          }
-        } else if (this.type === 'pumpkin-glow') {
-          if (this.isMote) {
-            const dynamicOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-            pCtx.beginPath();
-            pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            pCtx.fillStyle = `rgba(255, 185, 70, ${dynamicOpacity})`;
-            pCtx.shadowColor = "#ffaa00";
-            pCtx.shadowBlur = 12;
-            pCtx.fill();
-          } else {
-            pCtx.translate(this.x, this.y);
-            pCtx.rotate(this.angle);
-            pCtx.scale(Math.cos(this.roll), 1);
-            pCtx.beginPath();
-            pCtx.moveTo(0, -this.size);
-            pCtx.quadraticCurveTo(this.size * 0.7, 0, 0, this.size);
-            pCtx.quadraticCurveTo(-this.size * 0.7, 0, 0, -this.size);
-            pCtx.fillStyle = `${this.leafColor} ${this.opacity})`;
-            pCtx.shadowColor = "rgba(180, 80, 0, 0.35)";
-            pCtx.shadowBlur = 4;
-            pCtx.fill();
-          }
-        } else if (this.type === 'ghostly-pastels') {
-          const dynOpacity = this.opacity * (0.8 + Math.sin(this.pulsePhase) * 0.2);
-          pCtx.beginPath();
-          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          pCtx.fillStyle = `${this.hue} ${dynOpacity})`;
-          pCtx.shadowColor = "#e6a8d7";
-          pCtx.shadowBlur = 10;
-          pCtx.fill();
-        } else if (this.type === 'celestial-sparks') {
-          const dynOpacity = this.opacity * (0.75 + Math.sin(this.pulsePhase) * 0.25);
-          pCtx.beginPath();
-          pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          pCtx.fillStyle = `rgba(243, 229, 171, ${dynOpacity})`;
-          pCtx.shadowColor = "#2ecc71";
-          pCtx.shadowBlur = 10;
-          pCtx.fill();
-        } else {
-          this.y = pCanvas.height + 20; this.size = 2; this.speedY = -0.5; this.speedX = 0; this.opacity = 0.5;
-        }
-        pCtx.restore();
-      }
-    }
-
-    function initParticles(type) {
-      if (!pCanvas) return;
-      particles = [];
-      const count = (type === 'rain-to-sunshine' || type === 'gold-dust' || type === 'spooky-embers' || type === 'pumpkin-glow' || type === 'ghostly-pastels' || type === 'celestial-sparks') ? 45 : 30;
-      for (let i = 0; i < count; i++) particles.push(new UniversalParticle(type));
-    }
-
-    function animateParticles() {
-      if (pCtx && pCanvas) {
-        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-        for (let i = 0; i < particles.length; i++) {
-          particles[i].update();
-          particles[i].draw();
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-  </script>
-</body>
-</html>
+            this.speedX = Math.random() * 2.5 + 1.8; this.speedY = (Math.random() - 0.5
