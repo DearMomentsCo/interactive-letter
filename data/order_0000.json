@@ -11,17 +11,17 @@
   ],
   "photos": [
     {
-      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+      "url": "images/order_0000_1",
       "caption": "Our spooky cute adventure ✨"
     },
     {
-      "url": "https://images.unsplash.com/photo-1508385082359-f38ae991e8f2?q=80&w=600&auto=format&fit=crop",
+      "url": "images/order_0000_2",
       "caption": "My forever favorite boo 👻"
     }
   ],
   "scratchCard": {
     "enabled": true,
-    "title": "✦ SCRY INTO THE HAUNTED HOUSE 🏰 ✦",
+    "title": "✦ DARE TO OPEN? 🏰 ✦",
     "hiddenText": "Treat Claimed: Unlimited Hugs + Hot Chocolate Date ☕🎀"
   },
   "runawayQuestion": {
