@@ -1,8 +1,8 @@
 /* ==========================================================================
-   THEME 01: 金缮和解款 (KINTSUGI) - 温润和纸与互动道歉票券重构
+   THEME 01: 金缮和解款 (KINTSUGI) - 优雅杂志排版与呼吸感重构
    ========================================================================== */
 
-/* 1. 视口背景：温暖柔和的暗室烛光光晕，告别死黑沉闷 */
+/* 1. 视口环境：温暖舒适的烛光暗室沉浸感 */
 .letter-viewport[data-theme="kintsugi"] {
   background: radial-gradient(ellipse at 50% 38%, #222630 0%, #111317 75%, #08090b 100%);
   color: #2b2621;
@@ -11,27 +11,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 16px 60px;
+  padding: 40px 16px 80px;
 }
 
-/* 2. 高定礼品级信封 (370px x 230px 实体比例) */
+/* 2. 高定礼品级信封 (370px x 230px 黄金信函比例) */
 [data-theme="kintsugi"] .envelope-wrapper {
   position: relative;
   width: 94%;
-  max-width: 370px;
-  height: 230px;
+  max-width: 380px;
+  height: 234px;
   margin: 0 auto;
   border-radius: 10px;
   background: #232731;
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.9),
-    0 0 30px rgba(212, 175, 55, 0.15);
+    0 30px 60px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(212, 175, 55, 0.15);
   cursor: pointer;
   perspective: 1000px;
   border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
-/* 信封双层烫金精致线框与典雅四角金饰 */
 [data-theme="kintsugi"] .envelope-body {
   position: absolute;
   inset: 0;
@@ -48,18 +47,17 @@
   font-size: 11px;
   opacity: 0.85;
 }
-[data-theme="kintsugi"] .star-tl { top: 9px; left: 10px; }
-[data-theme="kintsugi"] .star-tr { top: 9px; right: 10px; }
-[data-theme="kintsugi"] .star-bl { bottom: 9px; left: 10px; }
-[data-theme="kintsugi"] .star-br { bottom: 9px; right: 10px; }
+[data-theme="kintsugi"] .star-tl { top: 10px; left: 11px; }
+[data-theme="kintsugi"] .star-tr { top: 10px; right: 11px; }
+[data-theme="kintsugi"] .star-bl { bottom: 10px; left: 11px; }
+[data-theme="kintsugi"] .star-br { bottom: 10px; right: 11px; }
 
-/* 优雅平缓的 V 型翻盖 */
 [data-theme="kintsugi"] .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 92px;
+  height: 94px;
   background: linear-gradient(180deg, #2f3442 0%, #1e2129 100%);
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   transform-origin: top center;
@@ -74,10 +72,10 @@
   z-index: 1;
 }
 
-/* 3. 熔蜡金缮火漆印 (呼吸微光) */
+/* 3. 熔蜡火漆印 */
 [data-theme="kintsugi"] .wax-seal-wrapper {
   position: absolute;
-  top: 92px;
+  top: 94px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
@@ -86,14 +84,14 @@
 }
 
 [data-theme="kintsugi"] .wax-seal {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
   background: radial-gradient(circle at 35% 30%, #fbedbf 0%, #c5a059 45%, #8f6e28 85%, #5a4313 100%);
   border: 1.5px solid #fff2bf;
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.85),
-    0 0 14px rgba(212, 175, 55, 0.6),
+    0 10px 22px rgba(0, 0, 0, 0.85),
+    0 0 16px rgba(212, 175, 55, 0.6),
     inset 0 2px 4px rgba(255, 255, 255, 0.8),
     inset 0 -2px 5px rgba(0, 0, 0, 0.6);
   display: flex;
@@ -116,19 +114,19 @@
 
 [data-theme="kintsugi"] .envelope-open-hint {
   position: absolute;
-  bottom: -36px;
+  bottom: -38px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 2.5px;
+  font-size: 10.5px;
+  letter-spacing: 3px;
   color: #c5a059;
   white-space: nowrap;
-  opacity: 0.85;
+  opacity: 0.9;
   pointer-events: none;
 }
 
-/* 4. 和纸信纸主体：充满呼吸感的典雅温润象牙白 */
+/* 4. 和纸信纸主体：大幅提升留白与字号呼吸感 */
 [data-theme="kintsugi"] .letter-sheet {
   background-color: #fdfaf3;
   background-image: 
@@ -141,31 +139,31 @@
   outline: 1px solid rgba(197, 160, 89, 0.5);
   outline-offset: -8px;
   box-shadow: 
-    0 25px 70px rgba(0, 0, 0, 0.7),
-    0 0 35px rgba(212, 175, 55, 0.15);
-  border-radius: 6px;
-  padding: 44px 22px 38px;
+    0 30px 80px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(212, 175, 55, 0.15);
+  border-radius: 8px;
+  padding: 56px 28px 48px; /* 加宽边距，完全告别局促沉闷 */
   position: relative;
   overflow: hidden;
 }
 
-/* 真实高对比度 SVG 艺术金缮和平鸽水印 (清楚可见但绝不挡字) */
+/* 和平鸽水印放大并增强柔和温润感 */
 [data-theme="kintsugi"] .letter-watermark-svg {
   position: absolute;
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 230px;
-  height: 230px;
-  opacity: 0.085;
+  width: 260px;
+  height: 260px;
+  opacity: 0.1;
   pointer-events: none;
   z-index: 1;
 }
 
-/* 官方和解公文烫金徽章标头 */
+/* 官方标章 */
 [data-theme="kintsugi"] .apology-badge-header {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 2;
 }
@@ -174,52 +172,53 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 16px;
+  padding: 6px 18px;
   border: 1px solid #d4af37;
-  border-radius: 20px;
+  border-radius: 24px;
   font-family: 'Cinzel', serif;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 2px;
-  color: #8c6a22;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.04) 100%);
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+  letter-spacing: 2.5px;
+  color: #7a5a17;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.04) 100%);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.12);
 }
 
+/* 主标题：放大字号与间距，极具视觉仪式感 */
 [data-theme="kintsugi"] .letter-title {
   font-family: 'Cinzel', serif;
-  font-size: 21px;
-  letter-spacing: 2px;
-  color: #7a5a17;
+  font-size: 24px;
+  letter-spacing: 3px;
+  color: #6d4b14;
   text-align: center;
-  margin: 10px 0 14px;
+  margin: 14px 0 18px;
   position: relative;
   z-index: 2;
 }
 
 [data-theme="kintsugi"] .letter-date {
   font-family: 'Cinzel', serif;
-  font-size: 11px;
+  font-size: 11.5px;
   color: #8c734b;
   text-align: right;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 2;
 }
 
 [data-theme="kintsugi"] .letter-salutation {
   font-family: 'Cinzel', serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: #5c4310;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   position: relative;
   z-index: 2;
 }
 
-/* 5. 3D 翻转相框 */
+/* 5. 3D 翻转相框：给予更舒适的展示比例 */
 [data-theme="kintsugi"] .photos-section {
-  margin: 16px auto 22px;
+  margin: 22px auto 28px;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -227,8 +226,8 @@
 
 [data-theme="kintsugi"] .photo-flip-card {
   width: 100%;
-  max-width: 280px;
-  height: 200px;
+  max-width: 290px;
+  height: 210px;
   margin: 0 auto;
 }
 
@@ -236,7 +235,7 @@
 [data-theme="kintsugi"] .photo-card-back {
   background: #ffffff;
   border: 1px solid rgba(212, 175, 55, 0.7);
-  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4px #d4af37, 0 10px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4px #d4af37, 0 12px 28px rgba(0,0,0,0.12);
   border-radius: 4px;
   padding: 8px;
 }
@@ -244,20 +243,20 @@
 [data-theme="kintsugi"] .photo-card-back {
   background: #fbf7ee;
   color: #634714;
-  padding: 18px;
+  padding: 20px;
 }
 
 [data-theme="kintsugi"] .photo-flip-hint {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  margin-top: 10px;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  margin-top: 12px;
 }
 
-/* 6. 【核心重构】实体打孔“道歉免死兑换券” (可点击盖章生效交互) */
+/* 6. 道歉兑换券：优化票身间距与舒适感 */
 [data-theme="kintsugi"] .apology-vouchers-container {
-  margin: 22px auto 24px;
+  margin: 26px auto 30px;
   position: relative;
   z-index: 2;
 }
@@ -265,27 +264,26 @@
 [data-theme="kintsugi"] .voucher-section-title {
   text-align: center;
   font-family: 'Cinzel', serif;
-  font-size: 10px;
+  font-size: 10.5px;
   letter-spacing: 2px;
   color: #9e7d3b;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 [data-theme="kintsugi"] .vouchers-list {
   display: flex;
   flex-direction: column;
-  gap: 9px;
-  max-width: 320px;
+  gap: 11px;
+  max-width: 330px;
   margin: 0 auto;
 }
 
-/* 实体打孔优惠券票身 */
 [data-theme="kintsugi"] .apology-voucher-card {
   position: relative;
   background: #f9f4e8;
   border: 1px dashed #d4af37;
   border-radius: 6px;
-  padding: 10px 14px 10px 42px;
+  padding: 12px 14px 12px 46px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -299,7 +297,6 @@
   transform: scale(0.98);
 }
 
-/* 左右两端打孔凹口 (模拟实体票券) */
 [data-theme="kintsugi"] .apology-voucher-card::before,
 [data-theme="kintsugi"] .apology-voucher-card::after {
   content: "";
@@ -308,45 +305,43 @@
   transform: translateY(-50%);
   width: 12px;
   height: 12px;
-  background-color: #fdfaf3; /* 与信纸底色融为一体形成凹洞 */
+  background-color: #fdfaf3;
   border: 1px solid #d4af37;
   border-radius: 50%;
 }
 [data-theme="kintsugi"] .apology-voucher-card::before { left: -6px; }
 [data-theme="kintsugi"] .apology-voucher-card::after { right: -6px; }
 
-/* 票券图标 */
 [data-theme="kintsugi"] .voucher-icon {
   position: absolute;
-  left: 14px;
-  font-size: 16px;
+  left: 15px;
+  font-size: 17px;
 }
 
-/* 票券文案 */
 [data-theme="kintsugi"] .voucher-info {
   text-align: left;
 }
 [data-theme="kintsugi"] .voucher-name {
   font-family: 'Cinzel', serif;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 700;
   color: #634714;
 }
 [data-theme="kintsugi"] .voucher-desc {
-  font-size: 10.5px;
+  font-size: 11px;
   font-style: italic;
   color: #8c734b;
+  margin-top: 2px;
 }
 
-/* 点击后砸下的烫金朱红“REDEEMED ♡ 已生效”火漆戳印 */
 [data-theme="kintsugi"] .voucher-stamp {
   font-family: 'Cinzel', serif;
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 1.5px;
   color: #a32a2a;
   border: 1.5px solid #a32a2a;
-  padding: 3px 8px;
+  padding: 3px 9px;
   border-radius: 4px;
   transform: rotate(-10deg) scale(0);
   opacity: 0;
@@ -364,20 +359,21 @@
   border-style: solid;
 }
 
-/* 7. 打字机正文 */
+/* 7. 正文排版：加大字号与超大行高，消除沉闷感 */
 [data-theme="kintsugi"] .letter-body-text {
-  font-size: 15.5px;
-  line-height: 1.9;
-  color: #332b25;
-  min-height: 120px;
+  font-size: 17px;
+  line-height: 2.05; /* 超舒适的高定信函呼吸行距 */
+  color: #302822;
+  min-height: 140px;
   position: relative;
   z-index: 2;
+  margin-bottom: 24px;
 }
 
 [data-theme="kintsugi"] .typewriter-cursor {
   display: inline-block;
   width: 2px;
-  height: 17px;
+  height: 19px;
   background-color: #c5a059;
   margin-left: 2px;
   vertical-align: text-bottom;
@@ -392,17 +388,17 @@
 [data-theme="kintsugi"] .letter-closing {
   font-family: 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-size: 16.5px;
+  font-size: 18px;
   text-align: right;
-  margin-top: 22px;
+  margin-top: 28px;
   color: #5c4310;
   position: relative;
   z-index: 2;
 }
 
-/* 8. 金继裂纹瓷板刮刮乐 */
+/* 8. 金继瓷板刮刮乐 */
 [data-theme="kintsugi"] .scratch-component {
-  margin: 32px auto 18px;
+  margin: 36px auto 22px;
   position: relative;
   z-index: 2;
 }
@@ -410,9 +406,10 @@
 [data-theme="kintsugi"] .scratch-hint-text {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 2px;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 [data-theme="kintsugi"] .scratch-card-box {
@@ -422,9 +419,10 @@
   outline-offset: -5px;
   background: #fbf8f0;
   box-shadow: 
-    0 6px 20px rgba(0, 0, 0, 0.08),
-    inset 0 0 14px rgba(212, 175, 55, 0.1);
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 0 16px rgba(212, 175, 55, 0.1);
   position: relative;
+  height: 80px;
 }
 
 [data-theme="kintsugi"] .scratch-card-box::before,
@@ -434,13 +432,13 @@
   top: 50%;
   transform: translateY(-50%);
   color: #d4af37;
-  font-size: 10px;
-  text-shadow: 0 0 4px rgba(212, 175, 55, 0.5);
+  font-size: 11px;
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
   z-index: 5;
   pointer-events: none;
 }
-[data-theme="kintsugi"] .scratch-card-box::before { left: 12px; }
-[data-theme="kintsugi"] .scratch-card-box::after { right: 12px; }
+[data-theme="kintsugi"] .scratch-card-box::before { left: 14px; }
+[data-theme="kintsugi"] .scratch-card-box::after { right: 14px; }
 
 [data-theme="kintsugi"] .scratch-secret-reveal {
   font-family: 'Cinzel', serif;
@@ -448,13 +446,14 @@
   font-weight: 700;
   letter-spacing: 1.5px;
   background: #fdfaf2;
-  font-size: 14px;
+  font-size: 14.5px;
 }
 
 /* 9. 逃跑互动按钮 */
 [data-theme="kintsugi"] .runaway-section {
-  border-top: 1px dashed rgba(197, 160, 89, 0.4);
-  margin-top: 32px;
+  border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
+  margin-top: 40px;
+  padding-top: 24px;
   position: relative;
   z-index: 2;
 }
@@ -462,13 +461,14 @@
 [data-theme="kintsugi"] .runaway-question {
   font-family: 'Cinzel', serif;
   color: #5c4310;
-  font-size: 16px;
+  font-size: 16.5px;
+  margin-bottom: 20px;
 }
 
 [data-theme="kintsugi"] .btn-yes {
   background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%);
   color: #ffffff;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.45);
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
 }
 
 [data-theme="kintsugi"] .btn-no {
@@ -481,4 +481,5 @@
   border: 1px solid #d4af37;
   color: #7a5a17;
   font-family: 'Cinzel', serif;
+  font-size: 15px;
 }
