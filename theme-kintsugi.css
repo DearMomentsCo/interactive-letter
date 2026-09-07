@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEME 01: 金缮修复和解款 (KINTSUGI) - 手机与电脑全端自适应定制
+   THEME 01: 金缮修复和解款 (KINTSUGI) - 专属艺术美学
    ========================================================================== */
 
 .letter-viewport[data-theme="kintsugi"] {
@@ -162,7 +162,7 @@
   z-index: 2;
 }
 
-/* 智能相框外壳（取消死板宽高，赋予流金边框质感） */
+/* 播放器金缮专属配色 */
 [data-theme="kintsugi"] .photo-card-front,
 [data-theme="kintsugi"] .photo-card-back {
   background: #ffffff;
@@ -183,6 +183,20 @@
   font-size: clamp(9px, 2.4vw, 10.5px);
   letter-spacing: 1.5px;
   margin-top: 10px;
+}
+
+[data-theme="kintsugi"] .photo-nav-btn {
+  border: 1px solid #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  color: #7a5a17;
+}
+
+[data-theme="kintsugi"] .photo-nav-btn:hover {
+  background: rgba(212, 175, 55, 0.28);
+}
+
+[data-theme="kintsugi"] .photo-page-indicator {
+  color: #8c6a22;
 }
 
 /* 和解免死券 */
@@ -368,7 +382,7 @@
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 逃跑互动问答 */
+/* 逃跑问答 */
 [data-theme="kintsugi"] .runaway-section {
   border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
   padding-top: 24px;
