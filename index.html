@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>A Letter For You</title>
 
-  <!-- Google 字体预加载 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -15,13 +14,12 @@
 </head>
 <body>
 
-  <!-- 背景粒子画布（常态浮尘 + 开信爆发金箔） -->
   <canvas id="particle-canvas"></canvas>
 
   <audio id="bgAudio" loop preload="auto"></audio>
   <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
 
-  <!-- 密码锁系统 -->
+  <!-- 密码锁 -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
       <div class="passcode-title">ENTER 4-DIGIT PASSCODE</div>
@@ -38,34 +36,50 @@
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 重工 3D 信封 -->
+      <!-- 1. 物理比例 3D 信封 (1.55:1 永不变形) -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
-          <!-- 锋利金缮断裂金线 -->
-          <svg class="kintsugi-cracks" viewBox="0 0 520 310" preserveAspectRatio="none">
-            <path d="M 0,45 L 80,70 L 130,50 L 210,140 L 280,130 L 360,200 L 450,180 L 520,230" 
-                  fill="none" stroke="#ffeaa7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="bevel" />
-            <path d="M 0,45 L 80,70 L 130,50 L 210,140 L 280,130 L 360,200 L 450,180 L 520,230" 
-                  fill="none" stroke="#d4af37" stroke-width="4.2" opacity="0.35" stroke-linecap="round" stroke-linejoin="bevel" />
-            <path d="M 210,140 L 240,205 L 220,260 L 250,310" 
-                  fill="none" stroke="#d4af37" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="bevel" />
-            <path d="M 360,200 L 400,150 L 440,120 L 490,115" 
-                  fill="none" stroke="#ecd08c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="bevel" />
+          <!-- 实体折纸三角暗影 (还原真实信封底折与侧折交叠) -->
+          <svg class="envelope-folds-svg" viewBox="0 0 500 320" preserveAspectRatio="none">
+            <!-- 底折三角翼暗影 -->
+            <polygon points="0,320 250,180 500,320" fill="rgba(0,0,0,0.35)" />
+            <path d="M 0,320 L 250,180 L 500,320" fill="none" stroke="rgba(212,175,55,0.12)" stroke-width="1" />
+            <!-- 左/右侧折微缝 -->
+            <path d="M 0,0 L 250,180 M 500,0 L 250,180" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.2" />
+          </svg>
+
+          <!-- 自然金缮断裂金脉 (多分支细流金，避开中央视觉冲突) -->
+          <svg class="kintsugi-cracks" viewBox="0 0 500 320" preserveAspectRatio="none">
+            <!-- 左侧主金脉 -->
+            <path d="M 0,60 Q 60,85 100,70 T 170,140 T 210,180" 
+                  fill="none" stroke="#ffeaa7" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M 0,60 Q 60,85 100,70 T 170,140 T 210,180" 
+                  fill="none" stroke="#d4af37" stroke-width="3.6" opacity="0.3" stroke-linecap="round" />
+            <path d="M 100,70 L 130,30" fill="none" stroke="#c5a059" stroke-width="1.2" />
+            
+            <!-- 右侧延伸金脉 -->
+            <path d="M 290,180 Q 340,150 380,185 T 460,160 T 500,210" 
+                  fill="none" stroke="#ffeaa7" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M 290,180 Q 340,150 380,185 T 460,160 T 500,210" 
+                  fill="none" stroke="#d4af37" stroke-width="3.6" opacity="0.3" stroke-linecap="round" />
+            <path d="M 380,185 L 415,230" fill="none" stroke="#c5a059" stroke-width="1.2" />
           </svg>
         </div>
 
+        <!-- 三角上翻盖 -->
         <div class="envelope-flap"></div>
-        <div class="envelope-custom-note" id="envelopeCustomNote"></div>
 
-        <!-- 手工熔蜡浮雕火漆印 -->
+        <!-- 3D 浮雕熔蜡火漆印 -->
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
-          <div class="envelope-open-hint">✦ TAP TO UNSEAL ✦</div>
         </div>
+
+        <!-- 悬浮在信封下方的提示语 (不再与信封内容叠压) -->
+        <div class="envelope-open-hint">✦ TAP SEAL TO OPEN ✦</div>
       </div>
 
       <!-- 2. 和纸信纸主体 -->
@@ -90,14 +104,14 @@
           <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP OVER ✦</div>
         </div>
 
-        <!-- 智能语速打字机长信 -->
+        <!-- 智能打字机长信 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 金缮专属：金继瓷板 · 研磨流金刮刮乐 -->
+        <!-- 金继裂纹瓷板刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ POLISH THE GOLDEN SEAM TO HEAL ✦</div>
           <div class="scratch-card-box">
@@ -106,7 +120,7 @@
           </div>
         </div>
 
-        <!-- 调皮逃跑按钮问答 -->
+        <!-- 逃跑按钮问答 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -123,14 +137,12 @@
   <script src="data.js"></script>
 
   <script>
-    // 1. 数据绑定
-    document.getElementById('envelopeCustomNote').innerText = LETTER_DATA.envelopeNote || '';
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
     document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "I'M TRULY SORRY";
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 相片卡
+    // 照片卡
     if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
       document.getElementById('frontPhotoImg').src = LETTER_DATA.photos[0].url;
       document.getElementById('backCaptionText').innerText = LETTER_DATA.photos[0].caption;
@@ -142,14 +154,14 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 刮刮乐开关
+    // 刮刮乐
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答开关
+    // 逃跑问答
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -187,7 +199,7 @@
       }
     }
 
-    // 音频控制
+    // 背景音频
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
@@ -200,7 +212,7 @@
       else { audio.pause(); audioBtn.innerText = '🔇'; }
     });
 
-    // 2. 开信动效
+    // 开信与金箔粒子爆发
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     let isLetterOpened = false;
@@ -209,7 +221,6 @@
       if (isLetterOpened) return;
       isLetterOpened = true;
 
-      // 释放金箔爆破特效
       createKintsugiBurst(window.innerWidth / 2, window.innerHeight / 2);
 
       setTimeout(() => {
@@ -220,7 +231,7 @@
       }, 350);
     });
 
-    // 3. 打字机与跳过
+    // 智能打字机
     let typewriterTimer = null;
     let isTypingFinished = false;
     const textContainer = document.getElementById('typewriterText');
@@ -259,7 +270,7 @@
       cursor.style.display = 'none';
     }
 
-    // 4. 金继瓷板 · 研磨流金涂层刮刮乐
+    // 金继瓷板刮刮乐
     function initScratchCard() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -270,7 +281,6 @@
       canvas.width = w;
       canvas.height = h;
 
-      // 磨砂真金矿物厚涂层
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#d4af37');
       grad.addColorStop(0.3, '#fbf0cd');
@@ -279,7 +289,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 生漆金粉细沙微粒
       ctx.fillStyle = "rgba(255, 255, 255, 0.35)";
       for (let i = 0; i < w; i += 3) {
         for (let j = 0; j < h; j += 3) {
@@ -314,7 +323,7 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 5. 逃跑问答
+    // 逃跑问答
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -326,7 +335,7 @@
       btnNo.style.transform = `translate(${x}px, ${y}px)`;
     }
     btnNo.addEventListener('mouseover', runaway);
-    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(); });
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
 
     btnYes.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -336,7 +345,7 @@
       createKintsugiBurst(window.innerWidth / 2, window.innerHeight * 0.7);
     });
 
-    // 6. 物理金粉微粒画布
+    // 粒子系统
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let floatingDust = [];
