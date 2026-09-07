@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>A Letter For You</title>
 
-  <!-- 预加载 9 款 Google Fonts -->
+  <!-- Google 字体库 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
@@ -59,10 +59,9 @@
         <div class="envelope-open-hint">✦ TAP SEAL TO UNSEAL ✦</div>
       </div>
 
-      <!-- 2. 和解信纸主体 -->
+      <!-- 2. 信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <!-- 矢量和平鸽水印 -->
         <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#7a5a17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M 20,55 C 25,45 35,40 50,42 C 60,35 75,30 85,32 C 82,42 75,50 68,55 C 72,62 78,72 82,80 C 70,76 60,70 52,62 C 45,68 35,72 22,70 C 26,64 28,58 20,55 Z" />
           <path d="M 50,42 C 48,32 55,20 65,15 C 62,24 58,35 50,42 Z" stroke-width="1.2" />
@@ -78,8 +77,8 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 3D 翻转相册 -->
-        <div class="photos-section" id="photosSection">
+        <!-- 【通用组件：3D 翻转 + 幻灯片播放器】 -->
+        <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
               <div class="photo-card-front">
@@ -91,9 +90,15 @@
             </div>
           </div>
           <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP OVER ✦</div>
+
+          <div class="photo-nav-controls" id="photoNavControls">
+            <button class="photo-nav-btn" id="prevPhotoBtn" title="Previous Photo">‹</button>
+            <span class="photo-page-indicator" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn" title="Next Photo">›</button>
+          </div>
         </div>
 
-        <!-- 和解免死兑换券 -->
+        <!-- 和解免死券 -->
         <div class="apology-vouchers-container">
           <div class="voucher-section-title">✦ TAP ANY VOUCHER TO CLAIM YOUR COMPENSATION ✦</div>
           <div class="vouchers-list">
@@ -149,7 +154,6 @@
             <button class="btn-yes" id="btnYes">Yes ♡</button>
             <button class="btn-no" id="btnNo">No</button>
           </div>
-          <!-- 默认严格隐藏弹窗 -->
           <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
         </div>
       </article>
@@ -165,20 +169,54 @@
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 自选字体切换（仅改变信件正文与落款，不破坏整体排版）
+    // 字体切换
     if (LETTER_DATA.fontType) {
       document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
 
-    // 照片卡
-    if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
-      document.getElementById('frontPhotoImg').src = LETTER_DATA.photos[0].url;
-      document.getElementById('backCaptionText').innerText = LETTER_DATA.photos[0].caption;
-      document.getElementById('photoCard').addEventListener('click', function(e) {
+    // 【全局通用相册引擎：支持 1-N 张照片播放与自动隐藏控件】
+    const photoCard = document.getElementById('photoCard');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+
+    if (photosList.length > 0) {
+      function renderPhoto(index) {
+        photoCard.classList.remove('is-flipped');
+        frontImg.src = photosList[index].url;
+        backCaption.innerText = photosList[index].caption || '';
+        pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
+      }
+
+      renderPhoto(0);
+
+      photoCard.addEventListener('click', function(e) {
         e.stopPropagation();
         this.classList.toggle('is-flipped');
       });
+
+      if (photosList.length <= 1) {
+        navControls.style.display = 'none';
+      } else {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+      }
     } else {
       document.getElementById('photosSection').style.display = 'none';
     }
@@ -228,7 +266,7 @@
       }
     }
 
-    // 音频控制
+    // 音频
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
@@ -241,7 +279,6 @@
       else { audio.pause(); audioBtn.innerText = '🔇'; }
     });
 
-    // 兑换券盖章
     function claimVoucher(el) {
       if (!el.classList.contains('is-claimed')) {
         el.classList.add('is-claimed');
@@ -250,7 +287,6 @@
       }
     }
 
-    // 开信动作与金箔星芒爆破
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     let isLetterOpened = false;
@@ -269,7 +305,6 @@
       }, 380);
     });
 
-    // 打字机
     let typewriterTimer = null;
     let isTypingFinished = false;
     const textContainer = document.getElementById('typewriterText');
@@ -308,7 +343,6 @@
       cursor.style.display = 'none';
     }
 
-    // 金继瓷板刮刮乐
     function initScratchCard() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -361,7 +395,6 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 逃跑问答交互
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -383,7 +416,6 @@
       createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 60);
     });
 
-    // 粒子系统
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let floatingDust = [];
