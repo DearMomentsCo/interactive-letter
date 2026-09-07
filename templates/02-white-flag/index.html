@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Official Peace Accord - White Flag</title>
+
+  <!-- Google 字体预加载 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- 引用根目录的公共核心骨架 + 引用同级目录的白旗专属皮肤 -->
+  <link rel="stylesheet" href="../../core.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 专属和平微光粒子画布 -->
+  <canvas id="particle-canvas"></canvas>
+
+  <audio id="bgAudio" loop preload="auto"></audio>
+  <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
+
+  <!-- 密码锁系统 -->
+  <div class="passcode-overlay" id="passcodeOverlay">
+    <div class="passcode-box">
+      <div class="passcode-title">ENTER 4-DIGIT DIPLOMATIC CODE</div>
+      <div class="passcode-inputs">
+        <input type="password" maxlength="1" class="passcode-digit" autofocus />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+      </div>
+      <div class="passcode-error" id="passcodeError"></div>
+    </div>
+  </div>
+
+  <div class="letter-viewport" data-theme="white-flag">
+    <div class="letter-container" id="letterContainer">
+      
+      <!-- 1. 白旗公文信封 -->
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-body">
+          <span class="envelope-corner-star star-tl">✦</span>
+          <span class="envelope-corner-star star-tr">✦</span>
+          <span class="envelope-corner-star star-bl">✦</span>
+          <span class="envelope-corner-star star-br">✦</span>
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="wax-seal-wrapper">
+          <div class="wax-seal" id="waxSealBtn">
+            <svg class="seal-heart-svg" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="envelope-open-hint">✦ BREAK THE DIPLOMATIC SEAL ✦</div>
+      </div>
+
+      <!-- 2. 条约公文信纸 -->
+      <article class="letter-sheet" id="letterSheet">
+        
+        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2b303a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50" cy="50" r="42" stroke-dasharray="3,3" />
+          <path d="M 25,55 C 35,42 50,42 65,48 C 75,40 85,42 80,55 C 70,60 55,68 40,65 Z" />
+          <path d="M 30,50 Q 50,30 70,35" stroke-width="1.2" />
+        </svg>
+
+        <div class="apology-badge-header">
+          <div class="apology-badge-pill">✦ ARTICLE OF RECONCILIATION & CEASEFIRE ✦</div>
+        </div>
+
+        <div class="letter-date" id="letterDate"></div>
+        <h1 class="letter-title" id="letterHeadline"></h1>
+        <div class="letter-salutation" id="letterSalutation"></div>
+
+        <!-- 3D 翻转 + < 1 / N > 播放器 -->
+        <div class="photo-slider-wrapper" id="photosSection">
+          <div class="photo-flip-card" id="photoCard">
+            <div class="photo-flip-inner">
+              <div class="photo-card-front">
+                <img id="frontPhotoImg" src="" alt="Treaty Evidence Photo" />
+              </div>
+              <div class="photo-card-back">
+                <p class="photo-caption-text" id="backCaptionText"></p>
+              </div>
+            </div>
+          </div>
+          <div class="photo-flip-hint">✦ TAP EVIDENCE TO REVIEW CLAUSE ✦</div>
+
+          <div class="photo-nav-controls" id="photoNavControls">
+            <button class="photo-nav-btn" id="prevPhotoBtn" title="Previous Photo">‹</button>
+            <span class="photo-page-indicator" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn" title="Next Photo">›</button>
+          </div>
+        </div>
+
+        <!-- 条约附录条款 -->
+        <div class="apology-vouchers-container">
+          <div class="voucher-section-title">✦ TAP CLAUSE TO RATIFY COMPENSATION TERMS ✦</div>
+          <div class="vouchers-list">
+            <div class="apology-voucher-card" onclick="claimVoucher(this)">
+              <div class="voucher-icon">🏳️</div>
+              <div class="voucher-info">
+                <div class="voucher-name">Clause I: Total Ceasefire</div>
+                <div class="voucher-desc">Immediate cessation of all disputes, 100% unconditional truce</div>
+              </div>
+              <div class="voucher-stamp">RATIFIED</div>
+            </div>
+
+            <div class="apology-voucher-card" onclick="claimVoucher(this)">
+              <div class="voucher-icon">♡</div>
+              <div class="voucher-info">
+                <div class="voucher-name">Clause II: Sweet Reparations</div>
+                <div class="voucher-desc">Unrestricted hugs & sweet pampering upon request</div>
+              </div>
+              <div class="voucher-stamp">RATIFIED</div>
+            </div>
+
+            <div class="apology-voucher-card" onclick="claimVoucher(this)">
+              <div class="voucher-icon">🍽️</div>
+              <div class="voucher-info">
+                <div class="voucher-name">Clause III: Treaty Feast</div>
+                <div class="voucher-desc">Victorious banquet chosen by you, fully funded</div>
+              </div>
+              <div class="voucher-stamp">RATIFIED</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 智能打字机正文 -->
+        <div class="letter-body-text" id="letterBody">
+          <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+        </div>
+
+        <div class="letter-closing" id="letterClosing"></div>
+
+        <!-- 刮刮乐密令 -->
+        <div class="scratch-component" id="scratchComponent">
+          <div class="scratch-hint-text" id="scratchHintText">✦ UNSEAL CLASSIFIED PEACE CLAUSE ✦</div>
+          <div class="scratch-card-box">
+            <div class="scratch-secret-reveal" id="scratchSecretReveal"></div>
+            <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 停战逃跑问答 -->
+        <div class="runaway-section" id="runawayQuestionSection">
+          <div class="runaway-question" id="runawayQuestion"></div>
+          <div class="runaway-buttons-wrapper">
+            <button class="btn-yes" id="btnYes">Ratify & Truce ♡</button>
+            <button class="btn-no" id="btnNo">Decline</button>
+          </div>
+          <!-- 严格内联隐藏 -->
+          <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- 读取同目录下的专属演示数据 -->
+  <script src="data.js"></script>
+
+  <script>
+    document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
+    document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "OFFICIAL PEACE ACCORD";
+    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
+    document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
+
+    // 自选字体
+    if (LETTER_DATA.fontType) {
+      document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+      document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+    }
+
+    // 相册播放器引擎
+    const photoCard = document.getElementById('photoCard');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+
+    if (photosList.length > 0) {
+      function renderPhoto(index) {
+        photoCard.classList.remove('is-flipped');
+        frontImg.src = photosList[index].url;
+        backCaption.innerText = photosList[index].caption || '';
+        pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
+      }
+
+      renderPhoto(0);
+
+      photoCard.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('is-flipped');
+      });
+
+      if (photosList.length <= 1) {
+        navControls.style.display = 'none';
+      } else {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+      }
+    } else {
+      document.getElementById('photosSection').style.display = 'none';
+    }
+
+    // 刮刮乐设置
+    if (!LETTER_DATA.enableScratch) {
+      document.getElementById('scratchComponent').style.display = 'none';
+    } else {
+      document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
+    }
+
+    // 逃跑问答
+    if (!LETTER_DATA.enableRunaway) {
+      document.getElementById('runawayQuestionSection').style.display = 'none';
+    } else {
+      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
+      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
+    }
+
+    // 密码锁
+    const overlay = document.getElementById('passcodeOverlay');
+    if (!LETTER_DATA.passcode) {
+      overlay.classList.add('is-unlocked');
+    } else {
+      const inputs = document.querySelectorAll('.passcode-digit');
+      const errorEl = document.getElementById('passcodeError');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) inputs[index + 1].focus();
+          checkPasscode();
+        });
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) inputs[index - 1].focus();
+        });
+      });
+      function checkPasscode() {
+        let entered = Array.from(inputs).map(i => i.value).join('');
+        if (entered.length === 4) {
+          if (entered === LETTER_DATA.passcode) {
+            overlay.classList.add('is-unlocked');
+          } else {
+            errorEl.innerText = "Incorrect protocol code. Try again.";
+            inputs.forEach(i => i.value = '');
+            inputs[0].focus();
+          }
+        }
+      }
+    }
+
+    // 音频
+    const audio = document.getElementById('bgAudio');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (LETTER_DATA.audioUrl) {
+      audio.src = LETTER_DATA.audioUrl;
+      audioBtn.style.display = 'flex';
+    }
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) { audio.play(); audioBtn.innerText = '🔊'; }
+      else { audio.pause(); audioBtn.innerText = '🔇'; }
+    });
+
+    function claimVoucher(el) {
+      if (!el.classList.contains('is-claimed')) {
+        el.classList.add('is-claimed');
+        const rect = el.getBoundingClientRect();
+        createPeaceUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+      }
+    }
+
+    // 开信动作
+    const container = document.getElementById('letterContainer');
+    const envelope = document.getElementById('envelopeWrapper');
+    let isLetterOpened = false;
+
+    envelope.addEventListener('click', (e) => {
+      if (isLetterOpened) return;
+      isLetterOpened = true;
+
+      createPeaceUnsealBurst(window.innerWidth / 2, window.innerHeight / 2, 55);
+
+      setTimeout(() => {
+        container.classList.add('is-opened');
+        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.enableScratch) initScratchCard();
+        startSmartTypewriter(LETTER_DATA.body);
+      }, 380);
+    });
+
+    let typewriterTimer = null;
+    let isTypingFinished = false;
+    const textContainer = document.getElementById('typewriterText');
+    const cursor = document.getElementById('typewriterCursor');
+
+    function startSmartTypewriter(fullText) {
+      if (!fullText) return;
+      let currentIndex = 0;
+      const totalLen = fullText.length;
+      let typingSpeed = totalLen > 500 ? 10 : (totalLen > 250 ? 18 : 35);
+
+      typewriterTimer = setInterval(() => {
+        if (currentIndex < totalLen) {
+          textContainer.innerText += fullText.charAt(currentIndex);
+          currentIndex++;
+        } else {
+          finishTyping(fullText);
+        }
+      }, typingSpeed);
+
+      document.addEventListener('click', function onSkipClick() {
+        if (!isTypingFinished) {
+          finishTyping(fullText);
+          document.removeEventListener('click', onSkipClick);
+        }
+      });
+    }
+
+    function finishTyping(fullText) {
+      clearInterval(typewriterTimer);
+      textContainer.innerText = fullText;
+      isTypingFinished = true;
+      cursor.style.display = 'none';
+    }
+
+    // 刮刮乐画布
+    function initScratchCard() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const box = canvas.parentElement;
+      const ctx = canvas.getContext('2d');
+      const w = box.clientWidth || 320;
+      const h = box.clientHeight || 76;
+      canvas.width = w;
+      canvas.height = h;
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#c41e1e');
+      grad.addColorStop(0.5, '#e53935');
+      grad.addColorStop(1, '#850d0d');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('✦ SCRATCH TO UNSEAL ✦', w / 2, h / 2);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(clientX - rect.left, clientY - rect.top, 18, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => isScratching = true);
+      window.addEventListener('mouseup', () => isScratching = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: true });
+      window.addEventListener('touchend', () => isScratching = false);
+      canvas.addEventListener('touchmove', scratch, { passive: true });
+    }
+
+    // 逃跑问答
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const modal = document.getElementById('runawaySuccessModal');
+
+    function runaway(e) {
+      e.stopPropagation();
+      const x = (Math.random() - 0.5) * 220;
+      const y = (Math.random() - 0.5) * 130;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    btnNo.addEventListener('mouseover', runaway);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
+
+    btnYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.style.display = 'block';
+      btnNo.style.display = 'none';
+      btnYes.style.transform = 'scale(1.08)';
+      createPeaceUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 65);
+    });
+
+    // 和平微光粒子画布
+    const pCanvas = document.getElementById('particle-canvas');
+    const pCtx = pCanvas.getContext('2d');
+    let floatingDust = [];
+    let sparkleStars = [];
+    let shockwaves = [];
+
+    function resizeCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 35; i++) {
+      floatingDust.push({
+        x: Math.random() * pCanvas.width,
+        y: Math.random() * pCanvas.height,
+        size: Math.random() * 2 + 0.6,
+        speedY: Math.random() * 0.35 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.25,
+        opacity: Math.random() * 0.5 + 0.2
+      });
+    }
+
+    function createPeaceUnsealBurst(originX, originY, count = 45) {
+      shockwaves.push({
+        x: originX,
+        y: originY,
+        radius: 10,
+        maxRadius: 280,
+        opacity: 0.95,
+        lineWidth: 5
+      });
+
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 7 + 3;
+        sparkleStars.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * velocity,
+          vy: Math.sin(angle) * velocity,
+          size: Math.random() * 5 + 3,
+          color: Math.random() > 0.4 ? '#ffffff' : '#e6e1d5',
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015,
+          rot: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 8
+        });
+      }
+    }
+
+    function renderLoop() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+      pCtx.fillStyle = '#f0ece1';
+      floatingDust.forEach(p => {
+        p.y -= p.speedY;
+        p.x += p.speedX;
+        if (p.y < 0) {
+          p.y = pCanvas.height + 10;
+          p.x = Math.random() * pCanvas.width;
+        }
+        pCtx.globalAlpha = p.opacity;
+        pCtx.beginPath();
+        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        pCtx.fill();
+      });
+
+      for (let i = shockwaves.length - 1; i >= 0; i--) {
+        const sw = shockwaves[i];
+        sw.radius += (sw.maxRadius - sw.radius) * 0.12;
+        sw.opacity -= 0.035;
+
+        if (sw.opacity <= 0) {
+          shockwaves.splice(i, 1);
+          continue;
+        }
+
+        pCtx.save();
+        pCtx.beginPath();
+        pCtx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+        pCtx.strokeStyle = `rgba(255, 255, 255, ${sw.opacity})`;
+        pCtx.lineWidth = sw.lineWidth;
+        pCtx.stroke();
+        pCtx.restore();
+      }
+
+      for (let i = sparkleStars.length - 1; i >= 0; i--) {
+        const s = sparkleStars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.1;
+        s.life -= s.decay;
+
+        if (s.life <= 0) {
+          sparkleStars.splice(i, 1);
+          continue;
+        }
+
+        pCtx.save();
+        pCtx.globalAlpha = s.life;
+        pCtx.fillStyle = s.color;
+        pCtx.beginPath();
+        pCtx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
+        pCtx.fill();
+        pCtx.restore();
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>
