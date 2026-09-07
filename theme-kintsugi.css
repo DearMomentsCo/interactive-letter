@@ -1,10 +1,10 @@
 /* ==========================================================================
-   THEME 01: 金缮修复款 (KINTSUGI) - 国际高定信函形制与真实手工金缮
+   THEME 01: 金缮和解款 (KINTSUGI) - 高定艺术信函与和解专属美学
    ========================================================================== */
 
-/* 1. 视口背景：微弱温润的暗室环境光，突出信件主体 */
+/* 1. 视口环境 */
 .letter-viewport[data-theme="kintsugi"] {
-  background: radial-gradient(ellipse at 50% 40%, #1a1c22 0%, #0d0e11 85%);
+  background: radial-gradient(ellipse at 50% 35%, #181a20 0%, #0c0d10 85%);
   color: #2b2621;
   font-family: 'Cormorant Garamond', Georgia, serif;
   min-height: 100vh;
@@ -14,59 +14,69 @@
   padding: 30px 16px 60px;
 }
 
-/* 2. 彻底锁死信封黄金比例：在手机上呈现完美修长矩形，永不变形 */
+/* 2. 高定礼盒级信封主体 (标准黄金比例 1.6 : 1) */
 [data-theme="kintsugi"] .envelope-wrapper {
   position: relative;
   width: 94%;
-  max-width: 380px;  /* 黄金长宽比 1.6 : 1 */
-  height: 236px;     /* 严格固定高度，杜绝一切拉伸与沙漏挤压 */
+  max-width: 380px;
+  height: 236px;
   margin: 0 auto;
   border-radius: 8px;
-  background: #20242c;
+  background: #21242b;
   box-shadow: 
-    0 20px 45px rgba(0, 0, 0, 0.85),
+    0 25px 60px rgba(0, 0, 0, 0.9),
     0 4px 15px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  border: 1px solid rgba(212, 175, 55, 0.18);
   perspective: 1000px;
 }
 
-/* 3. 信封本体：微磨砂羊绒和纸黑，取消所有引起错觉的底部尖角 */
+/* 典雅烫金双重细边框 (杜绝杂乱线条，回归高级器物感) */
 [data-theme="kintsugi"] .envelope-body {
   position: absolute;
   inset: 0;
   border-radius: 8px;
+  background: linear-gradient(145deg, #242831 0%, #1a1c22 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  outline: 1px solid rgba(212, 175, 55, 0.25);
+  outline-offset: -6px;
   overflow: hidden;
-  background: linear-gradient(145deg, #242831 0%, #191b21 100%);
 }
 
-/* 左右两侧自然的细微折痕阴影 (极为柔和，绝不抢戏) */
-[data-theme="kintsugi"] .envelope-body::after {
-  content: "";
+/* 信封四角典雅古典金饰角标 */
+[data-theme="kintsugi"] .envelope-body::before {
+  content: "✦";
   position: absolute;
-  inset: 0;
-  background: 
-    linear-gradient(to right, rgba(0,0,0,0.25) 0%, transparent 6%),
-    linear-gradient(to left, rgba(0,0,0,0.25) 0%, transparent 6%),
-    linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 12%);
-  pointer-events: none;
-  z-index: 2;
+  top: 10px;
+  left: 10px;
+  color: #d4af37;
+  font-size: 10px;
+  opacity: 0.7;
 }
 
-/* 4. 优雅平缓的西方高定 V 型翻盖 (仅占 39% 高度，舒展大方) */
+[data-theme="kintsugi"] .envelope-body::after {
+  content: "✦";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #d4af37;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+/* 优雅平缓的 V 型翻盖 (带烫金边线) */
 [data-theme="kintsugi"] .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 94px; /* 舒展的角度，不再像尖刀直插中央 */
-  background: linear-gradient(180deg, #2a2f3a 0%, #1e2229 100%);
+  height: 96px;
+  background: linear-gradient(180deg, #2a2e38 0%, #1e2128 100%);
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   transform-origin: top center;
   transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 6;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
-  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+  border-bottom: 1px solid rgba(212, 175, 55, 0.6);
 }
 
 .letter-container.is-opened [data-theme="kintsugi"] .envelope-flap {
@@ -74,22 +84,10 @@
   z-index: 1;
 }
 
-/* 5. 真实金缮细金脉：极其纤细精致，如破损宋瓷上的温润生漆金丝 */
-[data-theme="kintsugi"] .kintsugi-cracks {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  pointer-events: none;
-  /* 剔除一切塑料感荧光，仅保留金属微反光 */
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
-}
-
-/* 6. 手工压铸复古金箔火漆印 */
+/* 3. 金缮心愈火漆印 (手工熔蜡微不规则边缘) */
 [data-theme="kintsugi"] .wax-seal-wrapper {
   position: absolute;
-  top: 94px; /* 严丝合缝地扣在平缓 V 翻盖的尖端 */
+  top: 96px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
@@ -98,36 +96,38 @@
 }
 
 [data-theme="kintsugi"] .wax-seal {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  /* 真实青铜古董金的物理明暗 */
+  width: 54px;
+  height: 54px;
+  border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
   background: radial-gradient(circle at 35% 30%, #f6deb0 0%, #c9a050 45%, #8f6e28 85%, #5a4313 100%);
-  border: 1.5px solid #dfb96c;
+  border: 2px solid #fff0b8;
   box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.75),
-    inset 0 2px 3px rgba(255, 255, 255, 0.6),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+    0 8px 20px rgba(0, 0, 0, 0.85),
+    0 0 15px rgba(212, 175, 55, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: seal-breathe 2.8s infinite ease-in-out;
 }
 
-[data-theme="kintsugi"] .wax-seal:hover {
-  transform: scale(1.05);
+@keyframes seal-breathe {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.15) drop-shadow(0 0 10px rgba(212, 175, 55, 0.7)); }
 }
 
 [data-theme="kintsugi"] .seal-heart-svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   fill: #fff7e6;
   filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5));
 }
 
-/* 提示文字移到信封下方空白处，具有高级留白感 */
+/* 提示文字 */
 [data-theme="kintsugi"] .envelope-open-hint {
   position: absolute;
-  bottom: -34px;
+  bottom: -36px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Cinzel', serif;
@@ -139,31 +139,57 @@
   pointer-events: none;
 }
 
-/* 7. 信纸展开后的和纸高级质感 */
+/* 4. 和纸信纸主体（和解意象） */
 [data-theme="kintsugi"] .letter-sheet {
-  background-color: #fdfaf2;
+  background-color: #fcf9f1;
   background-image: 
     radial-gradient(#e8dec7 0.8px, transparent 0.8px),
-    radial-gradient(#f3ecdc 0.8px, #fdfaf2 0.8px);
+    radial-gradient(#f3ecdc 0.8px, #fcf9f1 0.8px);
   background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
   color: #2b2521;
-  border: 1px solid #d4af37;
-  outline: 1px solid rgba(197, 160, 89, 0.6);
+  border: 1.5px solid #d4af37;
+  outline: 1px solid rgba(197, 160, 89, 0.5);
   outline-offset: -8px;
   box-shadow: 
     0 25px 70px rgba(0, 0, 0, 0.7),
     0 0 35px rgba(212, 175, 55, 0.15);
   border-radius: 6px;
   padding: 44px 24px 38px;
+  position: relative;
+  overflow: hidden;
 }
 
-[data-theme="kintsugi"] .letter-header-decor {
+/* 和解与和平鸽半透明水印 */
+[data-theme="kintsugi"] .letter-sheet::before {
+  content: "🕊";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 160px;
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* 和解公文顶头标章 */
+[data-theme="kintsugi"] .apology-badge-header {
   text-align: center;
-  color: #c5a059;
-  font-size: 12px;
-  letter-spacing: 4px;
   margin-bottom: 8px;
+}
+
+[data-theme="kintsugi"] .apology-badge-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid #d4af37;
+  border-radius: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 9.5px;
+  letter-spacing: 2px;
+  color: #7a5a17;
+  background: rgba(212, 175, 55, 0.08);
 }
 
 [data-theme="kintsugi"] .letter-title {
@@ -172,7 +198,15 @@
   letter-spacing: 2px;
   color: #7a5a17;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 12px 0 16px;
+}
+
+[data-theme="kintsugi"] .letter-date {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: #8c734b;
+  text-align: right;
+  margin-bottom: 12px;
 }
 
 [data-theme="kintsugi"] .letter-salutation {
@@ -183,39 +217,30 @@
   margin-bottom: 14px;
 }
 
-[data-theme="kintsugi"] .letter-body-text {
-  font-size: 15.5px;
-  line-height: 1.9;
-  color: #332b25;
-  min-height: 120px;
-  position: relative;
+/* 和解承诺券 (Apology Promise Tokens) */
+[data-theme="kintsugi"] .apology-tokens-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px auto 22px;
+  flex-wrap: wrap;
 }
 
-[data-theme="kintsugi"] .typewriter-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 17px;
-  background-color: #c5a059;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: cursor-blink 0.8s infinite;
+[data-theme="kintsugi"] .apology-token {
+  background: #f7f1e1;
+  border: 1px dashed #c5a059;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-family: 'Cinzel', serif;
+  color: #6d4f18;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-[data-theme="kintsugi"] .letter-closing {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: 16px;
-  text-align: right;
-  margin-top: 22px;
-  color: #5c4310;
-}
-
-/* 8. 翻转相框 */
+/* 5. 3D 翻转相框 */
 [data-theme="kintsugi"] .photos-section {
   margin: 16px auto 22px;
   text-align: center;
@@ -251,9 +276,45 @@
   margin-top: 10px;
 }
 
-/* 9. 金继裂纹瓷板刮刮乐 */
+/* 6. 打字机正文 */
+[data-theme="kintsugi"] .letter-body-text {
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: #332b25;
+  min-height: 120px;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="kintsugi"] .typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 17px;
+  background-color: #c5a059;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+[data-theme="kintsugi"] .letter-closing {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 16.5px;
+  text-align: right;
+  margin-top: 22px;
+  color: #5c4310;
+}
+
+/* 7. 金继瓷板刮刮乐 */
 [data-theme="kintsugi"] .scratch-component {
   margin: 32px auto 18px;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .scratch-hint-text {
@@ -300,10 +361,12 @@
   font-size: 14px;
 }
 
-/* 10. 逃跑互动问答 */
+/* 8. 逃跑互动按钮 */
 [data-theme="kintsugi"] .runaway-section {
   border-top: 1px dashed rgba(197, 160, 89, 0.4);
   margin-top: 32px;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .runaway-question {
