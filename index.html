@@ -5,27 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>A Letter For You</title>
 
-  <!-- Google 字体 -->
+  <!-- 引入 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-  <!-- 1. 引入公共骨架 -->
   <link rel="stylesheet" href="core.css" />
-
-  <!-- 2. 【仅引入金缮款专属样式】绝不污染其他模板 -->
   <link rel="stylesheet" href="theme-kintsugi.css" />
 </head>
 <body>
 
-  <!-- 背景金箔粒子画布 -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- 背景音频标签 -->
   <audio id="bgAudio" loop preload="auto"></audio>
   <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
 
-  <!-- 1. 密码锁遮罩系统 -->
+  <!-- 密码锁 -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
       <div class="passcode-title">ENTER 4-DIGIT PASSCODE</div>
@@ -39,25 +34,45 @@
     </div>
   </div>
 
-  <!-- 2. 主视口 -->
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 信封体系 -->
+      <!-- 信封交互区域 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-custom-note" id="envelopeCustomNote"></div>
         <div class="envelope-body">
-          <!-- 金缮专用流光金裂纹 -->
-          <svg class="kintsugi-cracks" viewBox="0 0 520 350" preserveAspectRatio="none">
-            <path d="M 0,60 Q 140,80 200,150 T 360,190 T 520,260" fill="none" stroke="#d4af37" stroke-width="2.4" />
-            <path d="M 200,150 Q 240,210 270,350" fill="none" stroke="#c5a059" stroke-width="1.6" />
-            <path d="M 360,190 Q 420,110 520,90" fill="none" stroke="#ecd08c" stroke-width="1.2" />
+          <!-- 真实折角断裂金缮金脉 (锋利拐折与分支纹理) -->
+          <svg class="kintsugi-cracks" viewBox="0 0 540 250" preserveAspectRatio="none">
+            <!-- 主断裂金脉 -->
+            <path d="M 0,35 L 75,55 L 120,40 L 190,110 L 260,105 L 340,165 L 430,150 L 540,195" 
+                  fill="none" stroke="#f6d365" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="bevel" />
+            <path d="M 0,35 L 75,55 L 120,40 L 190,110 L 260,105 L 340,165 L 430,150 L 540,195" 
+                  fill="none" stroke="#d4af37" stroke-width="3.6" opacity="0.4" stroke-linecap="round" stroke-linejoin="bevel" />
+            
+            <!-- 分支裂痕 1 -->
+            <path d="M 190,110 L 220,165 L 205,210 L 235,250" 
+                  fill="none" stroke="#d4af37" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="bevel" />
+            <!-- 分支裂痕 2 -->
+            <path d="M 340,165 L 375,120 L 420,95 L 470,90" 
+                  fill="none" stroke="#ecd08c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="bevel" />
+            <!-- 微型细裂纹 -->
+            <path d="M 120,40 L 135,15" fill="none" stroke="#c5a059" stroke-width="1" />
+            <path d="M 260,105 L 290,75" fill="none" stroke="#c5a059" stroke-width="1" />
           </svg>
         </div>
+
         <div class="envelope-flap"></div>
+
+        <!-- 3D 熔蜡金属火漆印 (矢量浮雕，杜绝系统 Emoji) -->
         <div class="wax-seal-wrapper">
-          <div class="wax-seal" id="waxSealBtn">♥</div>
+          <div class="wax-seal" id="waxSealBtn">
+            <svg class="seal-heart-svg" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
         </div>
+
+        <div class="envelope-open-hint">✦ TAP SEAL TO OPEN ✦</div>
       </div>
 
       <!-- 信纸主体 -->
@@ -68,7 +83,7 @@
         <div class="letter-body-text" id="letterBody"></div>
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 3D 翻转相册 -->
+        <!-- 3D 翻转相框 -->
         <div class="photos-section" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
@@ -92,7 +107,7 @@
           </div>
         </div>
 
-        <!-- 逃跑互动按钮问答 -->
+        <!-- 逃跑互动问答 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -101,26 +116,23 @@
           </div>
           <div class="runaway-success-modal" id="runawaySuccessModal"></div>
         </div>
-
       </article>
 
     </div>
   </div>
 
-  <!-- 引入买家填空数据 -->
   <script src="data.js"></script>
 
   <script>
-    // 1. 数据驱动内容渲染
+    // 渲染文案
     document.getElementById('envelopeCustomNote').innerText = LETTER_DATA.envelopeNote || '';
-    document.getElementById('waxSealBtn').innerText = LETTER_DATA.waxSealMonogram || '♥';
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || '';
     document.getElementById('letterBody').innerText = LETTER_DATA.body || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 照片渲染
+    // 相片卡
     if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
       document.getElementById('frontPhotoImg').src = LETTER_DATA.photos[0].url;
       document.getElementById('backCaptionText').innerText = LETTER_DATA.photos[0].caption;
@@ -131,7 +143,7 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 刮刮乐开关
+    // 刮刮乐
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
@@ -139,7 +151,7 @@
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑按钮开关
+    // 逃跑问答
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -147,7 +159,7 @@
       document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
     }
 
-    // 2. 密码锁逻辑 (默认密码在 data.js 设为 1024)
+    // 密码锁
     const overlay = document.getElementById('passcodeOverlay');
     if (!LETTER_DATA.passcode) {
       overlay.classList.add('is-unlocked');
@@ -179,20 +191,17 @@
             inputs.forEach(i => i.value = '');
             inputs[0].focus();
           }
-        } else {
-          errorEl.innerText = "";
         }
       }
     }
 
-    // 3. 音频逻辑
+    // 背景音频
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
       audio.src = LETTER_DATA.audioUrl;
       audioBtn.style.display = 'flex';
     }
-
     audioBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -203,7 +212,7 @@
       }
     });
 
-    // 4. 信封开启逻辑
+    // 开信动作
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     envelope.addEventListener('click', () => {
@@ -216,7 +225,7 @@
       }
     });
 
-    // 5. 真实物理刮刮乐
+    // 刮刮乐初始化
     function initScratchCard() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -227,7 +236,6 @@
       canvas.width = w;
       canvas.height = h;
 
-      // 金色渐变底漆
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#c5a059');
       grad.addColorStop(0.5, '#ecd08c');
@@ -235,7 +243,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 金属颗粒质感
       ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
       for (let i = 0; i < w; i += 4) {
         for (let j = 0; j < h; j += 4) {
@@ -269,7 +276,7 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 6. 调皮逃跑按钮交互
+    // 调皮逃跑按钮
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -288,7 +295,7 @@
       btnYes.style.transform = 'scale(1.1)';
     });
 
-    // 7. 金箔浮尘粒子 (gold-dust)
+    // 金箔升腾微粒
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let particles = [];
