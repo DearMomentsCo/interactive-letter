@@ -24,13 +24,13 @@ Like kintsugi, I know we can heal and become even stronger together. I love you 
   // 5. 翻转相片配置（读取同文件夹下的 photo.jpg）
   photos: [
     {
-      url: "photo.jpg",
+      url: "photo1.jpg",
       caption: "Our happiest memory together in Kyoto ♡"
     }
   ],
 
   // 6. 默认钢琴治愈音频
-  audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
+  audioUrl: "audio.mp3",
 
   // 7. 刮刮乐设置
   enableScratch: true,
