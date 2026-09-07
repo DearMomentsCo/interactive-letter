@@ -1,37 +1,39 @@
 /* ==========================================================================
-   THEME 02: 白旗停战条约款 (WHITE FLAG / OFFICIAL TREATY)
-   独立样式文件 - 仅在 templates/02-white-flag/ 内部生效
+   THEME 02: 白旗停战专属样式库 (WHITE FLAG / DIPLOMATIC ACCORD)
+   物理级隔离 - 仅对 templates/02-white-flag 生效
    ========================================================================== */
 
-/* 1. 视口背景：公文外交深灰底色 */
+/* 1. 视口与深色外交战壕背景 */
 .letter-viewport[data-theme="white-flag"] {
-  background: radial-gradient(ellipse at 50% 35%, #2c3038 0%, #17191d 75%, #0d0e11 100%);
+  background: radial-gradient(ellipse at 50% 35%, #252830 0%, #15171b 75%, #0b0c0e 100%);
   color: #1a1e24;
   font-family: 'EB Garamond', Georgia, serif;
+  perspective: 1200px;
 }
 
-/* 2. 信封设计：象牙冷白外交公文封套，带安全防伪边框 */
+/* 2. 3D 信封设计（象牙冷白公文封套） */
 [data-theme="white-flag"] .envelope-wrapper {
   background: #f7f5f0;
   border-radius: 8px;
   box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.85),
-    0 0 25px rgba(255, 255, 255, 0.08);
-  border: 1.5px solid #dcd5c7;
+    0 30px 70px rgba(0, 0, 0, 0.9),
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  border: 1.5px solid #cfc7b8;
+  position: relative;
 }
 
 [data-theme="white-flag"] .envelope-body {
   border-radius: 8px;
-  background: linear-gradient(145deg, #fdfbf7 0%, #ede7dc 100%);
-  outline: 1.5px dashed #b5aa96;
+  background: linear-gradient(145deg, #fdfcf9 0%, #eae3d6 100%);
+  outline: 1.5px dashed #a89e8a;
   outline-offset: -7px;
 }
 
 [data-theme="white-flag"] .envelope-corner-star {
   position: absolute;
-  color: #8c8270;
+  color: #7a7262;
   font-size: clamp(9px, 2.2vw, 11px);
-  font-weight: bold;
 }
 [data-theme="white-flag"] .star-tl { top: 9px; left: 10px; }
 [data-theme="white-flag"] .star-tr { top: 9px; right: 10px; }
@@ -39,32 +41,27 @@
 [data-theme="white-flag"] .star-br { bottom: 9px; right: 10px; }
 
 [data-theme="white-flag"] .envelope-flap {
-  background: linear-gradient(180deg, #faf7f2 0%, #e2dacd 100%);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
-  border-bottom: 2px solid #b5aa96;
+  background: linear-gradient(180deg, #fcfaf6 0%, #ded5c5 100%);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+  border-bottom: 2px solid #a89e8a;
 }
 
-.letter-container.is-opened [data-theme="white-flag"] .envelope-flap {
-  transform: rotateX(180deg);
-  z-index: 1;
-}
-
-/* 3. 条约火漆印：外交条约朱砂红蜡印 */
+/* 3. 3D 浮雕鲜红火漆印 */
 [data-theme="white-flag"] .wax-seal {
   border-radius: 48% 52% 49% 51% / 52% 48% 52% 48%;
-  background: radial-gradient(circle at 35% 30%, #ff5c5c 0%, #c41e1e 50%, #850d0d 85%, #4a0505 100%);
+  background: radial-gradient(circle at 35% 30%, #ff5252 0%, #c41c1c 50%, #850b0b 85%, #470404 100%);
   border: 1.5px solid #ff9e9e;
   box-shadow: 
-    0 10px 22px rgba(0, 0, 0, 0.75),
-    0 0 16px rgba(196, 30, 30, 0.4),
-    inset 0 2px 4px rgba(255, 255, 255, 0.6),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+    0 12px 26px rgba(0, 0, 0, 0.8),
+    0 0 18px rgba(196, 28, 28, 0.5),
+    inset 0 3px 6px rgba(255, 255, 255, 0.7),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.7);
   animation: seal-pulse 2.8s infinite ease-in-out;
 }
 
 @keyframes seal-pulse {
   0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.04); filter: brightness(1.12); }
+  50% { transform: scale(1.05); filter: brightness(1.15); }
 }
 
 [data-theme="white-flag"] .seal-heart-svg {
@@ -77,10 +74,32 @@
   font-family: 'Cinzel', serif;
   letter-spacing: clamp(2px, 0.6vw, 3px);
   color: #ede7dc;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
 }
 
-/* 4. 条约公文信纸主体：复古羊皮公文纸 */
+/* 4. 从信封口内部向上向前喷涌的 3D 飞出容器 */
+.envelope-burst-stage {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.burst-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  font-size: clamp(22px, 6vw, 36px);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+
+/* 5. 3D 条约羊皮信纸主体 */
 [data-theme="white-flag"] .letter-sheet {
   background-color: #fbf9f4;
   background-image: 
@@ -90,11 +109,12 @@
   background-position: 0 0, 9px 9px;
   color: #1e2229;
   border: 2px solid #2b303a;
-  outline: 1px solid #7d8594;
-  outline-offset: -7px;
+  outline: 1.5px solid #7d8594;
+  outline-offset: -8px;
   box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.8),
-    0 0 40px rgba(0, 0, 0, 0.2);
+    0 35px 90px rgba(0, 0, 0, 0.85),
+    0 15px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 20px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="white-flag"] .letter-watermark-svg {
@@ -107,13 +127,6 @@
   opacity: 0.08;
   pointer-events: none;
   z-index: 1;
-}
-
-[data-theme="white-flag"] .apology-badge-header {
-  text-align: center;
-  margin-bottom: clamp(14px, 3.5vw, 20px);
-  position: relative;
-  z-index: 2;
 }
 
 [data-theme="white-flag"] .apology-badge-pill {
@@ -129,7 +142,7 @@
   letter-spacing: clamp(1.8px, 0.6vw, 2.8px);
   color: #1e2229;
   background: #ede8df;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="white-flag"] .letter-title {
@@ -140,8 +153,6 @@
   color: #14171c;
   text-align: center;
   margin: 10px 0 14px;
-  position: relative;
-  z-index: 2;
 }
 
 [data-theme="white-flag"] .letter-date {
@@ -150,8 +161,6 @@
   color: #555e6d;
   text-align: right;
   margin-bottom: 12px;
-  position: relative;
-  z-index: 2;
 }
 
 [data-theme="white-flag"] .letter-salutation {
@@ -160,16 +169,14 @@
   font-weight: 700;
   color: #1a1e24;
   margin-bottom: 14px;
-  position: relative;
-  z-index: 2;
 }
 
-/* 5. 相框设计：黑白复古公文边框 */
+/* 6. 相框：黑白复古公文边框 */
 [data-theme="white-flag"] .photo-card-front,
 [data-theme="white-flag"] .photo-card-back {
   background: #ffffff;
   border: 1.5px solid #2b303a;
-  box-shadow: 0 0 0 3px #f7f4ec, 0 0 0 4px #2b303a, 0 12px 28px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 3px #f7f4ec, 0 0 0 4px #2b303a, 0 14px 30px rgba(0,0,0,0.18);
   border-radius: 2px;
 }
 
@@ -193,123 +200,221 @@
   color: #1a1e24;
 }
 
-[data-theme="white-flag"] .photo-nav-btn:hover {
-  background: #ddd5c7;
-}
-
-[data-theme="white-flag"] .photo-page-indicator {
-  color: #2b303a;
-}
-
-/* 6. 条约条款赔偿券 (TREATY ARTICLES) */
-[data-theme="white-flag"] .apology-vouchers-container {
-  margin: clamp(22px, 5.5vw, 30px) auto clamp(24px, 5.5vw, 32px);
+/* 7. 【重磅独创巧思：3D 旗杆与投降降旗仪式】 */
+.surrender-flag-station {
   position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
+  padding: 18px 14px;
+  border: 1.5px solid #2b303a;
+  background: #f4efe4;
+  border-radius: 6px;
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.08),
+    inset 0 0 15px rgba(0, 0, 0, 0.02);
+  text-align: center;
   z-index: 2;
 }
 
-[data-theme="white-flag"] .voucher-section-title {
-  text-align: center;
+.flag-station-header {
+  margin-bottom: 14px;
+}
+
+.flag-status-pill {
   font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-size: clamp(9.5px, 2.5vw, 11px);
+  font-weight: 800;
   letter-spacing: 1.8px;
-  font-weight: 700;
-  color: #4b5360;
-  margin-bottom: 12px;
+  color: #8c1d1d;
+  background: #eae2d3;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #2b303a;
 }
 
-[data-theme="white-flag"] .vouchers-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 330px;
-  margin: 0 auto;
-}
-
-[data-theme="white-flag"] .apology-voucher-card {
+/* 旗杆舞台 */
+.flagpole-stage {
   position: relative;
-  background: #f2ede4;
-  border: 1.5px solid #2b303a;
-  border-radius: 4px;
-  padding: 10px 14px 10px clamp(36px, 9vw, 44px);
+  width: 100%;
+  height: 180px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  user-select: none;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 12px;
   overflow: hidden;
 }
 
-[data-theme="white-flag"] .apology-voucher-card::before,
-[data-theme="white-flag"] .apology-voucher-card::after {
-  content: "";
+/* 金属旗杆本体 */
+.flagpole-rig {
+  position: relative;
+  width: 160px;
+  height: 100%;
+  margin-left: -50px; /* 让旗帜飘向右侧 */
+}
+
+.flagpole-finial {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  background-color: #fbf9f4;
-  border: 1.5px solid #2b303a;
+  top: 0;
+  left: 20px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff0a8, #d4af37 60%, #8a6c18 100%);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  transform: translateX(-50%);
+  z-index: 5;
 }
-[data-theme="white-flag"] .apology-voucher-card::before { left: -5px; }
-[data-theme="white-flag"] .apology-voucher-card::after { right: -5px; }
 
-[data-theme="white-flag"] .voucher-icon {
+.flagpole-pole {
   position: absolute;
-  left: 12px;
-  font-size: clamp(14px, 3.8vw, 17px);
+  top: 10px;
+  left: 20px;
+  width: 6px;
+  height: 165px;
+  background: linear-gradient(90deg, #6c757d 0%, #ffffff 45%, #9aa0a6 75%, #495057 100%);
+  border-radius: 3px;
+  box-shadow: 2px 0 6px rgba(0,0,0,0.25);
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
-[data-theme="white-flag"] .voucher-info {
-  text-align: left;
+.flagpole-base {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 32px;
+  height: 8px;
+  background: #2b303a;
+  border-radius: 4px 4px 0 0;
+  transform: translateX(-50%);
+  z-index: 3;
 }
-[data-theme="white-flag"] .voucher-name {
+
+/* 旗帜整体悬挂组（包含上下滑动能力） */
+.flag-cloth-rig {
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  width: 120px;
+  height: 75px;
+  transform-origin: top left;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 4;
+}
+
+/* 飘拂的 3D 白旗面 */
+.flag-cloth {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffffff 0%, #f0ede6 40%, #ded7c8 100%);
+  border: 1px solid #bbb19f;
+  box-shadow: 3px 6px 14px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform-origin: left center;
+  animation: flagFlutter 3s infinite ease-in-out;
+  border-radius: 0 3px 3px 0;
+}
+
+.flag-cloth-text {
   font-family: 'Cinzel', serif;
-  font-size: clamp(11px, 2.9vw, 12px);
+  font-size: 10.5px;
   font-weight: 800;
-  color: #14171c;
+  letter-spacing: 1.5px;
+  color: #1e2229;
 }
-[data-theme="white-flag"] .voucher-desc {
-  font-size: clamp(10px, 2.6vw, 11px);
+
+.flag-cloth-sub {
+  font-size: 9px;
+  color: #7d8594;
+  margin-top: 3px;
+}
+
+@keyframes flagFlutter {
+  0% { transform: skewY(0deg) scaleX(1); box-shadow: 3px 6px 14px rgba(0,0,0,0.18); }
+  25% { transform: skewY(3deg) scaleX(0.96); box-shadow: 5px 8px 16px rgba(0,0,0,0.12); }
+  50% { transform: skewY(-2.5deg) scaleX(1.02); box-shadow: 2px 4px 10px rgba(0,0,0,0.22); }
+  75% { transform: skewY(2deg) scaleX(0.98); box-shadow: 4px 7px 15px rgba(0,0,0,0.15); }
+  100% { transform: skewY(0deg) scaleX(1); box-shadow: 3px 6px 14px rgba(0,0,0,0.18); }
+}
+
+/* 降旗后的状态 */
+.flag-cloth-rig.is-lowered {
+  transform: translateY(92px); /* 降到底端 */
+}
+.flag-cloth-rig.is-lowered .flag-cloth {
+  animation: none;
+  transform: rotate(4deg) scale(0.95);
+  background: #eae4d8;
+  opacity: 0.85;
+}
+
+/* 降旗操作按钮 */
+.lower-flag-btn {
+  background: #1e2229;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  padding: 9px 18px;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10px, 2.6vw, 11.5px);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: all 0.2s ease;
+}
+
+.lower-flag-btn:active {
+  transform: scale(0.94);
+}
+
+/* 3D 批准停战砸落印章 */
+.surrender-accepted-banner {
+  margin-top: 14px;
+  animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes stampSlam {
+  0% { transform: scale(2.2); opacity: 0; filter: blur(4px); }
+  70% { transform: scale(0.95); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.treaty-stamp-embossed {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12px, 3.2vw, 13.5px);
+  font-weight: 900;
+  letter-spacing: 2.2px;
+  color: #b81414;
+  border: 2.5px solid #b81414;
+  padding: 6px 16px;
+  border-radius: 4px;
+  transform: rotate(-3deg);
+  box-shadow: 0 0 0 2px rgba(184, 20, 20, 0.2), inset 0 0 6px rgba(184, 20, 20, 0.15);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+}
+
+.truce-subtext {
+  font-size: clamp(11.5px, 3vw, 12.5px);
   font-style: italic;
   color: #4b5360;
-  margin-top: 2px;
+  margin-top: 10px;
+  line-height: 1.5;
 }
 
-[data-theme="white-flag"] .voucher-stamp {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.4vw, 10px);
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  color: #b81414;
-  border: 2px solid #b81414;
-  padding: 3px 8px;
-  border-radius: 3px;
-  transform: rotate(-8deg) scale(0);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-  white-space: nowrap;
-}
-
-[data-theme="white-flag"] .apology-voucher-card.is-claimed .voucher-stamp {
-  transform: rotate(-8deg) scale(1);
-  opacity: 1;
-}
-
-[data-theme="white-flag"] .apology-voucher-card.is-claimed {
-  background: #e6dfd1;
-}
-
-/* 7. 正文公文排版 */
+/* 8. 正文与打字机 */
 [data-theme="white-flag"] .letter-body-text {
   font-size: clamp(15px, 4.1vw, 17px);
   line-height: clamp(1.9, 5vw, 2.05);
   color: #1e2229;
   min-height: 120px;
-  position: relative;
-  z-index: 2;
   margin-bottom: 20px;
 }
 
@@ -323,6 +428,8 @@
   animation: cursor-blink 0.8s infinite;
 }
 
+@keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
 [data-theme="white-flag"] .letter-closing {
   font-family: 'EB Garamond', Georgia, serif;
   font-style: italic;
@@ -330,11 +437,9 @@
   text-align: right;
   margin-top: 24px;
   color: #1e2229;
-  position: relative;
-  z-index: 2;
 }
 
-/* 8. 刮刮乐：条约密封条 */
+/* 9. 【专属白旗织布刮刮乐】 */
 [data-theme="white-flag"] .scratch-hint-text {
   color: #4b5360;
   font-family: 'Cinzel', serif;
@@ -347,41 +452,41 @@
 [data-theme="white-flag"] .scratch-card-box {
   border-radius: 4px;
   border: 1.5px solid #2b303a;
-  outline: 1px dashed #7d8594;
-  outline-offset: -5px;
-  background: #f7f4ec;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  outline: 1.5px dashed #a89e8a;
+  outline-offset: -6px;
+  background: #fbf9f4;
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.08),
+    inset 0 0 12px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="white-flag"] .scratch-card-box::before,
 [data-theme="white-flag"] .scratch-card-box::after {
-  content: "★";
+  content: "🏳️";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: #2b303a;
-  font-size: clamp(9px, 2.4vw, 11px);
+  font-size: 14px;
   z-index: 5;
   pointer-events: none;
 }
-[data-theme="white-flag"] .scratch-card-box::before { left: 12px; }
-[data-theme="white-flag"] .scratch-card-box::after { right: 12px; }
+[data-theme="white-flag"] .scratch-card-box::before { left: 14px; }
+[data-theme="white-flag"] .scratch-card-box::after { right: 14px; }
 
 [data-theme="white-flag"] .scratch-secret-reveal {
   font-family: 'Cinzel', serif;
   color: #b81414;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 1.5px;
-  background: #fbf9f4;
+  background: #fdfcf9;
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 9. 逃跑互动问答 */
+/* 10. 逃跑互动问答 */
 [data-theme="white-flag"] .runaway-section {
   border-top: 1.5px dashed #a8a090;
   padding-top: 24px;
-  position: relative;
-  z-index: 2;
+  margin-top: 30px;
 }
 
 [data-theme="white-flag"] .runaway-question {
