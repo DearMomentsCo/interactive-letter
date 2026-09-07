@@ -19,7 +19,7 @@
   <audio id="bgAudio" loop preload="auto"></audio>
   <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
 
-  <!-- 密码锁 -->
+  <!-- 密码锁系统 -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
       <div class="passcode-title">ENTER 4-DIGIT PASSCODE</div>
@@ -36,40 +36,29 @@
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 物理比例 3D 信封 (1.55:1 永不变形) -->
+      <!-- 1. 国际高定黄金比例 3D 信封 (380px x 236px，彻底告别沙漏形变) -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
-          <!-- 实体折纸三角暗影 (还原真实信封底折与侧折交叠) -->
-          <svg class="envelope-folds-svg" viewBox="0 0 500 320" preserveAspectRatio="none">
-            <!-- 底折三角翼暗影 -->
-            <polygon points="0,320 250,180 500,320" fill="rgba(0,0,0,0.35)" />
-            <path d="M 0,320 L 250,180 L 500,320" fill="none" stroke="rgba(212,175,55,0.12)" stroke-width="1" />
-            <!-- 左/右侧折微缝 -->
-            <path d="M 0,0 L 250,180 M 500,0 L 250,180" fill="none" stroke="rgba(0,0,0,0.5)" stroke-width="1.2" />
-          </svg>
+          <!-- 极细、真实的金缮生漆金脉 (避开中央，自然向两侧延展) -->
+          <svg class="kintsugi-cracks" viewBox="0 0 380 236" preserveAspectRatio="none">
+            <!-- 左下优雅金脉与分支 -->
+            <path d="M 0,160 L 55,145 L 85,170 L 125,160 L 160,195 L 180,236" 
+                  fill="none" stroke="#d4af37" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="bevel" />
+            <path d="M 85,170 L 105,195" fill="none" stroke="#e8caa4" stroke-width="0.8" />
+            <path d="M 55,145 L 70,120" fill="none" stroke="#c5a059" stroke-width="0.8" />
 
-          <!-- 自然金缮断裂金脉 (多分支细流金，避开中央视觉冲突) -->
-          <svg class="kintsugi-cracks" viewBox="0 0 500 320" preserveAspectRatio="none">
-            <!-- 左侧主金脉 -->
-            <path d="M 0,60 Q 60,85 100,70 T 170,140 T 210,180" 
-                  fill="none" stroke="#ffeaa7" stroke-width="1.8" stroke-linecap="round" />
-            <path d="M 0,60 Q 60,85 100,70 T 170,140 T 210,180" 
-                  fill="none" stroke="#d4af37" stroke-width="3.6" opacity="0.3" stroke-linecap="round" />
-            <path d="M 100,70 L 130,30" fill="none" stroke="#c5a059" stroke-width="1.2" />
-            
-            <!-- 右侧延伸金脉 -->
-            <path d="M 290,180 Q 340,150 380,185 T 460,160 T 500,210" 
-                  fill="none" stroke="#ffeaa7" stroke-width="1.8" stroke-linecap="round" />
-            <path d="M 290,180 Q 340,150 380,185 T 460,160 T 500,210" 
-                  fill="none" stroke="#d4af37" stroke-width="3.6" opacity="0.3" stroke-linecap="round" />
-            <path d="M 380,185 L 415,230" fill="none" stroke="#c5a059" stroke-width="1.2" />
+            <!-- 右上金脉与细微裂纹 -->
+            <path d="M 220,110 L 260,125 L 305,100 L 340,115 L 380,85" 
+                  fill="none" stroke="#d4af37" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="bevel" />
+            <path d="M 305,100 L 325,75" fill="none" stroke="#e8caa4" stroke-width="0.8" />
+            <path d="M 260,125 L 280,150 L 310,155" fill="none" stroke="#c5a059" stroke-width="0.8" />
           </svg>
         </div>
 
-        <!-- 三角上翻盖 -->
+        <!-- 平缓舒展的 V 型翻盖 (带极细描金缝) -->
         <div class="envelope-flap"></div>
 
-        <!-- 3D 浮雕熔蜡火漆印 -->
+        <!-- 手工压铸古董金火漆印 -->
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
@@ -78,8 +67,8 @@
           </div>
         </div>
 
-        <!-- 悬浮在信封下方的提示语 (不再与信封内容叠压) -->
-        <div class="envelope-open-hint">✦ TAP SEAL TO OPEN ✦</div>
+        <!-- 悬浮在信封下方的留白提示语 -->
+        <div class="envelope-open-hint">✦ TAP TO UNSEAL ✦</div>
       </div>
 
       <!-- 2. 和纸信纸主体 -->
@@ -89,7 +78,7 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 3D 翻转相册 -->
+        <!-- 3D 翻转相册 (位于正文之前) -->
         <div class="photos-section" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
@@ -104,7 +93,7 @@
           <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP OVER ✦</div>
         </div>
 
-        <!-- 智能打字机长信 -->
+        <!-- 智能语速打字机长信 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
@@ -120,7 +109,7 @@
           </div>
         </div>
 
-        <!-- 逃跑按钮问答 -->
+        <!-- 调皮逃跑按钮问答 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -142,7 +131,7 @@
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 照片卡
+    // 相片卡
     if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
       document.getElementById('frontPhotoImg').src = LETTER_DATA.photos[0].url;
       document.getElementById('backCaptionText').innerText = LETTER_DATA.photos[0].caption;
@@ -154,14 +143,14 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 刮刮乐
+    // 刮刮乐开关
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答
+    // 逃跑问答开关
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -199,7 +188,7 @@
       }
     }
 
-    // 背景音频
+    // 音频控制
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
