@@ -15,19 +15,17 @@ html, body {
   background: #0c0d10;
 }
 
-/* 主视口：全端弹性居中，小屏手机与大屏电脑留白自适应 */
 .letter-viewport {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh; /* 适配移动端浏览器地址栏伸缩 */
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: clamp(20px, 5vh, 60px) clamp(12px, 4vw, 24px);
 }
 
-/* 信件主容器：手机端 100% 充满，电脑端最大 480px 优雅居中 */
 .letter-container {
   position: relative;
   width: 100%;
@@ -37,7 +35,7 @@ html, body {
   margin: 0 auto;
 }
 
-/* ---------------- 1. 密码锁系统 ---------------- */
+/* 密码锁系统 */
 .passcode-overlay {
   position: fixed;
   inset: 0;
@@ -98,7 +96,7 @@ html, body {
   min-height: 18px;
 }
 
-/* ---------------- 2. 音乐浮钮 ---------------- */
+/* 音乐按钮 */
 .audio-toggle-btn {
   position: fixed;
   top: clamp(14px, 3vh, 24px);
@@ -114,18 +112,18 @@ html, body {
   border: none;
   outline: none;
   font-size: 16px;
-  transition: transform 0.2s ease, opacity 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .audio-toggle-btn:active {
   transform: scale(0.9);
 }
 
-/* ---------------- 3. 信封系统（全端黄金比例锁定核心） ---------------- */
+/* 信封核心结构 */
 .envelope-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 1.6 / 1; /* 【核心】锁定 1.6:1 黄金比例，彻底杜绝小屏挤压变方 */
+  aspect-ratio: 1.6 / 1;
   height: auto;
   cursor: pointer;
   transform-style: preserve-3d;
@@ -146,7 +144,7 @@ html, body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 44%; /* 翻盖高度按比例联动，永远精准对齐 */
+  height: 44%;
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   transform-origin: top center;
   transition: transform 0.85s cubic-bezier(0.4, 0, 0.2, 1);
@@ -155,7 +153,7 @@ html, body {
 
 .wax-seal-wrapper {
   position: absolute;
-  top: 44%; /* 精准咬合在翻盖尖角处 */
+  top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 8;
@@ -182,7 +180,7 @@ html, body {
   font-size: clamp(9.5px, 2.5vw, 11px);
 }
 
-/* ---------------- 4. 信纸核心 ---------------- */
+/* 信纸核心结构 */
 .letter-sheet {
   position: relative;
   width: 100%;
@@ -205,28 +203,25 @@ html, body {
   transform: translateY(0) scale(1);
 }
 
-/* ---------------- 5. 3D 翻转相框 ---------------- */
+/* ---------------- 5. 全画幅智能自适应 3D 相框 (横竖全自动贴合，绝无裁剪) ---------------- */
 .photos-section {
   width: 100%;
-  margin: clamp(16px, 4vw, 24px) auto;
+  margin: clamp(18px, 4vw, 26px) auto;
   text-align: center;
 }
 
 .photo-flip-card {
   position: relative;
   width: 100%;
-  max-width: 300px;
-  aspect-ratio: 4 / 3;
-  margin: 0 auto;
-  perspective: 1000px;
+  max-width: 330px; /* 画框黄金视觉宽度 */
+  margin: 0 auto 20px auto;
+  perspective: 1200px;
   cursor: pointer;
 }
 
 .photo-flip-inner {
   position: relative;
   width: 100%;
-  height: 100%;
-  text-align: center;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-style: preserve-3d;
 }
@@ -235,35 +230,49 @@ html, body {
   transform: rotateY(180deg);
 }
 
-.photo-card-front, .photo-card-back {
+/* 正面：自然流容器，由内部照片的高度自动撑开相框 */
+.photo-card-front {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 8px 10px 8px; /* 拍立得式自然留白框 */
+  line-height: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: rotateY(0deg);
+}
+
+/* 图片：100% 完整展现自身长宽比，横屏变横框，竖屏变竖框 */
+.photo-card-front img {
+  width: 100%;
+  height: auto;
+  max-height: 72vh; /* 避免超长图超出单屏 */
+  object-fit: contain; /* 彻底禁止任何拉伸和裁剪 */
+  display: block;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+/* 背面：绝对定位贴合，自动拥有与正面完全一致的尺寸 */
+.photo-card-back {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  border-radius: 6px;
-  padding: 8px;
+  box-sizing: border-box;
+  padding: clamp(16px, 4vw, 24px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
-}
-
-.photo-card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.photo-card-back {
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transform: rotateY(180deg);
-  padding: 20px;
+  overflow-y: auto;
 }
 
-/* ---------------- 6. 刮刮乐模块 ---------------- */
+/* 刮刮乐与逃跑按钮通用 */
 .scratch-component {
   position: relative;
   width: 100%;
@@ -298,7 +307,6 @@ html, body {
   cursor: crosshair;
 }
 
-/* ---------------- 7. 逃跑互动问答 ---------------- */
 .runaway-section {
   position: relative;
   width: 100%;
@@ -331,14 +339,6 @@ html, body {
   transition: transform 0.15s ease-out;
 }
 
-#particle-canvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 逃跑按钮点击 Yes 后的弹出反馈框 */
 .runaway-success-modal {
   display: none;
   margin-top: 20px;
@@ -349,12 +349,13 @@ html, body {
 }
 
 @keyframes runawayPopIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
