@@ -1,6 +1,5 @@
 /* ==========================================================================
    THEME 02: 白旗停战条约款 - 演示数据
-   独立数据文件 - 仅供 templates/02-white-flag/ 使用
    ========================================================================== */
 const LETTER_DATA = {
   passcode: "2026",
@@ -19,7 +18,7 @@ Looking back on our disagreement, I realize how foolish it was to let a brief mo
 This treaty represents my sincere pledge to listen with greater empathy, speak with gentler patience, and cherish our bond above all else. I offer you my full heart and request a return to peace.`,
   closing: "Respectfully Submitted,\nYour Loyal Partner ♡",
 
-  // 演示照片（自动全画幅适配与翻页）
+  // 演示照片（支持全画幅与翻页）
   photos: [
     {
       url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
@@ -33,10 +32,12 @@ This treaty represents my sincere pledge to listen with greater empathy, speak w
 
   audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
 
+  // 专属白布刮刮乐
   enableScratch: true,
-  scratchHint: "✦ UNSEAL CLASSIFIED PEACE CLAUSE ✦",
+  scratchHint: "✦ SCRATCH WHITE BANNER FOR CLASSIFIED CLAUSE ✦",
   scratchSecret: "Treaty Reparation: Dinner at your favorite place, fully paid! ♡",
 
+  // 停战逃跑互动问答
   enableRunaway: true,
   runawayQuestion: "Do you formally ratify this peace treaty?",
   runawaySuccessMessage: "✦ PEACE ACCORD RATIFIED! CEASEFIRE COMMENCED! ♡ ✦"
