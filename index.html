@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>A Letter For You</title>
 
+  <!-- 预加载 9 款 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="core.css" />
   <link rel="stylesheet" href="theme-kintsugi.css" />
 </head>
 <body>
 
-  <!-- 背景粒子画布 (常态星尘 + 开信流金星芒爆破) -->
   <canvas id="particle-canvas"></canvas>
 
   <audio id="bgAudio" loop preload="auto"></audio>
@@ -37,7 +37,7 @@
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 高定金缮信封 -->
+      <!-- 1. 信封 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <span class="envelope-corner-star star-tl">✦</span>
@@ -48,7 +48,6 @@
 
         <div class="envelope-flap"></div>
 
-        <!-- 金缮心愈手工火漆印 -->
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
@@ -63,16 +62,14 @@
       <!-- 2. 和解信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <!-- 【真实清晰可辨的艺术金缮和平鸽矢量水印】 -->
+        <!-- 矢量和平鸽水印 -->
         <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#7a5a17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M 20,55 C 25,45 35,40 50,42 C 60,35 75,30 85,32 C 82,42 75,50 68,55 C 72,62 78,72 82,80 C 70,76 60,70 52,62 C 45,68 35,72 22,70 C 26,64 28,58 20,55 Z" />
           <path d="M 50,42 C 48,32 55,20 65,15 C 62,24 58,35 50,42 Z" stroke-width="1.2" />
           <circle cx="76" cy="38" r="1.5" fill="#7a5a17" />
-          <!-- 金缮缝合断裂线细节 -->
           <path d="M 45,45 L 48,50 L 52,48 L 56,54" stroke="#d4af37" stroke-width="2" />
         </svg>
 
-        <!-- 官方和解公文标章 -->
         <div class="apology-badge-header">
           <div class="apology-badge-pill">✦ OFFICIAL PEACE OFFERING & RECONCILIATION ✦</div>
         </div>
@@ -96,11 +93,10 @@
           <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP OVER ✦</div>
         </div>
 
-        <!-- 【核心重构：具有真实补偿意义的 3 枚可盖章和解免死券】 -->
+        <!-- 和解免死兑换券 -->
         <div class="apology-vouchers-container">
           <div class="voucher-section-title">✦ TAP ANY VOUCHER TO CLAIM YOUR COMPENSATION ✦</div>
           <div class="vouchers-list">
-            
             <div class="apology-voucher-card" onclick="claimVoucher(this)">
               <div class="voucher-icon">🕊️</div>
               <div class="voucher-info">
@@ -127,18 +123,17 @@
               </div>
               <div class="voucher-stamp">REDEEMED ♡</div>
             </div>
-
           </div>
         </div>
 
-        <!-- 智能打字机长信 -->
+        <!-- 智能打字机正文 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 金继裂纹瓷板刮刮乐 -->
+        <!-- 金继瓷板刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ POLISH THE GOLDEN SEAM TO HEAL ✦</div>
           <div class="scratch-card-box">
@@ -147,13 +142,14 @@
           </div>
         </div>
 
-        <!-- 调皮逃跑按钮问答 -->
+        <!-- 逃跑互动问答 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
             <button class="btn-yes" id="btnYes">Yes ♡</button>
             <button class="btn-no" id="btnNo">No</button>
           </div>
+          <!-- 默认严格隐藏弹窗 -->
           <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
         </div>
       </article>
@@ -169,7 +165,13 @@
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 照片卡渲染
+    // 自选字体切换（仅改变信件正文与落款，不破坏整体排版）
+    if (LETTER_DATA.fontType) {
+      document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+      document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+    }
+
+    // 照片卡
     if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
       document.getElementById('frontPhotoImg').src = LETTER_DATA.photos[0].url;
       document.getElementById('backCaptionText').innerText = LETTER_DATA.photos[0].caption;
@@ -226,7 +228,7 @@
       }
     }
 
-    // 背景音频
+    // 音频控制
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
@@ -239,17 +241,16 @@
       else { audio.pause(); audioBtn.innerText = '🔇'; }
     });
 
-    // 交互：点击兑换券盖印
+    // 兑换券盖章
     function claimVoucher(el) {
       if (!el.classList.contains('is-claimed')) {
         el.classList.add('is-claimed');
-        // 点击时在票券位置爆出一小簇金星
         const rect = el.getBoundingClientRect();
         createGoldenUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 18);
       }
     }
 
-    // 开信与金箔粒子爆发
+    // 开信动作与金箔星芒爆破
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     let isLetterOpened = false;
@@ -268,7 +269,7 @@
       }, 380);
     });
 
-    // 智能打字机
+    // 打字机
     let typewriterTimer = null;
     let isTypingFinished = false;
     const textContainer = document.getElementById('typewriterText');
@@ -360,7 +361,7 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 逃跑问答
+    // 逃跑问答交互
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -382,7 +383,7 @@
       createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 60);
     });
 
-    // 物理流光星芒粒子画布
+    // 粒子系统
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let floatingDust = [];
