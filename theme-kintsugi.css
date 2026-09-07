@@ -1,129 +1,144 @@
 /* ==========================================================================
-   THEME 01: 金缮修复款 (KINTSUGI) - 专属样式隔离文件
-   色系：深炭灰黑 (#24272e)、象牙米白 (#fcf9f2)、流光金 (#c5a059 / #d4af37)
+   THEME 01: 金缮修复款 (KINTSUGI) - 真实物理与光影重构
    ========================================================================== */
 
-/* 1. 视口背景与字体 */
+/* 1. 视口背景：深邃渐变聚光灯，让信封自然悬浮于光影中 */
 .letter-viewport[data-theme="kintsugi"] {
-  background-color: #15171c;
+  background: radial-gradient(circle at 50% 45%, #1f232b 0%, #0d0f12 75%);
   color: #2c2724;
   font-family: 'Cormorant Garamond', Georgia, serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 2. 密码锁遮罩定制 */
-[data-theme="kintsugi"] .passcode-overlay {
-  background: rgba(15, 17, 21, 0.88);
-}
-
-[data-theme="kintsugi"] .passcode-box {
+/* 2. 信封外容器：优化为 1.5:1 的优雅黄金信封比例 */
+[data-theme="kintsugi"] .envelope-wrapper {
+  height: 250px; /* 调整为修长实体信封高度 */
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85),
+              0 0 35px rgba(212, 175, 55, 0.08);
+  position: relative;
   background: #24272e;
-  border: 1px solid #d4af37;
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
 }
 
-[data-theme="kintsugi"] .passcode-title {
-  color: #c5a059;
-  font-family: 'Cinzel', serif;
-}
-
-[data-theme="kintsugi"] .passcode-digit {
-  background: #191b20;
-  border: 1px solid #48443b;
-  color: #ffd700;
-  font-family: 'Cinzel', serif;
-}
-[data-theme="kintsugi"] .passcode-digit:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
-}
-
-/* 3. 音频浮钮 */
-[data-theme="kintsugi"] .audio-toggle-btn {
-  background: #24272e;
-  color: #d4af37;
-  border: 1px solid #d4af37;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-/* 4. 信封设计 (深炭黑磨砂 + 金裂纹) */
+/* 3. 实体信封机理与真实交叠折痕 */
 [data-theme="kintsugi"] .envelope-body {
-  background: #24272e;
-  border: 1px solid #3c404b;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(145deg, #282b33 0%, #1e2026 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
 }
 
-[data-theme="kintsugi"] .envelope-custom-note {
-  color: #d4af37;
-  font-family: 'Cinzel', serif;
+/* 信封底部与两侧三角折叠暗影 (模拟实体折纸) */
+[data-theme="kintsugi"] .envelope-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to top right, rgba(0, 0, 0, 0.45) 0%, transparent 45%),
+    linear-gradient(to top left, rgba(0, 0, 0, 0.45) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 3;
 }
 
+/* 4. 上翻盖三角形三角折痕与边缘金光 */
 [data-theme="kintsugi"] .envelope-flap {
-  background: #2b2f38;
+  height: 145px;
+  background: linear-gradient(180deg, #2c303a 0%, #20232a 100%);
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-  border-bottom: 1px solid #3c404b;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+  z-index: 5;
 }
 
+/* 5. 金缮断裂金线 (高精流光与外发光) */
 [data-theme="kintsugi"] .kintsugi-cracks {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+  z-index: 2;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.8))
+          drop-shadow(0 0 10px rgba(197, 160, 89, 0.4));
   pointer-events: none;
 }
 
-/* 5. 3D 浮雕金色爱心火漆印 */
-[data-theme="kintsugi"] .wax-seal {
-  background: radial-gradient(circle at 35% 35%, #ffe277 0%, #d4af37 45%, #8f6c18 100%);
-  border: 2px solid #ffd700;
-  color: #fff8d6;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.7);
-  font-family: 'Cinzel', serif;
+/* 6. 真实 3D 金属浮雕火漆印 (彻底杜绝系统红色 Emoji) */
+[data-theme="kintsugi"] .wax-seal-wrapper {
+  top: 145px;
 }
 
-/* 6. 信纸 (象牙白卡纸 + 双层金丝细框) */
+[data-theme="kintsugi"] .wax-seal {
+  width: 58px;
+  height: 58px;
+  /* 模拟物理手工熔蜡的微不对称边缘 */
+  border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
+  background: radial-gradient(circle at 35% 30%, #ffe885 0%, #d4af37 40%, #94711f 85%, #59420e 100%);
+  border: 2px solid #fff2a3;
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(212, 175, 55, 0.5),
+    inset 0 3px 6px rgba(255, 255, 255, 0.6),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.5);
+  animation: kintsugi-seal-pulse 3s infinite ease-in-out;
+}
+
+/* 压铸在火漆内部的浮雕金心 */
+[data-theme="kintsugi"] .seal-heart-svg {
+  width: 24px;
+  height: 24px;
+  fill: #fff9e6;
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5))
+          drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8));
+}
+
+/* 呼吸提示小动效 */
+@keyframes kintsugi-seal-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); filter: brightness(1.1); }
+}
+
+/* 7. 信封下方的轻奢提示文字 */
+[data-theme="kintsugi"] .envelope-open-hint {
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #c5a059;
+  white-space: nowrap;
+  opacity: 0.85;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+  pointer-events: none;
+}
+
+/* 8. 顶部音量按钮：融入黑金磨砂质感 */
+[data-theme="kintsugi"] .audio-toggle-btn {
+  background: rgba(36, 39, 46, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #d4af37;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* 9. 信纸展开后的象牙白质感 */
 [data-theme="kintsugi"] .letter-sheet {
   background: #fcf9f2;
   color: #2c2724;
   border: 1px solid #d4af37;
   outline: 1px solid #c5a059;
   outline-offset: -7px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.15);
 }
 
 [data-theme="kintsugi"] .letter-title {
   font-family: 'Cinzel', serif;
   color: #8c6a22;
-}
-
-[data-theme="kintsugi"] .letter-salutation,
-[data-theme="kintsugi"] .letter-closing {
-  font-family: 'Cinzel', serif;
-  color: #6d5218;
-}
-
-/* 7. 3D 翻转相框 */
-[data-theme="kintsugi"] .photo-card-front,
-[data-theme="kintsugi"] .photo-card-back {
-  background: #ffffff;
-  border: 1px solid rgba(212, 175, 55, 0.6);
-  box-shadow: 0 0 0 3px #fcf9f2, 0 0 0 4px #d4af37, 0 10px 25px rgba(0,0,0,0.1);
-}
-
-[data-theme="kintsugi"] .photo-card-back {
-  background: #faf6ec;
-  color: #5c441b;
-}
-
-[data-theme="kintsugi"] .photo-flip-hint {
-  color: #8c6a22;
-  font-family: 'Cinzel', serif;
-}
-
-/* 8. 创口贴造型刮刮乐 (透气网孔点阵) */
-[data-theme="kintsugi"] .scratch-hint-text {
-  color: #9e7d3b;
-  font-family: 'Cinzel', serif;
 }
 
 [data-theme="kintsugi"] .scratch-card-box {
@@ -148,33 +163,3 @@
 }
 [data-theme="kintsugi"] .scratch-card-box::before { left: 14px; }
 [data-theme="kintsugi"] .scratch-card-box::after { right: 14px; }
-
-[data-theme="kintsugi"] .scratch-secret-reveal {
-  font-family: 'Cinzel', serif;
-  color: #8c6a22;
-  letter-spacing: 1.5px;
-}
-
-/* 9. 逃跑互动问答 */
-[data-theme="kintsugi"] .runaway-question {
-  font-family: 'Cinzel', serif;
-  color: #6d5218;
-}
-
-[data-theme="kintsugi"] .btn-yes {
-  background: linear-gradient(135deg, #d4af37 0%, #aa8222 100%);
-  color: #ffffff;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-}
-
-[data-theme="kintsugi"] .btn-no {
-  background: #e2ded5;
-  color: #666;
-}
-
-[data-theme="kintsugi"] .runaway-success-modal {
-  background: #f5eedf;
-  border: 1px solid #d4af37;
-  color: #8c6a22;
-  font-family: 'Cinzel', serif;
-}
