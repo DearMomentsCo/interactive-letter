@@ -1,0 +1,180 @@
+/* ==========================================================================
+   THEME 01: 金缮修复款 (KINTSUGI) - 专属样式隔离文件
+   色系：深炭灰黑 (#24272e)、象牙米白 (#fcf9f2)、流光金 (#c5a059 / #d4af37)
+   ========================================================================== */
+
+/* 1. 视口背景与字体 */
+.letter-viewport[data-theme="kintsugi"] {
+  background-color: #15171c;
+  color: #2c2724;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* 2. 密码锁遮罩定制 */
+[data-theme="kintsugi"] .passcode-overlay {
+  background: rgba(15, 17, 21, 0.88);
+}
+
+[data-theme="kintsugi"] .passcode-box {
+  background: #24272e;
+  border: 1px solid #d4af37;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+[data-theme="kintsugi"] .passcode-title {
+  color: #c5a059;
+  font-family: 'Cinzel', serif;
+}
+
+[data-theme="kintsugi"] .passcode-digit {
+  background: #191b20;
+  border: 1px solid #48443b;
+  color: #ffd700;
+  font-family: 'Cinzel', serif;
+}
+[data-theme="kintsugi"] .passcode-digit:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+}
+
+/* 3. 音频浮钮 */
+[data-theme="kintsugi"] .audio-toggle-btn {
+  background: #24272e;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* 4. 信封设计 (深炭黑磨砂 + 金裂纹) */
+[data-theme="kintsugi"] .envelope-body {
+  background: #24272e;
+  border: 1px solid #3c404b;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="kintsugi"] .envelope-custom-note {
+  color: #d4af37;
+  font-family: 'Cinzel', serif;
+}
+
+[data-theme="kintsugi"] .envelope-flap {
+  background: #2b2f38;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  border-bottom: 1px solid #3c404b;
+}
+
+[data-theme="kintsugi"] .kintsugi-cracks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+  pointer-events: none;
+}
+
+/* 5. 3D 浮雕金色爱心火漆印 */
+[data-theme="kintsugi"] .wax-seal {
+  background: radial-gradient(circle at 35% 35%, #ffe277 0%, #d4af37 45%, #8f6c18 100%);
+  border: 2px solid #ffd700;
+  color: #fff8d6;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+  font-family: 'Cinzel', serif;
+}
+
+/* 6. 信纸 (象牙白卡纸 + 双层金丝细框) */
+[data-theme="kintsugi"] .letter-sheet {
+  background: #fcf9f2;
+  color: #2c2724;
+  border: 1px solid #d4af37;
+  outline: 1px solid #c5a059;
+  outline-offset: -7px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.12);
+}
+
+[data-theme="kintsugi"] .letter-title {
+  font-family: 'Cinzel', serif;
+  color: #8c6a22;
+}
+
+[data-theme="kintsugi"] .letter-salutation,
+[data-theme="kintsugi"] .letter-closing {
+  font-family: 'Cinzel', serif;
+  color: #6d5218;
+}
+
+/* 7. 3D 翻转相框 */
+[data-theme="kintsugi"] .photo-card-front,
+[data-theme="kintsugi"] .photo-card-back {
+  background: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 0 3px #fcf9f2, 0 0 0 4px #d4af37, 0 10px 25px rgba(0,0,0,0.1);
+}
+
+[data-theme="kintsugi"] .photo-card-back {
+  background: #faf6ec;
+  color: #5c441b;
+}
+
+[data-theme="kintsugi"] .photo-flip-hint {
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+}
+
+/* 8. 创口贴造型刮刮乐 (透气网孔点阵) */
+[data-theme="kintsugi"] .scratch-hint-text {
+  color: #9e7d3b;
+  font-family: 'Cinzel', serif;
+}
+
+[data-theme="kintsugi"] .scratch-card-box {
+  border-radius: 40px;
+  border: 2px solid #c5a059;
+  background: #f5eedf;
+}
+
+[data-theme="kintsugi"] .scratch-card-box::before,
+[data-theme="kintsugi"] .scratch-card-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 44px;
+  background-image: radial-gradient(#9e7d3b 1.5px, transparent 1.5px);
+  background-size: 5px 5px;
+  opacity: 0.55;
+  z-index: 5;
+  pointer-events: none;
+}
+[data-theme="kintsugi"] .scratch-card-box::before { left: 14px; }
+[data-theme="kintsugi"] .scratch-card-box::after { right: 14px; }
+
+[data-theme="kintsugi"] .scratch-secret-reveal {
+  font-family: 'Cinzel', serif;
+  color: #8c6a22;
+  letter-spacing: 1.5px;
+}
+
+/* 9. 逃跑互动问答 */
+[data-theme="kintsugi"] .runaway-question {
+  font-family: 'Cinzel', serif;
+  color: #6d5218;
+}
+
+[data-theme="kintsugi"] .btn-yes {
+  background: linear-gradient(135deg, #d4af37 0%, #aa8222 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+[data-theme="kintsugi"] .btn-no {
+  background: #e2ded5;
+  color: #666;
+}
+
+[data-theme="kintsugi"] .runaway-success-modal {
+  background: #f5eedf;
+  border: 1px solid #d4af37;
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+}
