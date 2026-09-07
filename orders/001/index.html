@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>A Letter For You</title>
 
-  <!-- Google 字体库 -->
+  <!-- Google 字体预加载 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
+  <!-- 引用上级根目录样式 -->
   <link rel="stylesheet" href="../../core.css" />
   <link rel="stylesheet" href="../../theme-kintsugi.css" />
 
   <style>
-    /* 多张相片之间的呼吸间距 */
+    /* 多张照片之间的呼吸间距 */
     .photo-flip-card {
       margin-bottom: 20px !important;
     }
@@ -22,12 +23,13 @@
 </head>
 <body>
 
+  <!-- 背景粒子画布 -->
   <canvas id="particle-canvas"></canvas>
 
   <audio id="bgAudio" loop preload="auto"></audio>
   <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
 
-  <!-- 密码锁 -->
+  <!-- 密码锁系统 -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
       <div class="passcode-title">ENTER 4-DIGIT PASSCODE</div>
@@ -44,7 +46,7 @@
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 信封 -->
+      <!-- 1. 信封 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <span class="envelope-corner-star star-tl">✦</span>
@@ -66,9 +68,10 @@
         <div class="envelope-open-hint">✦ TAP SEAL TO UNSEAL ✦</div>
       </div>
 
-      <!-- 信纸主体 -->
+      <!-- 2. 信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
+        <!-- 和平鸽水印 -->
         <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#7a5a17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M 20,55 C 25,45 35,40 50,42 C 60,35 75,30 85,32 C 82,42 75,50 68,55 C 72,62 78,72 82,80 C 70,76 60,70 52,62 C 45,68 35,72 22,70 C 26,64 28,58 20,55 Z" />
           <path d="M 50,42 C 48,32 55,20 65,15 C 62,24 58,35 50,42 Z" stroke-width="1.2" />
@@ -84,10 +87,10 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 3D 翻转相册动态容器 -->
+        <!-- 3D 翻转相片动态挂载区 -->
         <div class="photos-section" id="photosSection"></div>
 
-        <!-- 和解免死兑换券 -->
+        <!-- 和解免死券 -->
         <div class="apology-vouchers-container">
           <div class="voucher-section-title">✦ TAP ANY VOUCHER TO CLAIM YOUR COMPENSATION ✦</div>
           <div class="vouchers-list">
@@ -120,14 +123,14 @@
           </div>
         </div>
 
-        <!-- 正文 -->
+        <!-- 智能打字机正文 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 刮刮乐 -->
+        <!-- 金继瓷板刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ POLISH THE GOLDEN SEAM TO HEAL ✦</div>
           <div class="scratch-card-box">
@@ -150,7 +153,8 @@
     </div>
   </div>
 
-  <script src="data.js?v=2"></script>
+  <!-- 【关键：带版本号防缓存的数据读取标签】 -->
+  <script src="data.js?v=888"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -164,7 +168,7 @@
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
 
-    // 【动态渲染任意数量照片（1-8 张全自动排版）】
+    // 自动渲染任意数量相片
     const photosContainer = document.getElementById('photosSection');
     if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
       photosContainer.innerHTML = '';
@@ -196,14 +200,14 @@
       photosContainer.style.display = 'none';
     }
 
-    // 刮刮乐设置
+    // 刮刮乐开关
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答设置
+    // 逃跑问答开关
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -241,7 +245,7 @@
       }
     }
 
-    // 音频加载（支持本地 audio.mp3 与网络链接）
+    // 音频控制（读取你上传的 audio.mp3）
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
