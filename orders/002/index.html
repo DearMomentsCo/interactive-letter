@@ -10,13 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- 引用根目录样式 -->
-  <link rel="stylesheet" href="../../core.css?v=999" />
-  <link rel="stylesheet" href="../../theme-kintsugi.css?v=999" />
-
-  <style>
-    .photo-flip-card { margin-bottom: 22px !important; }
-  </style>
+  <link rel="stylesheet" href="../../core.css?v=slider1" />
+  <link rel="stylesheet" href="../../theme-kintsugi.css?v=slider1" />
 </head>
 <body>
 
@@ -82,10 +77,29 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 3D 翻转相册动态挂载区 -->
-        <div class="photos-section" id="photosSection"></div>
+        <!-- 3D 翻转 + 幻灯片相册播放器 -->
+        <div class="photo-slider-wrapper" id="photosSection">
+          <div class="photo-flip-card" id="photoCard">
+            <div class="photo-flip-inner">
+              <div class="photo-card-front">
+                <img id="frontPhotoImg" src="" alt="Memory Photo" />
+              </div>
+              <div class="photo-card-back">
+                <p class="photo-caption-text" id="backCaptionText"></p>
+              </div>
+            </div>
+          </div>
+          <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP OVER ✦</div>
 
-        <!-- 和解兑换券 -->
+          <!-- 翻页控制器 (< 1 / 2 >) -->
+          <div class="photo-nav-controls" id="photoNavControls">
+            <button class="photo-nav-btn" id="prevPhotoBtn" title="Previous Photo">‹</button>
+            <span class="photo-page-indicator" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn" title="Next Photo">›</button>
+          </div>
+        </div>
+
+        <!-- 和解免死券 -->
         <div class="apology-vouchers-container">
           <div class="voucher-section-title">✦ TAP ANY VOUCHER TO CLAIM YOUR COMPENSATION ✦</div>
           <div class="vouchers-list">
@@ -148,7 +162,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=1"></script>
+  <script src="data.js?v=slider1"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -162,46 +176,60 @@
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
 
-    // 自动按顺序渲染多张照片
-    const photosContainer = document.getElementById('photosSection');
-    if (LETTER_DATA.photos && LETTER_DATA.photos.length > 0) {
-      photosContainer.innerHTML = '';
-      LETTER_DATA.photos.forEach((item, idx) => {
-        const card = document.createElement('div');
-        card.className = 'photo-flip-card';
-        card.innerHTML = `
-          <div class="photo-flip-inner">
-            <div class="photo-card-front">
-              <img src="${item.url}" alt="Memory Photo ${idx + 1}" />
-            </div>
-            <div class="photo-card-back">
-              <p class="photo-caption-text">${item.caption || ''}</p>
-            </div>
-          </div>
-        `;
-        card.addEventListener('click', function(e) {
-          e.stopPropagation();
-          this.classList.toggle('is-flipped');
-        });
-        photosContainer.appendChild(card);
+    // 幻灯片相册 + 3D 翻转控制
+    const photoCard = document.getElementById('photoCard');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+
+    if (photosList.length > 0) {
+      function renderPhoto(index) {
+        photoCard.classList.remove('is-flipped');
+        frontImg.src = photosList[index].url;
+        backCaption.innerText = photosList[index].caption || '';
+        pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
+      }
+
+      renderPhoto(0);
+
+      photoCard.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('is-flipped');
       });
 
-      const hint = document.createElement('div');
-      hint.className = 'photo-flip-hint';
-      hint.innerText = '✦ TAP PHOTO TO FLIP OVER ✦';
-      photosContainer.appendChild(hint);
+      if (photosList.length <= 1) {
+        navControls.style.display = 'none';
+      } else {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+      }
     } else {
-      photosContainer.style.display = 'none';
+      document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 刮刮乐设置
+    // 刮刮乐
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答设置
+    // 逃跑问答
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
