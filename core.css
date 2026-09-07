@@ -337,3 +337,24 @@ html, body {
   pointer-events: none;
   z-index: 1;
 }
+
+/* 逃跑按钮点击 Yes 后的弹出反馈框 */
+.runaway-success-modal {
+  display: none;
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  line-height: 1.6;
+  animation: runawayPopIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes runawayPopIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
