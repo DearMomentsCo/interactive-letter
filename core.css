@@ -1,0 +1,413 @@
+/* ==========================================================================
+   CORE WIREFRAME (通用骨架层：尺寸、排版、3D 翻折与交互逻辑，无写死色彩)
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background: #111;
+}
+
+.letter-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px 80px;
+}
+
+.letter-container {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  perspective: 1200px;
+  z-index: 10;
+}
+
+/* ---------------- 1. 密码锁遮罩 ---------------- */
+.passcode-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.passcode-overlay.is-unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.passcode-box {
+  width: 100%;
+  max-width: 320px;
+  padding: 30px 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.passcode-title {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.passcode-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.passcode-digit {
+  width: 46px;
+  height: 52px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: transparent;
+}
+
+.passcode-error {
+  font-size: 12px;
+  color: #ff6b6b;
+  min-height: 16px;
+  margin-top: 8px;
+}
+
+/* ---------------- 2. 音频控制浮钮 ---------------- */
+.audio-toggle-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  border: none;
+  outline: none;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.audio-toggle-btn:active {
+  transform: scale(0.92);
+}
+
+/* ---------------- 3. 信封结构 ---------------- */
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, opacity 0.5s ease;
+}
+
+.envelope-custom-note {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 175px;
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.wax-seal-wrapper {
+  position: absolute;
+  top: 175px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  cursor: pointer;
+}
+
+.wax-seal {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ---------------- 4. 信纸与正文 ---------------- */
+.letter-sheet {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  padding: 46px 30px 42px;
+  display: none;
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  z-index: 8;
+}
+
+.letter-container.is-opened .envelope-wrapper {
+  display: none;
+}
+
+.letter-container.is-opened .letter-sheet {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.letter-date {
+  font-size: 12px;
+  text-align: right;
+  margin-bottom: 12px;
+  opacity: 0.75;
+}
+
+.letter-salutation {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.letter-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 24px;
+  letter-spacing: 1.5px;
+}
+
+.letter-body-text {
+  font-size: 16px;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  white-space: pre-wrap;
+}
+
+.letter-closing {
+  font-size: 16px;
+  text-align: right;
+  margin-top: 16px;
+  margin-bottom: 30px;
+}
+
+/* ---------------- 5. 3D 翻转相册轮播 ---------------- */
+.photos-section {
+  margin: 35px auto;
+  text-align: center;
+}
+
+.photo-flip-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 240px;
+  margin: 0 auto 20px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.photo-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.photo-flip-card.is-flipped .photo-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.photo-card-front, .photo-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.photo-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.photo-card-back {
+  transform: rotateY(180deg);
+  padding: 24px 20px;
+}
+
+.photo-caption-text {
+  font-size: 14px;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.photo-flip-hint {
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 12px;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* ---------------- 6. 刮刮乐模块 ---------------- */
+.scratch-component {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 36px auto 20px;
+  text-align: center;
+}
+
+.scratch-hint-text {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.scratch-card-box {
+  position: relative;
+  width: 100%;
+  height: 76px;
+  overflow: hidden;
+}
+
+.scratch-secret-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 16px;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  cursor: crosshair;
+}
+
+/* ---------------- 7. 逃跑互动按钮 ---------------- */
+.runaway-section {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 40px auto 10px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+}
+
+.runaway-question {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.runaway-buttons-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  min-height: 60px;
+}
+
+.btn-yes, .btn-no {
+  padding: 10px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 24px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.btn-no {
+  position: relative;
+  transition: transform 0.15s ease-out;
+}
+
+.runaway-success-modal {
+  display: none;
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 粒子系统画板 */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
