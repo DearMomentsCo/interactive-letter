@@ -10,13 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- 引用根目录骨架 + 本目录专属样式 -->
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css?v=3dflag" />
+  <!-- 防缓存版本标记 -->
+  <link rel="stylesheet" href="style.css?v=fix_align" />
 </head>
 <body>
 
-  <!-- 背景画布 -->
   <canvas id="particle-canvas"></canvas>
 
   <audio id="bgAudio" loop preload="auto"></audio>
@@ -53,14 +52,12 @@
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
 
         <div class="envelope-open-hint">✦ BREAK THE DIPLOMATIC SEAL ✦</div>
-
-        <!-- 3D 喷涌发射台（信封正中央） -->
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
@@ -73,6 +70,7 @@
           <path d="M 30,50 Q 50,30 70,35" stroke-width="1.2" />
         </svg>
 
+        <!-- 顶部标签：绝对居中，单行自适应 -->
         <div class="apology-badge-header">
           <div class="apology-badge-pill">✦ ARTICLE OF RECONCILIATION & CEASEFIRE ✦</div>
         </div>
@@ -102,10 +100,11 @@
           </div>
         </div>
 
-        <!-- 【全新专属巧思：3D 飘扬白旗与降旗停战仪式】 -->
+        <!-- 3D 旗杆与投降降旗仪式 -->
         <div class="surrender-flag-station">
           <div class="flag-station-header">
-            <span class="flag-status-pill" id="flagStatusPill">🏳️ SURRENDER STATUS: PENDING YOUR ORDER</span>
+            <!-- 优化为精简统一的单行外交胶囊 -->
+            <span class="flag-status-pill" id="flagStatusPill">✦ STATUS: SURRENDER PENDING YOUR ORDER ✦</span>
           </div>
 
           <div class="flagpole-stage">
@@ -114,7 +113,6 @@
               <div class="flagpole-pole"></div>
               <div class="flagpole-base"></div>
 
-              <!-- 悬挂旗帜组件 -->
               <div class="flag-cloth-rig" id="flagClothRig">
                 <div class="flag-cloth">
                   <div class="flag-cloth-text">I SURRENDER</div>
@@ -124,28 +122,30 @@
             </div>
           </div>
 
-          <!-- 交互操作区 -->
+          <!-- 交互操作区：使用全平台通用矢量 SVG，杜绝电脑端方块乱码 -->
           <div id="flagActionArea">
             <button class="lower-flag-btn" id="lowerFlagBtn">
-              🪢 LOWER THE WHITE FLAG TO ACCEPT TRUCE
+              <svg class="btn-vector-icon" viewBox="0 0 24 24">
+                <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/>
+              </svg>
+              <span>LOWER THE WHITE FLAG TO ACCEPT TRUCE</span>
             </button>
           </div>
 
-          <!-- 接受投降后，盖下鲜红 3D 停战印章 -->
           <div class="surrender-accepted-banner" id="truceBanner" style="display:none;">
             <div class="treaty-stamp-embossed">✦ SURRENDER ACCEPTED · CEASEFIRE IN EFFECT ✦</div>
             <p class="truce-subtext">You have officially forgiven your stubborn human. Sweet hugs & peace have been restored!</p>
           </div>
         </div>
 
-        <!-- 智能打字机正文 -->
+        <!-- 正文打字机 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 【专属白布密令刮刮乐】 -->
+        <!-- 白布密令刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH WHITE BANNER FOR CLASSIFIED CLAUSE ✦</div>
           <div class="scratch-card-box">
@@ -154,7 +154,7 @@
           </div>
         </div>
 
-        <!-- 停战逃跑问答 -->
+        <!-- 逃跑互动问答 -->
         <div class="runaway-section" id="runawayQuestionSection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -168,7 +168,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=3dflag"></script>
+  <script src="data.js?v=fix_align"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -176,7 +176,6 @@
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 字体适配
     if (LETTER_DATA.fontType) {
       document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
@@ -226,7 +225,7 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 【核心交互：拉下白旗仪式】
+    // 降旗仪式交互
     const lowerFlagBtn = document.getElementById('lowerFlagBtn');
     const flagClothRig = document.getElementById('flagClothRig');
     const flagStatusPill = document.getElementById('flagStatusPill');
@@ -235,29 +234,27 @@
 
     lowerFlagBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      // 1. 白旗缓缓降落到杆底
       flagClothRig.classList.add('is-lowered');
-      // 2. 更新状态指示灯
-      flagStatusPill.innerText = "🕊️ STATUS: SURRENDER ACCEPTED · TRUCE GRANTED";
+      
+      // 更新为严整的单行绿底印证文案
+      flagStatusPill.innerText = "✦ SURRENDER ACCEPTED · TRUCE GRANTED ✦";
       flagStatusPill.style.color = "#1b5e20";
       flagStatusPill.style.borderColor = "#2e7d32";
-      // 3. 按钮淡出，砸落鲜红印章
+      flagStatusPill.style.backgroundColor = "#e8f5e9";
+      
       flagActionArea.style.display = 'none';
       setTimeout(() => {
         truceBanner.style.display = 'block';
-        // 激发出小幅度的和平光芒
         createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 30);
       }, 700);
     });
 
-    // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawayQuestionSection').style.display = 'none';
     } else {
@@ -308,7 +305,7 @@
       else { audio.pause(); audioBtn.innerText = '🔇'; }
     });
 
-    // 【开信瞬间：从信封内部向前向上喷涌特效】
+    // 开信喷涌
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     const burstStage = document.getElementById('burstStage');
@@ -318,10 +315,8 @@
       if (isLetterOpened) return;
       isLetterOpened = true;
 
-      // 1. 从信封中心喷射 3D 飞出的鸽子、白旗与羽毛
       launchEnvelopeBurst();
 
-      // 2. 延迟展开信纸
       setTimeout(() => {
         container.classList.add('is-opened');
         if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
@@ -341,7 +336,7 @@
         const angle = (Math.PI * 2 * i) / burstIcons.length + (Math.random() - 0.5) * 0.5;
         const dist = Math.random() * 120 + 80;
         const destX = Math.cos(angle) * dist;
-        const destY = Math.sin(angle) * dist - 80; // 偏向上方飞跃
+        const destY = Math.sin(angle) * dist - 80;
         const rot = (Math.random() - 0.5) * 60;
 
         el.animate([
@@ -356,7 +351,6 @@
       });
     }
 
-    // 打字机
     let typewriterTimer = null;
     let isTypingFinished = false;
     const textContainer = document.getElementById('typewriterText');
@@ -392,7 +386,6 @@
       cursor.style.display = 'none';
     }
 
-    // 【专属白布与红印刮刮乐引擎】
     function initWhiteClothScratch() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -403,7 +396,6 @@
       canvas.width = w;
       canvas.height = h;
 
-      // 象牙白防伪布纹质感
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#ffffff');
       grad.addColorStop(0.5, '#ede8df');
@@ -411,7 +403,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 细微布纹纤维
       ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
       for (let i = 0; i < w; i += 4) {
         ctx.fillRect(i, 0, 1.5, h);
@@ -420,7 +411,6 @@
         ctx.fillRect(0, j, w, 1.5);
       }
 
-      // 朱砂红军政密封印章
       ctx.strokeStyle = '#b81414';
       ctx.lineWidth = 1.5;
       ctx.strokeRect(18, 12, w - 36, h - 24);
@@ -452,7 +442,6 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 逃跑问答
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -474,7 +463,6 @@
       createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 50);
     });
 
-    // 背景微光粒子
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let floatingDust = [];
