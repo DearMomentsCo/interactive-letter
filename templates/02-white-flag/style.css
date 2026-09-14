@@ -129,17 +129,29 @@
   z-index: 1;
 }
 
+/* 【修复 1：顶部公文标签锁死单行，自适应缩放不折行】 */
+[data-theme="white-flag"] .apology-badge-header {
+  text-align: center;
+  margin-bottom: clamp(14px, 3.5vw, 20px);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
 [data-theme="white-flag"] .apology-badge-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px clamp(14px, 3.5vw, 20px);
+  justify-content: center;
+  white-space: nowrap; /* 绝对禁止折行 */
+  max-width: 96%;
+  box-sizing: border-box;
+  padding: 6px clamp(8px, 2.5vw, 16px);
   border: 1.5px solid #1e2229;
   border-radius: 4px;
   font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-size: clamp(8px, 2.25vw, 10px); /* 手机端微调字号自适应 */
   font-weight: 800;
-  letter-spacing: clamp(1.8px, 0.6vw, 2.8px);
+  letter-spacing: clamp(1px, 0.35vw, 2px); /* 动态字间距，绝不挤爆容器 */
   color: #1e2229;
   background: #ede8df;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -171,7 +183,7 @@
   margin-bottom: 14px;
 }
 
-/* 6. 相框：黑白复古公文边框 */
+/* 6. 相框设计 */
 [data-theme="white-flag"] .photo-card-front,
 [data-theme="white-flag"] .photo-card-back {
   background: #ffffff;
@@ -200,13 +212,13 @@
   color: #1a1e24;
 }
 
-/* 7. 【重磅独创巧思：3D 旗杆与投降降旗仪式】 */
+/* 7. 3D 旗杆与投降降旗仪式 */
 .surrender-flag-station {
   position: relative;
   width: 100%;
   max-width: 350px;
   margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
-  padding: 18px 14px;
+  padding: 18px 12px;
   border: 1.5px solid #2b303a;
   background: #f4efe4;
   border-radius: 6px;
@@ -214,23 +226,35 @@
     0 10px 24px rgba(0, 0, 0, 0.08),
     inset 0 0 15px rgba(0, 0, 0, 0.02);
   text-align: center;
+  box-sizing: border-box;
   z-index: 2;
 }
 
 .flag-station-header {
   margin-bottom: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
+/* 【修复 2：投降状态胶囊彻底锁死单行，居中不溢出】 */
 .flag-status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap; /* 绝对禁止内部文字折成两截 */
+  max-width: 95%;
+  box-sizing: border-box;
   font-family: 'Cinzel', serif;
-  font-size: clamp(9.5px, 2.5vw, 11px);
+  font-size: clamp(8.5px, 2.3vw, 10.5px);
   font-weight: 800;
-  letter-spacing: 1.8px;
+  letter-spacing: clamp(1px, 0.3vw, 1.6px);
   color: #8c1d1d;
   background: #eae2d3;
-  padding: 4px 12px;
+  padding: 5px clamp(10px, 2.5vw, 16px);
   border-radius: 20px;
   border: 1px solid #2b303a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 /* 旗杆舞台 */
@@ -245,12 +269,11 @@
   overflow: hidden;
 }
 
-/* 金属旗杆本体 */
 .flagpole-rig {
   position: relative;
   width: 160px;
   height: 100%;
-  margin-left: -50px; /* 让旗帜飘向右侧 */
+  margin-left: -50px;
 }
 
 .flagpole-finial {
@@ -291,7 +314,6 @@
   z-index: 3;
 }
 
-/* 旗帜整体悬挂组（包含上下滑动能力） */
 .flag-cloth-rig {
   position: absolute;
   top: 14px;
@@ -303,7 +325,6 @@
   z-index: 4;
 }
 
-/* 飘拂的 3D 白旗面 */
 .flag-cloth {
   position: relative;
   width: 100%;
@@ -342,9 +363,8 @@
   100% { transform: skewY(0deg) scaleX(1); box-shadow: 3px 6px 14px rgba(0,0,0,0.18); }
 }
 
-/* 降旗后的状态 */
 .flag-cloth-rig.is-lowered {
-  transform: translateY(92px); /* 降到底端 */
+  transform: translateY(92px);
 }
 .flag-cloth-rig.is-lowered .flag-cloth {
   animation: none;
@@ -353,25 +373,37 @@
   opacity: 0.85;
 }
 
-/* 降旗操作按钮 */
+/* 【修复 3：按钮改为 Flex 布局，承载矢量旗帜，绝不缺字乱码】 */
 .lower-flag-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   background: #1e2229;
   color: #ffffff;
   border: none;
   outline: none;
-  padding: 9px 18px;
+  padding: 10px clamp(14px, 4vw, 20px);
   font-family: 'Cinzel', serif;
-  font-size: clamp(10px, 2.6vw, 11.5px);
+  font-size: clamp(9.5px, 2.5vw, 11px);
   font-weight: 700;
-  letter-spacing: 1.5px;
-  border-radius: 20px;
+  letter-spacing: 1.2px;
+  border-radius: 24px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .lower-flag-btn:active {
   transform: scale(0.94);
+}
+
+.btn-vector-icon {
+  width: 13px;
+  height: 13px;
+  fill: #ffffff;
+  flex-shrink: 0;
 }
 
 /* 3D 批准停战砸落印章 */
@@ -389,12 +421,12 @@
 .treaty-stamp-embossed {
   display: inline-block;
   font-family: 'Cinzel', serif;
-  font-size: clamp(12px, 3.2vw, 13.5px);
+  font-size: clamp(11.5px, 3.2vw, 13px);
   font-weight: 900;
-  letter-spacing: 2.2px;
+  letter-spacing: 1.8px;
   color: #b81414;
-  border: 2.5px solid #b81414;
-  padding: 6px 16px;
+  border: 2px solid #b81414;
+  padding: 6px 14px;
   border-radius: 4px;
   transform: rotate(-3deg);
   box-shadow: 0 0 0 2px rgba(184, 20, 20, 0.2), inset 0 0 6px rgba(184, 20, 20, 0.15);
@@ -402,7 +434,7 @@
 }
 
 .truce-subtext {
-  font-size: clamp(11.5px, 3vw, 12.5px);
+  font-size: clamp(11px, 2.8vw, 12px);
   font-style: italic;
   color: #4b5360;
   margin-top: 10px;
@@ -439,7 +471,7 @@
   color: #1e2229;
 }
 
-/* 9. 【专属白旗织布刮刮乐】 */
+/* 9. 专属白旗织布刮刮乐 */
 [data-theme="white-flag"] .scratch-hint-text {
   color: #4b5360;
   font-family: 'Cinzel', serif;
