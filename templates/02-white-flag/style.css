@@ -3,7 +3,7 @@
    物理级隔离 - 仅对 templates/02-white-flag 生效
    ========================================================================== */
 
-/* 1. 视口与深色外交战壕背景 */
+/* 1. 视口背景 */
 .letter-viewport[data-theme="white-flag"] {
   background: radial-gradient(ellipse at 50% 35%, #252830 0%, #15171b 75%, #0b0c0e 100%);
   color: #1a1e24;
@@ -46,16 +46,19 @@
   border-bottom: 2px solid #a89e8a;
 }
 
-/* 3. 3D 浮雕鲜红火漆印 */
+/* 3. 3D 浮雕鲜红火漆印（完美正圆无偏心，居中展示） */
 [data-theme="white-flag"] .wax-seal {
-  border-radius: 48% 52% 49% 51% / 52% 48% 52% 48%;
+  border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5252 0%, #c41c1c 50%, #850b0b 85%, #470404 100%);
   border: 1.5px solid #ff9e9e;
   box-shadow: 
     0 12px 26px rgba(0, 0, 0, 0.8),
     0 0 18px rgba(196, 28, 28, 0.5),
-    inset 0 3px 6px rgba(255, 255, 255, 0.7),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.7);
+    inset 0 2px 5px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: seal-pulse 2.8s infinite ease-in-out;
 }
 
@@ -67,7 +70,9 @@
 [data-theme="white-flag"] .seal-heart-svg {
   width: clamp(20px, 5vw, 24px);
   height: clamp(20px, 5vw, 24px);
-  fill: #fff2f2;
+  fill: #ffffff;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 
 [data-theme="white-flag"] .envelope-open-hint {
@@ -77,7 +82,7 @@
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
 }
 
-/* 4. 从信封口内部向上向前喷涌的 3D 飞出容器 */
+/* 4. 信封口 3D 飞出容器 */
 .envelope-burst-stage {
   position: absolute;
   top: 40%;
@@ -129,7 +134,7 @@
   z-index: 1;
 }
 
-/* 【修复 1：顶部公文标签锁死单行，自适应缩放不折行】 */
+/* 【彻底修复：顶部公文标签锁死不溢出，字体优雅居中】 */
 [data-theme="white-flag"] .apology-badge-header {
   text-align: center;
   margin-bottom: clamp(14px, 3.5vw, 20px);
@@ -142,16 +147,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap; /* 绝对禁止折行 */
-  max-width: 96%;
+  white-space: nowrap;
   box-sizing: border-box;
-  padding: 6px clamp(8px, 2.5vw, 16px);
+  padding: 6px clamp(12px, 3vw, 20px);
   border: 1.5px solid #1e2229;
   border-radius: 4px;
   font-family: 'Cinzel', serif;
-  font-size: clamp(8px, 2.25vw, 10px); /* 手机端微调字号自适应 */
+  font-size: clamp(8px, 2.1vw, 9.5px);
   font-weight: 800;
-  letter-spacing: clamp(1px, 0.35vw, 2px); /* 动态字间距，绝不挤爆容器 */
+  letter-spacing: clamp(0.6px, 0.2vw, 1.2px);
   color: #1e2229;
   background: #ede8df;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -237,23 +241,22 @@
   justify-content: center;
 }
 
-/* 【修复 2：投降状态胶囊彻底锁死单行，居中不溢出】 */
+/* 【彻底修复：投降状态胶囊字间距与内边距自适应，绝不戳破胶囊两端】 */
 .flag-status-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap; /* 绝对禁止内部文字折成两截 */
-  max-width: 95%;
+  white-space: nowrap;
   box-sizing: border-box;
   font-family: 'Cinzel', serif;
-  font-size: clamp(8.5px, 2.3vw, 10.5px);
+  font-size: clamp(8px, 2.1vw, 9.5px);
   font-weight: 800;
-  letter-spacing: clamp(1px, 0.3vw, 1.6px);
+  letter-spacing: clamp(0.5px, 0.18vw, 1px);
   color: #8c1d1d;
   background: #eae2d3;
-  padding: 5px clamp(10px, 2.5vw, 16px);
+  padding: 5px clamp(12px, 3.2vw, 20px);
   border-radius: 20px;
-  border: 1px solid #2b303a;
+  border: 1.5px solid #2b303a;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
@@ -373,7 +376,6 @@
   opacity: 0.85;
 }
 
-/* 【修复 3：按钮改为 Flex 布局，承载矢量旗帜，绝不缺字乱码】 */
 .lower-flag-btn {
   display: inline-flex;
   align-items: center;
@@ -383,11 +385,11 @@
   color: #ffffff;
   border: none;
   outline: none;
-  padding: 10px clamp(14px, 4vw, 20px);
+  padding: 10px clamp(14px, 3.5vw, 20px);
   font-family: 'Cinzel', serif;
-  font-size: clamp(9.5px, 2.5vw, 11px);
+  font-size: clamp(9px, 2.3vw, 10.5px);
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   border-radius: 24px;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
@@ -421,9 +423,9 @@
 .treaty-stamp-embossed {
   display: inline-block;
   font-family: 'Cinzel', serif;
-  font-size: clamp(11.5px, 3.2vw, 13px);
+  font-size: clamp(11px, 3vw, 12.5px);
   font-weight: 900;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.5px;
   color: #b81414;
   border: 2px solid #b81414;
   padding: 6px 14px;
