@@ -11,8 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=fix_align" />
+  <link rel="stylesheet" href="style.css?v=perfect_fit" />
 </head>
 <body>
 
@@ -51,8 +50,9 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
+            <!-- 严谨完整的标准爱心 SVG 路径（彻底修复左瓣缺角） -->
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
@@ -70,9 +70,9 @@
           <path d="M 30,50 Q 50,30 70,35" stroke-width="1.2" />
         </svg>
 
-        <!-- 顶部标签：绝对居中，单行自适应 -->
+        <!-- 顶部标签：文案精炼，两端留白规整对称 -->
         <div class="apology-badge-header">
-          <div class="apology-badge-pill">✦ ARTICLE OF RECONCILIATION & CEASEFIRE ✦</div>
+          <div class="apology-badge-pill">✦ OFFICIAL CEASEFIRE PROTOCOL ✦</div>
         </div>
 
         <div class="letter-date" id="letterDate"></div>
@@ -103,8 +103,8 @@
         <!-- 3D 旗杆与投降降旗仪式 -->
         <div class="surrender-flag-station">
           <div class="flag-station-header">
-            <!-- 优化为精简统一的单行外交胶囊 -->
-            <span class="flag-status-pill" id="flagStatusPill">✦ STATUS: SURRENDER PENDING YOUR ORDER ✦</span>
+            <!-- 投降状态胶囊：两端留白规整，完全包裹字体 -->
+            <span class="flag-status-pill" id="flagStatusPill">✦ STATUS: PENDING YOUR ORDER ✦</span>
           </div>
 
           <div class="flagpole-stage">
@@ -122,7 +122,7 @@
             </div>
           </div>
 
-          <!-- 交互操作区：使用全平台通用矢量 SVG，杜绝电脑端方块乱码 -->
+          <!-- 交互操作区 -->
           <div id="flagActionArea">
             <button class="lower-flag-btn" id="lowerFlagBtn">
               <svg class="btn-vector-icon" viewBox="0 0 24 24">
@@ -154,7 +154,7 @@
           </div>
         </div>
 
-        <!-- 逃跑互动问答 -->
+        <!-- 停战逃跑问答 -->
         <div class="runaway-section" id="runawayQuestionSection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -168,7 +168,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=fix_align"></script>
+  <script src="data.js?v=perfect_fit"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -236,8 +236,8 @@
       e.stopPropagation();
       flagClothRig.classList.add('is-lowered');
       
-      // 更新为严整的单行绿底印证文案
-      flagStatusPill.innerText = "✦ SURRENDER ACCEPTED · TRUCE GRANTED ✦";
+      // 点击降旗后更新文案：完全适配胶囊，绝无文字破框
+      flagStatusPill.innerText = "✦ TRUCE ACCEPTED & RATIFIED ✦";
       flagStatusPill.style.color = "#1b5e20";
       flagStatusPill.style.borderColor = "#2e7d32";
       flagStatusPill.style.backgroundColor = "#e8f5e9";
