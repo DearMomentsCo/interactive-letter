@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEME 03: 复古磁带倒带款 (RETRO CASSETTE SKEUOMORPHIC)
+   THEME 03: 复古磁带倒带款 (RETRO CASSETTE SKEUOMORPHIC & PLAYABLE)
    物理级绝对隔离 - 仅对 templates/03-cassette 生效
    ========================================================================== */
 
@@ -46,11 +46,10 @@
   border-bottom: 2px solid #ff758c;
 }
 
-/* 3. 彻底重构：黑胶唱片凹凸同心圆纹理火漆印（爱心饱满无缺角） */
+/* 3. 黑胶唱片凹凸同心圆纹理火漆印 */
 [data-theme="cassette"] .wax-seal {
   border-radius: 50%;
-  background: 
-    radial-gradient(circle, #ff4b72 0%, #d90429 45%, #7209b7 90%, #2b0938 100%);
+  background: radial-gradient(circle, #ff4b72 0%, #d90429 45%, #7209b7 90%, #2b0938 100%);
   border: 2px solid #ff8fa3;
   box-shadow: 
     0 12px 28px rgba(0, 0, 0, 0.9),
@@ -107,7 +106,7 @@
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-/* 5. 彻底重构：复古卡带歌词折页（J-Card）信纸背景（细密复古方格纸纹） */
+/* 5. 复古卡带歌词折页（J-Card）信纸背景 */
 [data-theme="cassette"] .letter-sheet {
   background-color: #f7f3e8;
   background-image: 
@@ -137,7 +136,7 @@
   z-index: 1;
 }
 
-/* 【彻底重构：随身听液晶屏数码时间码状态栏】 */
+/* 随身听液晶屏状态指示 */
 .walkman-lcd-screen {
   background: #191b1d;
   border: 2px solid #3d3142;
@@ -187,7 +186,7 @@
   margin-bottom: 14px;
 }
 
-/* 【彻底重构：美纹纸胶带专属题献便签（Tape Label Salutation）】 */
+/* 美纹纸胶带专属题献便签 */
 .tape-salutation-wrap {
   display: inline-block;
   background: #fbf0b9;
@@ -235,13 +234,13 @@
   color: #3b2230;
 }
 
-/* 7. 【重度拟物 3D 磁带舱与极速倒带系统】 */
+/* 7. 【重度拟物 3D 实体磁带舱 + A/B 面 3D 翻转把玩系统】 */
 .cassette-deck-station {
   position: relative;
   width: 100%;
   max-width: 360px;
   margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
-  padding: 18px 14px;
+  padding: 18px 12px;
   border: 2.5px solid #2d2433;
   background: linear-gradient(180deg, #ede5d3 0%, #e0d5be 100%);
   border-radius: 10px;
@@ -254,7 +253,7 @@
 }
 
 .deck-header {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
 }
@@ -277,14 +276,35 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
-/* 3D 实体透明亚克力磁带外壳 */
-.cassette-body-3d {
+/* 3D 磁带翻转舞台 (Perspective Flipper) */
+.cassette-3d-stage {
   position: relative;
   width: 100%;
   max-width: 300px;
-  height: 175px;
-  margin: 0 auto 16px auto;
-  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(35,30,42,0.95) 25%, #18141d 100%);
+  height: 180px;
+  margin: 0 auto 14px auto;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.cassette-flipper-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cassette-3d-stage.is-side-b .cassette-flipper-inner {
+  transform: rotateY(180deg);
+}
+
+/* 磁带正反双面公用外壳质感 */
+.cassette-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   border: 2px solid #4a3e53;
   box-shadow: 
@@ -298,6 +318,20 @@
   padding: 10px 12px;
   box-sizing: border-box;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 正面：SIDE A */
+.cassette-face-front {
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(35,30,42,0.95) 25%, #18141d 100%);
+  transform: rotateY(0deg);
+}
+
+/* 背面：SIDE B（复古水磨石暗金透壳） */
+.cassette-face-back {
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(42,32,48,0.96) 25%, #1d1624 100%);
+  transform: rotateY(180deg);
 }
 
 /* 四角金属固定螺丝 */
@@ -308,23 +342,24 @@
   border-radius: 50%;
   background: radial-gradient(circle, #e0e0e0 0%, #888888 100%);
   box-shadow: inset 0 1px 1px #fff, 0 1px 2px rgba(0,0,0,0.6);
+  z-index: 5;
 }
 .screw-tl { top: 6px; left: 6px; }
 .screw-tr { top: 6px; right: 6px; }
 .screw-bl { bottom: 6px; left: 6px; }
 .screw-br { bottom: 6px; right: 6px; }
 
-/* 磁带主体复古水洗贴纸 */
+/* 磁带贴纸 */
 .cassette-label-retro {
   width: 96%;
   background: #fdfbf7;
   border: 1.5px solid #2d2433;
   border-radius: 5px;
-  padding: 6px 10px;
+  padding: 5px 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
 }
 
@@ -338,13 +373,34 @@
 }
 
 .label-color-stripe {
-  height: 5px;
+  height: 4px;
   width: 100%;
   background: linear-gradient(90deg, #ff4b72 0%, #ff758c 50%, #7209b7 100%);
   border-radius: 2px;
 }
 
-/* 磁带中心深凹观察窗 */
+/* B 面专属私藏歌单手写贴纸 */
+.cassette-label-retro.side-b-label {
+  background: #fff8eb;
+}
+.side-b-title {
+  font-family: 'Caveat', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: #7b2cbf;
+  text-align: center;
+}
+.side-b-tracklist {
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  color: #4a3e3d;
+  line-height: 1.3;
+  text-align: left;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 深凹观察窗 */
 .cassette-window-deep {
   position: relative;
   width: 86%;
@@ -363,7 +419,6 @@
   overflow: hidden;
 }
 
-/* 磁粉带卷条（带光泽） */
 .tape-ribbon-left {
   position: absolute;
   top: 50%;
@@ -401,6 +456,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.spool-gear:active {
+  transform: scale(1.15) rotate(45deg);
 }
 
 .spool-hub {
@@ -439,7 +500,6 @@
   to { transform: rotate(0deg); }
 }
 
-/* 磁带底部梯形磁头托 */
 .cassette-bottom-dock {
   width: 65%;
   height: 16px;
@@ -459,35 +519,73 @@
   background: #000;
 }
 
-/* 倒带操作按钮（随身听机械凸起实体按键） */
-.rewind-action-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: linear-gradient(180deg, #ff5c7c 0%, #d90429 100%);
-  color: #ffffff;
-  border: 2px solid #2d2433;
-  outline: none;
-  padding: 10px clamp(16px, 4vw, 24px);
+/* 随身听翻面提示小字 */
+.cassette-flip-hint {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(9.5px, 2.4vw, 11px);
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  border-radius: 24px;
-  cursor: pointer;
-  box-shadow: 
-    0 6px 0 #8b001d,
-    0 10px 18px rgba(0, 0, 0, 0.3);
-  transition: all 0.15s ease;
-  white-space: nowrap;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #8c7365;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
 
-.rewind-action-btn:active {
-  transform: translateY(4px);
+/* 【全新随身听机械琴键控制排（Walkman Mechanical Buttons）】 */
+.walkman-keys-console {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.walkman-key {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f8f9fa 0%, #dee2e6 100%);
+  color: #212529;
+  border: 1.5px solid #495057;
+  border-radius: 4px;
+  padding: 8px 10px;
+  min-width: 62px;
   box-shadow: 
-    0 2px 0 #8b001d,
-    0 4px 10px rgba(0, 0, 0, 0.3);
+    0 4px 0 #6c757d,
+    0 6px 12px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.1s ease;
+}
+
+.walkman-key:active, .walkman-key.is-pressed {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #6c757d;
+}
+
+.key-icon {
+  font-size: 13px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.key-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+/* 倒带键专属高亮（红色琴键） */
+.walkman-key.key-rewind {
+  background: linear-gradient(180deg, #ff5c7c 0%, #d90429 100%);
+  color: #ffffff;
+  border-color: #8b001d;
+  box-shadow: 0 4px 0 #590013, 0 6px 12px rgba(217, 4, 41, 0.35);
+}
+.walkman-key.key-rewind:active, .walkman-key.key-rewind.is-pressed {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #590013;
 }
 
 /* 倒带完成验带邮戳 */
@@ -555,7 +653,7 @@
   color: #3b2230;
 }
 
-/* 9. 【彻底重构：专属磁粉带刮刮乐（Magnetic Tape Splicing Strip）】 */
+/* 9. 专属磁粉带刮刮乐 */
 [data-theme="cassette"] .scratch-hint-text {
   color: #6c584c;
   font-family: 'Montserrat', sans-serif;
@@ -598,7 +696,7 @@
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 10. 【彻底重构：复古录音机机械按键（Push-Key Style Buttons）】 */
+/* 10. 随身听机械按键逃跑问答 */
 [data-theme="cassette"] .runaway-section {
   border-top: 1.5px dashed #c2b59b;
   padding-top: 24px;
@@ -617,7 +715,7 @@
   background: linear-gradient(180deg, #38b000 0%, #007200 100%);
   color: #ffffff;
   border: 2px solid #1a4d00;
-  border-radius: 6px; /* 机械方矩角 */
+  border-radius: 6px;
   box-shadow: 
     0 5px 0 #004b00,
     0 8px 16px rgba(0, 0, 0, 0.25);
