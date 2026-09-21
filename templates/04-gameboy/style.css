@@ -46,7 +46,7 @@
   border-bottom: 2.5px solid #8c887b;
 }
 
-/* 3. 【彻底修复：任天堂金色品质印章 + 8-Bit 像素红心】杜绝切角问题 */
+/* 3. 任天堂金色品质印章 + 8-Bit 像素红心（饱满无缺角） */
 [data-theme="gameboy"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5277 0%, #8b1d43 65%, #4a051d 100%);
@@ -83,7 +83,6 @@
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-/* 4. 开信喷涌发射台 */
 .envelope-burst-stage {
   position: absolute;
   top: 40%;
@@ -105,14 +104,13 @@
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-/* 5. 【彻底重塑：GameBoy DMG-01 官方说明书专属信纸】告别单调方格纸 */
+/* 5. GameBoy 官方说明书专属信纸底纹 */
 [data-theme="gameboy"] .letter-sheet {
   background-color: #f7f5ed;
-  /* 初代点阵微距纹理 */
   background-image: radial-gradient(#d3cebe 1.1px, transparent 1.1px);
   background-size: 10px 10px;
   color: #1f2421;
-  border: 2.5px solid #2b2b2b;
+  border: 3px solid #2b2b2b;
   box-shadow: 
     0 35px 90px rgba(0, 0, 0, 0.9),
     0 15px 30px rgba(0, 0, 0, 0.25);
@@ -120,7 +118,6 @@
   overflow: hidden;
 }
 
-/* DMG-01 官方机身经典左侧双色彩条 (深洋红 + 海军蓝) */
 .letter-sheet::before {
   content: "";
   position: absolute;
@@ -134,21 +131,30 @@
   pointer-events: none;
 }
 
-[data-theme="gameboy"] .letter-watermark-svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(210px, 55vw, 290px);
-  height: clamp(210px, 55vw, 290px);
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 1;
+/* 街机 HUD 抬头仪表盘 */
+.arcade-hud-header {
+  background: #2b2b2b;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(6.5px, 1.8vw, 8px);
+  color: #ffbe0b;
+  box-shadow: 2px 2px 0px #8b1d43;
+  letter-spacing: 0.5px;
 }
+
+.hud-item { display: flex; align-items: center; gap: 4px; }
+.hud-val { color: #ffffff; }
 
 .pixel-stage-header {
   text-align: center;
-  margin-bottom: clamp(14px, 3.5vw, 20px);
+  margin-bottom: clamp(14px, 3.5vw, 18px);
   position: relative;
   z-index: 2;
   width: 100%;
@@ -182,7 +188,7 @@
 
 [data-theme="gameboy"] .letter-date {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(8px, 2.1vw, 9.5px);
+  font-size: clamp(7.5px, 2vw, 9px);
   color: #70757d;
   text-align: right;
   margin-bottom: 14px;
@@ -203,7 +209,7 @@
   color: #8b1d43;
 }
 
-/* 6. 相册设计 */
+/* 6. 相册：通关存档画框 */
 [data-theme="gameboy"] .photo-card-front,
 [data-theme="gameboy"] .photo-card-back {
   background: #ffffff;
@@ -240,13 +246,13 @@
   color: #2b2b2b;
 }
 
-/* 7. 【重度拟物 3D 初代掌机 DMG-01】 */
+/* 7. 【3D 初代掌机 DMG-01 + 卡带吹气除尘系统】 */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
   margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
-  padding: 20px 14px;
+  padding: 24px 14px 20px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
   border-radius: 12px 12px 36px 12px;
@@ -259,14 +265,38 @@
   z-index: 2;
 }
 
-.console-top-groove {
-  width: 60%;
-  height: 6px;
-  background: #beb9ac;
-  border-radius: 3px;
-  margin: -10px auto 14px auto;
-  border-bottom: 1px solid #ffffff;
-  box-shadow: inset 0 2px 3px rgba(0,0,0,0.3);
+/* 【专属巧思：实体可拔插复古黄色卡带】 */
+.cartridge-eject-zone {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.game-cartridge-body {
+  width: 100%;
+  height: 100%;
+  background: #f5af19;
+  border: 2px solid #8c887b;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6.5px;
+  color: #2b2b2b;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cartridge-eject-zone.is-ejected .game-cartridge-body {
+  transform: translateY(-22px);
+  background: #ffbe0b;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
 }
 
 .gameboy-screen-bezel {
@@ -318,6 +348,21 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
+  transition: filter 0.2s ease;
+}
+
+/* 卡带拔出时的花屏乱码滤镜 */
+.gameboy-lcd-screen.is-glitched {
+  animation: screenGlitch 0.2s infinite;
+  filter: contrast(180%) hue-rotate(90deg);
+}
+
+@keyframes screenGlitch {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 1.5px); }
+  50% { transform: translate(1.5px, -1px); }
+  75% { transform: translate(-1px, -1.5px); }
+  100% { transform: translate(0); }
 }
 
 .screen-headline {
@@ -328,9 +373,7 @@
   text-shadow: 1px 1px 0 rgba(155, 188, 15, 0.8);
 }
 
-.hp-gauge-container {
-  margin: 8px 0;
-}
+.hp-gauge-container { margin: 8px 0; }
 
 .hp-gauge-label {
   display: flex;
@@ -415,9 +458,7 @@
   z-index: 2;
 }
 
-.dpad-cross:active {
-  transform: translateY(2px);
-}
+.dpad-cross:active { transform: translateY(2px); }
 
 .ab-buttons-rig {
   display: flex;
@@ -466,7 +507,7 @@
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
 }
 
-/* 【彻底重构：高保真纯 3D 金属街机代币 (消除 Emoji 扁平变形)】 */
+/* 3D 金属街机代币 */
 .coin-insert-station {
   margin-top: 14px;
   padding: 14px 12px;
@@ -504,11 +545,8 @@
   50% { transform: translateY(-6px); }
 }
 
-.token-coin-3d:active {
-  transform: scale(0.92);
-}
+.token-coin-3d:active { transform: scale(0.92); }
 
-/* 代币中心的浮雕五角星 */
 .coin-star-relief {
   font-size: 20px;
   color: #fff9c4;
@@ -538,7 +576,6 @@
   letter-spacing: 0.5px;
 }
 
-/* 通关盖章 */
 .clear-banner-stamp {
   margin-top: 14px;
   animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -571,20 +608,42 @@
   line-height: 1.5;
 }
 
-/* 8. 正文与打字机 */
+/* 8. RPG 对话框信纸正文排版 */
+.rpg-dialogue-box {
+  background: #ffffff;
+  border: 2.5px solid #2b2b2b;
+  border-radius: 6px;
+  padding: 16px 14px;
+  margin: 18px 0;
+  box-shadow: 3px 3px 0px #8b1d43;
+  position: relative;
+}
+
+.dialogue-speaker-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #2b2b2b;
+  color: #00f5d4;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7.5px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
 [data-theme="gameboy"] .letter-body-text {
-  font-size: clamp(15px, 4.1vw, 17px);
-  line-height: clamp(1.9, 5vw, 2.05);
-  color: #1f2421;
-  min-height: 120px;
-  margin-bottom: 20px;
-  padding-left: 10px; /* 避开左侧彩条 */
+  font-size: clamp(14.5px, 4vw, 16.5px);
+  line-height: clamp(1.85, 4.8vw, 2.0);
+  color: #212529;
+  min-height: 110px;
+  position: relative;
 }
 
 [data-theme="gameboy"] .typewriter-cursor {
   display: inline-block;
   width: 8px;
-  height: clamp(15px, 3.8vw, 17px);
+  height: clamp(14px, 3.8vw, 16px);
   background-color: #8b1d43;
   margin-left: 3px;
   vertical-align: text-bottom;
@@ -593,16 +652,195 @@
 
 @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
+/* 【功能性 ▼ 提示条：点击或按 A 键开启 RPG 指令盘】 */
+.dialogue-prompt-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #8b1d43;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dialogue-next-arrow {
+  display: inline-block;
+  font-size: 11px;
+  animation: nextArrowHop 0.8s infinite ease-in-out;
+}
+
+@keyframes nextArrowHop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* ==========================================================================
+   【彻底重构：全新 8-Bit RPG 遇敌和解指令盘 (绝非白旗优惠券)】
+   ========================================================================== */
+.rpg-battle-console {
+  margin: 22px 0 20px 0;
+  padding: 14px 12px;
+  background: #2b2b2b;
+  border: 3px solid #000000;
+  border-radius: 6px;
+  box-shadow: 4px 4px 0px #8b1d43;
+  color: #ffffff;
+}
+
+.battle-prompt-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #ffbe0b;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  text-align: left;
+  border-bottom: 1.5px dashed #495057;
+  padding-bottom: 8px;
+}
+
+/* 2x2 经典掌机指令宫格 */
+.battle-commands-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.battle-cmd-btn {
+  background: #ffffff;
+  color: #212529;
+  border: 2px solid #000000;
+  border-radius: 4px;
+  padding: 10px 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(8px, 2vw, 9px);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #70757d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+  transition: all 0.12s ease;
+}
+
+.battle-cmd-btn:hover {
+  background: #ffbe0b;
+  transform: translateY(-2px);
+}
+.battle-cmd-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0;
+}
+
+/* 战斗行动即时反馈对话框 */
+.battle-result-dialog {
+  margin-top: 10px;
+  padding: 8px 10px;
+  background: #111111;
+  border: 1.5px solid #00f5d4;
+  border-radius: 4px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7.5px;
+  color: #00f5d4;
+  line-height: 1.5;
+  text-align: left;
+  display: none;
+}
+
+/* 道具背包浮层 */
+.item-bag-inventory {
+  margin-top: 10px;
+  padding: 10px;
+  background: #1e1e1e;
+  border: 2px solid #ffbe0b;
+  border-radius: 4px;
+  display: none;
+}
+
+.inventory-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7.5px;
+  color: #ffbe0b;
+  margin-bottom: 8px;
+}
+
+.inventory-items-row {
+  display: flex;
+  gap: 8px;
+  justify-content: space-around;
+}
+
+.inv-item-slot {
+  background: #ffffff;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #212529;
+  cursor: pointer;
+}
+.inv-item-slot:hover { background: #ffea79; }
+
+/* 亲密度经验条与署名落款 */
+.affection-exp-bar-wrap {
+  margin: 18px 0 10px 0;
+  padding: 8px 12px;
+  background: #2b2b2b;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exp-label-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #00f5d4;
+}
+
+.exp-track-outer {
+  width: 100%;
+  height: 8px;
+  background: #111111;
+  border: 1px solid #70757d;
+  padding: 1px;
+  box-sizing: border-box;
+}
+
+.exp-track-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ffbe0b, #00f5d4, #ff5277);
+}
+
 [data-theme="gameboy"] .letter-closing {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(9.5px, 2.4vw, 11px);
-  line-height: 1.6;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  line-height: 1.7;
   text-align: right;
-  margin-top: 24px;
+  margin-top: 14px;
   color: #8b1d43;
 }
 
-/* 9. 【彻底修复：卡带金手指 PCB 刮刮乐】移除覆盖在文字上的 Emoji 伪元素 */
+.cartridge-patent-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1.5px dashed #c2b59b;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6.5px;
+  color: #8c887b;
+  letter-spacing: 0.8px;
+  line-height: 1.6;
+}
+
+/* 9. 金手指刮刮乐 (纯净无遮挡) */
 [data-theme="gameboy"] .scratch-hint-text {
   color: #495057;
   font-family: 'Press Start 2P', monospace;
@@ -621,7 +859,6 @@
   position: relative;
 }
 
-/* 彻底移除遮挡文字的 ::before 和 ::after */
 [data-theme="gameboy"] .scratch-card-box::before,
 [data-theme="gameboy"] .scratch-card-box::after {
   display: none !important;
@@ -633,7 +870,6 @@
   font-size: clamp(9px, 2.3vw, 10.5px);
   line-height: 1.6;
   background: #fdfbf7;
-  /* 留足安全边距，绝不遮挡任何文字 */
   padding: 16px 20px !important;
   box-sizing: border-box;
   text-align: center;
