@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=true_occlusion_bay" />
+  <link rel="stylesheet" href="style.css?v=fix_cart_overlap" />
 </head>
 <body>
 
@@ -111,37 +111,33 @@
           </div>
         </div>
 
-        <!-- 【核心重构：3D 掌机与前后三层物理咬合卡槽】 -->
+        <!-- 【3D 掌机 + 前后夹层卡槽机构】 -->
         <div class="gameboy-console-station">
           
-          <!-- 三层立体卡槽机构 -->
           <div class="cartridge-bay-assembly">
-            <!-- 层级 1：后层深邃暗仓 -->
+            <!-- 后层深邃暗仓 -->
             <div class="cart-slot-cavity-back"></div>
 
-            <!-- 层级 2：中层 3D 实体卡带 (可滑入前唇遮挡下) -->
+            <!-- 中层 3D 实体黄色卡带 -->
             <div class="cartridge-3d-unit" id="cartridgeUnit" title="Click to Insert or Eject Cartridge!">
               <div class="cart-hover-guide-tag">TAP TO INSERT ⬇</div>
               
               <div class="cart-shell-body">
-                <!-- 原装弧形拇指凹槽 + GAME BOY 压字 -->
                 <div class="cart-thumb-recess">
                   <span class="cart-brand-text">GAME BOY</span>
                 </div>
-                <!-- 四道防滑横向咬花螺纹 -->
                 <div class="cart-ribbed-grips">
                   <div class="ribbed-bar"></div>
                   <div class="ribbed-bar"></div>
                   <div class="ribbed-bar"></div>
                   <div class="ribbed-bar"></div>
                 </div>
-                <!-- 专属游戏铭牌贴纸 -->
                 <div class="cart-game-sticker">
                   <span>★ LOVE QUEST ★</span>
                 </div>
               </div>
 
-              <!-- 拔出状态下可见的镀金引脚 -->
+              <!-- 镀金引脚 -->
               <div class="cart-pcb-pins">
                 <div class="gold-pin"></div>
                 <div class="gold-pin"></div>
@@ -154,13 +150,13 @@
               </div>
             </div>
 
-            <!-- 层级 3：前层外壳前唇 (用于遮挡下半部分卡带，实现物理插入感！) -->
+            <!-- 前层外壳前唇 (遮挡卡带下部) -->
             <div class="cart-slot-front-lip"></div>
           </div>
 
           <!-- 屏幕边框 -->
           <div class="gameboy-screen-bezel">
-            <!-- 独立宽裕排版的 BATTERY 模块 (绝对完整不截断) -->
+            <!-- 独立宽裕排版的 BATTERY 模块 -->
             <div class="battery-indicator-module">
               <div class="battery-led-light" id="batteryLed"></div>
               <span class="battery-title-text">BATTERY</span>
@@ -177,7 +173,7 @@
                 <div class="glitch-alert-banner">✦ INSERT CARTRIDGE TO BOOT ✦</div>
               </div>
 
-              <!-- 正常游戏画面 (插卡后解锁点亮) -->
+              <!-- 正常游戏画面 -->
               <div class="screen-headline" id="screenHeadline">✦ CRITICAL DAMAGE! ✦</div>
               
               <div class="hp-gauge-container">
@@ -238,7 +234,6 @@
             <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
           </div>
 
-          <!-- 功能性 ▼ 推进指示条 -->
           <div class="dialogue-prompt-bar" id="dialoguePromptBar" style="display:none;" onclick="triggerBattleConsole()">
             <span>PRESS [A] TO ACTION</span>
             <span class="dialogue-next-arrow">▼</span>
@@ -311,7 +306,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=true_occlusion_bay"></script>
+  <script src="data.js?v=fix_cart_overlap"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -449,7 +444,6 @@
       } catch(e) {}
     }
 
-    // 机械卡带入槽扎实卡簧声
     function playCartridgeSnapSound() {
       try {
         const ctx = getAudioContext();
@@ -468,7 +462,6 @@
       } catch(e) {}
     }
 
-    // 吹气除尘风声
     function playBlowWindSound() {
       try {
         const ctx = getAudioContext();
@@ -533,7 +526,6 @@
       e.stopPropagation();
 
       if (!isCartridgeInserted) {
-        // 核心交互：读者将卡带插进卡槽，点亮开机！
         isCartridgeInserted = true;
         cartridgeUnit.classList.add('is-inserted');
         playCartridgeSnapSound();
@@ -548,7 +540,6 @@
         }, 220);
 
       } else {
-        // 已插卡状态下再次点击：拔出吹气除尘！
         isCartridgeInserted = false;
         cartridgeUnit.classList.remove('is-inserted');
         glitchCrashScreen.style.display = 'flex';
