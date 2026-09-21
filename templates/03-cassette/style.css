@@ -234,7 +234,7 @@
   color: #3b2230;
 }
 
-/* 7. 【重度拟物 3D 实体磁带舱 + A/B 面 3D 翻转把玩系统】 */
+/* 7. 【重度拟物 3D 实体磁带舱 + 真实卷带手感】 */
 .cassette-deck-station {
   position: relative;
   width: 100%;
@@ -274,9 +274,10 @@
   border-radius: 20px;
   border: 1.5px solid #3d3142;
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
 }
 
-/* 3D 磁带翻转舞台 (Perspective Flipper) */
+/* 3D 磁带翻转舞台 */
 .cassette-3d-stage {
   position: relative;
   width: 100%;
@@ -322,19 +323,16 @@
   -webkit-backface-visibility: hidden;
 }
 
-/* 正面：SIDE A */
 .cassette-face-front {
   background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(35,30,42,0.95) 25%, #18141d 100%);
   transform: rotateY(0deg);
 }
 
-/* 背面：SIDE B（复古水磨石暗金透壳） */
 .cassette-face-back {
   background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(42,32,48,0.96) 25%, #1d1624 100%);
   transform: rotateY(180deg);
 }
 
-/* 四角金属固定螺丝 */
 .screw {
   position: absolute;
   width: 8px;
@@ -349,7 +347,6 @@
 .screw-bl { bottom: 6px; left: 6px; }
 .screw-br { bottom: 6px; right: 6px; }
 
-/* 磁带贴纸 */
 .cassette-label-retro {
   width: 96%;
   background: #fdfbf7;
@@ -379,7 +376,6 @@
   border-radius: 2px;
 }
 
-/* B 面专属私藏歌单手写贴纸 */
 .cassette-label-retro.side-b-label {
   background: #fff8eb;
 }
@@ -400,7 +396,6 @@
   justify-content: space-around;
 }
 
-/* 深凹观察窗 */
 .cassette-window-deep {
   position: relative;
   width: 86%;
@@ -429,6 +424,7 @@
   background: radial-gradient(circle, #3e2723 0%, #211512 80%);
   transform: translateY(-50%);
   box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .tape-ribbon-right {
@@ -441,9 +437,10 @@
   background: radial-gradient(circle, #3e2723 0%, #211512 80%);
   transform: translateY(-50%);
   box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
-/* 六齿白色传动齿轮 */
+/* 六齿白色传动齿轮（带真实机械咬合手感反馈） */
 .spool-gear {
   position: relative;
   width: 38px;
@@ -457,11 +454,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.1s ease;
+  transition: transform 0.12s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .spool-gear:active {
-  transform: scale(1.15) rotate(45deg);
+  transform: scale(1.12);
 }
 
 .spool-hub {
@@ -480,7 +477,6 @@
 .spool-hub::before { top: 0; left: 6px; width: 4px; height: 16px; }
 .spool-hub::after { top: 6px; left: 0; width: 16px; height: 4px; }
 
-/* 匀速播放旋转 */
 .spool-gear.is-playing {
   animation: gearSpin 4s linear infinite;
 }
@@ -490,7 +486,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* 高速倒带激剧反转 */
 .spool-gear.is-rewinding {
   animation: gearRewind 0.3s linear infinite !important;
 }
@@ -519,7 +514,6 @@
   background: #000;
 }
 
-/* 随身听翻面提示小字 */
 .cassette-flip-hint {
   font-family: 'Montserrat', sans-serif;
   font-size: 8.5px;
@@ -529,7 +523,7 @@
   margin-bottom: 12px;
 }
 
-/* 【全新随身听机械琴键控制排（Walkman Mechanical Buttons）】 */
+/* 随身听机械琴键控制排 */
 .walkman-keys-console {
   display: flex;
   justify-content: center;
@@ -576,7 +570,6 @@
   letter-spacing: 0.8px;
 }
 
-/* 倒带键专属高亮（红色琴键） */
 .walkman-key.key-rewind {
   background: linear-gradient(180deg, #ff5c7c 0%, #d90429 100%);
   color: #ffffff;
@@ -588,7 +581,7 @@
   box-shadow: 0 1px 0 #590013;
 }
 
-/* 倒带完成验带邮戳 */
+/* 倒带验带邮戳 */
 .rewind-success-banner {
   margin-top: 14px;
   animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -621,6 +614,39 @@
   color: #6c584c;
   margin-top: 10px;
   line-height: 1.5;
+}
+
+/* 【全新彩蛋：手动卷带修复成功弹出的绝密便签纸】 */
+.manual-roll-easter-egg {
+  margin-top: 14px;
+  background: #fffbe6;
+  border: 2px dashed #f59f00;
+  border-radius: 6px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 16px rgba(245, 159, 0, 0.25);
+  animation: easterEggSlideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes easterEggSlideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.egg-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #d9480f;
+  margin-bottom: 4px;
+}
+
+.egg-message {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3b2210;
+  line-height: 1.4;
 }
 
 /* 8. 正文与打字机 */
