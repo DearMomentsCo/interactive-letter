@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;900&family=Montserrat:wght@500;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 防缓存标识 -->
-  <link rel="stylesheet" href="style.css?v=retro_v3" />
+  <!-- 防缓存版本标记 -->
+  <link rel="stylesheet" href="style.css?v=interactive_deck" />
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   <div class="letter-viewport" data-theme="cassette">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 磨砂黑胶外壳封套 -->
+      <!-- 1. 磨砂黑胶盒信封 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <span class="envelope-corner-star star-tl">✦</span>
@@ -51,9 +51,8 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 严谨完整的标准爱心矢量（绝对饱满无缺角） -->
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
@@ -71,7 +70,7 @@
           <circle cx="50" cy="50" r="4" fill="#2d2433" />
         </svg>
 
-        <!-- 【全新设计：随身听液晶屏状态指示】 -->
+        <!-- 随身听液晶数码时间码状态栏 -->
         <div class="walkman-lcd-screen">
           <span class="lcd-tag-left">● STEREO // DOLBY B-NR</span>
           <span class="lcd-timer-right" id="lcdTimer">SIDE A [03:42]</span>
@@ -80,14 +79,14 @@
         <div class="letter-date" id="letterDate"></div>
         <h1 class="letter-title" id="letterHeadline"></h1>
 
-        <!-- 【全新设计：美纹纸胶带专属题献便签】 -->
+        <!-- 美纹纸胶带专属题献便签 -->
         <div>
           <div class="tape-salutation-wrap">
             <span class="tape-salutation-label" id="letterSalutation"></span>
           </div>
         </div>
 
-        <!-- 3D 翻转 + < 1 / N > 全画幅播放器 -->
+        <!-- 3D 翻转 + < 1 / N > 全画幅相册播放器 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
@@ -108,58 +107,116 @@
           </div>
         </div>
 
-        <!-- 【全新重度拟物 3D 实体磁带与 REWIND 倒带系统】 -->
+        <!-- 【全新重度拟物 3D 磁带舱：支持 A/B 面 3D 翻转 + 随身听机械按键排 + 齿轮手动卷带】 -->
         <div class="cassette-deck-station">
           <div class="deck-header">
-            <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING TRACK 01 ✦</span>
+            <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING SIDE A ✦</span>
           </div>
 
-          <!-- 3D 实体亚克力磁带外壳 -->
-          <div class="cassette-body-3d">
-            <!-- 四角金属固定螺丝 -->
-            <div class="screw screw-tl"></div>
-            <div class="screw screw-tr"></div>
-            <div class="screw screw-bl"></div>
-            <div class="screw screw-br"></div>
-
-            <!-- 复古水洗纸质标签 -->
-            <div class="cassette-label-retro">
-              <div class="label-top-meta">
-                <span>● A-SIDE</span>
-                <span>APOLOGY MIXTAPE #01</span>
-                <span>TYPE-I</span>
-              </div>
-              <div class="label-color-stripe"></div>
-            </div>
-
-            <!-- 深凹双滚轴观察窗 -->
-            <div class="cassette-window-deep">
-              <div class="tape-ribbon-left"></div>
-              <div class="tape-ribbon-right"></div>
+          <!-- 3D 翻转磁带舞台 -->
+          <div class="cassette-3d-stage" id="cassetteFlipper">
+            <div class="cassette-flipper-inner">
               
-              <div class="spool-gear is-playing" id="spoolLeft">
-                <div class="spool-hub"></div>
-              </div>
-              <div class="spool-gear is-playing" id="spoolRight">
-                <div class="spool-hub"></div>
-              </div>
-            </div>
+              <!-- 正面：SIDE A (主打歌面) -->
+              <div class="cassette-face cassette-face-front">
+                <div class="screw screw-tl"></div>
+                <div class="screw screw-tr"></div>
+                <div class="screw screw-bl"></div>
+                <div class="screw screw-br"></div>
 
-            <!-- 底部梯形磁头槽 -->
-            <div class="cassette-bottom-dock">
-              <div class="dock-hole"></div>
-              <div class="dock-hole"></div>
+                <div class="cassette-label-retro">
+                  <div class="label-top-meta">
+                    <span>● SIDE A</span>
+                    <span>APOLOGY MIXTAPE #01</span>
+                    <span>TYPE-I</span>
+                  </div>
+                  <div class="label-color-stripe"></div>
+                </div>
+
+                <div class="cassette-window-deep">
+                  <div class="tape-ribbon-left"></div>
+                  <div class="tape-ribbon-right"></div>
+                  <div class="spool-gear is-playing" id="spoolFrontLeft" title="Click to manually roll tape">
+                    <div class="spool-hub"></div>
+                  </div>
+                  <div class="spool-gear is-playing" id="spoolFrontRight" title="Click to manually roll tape">
+                    <div class="spool-hub"></div>
+                  </div>
+                </div>
+
+                <div class="cassette-bottom-dock">
+                  <div class="dock-hole"></div>
+                  <div class="dock-hole"></div>
+                </div>
+              </div>
+
+              <!-- 背面：SIDE B (私藏回忆歌单面) -->
+              <div class="cassette-face cassette-face-back">
+                <div class="screw screw-tl"></div>
+                <div class="screw screw-tr"></div>
+                <div class="screw screw-bl"></div>
+                <div class="screw screw-br"></div>
+
+                <div class="cassette-label-retro side-b-label">
+                  <div class="label-top-meta">
+                    <span style="color:#7b2cbf;">● SIDE B</span>
+                    <span style="color:#7b2cbf;">BONUS LOVE TRACKS</span>
+                    <span style="color:#7b2cbf;">STEREO</span>
+                  </div>
+                  <div class="side-b-title">✦ OUR SECRET PLAYLIST ✦</div>
+                  <div class="side-b-tracklist">
+                    <span>01. The Day We Met ♡</span>
+                    <span>02. Forgive Me, Babe</span>
+                  </div>
+                </div>
+
+                <div class="cassette-window-deep">
+                  <div class="tape-ribbon-left"></div>
+                  <div class="tape-ribbon-right"></div>
+                  <div class="spool-gear is-playing" id="spoolBackLeft">
+                    <div class="spool-hub"></div>
+                  </div>
+                  <div class="spool-gear is-playing" id="spoolBackRight">
+                    <div class="spool-hub"></div>
+                  </div>
+                </div>
+
+                <div class="cassette-bottom-dock">
+                  <div class="dock-hole"></div>
+                  <div class="dock-hole"></div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- 倒带按键 -->
-          <div id="rewindActionArea">
-            <button class="rewind-action-btn" id="rewindBtn">
-              <span>◀◀ HOLD TO REWIND TO ZERO</span>
+          <div class="cassette-flip-hint">✦ TAP CASSETTE TO FLIP A/B SIDES · CLICK SPOOLS TO ROLL ✦</div>
+
+          <!-- 【随身听 4 键机械控制排】 -->
+          <div class="walkman-keys-console">
+            <!-- 倒带键 -->
+            <button class="walkman-key key-rewind" id="keyRewind" title="Hold to Rewind">
+              <span class="key-icon">◀◀</span>
+              <span class="key-label">REWIND</span>
+            </button>
+            <!-- 播放/暂停键 -->
+            <button class="walkman-key" id="keyPlayPause" title="Play or Pause">
+              <span class="key-icon" id="playPauseIcon">⏸</span>
+              <span class="key-label" id="playPauseLabel">PAUSE</span>
+            </button>
+            <!-- 3D 翻面键 -->
+            <button class="walkman-key" id="keyFlip" title="Flip Side A/B">
+              <span class="key-icon">🔄</span>
+              <span class="key-label">FLIP A/B</span>
+            </button>
+            <!-- 手动卷带键 -->
+            <button class="walkman-key" id="keyRoll" title="Manual Pencil Roll">
+              <span class="key-icon">✏️</span>
+              <span class="key-label">ROLL</span>
             </button>
           </div>
 
-          <!-- 倒带完成验带戳 -->
+          <!-- 倒带完成验带邮戳 -->
           <div class="rewind-success-banner" id="rewindBanner" style="display:none;">
             <div class="rewind-stamp-embossed">✦ TAPE REWOUND · CLEAN SLATE ♡ ✦</div>
             <p class="rewind-subtext">We've rewound back to where everything felt gentle and loving. Let's start fresh together!</p>
@@ -173,7 +230,7 @@
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 【全新专属磁粉带刮刮乐】 -->
+        <!-- 专属磁粉带刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH MAGNETIC TAPE TO REVEAL B-SIDE ✦</div>
           <div class="scratch-card-box">
@@ -182,7 +239,7 @@
           </div>
         </div>
 
-        <!-- 【全新随身听机械按键逃跑问答】 -->
+        <!-- 随身听机械按键逃跑问答 -->
         <div class="runaway-section" id="runawayQuestionSection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -196,7 +253,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=retro_v3"></script>
+  <script src="data.js?v=interactive_deck"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -253,28 +310,80 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 【倒带动效控制与液晶屏联动】
-    const rewindBtn = document.getElementById('rewindBtn');
-    const spoolLeft = document.getElementById('spoolLeft');
-    const spoolRight = document.getElementById('spoolRight');
+    /* ==========================================================================
+       【重磅互动：3D 磁带实体随身听把玩引擎】
+       ========================================================================== */
+    const cassetteFlipper = document.getElementById('cassetteFlipper');
+    const allSpools = document.querySelectorAll('.spool-gear');
     const deckStatusPill = document.getElementById('deckStatusPill');
-    const rewindActionArea = document.getElementById('rewindActionArea');
-    const rewindBanner = document.getElementById('rewindBanner');
     const lcdTimer = document.getElementById('lcdTimer');
+    const rewindBanner = document.getElementById('rewindBanner');
 
-    rewindBtn.addEventListener('click', (e) => {
+    const keyRewind = document.getElementById('keyRewind');
+    const keyPlayPause = document.getElementById('keyPlayPause');
+    const keyFlip = document.getElementById('keyFlip');
+    const keyRoll = document.getElementById('keyRoll');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    const playPauseLabel = document.getElementById('playPauseLabel');
+
+    let isSideB = false;
+    let isPlaying = true;
+    let isRewinding = false;
+
+    // 1. 【玩法一：3D A/B 面翻转】
+    function toggleCassetteFlip() {
+      isSideB = !isSideB;
+      if (isSideB) {
+        cassetteFlipper.classList.add('is-side-b');
+        deckStatusPill.innerText = "✦ DECK STATUS: PLAYING SIDE B (SECRET TRACKS) ✦";
+        lcdTimer.innerText = "SIDE B [02:15]";
+      } else {
+        cassetteFlipper.classList.remove('is-side-b');
+        deckStatusPill.innerText = "✦ DECK STATUS: PLAYING SIDE A ✦";
+        lcdTimer.innerText = "SIDE A [03:42]";
+      }
+    }
+    cassetteFlipper.addEventListener('click', toggleCassetteFlip);
+    keyFlip.addEventListener('click', (e) => { e.stopPropagation(); toggleCassetteFlip(); });
+
+    // 2. 【玩法二：复古倒带电平音效合成器 (Web Audio API 纯代码合成无需下载)】
+    function playRewindSound() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1600, audioCtx.currentTime + 0.6);
+        osc.frequency.exponentialRampToValueAtTime(280, audioCtx.currentTime + 1.2);
+        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+      } catch(e) {}
+    }
+
+    keyRewind.addEventListener('click', (e) => {
       e.stopPropagation();
+      if (isRewinding) return;
+      isRewinding = true;
 
-      spoolLeft.classList.remove('is-playing');
-      spoolRight.classList.remove('is-playing');
-      spoolLeft.classList.add('is-rewinding');
-      spoolRight.classList.add('is-rewinding');
+      // 播放复古倒带音效
+      playRewindSound();
+
+      // 齿轮极速逆转
+      allSpools.forEach(s => {
+        s.classList.remove('is-playing');
+        s.classList.add('is-rewinding');
+      });
 
       deckStatusPill.innerText = "◀◀ REWINDING TAPE TO ZERO...";
       deckStatusPill.style.color = "#ff007f";
       deckStatusPill.style.backgroundColor = "#fff0f5";
 
-      // 液晶数码屏极速倒数
+      // 液晶数码屏极速回跳
       let countdown = 342;
       const timerInt = setInterval(() => {
         countdown = Math.max(0, countdown - 38);
@@ -285,10 +394,11 @@
       }, 100);
 
       setTimeout(() => {
-        spoolLeft.classList.remove('is-rewinding');
-        spoolRight.classList.remove('is-rewinding');
-        spoolLeft.classList.add('is-playing');
-        spoolRight.classList.add('is-playing');
+        isRewinding = false;
+        allSpools.forEach(s => {
+          s.classList.remove('is-rewinding');
+          if (isPlaying) s.classList.add('is-playing');
+        });
 
         lcdTimer.innerText = `PLAY [00:00]`;
         lcdTimer.style.color = "#00f5d4";
@@ -298,19 +408,67 @@
         deckStatusPill.style.borderColor = "#2b9348";
         deckStatusPill.style.backgroundColor = "#e8f5e9";
 
-        rewindActionArea.style.display = 'none';
         rewindBanner.style.display = 'block';
-
         createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 40);
       }, 1200);
     });
 
+    // 3. 【随身听播放 / 暂停琴键】
+    const audio = document.getElementById('bgAudio');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (LETTER_DATA.audioUrl) {
+      audio.src = LETTER_DATA.audioUrl;
+      audioBtn.style.display = 'flex';
+    }
+
+    function togglePlayPause() {
+      if (isPlaying) {
+        isPlaying = false;
+        audio.pause();
+        allSpools.forEach(s => s.classList.remove('is-playing'));
+        playPauseIcon.innerText = '▶';
+        playPauseLabel.innerText = 'PLAY';
+        deckStatusPill.innerText = "⏸ TAPE PAUSED";
+      } else {
+        isPlaying = true;
+        audio.play().catch(() => {});
+        allSpools.forEach(s => s.classList.add('is-playing'));
+        playPauseIcon.innerText = '⏸';
+        playPauseLabel.innerText = 'PAUSE';
+        deckStatusPill.innerText = isSideB ? "✦ PLAYING SIDE B ✦" : "✦ PLAYING SIDE A ✦";
+      }
+    }
+    keyPlayPause.addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
+    audioBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
+
+    // 4. 【玩法三：情怀铅笔卷带机制 (Manual Roll)】
+    let currentRollAngle = 0;
+    function manualTapeRoll() {
+      currentRollAngle += 60;
+      allSpools.forEach(s => {
+        s.style.transform = `rotate(${currentRollAngle}deg)`;
+      });
+      deckStatusPill.innerText = "✏️ MANUAL TAPE WINDING... ♡";
+      setTimeout(() => {
+        allSpools.forEach(s => s.style.transform = '');
+        if (isPlaying) {
+          deckStatusPill.innerText = isSideB ? "✦ PLAYING SIDE B ✦" : "✦ PLAYING SIDE A ✦";
+        }
+      }, 400);
+    }
+    keyRoll.addEventListener('click', (e) => { e.stopPropagation(); manualTapeRoll(); });
+    allSpools.forEach(s => {
+      s.addEventListener('click', (e) => { e.stopPropagation(); manualTapeRoll(); });
+    });
+
+    // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
+    // 逃跑问答设置
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawayQuestionSection').style.display = 'none';
     } else {
@@ -348,29 +506,7 @@
       }
     }
 
-    // 音频
-    const audio = document.getElementById('bgAudio');
-    const audioBtn = document.getElementById('audioToggleBtn');
-    if (LETTER_DATA.audioUrl) {
-      audio.src = LETTER_DATA.audioUrl;
-      audioBtn.style.display = 'flex';
-    }
-    audioBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (audio.paused) { 
-        audio.play(); 
-        audioBtn.innerText = '🔊';
-        spoolLeft.classList.add('is-playing');
-        spoolRight.classList.add('is-playing');
-      } else { 
-        audio.pause(); 
-        audioBtn.innerText = '🔇';
-        spoolLeft.classList.remove('is-playing');
-        spoolRight.classList.remove('is-playing');
-      }
-    });
-
-    // 拆信喷涌
+    // 开信喷涌
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     const burstStage = document.getElementById('burstStage');
@@ -451,7 +587,6 @@
       cursor.style.display = 'none';
     }
 
-    // 【专属深棕色磁带磁粉涂层刮刮乐】
     function initMagneticScratch() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -462,7 +597,6 @@
       canvas.width = w;
       canvas.height = h;
 
-      // 磁粉带深褐反光
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#2e1c14');
       grad.addColorStop(0.5, '#452c20');
@@ -470,7 +604,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 磁粉颗粒感
       ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
       for (let i = 0; i < w; i += 3) {
         for (let j = 0; j < h; j += 3) {
@@ -509,7 +642,6 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 机械按键逃跑问答
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
