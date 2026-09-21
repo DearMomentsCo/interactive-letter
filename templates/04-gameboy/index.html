@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=true_cart_boot" />
+  <link rel="stylesheet" href="style.css?v=true_occlusion_bay" />
 </head>
 <body>
 
@@ -111,47 +111,63 @@
           </div>
         </div>
 
-        <!-- 【高保真 3D 掌机 + 真实可拔插卡带 + 初始开机乱码】 -->
+        <!-- 【核心重构：3D 掌机与前后三层物理咬合卡槽】 -->
         <div class="gameboy-console-station">
-          <!-- 顶部深槽内壁 -->
-          <div class="cartridge-housing-slot"></div>
+          
+          <!-- 三层立体卡槽机构 -->
+          <div class="cartridge-bay-assembly">
+            <!-- 层级 1：后层深邃暗仓 -->
+            <div class="cart-slot-cavity-back"></div>
 
-          <!-- 3D 实体卡带 (默认悬浮在槽外，带指引气泡) -->
-          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to Insert Cartridge!">
-            <div class="cartridge-hover-guide-tag">TAP TO INSERT ⬇</div>
-            <div class="game-cartridge-body">
-              <div class="cartridge-grip-ribs">
-                <div class="grip-rib"></div>
-                <div class="grip-rib"></div>
-                <div class="grip-rib"></div>
+            <!-- 层级 2：中层 3D 实体卡带 (可滑入前唇遮挡下) -->
+            <div class="cartridge-3d-unit" id="cartridgeUnit" title="Click to Insert or Eject Cartridge!">
+              <div class="cart-hover-guide-tag">TAP TO INSERT ⬇</div>
+              
+              <div class="cart-shell-body">
+                <!-- 原装弧形拇指凹槽 + GAME BOY 压字 -->
+                <div class="cart-thumb-recess">
+                  <span class="cart-brand-text">GAME BOY</span>
+                </div>
+                <!-- 四道防滑横向咬花螺纹 -->
+                <div class="cart-ribbed-grips">
+                  <div class="ribbed-bar"></div>
+                  <div class="ribbed-bar"></div>
+                  <div class="ribbed-bar"></div>
+                  <div class="ribbed-bar"></div>
+                </div>
+                <!-- 专属游戏铭牌贴纸 -->
+                <div class="cart-game-sticker">
+                  <span>★ LOVE QUEST ★</span>
+                </div>
               </div>
-              <div class="cartridge-label-plate" id="cartridgeLabel">
-                <span>★ LOVE CART ★</span>
+
+              <!-- 拔出状态下可见的镀金引脚 -->
+              <div class="cart-pcb-pins">
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
+                <div class="gold-pin"></div>
               </div>
             </div>
-            <!-- 拔出状态下的导电金手指引脚 -->
-            <div class="cartridge-pins-exposed">
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-              <div class="pin-gold"></div>
-            </div>
+
+            <!-- 层级 3：前层外壳前唇 (用于遮挡下半部分卡带，实现物理插入感！) -->
+            <div class="cart-slot-front-lip"></div>
           </div>
 
           <!-- 屏幕边框 -->
           <div class="gameboy-screen-bezel">
-            <!-- 【修复：独立排版、文字绝不截断的 BATTERY 模块】 -->
+            <!-- 独立宽裕排版的 BATTERY 模块 (绝对完整不截断) -->
             <div class="battery-indicator-module">
               <div class="battery-led-light" id="batteryLed"></div>
               <span class="battery-title-text">BATTERY</span>
             </div>
 
             <div class="gameboy-lcd-screen" id="lcdScreen">
-              <!-- 【初始开机死机花屏乱码遮罩层】 -->
+              <!-- 初始死机花屏乱码遮罩层 -->
               <div class="glitch-crash-screen" id="glitchCrashScreen">
                 <div class="glitch-noise-tiles" id="glitchNoiseText">
                   ■▓▒░█X$#@?%!01<br/>
@@ -161,7 +177,7 @@
                 <div class="glitch-alert-banner">✦ INSERT CARTRIDGE TO BOOT ✦</div>
               </div>
 
-              <!-- 正常游戏画面 (插卡后解锁展现) -->
+              <!-- 正常游戏画面 (插卡后解锁点亮) -->
               <div class="screen-headline" id="screenHeadline">✦ CRITICAL DAMAGE! ✦</div>
               
               <div class="hp-gauge-container">
@@ -295,7 +311,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=true_cart_boot"></script>
+  <script src="data.js?v=true_occlusion_bay"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -433,7 +449,7 @@
       } catch(e) {}
     }
 
-    // 【机械卡带入槽卡嗒声 (Cartridge Snap Sound)】
+    // 机械卡带入槽扎实卡簧声
     function playCartridgeSnapSound() {
       try {
         const ctx = getAudioContext();
@@ -441,18 +457,18 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'triangle';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.exponentialRampToValueAtTime(60, now + 0.08);
-        gain.gain.setValueAtTime(0.7, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.exponentialRampToValueAtTime(50, now + 0.09);
+        gain.gain.setValueAtTime(0.75, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
-        osc.stop(now + 0.08);
+        osc.stop(now + 0.09);
       } catch(e) {}
     }
 
-    // 【吹气除尘风声】
+    // 吹气除尘风声
     function playBlowWindSound() {
       try {
         const ctx = getAudioContext();
@@ -490,17 +506,16 @@
     }
 
     /* ==========================================================================
-       【核心玩法：初始开机乱码 ➔ 引导插入卡带 ➔ 叮声启动】
+       【核心联动：初始开机乱码 ➔ 读者插卡 ➔ 叮声开机】
        ========================================================================== */
-    const cartridgeZone = document.getElementById('cartridgeEjectZone');
+    const cartridgeUnit = document.getElementById('cartridgeUnit');
     const glitchCrashScreen = document.getElementById('glitchCrashScreen');
     const glitchNoiseText = document.getElementById('glitchNoiseText');
     const batteryLed = document.getElementById('batteryLed');
 
-    let isCartridgeInserted = false; // 初始状态为未插卡
+    let isCartridgeInserted = false;
     let glitchInterval = null;
 
-    // 持续生成死机随机乱码
     function startGlitchFlicker() {
       const glitchChars = "■▓▒░█X$#@?%!01&_/*";
       glitchInterval = setInterval(() => {
@@ -514,32 +529,31 @@
     }
     startGlitchFlicker();
 
-    cartridgeZone.addEventListener('click', (e) => {
+    cartridgeUnit.addEventListener('click', (e) => {
       e.stopPropagation();
 
       if (!isCartridgeInserted) {
-        // 【核心交互：读者将卡带插进卡槽，点亮开机！】
+        // 核心交互：读者将卡带插进卡槽，点亮开机！
         isCartridgeInserted = true;
-        cartridgeZone.classList.add('is-inserted');
-        playCartridgeSnapSound(); // 机械卡嗒声
+        cartridgeUnit.classList.add('is-inserted');
+        playCartridgeSnapSound();
 
         clearInterval(glitchInterval);
 
         setTimeout(() => {
-          // 消除死机乱码，响起任天堂开机叮声！
           glitchCrashScreen.style.display = 'none';
-          batteryLed.classList.add('is-powered'); // LED 由红转为常亮通电绿
+          batteryLed.classList.add('is-powered');
           playNintendoChime();
           createBurstAt(window.innerWidth / 2, window.innerHeight * 0.45, 35);
         }, 220);
 
       } else {
-        // 已插卡状态下再次点击：支持拔出吹气除尘！
+        // 已插卡状态下再次点击：拔出吹气除尘！
         isCartridgeInserted = false;
-        cartridgeZone.classList.remove('is-inserted');
+        cartridgeUnit.classList.remove('is-inserted');
         glitchCrashScreen.style.display = 'flex';
         batteryLed.classList.remove('is-powered');
-        playBlowWindSound(); // 吹气除尘声
+        playBlowWindSound();
         startGlitchFlicker();
       }
     });
