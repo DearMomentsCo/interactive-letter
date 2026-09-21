@@ -247,146 +247,174 @@
 }
 
 /* ==========================================================================
-   【重构 1：高保真真 3D 掌机卡槽与可插拔卡带】
+   【彻底重构：真 3D 掌机嵌入式卡槽与实体卡带 (前后夹层遮挡结构)】
    ========================================================================== */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
   margin: clamp(55px, 12vw, 65px) auto clamp(26px, 6vw, 36px) auto;
-  padding: 24px 14px 20px;
+  padding: 16px 14px 20px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
   border-radius: 12px 12px 36px 12px;
   box-shadow: 
     0 18px 38px rgba(0, 0, 0, 0.45),
-    inset 2px 2px 2px rgba(255, 255, 255, 0.8),
-    inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+    inset 2px 2px 2px rgba(255, 255, 255, 0.85),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
   box-sizing: border-box;
   z-index: 2;
 }
 
-/* 掌机顶部深凹卡槽内壁 (带有导轨阴影与厚度) */
-.cartridge-housing-slot {
-  position: absolute;
-  top: -18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 162px;
-  height: 22px;
-  background: #18191f;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 
-    inset 0 6px 10px #000000,
-    inset 3px 0 4px #0a0b0e,
-    inset -3px 0 4px #0a0b0e,
-    0 2px 0 rgba(255,255,255,0.7);
-  z-index: 3;
+/* 顶部完整卡槽机构总容器 */
+.cartridge-bay-assembly {
+  position: relative;
+  width: 154px;
+  height: 28px;
+  margin: -36px auto 14px auto;
+  z-index: 5;
 }
 
-/* 【全新立体 3D 黄色实体卡带：带右上角防呆切角与厚实质感】 */
-.cartridge-eject-zone {
+/* 1. 后层：深邃卡槽内壁暗仓 (带有底部接触弹片与深黑投影) */
+.cart-slot-cavity-back {
   position: absolute;
-  top: -46px; /* 拔出悬浮状态 */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 148px;
-  height: 56px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 22px;
+  background: #111317;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 
+    inset 0 8px 12px #000000,
+    inset 4px 0 6px #050608,
+    inset -4px 0 6px #050608;
+  z-index: 1;
+}
+
+/* 2. 中层：真 3D 实体黄色卡带 (可沿轨道滑入后层与前唇之间) */
+.cartridge-3d-unit {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  width: 144px;
+  height: 60px;
   cursor: pointer;
-  z-index: 8;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2; /* 位于后层暗仓之上，但在机身前唇之下！ */
+  transform: translateY(-38px); /* 初始拔出状态 */
+  transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
   user-select: none;
 }
 
-/* 插入卡槽后位置 (完全咬合插进卡槽内) */
-.cartridge-eject-zone.is-inserted {
-  transform: translate(-50%, 30px);
+/* 插入卡槽状态：下沉滑入机身内部前唇后面 */
+.cartridge-3d-unit.is-inserted {
+  transform: translateY(14px);
 }
 
-.game-cartridge-body {
+/* 卡带实体黄色外壳 (带真实 3D 斜切倒角与光影厚度) */
+.cart-shell-body {
   position: relative;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(145deg, #ffc926 0%, #e09e00 100%);
-  border: 2px solid #555e68;
-  border-bottom: 3px solid #3d434a;
-  /* 还原原装卡带经典右上角防呆斜切口 */
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+  height: 52px;
+  background: linear-gradient(180deg, #ffc926 0%, #e09e00 65%, #c28500 100%);
+  border: 1.5px solid #5a5448;
+  border-bottom: 2.5px solid #2d2a24;
+  border-radius: 5px 5px 0 0;
   box-shadow: 
-    0 12px 24px rgba(0, 0, 0, 0.45),
-    inset 0 2px 3px rgba(255, 255, 255, 0.9),
-    inset 2px 0 3px rgba(255, 255, 255, 0.5),
-    inset -2px 0 3px rgba(0, 0, 0, 0.35);
+    0 10px 20px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9),
+    inset 2px 0 2px rgba(255, 255, 255, 0.4),
+    inset -2px 0 2px rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  padding: 4px 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px 8px 0;
-  box-sizing: border-box;
 }
 
-/* 卡带手握防滑横向螺纹压纹 (Grip Ribs) */
-.cartridge-grip-ribs {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 72%;
-  margin-bottom: 5px;
-}
-
-.grip-rib {
-  height: 2.5px;
-  background: #a87600;
-  border-radius: 1px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
-}
-
-/* 镭射质感卡带铭牌 */
-.cartridge-label-plate {
-  width: 86%;
-  height: 24px;
-  background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
-  border: 1.5px solid #2b2b2b;
-  border-radius: 3px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+/* 原装经典顶部半月形凹陷槽 + GAME BOY 浮雕压字 */
+.cart-thumb-recess {
+  width: 88%;
+  height: 12px;
+  background: linear-gradient(180deg, #c28500 0%, #dba000 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.55), 0 1px 1px rgba(255,255,255,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.cart-brand-text {
   font-family: 'Press Start 2P', monospace;
-  font-size: 6.5px;
+  font-size: 5px;
+  color: #fff176;
+  letter-spacing: 1px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
+}
+
+/* 四道防滑横向咬花螺纹 */
+.cart-ribbed-grips {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 76%;
+  margin-bottom: 4px;
+}
+
+.ribbed-bar {
+  height: 2px;
+  background: #a87600;
+  border-radius: 1px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* 金属光泽卡带贴纸铭牌 */
+.cart-game-sticker {
+  width: 88%;
+  height: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
+  border: 1.5px solid #2b2b2b;
+  border-radius: 2px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
   color: #8b1d43;
 }
 
-/* 拔出状态下露出的卡带底部镀金引脚 */
-.cartridge-pins-exposed {
+/* 拔出状态露出的镀金引脚 */
+.cart-pcb-pins {
   position: absolute;
-  bottom: -6px;
-  left: 12%;
-  width: 76%;
-  height: 6px;
-  background: #111111;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 8px;
+  background: #18191f;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
   opacity: 1;
   transition: opacity 0.2s ease;
 }
 
-.pin-gold {
-  width: 3.5px;
-  height: 4.5px;
+.gold-pin {
+  width: 3px;
+  height: 5px;
   background: #ffd700;
   box-shadow: 0 0 2px #ffc107;
 }
 
-/* 插入卡槽后引脚被遮挡隐藏 */
-.cartridge-eject-zone.is-inserted .cartridge-pins-exposed {
+.cartridge-3d-unit.is-inserted .cart-pcb-pins {
   opacity: 0;
 }
 
-/* 卡带悬浮引导提示气泡 */
-.cartridge-hover-guide-tag {
+/* 拔出时的悬浮跳动引导小标 */
+.cart-hover-guide-tag {
   position: absolute;
   top: -24px;
   left: 50%;
@@ -400,7 +428,8 @@
   border-radius: 3px;
   white-space: nowrap;
   animation: guideBounce 1.2s infinite ease-in-out;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
 @keyframes guideBounce {
@@ -408,33 +437,50 @@
   50% { transform: translate(-50%, -4px); }
 }
 
-.cartridge-eject-zone.is-inserted .cartridge-hover-guide-tag {
+.cartridge-3d-unit.is-inserted .cart-hover-guide-tag {
   display: none;
 }
 
+/* 3. 前层：掌机机格外壳前唇 (遮挡卡带下部，创造真实插入感！) */
+.cart-slot-front-lip {
+  position: absolute;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  height: 12px;
+  background: linear-gradient(180deg, #beb9ac 0%, #d8d5cd 100%);
+  border: 2px solid #8c887b;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 
+    0 -3px 6px rgba(0, 0, 0, 0.35),
+    inset 0 2px 2px rgba(255, 255, 255, 0.9);
+  z-index: 3; /* 盖在卡带之上！ */
+  pointer-events: none;
+}
+
 /* ==========================================================================
-   【重构 2：BATTERY 电量模块排版修复 (绝对不截断)】
+   【修复：BATTERY 模块独立绝对排版，文字完整舒展】
    ========================================================================== */
 .gameboy-screen-bezel {
   background: #5d6474;
   border-radius: 8px 8px 24px 8px;
-  padding: 14px 12px 10px 38px; /* 左侧留足 38px 空间安放指示灯与文字 */
+  padding: 14px 12px 10px 42px; /* 左侧留出 42px 宽裕空间安放 BATTERY 模块 */
   border: 2px solid #3c4250;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.6);
   position: relative;
   margin-bottom: 16px;
 }
 
-/* 独立的电池指示灯容器 */
 .battery-indicator-module {
   position: absolute;
   top: 24px;
   left: 6px;
-  width: 28px;
+  width: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   user-select: none;
 }
 
@@ -442,18 +488,17 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #d90429; /* 初始未插卡/故障：闪烁暗红 */
+  background: #d90429;
   box-shadow: 0 0 6px #d90429;
-  border: 1px solid rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.5);
   transition: all 0.3s ease;
 }
 
 .battery-led-light.is-powered {
-  background: #38b000; /* 插卡开机：常亮绿灯 */
+  background: #38b000;
   box-shadow: 0 0 10px #38b000;
 }
 
-/* 完美完整显示的 BATTERY 标题 */
 .battery-title-text {
   font-family: 'Press Start 2P', monospace;
   font-size: 5px;
@@ -481,15 +526,13 @@
   overflow: hidden;
 }
 
-/* ==========================================================================
-   【重构 3：真死机花屏乱码遮罩层 (初始默认开启)】
-   ========================================================================== */
+/* 真死机花屏乱码遮罩层 (初始默认启动) */
 .glitch-crash-screen {
   position: absolute;
   inset: 0;
   background: #8bac0f;
   z-index: 10;
-  display: flex; /* 初始默认启动显示乱码 */
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
