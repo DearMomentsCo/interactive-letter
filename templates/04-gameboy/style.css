@@ -247,13 +247,13 @@
 }
 
 /* ==========================================================================
-   【重构：高保真 3D 掌机与实体可插拔卡带】
+   【重构 1：高保真真 3D 掌机卡槽与可插拔卡带】
    ========================================================================== */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
-  margin: clamp(40px, 9vw, 48px) auto clamp(26px, 6vw, 36px) auto;
+  margin: clamp(55px, 12vw, 65px) auto clamp(26px, 6vw, 36px) auto;
   padding: 24px 14px 20px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
@@ -267,157 +267,203 @@
   z-index: 2;
 }
 
-/* 机身顶部深槽 */
+/* 掌机顶部深凹卡槽内壁 (带有导轨阴影与厚度) */
 .cartridge-housing-slot {
   position: absolute;
-  top: -14px;
+  top: -18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 156px;
-  height: 16px;
-  background: #252830;
+  width: 162px;
+  height: 22px;
+  background: #18191f;
   border-radius: 4px 4px 0 0;
-  box-shadow: inset 0 3px 6px #000, 0 1px 1px rgba(255,255,255,0.4);
+  box-shadow: 
+    inset 0 6px 10px #000000,
+    inset 3px 0 4px #0a0b0e,
+    inset -3px 0 4px #0a0b0e,
+    0 2px 0 rgba(255,255,255,0.7);
   z-index: 3;
 }
 
-/* 【全新立体 3D 黄色卡带实体】 */
+/* 【全新立体 3D 黄色实体卡带：带右上角防呆切角与厚实质感】 */
 .cartridge-eject-zone {
   position: absolute;
-  top: -38px;
+  top: -46px; /* 拔出悬浮状态 */
   left: 50%;
   transform: translateX(-50%);
-  width: 144px;
-  height: 48px;
+  width: 148px;
+  height: 56px;
   cursor: pointer;
   z-index: 8;
-  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  user-select: none;
 }
 
-.cartridge-eject-zone:hover {
-  filter: brightness(1.05);
+/* 插入卡槽后位置 (完全咬合插进卡槽内) */
+.cartridge-eject-zone.is-inserted {
+  transform: translate(-50%, 30px);
 }
 
 .game-cartridge-body {
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #ffc107 0%, #e0a800 100%);
-  border: 2px solid #6c757d;
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
+  background: linear-gradient(145deg, #ffc926 0%, #e09e00 100%);
+  border: 2px solid #555e68;
+  border-bottom: 3px solid #3d434a;
+  /* 还原原装卡带经典右上角防呆斜切口 */
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
   box-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.4),
-    inset 0 2px 2px rgba(255, 255, 255, 0.8),
-    inset 2px 0 2px rgba(255, 255, 255, 0.4),
-    inset -2px 0 2px rgba(0, 0, 0, 0.3);
+    0 12px 24px rgba(0, 0, 0, 0.45),
+    inset 0 2px 3px rgba(255, 255, 255, 0.9),
+    inset 2px 0 3px rgba(255, 255, 255, 0.5),
+    inset -2px 0 3px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 4px;
+  padding: 5px 8px 0;
   box-sizing: border-box;
 }
 
-/* 卡带手握防滑横条螺纹 (Grip Ribs) */
+/* 卡带手握防滑横向螺纹压纹 (Grip Ribs) */
 .cartridge-grip-ribs {
   display: flex;
   flex-direction: column;
-  gap: 2.5px;
-  width: 75%;
-  margin-bottom: 4px;
+  gap: 3px;
+  width: 72%;
+  margin-bottom: 5px;
 }
 
 .grip-rib {
-  height: 2px;
-  background: #b28704;
+  height: 2.5px;
+  background: #a87600;
   border-radius: 1px;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
-/* 卡带贴纸标 */
+/* 镭射质感卡带铭牌 */
 .cartridge-label-plate {
-  width: 82%;
-  height: 22px;
-  background: #ffffff;
-  border: 1px solid #333333;
-  border-radius: 2px;
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+  width: 86%;
+  height: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f3f5 100%);
+  border: 1.5px solid #2b2b2b;
+  border-radius: 3px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 6px;
-  color: #d90429;
+  font-size: 6.5px;
+  color: #8b1d43;
 }
 
-/* 拔出状态（露出底部金手指） */
-.cartridge-eject-zone.is-ejected {
-  transform: translate(-50%, -32px);
-}
-
+/* 拔出状态下露出的卡带底部镀金引脚 */
 .cartridge-pins-exposed {
   position: absolute;
   bottom: -6px;
-  left: 10%;
-  width: 80%;
+  left: 12%;
+  width: 76%;
   height: 6px;
-  background: #1e1e1e;
+  background: #111111;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
 .pin-gold {
-  width: 3px;
-  height: 4px;
+  width: 3.5px;
+  height: 4.5px;
   background: #ffd700;
   box-shadow: 0 0 2px #ffc107;
 }
 
-.cartridge-eject-zone.is-ejected .cartridge-pins-exposed {
-  opacity: 1;
+/* 插入卡槽后引脚被遮挡隐藏 */
+.cartridge-eject-zone.is-inserted .cartridge-pins-exposed {
+  opacity: 0;
 }
 
-/* 屏幕外框与点阵液晶屏 */
+/* 卡带悬浮引导提示气泡 */
+.cartridge-hover-guide-tag {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffbe0b;
+  border: 1.5px solid #000;
+  color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  animation: guideBounce 1.2s infinite ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+@keyframes guideBounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -4px); }
+}
+
+.cartridge-eject-zone.is-inserted .cartridge-hover-guide-tag {
+  display: none;
+}
+
+/* ==========================================================================
+   【重构 2：BATTERY 电量模块排版修复 (绝对不截断)】
+   ========================================================================== */
 .gameboy-screen-bezel {
   background: #5d6474;
   border-radius: 8px 8px 24px 8px;
-  padding: 14px 14px 10px;
+  padding: 14px 12px 10px 38px; /* 左侧留足 38px 空间安放指示灯与文字 */
   border: 2px solid #3c4250;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.6);
   position: relative;
   margin-bottom: 16px;
 }
 
-.battery-led-indicator {
+/* 独立的电池指示灯容器 */
+.battery-indicator-module {
   position: absolute;
   top: 24px;
-  left: 10px;
-  width: 8px;
-  height: 8px;
+  left: 6px;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+}
+
+.battery-led-light {
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: #d90429;
-  box-shadow: 0 0 8px #d90429;
+  background: #d90429; /* 初始未插卡/故障：闪烁暗红 */
+  box-shadow: 0 0 6px #d90429;
+  border: 1px solid rgba(0,0,0,0.4);
   transition: all 0.3s ease;
 }
 
-.battery-led-indicator.is-powered {
-  background: #38b000;
+.battery-led-light.is-powered {
+  background: #38b000; /* 插卡开机：常亮绿灯 */
   box-shadow: 0 0 10px #38b000;
 }
 
-.battery-text {
-  position: absolute;
-  top: 36px;
-  left: 6px;
-  font-size: 6px;
+/* 完美完整显示的 BATTERY 标题 */
+.battery-title-text {
   font-family: 'Press Start 2P', monospace;
-  color: #adb5bd;
+  font-size: 5px;
+  color: #dee2e6;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.8);
+  line-height: 1;
 }
 
+/* 掌机暗黄绿点阵液晶屏 */
 .gameboy-lcd-screen {
   background-color: #8bac0f;
   background-image: 
@@ -435,13 +481,15 @@
   overflow: hidden;
 }
 
-/* 【任天堂真死机花屏乱码遮罩层】 */
+/* ==========================================================================
+   【重构 3：真死机花屏乱码遮罩层 (初始默认开启)】
+   ========================================================================== */
 .glitch-crash-screen {
   position: absolute;
   inset: 0;
   background: #8bac0f;
   z-index: 10;
-  display: none;
+  display: flex; /* 初始默认启动显示乱码 */
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -452,7 +500,7 @@
 
 @keyframes glitchTear {
   0% { transform: translate(0, 0); }
-  25% { transform: translate(-2px, 1px); }
+  25% { transform: translate(-2px, 1.5px); }
   50% { transform: translate(2px, -1px); }
   75% { transform: translate(-1px, -2px); }
   100% { transform: translate(1px, 2px); }
@@ -461,11 +509,12 @@
 .glitch-noise-tiles {
   font-family: monospace;
   font-size: 11px;
-  line-height: 1.2;
+  line-height: 1.25;
   color: #0f380f;
   word-break: break-all;
   user-select: none;
   font-weight: 900;
+  text-align: center;
 }
 
 .glitch-alert-banner {
@@ -473,8 +522,11 @@
   background: #0f380f;
   color: #8bac0f;
   font-family: 'Press Start 2P', monospace;
-  font-size: 6.5px;
-  padding: 3px 6px;
+  font-size: 6px;
+  padding: 4px 6px;
+  text-align: center;
+  line-height: 1.4;
+  border-radius: 2px;
 }
 
 .screen-headline {
