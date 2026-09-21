@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Can We Rewind? - Retro Mixtape</title>
 
-  <!-- Google 字体预加载 -->
+  <!-- Google 字体库 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;900&family=Montserrat:wght@500;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css?v=cassette1" />
+  <!-- 防缓存标识 -->
+  <link rel="stylesheet" href="style.css?v=retro_v3" />
 </head>
 <body>
 
@@ -37,7 +38,7 @@
   <div class="letter-viewport" data-theme="cassette">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 复古磨砂黑胶盒信封 -->
+      <!-- 1. 磨砂黑胶外壳封套 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <span class="envelope-corner-star star-tl">✦</span>
@@ -50,9 +51,9 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 严谨完整的标准爱心 SVG（绝不切角） -->
+            <!-- 严谨完整的标准爱心矢量（绝对饱满无缺角） -->
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
@@ -61,22 +62,30 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 2. 复古情歌信纸 -->
+      <!-- 2. 复古卡带歌词折页（J-Card）信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#3d3142" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="50" cy="50" r="42" stroke-dasharray="4,4" />
+        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2d2433" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50" cy="50" r="44" stroke-dasharray="4,4" />
           <circle cx="50" cy="50" r="16" />
-          <circle cx="50" cy="50" r="4" fill="#3d3142" />
+          <circle cx="50" cy="50" r="4" fill="#2d2433" />
         </svg>
 
-        <div class="apology-badge-header">
-          <div class="apology-badge-pill">✦ VINTAGE MIXTAPE · SIDE A ✦</div>
+        <!-- 【全新设计：随身听液晶屏状态指示】 -->
+        <div class="walkman-lcd-screen">
+          <span class="lcd-tag-left">● STEREO // DOLBY B-NR</span>
+          <span class="lcd-timer-right" id="lcdTimer">SIDE A [03:42]</span>
         </div>
 
         <div class="letter-date" id="letterDate"></div>
         <h1 class="letter-title" id="letterHeadline"></h1>
-        <div class="letter-salutation" id="letterSalutation"></div>
+
+        <!-- 【全新设计：美纹纸胶带专属题献便签】 -->
+        <div>
+          <div class="tape-salutation-wrap">
+            <span class="tape-salutation-label" id="letterSalutation"></span>
+          </div>
+        </div>
 
         <!-- 3D 翻转 + < 1 / N > 全画幅播放器 -->
         <div class="photo-slider-wrapper" id="photosSection">
@@ -99,70 +108,86 @@
           </div>
         </div>
 
-        <!-- 【核心专属巧思：3D 实体磁带与 REWIND 倒带仪式】 -->
+        <!-- 【全新重度拟物 3D 实体磁带与 REWIND 倒带系统】 -->
         <div class="cassette-deck-station">
           <div class="deck-header">
-            <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING SIDE A ✦</span>
+            <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING TRACK 01 ✦</span>
           </div>
 
-          <!-- 3D 实体磁带 -->
-          <div class="cassette-body">
-            <div class="cassette-label-top">
-              <span>● REC</span>
-              <span>APOLOGY MIXTAPE #01</span>
-              <span>STEREO</span>
+          <!-- 3D 实体亚克力磁带外壳 -->
+          <div class="cassette-body-3d">
+            <!-- 四角金属固定螺丝 -->
+            <div class="screw screw-tl"></div>
+            <div class="screw screw-tr"></div>
+            <div class="screw screw-bl"></div>
+            <div class="screw screw-br"></div>
+
+            <!-- 复古水洗纸质标签 -->
+            <div class="cassette-label-retro">
+              <div class="label-top-meta">
+                <span>● A-SIDE</span>
+                <span>APOLOGY MIXTAPE #01</span>
+                <span>TYPE-I</span>
+              </div>
+              <div class="label-color-stripe"></div>
             </div>
 
-            <!-- 中心开窗观察孔与齿轮 -->
-            <div class="cassette-window">
-              <div class="cassette-tape-strip"></div>
-              <div class="cassette-spool is-playing" id="spoolLeft">
-                <div class="spool-teeth"></div>
+            <!-- 深凹双滚轴观察窗 -->
+            <div class="cassette-window-deep">
+              <div class="tape-ribbon-left"></div>
+              <div class="tape-ribbon-right"></div>
+              
+              <div class="spool-gear is-playing" id="spoolLeft">
+                <div class="spool-hub"></div>
               </div>
-              <div class="cassette-spool is-playing" id="spoolRight">
-                <div class="spool-teeth"></div>
+              <div class="spool-gear is-playing" id="spoolRight">
+                <div class="spool-hub"></div>
               </div>
             </div>
 
-            <div class="cassette-bottom-block"></div>
+            <!-- 底部梯形磁头槽 -->
+            <div class="cassette-bottom-dock">
+              <div class="dock-hole"></div>
+              <div class="dock-hole"></div>
+            </div>
           </div>
 
-          <!-- 倒带操作区 -->
+          <!-- 倒带按键 -->
           <div id="rewindActionArea">
             <button class="rewind-action-btn" id="rewindBtn">
               <span>◀◀ HOLD TO REWIND TO ZERO</span>
             </button>
           </div>
 
-          <!-- 倒带完成后盖戳 -->
+          <!-- 倒带完成验带戳 -->
           <div class="rewind-success-banner" id="rewindBanner" style="display:none;">
             <div class="rewind-stamp-embossed">✦ TAPE REWOUND · CLEAN SLATE ♡ ✦</div>
             <p class="rewind-subtext">We've rewound back to where everything felt gentle and loving. Let's start fresh together!</p>
           </div>
         </div>
 
-        <!-- 正文打字机 -->
+        <!-- 歌词正文打字机 -->
         <div class="letter-body-text" id="letterBody">
           <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 专属哑光贴纸刮刮乐 -->
+        <!-- 【全新专属磁粉带刮刮乐】 -->
         <div class="scratch-component" id="scratchComponent">
-          <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH TAPE LABEL FOR SECRET BONUS TRACK ✦</div>
+          <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH MAGNETIC TAPE TO REVEAL B-SIDE ✦</div>
           <div class="scratch-card-box">
             <div class="scratch-secret-reveal" id="scratchSecretReveal"></div>
             <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
           </div>
         </div>
 
-        <!-- 逃跑问答 -->
+        <!-- 【全新随身听机械按键逃跑问答】 -->
         <div class="runaway-section" id="runawayQuestionSection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
-            <button class="btn-yes" id="btnYes">Play It Again ♡</button>
-            <button class="btn-no" id="btnNo">Eject</button>
+            <button class="btn-yes" id="btnYes">▶ RESUME ♡</button>
+            <button class="btn-no" id="btnNo">⏏ EJECT</button>
           </div>
           <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
         </div>
@@ -171,12 +196,12 @@
     </div>
   </div>
 
-  <script src="data.js?v=cassette1"></script>
+  <script src="data.js?v=retro_v3"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
     document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "CAN WE REWIND?";
-    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
+    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || 'To My Favorite Track,';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
     if (LETTER_DATA.fontType) {
@@ -228,32 +253,45 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 【倒带交互】：点击后齿轮极速反转，状态更新，砸下复古印章
+    // 【倒带动效控制与液晶屏联动】
     const rewindBtn = document.getElementById('rewindBtn');
     const spoolLeft = document.getElementById('spoolLeft');
     const spoolRight = document.getElementById('spoolRight');
     const deckStatusPill = document.getElementById('deckStatusPill');
     const rewindActionArea = document.getElementById('rewindActionArea');
     const rewindBanner = document.getElementById('rewindBanner');
+    const lcdTimer = document.getElementById('lcdTimer');
 
     rewindBtn.addEventListener('click', (e) => {
       e.stopPropagation();
 
-      // 1. 启动高速倒带反转动效
       spoolLeft.classList.remove('is-playing');
       spoolRight.classList.remove('is-playing');
       spoolLeft.classList.add('is-rewinding');
       spoolRight.classList.add('is-rewinding');
 
-      deckStatusPill.innerText = "◀◀ REWINDING TO ZERO...";
-      deckStatusPill.style.color = "#ff758c";
+      deckStatusPill.innerText = "◀◀ REWINDING TAPE TO ZERO...";
+      deckStatusPill.style.color = "#ff007f";
+      deckStatusPill.style.backgroundColor = "#fff0f5";
 
-      // 2. 倒带持续 1.2 秒后完成，齿轮恢复正常匀速
+      // 液晶数码屏极速倒数
+      let countdown = 342;
+      const timerInt = setInterval(() => {
+        countdown = Math.max(0, countdown - 38);
+        const mins = String(Math.floor(countdown / 60)).padStart(2, '0');
+        const secs = String(countdown % 60).padStart(2, '0');
+        lcdTimer.innerText = `REW [${mins}:${secs}]`;
+        if (countdown <= 0) clearInterval(timerInt);
+      }, 100);
+
       setTimeout(() => {
         spoolLeft.classList.remove('is-rewinding');
         spoolRight.classList.remove('is-rewinding');
         spoolLeft.classList.add('is-playing');
         spoolRight.classList.add('is-playing');
+
+        lcdTimer.innerText = `PLAY [00:00]`;
+        lcdTimer.style.color = "#00f5d4";
 
         deckStatusPill.innerText = "✦ REWOUND TO ZERO · READY TO PLAY ✦";
         deckStatusPill.style.color = "#2b9348";
@@ -263,7 +301,7 @@
         rewindActionArea.style.display = 'none';
         rewindBanner.style.display = 'block';
 
-        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 35);
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 40);
       }, 1200);
     });
 
@@ -332,7 +370,7 @@
       }
     });
 
-    // 开信喷涌
+    // 拆信喷涌
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     const burstStage = document.getElementById('burstStage');
@@ -347,7 +385,7 @@
       setTimeout(() => {
         container.classList.add('is-opened');
         if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
-        if (LETTER_DATA.enableScratch) initStickerScratch();
+        if (LETTER_DATA.enableScratch) initMagneticScratch();
         startSmartTypewriter(LETTER_DATA.body);
       }, 550);
     });
@@ -413,8 +451,8 @@
       cursor.style.display = 'none';
     }
 
-    // 专属复古贴纸刮刮乐
-    function initStickerScratch() {
+    // 【专属深棕色磁带磁粉涂层刮刮乐】
+    function initMagneticScratch() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
       const box = canvas.parentElement;
@@ -424,23 +462,32 @@
       canvas.width = w;
       canvas.height = h;
 
+      // 磁粉带深褐反光
       const grad = ctx.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#ff758c');
-      grad.addColorStop(0.5, '#ff7eb3');
-      grad.addColorStop(1, '#ff4b72');
+      grad.addColorStop(0, '#2e1c14');
+      grad.addColorStop(0.5, '#452c20');
+      grad.addColorStop(1, '#1b100b');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      ctx.strokeStyle = '#ffffff';
+      // 磁粉颗粒感
+      ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+      for (let i = 0; i < w; i += 3) {
+        for (let j = 0; j < h; j += 3) {
+          if (Math.random() > 0.6) ctx.fillRect(i, j, 1, 1);
+        }
+      }
+
+      ctx.strokeStyle = '#ff758c';
       ctx.lineWidth = 1.5;
       ctx.strokeRect(16, 10, w - 32, h - 20);
 
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = '#ffccd5';
       ctx.font = 'bold 11px Montserrat, sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.letterSpacing = '1.5px';
-      ctx.fillText('✦ SCRATCH FOR BONUS TRACK ✦', w / 2, h / 2);
+      ctx.fillText('✦ SCRATCH MAGNETIC TAPE ✦', w / 2, h / 2);
 
       let isScratching = false;
       function scratch(e) {
@@ -462,6 +509,7 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
+    // 机械按键逃跑问答
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
