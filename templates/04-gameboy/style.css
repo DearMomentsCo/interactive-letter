@@ -1,7 +1,7 @@
 /* ==========================================================================
    THEME 04: 复古像素掌机款 (GAMEBOY CLASSIC DMG-01)
    独立样式库 - 仅对 templates/04-gameboy/ 生效，绝不污染其他模板
-   ========================================================================== */
+   ========================================================================= */
 
 /* 1. 视口背景：街机深邃暗调 */
 .letter-viewport[data-theme="gameboy"] {
@@ -209,7 +209,11 @@
   color: #8b1d43;
 }
 
-/* 6. 相册：通关存档画框 */
+/* 6. 相册：通关存档画框与控制器边距优化 */
+[data-theme="gameboy"] .photo-slider-wrapper {
+  margin-bottom: 12px;
+}
+
 [data-theme="gameboy"] .photo-card-front,
 [data-theme="gameboy"] .photo-card-back {
   background: #ffffff;
@@ -232,6 +236,11 @@
   margin-top: 10px;
 }
 
+[data-theme="gameboy"] .photo-nav-controls {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
 [data-theme="gameboy"] .photo-nav-btn {
   border: 2px solid #2b2b2b;
   background: #ffbe0b;
@@ -247,13 +256,14 @@
 }
 
 /* ==========================================================================
-   【彻底重构：真 3D 掌机嵌入式卡槽与实体卡带 (前后夹层遮挡结构)】
+   【重构：掌机顶部间距放大，彻底消除与上方轮播按钮的重叠】
    ========================================================================== */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
-  margin: clamp(55px, 12vw, 65px) auto clamp(26px, 6vw, 36px) auto;
+  /* 增大顶部外边距至 105px~125px，彻底容纳拔出态卡带与指引标签的高光投影 */
+  margin: clamp(105px, 22vw, 125px) auto clamp(26px, 6vw, 36px) auto;
   padding: 16px 14px 20px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
@@ -276,7 +286,7 @@
   z-index: 5;
 }
 
-/* 1. 后层：深邃卡槽内壁暗仓 (带有底部接触弹片与深黑投影) */
+/* 1. 后层：深邃卡槽内壁暗仓 */
 .cart-slot-cavity-back {
   position: absolute;
   bottom: 0;
@@ -292,7 +302,7 @@
   z-index: 1;
 }
 
-/* 2. 中层：真 3D 实体黄色卡带 (可沿轨道滑入后层与前唇之间) */
+/* 2. 中层：真 3D 实体黄色卡带 */
 .cartridge-3d-unit {
   position: absolute;
   bottom: 0;
@@ -300,18 +310,18 @@
   width: 144px;
   height: 60px;
   cursor: pointer;
-  z-index: 2; /* 位于后层暗仓之上，但在机身前唇之下！ */
-  transform: translateY(-38px); /* 初始拔出状态 */
+  z-index: 2;
+  transform: translateY(-38px);
   transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2);
   user-select: none;
 }
 
-/* 插入卡槽状态：下沉滑入机身内部前唇后面 */
+/* 插入卡槽状态 */
 .cartridge-3d-unit.is-inserted {
   transform: translateY(14px);
 }
 
-/* 卡带实体黄色外壳 (带真实 3D 斜切倒角与光影厚度) */
+/* 卡带实体黄色外壳 */
 .cart-shell-body {
   position: relative;
   width: 100%;
@@ -332,7 +342,7 @@
   align-items: center;
 }
 
-/* 原装经典顶部半月形凹陷槽 + GAME BOY 浮雕压字 */
+/* 顶部半月形凹槽 + GAME BOY 浮雕 */
 .cart-thumb-recess {
   width: 88%;
   height: 12px;
@@ -353,7 +363,7 @@
   text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
 }
 
-/* 四道防滑横向咬花螺纹 */
+/* 四道防滑咬花螺纹 */
 .cart-ribbed-grips {
   display: flex;
   flex-direction: column;
@@ -369,7 +379,7 @@
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* 金属光泽卡带贴纸铭牌 */
+/* 铭牌贴纸 */
 .cart-game-sticker {
   width: 88%;
   height: 20px;
@@ -385,7 +395,7 @@
   color: #8b1d43;
 }
 
-/* 拔出状态露出的镀金引脚 */
+/* 镀金引脚 */
 .cart-pcb-pins {
   position: absolute;
   bottom: 0;
@@ -413,7 +423,7 @@
   opacity: 0;
 }
 
-/* 拔出时的悬浮跳动引导小标 */
+/* 悬浮指引气泡 */
 .cart-hover-guide-tag {
   position: absolute;
   top: -24px;
@@ -441,7 +451,7 @@
   display: none;
 }
 
-/* 3. 前层：掌机机格外壳前唇 (遮挡卡带下部，创造真实插入感！) */
+/* 3. 前层：外壳前唇 */
 .cart-slot-front-lip {
   position: absolute;
   bottom: -4px;
@@ -455,17 +465,15 @@
   box-shadow: 
     0 -3px 6px rgba(0, 0, 0, 0.35),
     inset 0 2px 2px rgba(255, 255, 255, 0.9);
-  z-index: 3; /* 盖在卡带之上！ */
+  z-index: 3;
   pointer-events: none;
 }
 
-/* ==========================================================================
-   【修复：BATTERY 模块独立绝对排版，文字完整舒展】
-   ========================================================================== */
+/* BATTERY 模块 */
 .gameboy-screen-bezel {
   background: #5d6474;
   border-radius: 8px 8px 24px 8px;
-  padding: 14px 12px 10px 42px; /* 左侧留出 42px 宽裕空间安放 BATTERY 模块 */
+  padding: 14px 12px 10px 42px;
   border: 2px solid #3c4250;
   box-shadow: inset 0 3px 6px rgba(0,0,0,0.6);
   position: relative;
@@ -508,7 +516,7 @@
   line-height: 1;
 }
 
-/* 掌机暗黄绿点阵液晶屏 */
+/* 液晶点阵屏 */
 .gameboy-lcd-screen {
   background-color: #8bac0f;
   background-image: 
@@ -526,7 +534,7 @@
   overflow: hidden;
 }
 
-/* 真死机花屏乱码遮罩层 (初始默认启动) */
+/* 死机乱码遮罩层 */
 .glitch-crash-screen {
   position: absolute;
   inset: 0;
