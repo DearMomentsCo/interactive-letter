@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css?v=gameboy_dmg" />
+  <!-- 防缓存版本标记 -->
+  <link rel="stylesheet" href="style.css?v=fix_gameboy_v2" />
 </head>
 <body>
 
@@ -50,9 +51,14 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 绝对完整的标准爱心矢量 -->
-            <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            <!-- 【彻底修复：纯正对称饱满的 8-Bit 像素红心，绝对杜绝任何切角】 -->
+            <svg class="seal-pixel-heart" viewBox="0 0 16 16" width="22" height="22">
+              <rect x="3" y="3" width="4" height="2" fill="#ffffff" />
+              <rect x="9" y="3" width="4" height="2" fill="#ffffff" />
+              <rect x="2" y="5" width="12" height="4" fill="#ffffff" />
+              <rect x="3" y="9" width="10" height="2" fill="#ffffff" />
+              <rect x="5" y="11" width="6" height="2" fill="#ffffff" />
+              <rect x="7" y="13" width="2" height="2" fill="#ffffff" />
             </svg>
           </div>
         </div>
@@ -61,7 +67,7 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 2. 游戏通关任务信纸 -->
+      <!-- 2. DMG-01 官方说明书任务信纸 -->
       <article class="letter-sheet" id="letterSheet">
         
         <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2b2b2b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -132,21 +138,19 @@
 
           <!-- 控制区：十字键 + A/B 键 + 扬声器孔 -->
           <div class="console-controls-area">
-            <!-- 经典炭黑十字键（支持点击把玩） -->
             <div class="dpad-cross" id="dpadCross" title="Click D-pad for 8-bit blip">
               <div class="dpad-axis-v"></div>
               <div class="dpad-axis-h"></div>
               <div class="dpad-center-circle"></div>
             </div>
 
-            <!-- 斜切酒红 A/B 键（支持点击把玩） -->
             <div class="ab-buttons-rig">
               <div class="gameboy-btn" id="btnB" title="Press B">B</div>
               <div class="gameboy-btn" id="btnA" title="Press A">A</div>
             </div>
           </div>
 
-          <!-- 斜切扬声器孔 -->
+          <!-- 扬声器孔 -->
           <div class="speaker-grill-slits">
             <div class="speaker-slit"></div>
             <div class="speaker-slit"></div>
@@ -154,9 +158,11 @@
             <div class="speaker-slit"></div>
           </div>
 
-          <!-- 投币复活槽与金色像素代币 -->
+          <!-- 【彻底重构：高保真 3D 金属街机代币 (绝无 Emoji 缺失变形)】 -->
           <div class="coin-insert-station" id="coinStation">
-            <div class="arcade-token-coin" id="tokenCoin" title="Click to Insert Coin!">🪙</div>
+            <div class="token-coin-3d" id="tokenCoin" title="Click to Insert Coin!">
+              <div class="coin-star-relief">★</div>
+            </div>
             <div class="coin-slot-gate">
               <div class="slot-opening"></div>
               <span class="slot-text">INSERT COIN TO CONTINUE</span>
@@ -177,7 +183,7 @@
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 专属金手指防伪刮刮乐 -->
+        <!-- 【全新卡带金手指刮刮乐 (无遮挡文字)】 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH GOLD FINGER FOR SECRET CHEAT CODE ✦</div>
           <div class="scratch-card-box">
@@ -200,7 +206,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=gameboy_dmg"></script>
+  <script src="data.js?v=fix_gameboy_v2"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -253,7 +259,7 @@
     }
 
     /* ==========================================================================
-       【8-Bit 像素音频合成引擎 (Nintendo Ding + Coin + 1-UP Fanfare)】
+       【8-Bit 像素音频合成引擎】
        ========================================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -266,7 +272,6 @@
       return audioCtx;
     }
 
-    // 1. 任天堂开机叮声 (Nintendo Ding)
     function playNintendoChime() {
       try {
         const ctx = getAudioContext();
@@ -274,7 +279,7 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'square';
-        osc.frequency.setValueAtTime(1046.5, now); // C6
+        osc.frequency.setValueAtTime(1046.5, now);
         gain.gain.setValueAtTime(0.25, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
         osc.connect(gain);
@@ -284,7 +289,6 @@
       } catch(e) {}
     }
 
-    // 2. 经典街机投币声 (Arcade Coin Ding-Ding!)
     function playCoinSound() {
       try {
         const ctx = getAudioContext();
@@ -292,8 +296,8 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'square';
-        osc.frequency.setValueAtTime(987.77, now); // B5
-        osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+        osc.frequency.setValueAtTime(987.77, now);
+        osc.frequency.setValueAtTime(1318.51, now + 0.08);
         gain.gain.setValueAtTime(0.3, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
         osc.connect(gain);
@@ -303,7 +307,6 @@
       } catch(e) {}
     }
 
-    // 3. 经典满血复活 / 1-UP 旋律
     function play1UpFanfare() {
       try {
         const ctx = getAudioContext();
@@ -324,7 +327,6 @@
       } catch(e) {}
     }
 
-    // 4. 按键卡嗒短促音 (Blip)
     function playBlipSound(freq = 440) {
       try {
         const ctx = getAudioContext();
@@ -342,7 +344,6 @@
       } catch(e) {}
     }
 
-    // 十字键与 A/B 键把玩点击
     const dpad = document.getElementById('dpadCross');
     const btnA = document.getElementById('btnA');
     const btnB = document.getElementById('btnB');
@@ -369,22 +370,16 @@
       if (isHealed) return;
       isHealed = true;
 
-      // 1. 投币声响起
       playCoinSound();
 
-      // 代币落入投币孔动画
       tokenCoin.style.transition = 'all 0.35s ease-in';
-      tokenCoin.style.transform = 'translateY(24px) scale(0.4)';
+      tokenCoin.style.transform = 'translateY(24px) scale(0.35)';
       tokenCoin.style.opacity = '0';
 
       setTimeout(() => {
-        // 2. 触发 1-UP 狂欢音效
         play1UpFanfare();
 
-        // 3. 电池 LED 转为常亮绿灯
         batteryLed.classList.add('is-powered');
-
-        // 4. 血条瞬间暴涨至 100% MAX
         hpFill.classList.add('is-healed');
         hpPercentText.innerText = "100% MAX! ❤️";
         screenHeadline.innerText = "✦ CO-OP RESTORED! ✦";
@@ -397,14 +392,12 @@
       }, 400);
     });
 
-    // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答设置
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawayQuestionSection').style.display = 'none';
     } else {
@@ -466,7 +459,7 @@
       isLetterOpened = true;
 
       getAudioContext();
-      playNintendoChime(); // 开机叮声
+      playNintendoChime();
       launchEnvelopeBurst();
 
       setTimeout(() => {
@@ -538,7 +531,6 @@
       cursor.style.display = 'none';
     }
 
-    // 【金手指金黄电路刮刮乐】
     function initGoldFingerScratch() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
@@ -556,7 +548,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 金手指导电触片金黄条纹
       ctx.fillStyle = "rgba(255, 255, 255, 0.18)";
       for (let i = 0; i < w; i += 8) {
         ctx.fillRect(i, 0, 4, h);
@@ -592,7 +583,6 @@
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
 
-    // 逃跑问答
     const btnNo = document.getElementById('btnNo');
     const btnYes = document.getElementById('btnYes');
     const modal = document.getElementById('runawaySuccessModal');
@@ -615,7 +605,6 @@
       createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 50);
     });
 
-    // 像素微光背景粒子
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
     let floatingDust = [];
@@ -668,7 +657,7 @@
           p.x = Math.random() * pCanvas.width;
         }
         pCtx.globalAlpha = p.opacity;
-        pCtx.fillRect(p.x, p.y, p.size, p.size); // 像素方块粒子
+        pCtx.fillRect(p.x, p.y, p.size, p.size);
       });
 
       for (let i = sparkleStars.length - 1; i >= 0; i--) {
