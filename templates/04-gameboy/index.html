@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=rpg_battle_and_blow" />
+  <link rel="stylesheet" href="style.css?v=real_cart_crash" />
 </head>
 <body>
 
@@ -69,9 +69,9 @@
       <!-- 2. DMG-01 官方任务信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <!-- 8-Bit 街机 HUD 抬头仪表盘 -->
+        <!-- 【修复：标准街机 1UP 分值记分板】 -->
         <div class="arcade-hud-header">
-          <div class="hud-item"><span>1UP:</span><span class="hud-val">SHEN</span></div>
+          <div class="hud-item"><span>1UP:</span><span class="hud-val">99990</span></div>
           <div class="hud-item"><span>STAGE:</span><span class="hud-val">1-1</span></div>
           <div class="hud-item"><span>COINS:</span><span class="hud-val">★99</span></div>
           <div class="hud-item"><span>TIME:</span><span class="hud-val">∞</span></div>
@@ -111,12 +111,33 @@
           </div>
         </div>
 
-        <!-- 【重度拟物 3D 初代掌机 DMG-01 + 实体卡带插拔吹气修复】 -->
+        <!-- 【高保真 3D 掌机 + 真实可拔插卡带】 -->
         <div class="gameboy-console-station">
-          <!-- 实体可插拔黄色卡带 -->
-          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to eject/insert cartridge!">
-            <div class="game-cartridge-body" id="cartridgeText">
-              <span>● LOVE CART</span>
+          <!-- 掌机顶部卡带深插槽 -->
+          <div class="cartridge-housing-slot"></div>
+
+          <!-- 3D 实体黄色卡带 (带螺纹手柄与导电金手指) -->
+          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to Eject or Blow on Cartridge!">
+            <div class="game-cartridge-body">
+              <div class="cartridge-grip-ribs">
+                <div class="grip-rib"></div>
+                <div class="grip-rib"></div>
+                <div class="grip-rib"></div>
+              </div>
+              <div class="cartridge-label-plate" id="cartridgeLabel">
+                <span>★ LOVE CART ★</span>
+              </div>
+            </div>
+            <!-- 拔出后露出的镀金引脚 -->
+            <div class="cartridge-pins-exposed">
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
+              <div class="pin-gold"></div>
             </div>
           </div>
 
@@ -125,6 +146,17 @@
             <div class="battery-text">BATTERY</div>
 
             <div class="gameboy-lcd-screen" id="lcdScreen">
+              <!-- 【死机花屏乱码遮罩层：拔出卡带时真实展现】 -->
+              <div class="glitch-crash-screen" id="glitchCrashScreen">
+                <div class="glitch-noise-tiles" id="glitchNoiseText">
+                  ▓▒░█■$#@?%&<br/>
+                  !X01#9■▓▒░█<br/>
+                  ░▒▓█ERROR404
+                </div>
+                <div class="glitch-alert-banner">TAP CART TO BLOW DUST 💨</div>
+              </div>
+
+              <!-- 正常游戏画面 -->
               <div class="screen-headline" id="screenHeadline">✦ CRITICAL DAMAGE! ✦</div>
               
               <div class="hp-gauge-container">
@@ -185,14 +217,14 @@
             <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
           </div>
 
-          <!-- 【有实际交互使命的 ▼：点击或按掌机 A 键开启战斗和解盘】 -->
+          <!-- 功能性 ▼ 推进指示条 -->
           <div class="dialogue-prompt-bar" id="dialoguePromptBar" style="display:none;" onclick="triggerBattleConsole()">
             <span>PRESS [A] TO ACTION</span>
             <span class="dialogue-next-arrow">▼</span>
           </div>
         </div>
 
-        <!-- 【全新专属：8-Bit RPG 遇敌和解指令盘 (彻底取代盖章券)】 -->
+        <!-- 8-Bit RPG 遇敌和解指令盘 -->
         <div class="rpg-battle-console" id="rpgBattleConsole" style="display:none;">
           <div class="battle-prompt-text" id="battlePromptText">
             WILD MISUNDERSTANDING APPEARED!<br/>WHAT WILL PLAYER 2 DO?
@@ -205,10 +237,8 @@
             <button class="battle-cmd-btn" onclick="executeBattleCmd('SPARE')">❤️ SPARE</button>
           </div>
 
-          <!-- 即时战斗结算文字 -->
           <div class="battle-result-dialog" id="battleResultDialog"></div>
 
-          <!-- 道具背包浮层 -->
           <div class="item-bag-inventory" id="itemBagInventory">
             <div class="inventory-title">✦ SELECT AN ITEM TO USE: ✦</div>
             <div class="inventory-items-row">
@@ -260,7 +290,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=rpg_battle_and_blow"></script>
+  <script src="data.js?v=real_cart_crash"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -313,7 +343,7 @@
     }
 
     /* ==========================================================================
-       【8-Bit 像素全套音频合成引擎 (含吹气、开机、投币、按键声)】
+       【高保真 8-Bit 像素音频引擎】
        ========================================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -334,7 +364,7 @@
         const gain = ctx.createGain();
         osc.type = 'square';
         osc.frequency.setValueAtTime(1046.5, now);
-        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.setValueAtTime(0.28, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -352,7 +382,7 @@
         osc.type = 'square';
         osc.frequency.setValueAtTime(987.77, now);
         osc.frequency.setValueAtTime(1318.51, now + 0.08);
-        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.setValueAtTime(0.35, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -371,7 +401,7 @@
           const gain = ctx.createGain();
           osc.type = 'square';
           osc.frequency.setValueAtTime(freq, now + idx * 0.09);
-          gain.gain.setValueAtTime(0.22, now + idx * 0.09);
+          gain.gain.setValueAtTime(0.25, now + idx * 0.09);
           gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.12);
           osc.connect(gain);
           gain.connect(ctx.destination);
@@ -389,7 +419,7 @@
         const gain = ctx.createGain();
         osc.type = 'square';
         osc.frequency.setValueAtTime(freq, now);
-        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.setValueAtTime(0.2, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
         osc.connect(gain);
         gain.connect(ctx.destination);
@@ -398,68 +428,92 @@
       } catch(e) {}
     }
 
-    // 【合成吹气风声 (Simulate Blowing on Cartridge)】
+    // 【强力重混：清晰真实吹气风声 (提高至 0.85 饱满音量)】
     function playBlowWindSound() {
       try {
         const ctx = getAudioContext();
-        const bufferSize = ctx.sampleRate * 0.4;
+        const now = ctx.currentTime;
+        const dur = 0.5;
+        const bufferSize = ctx.sampleRate * dur;
         const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
         const data = buffer.getChannelData(0);
         for (let i = 0; i < bufferSize; i++) {
           data[i] = Math.random() * 2 - 1;
         }
+
         const noise = ctx.createBufferSource();
         noise.buffer = buffer;
+
         const filter = ctx.createBiquadFilter();
         filter.type = 'bandpass';
-        filter.frequency.value = 800;
-        filter.Q.value = 3.0;
+        filter.frequency.setValueAtTime(650, now);
+        filter.frequency.exponentialRampToValueAtTime(1400, now + 0.2);
+        filter.frequency.exponentialRampToValueAtTime(500, now + dur);
+        filter.Q.value = 1.8;
 
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.01, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.85, now + 0.08); // 大音量饱满
+        gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
 
         noise.connect(filter);
         filter.connect(gain);
         gain.connect(ctx.destination);
-        noise.start();
+
+        noise.start(now);
+        noise.stop(now + dur);
       } catch(e) {}
     }
 
     /* ==========================================================================
-       【独创玩法一：实体卡带拔出与“吹气除尘”修复交互】
+       【卡带拔插 + 真死机花屏乱码 + 吹气修复联动】
        ========================================================================== */
     const cartridgeZone = document.getElementById('cartridgeEjectZone');
-    const cartridgeText = document.getElementById('cartridgeText');
-    const lcdScreen = document.getElementById('lcdScreen');
+    const cartridgeLabel = document.getElementById('cartridgeLabel');
+    const glitchCrashScreen = document.getElementById('glitchCrashScreen');
+    const glitchNoiseText = document.getElementById('glitchNoiseText');
     let isCartridgeEjected = false;
+    let glitchInterval = null;
 
     cartridgeZone.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!isCartridgeEjected) {
-        // 1. 卡带弹出 -> 花屏故障
+        // 1. 卡带拔出 -> 触发真正的满屏死机花屏乱码
         isCartridgeEjected = true;
         cartridgeZone.classList.add('is-ejected');
-        lcdScreen.classList.add('is-glitched');
-        cartridgeText.innerHTML = "<span>💨 BLOW ME!</span>";
-        playBlipSound(180);
+        cartridgeLabel.innerHTML = "<span style='color:#d90429;'>💨 BLOW DUST</span>";
+        glitchCrashScreen.style.display = 'flex';
+        playBlipSound(120);
+
+        // 动态生成乱码字符
+        const glitchChars = "■▓▒░█X$#@?%!01&_/*";
+        glitchInterval = setInterval(() => {
+          let str = "";
+          for (let i = 0; i < 30; i++) {
+            str += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            if (i % 10 === 9) str += "<br/>";
+          }
+          glitchNoiseText.innerHTML = str;
+        }, 80);
+
       } else {
-        // 2. 吹气除尘 -> 屏幕复原
+        // 2. 吹气除尘 -> 消除花屏乱码，卡带推回，恢复清晰
         playBlowWindSound();
+        clearInterval(glitchInterval);
+
         setTimeout(() => {
           isCartridgeEjected = false;
           cartridgeZone.classList.remove('is-ejected');
-          lcdScreen.classList.remove('is-glitched');
-          cartridgeText.innerHTML = "<span>● LOVE CART</span>";
+          glitchCrashScreen.style.display = 'none';
+          cartridgeLabel.innerHTML = "<span>★ LOVE CART ★</span>";
           playNintendoChime();
-          createBurstAt(window.innerWidth / 2, window.innerHeight * 0.4, 25);
-        }, 300);
+          createBurstAt(window.innerWidth / 2, window.innerHeight * 0.45, 30);
+        }, 350);
       }
     });
 
     /* ==========================================================================
-       【独创玩法二：8-Bit RPG 遇敌和解指令盘】
+       【8-Bit RPG 遇敌和解指令盘】
        ========================================================================== */
     const dialoguePromptBar = document.getElementById('dialoguePromptBar');
     const rpgBattleConsole = document.getElementById('rpgBattleConsole');
@@ -479,8 +533,6 @@
       if (cmd === 'FIGHT') {
         playBlipSound(150);
         battleResultDialog.innerText = "❌ [PP: 0/0] Cannot attack your beloved Player 2! Miss!";
-        lcdScreen.style.animation = "screenGlitch 0.2s 2";
-        setTimeout(() => lcdScreen.style.animation = "", 400);
       } else if (cmd === 'BAG') {
         playBlipSound(520);
         battleResultDialog.innerText = "🎒 Opened Item Bag! Select a love potion:";
@@ -502,7 +554,6 @@
       createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 30);
     }
 
-    // 十字键与 A/B 键真联动
     const dpad = document.getElementById('dpadCross');
     const btnA = document.getElementById('btnA');
     const btnB = document.getElementById('btnB');
@@ -511,7 +562,6 @@
     btnA.addEventListener('click', (e) => {
       e.stopPropagation();
       playBlipSound(660);
-      // 如果正文打字结束出现提示条，按 A 键直接推进开启 RPG 指令盘！
       if (dialoguePromptBar.style.display !== 'none') {
         triggerBattleConsole();
       }
@@ -700,7 +750,6 @@
       textContainer.innerText = fullText;
       isTypingFinished = true;
       cursor.style.display = 'none';
-      // 打字完成后，显示带功能指示的 [A] 推进提示条
       dialoguePromptBar.style.display = 'flex';
     }
 
