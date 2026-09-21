@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=real_cart_crash" />
+  <link rel="stylesheet" href="style.css?v=true_cart_boot" />
 </head>
 <body>
 
@@ -69,7 +69,7 @@
       <!-- 2. DMG-01 官方任务信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <!-- 【修复：标准街机 1UP 分值记分板】 -->
+        <!-- 街机 1UP 分值记分板 -->
         <div class="arcade-hud-header">
           <div class="hud-item"><span>1UP:</span><span class="hud-val">99990</span></div>
           <div class="hud-item"><span>STAGE:</span><span class="hud-val">1-1</span></div>
@@ -111,13 +111,14 @@
           </div>
         </div>
 
-        <!-- 【高保真 3D 掌机 + 真实可拔插卡带】 -->
+        <!-- 【高保真 3D 掌机 + 真实可拔插卡带 + 初始开机乱码】 -->
         <div class="gameboy-console-station">
-          <!-- 掌机顶部卡带深插槽 -->
+          <!-- 顶部深槽内壁 -->
           <div class="cartridge-housing-slot"></div>
 
-          <!-- 3D 实体黄色卡带 (带螺纹手柄与导电金手指) -->
-          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to Eject or Blow on Cartridge!">
+          <!-- 3D 实体卡带 (默认悬浮在槽外，带指引气泡) -->
+          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to Insert Cartridge!">
+            <div class="cartridge-hover-guide-tag">TAP TO INSERT ⬇</div>
             <div class="game-cartridge-body">
               <div class="cartridge-grip-ribs">
                 <div class="grip-rib"></div>
@@ -128,7 +129,7 @@
                 <span>★ LOVE CART ★</span>
               </div>
             </div>
-            <!-- 拔出后露出的镀金引脚 -->
+            <!-- 拔出状态下的导电金手指引脚 -->
             <div class="cartridge-pins-exposed">
               <div class="pin-gold"></div>
               <div class="pin-gold"></div>
@@ -141,22 +142,26 @@
             </div>
           </div>
 
+          <!-- 屏幕边框 -->
           <div class="gameboy-screen-bezel">
-            <div class="battery-led-indicator" id="batteryLed"></div>
-            <div class="battery-text">BATTERY</div>
+            <!-- 【修复：独立排版、文字绝不截断的 BATTERY 模块】 -->
+            <div class="battery-indicator-module">
+              <div class="battery-led-light" id="batteryLed"></div>
+              <span class="battery-title-text">BATTERY</span>
+            </div>
 
             <div class="gameboy-lcd-screen" id="lcdScreen">
-              <!-- 【死机花屏乱码遮罩层：拔出卡带时真实展现】 -->
+              <!-- 【初始开机死机花屏乱码遮罩层】 -->
               <div class="glitch-crash-screen" id="glitchCrashScreen">
                 <div class="glitch-noise-tiles" id="glitchNoiseText">
-                  ▓▒░█■$#@?%&<br/>
-                  !X01#9■▓▒░█<br/>
-                  ░▒▓█ERROR404
+                  ■▓▒░█X$#@?%!01<br/>
+                  ░▒▓█ERROR404█▒<br/>
+                  ?%!X01#9■▓▒░█&
                 </div>
-                <div class="glitch-alert-banner">TAP CART TO BLOW DUST 💨</div>
+                <div class="glitch-alert-banner">✦ INSERT CARTRIDGE TO BOOT ✦</div>
               </div>
 
-              <!-- 正常游戏画面 -->
+              <!-- 正常游戏画面 (插卡后解锁展现) -->
               <div class="screen-headline" id="screenHeadline">✦ CRITICAL DAMAGE! ✦</div>
               
               <div class="hp-gauge-container">
@@ -290,7 +295,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=real_cart_crash"></script>
+  <script src="data.js?v=true_cart_boot"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -428,7 +433,26 @@
       } catch(e) {}
     }
 
-    // 【强力重混：清晰真实吹气风声 (提高至 0.85 饱满音量)】
+    // 【机械卡带入槽卡嗒声 (Cartridge Snap Sound)】
+    function playCartridgeSnapSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(160, now);
+        osc.frequency.exponentialRampToValueAtTime(60, now + 0.08);
+        gain.gain.setValueAtTime(0.7, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } catch(e) {}
+    }
+
+    // 【吹气除尘风声】
     function playBlowWindSound() {
       try {
         const ctx = getAudioContext();
@@ -453,7 +477,7 @@
 
         const gain = ctx.createGain();
         gain.gain.setValueAtTime(0.01, now);
-        gain.gain.linearRampToValueAtTime(0.85, now + 0.08); // 大音量饱满
+        gain.gain.linearRampToValueAtTime(0.85, now + 0.08);
         gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
 
         noise.connect(filter);
@@ -466,49 +490,57 @@
     }
 
     /* ==========================================================================
-       【卡带拔插 + 真死机花屏乱码 + 吹气修复联动】
+       【核心玩法：初始开机乱码 ➔ 引导插入卡带 ➔ 叮声启动】
        ========================================================================== */
     const cartridgeZone = document.getElementById('cartridgeEjectZone');
-    const cartridgeLabel = document.getElementById('cartridgeLabel');
     const glitchCrashScreen = document.getElementById('glitchCrashScreen');
     const glitchNoiseText = document.getElementById('glitchNoiseText');
-    let isCartridgeEjected = false;
+    const batteryLed = document.getElementById('batteryLed');
+
+    let isCartridgeInserted = false; // 初始状态为未插卡
     let glitchInterval = null;
+
+    // 持续生成死机随机乱码
+    function startGlitchFlicker() {
+      const glitchChars = "■▓▒░█X$#@?%!01&_/*";
+      glitchInterval = setInterval(() => {
+        let str = "";
+        for (let i = 0; i < 30; i++) {
+          str += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+          if (i % 10 === 9) str += "<br/>";
+        }
+        glitchNoiseText.innerHTML = str;
+      }, 75);
+    }
+    startGlitchFlicker();
 
     cartridgeZone.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (!isCartridgeEjected) {
-        // 1. 卡带拔出 -> 触发真正的满屏死机花屏乱码
-        isCartridgeEjected = true;
-        cartridgeZone.classList.add('is-ejected');
-        cartridgeLabel.innerHTML = "<span style='color:#d90429;'>💨 BLOW DUST</span>";
-        glitchCrashScreen.style.display = 'flex';
-        playBlipSound(120);
 
-        // 动态生成乱码字符
-        const glitchChars = "■▓▒░█X$#@?%!01&_/*";
-        glitchInterval = setInterval(() => {
-          let str = "";
-          for (let i = 0; i < 30; i++) {
-            str += glitchChars[Math.floor(Math.random() * glitchChars.length)];
-            if (i % 10 === 9) str += "<br/>";
-          }
-          glitchNoiseText.innerHTML = str;
-        }, 80);
+      if (!isCartridgeInserted) {
+        // 【核心交互：读者将卡带插进卡槽，点亮开机！】
+        isCartridgeInserted = true;
+        cartridgeZone.classList.add('is-inserted');
+        playCartridgeSnapSound(); // 机械卡嗒声
 
-      } else {
-        // 2. 吹气除尘 -> 消除花屏乱码，卡带推回，恢复清晰
-        playBlowWindSound();
         clearInterval(glitchInterval);
 
         setTimeout(() => {
-          isCartridgeEjected = false;
-          cartridgeZone.classList.remove('is-ejected');
+          // 消除死机乱码，响起任天堂开机叮声！
           glitchCrashScreen.style.display = 'none';
-          cartridgeLabel.innerHTML = "<span>★ LOVE CART ★</span>";
+          batteryLed.classList.add('is-powered'); // LED 由红转为常亮通电绿
           playNintendoChime();
-          createBurstAt(window.innerWidth / 2, window.innerHeight * 0.45, 30);
-        }, 350);
+          createBurstAt(window.innerWidth / 2, window.innerHeight * 0.45, 35);
+        }, 220);
+
+      } else {
+        // 已插卡状态下再次点击：支持拔出吹气除尘！
+        isCartridgeInserted = false;
+        cartridgeZone.classList.remove('is-inserted');
+        glitchCrashScreen.style.display = 'flex';
+        batteryLed.classList.remove('is-powered');
+        playBlowWindSound(); // 吹气除尘声
+        startGlitchFlicker();
       }
     });
 
@@ -576,7 +608,6 @@
        【投币复活仪式】
        ========================================================================== */
     const tokenCoin = document.getElementById('tokenCoin');
-    const batteryLed = document.getElementById('batteryLed');
     const hpFill = document.getElementById('hpFill');
     const hpPercentText = document.getElementById('hpPercentText');
     const screenHeadline = document.getElementById('screenHeadline');
@@ -600,7 +631,6 @@
       setTimeout(() => {
         play1UpFanfare();
 
-        batteryLed.classList.add('is-powered');
         hpFill.classList.add('is-healed');
         hpPercentText.innerText = "100% MAX! ❤️";
         screenHeadline.innerText = "✦ CO-OP RESTORED! ✦";
@@ -680,7 +710,6 @@
       isLetterOpened = true;
 
       getAudioContext();
-      playNintendoChime();
       launchEnvelopeBurst();
 
       setTimeout(() => {
