@@ -1,9 +1,9 @@
 /* ==========================================================================
-   THEME 03: 复古磁带倒带款 (RETRO CASSETTE: "CAN WE REWIND?")
-   独立样式文件 - 仅对 templates/03-cassette 生效，绝不污染其他模板
+   THEME 03: 复古磁带倒带款 (RETRO CASSETTE SKEUOMORPHIC)
+   物理级绝对隔离 - 仅对 templates/03-cassette 生效
    ========================================================================== */
 
-/* 1. 视口背景：90 年代复古黑胶录音室深邃暗调 */
+/* 1. 视口背景：复古黑胶暗调 */
 .letter-viewport[data-theme="cassette"] {
   background: radial-gradient(ellipse at 50% 35%, #2a202c 0%, #16131a 75%, #0a080c 100%);
   color: #231f20;
@@ -11,20 +11,21 @@
   perspective: 1200px;
 }
 
-/* 2. 3D 磁带盒信封（复古磨砂黑胶盒质感） */
+/* 2. 复古磨砂磁带保护封套 */
 [data-theme="cassette"] .envelope-wrapper {
-  background: #1c1822;
+  background: #18151c;
   border-radius: 10px;
   box-shadow: 
-    0 30px 75px rgba(0, 0, 0, 0.92),
-    0 0 30px rgba(255, 110, 150, 0.15);
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(255, 110, 150, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
   border: 1.5px solid rgba(255, 110, 150, 0.35);
   position: relative;
 }
 
 [data-theme="cassette"] .envelope-body {
   border-radius: 10px;
-  background: linear-gradient(145deg, #251f2d 0%, #17141d 100%);
+  background: linear-gradient(145deg, #221c27 0%, #131017 100%);
   outline: 1.5px dashed rgba(255, 180, 120, 0.4);
   outline-offset: -7px;
 }
@@ -40,21 +41,22 @@
 [data-theme="cassette"] .star-br { bottom: 9px; right: 10px; }
 
 [data-theme="cassette"] .envelope-flap {
-  background: linear-gradient(180deg, #2d2536 0%, #1a1622 100%);
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
+  background: linear-gradient(180deg, #2a2232 0%, #16121c 100%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7));
   border-bottom: 2px solid #ff758c;
 }
 
-/* 3. 3D 复古黑胶音符火漆印 */
+/* 3. 彻底重构：黑胶唱片凹凸同心圆纹理火漆印（爱心饱满无缺角） */
 [data-theme="cassette"] .wax-seal {
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ff8fa3 0%, #ff4b72 50%, #b31b40 85%, #63051d 100%);
-  border: 1.5px solid #ffb3c1;
+  background: 
+    radial-gradient(circle, #ff4b72 0%, #d90429 45%, #7209b7 90%, #2b0938 100%);
+  border: 2px solid #ff8fa3;
   box-shadow: 
-    0 12px 26px rgba(0, 0, 0, 0.85),
-    0 0 20px rgba(255, 75, 114, 0.55),
-    inset 0 2px 5px rgba(255, 255, 255, 0.7),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.7);
+    0 12px 28px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(255, 75, 114, 0.6),
+    inset 0 0 0 3px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 5px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,24 +65,27 @@
 
 @keyframes seal-pulse {
   0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.05); filter: brightness(1.15); }
+  50% { transform: scale(1.05); filter: brightness(1.18); }
 }
 
 [data-theme="cassette"] .seal-heart-svg {
   width: clamp(20px, 5vw, 24px);
   height: clamp(20px, 5vw, 24px);
   fill: #ffffff;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 [data-theme="cassette"] .envelope-open-hint {
-  font-family: 'Cinzel', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
   letter-spacing: clamp(2px, 0.6vw, 3px);
+  font-size: clamp(9.5px, 2.3vw, 11px);
   color: #ffccd5;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-/* 4. 信封口 3D 飞出容器 */
+/* 4. 信封口喷涌容器 */
 .envelope-burst-stage {
   position: absolute;
   top: 40%;
@@ -102,69 +107,75 @@
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-/* 5. 3D 复古歌词信纸主体 */
+/* 5. 彻底重构：复古卡带歌词折页（J-Card）信纸背景（细密复古方格纸纹） */
 [data-theme="cassette"] .letter-sheet {
-  background-color: #faf6ee;
+  background-color: #f7f3e8;
   background-image: 
-    radial-gradient(#e4dbca 0.7px, transparent 0.7px),
-    radial-gradient(#ede3d2 0.7px, #faf6ee 0.7px);
-  background-size: 18px 18px;
-  background-position: 0 0, 9px 9px;
-  color: #2b2520;
-  border: 2px solid #3d3142;
+    linear-gradient(rgba(215, 203, 185, 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 203, 185, 0.45) 1px, transparent 1px);
+  background-size: 16px 16px;
+  color: #231f20;
+  border: 2.5px solid #2d2433;
   outline: 1.5px solid #d4a373;
   outline-offset: -8px;
   box-shadow: 
-    0 35px 90px rgba(0, 0, 0, 0.88),
-    0 15px 30px rgba(0, 0, 0, 0.25);
+    0 35px 90px rgba(0, 0, 0, 0.9),
+    0 15px 30px rgba(0, 0, 0, 0.25),
+    inset 0 0 20px rgba(180, 160, 130, 0.15);
+  position: relative;
 }
 
 [data-theme="cassette"] .letter-watermark-svg {
   position: absolute;
-  top: 52%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(200px, 55vw, 280px);
-  height: clamp(200px, 55vw, 280px);
-  opacity: 0.06;
+  width: clamp(210px, 55vw, 290px);
+  height: clamp(210px, 55vw, 290px);
+  opacity: 0.05;
   pointer-events: none;
   z-index: 1;
 }
 
-[data-theme="cassette"] .apology-badge-header {
-  text-align: center;
-  margin-bottom: clamp(14px, 3.5vw, 20px);
-  position: relative;
-  z-index: 2;
-  width: 100%;
+/* 【彻底重构：随身听液晶屏数码时间码状态栏】 */
+.walkman-lcd-screen {
+  background: #191b1d;
+  border: 2px solid #3d3142;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8), 0 2px 4px rgba(255,255,255,0.4);
 }
 
-[data-theme="cassette"] .apology-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  box-sizing: border-box;
-  padding: 6px clamp(12px, 3vw, 20px);
-  border: 1.5px solid #3d3142;
-  border-radius: 4px;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(8px, 2.1vw, 9.5px);
-  font-weight: 800;
-  letter-spacing: clamp(0.6px, 0.2vw, 1.2px);
-  color: #4a2835;
-  background: #f7d6dc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+.lcd-tag-left {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-weight: 700;
+  color: #00f5d4;
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 6px rgba(0, 245, 212, 0.6);
+}
+
+.lcd-timer-right {
+  font-family: 'Courier New', monospace;
+  font-size: clamp(10px, 2.5vw, 12px);
+  font-weight: 900;
+  color: #ff007f;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px rgba(255, 0, 127, 0.6);
 }
 
 [data-theme="cassette"] .letter-title {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(20px, 5.5vw, 26px);
+  font-size: clamp(22px, 5.8vw, 28px);
   font-weight: 800;
   letter-spacing: clamp(1px, 0.5vw, 2px);
-  color: #3b2230;
+  color: #2b1824;
   text-align: center;
-  margin: 10px 0 14px;
+  margin: 10px 0 16px;
 }
 
 [data-theme="cassette"] .letter-date {
@@ -173,29 +184,39 @@
   font-weight: 600;
   color: #8c7365;
   text-align: right;
-  margin-bottom: 12px;
-}
-
-[data-theme="cassette"] .letter-salutation {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(14px, 3.8vw, 16.5px);
-  font-weight: 700;
-  color: #2b2520;
   margin-bottom: 14px;
 }
 
-/* 6. 相框：复古黑胶唱片外套设计 */
+/* 【彻底重构：美纹纸胶带专属题献便签（Tape Label Salutation）】 */
+.tape-salutation-wrap {
+  display: inline-block;
+  background: #fbf0b9;
+  border-left: 3px solid #ff758c;
+  padding: 4px 14px;
+  transform: rotate(-1.2deg);
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.12);
+  margin-bottom: 16px;
+}
+
+.tape-salutation-label {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(17px, 4.5vw, 21px);
+  font-weight: 700;
+  color: #382414;
+}
+
+/* 6. 相框设计 */
 [data-theme="cassette"] .photo-card-front,
 [data-theme="cassette"] .photo-card-back {
   background: #ffffff;
   border: 1.5px solid #3d3142;
-  box-shadow: 0 0 0 3px #faf6ee, 0 0 0 4px #3d3142, 0 14px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 3px #faf6ee, 0 0 0 4px #3d3142, 0 14px 30px rgba(0,0,0,0.18);
   border-radius: 4px;
 }
 
 [data-theme="cassette"] .photo-card-back {
-  background: #fdfaf3;
-  color: #2b2520;
+  background: #fdfbf7;
+  color: #231f20;
   font-size: clamp(12.5px, 3.4vw, 14px);
 }
 
@@ -210,30 +231,30 @@
 
 [data-theme="cassette"] .photo-nav-btn {
   border: 1.5px solid #3d3142;
-  background: #f7d6dc;
+  background: #ffe3e8;
   color: #3b2230;
 }
 
-/* 7. 【核心专属巧思：3D 实体磁带与 REWIND 倒带系统】 */
+/* 7. 【重度拟物 3D 磁带舱与极速倒带系统】 */
 .cassette-deck-station {
   position: relative;
   width: 100%;
-  max-width: 350px;
+  max-width: 360px;
   margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
-  padding: 16px 12px;
-  border: 2px solid #3d3142;
-  background: #f2ebd9;
-  border-radius: 8px;
+  padding: 18px 14px;
+  border: 2.5px solid #2d2433;
+  background: linear-gradient(180deg, #ede5d3 0%, #e0d5be 100%);
+  border-radius: 10px;
   box-shadow: 
-    0 12px 28px rgba(0, 0, 0, 0.1),
-    inset 0 1px 3px rgba(255, 255, 255, 0.8);
+    0 14px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
   text-align: center;
   box-sizing: border-box;
   z-index: 2;
 }
 
 .deck-header {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   display: flex;
   justify-content: center;
 }
@@ -245,62 +266,95 @@
   white-space: nowrap;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(8px, 2.1vw, 9.5px);
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: clamp(8.5px, 2.2vw, 10px);
+  font-weight: 800;
+  letter-spacing: 1.2px;
   color: #c9184a;
   background: #ffe3e8;
   padding: 4px clamp(12px, 3vw, 18px);
   border-radius: 20px;
   border: 1.5px solid #3d3142;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
-/* 3D 实体磁带外壳 */
-.cassette-body {
+/* 3D 实体透明亚克力磁带外壳 */
+.cassette-body-3d {
   position: relative;
   width: 100%;
-  max-width: 290px;
-  height: 160px;
-  margin: 0 auto 14px auto;
-  background: linear-gradient(145deg, #302936 0%, #1e1924 100%);
-  border-radius: 8px;
+  max-width: 300px;
+  height: 175px;
+  margin: 0 auto 16px auto;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(35,30,42,0.95) 25%, #18141d 100%);
+  border-radius: 10px;
   border: 2px solid #4a3e53;
   box-shadow: 
-    0 10px 22px rgba(0, 0, 0, 0.35),
-    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    0 12px 28px rgba(0, 0, 0, 0.55),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 14px;
+  padding: 10px 12px;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* 磁带顶部贴纸标签 */
-.cassette-label-top {
-  width: 100%;
-  background: linear-gradient(90deg, #ff758c 0%, #ff7eb3 100%);
-  border-radius: 4px;
-  padding: 5px 8px;
+/* 四角金属固定螺丝 */
+.screw {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e0e0e0 0%, #888888 100%);
+  box-shadow: inset 0 1px 1px #fff, 0 1px 2px rgba(0,0,0,0.6);
+}
+.screw-tl { top: 6px; left: 6px; }
+.screw-tr { top: 6px; right: 6px; }
+.screw-bl { bottom: 6px; left: 6px; }
+.screw-br { bottom: 6px; right: 6px; }
+
+/* 磁带主体复古水洗贴纸 */
+.cassette-label-retro {
+  width: 96%;
+  background: #fdfbf7;
+  border: 1.5px solid #2d2433;
+  border-radius: 5px;
+  padding: 6px 10px;
   box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #ffffff;
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  box-shadow: inset 0 -1px 2px rgba(0,0,0,0.2);
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
 }
 
-/* 磁带中心开窗区（齿轮与磁带卷轴） */
-.cassette-window {
+.label-top-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #ff4b72;
+  letter-spacing: 1px;
+}
+
+.label-color-stripe {
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(90deg, #ff4b72 0%, #ff758c 50%, #7209b7 100%);
+  border-radius: 2px;
+}
+
+/* 磁带中心深凹观察窗 */
+.cassette-window-deep {
   position: relative;
-  width: 82%;
-  height: 64px;
-  background: #110e14;
-  border-radius: 6px;
-  border: 1.5px solid #5a4b64;
+  width: 86%;
+  height: 68px;
+  background: #0d0b10;
+  border-radius: 8px;
+  border: 2px solid #5a4b64;
+  box-shadow: 
+    inset 0 6px 14px rgba(0, 0, 0, 0.9),
+    0 1px 2px rgba(255,255,255,0.2);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -309,36 +363,47 @@
   overflow: hidden;
 }
 
-/* 透明观察窗内相连的棕色磁带条 */
-.cassette-tape-strip {
+/* 磁粉带卷条（带光泽） */
+.tape-ribbon-left {
   position: absolute;
   top: 50%;
-  left: 18%;
-  right: 18%;
-  height: 28px;
-  background: #2e1f18;
+  left: 20px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3e2723 0%, #211512 80%);
   transform: translateY(-50%);
-  border-radius: 14px;
-  z-index: 1;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
 }
 
-/* 磁带白色旋转轮齿（Spools） */
-.cassette-spool {
+.tape-ribbon-right {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3e2723 0%, #211512 80%);
+  transform: translateY(-50%);
+  box-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+/* 六齿白色传动齿轮 */
+.spool-gear {
   position: relative;
   width: 38px;
   height: 38px;
   border-radius: 50%;
   background: #ffffff;
-  border: 3px solid #dedede;
-  box-shadow: 0 0 0 3px #221a16;
-  z-index: 2;
+  border: 3px solid #dcdcdc;
+  box-shadow: 0 0 0 2px #18141d, 0 3px 6px rgba(0,0,0,0.5);
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.spool-teeth {
+.spool-hub {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -346,57 +411,63 @@
   position: relative;
 }
 
-/* 轮齿十字凹槽 */
-.spool-teeth::before, .spool-teeth::after {
+.spool-hub::before, .spool-hub::after {
   content: "";
   position: absolute;
   background: #ffffff;
 }
-.spool-teeth::before {
-  top: 0; left: 6px; width: 4px; height: 16px;
-}
-.spool-teeth::after {
-  top: 6px; left: 0; width: 16px; height: 4px;
+.spool-hub::before { top: 0; left: 6px; width: 4px; height: 16px; }
+.spool-hub::after { top: 6px; left: 0; width: 16px; height: 4px; }
+
+/* 匀速播放旋转 */
+.spool-gear.is-playing {
+  animation: gearSpin 4s linear infinite;
 }
 
-/* 正常播放旋转 */
-.cassette-spool.is-playing {
-  animation: spoolSpin 4s linear infinite;
-}
-
-@keyframes spoolSpin {
+@keyframes gearSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* 高速倒带旋转（10 倍速逆时针反转） */
-.cassette-spool.is-rewinding {
-  animation: spoolRewind 0.35s linear infinite !important;
+/* 高速倒带激剧反转 */
+.spool-gear.is-rewinding {
+  animation: gearRewind 0.3s linear infinite !important;
 }
 
-@keyframes spoolRewind {
+@keyframes gearRewind {
   from { transform: rotate(360deg); }
   to { transform: rotate(0deg); }
 }
 
-/* 磁带底部梯形区域 */
-.cassette-bottom-block {
-  width: 60%;
-  height: 14px;
-  background: #231d27;
+/* 磁带底部梯形磁头托 */
+.cassette-bottom-dock {
+  width: 65%;
+  height: 16px;
+  background: #251f2b;
   clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
-  border-top: 1px solid #4a3e53;
+  border-top: 1.5px solid #4a3e53;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
-/* 倒带按钮 */
+.dock-hole {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #000;
+}
+
+/* 倒带操作按钮（随身听机械凸起实体按键） */
 .rewind-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #ff4b72;
+  background: linear-gradient(180deg, #ff5c7c 0%, #d90429 100%);
   color: #ffffff;
-  border: 1.5px solid #3d3142;
+  border: 2px solid #2d2433;
   outline: none;
   padding: 10px clamp(16px, 4vw, 24px);
   font-family: 'Montserrat', sans-serif;
@@ -405,18 +476,23 @@
   letter-spacing: 1.2px;
   border-radius: 24px;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(255, 75, 114, 0.4);
-  transition: all 0.2s ease;
+  box-shadow: 
+    0 6px 0 #8b001d,
+    0 10px 18px rgba(0, 0, 0, 0.3);
+  transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .rewind-action-btn:active {
-  transform: scale(0.94);
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 #8b001d,
+    0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 倒带完成盖章 */
+/* 倒带完成验带邮戳 */
 .rewind-success-banner {
-  margin-top: 12px;
+  margin-top: 14px;
   animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
@@ -429,15 +505,15 @@
 .rewind-stamp-embossed {
   display: inline-block;
   font-family: 'Cinzel', serif;
-  font-size: clamp(11px, 3vw, 12.5px);
+  font-size: clamp(11.5px, 3.2vw, 13px);
   font-weight: 900;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
   color: #2b9348;
-  border: 2px solid #2b9348;
-  padding: 6px 14px;
+  border: 2.5px solid #2b9348;
+  padding: 6px 16px;
   border-radius: 4px;
   transform: rotate(-3deg);
-  box-shadow: 0 0 0 2px rgba(43, 147, 72, 0.2), inset 0 0 6px rgba(43, 147, 72, 0.15);
+  box-shadow: 0 0 0 2px rgba(43, 147, 72, 0.25), inset 0 0 6px rgba(43, 147, 72, 0.15);
   text-shadow: 0 1px 1px rgba(255,255,255,0.8);
 }
 
@@ -453,7 +529,7 @@
 [data-theme="cassette"] .letter-body-text {
   font-size: clamp(15px, 4.1vw, 17px);
   line-height: clamp(1.9, 5vw, 2.05);
-  color: #2b2520;
+  color: #231f20;
   min-height: 120px;
   margin-bottom: 20px;
 }
@@ -479,30 +555,30 @@
   color: #3b2230;
 }
 
-/* 9. 【专属复古哑光贴纸刮刮乐】 */
+/* 9. 【彻底重构：专属磁粉带刮刮乐（Magnetic Tape Splicing Strip）】 */
 [data-theme="cassette"] .scratch-hint-text {
-  color: #8c7365;
+  color: #6c584c;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(9.5px, 2.4vw, 10.5px);
-  letter-spacing: 1.8px;
-  font-weight: 700;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  letter-spacing: 1.6px;
+  font-weight: 800;
   margin-bottom: 10px;
 }
 
 [data-theme="cassette"] .scratch-card-box {
   border-radius: 6px;
-  border: 1.5px solid #3d3142;
+  border: 2px solid #2d2433;
   outline: 1.5px dashed #ff758c;
   outline-offset: -6px;
-  background: #ffffff;
+  background: #fdfaf3;
   box-shadow: 
     0 10px 24px rgba(0, 0, 0, 0.08),
-    inset 0 0 12px rgba(255, 117, 140, 0.06);
+    inset 0 0 12px rgba(255, 117, 140, 0.08);
 }
 
 [data-theme="cassette"] .scratch-card-box::before,
 [data-theme="cassette"] .scratch-card-box::after {
-  content: "🎵";
+  content: "📼";
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -515,42 +591,65 @@
 
 [data-theme="cassette"] .scratch-secret-reveal {
   font-family: 'Montserrat', sans-serif;
-  color: #ff4b72;
+  color: #d90429;
   font-weight: 800;
   letter-spacing: 1.2px;
   background: #fff8f9;
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 10. 逃跑互动问答 */
+/* 10. 【彻底重构：复古录音机机械按键（Push-Key Style Buttons）】 */
 [data-theme="cassette"] .runaway-section {
-  border-top: 1.5px dashed #d4a373;
+  border-top: 1.5px dashed #c2b59b;
   padding-top: 24px;
   margin-top: 30px;
 }
 
 [data-theme="cassette"] .runaway-question {
   font-family: 'Playfair Display', Georgia, serif;
-  color: #3b2230;
-  font-size: clamp(15px, 4vw, 16.5px);
-  margin-bottom: 18px;
+  color: #2b1824;
+  font-size: clamp(15px, 4vw, 17px);
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 [data-theme="cassette"] .btn-yes {
-  background: linear-gradient(135deg, #ff4b72 0%, #ff758c 100%);
+  background: linear-gradient(180deg, #38b000 0%, #007200 100%);
   color: #ffffff;
-  box-shadow: 0 6px 18px rgba(255, 75, 114, 0.45);
+  border: 2px solid #1a4d00;
+  border-radius: 6px; /* 机械方矩角 */
+  box-shadow: 
+    0 5px 0 #004b00,
+    0 8px 16px rgba(0, 0, 0, 0.25);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  transition: all 0.15s ease;
+}
+
+[data-theme="cassette"] .btn-yes:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #004b00;
 }
 
 [data-theme="cassette"] .btn-no {
-  background: #e3d5ca;
-  color: #4a3e3d;
+  background: linear-gradient(180deg, #e9ecef 0%, #ced4da 100%);
+  color: #495057;
+  border: 2px solid #adb5bd;
+  border-radius: 6px;
+  box-shadow: 
+    0 5px 0 #6c757d,
+    0 8px 16px rgba(0, 0, 0, 0.18);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: 1.2px;
 }
 
 [data-theme="cassette"] .runaway-success-modal {
-  background: #ffe3e8;
-  border: 1.5px solid #3d3142;
-  color: #590d22;
+  background: #e8f5e9;
+  border: 2px solid #2b9348;
+  color: #1b4332;
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(13.5px, 3.6vw, 15px);
+  font-size: clamp(13px, 3.5vw, 14.5px);
+  font-weight: 700;
 }
