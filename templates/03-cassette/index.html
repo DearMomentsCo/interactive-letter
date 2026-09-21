@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Can We Rewind? - Retro Mixtape</title>
+
+  <!-- Google 字体预加载 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../core.css" />
+  <link rel="stylesheet" href="style.css?v=cassette1" />
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <audio id="bgAudio" loop preload="auto"></audio>
+  <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
+
+  <!-- 密码锁系统 -->
+  <div class="passcode-overlay" id="passcodeOverlay">
+    <div class="passcode-box">
+      <div class="passcode-title">ENTER 4-DIGIT CASSETTE CODE</div>
+      <div class="passcode-inputs">
+        <input type="password" maxlength="1" class="passcode-digit" autofocus />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+      </div>
+      <div class="passcode-error" id="passcodeError"></div>
+    </div>
+  </div>
+
+  <div class="letter-viewport" data-theme="cassette">
+    <div class="letter-container" id="letterContainer">
+      
+      <!-- 1. 复古磨砂黑胶盒信封 -->
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-body">
+          <span class="envelope-corner-star star-tl">✦</span>
+          <span class="envelope-corner-star star-tr">✦</span>
+          <span class="envelope-corner-star star-bl">✦</span>
+          <span class="envelope-corner-star star-br">✦</span>
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="wax-seal-wrapper">
+          <div class="wax-seal" id="waxSealBtn">
+            <!-- 严谨完整的标准爱心 SVG（绝不切角） -->
+            <svg class="seal-heart-svg" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="envelope-open-hint">✦ OPEN THE CASSETTE CASE ✦</div>
+        <div class="envelope-burst-stage" id="burstStage"></div>
+      </div>
+
+      <!-- 2. 复古情歌信纸 -->
+      <article class="letter-sheet" id="letterSheet">
+        
+        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#3d3142" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50" cy="50" r="42" stroke-dasharray="4,4" />
+          <circle cx="50" cy="50" r="16" />
+          <circle cx="50" cy="50" r="4" fill="#3d3142" />
+        </svg>
+
+        <div class="apology-badge-header">
+          <div class="apology-badge-pill">✦ VINTAGE MIXTAPE · SIDE A ✦</div>
+        </div>
+
+        <div class="letter-date" id="letterDate"></div>
+        <h1 class="letter-title" id="letterHeadline"></h1>
+        <div class="letter-salutation" id="letterSalutation"></div>
+
+        <!-- 3D 翻转 + < 1 / N > 全画幅播放器 -->
+        <div class="photo-slider-wrapper" id="photosSection">
+          <div class="photo-flip-card" id="photoCard">
+            <div class="photo-flip-inner">
+              <div class="photo-card-front">
+                <img id="frontPhotoImg" src="" alt="Mixtape Memory Photo" />
+              </div>
+              <div class="photo-card-back">
+                <p class="photo-caption-text" id="backCaptionText"></p>
+              </div>
+            </div>
+          </div>
+          <div class="photo-flip-hint">✦ TAP ALBUM ART TO FLIP ✦</div>
+
+          <div class="photo-nav-controls" id="photoNavControls">
+            <button class="photo-nav-btn" id="prevPhotoBtn" title="Previous Track">‹</button>
+            <span class="photo-page-indicator" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn" title="Next Track">›</button>
+          </div>
+        </div>
+
+        <!-- 【核心专属巧思：3D 实体磁带与 REWIND 倒带仪式】 -->
+        <div class="cassette-deck-station">
+          <div class="deck-header">
+            <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING SIDE A ✦</span>
+          </div>
+
+          <!-- 3D 实体磁带 -->
+          <div class="cassette-body">
+            <div class="cassette-label-top">
+              <span>● REC</span>
+              <span>APOLOGY MIXTAPE #01</span>
+              <span>STEREO</span>
+            </div>
+
+            <!-- 中心开窗观察孔与齿轮 -->
+            <div class="cassette-window">
+              <div class="cassette-tape-strip"></div>
+              <div class="cassette-spool is-playing" id="spoolLeft">
+                <div class="spool-teeth"></div>
+              </div>
+              <div class="cassette-spool is-playing" id="spoolRight">
+                <div class="spool-teeth"></div>
+              </div>
+            </div>
+
+            <div class="cassette-bottom-block"></div>
+          </div>
+
+          <!-- 倒带操作区 -->
+          <div id="rewindActionArea">
+            <button class="rewind-action-btn" id="rewindBtn">
+              <span>◀◀ HOLD TO REWIND TO ZERO</span>
+            </button>
+          </div>
+
+          <!-- 倒带完成后盖戳 -->
+          <div class="rewind-success-banner" id="rewindBanner" style="display:none;">
+            <div class="rewind-stamp-embossed">✦ TAPE REWOUND · CLEAN SLATE ♡ ✦</div>
+            <p class="rewind-subtext">We've rewound back to where everything felt gentle and loving. Let's start fresh together!</p>
+          </div>
+        </div>
+
+        <!-- 正文打字机 -->
+        <div class="letter-body-text" id="letterBody">
+          <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+        </div>
+
+        <div class="letter-closing" id="letterClosing"></div>
+
+        <!-- 专属哑光贴纸刮刮乐 -->
+        <div class="scratch-component" id="scratchComponent">
+          <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH TAPE LABEL FOR SECRET BONUS TRACK ✦</div>
+          <div class="scratch-card-box">
+            <div class="scratch-secret-reveal" id="scratchSecretReveal"></div>
+            <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 逃跑问答 -->
+        <div class="runaway-section" id="runawayQuestionSection">
+          <div class="runaway-question" id="runawayQuestion"></div>
+          <div class="runaway-buttons-wrapper">
+            <button class="btn-yes" id="btnYes">Play It Again ♡</button>
+            <button class="btn-no" id="btnNo">Eject</button>
+          </div>
+          <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <script src="data.js?v=cassette1"></script>
+
+  <script>
+    document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
+    document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "CAN WE REWIND?";
+    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
+    document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
+
+    if (LETTER_DATA.fontType) {
+      document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+      document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
+    }
+
+    // 相册播放器
+    const photoCard = document.getElementById('photoCard');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+
+    if (photosList.length > 0) {
+      function renderPhoto(index) {
+        photoCard.classList.remove('is-flipped');
+        frontImg.src = photosList[index].url;
+        backCaption.innerText = photosList[index].caption || '';
+        pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
+      }
+      renderPhoto(0);
+
+      photoCard.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('is-flipped');
+      });
+
+      if (photosList.length <= 1) {
+        navControls.style.display = 'none';
+      } else {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+      }
+    } else {
+      document.getElementById('photosSection').style.display = 'none';
+    }
+
+    // 【倒带交互】：点击后齿轮极速反转，状态更新，砸下复古印章
+    const rewindBtn = document.getElementById('rewindBtn');
+    const spoolLeft = document.getElementById('spoolLeft');
+    const spoolRight = document.getElementById('spoolRight');
+    const deckStatusPill = document.getElementById('deckStatusPill');
+    const rewindActionArea = document.getElementById('rewindActionArea');
+    const rewindBanner = document.getElementById('rewindBanner');
+
+    rewindBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // 1. 启动高速倒带反转动效
+      spoolLeft.classList.remove('is-playing');
+      spoolRight.classList.remove('is-playing');
+      spoolLeft.classList.add('is-rewinding');
+      spoolRight.classList.add('is-rewinding');
+
+      deckStatusPill.innerText = "◀◀ REWINDING TO ZERO...";
+      deckStatusPill.style.color = "#ff758c";
+
+      // 2. 倒带持续 1.2 秒后完成，齿轮恢复正常匀速
+      setTimeout(() => {
+        spoolLeft.classList.remove('is-rewinding');
+        spoolRight.classList.remove('is-rewinding');
+        spoolLeft.classList.add('is-playing');
+        spoolRight.classList.add('is-playing');
+
+        deckStatusPill.innerText = "✦ REWOUND TO ZERO · READY TO PLAY ✦";
+        deckStatusPill.style.color = "#2b9348";
+        deckStatusPill.style.borderColor = "#2b9348";
+        deckStatusPill.style.backgroundColor = "#e8f5e9";
+
+        rewindActionArea.style.display = 'none';
+        rewindBanner.style.display = 'block';
+
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 35);
+      }, 1200);
+    });
+
+    if (!LETTER_DATA.enableScratch) {
+      document.getElementById('scratchComponent').style.display = 'none';
+    } else {
+      document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
+    }
+
+    if (!LETTER_DATA.enableRunaway) {
+      document.getElementById('runawayQuestionSection').style.display = 'none';
+    } else {
+      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
+      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
+    }
+
+    // 密码锁
+    const overlay = document.getElementById('passcodeOverlay');
+    if (!LETTER_DATA.passcode) {
+      overlay.classList.add('is-unlocked');
+    } else {
+      const inputs = document.querySelectorAll('.passcode-digit');
+      const errorEl = document.getElementById('passcodeError');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) inputs[index + 1].focus();
+          checkPasscode();
+        });
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) inputs[index - 1].focus();
+        });
+      });
+      function checkPasscode() {
+        let entered = Array.from(inputs).map(i => i.value).join('');
+        if (entered.length === 4) {
+          if (entered === LETTER_DATA.passcode) {
+            overlay.classList.add('is-unlocked');
+          } else {
+            errorEl.innerText = "Incorrect code. Check mixtape label.";
+            inputs.forEach(i => i.value = '');
+            inputs[0].focus();
+          }
+        }
+      }
+    }
+
+    // 音频
+    const audio = document.getElementById('bgAudio');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (LETTER_DATA.audioUrl) {
+      audio.src = LETTER_DATA.audioUrl;
+      audioBtn.style.display = 'flex';
+    }
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) { 
+        audio.play(); 
+        audioBtn.innerText = '🔊';
+        spoolLeft.classList.add('is-playing');
+        spoolRight.classList.add('is-playing');
+      } else { 
+        audio.pause(); 
+        audioBtn.innerText = '🔇';
+        spoolLeft.classList.remove('is-playing');
+        spoolRight.classList.remove('is-playing');
+      }
+    });
+
+    // 开信喷涌
+    const container = document.getElementById('letterContainer');
+    const envelope = document.getElementById('envelopeWrapper');
+    const burstStage = document.getElementById('burstStage');
+    let isLetterOpened = false;
+
+    envelope.addEventListener('click', (e) => {
+      if (isLetterOpened) return;
+      isLetterOpened = true;
+
+      launchEnvelopeBurst();
+
+      setTimeout(() => {
+        container.classList.add('is-opened');
+        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.enableScratch) initStickerScratch();
+        startSmartTypewriter(LETTER_DATA.body);
+      }, 550);
+    });
+
+    function launchEnvelopeBurst() {
+      const burstIcons = ['📼', '🎵', '🎶', '✨', '🪩', '🎵', '✨'];
+      burstIcons.forEach((icon, i) => {
+        const el = document.createElement('div');
+        el.className = 'burst-element';
+        el.innerText = icon;
+        burstStage.appendChild(el);
+
+        const angle = (Math.PI * 2 * i) / burstIcons.length + (Math.random() - 0.5) * 0.5;
+        const dist = Math.random() * 120 + 80;
+        const destX = Math.cos(angle) * dist;
+        const destY = Math.sin(angle) * dist - 80;
+        const rot = (Math.random() - 0.5) * 60;
+
+        el.animate([
+          { opacity: 0, transform: 'translate3d(0, 0, 0) scale(0.2) rotate(0deg)' },
+          { opacity: 1, transform: `translate3d(${destX * 0.5}px, ${destY * 0.5}px, 60px) scale(1.3) rotate(${rot * 0.5}deg)`, offset: 0.4 },
+          { opacity: 0, transform: `translate3d(${destX}px, ${destY}px, 120px) scale(1) rotate(${rot}deg)` }
+        ], {
+          duration: 900,
+          easing: 'cubic-bezier(0.15, 0.85, 0.35, 1.2)',
+          fill: 'forwards'
+        });
+      });
+    }
+
+    let typewriterTimer = null;
+    let isTypingFinished = false;
+    const textContainer = document.getElementById('typewriterText');
+    const cursor = document.getElementById('typewriterCursor');
+
+    function startSmartTypewriter(fullText) {
+      if (!fullText) return;
+      let currentIndex = 0;
+      const totalLen = fullText.length;
+      let typingSpeed = totalLen > 500 ? 10 : (totalLen > 250 ? 18 : 35);
+
+      typewriterTimer = setInterval(() => {
+        if (currentIndex < totalLen) {
+          textContainer.innerText += fullText.charAt(currentIndex);
+          currentIndex++;
+        } else {
+          finishTyping(fullText);
+        }
+      }, typingSpeed);
+
+      document.addEventListener('click', function onSkipClick() {
+        if (!isTypingFinished) {
+          finishTyping(fullText);
+          document.removeEventListener('click', onSkipClick);
+        }
+      });
+    }
+
+    function finishTyping(fullText) {
+      clearInterval(typewriterTimer);
+      textContainer.innerText = fullText;
+      isTypingFinished = true;
+      cursor.style.display = 'none';
+    }
+
+    // 专属复古贴纸刮刮乐
+    function initStickerScratch() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const box = canvas.parentElement;
+      const ctx = canvas.getContext('2d');
+      const w = box.clientWidth || 320;
+      const h = box.clientHeight || 76;
+      canvas.width = w;
+      canvas.height = h;
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#ff758c');
+      grad.addColorStop(0.5, '#ff7eb3');
+      grad.addColorStop(1, '#ff4b72');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(16, 10, w - 32, h - 20);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.letterSpacing = '1.5px';
+      ctx.fillText('✦ SCRATCH FOR BONUS TRACK ✦', w / 2, h / 2);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(clientX - rect.left, clientY - rect.top, 18, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => isScratching = true);
+      window.addEventListener('mouseup', () => isScratching = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: true });
+      window.addEventListener('touchend', () => isScratching = false);
+      canvas.addEventListener('touchmove', scratch, { passive: true });
+    }
+
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const modal = document.getElementById('runawaySuccessModal');
+
+    function runaway(e) {
+      e.stopPropagation();
+      const x = (Math.random() - 0.5) * 220;
+      const y = (Math.random() - 0.5) * 130;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    btnNo.addEventListener('mouseover', runaway);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
+
+    btnYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.style.display = 'block';
+      btnNo.style.display = 'none';
+      btnYes.style.transform = 'scale(1.08)';
+      createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 50);
+    });
+
+    const pCanvas = document.getElementById('particle-canvas');
+    const pCtx = pCanvas.getContext('2d');
+    let floatingDust = [];
+    let sparkleStars = [];
+
+    function resizeCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 30; i++) {
+      floatingDust.push({
+        x: Math.random() * pCanvas.width,
+        y: Math.random() * pCanvas.height,
+        size: Math.random() * 2 + 0.6,
+        speedY: Math.random() * 0.3 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.2,
+        opacity: Math.random() * 0.4 + 0.15
+      });
+    }
+
+    function createBurstAt(originX, originY, count = 35) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 6 + 2.5;
+        sparkleStars.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * velocity,
+          vy: Math.sin(angle) * velocity,
+          size: Math.random() * 4 + 2,
+          color: Math.random() > 0.4 ? '#ff758c' : '#ffffff',
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015
+        });
+      }
+    }
+
+    function renderLoop() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+      pCtx.fillStyle = '#ff8fa3';
+      floatingDust.forEach(p => {
+        p.y -= p.speedY;
+        p.x += p.speedX;
+        if (p.y < 0) {
+          p.y = pCanvas.height + 10;
+          p.x = Math.random() * pCanvas.width;
+        }
+        pCtx.globalAlpha = p.opacity;
+        pCtx.beginPath();
+        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        pCtx.fill();
+      });
+
+      for (let i = sparkleStars.length - 1; i >= 0; i--) {
+        const s = sparkleStars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.08;
+        s.life -= s.decay;
+
+        if (s.life <= 0) {
+          sparkleStars.splice(i, 1);
+          continue;
+        }
+
+        pCtx.save();
+        pCtx.globalAlpha = s.life;
+        pCtx.fillStyle = s.color;
+        pCtx.beginPath();
+        pCtx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
+        pCtx.fill();
+        pCtx.restore();
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>
