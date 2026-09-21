@@ -1,7 +1,7 @@
 /* ==========================================================================
    THEME 04: 复古像素掌机款 (GAMEBOY CLASSIC DMG-01)
    独立样式库 - 仅对 templates/04-gameboy/ 生效，绝不污染其他模板
-   ========================================================================= */
+   ========================================================================== */
 
 /* 1. 视口背景：街机深邃暗调 */
 .letter-viewport[data-theme="gameboy"] {
@@ -152,48 +152,78 @@
 .hud-item { display: flex; align-items: center; gap: 4px; }
 .hud-val { color: #ffffff; }
 
-.pixel-stage-header {
-  text-align: center;
-  margin-bottom: clamp(14px, 3.5vw, 18px);
+/* ==========================================================================
+   【彻底重塑：8-Bit 经典游戏标题招牌展板 (Game Title Marquee)】
+   彻底消除“系统报错”或“指令提示”的误会，清晰标明这是“任务大标题”
+   ========================================================================== */
+.game-title-marquee-box {
   position: relative;
-  z-index: 2;
-  width: 100%;
+  background: #ffffff;
+  border: 2.5px solid #2b2b2b;
+  border-radius: 6px;
+  padding: 16px 14px 12px;
+  margin: 12px 0 20px 0;
+  box-shadow: 
+    3px 3px 0px #8b1d43,
+    0 8px 18px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
-.pixel-stage-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  box-sizing: border-box;
-  padding: 6px clamp(12px, 3vw, 18px);
-  border: 2px solid #2b2b2b;
-  border-radius: 4px;
-  font-family: 'Press Start 2P', monospace;
-  font-size: clamp(7.5px, 1.9vw, 9px);
-  letter-spacing: 0.8px;
-  color: #ffffff;
+/* 顶部嵌入式铭牌标签：标明“主线任务标题” */
+.marquee-badge-top {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #8b1d43;
-  box-shadow: 2px 2px 0px #2b2b2b;
+  color: #ffffff;
+  border: 1.5px solid #2b2b2b;
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(6.5px, 1.8vw, 7.5px);
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px #2b2b2b;
 }
 
+/* 3D 浮雕像素艺术字大标题 */
 [data-theme="gameboy"] .letter-title {
   font-family: 'Press Start 2P', monospace, sans-serif;
-  font-size: clamp(16px, 4.2vw, 21px);
-  line-height: 1.4;
+  font-size: clamp(14px, 3.8vw, 18px);
+  line-height: 1.45;
   color: #2b2b2b;
   text-align: center;
-  margin: 10px 0 16px;
+  margin: 6px 0 10px;
+  letter-spacing: 1px;
+  /* 双层 3D 挤出立体阴影：金黄高光 + 酒红深邃阴影 */
+  text-shadow: 
+    2px 2px 0px #ffbe0b,
+    3.5px 3.5px 0px #8b1d43;
 }
 
-[data-theme="gameboy"] .letter-date {
+/* 标题底部状态栏：日期 + 2人联机模式 */
+.marquee-meta-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1.5px dashed #d3cebe;
+  padding-top: 8px;
+  margin-top: 6px;
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(7.5px, 2vw, 9px);
+  font-size: clamp(6.5px, 1.7vw, 7.5px);
   color: #70757d;
-  text-align: right;
-  margin-bottom: 14px;
 }
 
+.coop-mode-pill {
+  color: #2b9348;
+  background: #e8f5e9;
+  border: 1px solid #2b9348;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* 称呼便签 */
 .gamer-salutation-wrap {
   display: inline-block;
   background: #e9ecef;
@@ -209,7 +239,7 @@
   color: #8b1d43;
 }
 
-/* 6. 相册：通关存档画框与控制器边距优化 */
+/* 6. 相册：通关存档画框 */
 [data-theme="gameboy"] .photo-slider-wrapper {
   margin-bottom: 12px;
 }
@@ -255,14 +285,11 @@
   color: #2b2b2b;
 }
 
-/* ==========================================================================
-   【重构：掌机顶部间距放大，彻底消除与上方轮播按钮的重叠】
-   ========================================================================== */
+/* 7. 3D 掌机与前后夹层卡槽机构 */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
-  /* 增大顶部外边距至 105px~125px，彻底容纳拔出态卡带与指引标签的高光投影 */
   margin: clamp(105px, 22vw, 125px) auto clamp(26px, 6vw, 36px) auto;
   padding: 16px 14px 20px;
   background: #d8d5cd;
@@ -277,7 +304,6 @@
   z-index: 2;
 }
 
-/* 顶部完整卡槽机构总容器 */
 .cartridge-bay-assembly {
   position: relative;
   width: 154px;
@@ -286,7 +312,6 @@
   z-index: 5;
 }
 
-/* 1. 后层：深邃卡槽内壁暗仓 */
 .cart-slot-cavity-back {
   position: absolute;
   bottom: 0;
@@ -302,7 +327,6 @@
   z-index: 1;
 }
 
-/* 2. 中层：真 3D 实体黄色卡带 */
 .cartridge-3d-unit {
   position: absolute;
   bottom: 0;
@@ -316,12 +340,10 @@
   user-select: none;
 }
 
-/* 插入卡槽状态 */
 .cartridge-3d-unit.is-inserted {
   transform: translateY(14px);
 }
 
-/* 卡带实体黄色外壳 */
 .cart-shell-body {
   position: relative;
   width: 100%;
@@ -342,7 +364,6 @@
   align-items: center;
 }
 
-/* 顶部半月形凹槽 + GAME BOY 浮雕 */
 .cart-thumb-recess {
   width: 88%;
   height: 12px;
@@ -363,7 +384,6 @@
   text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
 }
 
-/* 四道防滑咬花螺纹 */
 .cart-ribbed-grips {
   display: flex;
   flex-direction: column;
@@ -379,7 +399,6 @@
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* 铭牌贴纸 */
 .cart-game-sticker {
   width: 88%;
   height: 20px;
@@ -395,7 +414,6 @@
   color: #8b1d43;
 }
 
-/* 镀金引脚 */
 .cart-pcb-pins {
   position: absolute;
   bottom: 0;
@@ -423,7 +441,6 @@
   opacity: 0;
 }
 
-/* 悬浮指引气泡 */
 .cart-hover-guide-tag {
   position: absolute;
   top: -24px;
@@ -451,7 +468,6 @@
   display: none;
 }
 
-/* 3. 前层：外壳前唇 */
 .cart-slot-front-lip {
   position: absolute;
   bottom: -4px;
