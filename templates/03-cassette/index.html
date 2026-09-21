@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;900&family=Montserrat:wght@500;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=interactive_deck" />
+  <!-- 防缓存标识 -->
+  <link rel="stylesheet" href="style.css?v=pencil_tactile" />
 </head>
 <body>
 
@@ -52,7 +52,7 @@
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
             <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
@@ -61,7 +61,7 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 2. 复古卡带歌词折页（J-Card）信纸主体 -->
+      <!-- 2. 复古卡带歌词折页信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
         <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2d2433" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -107,7 +107,7 @@
           </div>
         </div>
 
-        <!-- 【全新重度拟物 3D 磁带舱：支持 A/B 面 3D 翻转 + 随身听机械按键排 + 齿轮手动卷带】 -->
+        <!-- 【重磅拟物 3D 实体磁带舱：支持 A/B 面翻转 + 机械琴键 + 触觉铅笔卷带寻宝】 -->
         <div class="cassette-deck-station">
           <div class="deck-header">
             <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING SIDE A ✦</span>
@@ -134,12 +134,14 @@
                 </div>
 
                 <div class="cassette-window-deep">
-                  <div class="tape-ribbon-left"></div>
-                  <div class="tape-ribbon-right"></div>
-                  <div class="spool-gear is-playing" id="spoolFrontLeft" title="Click to manually roll tape">
+                  <div class="tape-ribbon-left" id="tapeRibbonLeft"></div>
+                  <div class="tape-ribbon-right" id="tapeRibbonRight"></div>
+                  
+                  <!-- 齿轮带点击卷带提示 -->
+                  <div class="spool-gear is-playing" id="spoolFrontLeft" title="Click to manually roll tape with pencil!">
                     <div class="spool-hub"></div>
                   </div>
-                  <div class="spool-gear is-playing" id="spoolFrontRight" title="Click to manually roll tape">
+                  <div class="spool-gear is-playing" id="spoolFrontRight" title="Click to manually roll tape with pencil!">
                     <div class="spool-hub"></div>
                   </div>
                 </div>
@@ -190,29 +192,25 @@
             </div>
           </div>
 
-          <div class="cassette-flip-hint">✦ TAP CASSETTE TO FLIP A/B SIDES · CLICK SPOOLS TO ROLL ✦</div>
+          <div class="cassette-flip-hint">✦ TAP CASSETTE TO FLIP · CLICK SPOOLS TO ROLL WITH PENCIL ✦</div>
 
-          <!-- 【随身听 4 键机械控制排】 -->
+          <!-- 随身听 4 键机械控制排 -->
           <div class="walkman-keys-console">
-            <!-- 倒带键 -->
             <button class="walkman-key key-rewind" id="keyRewind" title="Hold to Rewind">
               <span class="key-icon">◀◀</span>
               <span class="key-label">REWIND</span>
             </button>
-            <!-- 播放/暂停键 -->
             <button class="walkman-key" id="keyPlayPause" title="Play or Pause">
               <span class="key-icon" id="playPauseIcon">⏸</span>
               <span class="key-label" id="playPauseLabel">PAUSE</span>
             </button>
-            <!-- 3D 翻面键 -->
             <button class="walkman-key" id="keyFlip" title="Flip Side A/B">
               <span class="key-icon">🔄</span>
               <span class="key-label">FLIP A/B</span>
             </button>
-            <!-- 手动卷带键 -->
             <button class="walkman-key" id="keyRoll" title="Manual Pencil Roll">
               <span class="key-icon">✏️</span>
-              <span class="key-label">ROLL</span>
+              <span class="key-label">PENCIL</span>
             </button>
           </div>
 
@@ -220,6 +218,12 @@
           <div class="rewind-success-banner" id="rewindBanner" style="display:none;">
             <div class="rewind-stamp-embossed">✦ TAPE REWOUND · CLEAN SLATE ♡ ✦</div>
             <p class="rewind-subtext">We've rewound back to where everything felt gentle and loving. Let's start fresh together!</p>
+          </div>
+
+          <!-- 【专属惊喜彩蛋：铅笔卷满 5 次弹出的绝密便签】 -->
+          <div class="manual-roll-easter-egg" id="easterEggBox" style="display:none;">
+            <div class="egg-header">✦ TAPE REPAIRED · HIDDEN VOICEMAIL UNLOCKED ✦</div>
+            <div class="egg-message">"You tightened every loose bit of my heart with that pencil. No more tangles, only love for you! ♡"</div>
           </div>
         </div>
 
@@ -253,7 +257,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=interactive_deck"></script>
+  <script src="data.js?v=pencil_tactile"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -311,13 +315,14 @@
     }
 
     /* ==========================================================================
-       【重磅互动：3D 磁带实体随身听把玩引擎】
+       【重度拟物音效与实体卡带把玩引擎】
        ========================================================================== */
     const cassetteFlipper = document.getElementById('cassetteFlipper');
     const allSpools = document.querySelectorAll('.spool-gear');
     const deckStatusPill = document.getElementById('deckStatusPill');
     const lcdTimer = document.getElementById('lcdTimer');
     const rewindBanner = document.getElementById('rewindBanner');
+    const easterEggBox = document.getElementById('easterEggBox');
 
     const keyRewind = document.getElementById('keyRewind');
     const keyPlayPause = document.getElementById('keyPlayPause');
@@ -330,7 +335,84 @@
     let isPlaying = true;
     let isRewinding = false;
 
-    // 1. 【玩法一：3D A/B 面翻转】
+    // Web Audio 上下文单例
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // 1. 【高保真倒带啸叫音效 - 声音清晰有力】
+    function playRewindSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        // 主电机锯齿波
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.type = 'sawtooth';
+        osc1.frequency.setValueAtTime(320, now);
+        osc1.frequency.exponentialRampToValueAtTime(2400, now + 0.45);
+        osc1.frequency.exponentialRampToValueAtTime(380, now + 1.2);
+
+        gain1.gain.setValueAtTime(0.01, now);
+        gain1.gain.linearRampToValueAtTime(0.35, now + 0.1); // 大音量饱满
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        // 次级齿轮高频啸叫
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(640, now);
+        osc2.frequency.exponentialRampToValueAtTime(3200, now + 0.5);
+        osc2.frequency.exponentialRampToValueAtTime(450, now + 1.2);
+
+        gain2.gain.setValueAtTime(0.01, now);
+        gain2.gain.linearRampToValueAtTime(0.18, now + 0.1);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+
+        osc1.start(now);
+        osc1.stop(now + 1.2);
+        osc2.start(now);
+        osc2.stop(now + 1.2);
+      } catch(e) {}
+    }
+
+    // 2. 【实体机械棘轮卡嗒声 - 模拟铅笔拨齿轮触感】
+    function playRatchetClickSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        // 快速频率突降脉冲 (模拟塑料卡齿弹开声)
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.04);
+
+        gain.gain.setValueAtTime(0.28, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } catch(e) {}
+    }
+
+    // 3. 【玩法一：3D A/B 面翻转】
     function toggleCassetteFlip() {
       isSideB = !isSideB;
       if (isSideB) {
@@ -346,34 +428,14 @@
     cassetteFlipper.addEventListener('click', toggleCassetteFlip);
     keyFlip.addEventListener('click', (e) => { e.stopPropagation(); toggleCassetteFlip(); });
 
-    // 2. 【玩法二：复古倒带电平音效合成器 (Web Audio API 纯代码合成无需下载)】
-    function playRewindSound() {
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(320, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(1600, audioCtx.currentTime + 0.6);
-        osc.frequency.exponentialRampToValueAtTime(280, audioCtx.currentTime + 1.2);
-        gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 1.2);
-      } catch(e) {}
-    }
-
+    // 4. 【玩法二：清晰响亮的倒带仪式】
     keyRewind.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isRewinding) return;
       isRewinding = true;
 
-      // 播放复古倒带音效
       playRewindSound();
 
-      // 齿轮极速逆转
       allSpools.forEach(s => {
         s.classList.remove('is-playing');
         s.classList.add('is-rewinding');
@@ -383,7 +445,6 @@
       deckStatusPill.style.color = "#ff007f";
       deckStatusPill.style.backgroundColor = "#fff0f5";
 
-      // 液晶数码屏极速回跳
       let countdown = 342;
       const timerInt = setInterval(() => {
         countdown = Math.max(0, countdown - 38);
@@ -413,7 +474,7 @@
       }, 1200);
     });
 
-    // 3. 【随身听播放 / 暂停琴键】
+    // 5. 【随身听播放 / 暂停琴键】
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
@@ -441,34 +502,58 @@
     keyPlayPause.addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
     audioBtn.addEventListener('click', (e) => { e.stopPropagation(); togglePlayPause(); });
 
-    // 4. 【玩法三：情怀铅笔卷带机制 (Manual Roll)】
-    let currentRollAngle = 0;
-    function manualTapeRoll() {
-      currentRollAngle += 60;
+    // 6. 【玩法三：铅笔手动卷带触觉系统 + 5 次卷满解锁惊喜彩蛋】
+    let rollCount = 0;
+    let gearAngle = 0;
+    const requiredRolls = 5;
+    let eggUnlocked = false;
+
+    function manualPencilRoll() {
+      playRatchetClickSound(); // 触发真实咬合卡嗒声
+
+      gearAngle += 60;
       allSpools.forEach(s => {
-        s.style.transform = `rotate(${currentRollAngle}deg)`;
+        s.style.transform = `rotate(${gearAngle}deg)`;
       });
-      deckStatusPill.innerText = "✏️ MANUAL TAPE WINDING... ♡";
-      setTimeout(() => {
-        allSpools.forEach(s => s.style.transform = '');
-        if (isPlaying) {
-          deckStatusPill.innerText = isSideB ? "✦ PLAYING SIDE B ✦" : "✦ PLAYING SIDE A ✦";
+
+      if (!eggUnlocked) {
+        rollCount++;
+        deckStatusPill.innerText = `✏️ TIGHTENING TAPE... [${rollCount}/${requiredRolls}]`;
+        deckStatusPill.style.color = "#d9480f";
+        deckStatusPill.style.backgroundColor = "#fff4e6";
+
+        if (rollCount >= requiredRolls) {
+          eggUnlocked = true;
+          // 达成 5 次修复，弹出绝密彩蛋
+          setTimeout(() => {
+            easterEggBox.style.display = 'block';
+            deckStatusPill.innerText = "✦ TAPE TENSION 100% · SLACK REPAIRED ♡ ✦";
+            deckStatusPill.style.color = "#2b9348";
+            deckStatusPill.style.borderColor = "#2b9348";
+            deckStatusPill.style.backgroundColor = "#e8f5e9";
+            lcdTimer.innerText = "FIXED [100%]";
+            lcdTimer.style.color = "#ffbe0b";
+            createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 45);
+          }, 350);
         }
-      }, 400);
+      } else {
+        deckStatusPill.innerText = "✏️ MANUAL ROLL: RUNNING PERFECTLY ♡";
+      }
     }
-    keyRoll.addEventListener('click', (e) => { e.stopPropagation(); manualTapeRoll(); });
+
+    keyRoll.addEventListener('click', (e) => { e.stopPropagation(); manualPencilRoll(); });
     allSpools.forEach(s => {
-      s.addEventListener('click', (e) => { e.stopPropagation(); manualTapeRoll(); });
+      s.addEventListener('click', (e) => { e.stopPropagation(); manualPencilRoll(); });
     });
 
-    // 刮刮乐设置
+    // 刮刮乐
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答设置
+    // 逃跑问答
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawayQuestionSection').style.display = 'none';
     } else {
@@ -515,6 +600,9 @@
     envelope.addEventListener('click', (e) => {
       if (isLetterOpened) return;
       isLetterOpened = true;
+
+      // 首次用户手势激活 AudioContext，确保音效畅通无阻
+      getAudioContext();
 
       launchEnvelopeBurst();
 
