@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=fix_cart_overlap" />
+  <link rel="stylesheet" href="style.css?v=marquee_title_v3" />
 </head>
 <body>
 
@@ -77,12 +77,15 @@
           <div class="hud-item"><span>TIME:</span><span class="hud-val">∞</span></div>
         </div>
 
-        <div class="pixel-stage-header">
-          <div class="pixel-stage-pill">✦ WORLD 1-1: CO-OP RESURRECTION ✦</div>
+        <!-- 【全新：清晰明确的 8-Bit 游戏标题招牌展板，杜绝报错假感】 -->
+        <div class="game-title-marquee-box">
+          <div class="marquee-badge-top">★ MAIN MISSION / 主线任务 ★</div>
+          <h1 class="letter-title" id="letterHeadline"></h1>
+          <div class="marquee-meta-bottom">
+            <span id="letterDate"></span>
+            <span class="coop-mode-pill">● 2-PLAYER CO-OP</span>
+          </div>
         </div>
-
-        <div class="letter-date" id="letterDate"></div>
-        <h1 class="letter-title" id="letterHeadline"></h1>
 
         <div>
           <div class="gamer-salutation-wrap">
@@ -111,7 +114,7 @@
           </div>
         </div>
 
-        <!-- 【3D 掌机 + 前后夹层卡槽机构】 -->
+        <!-- 3D 掌机与前后夹层卡槽机构 -->
         <div class="gameboy-console-station">
           
           <div class="cartridge-bay-assembly">
@@ -306,7 +309,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=fix_cart_overlap"></script>
+  <script src="data.js?v=marquee_title_v3"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
