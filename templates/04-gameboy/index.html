@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=fix_gameboy_v2" />
+  <link rel="stylesheet" href="style.css?v=rpg_battle_and_blow" />
 </head>
 <body>
 
@@ -51,7 +51,6 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 【彻底修复：纯正对称饱满的 8-Bit 像素红心，绝对杜绝任何切角】 -->
             <svg class="seal-pixel-heart" viewBox="0 0 16 16" width="22" height="22">
               <rect x="3" y="3" width="4" height="2" fill="#ffffff" />
               <rect x="9" y="3" width="4" height="2" fill="#ffffff" />
@@ -67,14 +66,16 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 2. DMG-01 官方说明书任务信纸 -->
+      <!-- 2. DMG-01 官方任务信纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
-        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2b2b2b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="25" y="25" width="50" height="50" rx="4" />
-          <rect x="35" y="35" width="30" height="24" rx="2" />
-          <circle cx="45" cy="65" r="3" />
-        </svg>
+        <!-- 8-Bit 街机 HUD 抬头仪表盘 -->
+        <div class="arcade-hud-header">
+          <div class="hud-item"><span>1UP:</span><span class="hud-val">SHEN</span></div>
+          <div class="hud-item"><span>STAGE:</span><span class="hud-val">1-1</span></div>
+          <div class="hud-item"><span>COINS:</span><span class="hud-val">★99</span></div>
+          <div class="hud-item"><span>TIME:</span><span class="hud-val">∞</span></div>
+        </div>
 
         <div class="pixel-stage-header">
           <div class="pixel-stage-pill">✦ WORLD 1-1: CO-OP RESURRECTION ✦</div>
@@ -110,11 +111,15 @@
           </div>
         </div>
 
-        <!-- 【重度拟物 3D 初代掌机 DMG-01 与投币复活台】 -->
+        <!-- 【重度拟物 3D 初代掌机 DMG-01 + 实体卡带插拔吹气修复】 -->
         <div class="gameboy-console-station">
-          <div class="console-top-groove"></div>
+          <!-- 实体可插拔黄色卡带 -->
+          <div class="cartridge-eject-zone" id="cartridgeEjectZone" title="Click to eject/insert cartridge!">
+            <div class="game-cartridge-body" id="cartridgeText">
+              <span>● LOVE CART</span>
+            </div>
+          </div>
 
-          <!-- 屏幕外框与 CRT 点阵液晶屏 -->
           <div class="gameboy-screen-bezel">
             <div class="battery-led-indicator" id="batteryLed"></div>
             <div class="battery-text">BATTERY</div>
@@ -136,7 +141,6 @@
             </div>
           </div>
 
-          <!-- 控制区：十字键 + A/B 键 + 扬声器孔 -->
           <div class="console-controls-area">
             <div class="dpad-cross" id="dpadCross" title="Click D-pad for 8-bit blip">
               <div class="dpad-axis-v"></div>
@@ -146,11 +150,10 @@
 
             <div class="ab-buttons-rig">
               <div class="gameboy-btn" id="btnB" title="Press B">B</div>
-              <div class="gameboy-btn" id="btnA" title="Press A">A</div>
+              <div class="gameboy-btn" id="btnA" title="Press A to Advance Dialogue!">A</div>
             </div>
           </div>
 
-          <!-- 扬声器孔 -->
           <div class="speaker-grill-slits">
             <div class="speaker-slit"></div>
             <div class="speaker-slit"></div>
@@ -158,7 +161,7 @@
             <div class="speaker-slit"></div>
           </div>
 
-          <!-- 【彻底重构：高保真 3D 金属街机代币 (绝无 Emoji 缺失变形)】 -->
+          <!-- 3D 金属街机代币 -->
           <div class="coin-insert-station" id="coinStation">
             <div class="token-coin-3d" id="tokenCoin" title="Click to Insert Coin!">
               <div class="coin-star-relief">★</div>
@@ -169,21 +172,67 @@
             </div>
           </div>
 
-          <!-- 通关盖章 -->
           <div class="clear-banner-stamp" id="clearBanner" style="display:none;">
             <div class="clear-stamp-embossed">✦ STAGE CLEAR · TRUCE UNLOCKED! ✦</div>
             <p class="clear-subtext">You inserted the coin and saved our co-op game! 100% Love & infinite lives restored!</p>
           </div>
         </div>
 
-        <!-- 正文打字机 -->
-        <div class="letter-body-text" id="letterBody">
-          <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+        <!-- RPG 对话框正文 -->
+        <div class="rpg-dialogue-box">
+          <div class="dialogue-speaker-tag">💬 PLAYER 1 SPEAKS:</div>
+          <div class="letter-body-text" id="letterBody">
+            <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+          </div>
+
+          <!-- 【有实际交互使命的 ▼：点击或按掌机 A 键开启战斗和解盘】 -->
+          <div class="dialogue-prompt-bar" id="dialoguePromptBar" style="display:none;" onclick="triggerBattleConsole()">
+            <span>PRESS [A] TO ACTION</span>
+            <span class="dialogue-next-arrow">▼</span>
+          </div>
+        </div>
+
+        <!-- 【全新专属：8-Bit RPG 遇敌和解指令盘 (彻底取代盖章券)】 -->
+        <div class="rpg-battle-console" id="rpgBattleConsole" style="display:none;">
+          <div class="battle-prompt-text" id="battlePromptText">
+            WILD MISUNDERSTANDING APPEARED!<br/>WHAT WILL PLAYER 2 DO?
+          </div>
+
+          <div class="battle-commands-grid">
+            <button class="battle-cmd-btn" onclick="executeBattleCmd('FIGHT')">⚔️ FIGHT</button>
+            <button class="battle-cmd-btn" onclick="executeBattleCmd('BAG')">🎒 BAG</button>
+            <button class="battle-cmd-btn" onclick="executeBattleCmd('TALK')">💬 TALK</button>
+            <button class="battle-cmd-btn" onclick="executeBattleCmd('SPARE')">❤️ SPARE</button>
+          </div>
+
+          <!-- 即时战斗结算文字 -->
+          <div class="battle-result-dialog" id="battleResultDialog"></div>
+
+          <!-- 道具背包浮层 -->
+          <div class="item-bag-inventory" id="itemBagInventory">
+            <div class="inventory-title">✦ SELECT AN ITEM TO USE: ✦</div>
+            <div class="inventory-items-row">
+              <div class="inv-item-slot" onclick="useItem('Boba Milk Tea (+50 HP)')">🧋 BOBA TEA</div>
+              <div class="inv-item-slot" onclick="useItem('Sweet Hug Elixir')">🫂 WARM HUG</div>
+              <div class="inv-item-slot" onclick="useItem('Truce Donut')">🍩 SWEET DONUT</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 亲密度经验条与署名落款 -->
+        <div class="affection-exp-bar-wrap">
+          <div class="exp-label-meta">
+            <span>AFFECTION LEVEL</span>
+            <span>LV.99 MAX (LEVEL UP!)</span>
+          </div>
+          <div class="exp-track-outer">
+            <div class="exp-track-fill"></div>
+          </div>
         </div>
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 【全新卡带金手指刮刮乐 (无遮挡文字)】 -->
+        <!-- 卡带金手指 PCB 刮刮乐 -->
         <div class="scratch-component" id="scratchComponent">
           <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH GOLD FINGER FOR SECRET CHEAT CODE ✦</div>
           <div class="scratch-card-box">
@@ -192,7 +241,7 @@
           </div>
         </div>
 
-        <!-- 8-Bit 像素逃跑问答 -->
+        <!-- 8-Bit 像素逃跑对白框 -->
         <div class="runaway-section" id="runawayQuestionSection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -201,12 +250,17 @@
           </div>
           <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
         </div>
+
+        <div class="cartridge-patent-footer">
+          MODEL NO. DMG-LOVE-2026 // MADE IN MY HEART<br/>
+          ✦ OFFICIAL NINTENDO-STYLE SEAL OF QUALITY & AFFECTION ✦
+        </div>
       </article>
 
     </div>
   </div>
 
-  <script src="data.js?v=fix_gameboy_v2"></script>
+  <script src="data.js?v=rpg_battle_and_blow"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -259,7 +313,7 @@
     }
 
     /* ==========================================================================
-       【8-Bit 像素音频合成引擎】
+       【8-Bit 像素全套音频合成引擎 (含吹气、开机、投币、按键声)】
        ========================================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -344,15 +398,132 @@
       } catch(e) {}
     }
 
+    // 【合成吹气风声 (Simulate Blowing on Cartridge)】
+    function playBlowWindSound() {
+      try {
+        const ctx = getAudioContext();
+        const bufferSize = ctx.sampleRate * 0.4;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.value = 800;
+        filter.Q.value = 3.0;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0.01, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start();
+      } catch(e) {}
+    }
+
+    /* ==========================================================================
+       【独创玩法一：实体卡带拔出与“吹气除尘”修复交互】
+       ========================================================================== */
+    const cartridgeZone = document.getElementById('cartridgeEjectZone');
+    const cartridgeText = document.getElementById('cartridgeText');
+    const lcdScreen = document.getElementById('lcdScreen');
+    let isCartridgeEjected = false;
+
+    cartridgeZone.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!isCartridgeEjected) {
+        // 1. 卡带弹出 -> 花屏故障
+        isCartridgeEjected = true;
+        cartridgeZone.classList.add('is-ejected');
+        lcdScreen.classList.add('is-glitched');
+        cartridgeText.innerHTML = "<span>💨 BLOW ME!</span>";
+        playBlipSound(180);
+      } else {
+        // 2. 吹气除尘 -> 屏幕复原
+        playBlowWindSound();
+        setTimeout(() => {
+          isCartridgeEjected = false;
+          cartridgeZone.classList.remove('is-ejected');
+          lcdScreen.classList.remove('is-glitched');
+          cartridgeText.innerHTML = "<span>● LOVE CART</span>";
+          playNintendoChime();
+          createBurstAt(window.innerWidth / 2, window.innerHeight * 0.4, 25);
+        }, 300);
+      }
+    });
+
+    /* ==========================================================================
+       【独创玩法二：8-Bit RPG 遇敌和解指令盘】
+       ========================================================================== */
+    const dialoguePromptBar = document.getElementById('dialoguePromptBar');
+    const rpgBattleConsole = document.getElementById('rpgBattleConsole');
+    const battleResultDialog = document.getElementById('battleResultDialog');
+    const itemBagInventory = document.getElementById('itemBagInventory');
+
+    function triggerBattleConsole() {
+      playBlipSound(880);
+      dialoguePromptBar.style.display = 'none';
+      rpgBattleConsole.style.display = 'block';
+    }
+
+    function executeBattleCmd(cmd) {
+      itemBagInventory.style.display = 'none';
+      battleResultDialog.style.display = 'block';
+
+      if (cmd === 'FIGHT') {
+        playBlipSound(150);
+        battleResultDialog.innerText = "❌ [PP: 0/0] Cannot attack your beloved Player 2! Miss!";
+        lcdScreen.style.animation = "screenGlitch 0.2s 2";
+        setTimeout(() => lcdScreen.style.animation = "", 400);
+      } else if (cmd === 'BAG') {
+        playBlipSound(520);
+        battleResultDialog.innerText = "🎒 Opened Item Bag! Select a love potion:";
+        itemBagInventory.style.display = 'block';
+      } else if (cmd === 'TALK') {
+        playBlipSound(660);
+        battleResultDialog.innerText = "💬 Player 1: 'No misunderstanding can change how much I love you!'";
+      } else if (cmd === 'SPARE') {
+        play1UpFanfare();
+        battleResultDialog.innerText = "❤️ SPARED! Peace restored! 100% Love & Infinite Lives Granted!";
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 45);
+      }
+    }
+
+    function useItem(itemName) {
+      playCoinSound();
+      itemBagInventory.style.display = 'none';
+      battleResultDialog.innerText = `✨ Used [${itemName}]! Restored all hearts & happiness! ♡`;
+      createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 30);
+    }
+
+    // 十字键与 A/B 键真联动
     const dpad = document.getElementById('dpadCross');
     const btnA = document.getElementById('btnA');
     const btnB = document.getElementById('btnB');
+
     dpad.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(320); });
-    btnA.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(660); });
-    btnB.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(520); });
+    btnA.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playBlipSound(660);
+      // 如果正文打字结束出现提示条，按 A 键直接推进开启 RPG 指令盘！
+      if (dialoguePromptBar.style.display !== 'none') {
+        triggerBattleConsole();
+      }
+    });
+    btnB.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playBlipSound(520);
+      itemBagInventory.style.display = 'none';
+    });
 
     /* ==========================================================================
-       【核心互动：投币满血复活仪式】
+       【投币复活仪式】
        ========================================================================== */
     const tokenCoin = document.getElementById('tokenCoin');
     const batteryLed = document.getElementById('batteryLed');
@@ -529,6 +700,8 @@
       textContainer.innerText = fullText;
       isTypingFinished = true;
       cursor.style.display = 'none';
+      // 打字完成后，显示带功能指示的 [A] 推进提示条
+      dialoguePromptBar.style.display = 'flex';
     }
 
     function initGoldFingerScratch() {
