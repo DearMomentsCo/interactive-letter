@@ -3,9 +3,9 @@
    独立样式库 - 仅对 templates/04-gameboy/ 生效，绝不污染其他模板
    ========================================================================== */
 
-/* 1. 视口背景：街机厅霓虹与像素深色背景 */
+/* 1. 视口背景：街机深邃暗调 */
 .letter-viewport[data-theme="gameboy"] {
-  background: radial-gradient(ellipse at 50% 35%, #252836 0%, #151722 75%, #0a0b10 100%);
+  background: radial-gradient(ellipse at 50% 35%, #222533 0%, #141620 75%, #08090d 100%);
   color: #1a1e24;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
   perspective: 1200px;
@@ -18,7 +18,7 @@
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.95),
     0 0 25px rgba(139, 172, 15, 0.2);
-  border: 2px solid #8c887b;
+  border: 2.5px solid #8c887b;
   position: relative;
 }
 
@@ -43,17 +43,18 @@
 [data-theme="gameboy"] .envelope-flap {
   background: linear-gradient(180deg, #edeae0 0%, #beb9ac 100%);
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5));
-  border-bottom: 2px solid #8c887b;
+  border-bottom: 2.5px solid #8c887b;
 }
 
-/* 3. 8-Bit 像素红心与金色品质火漆印 */
+/* 3. 【彻底修复：任天堂金色品质印章 + 8-Bit 像素红心】杜绝切角问题 */
 [data-theme="gameboy"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5277 0%, #8b1d43 65%, #4a051d 100%);
   border: 2.5px solid #ffbe0b;
   box-shadow: 
     0 12px 28px rgba(0, 0, 0, 0.85),
-    0 0 20px rgba(255, 190, 11, 0.5),
+    0 0 0 2px #8b1d43,
+    0 0 20px rgba(255, 190, 11, 0.6),
     inset 0 2px 4px rgba(255, 255, 255, 0.7),
     inset 0 -2px 4px rgba(0, 0, 0, 0.7);
   display: flex;
@@ -67,12 +68,11 @@
   50% { transform: scale(1.06); filter: brightness(1.15); }
 }
 
-[data-theme="gameboy"] .seal-heart-svg {
-  width: clamp(20px, 5vw, 24px);
-  height: clamp(20px, 5vw, 24px);
-  fill: #ffffff;
+[data-theme="gameboy"] .seal-pixel-heart {
+  width: 22px;
+  height: 22px;
   display: block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6));
 }
 
 [data-theme="gameboy"] .envelope-open-hint {
@@ -105,21 +105,33 @@
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-/* 5. 游戏通关信纸主体（像素方格任务折页） */
+/* 5. 【彻底重塑：GameBoy DMG-01 官方说明书专属信纸】告别单调方格纸 */
 [data-theme="gameboy"] .letter-sheet {
-  background-color: #f5f3ec;
-  background-image: 
-    linear-gradient(rgba(200, 196, 183, 0.45) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 196, 183, 0.45) 1px, transparent 1px);
-  background-size: 16px 16px;
+  background-color: #f7f5ed;
+  /* 初代点阵微距纹理 */
+  background-image: radial-gradient(#d3cebe 1.1px, transparent 1.1px);
+  background-size: 10px 10px;
   color: #1f2421;
   border: 2.5px solid #2b2b2b;
-  outline: 2px solid #8b1d43;
-  outline-offset: -8px;
   box-shadow: 
     0 35px 90px rgba(0, 0, 0, 0.9),
     0 15px 30px rgba(0, 0, 0, 0.25);
   position: relative;
+  overflow: hidden;
+}
+
+/* DMG-01 官方机身经典左侧双色彩条 (深洋红 + 海军蓝) */
+.letter-sheet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  width: 3px;
+  background: #8b1d43;
+  box-shadow: 4px 0 0 #003882;
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 [data-theme="gameboy"] .letter-watermark-svg {
@@ -129,12 +141,11 @@
   transform: translate(-50%, -50%);
   width: clamp(210px, 55vw, 290px);
   height: clamp(210px, 55vw, 290px);
-  opacity: 0.05;
+  opacity: 0.04;
   pointer-events: none;
   z-index: 1;
 }
 
-/* 顶部关卡指示徽章 */
 .pixel-stage-header {
   text-align: center;
   margin-bottom: clamp(14px, 3.5vw, 20px);
@@ -177,7 +188,6 @@
   margin-bottom: 14px;
 }
 
-/* 角色称呼便签 */
 .gamer-salutation-wrap {
   display: inline-block;
   background: #e9ecef;
@@ -193,7 +203,7 @@
   color: #8b1d43;
 }
 
-/* 6. 相册：通关存档画框 (MEMORY SAVE SLOT) */
+/* 6. 相册设计 */
 [data-theme="gameboy"] .photo-card-front,
 [data-theme="gameboy"] .photo-card-back {
   background: #ffffff;
@@ -230,7 +240,7 @@
   color: #2b2b2b;
 }
 
-/* 7. 【核心专属拟物：3D 初代掌机 DMG-01 与投币复活台】 */
+/* 7. 【重度拟物 3D 初代掌机 DMG-01】 */
 .gameboy-console-station {
   position: relative;
   width: 100%;
@@ -239,7 +249,7 @@
   padding: 20px 14px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
-  border-radius: 12px 12px 36px 12px; /* 经典右下角弧度大倒角 */
+  border-radius: 12px 12px 36px 12px;
   box-shadow: 
     0 16px 36px rgba(0, 0, 0, 0.4),
     inset 2px 2px 2px rgba(255, 255, 255, 0.8),
@@ -249,7 +259,6 @@
   z-index: 2;
 }
 
-/* 掌机顶部边框与卡带槽示意 */
 .console-top-groove {
   width: 60%;
   height: 6px;
@@ -260,7 +269,6 @@
   box-shadow: inset 0 2px 3px rgba(0,0,0,0.3);
 }
 
-/* 屏幕外框（深灰蓝黑经典外框） */
 .gameboy-screen-bezel {
   background: #5d6474;
   border-radius: 8px 8px 24px 8px;
@@ -271,7 +279,6 @@
   margin-bottom: 16px;
 }
 
-/* 电源红/绿 LED 指示灯 */
 .battery-led-indicator {
   position: absolute;
   top: 24px;
@@ -279,13 +286,13 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #d90429; /* 濒死红灯 */
+  background: #d90429;
   box-shadow: 0 0 8px #d90429;
   transition: all 0.3s ease;
 }
 
 .battery-led-indicator.is-powered {
-  background: #38b000; /* 复活满电常亮绿灯 */
+  background: #38b000;
   box-shadow: 0 0 10px #38b000;
 }
 
@@ -298,7 +305,6 @@
   color: #adb5bd;
 }
 
-/* 经典黄绿点阵液晶显示屏 (带 CRT 扫描线) */
 .gameboy-lcd-screen {
   background-color: #8bac0f;
   background-image: 
@@ -322,7 +328,6 @@
   text-shadow: 1px 1px 0 rgba(155, 188, 15, 0.8);
 }
 
-/* 血量条 */
 .hp-gauge-container {
   margin: 8px 0;
 }
@@ -346,7 +351,7 @@
 }
 
 .hp-gauge-fill {
-  width: 5%; /* 濒死 5% 闪烁 */
+  width: 5%;
   height: 100%;
   background: #d90429;
   transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.4s ease;
@@ -371,7 +376,6 @@
   margin-top: 4px;
 }
 
-/* 掌机下部控制区：十字键 + A/B 键 + 投币槽 */
 .console-controls-area {
   display: flex;
   justify-content: space-between;
@@ -380,7 +384,6 @@
   margin-bottom: 12px;
 }
 
-/* 经典炭黑四向十字键 */
 .dpad-cross {
   position: relative;
   width: 66px;
@@ -416,11 +419,10 @@
   transform: translateY(2px);
 }
 
-/* 斜切酒红 A/B 弹簧键 */
 .ab-buttons-rig {
   display: flex;
   gap: 12px;
-  transform: rotate(-25deg); /* 经典掌机倾斜角 */
+  transform: rotate(-25deg);
   margin-top: -6px;
 }
 
@@ -447,7 +449,6 @@
   box-shadow: 0 2px 0 #42081c;
 }
 
-/* 掌机斜切扬声器排孔 (右下角) */
 .speaker-grill-slits {
   display: flex;
   flex-direction: column;
@@ -465,66 +466,79 @@
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
 }
 
-/* 投币复活交互区 */
+/* 【彻底重构：高保真纯 3D 金属街机代币 (消除 Emoji 扁平变形)】 */
 .coin-insert-station {
   margin-top: 14px;
-  padding: 12px;
+  padding: 14px 12px;
   background: #c5c1b4;
-  border: 2px solid #8c887b;
-  border-radius: 6px;
+  border: 2.5px solid #8c887b;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.arcade-token-coin {
-  width: 44px;
-  height: 44px;
+.token-coin-3d {
+  position: relative;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff176 0%, #fbc02d 55%, #f57f17 100%);
-  border: 2px solid #fff59d;
-  box-shadow: 0 4px 0 #bc5100, 0 8px 16px rgba(0,0,0,0.35);
+  background: radial-gradient(circle at 35% 30%, #fff59d 0%, #fbc02d 45%, #f57f17 80%, #bc5100 100%);
+  border: 2px solid #fffde7;
+  box-shadow: 
+    0 5px 0 #8c3b00,
+    0 8px 18px rgba(0, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
   cursor: pointer;
-  animation: coinBounce 2s infinite ease-in-out;
+  animation: coinHover 2s infinite ease-in-out;
   user-select: none;
+  transition: transform 0.2s ease;
 }
 
-@keyframes coinBounce {
+@keyframes coinHover {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-.arcade-token-coin:active {
-  transform: scale(0.9);
+.token-coin-3d:active {
+  transform: scale(0.92);
+}
+
+/* 代币中心的浮雕五角星 */
+.coin-star-relief {
+  font-size: 20px;
+  color: #fff9c4;
+  text-shadow: 0 1px 2px rgba(140, 59, 0, 0.8), 0 -1px 1px rgba(255, 255, 255, 0.9);
+  line-height: 1;
 }
 
 .coin-slot-gate {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .slot-opening {
-  width: 52px;
-  height: 6px;
+  width: 54px;
+  height: 7px;
   background: #111;
-  border-radius: 3px;
-  box-shadow: inset 0 2px 3px rgba(0,0,0,0.9), 0 1px 1px rgba(255,255,255,0.6);
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.95), 0 1px 1px rgba(255,255,255,0.7);
 }
 
 .slot-text {
   font-family: 'Press Start 2P', monospace;
   font-size: 7.5px;
-  color: #495057;
+  color: #3e444a;
   letter-spacing: 0.5px;
 }
 
-/* 通关复活戳 */
+/* 通关盖章 */
 .clear-banner-stamp {
   margin-top: 14px;
   animation: stampSlam 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -564,6 +578,7 @@
   color: #1f2421;
   min-height: 120px;
   margin-bottom: 20px;
+  padding-left: 10px; /* 避开左侧彩条 */
 }
 
 [data-theme="gameboy"] .typewriter-cursor {
@@ -587,7 +602,7 @@
   color: #8b1d43;
 }
 
-/* 9. 【专属金手指刮刮乐 (Gold-Finger Circuit)】 */
+/* 9. 【彻底修复：卡带金手指 PCB 刮刮乐】移除覆盖在文字上的 Emoji 伪元素 */
 [data-theme="gameboy"] .scratch-hint-text {
   color: #495057;
   font-family: 'Press Start 2P', monospace;
@@ -603,30 +618,28 @@
   outline-offset: -6px;
   background: #ffffff;
   box-shadow: 3px 3px 0px #2b2b2b;
+  position: relative;
 }
 
+/* 彻底移除遮挡文字的 ::before 和 ::after */
 [data-theme="gameboy"] .scratch-card-box::before,
 [data-theme="gameboy"] .scratch-card-box::after {
-  content: "👾";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 14px;
-  z-index: 5;
-  pointer-events: none;
+  display: none !important;
 }
-[data-theme="gameboy"] .scratch-card-box::before { left: 14px; }
-[data-theme="gameboy"] .scratch-card-box::after { right: 14px; }
 
 [data-theme="gameboy"] .scratch-secret-reveal {
   font-family: 'Press Start 2P', monospace;
   color: #8b1d43;
-  font-size: clamp(9.5px, 2.5vw, 11px);
-  line-height: 1.5;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  line-height: 1.6;
   background: #fdfbf7;
+  /* 留足安全边距，绝不遮挡任何文字 */
+  padding: 16px 20px !important;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-/* 10. 8-Bit RPG 像素逃跑对白框 */
+/* 10. 8-Bit 像素逃跑对白框 */
 [data-theme="gameboy"] .runaway-section {
   border-top: 2px dashed #9b9688;
   padding-top: 24px;
