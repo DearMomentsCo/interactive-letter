@@ -46,7 +46,7 @@
   border-bottom: 2.5px solid #8c887b;
 }
 
-/* 3. 任天堂金色品质印章 + 8-Bit 像素红心（饱满无缺角） */
+/* 3. 任天堂金色品质印章 + 8-Bit 像素红心 */
 [data-theme="gameboy"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5277 0%, #8b1d43 65%, #4a051d 100%);
@@ -246,18 +246,20 @@
   color: #2b2b2b;
 }
 
-/* 7. 【3D 初代掌机 DMG-01 + 卡带吹气除尘系统】 */
+/* ==========================================================================
+   【重构：高保真 3D 掌机与实体可插拔卡带】
+   ========================================================================== */
 .gameboy-console-station {
   position: relative;
   width: 100%;
   max-width: 350px;
-  margin: clamp(24px, 6vw, 34px) auto clamp(26px, 6vw, 36px) auto;
+  margin: clamp(40px, 9vw, 48px) auto clamp(26px, 6vw, 36px) auto;
   padding: 24px 14px 20px;
   background: #d8d5cd;
   border: 3px solid #8c887b;
   border-radius: 12px 12px 36px 12px;
   box-shadow: 
-    0 16px 36px rgba(0, 0, 0, 0.4),
+    0 18px 38px rgba(0, 0, 0, 0.45),
     inset 2px 2px 2px rgba(255, 255, 255, 0.8),
     inset -2px -2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -265,40 +267,121 @@
   z-index: 2;
 }
 
-/* 【专属巧思：实体可拔插复古黄色卡带】 */
-.cartridge-eject-zone {
+/* 机身顶部深槽 */
+.cartridge-housing-slot {
   position: absolute;
-  top: -24px;
+  top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 130px;
-  height: 32px;
+  width: 156px;
+  height: 16px;
+  background: #252830;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 3px 6px #000, 0 1px 1px rgba(255,255,255,0.4);
+  z-index: 3;
+}
+
+/* 【全新立体 3D 黄色卡带实体】 */
+.cartridge-eject-zone {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 144px;
+  height: 48px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 8;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cartridge-eject-zone:hover {
+  filter: brightness(1.05);
 }
 
 .game-cartridge-body {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: #f5af19;
-  border: 2px solid #8c887b;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  background: linear-gradient(180deg, #ffc107 0%, #e0a800 100%);
+  border: 2px solid #6c757d;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2px rgba(255, 255, 255, 0.8),
+    inset 2px 0 2px rgba(255, 255, 255, 0.4),
+    inset -2px 0 2px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+  box-sizing: border-box;
+}
+
+/* 卡带手握防滑横条螺纹 (Grip Ribs) */
+.cartridge-grip-ribs {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+  width: 75%;
+  margin-bottom: 4px;
+}
+
+.grip-rib {
+  height: 2px;
+  background: #b28704;
+  border-radius: 1px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* 卡带贴纸标 */
+.cartridge-label-plate {
+  width: 82%;
+  height: 22px;
+  background: #ffffff;
+  border: 1px solid #333333;
+  border-radius: 2px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 6.5px;
-  color: #2b2b2b;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 6px;
+  color: #d90429;
 }
 
-.cartridge-eject-zone.is-ejected .game-cartridge-body {
-  transform: translateY(-22px);
-  background: #ffbe0b;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+/* 拔出状态（露出底部金手指） */
+.cartridge-eject-zone.is-ejected {
+  transform: translate(-50%, -32px);
 }
 
+.cartridge-pins-exposed {
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  width: 80%;
+  height: 6px;
+  background: #1e1e1e;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.pin-gold {
+  width: 3px;
+  height: 4px;
+  background: #ffd700;
+  box-shadow: 0 0 2px #ffc107;
+}
+
+.cartridge-eject-zone.is-ejected .cartridge-pins-exposed {
+  opacity: 1;
+}
+
+/* 屏幕外框与点阵液晶屏 */
 .gameboy-screen-bezel {
   background: #5d6474;
   border-radius: 8px 8px 24px 8px;
@@ -348,21 +431,50 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  transition: filter 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 卡带拔出时的花屏乱码滤镜 */
-.gameboy-lcd-screen.is-glitched {
-  animation: screenGlitch 0.2s infinite;
-  filter: contrast(180%) hue-rotate(90deg);
+/* 【任天堂真死机花屏乱码遮罩层】 */
+.glitch-crash-screen {
+  position: absolute;
+  inset: 0;
+  background: #8bac0f;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+  animation: glitchTear 0.12s infinite;
 }
 
-@keyframes screenGlitch {
-  0% { transform: translate(0); }
-  25% { transform: translate(-2px, 1.5px); }
-  50% { transform: translate(1.5px, -1px); }
-  75% { transform: translate(-1px, -1.5px); }
-  100% { transform: translate(0); }
+@keyframes glitchTear {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, -2px); }
+  100% { transform: translate(1px, 2px); }
+}
+
+.glitch-noise-tiles {
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #0f380f;
+  word-break: break-all;
+  user-select: none;
+  font-weight: 900;
+}
+
+.glitch-alert-banner {
+  margin-top: 6px;
+  background: #0f380f;
+  color: #8bac0f;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6.5px;
+  padding: 3px 6px;
 }
 
 .screen-headline {
@@ -608,7 +720,7 @@
   line-height: 1.5;
 }
 
-/* 8. RPG 对话框信纸正文排版 */
+/* 8. RPG 对话框正文 */
 .rpg-dialogue-box {
   background: #ffffff;
   border: 2.5px solid #2b2b2b;
@@ -652,7 +764,6 @@
 
 @keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-/* 【功能性 ▼ 提示条：点击或按 A 键开启 RPG 指令盘】 */
 .dialogue-prompt-bar {
   display: flex;
   align-items: center;
@@ -677,9 +788,7 @@
   50% { transform: translateY(4px); }
 }
 
-/* ==========================================================================
-   【彻底重构：全新 8-Bit RPG 遇敌和解指令盘 (绝非白旗优惠券)】
-   ========================================================================== */
+/* 8-Bit RPG 遇敌和解指令盘 */
 .rpg-battle-console {
   margin: 22px 0 20px 0;
   padding: 14px 12px;
@@ -701,7 +810,6 @@
   padding-bottom: 8px;
 }
 
-/* 2x2 经典掌机指令宫格 */
 .battle-commands-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -735,7 +843,6 @@
   box-shadow: 0 0 0;
 }
 
-/* 战斗行动即时反馈对话框 */
 .battle-result-dialog {
   margin-top: 10px;
   padding: 8px 10px;
@@ -750,7 +857,6 @@
   display: none;
 }
 
-/* 道具背包浮层 */
 .item-bag-inventory {
   margin-top: 10px;
   padding: 10px;
@@ -840,7 +946,7 @@
   line-height: 1.6;
 }
 
-/* 9. 金手指刮刮乐 (纯净无遮挡) */
+/* 9. 金手指刮刮乐 */
 [data-theme="gameboy"] .scratch-hint-text {
   color: #495057;
   font-family: 'Press Start 2P', monospace;
