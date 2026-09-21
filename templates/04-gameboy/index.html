@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Insert Coin To Continue - Retro GameBoy</title>
+
+  <!-- Google 像素与复古字体库 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../core.css" />
+  <link rel="stylesheet" href="style.css?v=gameboy_dmg" />
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <audio id="bgAudio" loop preload="auto"></audio>
+  <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
+
+  <!-- 密码锁系统 -->
+  <div class="passcode-overlay" id="passcodeOverlay">
+    <div class="passcode-box">
+      <div class="passcode-title" style="font-family:'Press Start 2P', monospace; font-size:9.5px; line-height:1.5;">ENTER 4-DIGIT GAMEBOY PASSCODE</div>
+      <div class="passcode-inputs">
+        <input type="password" maxlength="1" class="passcode-digit" autofocus />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+      </div>
+      <div class="passcode-error" id="passcodeError" style="font-family:'Press Start 2P', monospace; font-size:8px;"></div>
+    </div>
+  </div>
+
+  <div class="letter-viewport" data-theme="gameboy">
+    <div class="letter-container" id="letterContainer">
+      
+      <!-- 1. 卡带盒信封包装 -->
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-body">
+          <span class="envelope-corner-star star-tl">✦</span>
+          <span class="envelope-corner-star star-tr">✦</span>
+          <span class="envelope-corner-star star-bl">✦</span>
+          <span class="envelope-corner-star star-br">✦</span>
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="wax-seal-wrapper">
+          <div class="wax-seal" id="waxSealBtn">
+            <!-- 绝对完整的标准爱心矢量 -->
+            <svg class="seal-heart-svg" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="envelope-open-hint">✦ PRESS START TO UNBOX ✦</div>
+        <div class="envelope-burst-stage" id="burstStage"></div>
+      </div>
+
+      <!-- 2. 游戏通关任务信纸 -->
+      <article class="letter-sheet" id="letterSheet">
+        
+        <svg class="letter-watermark-svg" viewBox="0 0 100 100" fill="none" stroke="#2b2b2b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="25" y="25" width="50" height="50" rx="4" />
+          <rect x="35" y="35" width="30" height="24" rx="2" />
+          <circle cx="45" cy="65" r="3" />
+        </svg>
+
+        <div class="pixel-stage-header">
+          <div class="pixel-stage-pill">✦ WORLD 1-1: CO-OP RESURRECTION ✦</div>
+        </div>
+
+        <div class="letter-date" id="letterDate"></div>
+        <h1 class="letter-title" id="letterHeadline"></h1>
+
+        <div>
+          <div class="gamer-salutation-wrap">
+            <span class="gamer-salutation-label" id="letterSalutation"></span>
+          </div>
+        </div>
+
+        <!-- 3D 翻转 + < 1 / N > 全画幅相册播放器 -->
+        <div class="photo-slider-wrapper" id="photosSection">
+          <div class="photo-flip-card" id="photoCard">
+            <div class="photo-flip-inner">
+              <div class="photo-card-front">
+                <img id="frontPhotoImg" src="" alt="Memory Save Slot" />
+              </div>
+              <div class="photo-card-back">
+                <p class="photo-caption-text" id="backCaptionText"></p>
+              </div>
+            </div>
+          </div>
+          <div class="photo-flip-hint">✦ TAP SAVE SLOT TO REVIEW MEMORY ✦</div>
+
+          <div class="photo-nav-controls" id="photoNavControls">
+            <button class="photo-nav-btn" id="prevPhotoBtn" title="Previous Slot">‹</button>
+            <span class="photo-page-indicator" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn" title="Next Slot">›</button>
+          </div>
+        </div>
+
+        <!-- 【重度拟物 3D 初代掌机 DMG-01 与投币复活台】 -->
+        <div class="gameboy-console-station">
+          <div class="console-top-groove"></div>
+
+          <!-- 屏幕外框与 CRT 点阵液晶屏 -->
+          <div class="gameboy-screen-bezel">
+            <div class="battery-led-indicator" id="batteryLed"></div>
+            <div class="battery-text">BATTERY</div>
+
+            <div class="gameboy-lcd-screen" id="lcdScreen">
+              <div class="screen-headline" id="screenHeadline">✦ CRITICAL DAMAGE! ✦</div>
+              
+              <div class="hp-gauge-container">
+                <div class="hp-gauge-label">
+                  <span>P1 & P2 HP</span>
+                  <span id="hpPercentText">1% 💔</span>
+                </div>
+                <div class="hp-gauge-bar">
+                  <div class="hp-gauge-fill" id="hpFill"></div>
+                </div>
+              </div>
+
+              <div class="screen-prompt-text" id="screenPrompt">CONTINUE? 09... [INSERT COIN]</div>
+            </div>
+          </div>
+
+          <!-- 控制区：十字键 + A/B 键 + 扬声器孔 -->
+          <div class="console-controls-area">
+            <!-- 经典炭黑十字键（支持点击把玩） -->
+            <div class="dpad-cross" id="dpadCross" title="Click D-pad for 8-bit blip">
+              <div class="dpad-axis-v"></div>
+              <div class="dpad-axis-h"></div>
+              <div class="dpad-center-circle"></div>
+            </div>
+
+            <!-- 斜切酒红 A/B 键（支持点击把玩） -->
+            <div class="ab-buttons-rig">
+              <div class="gameboy-btn" id="btnB" title="Press B">B</div>
+              <div class="gameboy-btn" id="btnA" title="Press A">A</div>
+            </div>
+          </div>
+
+          <!-- 斜切扬声器孔 -->
+          <div class="speaker-grill-slits">
+            <div class="speaker-slit"></div>
+            <div class="speaker-slit"></div>
+            <div class="speaker-slit"></div>
+            <div class="speaker-slit"></div>
+          </div>
+
+          <!-- 投币复活槽与金色像素代币 -->
+          <div class="coin-insert-station" id="coinStation">
+            <div class="arcade-token-coin" id="tokenCoin" title="Click to Insert Coin!">🪙</div>
+            <div class="coin-slot-gate">
+              <div class="slot-opening"></div>
+              <span class="slot-text">INSERT COIN TO CONTINUE</span>
+            </div>
+          </div>
+
+          <!-- 通关盖章 -->
+          <div class="clear-banner-stamp" id="clearBanner" style="display:none;">
+            <div class="clear-stamp-embossed">✦ STAGE CLEAR · TRUCE UNLOCKED! ✦</div>
+            <p class="clear-subtext">You inserted the coin and saved our co-op game! 100% Love & infinite lives restored!</p>
+          </div>
+        </div>
+
+        <!-- 正文打字机 -->
+        <div class="letter-body-text" id="letterBody">
+          <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+        </div>
+
+        <div class="letter-closing" id="letterClosing"></div>
+
+        <!-- 专属金手指防伪刮刮乐 -->
+        <div class="scratch-component" id="scratchComponent">
+          <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH GOLD FINGER FOR SECRET CHEAT CODE ✦</div>
+          <div class="scratch-card-box">
+            <div class="scratch-secret-reveal" id="scratchSecretReveal"></div>
+            <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 8-Bit 像素逃跑问答 -->
+        <div class="runaway-section" id="runawayQuestionSection">
+          <div class="runaway-question" id="runawayQuestion"></div>
+          <div class="runaway-buttons-wrapper">
+            <button class="btn-yes" id="btnYes">▶ START ♡</button>
+            <button class="btn-no" id="btnNo">⏏ GIVE UP</button>
+          </div>
+          <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <script src="data.js?v=gameboy_dmg"></script>
+
+  <script>
+    document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
+    document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "INSERT COIN TO CONTINUE";
+    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || 'PLAYER 2,';
+    document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
+
+    // 相册播放器
+    const photoCard = document.getElementById('photoCard');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+
+    if (photosList.length > 0) {
+      function renderPhoto(index) {
+        photoCard.classList.remove('is-flipped');
+        frontImg.src = photosList[index].url;
+        backCaption.innerText = photosList[index].caption || '';
+        pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
+      }
+      renderPhoto(0);
+
+      photoCard.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('is-flipped');
+      });
+
+      if (photosList.length <= 1) {
+        navControls.style.display = 'none';
+      } else {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
+          renderPhoto(currentPhotoIdx);
+        });
+      }
+    } else {
+      document.getElementById('photosSection').style.display = 'none';
+    }
+
+    /* ==========================================================================
+       【8-Bit 像素音频合成引擎 (Nintendo Ding + Coin + 1-UP Fanfare)】
+       ========================================================================== */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // 1. 任天堂开机叮声 (Nintendo Ding)
+    function playNintendoChime() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(1046.5, now); // C6
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.2);
+      } catch(e) {}
+    }
+
+    // 2. 经典街机投币声 (Arcade Coin Ding-Ding!)
+    function playCoinSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(987.77, now); // B5
+        osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } catch(e) {}
+    }
+
+    // 3. 经典满血复活 / 1-UP 旋律
+    function play1UpFanfare() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const notes = [330, 392, 659, 523, 587, 784];
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+          gain.gain.setValueAtTime(0.22, now + idx * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.12);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.09);
+          osc.stop(now + idx * 0.09 + 0.12);
+        });
+      } catch(e) {}
+    }
+
+    // 4. 按键卡嗒短促音 (Blip)
+    function playBlipSound(freq = 440) {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } catch(e) {}
+    }
+
+    // 十字键与 A/B 键把玩点击
+    const dpad = document.getElementById('dpadCross');
+    const btnA = document.getElementById('btnA');
+    const btnB = document.getElementById('btnB');
+    dpad.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(320); });
+    btnA.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(660); });
+    btnB.addEventListener('click', (e) => { e.stopPropagation(); playBlipSound(520); });
+
+    /* ==========================================================================
+       【核心互动：投币满血复活仪式】
+       ========================================================================== */
+    const tokenCoin = document.getElementById('tokenCoin');
+    const batteryLed = document.getElementById('batteryLed');
+    const hpFill = document.getElementById('hpFill');
+    const hpPercentText = document.getElementById('hpPercentText');
+    const screenHeadline = document.getElementById('screenHeadline');
+    const screenPrompt = document.getElementById('screenPrompt');
+    const coinStation = document.getElementById('coinStation');
+    const clearBanner = document.getElementById('clearBanner');
+
+    let isHealed = false;
+
+    tokenCoin.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isHealed) return;
+      isHealed = true;
+
+      // 1. 投币声响起
+      playCoinSound();
+
+      // 代币落入投币孔动画
+      tokenCoin.style.transition = 'all 0.35s ease-in';
+      tokenCoin.style.transform = 'translateY(24px) scale(0.4)';
+      tokenCoin.style.opacity = '0';
+
+      setTimeout(() => {
+        // 2. 触发 1-UP 狂欢音效
+        play1UpFanfare();
+
+        // 3. 电池 LED 转为常亮绿灯
+        batteryLed.classList.add('is-powered');
+
+        // 4. 血条瞬间暴涨至 100% MAX
+        hpFill.classList.add('is-healed');
+        hpPercentText.innerText = "100% MAX! ❤️";
+        screenHeadline.innerText = "✦ CO-OP RESTORED! ✦";
+        screenPrompt.innerText = "LEVEL 1-1 CLEARED! READY!";
+
+        coinStation.style.display = 'none';
+        clearBanner.style.display = 'block';
+
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.65, 45);
+      }, 400);
+    });
+
+    // 刮刮乐设置
+    if (!LETTER_DATA.enableScratch) {
+      document.getElementById('scratchComponent').style.display = 'none';
+    } else {
+      document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
+    }
+
+    // 逃跑问答设置
+    if (!LETTER_DATA.enableRunaway) {
+      document.getElementById('runawayQuestionSection').style.display = 'none';
+    } else {
+      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
+      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
+    }
+
+    // 密码锁
+    const overlay = document.getElementById('passcodeOverlay');
+    if (!LETTER_DATA.passcode) {
+      overlay.classList.add('is-unlocked');
+    } else {
+      const inputs = document.querySelectorAll('.passcode-digit');
+      const errorEl = document.getElementById('passcodeError');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) inputs[index + 1].focus();
+          checkPasscode();
+        });
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) inputs[index - 1].focus();
+        });
+      });
+      function checkPasscode() {
+        let entered = Array.from(inputs).map(i => i.value).join('');
+        if (entered.length === 4) {
+          if (entered === LETTER_DATA.passcode) {
+            overlay.classList.add('is-unlocked');
+          } else {
+            errorEl.innerText = "WRONG CODE! RETRY.";
+            inputs.forEach(i => i.value = '');
+            inputs[0].focus();
+          }
+        }
+      }
+    }
+
+    // 音频控制
+    const audio = document.getElementById('bgAudio');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (LETTER_DATA.audioUrl) {
+      audio.src = LETTER_DATA.audioUrl;
+      audioBtn.style.display = 'flex';
+    }
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) { audio.play(); audioBtn.innerText = '🔊'; }
+      else { audio.pause(); audioBtn.innerText = '🔇'; }
+    });
+
+    // 开信喷涌
+    const container = document.getElementById('letterContainer');
+    const envelope = document.getElementById('envelopeWrapper');
+    const burstStage = document.getElementById('burstStage');
+    let isLetterOpened = false;
+
+    envelope.addEventListener('click', (e) => {
+      if (isLetterOpened) return;
+      isLetterOpened = true;
+
+      getAudioContext();
+      playNintendoChime(); // 开机叮声
+      launchEnvelopeBurst();
+
+      setTimeout(() => {
+        container.classList.add('is-opened');
+        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.enableScratch) initGoldFingerScratch();
+        startSmartTypewriter(LETTER_DATA.body);
+      }, 550);
+    });
+
+    function launchEnvelopeBurst() {
+      const burstIcons = ['🪙', '❤️', '🍄', '⭐', '👾', '🪙', '✨'];
+      burstIcons.forEach((icon, i) => {
+        const el = document.createElement('div');
+        el.className = 'burst-element';
+        el.innerText = icon;
+        burstStage.appendChild(el);
+
+        const angle = (Math.PI * 2 * i) / burstIcons.length + (Math.random() - 0.5) * 0.5;
+        const dist = Math.random() * 120 + 80;
+        const destX = Math.cos(angle) * dist;
+        const destY = Math.sin(angle) * dist - 80;
+        const rot = (Math.random() - 0.5) * 60;
+
+        el.animate([
+          { opacity: 0, transform: 'translate3d(0, 0, 0) scale(0.2) rotate(0deg)' },
+          { opacity: 1, transform: `translate3d(${destX * 0.5}px, ${destY * 0.5}px, 60px) scale(1.3) rotate(${rot * 0.5}deg)`, offset: 0.4 },
+          { opacity: 0, transform: `translate3d(${destX}px, ${destY}px, 120px) scale(1) rotate(${rot}deg)` }
+        ], {
+          duration: 900,
+          easing: 'cubic-bezier(0.15, 0.85, 0.35, 1.2)',
+          fill: 'forwards'
+        });
+      });
+    }
+
+    let typewriterTimer = null;
+    let isTypingFinished = false;
+    const textContainer = document.getElementById('typewriterText');
+    const cursor = document.getElementById('typewriterCursor');
+
+    function startSmartTypewriter(fullText) {
+      if (!fullText) return;
+      let currentIndex = 0;
+      const totalLen = fullText.length;
+      let typingSpeed = totalLen > 500 ? 10 : (totalLen > 250 ? 18 : 35);
+
+      typewriterTimer = setInterval(() => {
+        if (currentIndex < totalLen) {
+          textContainer.innerText += fullText.charAt(currentIndex);
+          currentIndex++;
+        } else {
+          finishTyping(fullText);
+        }
+      }, typingSpeed);
+
+      document.addEventListener('click', function onSkipClick() {
+        if (!isTypingFinished) {
+          finishTyping(fullText);
+          document.removeEventListener('click', onSkipClick);
+        }
+      });
+    }
+
+    function finishTyping(fullText) {
+      clearInterval(typewriterTimer);
+      textContainer.innerText = fullText;
+      isTypingFinished = true;
+      cursor.style.display = 'none';
+    }
+
+    // 【金手指金黄电路刮刮乐】
+    function initGoldFingerScratch() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const box = canvas.parentElement;
+      const ctx = canvas.getContext('2d');
+      const w = box.clientWidth || 320;
+      const h = box.clientHeight || 76;
+      canvas.width = w;
+      canvas.height = h;
+
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#f5af19');
+      grad.addColorStop(0.5, '#e65c00');
+      grad.addColorStop(1, '#ffbe0b');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // 金手指导电触片金黄条纹
+      ctx.fillStyle = "rgba(255, 255, 255, 0.18)";
+      for (let i = 0; i < w; i += 8) {
+        ctx.fillRect(i, 0, 4, h);
+      }
+
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(14, 10, w - 28, h - 20);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 9px "Press Start 2P", monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('SCRATCH GOLD FINGER', w / 2, h / 2);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(clientX - rect.left, clientY - rect.top, 18, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => isScratching = true);
+      window.addEventListener('mouseup', () => isScratching = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: true });
+      window.addEventListener('touchend', () => isScratching = false);
+      canvas.addEventListener('touchmove', scratch, { passive: true });
+    }
+
+    // 逃跑问答
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const modal = document.getElementById('runawaySuccessModal');
+
+    function runaway(e) {
+      e.stopPropagation();
+      const x = (Math.random() - 0.5) * 220;
+      const y = (Math.random() - 0.5) * 130;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    btnNo.addEventListener('mouseover', runaway);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
+
+    btnYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.style.display = 'block';
+      btnNo.style.display = 'none';
+      btnYes.style.transform = 'scale(1.08)';
+      play1UpFanfare();
+      createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 50);
+    });
+
+    // 像素微光背景粒子
+    const pCanvas = document.getElementById('particle-canvas');
+    const pCtx = pCanvas.getContext('2d');
+    let floatingDust = [];
+    let sparkleStars = [];
+
+    function resizeCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 30; i++) {
+      floatingDust.push({
+        x: Math.random() * pCanvas.width,
+        y: Math.random() * pCanvas.height,
+        size: Math.random() * 2.5 + 1,
+        speedY: Math.random() * 0.3 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.2,
+        opacity: Math.random() * 0.4 + 0.15
+      });
+    }
+
+    function createBurstAt(originX, originY, count = 35) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 6 + 2.5;
+        sparkleStars.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * velocity,
+          vy: Math.sin(angle) * velocity,
+          size: Math.random() * 4 + 2,
+          color: Math.random() > 0.4 ? '#ffbe0b' : '#38b000',
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015
+        });
+      }
+    }
+
+    function renderLoop() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+      pCtx.fillStyle = '#ffbe0b';
+      floatingDust.forEach(p => {
+        p.y -= p.speedY;
+        p.x += p.speedX;
+        if (p.y < 0) {
+          p.y = pCanvas.height + 10;
+          p.x = Math.random() * pCanvas.width;
+        }
+        pCtx.globalAlpha = p.opacity;
+        pCtx.fillRect(p.x, p.y, p.size, p.size); // 像素方块粒子
+      });
+
+      for (let i = sparkleStars.length - 1; i >= 0; i--) {
+        const s = sparkleStars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.08;
+        s.life -= s.decay;
+
+        if (s.life <= 0) {
+          sparkleStars.splice(i, 1);
+          continue;
+        }
+
+        pCtx.save();
+        pCtx.globalAlpha = s.life;
+        pCtx.fillStyle = s.color;
+        pCtx.fillRect(s.x, s.y, s.size, s.size);
+        pCtx.restore();
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>
