@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Cinzel:wght@700;900&family=Montserrat:wght@500;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 防缓存标识 -->
-  <link rel="stylesheet" href="style.css?v=pencil_tactile" />
+  <!-- 防缓存版本标记 -->
+  <link rel="stylesheet" href="style.css?v=heart_fix" />
 </head>
 <body>
 
@@ -51,8 +51,9 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            <!-- 【核心修复：绝对完整、对称饱满的标准爱心矢量，杜绝任何切角缺损】 -->
+            <svg class="seal-heart-svg" viewBox="0 0 24 24" width="22" height="22" style="overflow: visible; display: block;">
+              <path fill="#ffffff" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
           </div>
         </div>
@@ -107,7 +108,7 @@
           </div>
         </div>
 
-        <!-- 【重磅拟物 3D 实体磁带舱：支持 A/B 面翻转 + 机械琴键 + 触觉铅笔卷带寻宝】 -->
+        <!-- 3D 实体磁带舱：支持 A/B 面翻转 + 机械琴键 + 触觉铅笔卷带寻宝 -->
         <div class="cassette-deck-station">
           <div class="deck-header">
             <span class="deck-status-pill" id="deckStatusPill">✦ DECK STATUS: PLAYING SIDE A ✦</span>
@@ -137,7 +138,6 @@
                   <div class="tape-ribbon-left" id="tapeRibbonLeft"></div>
                   <div class="tape-ribbon-right" id="tapeRibbonRight"></div>
                   
-                  <!-- 齿轮带点击卷带提示 -->
                   <div class="spool-gear is-playing" id="spoolFrontLeft" title="Click to manually roll tape with pencil!">
                     <div class="spool-hub"></div>
                   </div>
@@ -220,7 +220,7 @@
             <p class="rewind-subtext">We've rewound back to where everything felt gentle and loving. Let's start fresh together!</p>
           </div>
 
-          <!-- 【专属惊喜彩蛋：铅笔卷满 5 次弹出的绝密便签】 -->
+          <!-- 铅笔卷满 5 次弹出的绝密便签 -->
           <div class="manual-roll-easter-egg" id="easterEggBox" style="display:none;">
             <div class="egg-header">✦ TAPE REPAIRED · HIDDEN VOICEMAIL UNLOCKED ✦</div>
             <div class="egg-message">"You tightened every loose bit of my heart with that pencil. No more tangles, only love for you! ♡"</div>
@@ -257,7 +257,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=pencil_tactile"></script>
+  <script src="data.js?v=heart_fix"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -347,13 +347,12 @@
       return audioCtx;
     }
 
-    // 1. 【高保真倒带啸叫音效 - 声音清晰有力】
+    // 1. 【高保真倒带啸叫音效】
     function playRewindSound() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
 
-        // 主电机锯齿波
         const osc1 = ctx.createOscillator();
         const gain1 = ctx.createGain();
         osc1.type = 'sawtooth';
@@ -362,10 +361,9 @@
         osc1.frequency.exponentialRampToValueAtTime(380, now + 1.2);
 
         gain1.gain.setValueAtTime(0.01, now);
-        gain1.gain.linearRampToValueAtTime(0.35, now + 0.1); // 大音量饱满
+        gain1.gain.linearRampToValueAtTime(0.35, now + 0.1);
         gain1.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
 
-        // 次级齿轮高频啸叫
         const osc2 = ctx.createOscillator();
         const gain2 = ctx.createGain();
         osc2.type = 'triangle';
@@ -389,13 +387,12 @@
       } catch(e) {}
     }
 
-    // 2. 【实体机械棘轮卡嗒声 - 模拟铅笔拨齿轮触感】
+    // 2. 【实体机械棘轮卡嗒声】
     function playRatchetClickSound() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
 
-        // 快速频率突降脉冲 (模拟塑料卡齿弹开声)
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'square';
@@ -428,7 +425,7 @@
     cassetteFlipper.addEventListener('click', toggleCassetteFlip);
     keyFlip.addEventListener('click', (e) => { e.stopPropagation(); toggleCassetteFlip(); });
 
-    // 4. 【玩法二：清晰响亮的倒带仪式】
+    // 4. 【玩法二：响亮的倒带仪式】
     keyRewind.addEventListener('click', (e) => {
       e.stopPropagation();
       if (isRewinding) return;
@@ -509,7 +506,7 @@
     let eggUnlocked = false;
 
     function manualPencilRoll() {
-      playRatchetClickSound(); // 触发真实咬合卡嗒声
+      playRatchetClickSound();
 
       gearAngle += 60;
       allSpools.forEach(s => {
@@ -524,7 +521,6 @@
 
         if (rollCount >= requiredRolls) {
           eggUnlocked = true;
-          // 达成 5 次修复，弹出绝密彩蛋
           setTimeout(() => {
             easterEggBox.style.display = 'block';
             deckStatusPill.innerText = "✦ TAPE TENSION 100% · SLACK REPAIRED ♡ ✦";
@@ -601,9 +597,7 @@
       if (isLetterOpened) return;
       isLetterOpened = true;
 
-      // 首次用户手势激活 AudioContext，确保音效畅通无阻
       getAudioContext();
-
       launchEnvelopeBurst();
 
       setTimeout(() => {
