@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Our Story In Full Focus - Vintage View-Master 3D Reel</title>
+
+  <!-- Google 字体库 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../core.css" />
+  <link rel="stylesheet" href="style.css?v=viewmaster_v1" />
+</head>
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+
+  <audio id="bgAudio" loop preload="auto"></audio>
+  <button class="audio-toggle-btn" id="audioToggleBtn" title="Toggle Music" style="display:none;">🔊</button>
+
+  <!-- 密码锁系统 -->
+  <div class="passcode-overlay" id="passcodeOverlay">
+    <div class="passcode-box">
+      <div class="passcode-title" style="font-family:'Montserrat', sans-serif; font-size:10px; font-weight:800; letter-spacing:1.5px;">ENTER 4-DIGIT REEL PASSCODE</div>
+      <div class="passcode-inputs">
+        <input type="password" maxlength="1" class="passcode-digit" autofocus />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+        <input type="password" maxlength="1" class="passcode-digit" />
+      </div>
+      <div class="passcode-error" id="passcodeError" style="font-family:'Montserrat', sans-serif; font-size:9px;"></div>
+    </div>
+  </div>
+
+  <div class="letter-viewport" data-theme="viewmaster">
+    <div class="letter-container" id="letterContainer">
+      
+      <!-- 1. 圆形底片套信封包装 -->
+      <div class="envelope-wrapper" id="envelopeWrapper">
+        <div class="envelope-body">
+          <span class="envelope-corner-star star-tl">✦</span>
+          <span class="envelope-corner-star star-tr">✦</span>
+          <span class="envelope-corner-star star-bl">✦</span>
+          <span class="envelope-corner-star star-br">✦</span>
+        </div>
+
+        <div class="envelope-flap"></div>
+
+        <div class="wax-seal-wrapper">
+          <div class="wax-seal" id="waxSealBtn">
+            <!-- 绝对饱满的完整爱心矢量 -->
+            <svg class="seal-heart-svg" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="envelope-open-hint">✦ PULL LEVER TO OPEN REEL ✦</div>
+        <div class="envelope-burst-stage" id="burstStage"></div>
+      </div>
+
+      <!-- 2. 柯达冲印暖白卡纸信纸主体 -->
+      <article class="letter-sheet" id="letterSheet">
+        
+        <!-- 胶卷 HUD 抬头栏 -->
+        <div class="reel-hud-header">
+          <div class="hud-item"><span>REEL:</span><span class="hud-val">NO. 05</span></div>
+          <div class="hud-item"><span>FORMAT:</span><span class="hud-val">7 APERTURES</span></div>
+          <div class="hud-item"><span>OPTIC:</span><span class="hud-val">3D STEREO</span></div>
+        </div>
+
+        <!-- 幻灯片铭牌大标题展板 -->
+        <div class="viewmaster-title-marquee">
+          <div class="marquee-badge-top">★ VIEW-MASTER 3D REEL ★</div>
+          <h1 class="letter-title" id="letterHeadline"></h1>
+          <div class="marquee-meta-bottom">
+            <span id="letterDate"></span>
+            <span class="reel-frame-pill" id="reelFramePill">FRAME 1 OF 7</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="salutation-film-wrap">
+            <span class="salutation-film-label" id="letterSalutation"></span>
+          </div>
+        </div>
+
+        <!-- 【核心 3D 拟物台：红色双筒观片机 + 外露白色底片盘 + 下压金属扳手】 -->
+        <div class="viewmaster-3d-station">
+          
+          <!-- 顶部外露 7 孔白色底片盘 -->
+          <div class="reel-disc-assembly">
+            <div class="reel-disc-3d" id="reelDisc3D">
+              <div class="reel-spoke spoke-1"></div>
+              <div class="reel-spoke spoke-2"></div>
+              <div class="reel-spoke spoke-3"></div>
+              <div class="reel-spoke spoke-4"></div>
+              <div class="reel-spoke spoke-5"></div>
+              <div class="reel-spoke spoke-6"></div>
+              <div class="reel-spoke spoke-7"></div>
+            </div>
+          </div>
+
+          <!-- 观片机大红机身 -->
+          <div class="viewmaster-housing-body">
+            <div class="viewer-top-slot-cut"></div>
+
+            <!-- 右侧活动金属切片拨杆 -->
+            <div class="viewer-advance-lever" id="advanceLever" title="Pull Lever to Advance Frame!">
+              <div class="lever-stem"></div>
+              <div class="lever-knob"></div>
+            </div>
+            <div class="lever-guide-hint">PULL ⬇</div>
+
+            <!-- 双目橡胶取景目镜 -->
+            <div class="viewer-eyepieces-visor">
+              <div class="slide-optical-chamber">
+                <img class="slide-photo-img" id="slidePhotoImg" src="" alt="View-Master Slide Photo" />
+                <div class="lens-reflection-arc"></div>
+                <div class="light-leak-overlay" id="lightLeak"></div>
+              </div>
+            </div>
+
+            <!-- 幻灯片下方的手写旁白小卡 -->
+            <div class="slide-caption-card" id="slideCaptionCard"></div>
+          </div>
+
+        </div>
+
+        <!-- 正文打字机展板 -->
+        <div class="viewmaster-letter-content">
+          <div class="slide-speaker-tag">● PROJECTED MEMORY // REEL NOTES:</div>
+          <div class="letter-body-text" id="letterBody">
+            <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
+          </div>
+        </div>
+
+        <div class="letter-closing" id="letterClosing"></div>
+
+        <!-- 柯达 35mm 胶卷底片刮刮乐 -->
+        <div class="scratch-component" id="scratchComponent">
+          <div class="scratch-hint-text" id="scratchHintText">✦ SCRATCH 35MM FILM STRIP TO REVEAL HIDDEN FRAME ✦</div>
+          <div class="scratch-card-box">
+            <div class="scratch-secret-reveal" id="scratchSecretReveal"></div>
+            <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 光学对焦逃跑问答 -->
+        <div class="runaway-section" id="runawayQuestionSection">
+          <div class="runaway-question" id="runawayQuestion"></div>
+          <div class="runaway-buttons-wrapper">
+            <button class="btn-yes" id="btnYes">👁️ IN FOCUS ♡</button>
+            <button class="btn-no" id="btnNo">💨 BLUR OUT</button>
+          </div>
+          <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
+        </div>
+
+        <!-- 底部胶卷冲印工作室质检标 -->
+        <div class="film-studio-footer-stamp">
+          CATALOG NO. VM-1939-LOVE // DEVELOPED IN FULL COLOR<br/>
+          ✦ GENUINE STEREOSCOPIC MEMORY DISC · FOCUS GUARANTEED ✦
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <script src="data.js?v=viewmaster_v1"></script>
+
+  <script>
+    document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
+    document.getElementById('letterHeadline').innerText = LETTER_DATA.headline || "OUR STORY IN FULL FOCUS";
+    document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || 'To My Favorite View,';
+    document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
+
+    // 照片幻灯片数据
+    const photosList = LETTER_DATA.photos || [];
+    let currentSlideIdx = 0;
+    const slideImg = document.getElementById('slidePhotoImg');
+    const slideCaption = document.getElementById('slideCaptionCard');
+    const reelFramePill = document.getElementById('reelFramePill');
+    const lightLeak = document.getElementById('lightLeak');
+
+    function renderSlide(index) {
+      if (photosList.length === 0) return;
+      slideImg.src = photosList[index].url;
+      slideCaption.innerText = photosList[index].caption || '';
+      reelFramePill.innerText = `FRAME ${index + 1} OF ${Math.max(7, photosList.length)}`;
+    }
+    renderSlide(0);
+
+    /* ==========================================================================
+       【高保真 Web Audio 音效：机械扳手下压卡齿切片声 (Chunk-Click!)】
+       ========================================================================== */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playLeverChunkClick() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        // 1. 重机械下压阻尼声 (Chunk)
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.type = 'triangle';
+        osc1.frequency.setValueAtTime(140, now);
+        osc1.frequency.exponentialRampToValueAtTime(45, now + 0.08);
+        gain1.gain.setValueAtTime(0.7, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.08);
+
+        // 2. 弹簧卡齿弹起清脆金属卡嗒声 (Click)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.type = 'square';
+        osc2.frequency.setValueAtTime(1800, now + 0.06);
+        osc2.frequency.exponentialRampToValueAtTime(300, now + 0.12);
+        gain2.gain.setValueAtTime(0.01, now);
+        gain2.gain.setValueAtTime(0.35, now + 0.06);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.06);
+        osc2.stop(now + 0.12);
+      } catch(e) {}
+    }
+
+    function playShutterOpenChime() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(1046.5, now + 0.15); // C6
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.8);
+      } catch(e) {}
+    }
+
+    /* ==========================================================================
+       【核心把玩交互：按压右侧金属拨杆 ➔ 胶卷盘旋转 ➔ 漏光切片】
+       ========================================================================== */
+    const advanceLever = document.getElementById('advanceLever');
+    const reelDisc = document.getElementById('reelDisc3D');
+    let reelRotationAngle = 0;
+    let isAdvancing = false;
+
+    function advanceFrame() {
+      if (isAdvancing) return;
+      isAdvancing = true;
+
+      // 拨杆下压动画与声音
+      advanceLever.classList.add('is-pressed');
+      playLeverChunkClick();
+
+      // 触发复古胶片过曝光晕 (Light Leak)
+      lightLeak.classList.add('is-leaking');
+
+      // 圆盘旋转 51.4 度（7孔圆盘一格）
+      reelRotationAngle += 51.4;
+      reelDisc.style.transform = `translateX(-50%) rotate(${reelRotationAngle}deg)`;
+
+      setTimeout(() => {
+        advanceLever.classList.remove('is-pressed');
+        lightLeak.classList.remove('is-leaking');
+
+        // 切换下一张幻灯片
+        if (photosList.length > 0) {
+          currentSlideIdx = (currentSlideIdx + 1) % photosList.length;
+          renderSlide(currentSlideIdx);
+        }
+
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.45, 20);
+        isAdvancing = false;
+      }, 160);
+    }
+
+    advanceLever.addEventListener('click', (e) => {
+      e.stopPropagation();
+      advanceFrame();
+    });
+
+    // 刮刮乐设置
+    if (!LETTER_DATA.enableScratch) {
+      document.getElementById('scratchComponent').style.display = 'none';
+    } else {
+      document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
+    }
+
+    // 逃跑问答设置
+    if (!LETTER_DATA.enableRunaway) {
+      document.getElementById('runawayQuestionSection').style.display = 'none';
+    } else {
+      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
+      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
+    }
+
+    // 密码锁
+    const overlay = document.getElementById('passcodeOverlay');
+    if (!LETTER_DATA.passcode) {
+      overlay.classList.add('is-unlocked');
+    } else {
+      const inputs = document.querySelectorAll('.passcode-digit');
+      const errorEl = document.getElementById('passcodeError');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) inputs[index + 1].focus();
+          checkPasscode();
+        });
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !e.target.value && index > 0) inputs[index - 1].focus();
+        });
+      });
+      function checkPasscode() {
+        let entered = Array.from(inputs).map(i => i.value).join('');
+        if (entered.length === 4) {
+          if (entered === LETTER_DATA.passcode) {
+            overlay.classList.add('is-unlocked');
+          } else {
+            errorEl.innerText = "WRONG CODE! CHECK REEL SLEEVE.";
+            inputs.forEach(i => i.value = '');
+            inputs[0].focus();
+          }
+        }
+      }
+    }
+
+    // 音频控制
+    const audio = document.getElementById('bgAudio');
+    const audioBtn = document.getElementById('audioToggleBtn');
+    if (LETTER_DATA.audioUrl) {
+      audio.src = LETTER_DATA.audioUrl;
+      audioBtn.style.display = 'flex';
+    }
+    audioBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) { audio.play(); audioBtn.innerText = '🔊'; }
+      else { audio.pause(); audioBtn.innerText = '🔇'; }
+    });
+
+    // 开信喷涌
+    const container = document.getElementById('letterContainer');
+    const envelope = document.getElementById('envelopeWrapper');
+    const burstStage = document.getElementById('burstStage');
+    let isLetterOpened = false;
+
+    envelope.addEventListener('click', (e) => {
+      if (isLetterOpened) return;
+      isLetterOpened = true;
+
+      getAudioContext();
+      playShutterOpenChime();
+      launchEnvelopeBurst();
+
+      setTimeout(() => {
+        container.classList.add('is-opened');
+        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.enableScratch) initFilmNegativeScratch();
+        startSmartTypewriter(LETTER_DATA.body);
+      }, 550);
+    });
+
+    function launchEnvelopeBurst() {
+      const burstIcons = ['🎞️', '📸', '✨', '❤️', '🎞️', '⭐', '✨'];
+      burstIcons.forEach((icon, i) => {
+        const el = document.createElement('div');
+        el.className = 'burst-element';
+        el.innerText = icon;
+        burstStage.appendChild(el);
+
+        const angle = (Math.PI * 2 * i) / burstIcons.length + (Math.random() - 0.5) * 0.5;
+        const dist = Math.random() * 120 + 80;
+        const destX = Math.cos(angle) * dist;
+        const destY = Math.sin(angle) * dist - 80;
+        const rot = (Math.random() - 0.5) * 60;
+
+        el.animate([
+          { opacity: 0, transform: 'translate3d(0, 0, 0) scale(0.2) rotate(0deg)' },
+          { opacity: 1, transform: `translate3d(${destX * 0.5}px, ${destY * 0.5}px, 60px) scale(1.3) rotate(${rot * 0.5}deg)`, offset: 0.4 },
+          { opacity: 0, transform: `translate3d(${destX}px, ${destY}px, 120px) scale(1) rotate(${rot}deg)` }
+        ], {
+          duration: 900,
+          easing: 'cubic-bezier(0.15, 0.85, 0.35, 1.2)',
+          fill: 'forwards'
+        });
+      });
+    }
+
+    let typewriterTimer = null;
+    let isTypingFinished = false;
+    const textContainer = document.getElementById('typewriterText');
+    const cursor = document.getElementById('typewriterCursor');
+
+    function startSmartTypewriter(fullText) {
+      if (!fullText) return;
+      let currentIndex = 0;
+      const totalLen = fullText.length;
+      let typingSpeed = totalLen > 500 ? 10 : (totalLen > 250 ? 18 : 35);
+
+      typewriterTimer = setInterval(() => {
+        if (currentIndex < totalLen) {
+          textContainer.innerText += fullText.charAt(currentIndex);
+          currentIndex++;
+        } else {
+          finishTyping(fullText);
+        }
+      }, typingSpeed);
+
+      document.addEventListener('click', function onSkipClick() {
+        if (!isTypingFinished) {
+          finishTyping(fullText);
+          document.removeEventListener('click', onSkipClick);
+        }
+      });
+    }
+
+    function finishTyping(fullText) {
+      clearInterval(typewriterTimer);
+      textContainer.innerText = fullText;
+      isTypingFinished = true;
+      cursor.style.display = 'none';
+    }
+
+    // 【柯达 35mm 胶卷底片刮刮乐 (带走纸齿孔效果)】
+    function initFilmNegativeScratch() {
+      const canvas = document.getElementById('scratchCanvas');
+      if (!canvas) return;
+      const box = canvas.parentElement;
+      const ctx = canvas.getContext('2d');
+      const w = box.clientWidth || 320;
+      const h = box.clientHeight || 76;
+      canvas.width = w;
+      canvas.height = h;
+
+      // 暗褐琥珀色胶片乳剂层
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#2d140e');
+      grad.addColorStop(0.5, '#4a2016');
+      grad.addColorStop(1, '#1b0906');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // 上下边缘绘制 35mm 胶卷走纸齿孔 (Sprocket Holes)
+      ctx.fillStyle = "#ffffff";
+      for (let x = 10; x < w - 10; x += 18) {
+        ctx.fillRect(x, 4, 10, 6); // 顶齿孔
+        ctx.fillRect(x, h - 10, 10, 6); // 底齿孔
+      }
+
+      ctx.strokeStyle = '#ffbe0b';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(10, 14, w - 20, h - 28);
+
+      ctx.fillStyle = '#ffbe0b';
+      ctx.font = 'bold 9.5px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.letterSpacing = '1px';
+      ctx.fillText('SCRATCH 35MM NEGATIVE FILM', w / 2, h / 2);
+
+      let isScratching = false;
+      function scratch(e) {
+        if (!isScratching) return;
+        const rect = canvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(clientX - rect.left, clientY - rect.top, 18, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => isScratching = true);
+      window.addEventListener('mouseup', () => isScratching = false);
+      canvas.addEventListener('mousemove', scratch);
+      canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: true });
+      window.addEventListener('touchend', () => isScratching = false);
+      canvas.addEventListener('touchmove', scratch, { passive: true });
+    }
+
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+    const modal = document.getElementById('runawaySuccessModal');
+
+    function runaway(e) {
+      e.stopPropagation();
+      const x = (Math.random() - 0.5) * 220;
+      const y = (Math.random() - 0.5) * 130;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    btnNo.addEventListener('mouseover', runaway);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
+
+    btnYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modal.style.display = 'block';
+      btnNo.style.display = 'none';
+      btnYes.style.transform = 'scale(1.08)';
+      playShutterOpenChime();
+      createBurstAt(window.innerWidth / 2, window.innerHeight * 0.7, 50);
+    });
+
+    // 背景光学粒子
+    const pCanvas = document.getElementById('particle-canvas');
+    const pCtx = pCanvas.getContext('2d');
+    let floatingDust = [];
+    let sparkleStars = [];
+
+    function resizeCanvas() {
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    for (let i = 0; i < 30; i++) {
+      floatingDust.push({
+        x: Math.random() * pCanvas.width,
+        y: Math.random() * pCanvas.height,
+        size: Math.random() * 2 + 0.8,
+        speedY: Math.random() * 0.3 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.2,
+        opacity: Math.random() * 0.4 + 0.15
+      });
+    }
+
+    function createBurstAt(originX, originY, count = 35) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 6 + 2.5;
+        sparkleStars.push({
+          x: originX,
+          y: originY,
+          vx: Math.cos(angle) * velocity,
+          vy: Math.sin(angle) * velocity,
+          size: Math.random() * 4 + 2,
+          color: Math.random() > 0.4 ? '#e62229' : '#ffbe0b',
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015
+        });
+      }
+    }
+
+    function renderLoop() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+
+      pCtx.fillStyle = '#ffbe0b';
+      floatingDust.forEach(p => {
+        p.y -= p.speedY;
+        p.x += p.speedX;
+        if (p.y < 0) {
+          p.y = pCanvas.height + 10;
+          p.x = Math.random() * pCanvas.width;
+        }
+        pCtx.globalAlpha = p.opacity;
+        pCtx.beginPath();
+        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        pCtx.fill();
+      });
+
+      for (let i = sparkleStars.length - 1; i >= 0; i--) {
+        const s = sparkleStars[i];
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.08;
+        s.life -= s.decay;
+
+        if (s.life <= 0) {
+          sparkleStars.splice(i, 1);
+          continue;
+        }
+
+        pCtx.save();
+        pCtx.globalAlpha = s.life;
+        pCtx.fillStyle = s.color;
+        pCtx.beginPath();
+        pCtx.arc(s.x, s.y, s.size * 0.5, 0, Math.PI * 2);
+        pCtx.fill();
+        pCtx.restore();
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+  </script>
+</body>
+</html>
