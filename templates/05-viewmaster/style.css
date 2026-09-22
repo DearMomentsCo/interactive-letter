@@ -1,0 +1,609 @@
+/* ==========================================================================
+   THEME 05: 复古双筒观片镜款 (VINTAGE VIEW-MASTER 3D REEL)
+   独立样式库 - 仅对 templates/05-viewmaster/ 生效，绝不影响其他模板
+   ========================================================================== */
+
+/* 1. 视口背景：深红褐与光学暗室调 */
+.letter-viewport[data-theme="viewmaster"] {
+  background: radial-gradient(ellipse at 50% 35%, #2c1b18 0%, #170d0b 75%, #0a0504 100%);
+  color: #212529;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  perspective: 1200px;
+}
+
+/* 2. 底片收纳封套信封 (Disc Sleeve Envelope) */
+[data-theme="viewmaster"] .envelope-wrapper {
+  background: #fdfaf3;
+  border-radius: 12px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.95),
+    0 0 30px rgba(230, 34, 41, 0.25);
+  border: 2.5px solid #d90429;
+  position: relative;
+}
+
+[data-theme="viewmaster"] .envelope-body {
+  border-radius: 12px;
+  background: linear-gradient(145deg, #fffbf5 0%, #f4eee1 100%);
+  outline: 2px dashed #e63946;
+  outline-offset: -7px;
+}
+
+[data-theme="viewmaster"] .envelope-corner-star {
+  position: absolute;
+  color: #e62229;
+  font-size: clamp(10px, 2.4vw, 12px);
+  font-weight: 900;
+}
+[data-theme="viewmaster"] .star-tl { top: 9px; left: 10px; }
+[data-theme="viewmaster"] .star-tr { top: 9px; right: 10px; }
+[data-theme="viewmaster"] .star-bl { bottom: 9px; left: 10px; }
+[data-theme="viewmaster"] .star-br { bottom: 9px; right: 10px; }
+
+[data-theme="viewmaster"] .envelope-flap {
+  background: linear-gradient(180deg, #ffffff 0%, #faede8 100%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  border-bottom: 2.5px solid #d90429;
+}
+
+/* 3. 凸透镜光学火漆封印（饱满无损 3D 红心） */
+[data-theme="viewmaster"] .wax-seal {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff5c7c 0%, #e62229 55%, #8b0000 100%);
+  border: 2.5px solid #ffbe0b;
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.85),
+    0 0 0 2px #e62229,
+    0 0 22px rgba(230, 34, 41, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: seal-pulse 2.8s infinite ease-in-out;
+}
+
+@keyframes seal-pulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.06); filter: brightness(1.15); }
+}
+
+[data-theme="viewmaster"] .seal-heart-svg {
+  width: clamp(20px, 5vw, 24px);
+  height: clamp(20px, 5vw, 24px);
+  fill: #ffffff;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+[data-theme="viewmaster"] .envelope-open-hint {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: clamp(1.5px, 0.4vw, 2.5px);
+  font-size: clamp(8.5px, 2.2vw, 10px);
+  color: #ffccd5;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+.envelope-burst-stage {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.burst-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  font-size: clamp(22px, 6vw, 36px);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+}
+
+/* 5. 柯达暖白冲印卡纸底纹信纸 */
+[data-theme="viewmaster"] .letter-sheet {
+  background-color: #fbf9f4;
+  /* 微弱底片感光卡纸颗粒 */
+  background-image: 
+    linear-gradient(rgba(215, 203, 185, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 203, 185, 0.35) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #212529;
+  border: 3px solid #332724;
+  outline: 2px solid #e62229;
+  outline-offset: -8px;
+  box-shadow: 
+    0 35px 90px rgba(0, 0, 0, 0.9),
+    0 15px 30px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 顶部胶卷 HUD 抬头栏 */
+.reel-hud-header {
+  background: #332724;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: clamp(8px, 2.2vw, 10px);
+  color: #ffbe0b;
+  box-shadow: 2px 2px 0px #e62229;
+  letter-spacing: 1px;
+}
+
+.hud-item { display: flex; align-items: center; gap: 4px; }
+.hud-val { color: #ffffff; }
+
+/* 幻灯片铭牌大标题展板 */
+.viewmaster-title-marquee {
+  position: relative;
+  background: #ffffff;
+  border: 2.5px solid #332724;
+  border-radius: 6px;
+  padding: 16px 14px 12px;
+  margin: 12px 0 20px 0;
+  box-shadow: 3px 3px 0px #e62229;
+  text-align: center;
+}
+
+.marquee-badge-top {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e62229;
+  color: #ffffff;
+  border: 1.5px solid #332724;
+  border-radius: 3px;
+  padding: 3px 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(7.5px, 2vw, 8.5px);
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  white-space: nowrap;
+  box-shadow: 1px 1px 0px #332724;
+}
+
+[data-theme="viewmaster"] .letter-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(16px, 4.5vw, 22px);
+  font-weight: 900;
+  line-height: 1.35;
+  color: #2b1816;
+  text-align: center;
+  margin: 6px 0 10px;
+  letter-spacing: 1.2px;
+  text-shadow: 2px 2px 0px #ffbe0b, 3.5px 3.5px 0px #e62229;
+}
+
+.marquee-meta-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1.5px dashed #e0d5c1;
+  padding-top: 8px;
+  margin-top: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(8px, 2.1vw, 9.5px);
+  color: #6c757d;
+  font-weight: 700;
+}
+
+.reel-frame-pill {
+  color: #e62229;
+  background: #ffe5e7;
+  border: 1px solid #e62229;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+/* 称呼便签 */
+.salutation-film-wrap {
+  display: inline-block;
+  background: #fff8eb;
+  border-left: 3.5px solid #e62229;
+  border: 1.5px solid #332724;
+  border-left-width: 4px;
+  padding: 5px 16px;
+  box-shadow: 2px 2px 0px #332724;
+  margin-bottom: 16px;
+  transform: rotate(-1deg);
+}
+
+.salutation-film-label {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 4.8vw, 22px);
+  font-weight: 700;
+  color: #2b1816;
+}
+
+/* ==========================================================================
+   【核心 3D 拟物台：实体红塑料观片镜 + 顶部露出的 7 孔白色底片圆盘】
+   ========================================================================== */
+.viewmaster-3d-station {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: clamp(55px, 12vw, 65px) auto clamp(28px, 6vw, 36px) auto;
+  padding: 16px 14px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* 顶部外露的圆形白色 7 孔胶卷盘 (Reel Disc) */
+.reel-disc-assembly {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 90px;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.reel-disc-3d {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 190px;
+  height: 190px;
+  transform: translateX(-50%) rotate(0deg);
+  background: #ffffff;
+  border: 2px solid #332724;
+  border-radius: 50%;
+  box-shadow: 
+    0 6px 14px rgba(0, 0, 0, 0.3),
+    inset 0 0 8px rgba(0,0,0,0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 圆盘上的 7 个幻灯片透视微缩小窗 */
+.reel-spoke {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 18px;
+  height: 24px;
+  background: #2b1816;
+  border: 1px solid #ffbe0b;
+  border-radius: 2px;
+  margin-left: -9px;
+  box-shadow: inset 0 0 3px #000;
+}
+.spoke-1 { transform: rotate(0deg) translateY(0); }
+.spoke-2 { transform: rotate(51.4deg) translateY(0); }
+.spoke-3 { transform: rotate(102.8deg) translateY(0); }
+.spoke-4 { transform: rotate(154.2deg) translateY(0); }
+.spoke-5 { transform: rotate(205.7deg) translateY(0); }
+.spoke-6 { transform: rotate(257.1deg) translateY(0); }
+.spoke-7 { transform: rotate(308.5deg) translateY(0); }
+
+/* 观片镜大红机身 (Classic Red Fisher-Price Plastic Model) */
+.viewmaster-housing-body {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #ff333a 0%, #e62229 55%, #b71117 100%);
+  border: 3px solid #332724;
+  border-radius: 24px 24px 36px 36px;
+  padding: 16px 14px 18px;
+  box-shadow: 
+    0 18px 40px rgba(0, 0, 0, 0.55),
+    inset 0 3px 4px rgba(255, 255, 255, 0.75),
+    inset 0 -4px 6px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+/* 机身上部卡槽缝 (Slot Opening) */
+.viewer-top-slot-cut {
+  width: 78%;
+  height: 8px;
+  background: #180d0b;
+  border-radius: 4px;
+  margin: -6px auto 14px auto;
+  box-shadow: inset 0 2px 4px #000, 0 1px 1px rgba(255,255,255,0.4);
+}
+
+/* 右侧活动金属切片拨杆 (Advance Lever) */
+.viewer-advance-lever {
+  position: absolute;
+  right: -24px;
+  top: 40px;
+  width: 32px;
+  height: 52px;
+  cursor: pointer;
+  z-index: 4;
+  transform-origin: 0% 15%;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+}
+
+.lever-stem {
+  width: 10px;
+  height: 40px;
+  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #a8a8a8 100%);
+  border: 1.5px solid #332724;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+
+.lever-knob {
+  position: absolute;
+  bottom: 0;
+  left: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #8b0000 100%);
+  border: 1.5px solid #332724;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+}
+
+/* 拨杆点击按下动作 */
+.viewer-advance-lever:active,
+.viewer-advance-lever.is-pressed {
+  transform: rotate(32deg);
+}
+
+.lever-guide-hint {
+  position: absolute;
+  right: -36px;
+  top: 100px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 7.5px;
+  font-weight: 800;
+  color: #e62229;
+  background: #fff;
+  border: 1px solid #332724;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  animation: leverHintHop 1.2s infinite ease-in-out;
+}
+
+@keyframes leverHintHop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* 双眼黑色橡胶取景目镜 (Binocular Eyepieces) */
+.viewer-eyepieces-visor {
+  background: #1a1312;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 2px solid #332724;
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.8), 0 2px 2px rgba(255,255,255,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 幻灯片放映全画幅窗口 */
+.slide-optical-chamber {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  background: #000000;
+  border-radius: 10px;
+  border: 2px solid #54413c;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(108%) saturate(115%); /* 柯达胶片饱和色调 */
+}
+
+/* 镜头反光高光弧 */
+.lens-reflection-arc {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* 切换胶片瞬间的复古漏光动效 (Light Leak) */
+.light-leak-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 150, 50, 0.85) 0%, rgba(255, 50, 100, 0.6) 45%, transparent 80%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.08s ease;
+}
+
+.light-leak-overlay.is-leaking {
+  opacity: 1;
+}
+
+/* 幻灯片下方的手写旁白小卡 */
+.slide-caption-card {
+  margin-top: 10px;
+  background: #fffdfa;
+  border: 1.5px solid #332724;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(14px, 3.8vw, 17px);
+  color: #2b1816;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+}
+
+/* 8. 正文与打字机 */
+.viewmaster-letter-content {
+  margin: 22px 0 16px 0;
+  padding: 16px 14px;
+  background: #ffffff;
+  border: 2px solid #332724;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0px #e62229;
+}
+
+.slide-speaker-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #332724;
+  color: #ffbe0b;
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 8px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+[data-theme="viewmaster"] .letter-body-text {
+  font-size: clamp(14.5px, 4vw, 16.5px);
+  line-height: clamp(1.85, 4.8vw, 2.0);
+  color: #2b1816;
+  min-height: 110px;
+}
+
+[data-theme="viewmaster"] .typewriter-cursor {
+  display: inline-block;
+  width: 8px;
+  height: clamp(14px, 3.8vw, 16px);
+  background-color: #e62229;
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s infinite;
+}
+
+@keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+[data-theme="viewmaster"] .letter-closing {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 4.5vw, 22px);
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: right;
+  margin-top: 18px;
+  color: #e62229;
+}
+
+/* 9. 【专属柯达 35mm 胶卷底片刮刮乐 (带走纸齿孔与帧号)】 */
+[data-theme="viewmaster"] .scratch-hint-text {
+  color: #6c757d;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(8.5px, 2.2vw, 10px);
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  margin-bottom: 10px;
+}
+
+[data-theme="viewmaster"] .scratch-card-box {
+  border-radius: 4px;
+  border: 2.5px solid #2b1816;
+  outline: 2px dashed #ffbe0b;
+  outline-offset: -6px;
+  background: #110d0c;
+  box-shadow: 3px 3px 0px #e62229;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 移除遮挡文字的 emoji 伪元素 */
+[data-theme="viewmaster"] .scratch-card-box::before,
+[data-theme="viewmaster"] .scratch-card-box::after {
+  display: none !important;
+}
+
+[data-theme="viewmaster"] .scratch-secret-reveal {
+  font-family: 'Courier New', monospace;
+  color: #ffbe0b;
+  font-weight: 800;
+  font-size: clamp(10px, 2.6vw, 12px);
+  line-height: 1.5;
+  background: #1e1311;
+  padding: 18px 22px !important;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 10. 光学对焦逃跑问答 */
+[data-theme="viewmaster"] .runaway-section {
+  border-top: 2px dashed #d9cfbe;
+  padding-top: 24px;
+  margin-top: 30px;
+}
+
+[data-theme="viewmaster"] .runaway-question {
+  font-family: 'Montserrat', sans-serif;
+  color: #2b1816;
+  font-size: clamp(12px, 3vw, 14px);
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+[data-theme="viewmaster"] .btn-yes {
+  background: #e62229;
+  color: #ffffff;
+  border: 2px solid #332724;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0px #332724;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(9.5px, 2.4vw, 11px);
+}
+
+[data-theme="viewmaster"] .btn-no {
+  background: #e9ecef;
+  color: #495057;
+  border: 2px solid #332724;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0px #332724;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(9.5px, 2.4vw, 11px);
+}
+
+[data-theme="viewmaster"] .runaway-success-modal {
+  background: #fff8eb;
+  border: 2.5px solid #e62229;
+  color: #8b0000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(10px, 2.6vw, 12px);
+  font-weight: 800;
+}
+
+/* 底部胶卷冲印工作室质检标印章 */
+.film-studio-footer-stamp {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1.5px dashed #d9cfbe;
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  font-weight: 700;
+  color: #8c7365;
+  letter-spacing: 0.8px;
+  line-height: 1.6;
+}
