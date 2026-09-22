@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=vm_v2_authentic" />
+  <link rel="stylesheet" href="style.css?v=vm_v3_eject_strip" />
 </head>
 <body>
 
@@ -38,21 +38,13 @@
   <div class="letter-viewport" data-theme="viewmaster">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 【彻底重构 1：80 年代底片硬卡纸封套包装 (圆窗透视底片轮盘)】 -->
+      <!-- 【重构 1：复古柯达暗房显影相纸信封 (封口相机光圈火漆印)】 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
-          <div class="sleeve-kodak-stripes"></div>
-
-          <!-- 中央透明镂空开窗，开箱前即可透视内部底片轮盘 -->
-          <div class="sleeve-peek-window">
-            <div class="sleeve-peek-reel-graphic">
-              <div class="peek-spoke-chip peek-c1"></div>
-              <div class="peek-spoke-chip peek-c2"></div>
-              <div class="peek-spoke-chip peek-c3"></div>
-              <div class="peek-spoke-chip peek-c4"></div>
-              <div class="peek-spoke-chip peek-c5"></div>
-            </div>
-          </div>
+          <span class="envelope-corner-star star-tl">✦</span>
+          <span class="envelope-corner-star star-tr">✦</span>
+          <span class="envelope-corner-star star-bl">✦</span>
+          <span class="envelope-corner-star star-br">✦</span>
         </div>
 
         <div class="envelope-flap"></div>
@@ -65,11 +57,11 @@
           </div>
         </div>
 
-        <div class="envelope-open-hint">✦ PULL FLAP TO SLIDE OUT REEL ✦</div>
+        <div class="envelope-open-hint">✦ PULL FLAP TO DEVELOP MEMORIES ✦</div>
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 【彻底重构 2：暗房放映档案纸主体】 -->
+      <!-- 【暗房放映档案纸主体】 -->
       <article class="letter-sheet" id="letterSheet">
         
         <!-- 四角暗房校准十字线 -->
@@ -95,12 +87,13 @@
           <span class="salutation-transcription-label" id="letterSalutation"></span>
         </div>
 
-        <!-- 【彻底重构 3：高保真 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
+        <!-- 【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
         <div class="viewmaster-master-rig">
           
-          <!-- 顶部外露 7 孔柯达幻灯片转盘 (Detailed 7-Aperture Reel) -->
+          <!-- 顶部外露 7 孔柯达幻灯片转盘 (带齿孔与六角轮毂) -->
           <div class="viewmaster-exposed-disc-wrap">
             <div class="viewmaster-reel-wheel" id="reelWheel">
+              <div class="reel-outer-drive-notches"></div>
               <div class="reel-center-spindle-hole"></div>
               <div class="reel-film-chip chip-1">1</div>
               <div class="reel-film-chip chip-2">2</div>
@@ -117,39 +110,52 @@
             <div class="viewer-disc-slot-lip"></div>
             <div class="viewer-embossed-brand">VIEW·MASTER</div>
 
-            <!-- 【专属惊喜巧思 1：左侧微距光学对焦滚轮】 -->
+            <!-- 【左侧微距对焦齿轮：初始模糊，引导点击对焦】 -->
             <div class="viewer-focus-wheel-rig" id="focusWheel" title="Click to adjust optical focus!">
               <div class="focus-knurl-line"></div>
               <div class="focus-knurl-line"></div>
               <div class="focus-knurl-line"></div>
               <div class="focus-knurl-line"></div>
+              <div class="focus-guide-hint" id="focusGuideHint">⌖ TAP FOCUS</div>
             </div>
-            <div class="focus-guide-hint">FOCUS ⌖</div>
 
-            <!-- 右侧导轨与金属下压活动扳手 -->
+            <!-- 【加大加粗版：右侧导轨活动扳手 (绝对不挡图)】 -->
             <div class="viewer-advance-lever-slot" id="advanceLeverSlot" title="Click to pull advance lever!">
               <div class="lever-track-groove"></div>
               <div class="lever-plunger-arm" id="leverArm">
                 <div class="lever-metal-post"></div>
                 <div class="lever-thumb-knob"></div>
               </div>
+              <div class="lever-pull-tag-hint">PULL ⬇</div>
             </div>
-            <div class="lever-pull-tag-hint">PULL LEVER ⬇</div>
 
             <!-- 双眼橡胶取景目镜暗室 -->
             <div class="viewer-binocular-visor-box">
               <div class="viewmaster-slide-stage">
-                <!-- 真实物理黑色快门叶片闭合层 -->
+                <!-- 漫反射虚化环境背景 (提升横屏与竖屏照片氛围) -->
+                <div class="slide-ambient-blur-backdrop" id="ambientBackdrop"></div>
+                <!-- 快门闭合遮光层 -->
                 <div class="viewmaster-shutter-blade" id="shutterBlade"></div>
                 <!-- 胶卷过曝光斑 -->
                 <div class="viewmaster-light-leak" id="lightLeak"></div>
+                <!-- 智能光学自适应核心照片 (绝对不切头不切脚) -->
                 <img class="slide-kodak-photo" id="slidePhotoImg" src="" alt="View-Master 3D Slide Photo" />
                 <div class="lens-reflection-highlight"></div>
               </div>
             </div>
 
-            <!-- 幻灯片手写说明标签卡 -->
-            <div class="slide-handwritten-caption" id="slideCaptionCard"></div>
+            <!-- 【专属惊喜巧思：底部吐出的实体解说字条】 -->
+            <div class="dispenser-slot-wrapper">
+              <div class="dispenser-eject-slot"></div>
+              <div class="ejected-caption-strip" id="captionStrip">
+                <div class="strip-header-meta">
+                  <span id="stripFrameTag">SLIDE FRAME #1</span>
+                  <span>KODAK ARCHIVE</span>
+                </div>
+                <p class="strip-caption-text" id="stripCaptionText"></p>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -164,7 +170,7 @@
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 【专属惊喜巧思 2：2x2 柯达幻灯片纸夹刮刮乐 (Kodachrome Slide Mount)】 -->
+        <!-- 2x2 柯达幻灯片纸夹刮刮乐 -->
         <div class="slide-mount-scratch-wrapper" id="scratchSection">
           <div class="slide-mount-frame">
             <div class="slide-mount-header-text">KODACHROME TRANSPARENCY</div>
@@ -196,7 +202,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=vm_v2_authentic"></script>
+  <script src="data.js?v=vm_v3_eject_strip"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -208,15 +214,27 @@
     const photosList = LETTER_DATA.photos || [];
     let currentSlideIdx = 0;
     const slideImg = document.getElementById('slidePhotoImg');
-    const slideCaption = document.getElementById('slideCaptionCard');
+    const ambientBackdrop = document.getElementById('ambientBackdrop');
+    const stripFrameTag = document.getElementById('stripFrameTag');
+    const stripCaptionText = document.getElementById('stripCaptionText');
+    const captionStrip = document.getElementById('captionStrip');
     const frameCounter = document.getElementById('frameCounterText');
     const shutterBlade = document.getElementById('shutterBlade');
     const lightLeak = document.getElementById('lightLeak');
 
     function renderSlide(index) {
       if (photosList.length === 0) return;
-      slideImg.src = photosList[index].url;
-      slideCaption.innerText = photosList[index].caption || '';
+      const photo = photosList[index];
+      slideImg.src = photo.url;
+      ambientBackdrop.style.backgroundImage = `url('${photo.url}')`;
+
+      // 重新触发纸条吐出动画
+      captionStrip.style.animation = 'none';
+      void captionStrip.offsetWidth; // 触发回流重置
+      captionStrip.style.animation = 'slideOutSlip 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards';
+
+      stripFrameTag.innerText = `SLIDE FRAME #${index + 1}`;
+      stripCaptionText.innerText = photo.caption || '';
       frameCounter.innerText = `FRAME ${index + 1} OF ${Math.max(7, photosList.length)} // STEREO 3D`;
     }
     renderSlide(0);
@@ -235,7 +253,6 @@
       return audioCtx;
     }
 
-    // 复合切片音：沉重棘轮推进 (Thud-Chunk) + 弹簧到位卡嗒 (Spring Snap)
     function playViewMasterRatchetSound() {
       try {
         const ctx = getAudioContext();
@@ -244,31 +261,31 @@
         const osc1 = ctx.createOscillator();
         const gain1 = ctx.createGain();
         osc1.type = 'triangle';
-        osc1.frequency.setValueAtTime(160, now);
-        osc1.frequency.exponentialRampToValueAtTime(32, now + 0.11);
-        gain1.gain.setValueAtTime(0.9, now);
-        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+        osc1.frequency.setValueAtTime(170, now);
+        osc1.frequency.exponentialRampToValueAtTime(30, now + 0.12);
+        gain1.gain.setValueAtTime(0.95, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
         osc1.connect(gain1);
         gain1.connect(ctx.destination);
         osc1.start(now);
-        osc1.stop(now + 0.11);
+        osc1.stop(now + 0.12);
 
         const osc2 = ctx.createOscillator();
         const gain2 = ctx.createGain();
         osc2.type = 'square';
-        osc2.frequency.setValueAtTime(1550, now + 0.08);
-        osc2.frequency.exponentialRampToValueAtTime(280, now + 0.16);
+        osc2.frequency.setValueAtTime(1600, now + 0.08);
+        osc2.frequency.exponentialRampToValueAtTime(260, now + 0.17);
         gain2.gain.setValueAtTime(0.01, now);
-        gain2.gain.setValueAtTime(0.5, now + 0.08);
-        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+        gain2.gain.setValueAtTime(0.55, now + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.17);
         osc2.connect(gain2);
         gain2.connect(ctx.destination);
         osc2.start(now + 0.08);
-        osc2.stop(now + 0.16);
+        osc2.stop(now + 0.17);
       } catch(e) {}
     }
 
-    // 对焦滚轮齿轮卡嗒音
+    // 对焦齿轮卡嗒声与清脆提示音
     function playFocusClickSound() {
       try {
         const ctx = getAudioContext();
@@ -276,14 +293,14 @@
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(820, now);
-        osc.frequency.exponentialRampToValueAtTime(1240, now + 0.05);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.frequency.setValueAtTime(660, now);
+        osc.frequency.exponentialRampToValueAtTime(1320, now + 0.08);
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
-        osc.stop(now + 0.05);
+        osc.stop(now + 0.08);
       } catch(e) {}
     }
 
@@ -306,7 +323,7 @@
     }
 
     /* ==========================================================================
-       【核心机械交互：按压导轨扳手 ➔ 快门闭合 ➔ 圆盘旋转 ➔ 漏光切片】
+       【核心机械交互：按压扳手 ➔ 快门闭合 ➔ 转盘旋转 ➔ 吐出新字条】
        ========================================================================== */
     const advanceSlot = document.getElementById('advanceLeverSlot');
     const reelWheel = document.getElementById('reelWheel');
@@ -320,15 +337,15 @@
       advanceSlot.classList.add('is-pressed');
       playViewMasterRatchetSound();
 
-      // 1. 物理黑色快门瞬间遮光闭合
+      // 1. 物理快门叶片闭合遮光
       shutterBlade.classList.add('is-closed');
 
-      // 2. 白色胶卷盘精准旋转 51.4 度
+      // 2. 详细底片转盘精准旋转一格 (51.4 度)
       reelAngle += 51.4;
       reelWheel.style.transform = `translateX(-50%) rotate(${reelAngle}deg)`;
 
       setTimeout(() => {
-        // 3. 换出下一帧照片
+        // 3. 换出下一张照片并缓缓吐出新字条
         if (photosList.length > 0) {
           currentSlideIdx = (currentSlideIdx + 1) % photosList.length;
           renderSlide(currentSlideIdx);
@@ -354,18 +371,30 @@
     });
 
     /* ==========================================================================
-       【专属惊喜巧思 1：点击左侧齿轮切换微距光学对焦】
+       【核心交互：左侧对焦滚轮 (初始模糊 ➔ 点击锐化清晰)】
        ========================================================================== */
     const focusWheel = document.getElementById('focusWheel');
-    let isDreamyFocus = false;
+    const focusGuideHint = document.getElementById('focusGuideHint');
+    let isInFocus = false; // 初始默认模糊失焦
 
     focusWheel.addEventListener('click', (e) => {
       e.stopPropagation();
       playFocusClickSound();
-      isDreamyFocus = !isDreamyFocus;
-      slideImg.classList.toggle('is-dreamy-focus', isDreamyFocus);
+      isInFocus = !isInFocus;
 
-      // 齿轮微动动画
+      if (isInFocus) {
+        slideImg.classList.add('is-in-focus');
+        focusGuideHint.innerText = "✓ IN FOCUS";
+        focusGuideHint.style.background = "#e62229";
+        focusGuideHint.style.color = "#ffffff";
+        createBurstAt(window.innerWidth / 2, window.innerHeight * 0.4, 25);
+      } else {
+        slideImg.classList.remove('is-in-focus');
+        focusGuideHint.innerText = "⌖ TAP FOCUS";
+        focusGuideHint.style.background = "#ffbe0b";
+        focusGuideHint.style.color = "#33221f";
+      }
+
       focusWheel.style.transform = 'translateY(3px)';
       setTimeout(() => focusWheel.style.transform = '', 120);
     });
@@ -407,7 +436,7 @@
           if (entered === LETTER_DATA.passcode) {
             overlay.classList.add('is-unlocked');
           } else {
-            errorEl.innerText = "WRONG CODE! CHECK REEL SLEEVE.";
+            errorEl.innerText = "WRONG CODE! RETRY.";
             inputs.forEach(i => i.value = '');
             inputs[0].focus();
           }
@@ -428,7 +457,7 @@
       else { audio.pause(); audioBtn.innerText = '🔇'; }
     });
 
-    // 开箱撕拉封套
+    // 开信
     const container = document.getElementById('letterContainer');
     const envelope = document.getElementById('envelopeWrapper');
     const burstStage = document.getElementById('burstStage');
@@ -511,7 +540,7 @@
       cursor.style.display = 'none';
     }
 
-    // 【2x2 柯达幻灯片纸夹刮刮乐】
+    // 2x2 柯达幻灯片刮刮乐
     function initSlideMountScratch() {
       const canvas = document.getElementById('scratchCanvas');
       if (!canvas) return;
