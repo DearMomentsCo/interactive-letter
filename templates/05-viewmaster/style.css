@@ -12,116 +12,44 @@
 }
 
 /* ==========================================================================
-   【强制粉碎三角信封：重构为 80 年代正方硬卡纸底片封套袋 (Disc Sleeve Pouch)】
+   【重塑 1：复古柯达暗房显影相纸信封 (Darkroom Photo Mailer)】
+   告别错误封套，呈现经典的暖黄牛皮纸暗房袋质感
    ========================================================================== */
-
-/* 1. 彻底清除 core.css 的三角折叠伪元素 */
-[data-theme="viewmaster"] .envelope-body::before,
-[data-theme="viewmaster"] .envelope-body::after,
-[data-theme="viewmaster"] .envelope-wrapper::before,
-[data-theme="viewmaster"] .envelope-wrapper::after {
-  display: none !important;
-  content: none !important;
-  border: none !important;
-}
-
-/* 2. 封套主体：复古硬卡纸正方包装袋 */
 [data-theme="viewmaster"] .envelope-wrapper {
-  background: #fbf6ec !important;
-  border-radius: 18px !important;
+  background: #fdfaf2;
+  border-radius: 12px;
   box-shadow: 
     0 32px 85px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(217, 4, 41, 0.3) !important;
-  border: 3.5px solid #2b1816 !important;
-  position: relative !important;
-  overflow: visible !important;
+    0 0 30px rgba(230, 34, 41, 0.3);
+  border: 3px solid #33221f;
+  position: relative;
 }
 
 [data-theme="viewmaster"] .envelope-body {
-  border-radius: 14px !important;
-  background: 
-    linear-gradient(135deg, rgba(230, 34, 41, 0.08) 0%, transparent 40%),
-    linear-gradient(145deg, #fffcf7 0%, #f4ede0 100%) !important;
-  border: 2px solid #e0d5c1 !important;
-  position: relative !important;
-  overflow: visible !important;
-}
-
-/* 封套正面的红黄柯达复古标条 */
-.sleeve-kodak-stripes {
-  position: absolute;
-  top: 14px;
-  left: -3px;
-  width: 90px;
-  height: 8px;
-  background: #e62229;
-  box-shadow: 0 8px 0 #ffbe0b;
-  border-radius: 0 4px 4px 0;
-  pointer-events: none;
-}
-
-/* 封套中央真实的圆形透视开窗 (Die-Cut Window) */
-.sleeve-peek-window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(100px, 26vw, 130px);
-  height: clamp(100px, 26vw, 130px);
-  border-radius: 50%;
-  border: 3px dashed #e62229;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(240, 230, 215, 0.7) 100%);
-  box-shadow: inset 0 3px 8px rgba(0,0,0,0.25), 0 0 15px rgba(255, 190, 11, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.sleeve-peek-reel-graphic {
-  width: 82%;
-  height: 82%;
-  border-radius: 50%;
-  border: 1.5px solid #33221f;
-  background: #ffffff;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #fffbf5 0%, #f3ecd9 100%);
+  border: 2px dashed #e62229;
   position: relative;
-  animation: peekReelSlowTurn 20s infinite linear;
 }
 
-@keyframes peekReelSlowTurn {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.peek-spoke-chip {
+[data-theme="viewmaster"] .envelope-corner-star {
   position: absolute;
-  top: 6px;
-  left: 50%;
-  width: 10px;
-  height: 14px;
-  background: #2b1816;
-  border-radius: 2px;
-  margin-left: -5px;
+  color: #e62229;
+  font-size: clamp(10px, 2.4vw, 12px);
+  font-weight: 900;
 }
-.peek-c1 { transform: rotate(0deg); }
-.peek-c2 { transform: rotate(72deg); }
-.peek-c3 { transform: rotate(144deg); }
-.peek-c4 { transform: rotate(216deg); }
-.peek-c5 { transform: rotate(288deg); }
+[data-theme="viewmaster"] .star-tl { top: 9px; left: 10px; }
+[data-theme="viewmaster"] .star-tr { top: 9px; right: 10px; }
+[data-theme="viewmaster"] .star-bl { bottom: 9px; left: 10px; }
+[data-theme="viewmaster"] .star-br { bottom: 9px; right: 10px; }
 
-/* 3. 彻底重设顶部平口盖 (彻底消灭三角形) */
 [data-theme="viewmaster"] .envelope-flap {
-  width: 100% !important;
-  height: 70px !important;
-  border: none !important;
-  border-bottom: 3.5px solid #e62229 !important;
-  border-radius: 14px 14px 0 0 !important;
-  background: linear-gradient(180deg, #ffffff 0%, #f4ebd9 100%) !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35) !important;
-  transform-origin: top center !important;
+  background: linear-gradient(180deg, #ffffff 0%, #faede0 100%);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+  border-bottom: 2.5px solid #e62229;
 }
 
-/* 4. 封口凸透镜火漆印 (3D 饱满红心) */
+/* 封口 3D 相机镜头光圈火漆印 */
 [data-theme="viewmaster"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5c7c 0%, #e62229 55%, #8b0000 100%);
@@ -182,7 +110,7 @@
 }
 
 /* ==========================================================================
-   【暗房放映档案信纸：彻底拔除 HUD 街机条/方块跑马灯】
+   【暗房放映档案纸排版】
    ========================================================================== */
 [data-theme="viewmaster"] .letter-sheet {
   background-color: #fbf9f4;
@@ -283,26 +211,26 @@
 }
 
 /* ==========================================================================
-   【重构 2：真实 3D 红色双筒注塑观片机与机械扳手机构】
+   【高保真 3D 实体红色双筒塑料观片机与机械连杆切片系统】
    ========================================================================== */
 .viewmaster-master-rig {
   position: relative;
   width: 100%;
-  max-width: 360px;
-  margin: clamp(75px, 16vw, 95px) auto clamp(28px, 6vw, 36px) auto;
+  max-width: 350px;
+  margin: clamp(80px, 18vw, 100px) auto clamp(28px, 6vw, 36px) auto;
   text-align: center;
   box-sizing: border-box;
   z-index: 2;
 }
 
-/* 1. 真实详细的 7 孔柯达幻灯片转盘 (Detailed 7-Aperture Reel) */
+/* 1. 【逼真真实 7 孔柯达幻灯转盘 (带齿孔咬合槽与中心轮毂)】 */
 .viewmaster-exposed-disc-wrap {
   position: absolute;
-  top: -68px;
+  top: -72px;
   left: 50%;
   transform: translateX(-50%);
-  width: 220px;
-  height: 105px;
+  width: 230px;
+  height: 110px;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -312,48 +240,57 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 210px;
-  height: 210px;
+  width: 220px;
+  height: 220px;
   transform: translateX(-50%) rotate(0deg);
-  background: radial-gradient(circle at center, #ffffff 0%, #f4ede2 85%, #d8caa7 100%);
+  background: radial-gradient(circle at center, #ffffff 0%, #f4eee2 80%, #dcd0b8 100%);
   border: 2.5px solid #33221f;
   border-radius: 50%;
   box-shadow: 
-    0 10px 24px rgba(0, 0, 0, 0.4),
-    inset 0 0 12px rgba(0,0,0,0.15);
+    0 10px 25px rgba(0, 0, 0, 0.45),
+    inset 0 0 14px rgba(0,0,0,0.15);
   transition: transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1.25);
 }
 
-/* 中心六角齿轮卡孔 */
+/* 外圈齿轮机械咬合卡孔 (Drive Notches) */
+.reel-outer-drive-notches {
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 2px dashed #a89f8d;
+  pointer-events: none;
+}
+
+/* 中心六角金属轮毂卡孔 */
 .reel-center-spindle-hole {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background: #33221f;
   clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-  border: 1.5px solid #ffbe0b;
+  border: 2px solid #ffbe0b;
 }
 
-/* 底片盘上的 7 组带黑边框的彩色透明幻灯片小窗与帧号 */
+/* 7 扇带独立暗褐透明胶片窗口的小窗 */
 .reel-film-chip {
   position: absolute;
   top: 8px;
   left: 50%;
-  width: 20px;
-  height: 26px;
+  width: 22px;
+  height: 28px;
   background: #1a0e0c;
-  border: 2px solid #222;
+  border: 2px solid #2b1816;
   border-radius: 2px;
-  margin-left: -10px;
+  margin-left: -11px;
   box-shadow: inset 0 0 4px #000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: monospace;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 900;
   color: #ffbe0b;
 }
@@ -365,15 +302,14 @@
 .chip-6 { transform: rotate(257.1deg); }
 .chip-7 { transform: rotate(308.5deg); }
 
-/* 2. 真实 3D 红色双筒注塑外壳 (双眼隆起圆弧与鼻梁凹槽) */
+/* 2. 真实 3D 红色注塑观片机身 */
 .viewmaster-plastic-chassis {
   position: relative;
   width: 100%;
   background: linear-gradient(180deg, #ff363d 0%, #e62229 50%, #ad1017 100%);
   border: 3.5px solid #33221f;
-  /* 雕塑双筒目镜的隆起倒角 */
   border-radius: 32px 32px 42px 42px;
-  padding: 18px 14px 22px;
+  padding: 18px 14px 20px;
   box-shadow: 
     0 24px 50px rgba(0, 0, 0, 0.65),
     inset 0 4px 4px rgba(255, 255, 255, 0.85),
@@ -384,7 +320,6 @@
   z-index: 3;
 }
 
-/* 机顶深黑卡槽口 */
 .viewer-disc-slot-lip {
   width: 82%;
   height: 9px;
@@ -404,15 +339,15 @@
   text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
 }
 
-/* 3. 右侧导轨金属活动扳手 (Advance Lever) */
+/* 3. 【加大加粗版：右侧导轨金属活动扳手】彻底消除重叠 */
 .viewer-advance-lever-slot {
   position: absolute;
-  right: -28px;
-  top: 36px;
-  width: 38px;
-  height: 68px;
+  right: -34px; /* 外移 34px，保证绝不遮挡照片 */
+  top: 32px;
+  width: 44px;
+  height: 80px;
   cursor: pointer;
-  z-index: 5;
+  z-index: 10;
   user-select: none;
 }
 
@@ -420,11 +355,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 56px;
+  width: 16px;
+  height: 68px;
   background: #1b110f;
-  border: 1.5px solid #33221f;
-  border-radius: 7px;
+  border: 2px solid #33221f;
+  border-radius: 8px;
   box-shadow: inset 0 3px 6px #000;
 }
 
@@ -432,16 +367,16 @@
   position: absolute;
   top: 0;
   left: 2px;
-  width: 26px;
-  height: 42px;
-  transform-origin: 5px 6px;
+  width: 32px;
+  height: 50px;
+  transform-origin: 6px 8px;
   transition: transform 0.14s cubic-bezier(0.2, 0.85, 0.25, 1);
 }
 
 .lever-metal-post {
-  width: 10px;
-  height: 28px;
-  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #9e9e9e 100%);
+  width: 12px;
+  height: 36px;
+  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #8e8e8e 100%);
   border: 1.5px solid #33221f;
   border-radius: 3px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.4);
@@ -450,32 +385,32 @@
 .lever-thumb-knob {
   position: absolute;
   bottom: 0;
-  left: -5px;
-  width: 20px;
-  height: 20px;
+  left: -7px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #75040a 100%);
-  border: 1.5px solid #33221f;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 2px #fff;
+  border: 2px solid #33221f;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.5), inset 0 2px 2px #fff;
 }
 
-/* 下压扳手动作 */
+/* 下压扳手深度物理行程 */
 .viewer-advance-lever-slot:active .lever-plunger-arm,
 .viewer-advance-lever-slot.is-pressed .lever-plunger-arm {
-  transform: translateY(26px) rotate(28deg);
+  transform: translateY(32px) rotate(32deg);
 }
 
 .lever-pull-tag-hint {
   position: absolute;
-  right: -42px;
-  top: 114px;
+  right: -24px;
+  bottom: -22px;
   font-family: 'Courier New', monospace;
   font-size: 8px;
   font-weight: 800;
   color: #e62229;
   background: #ffffff;
   border: 1.5px solid #33221f;
-  padding: 2px 6px;
+  padding: 3px 6px;
   border-radius: 3px;
   white-space: nowrap;
   animation: leverTagBounce 1.2s infinite ease-in-out;
@@ -487,50 +422,54 @@
   50% { transform: translateY(4px); }
 }
 
-/* ==========================================================================
-   【专属惊喜巧思 1：左侧实体微距光学对焦滚轮 (Focus Wheel)】
-   ========================================================================== */
+/* 4. 【左侧刻花对焦齿轮：默认开场失焦引导点击】 */
 .viewer-focus-wheel-rig {
   position: absolute;
-  left: -16px;
-  top: 60px;
-  width: 18px;
-  height: 48px;
+  left: -20px;
+  top: 56px;
+  width: 22px;
+  height: 56px;
   background: linear-gradient(180deg, #444 0%, #111 50%, #444 100%);
-  border: 1.5px solid #33221f;
-  border-radius: 4px;
-  box-shadow: -3px 3px 6px rgba(0,0,0,0.5), inset 0 0 3px #fff;
+  border: 2px solid #33221f;
+  border-radius: 5px;
+  box-shadow: -4px 4px 8px rgba(0,0,0,0.5), inset 0 0 3px #fff;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 3px 0;
+  padding: 4px 0;
   box-sizing: border-box;
-  z-index: 5;
+  z-index: 10;
 }
 
 .focus-knurl-line {
   height: 2px;
-  background: #888;
+  background: #999;
   border-radius: 1px;
 }
 
 .focus-guide-hint {
   position: absolute;
-  left: -48px;
-  top: 114px;
+  left: -24px;
+  bottom: -24px;
   font-family: 'Courier New', monospace;
   font-size: 7.5px;
   font-weight: 800;
   color: #33221f;
   background: #ffbe0b;
   border: 1px solid #33221f;
-  padding: 2px 5px;
+  padding: 3px 6px;
   border-radius: 3px;
   white-space: nowrap;
+  animation: pulseFocusHint 1.4s infinite ease-in-out;
 }
 
-/* 4. 双筒双目取景暗室与真实黑色快门叶片 */
+@keyframes pulseFocusHint {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+
+/* 5. 双筒双目取景暗室与【智能光学自适应 (包含 9:16 竖屏与横屏)】 */
 .viewer-binocular-visor-box {
   background: #170d0b;
   border-radius: 18px;
@@ -544,8 +483,8 @@
 .viewmaster-slide-stage {
   position: relative;
   width: 100%;
-  height: 200px;
-  background: #000000;
+  height: 205px;
+  background: #080403;
   border-radius: 10px;
   border: 2px solid #54413c;
   overflow: hidden;
@@ -554,18 +493,34 @@
   justify-content: center;
 }
 
-.slide-kodak-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: contrast(108%) saturate(118%);
-  transition: filter 0.3s ease;
+/* 虚化环境光效背景：确保任何比例照片都拥有充满暗室的电影级光晕 */
+.slide-ambient-blur-backdrop {
+  position: absolute;
+  inset: -10px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(14px) brightness(0.45);
+  opacity: 0.8;
+  z-index: 1;
 }
 
-/* 光学调焦柔化状态 */
-.slide-kodak-photo.is-dreamy-focus {
-  filter: contrast(105%) saturate(120%) blur(2.5px) brightness(1.08) !important;
+/* 核心照片：智能适应 (object-fit: contain)，确保 9:16 或横屏 100% 完整显示不切头切尾 */
+.slide-kodak-photo {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* 绝对不裁剪客户的照片！ */
+  display: block;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  /* 初始失焦模糊状态 (Blured by default) */
+  filter: blur(7px) contrast(90%);
+  transition: filter 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 对焦成功状态：高清晰、高对比度与纯正反转片色泽 */
+.slide-kodak-photo.is-in-focus {
+  filter: blur(0px) contrast(110%) saturate(118%) !important;
 }
 
 .lens-reflection-highlight {
@@ -575,18 +530,19 @@
   width: 160px;
   height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
   pointer-events: none;
+  z-index: 3;
 }
 
-/* 真实物理黑色快门叶片闭合 */
+/* 快门闭合遮光层 */
 .viewmaster-shutter-blade {
   position: absolute;
   inset: 0;
   background: #000000;
   opacity: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 12;
   transition: opacity 0.05s ease;
 }
 
@@ -600,7 +556,7 @@
   background: radial-gradient(circle at 80% 20%, rgba(255, 140, 40, 0.85) 0%, rgba(255, 40, 90, 0.6) 45%, transparent 75%);
   opacity: 0;
   pointer-events: none;
-  z-index: 9;
+  z-index: 11;
   transition: opacity 0.12s ease;
 }
 
@@ -608,17 +564,64 @@
   opacity: 1;
 }
 
-.slide-handwritten-caption {
-  margin-top: 10px;
+/* ==========================================================================
+   【专属惊喜巧思 2：观片机底部缓缓吐出专属信息字条 (Ejected Caption Strip)】
+   ========================================================================== */
+.dispenser-slot-wrapper {
+  margin-top: 14px;
+  position: relative;
+  width: 100%;
+}
+
+/* 吐纸仓口细缝 */
+.dispenser-eject-slot {
+  width: 88%;
+  height: 6px;
+  background: #110807;
+  border-radius: 3px;
+  margin: 0 auto;
+  box-shadow: inset 0 2px 4px #000, 0 1px 1px rgba(255,255,255,0.5);
+}
+
+/* 吐出的专属实体字条 (带滑动吐出动画与锯齿撕边) */
+.ejected-caption-strip {
   background: #ffffff;
   border: 1.5px solid #33221f;
-  border-radius: 4px;
-  padding: 6px 12px;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  padding: 10px 14px 12px;
+  margin: -2px auto 0 auto;
+  width: 84%;
+  box-sizing: border-box;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  transform-origin: top center;
+  animation: slideOutSlip 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards;
+}
+
+@keyframes slideOutSlip {
+  0% { transform: translateY(-16px) scaleY(0.2); opacity: 0; }
+  100% { transform: translateY(0) scaleY(1); opacity: 1; }
+}
+
+.strip-header-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  font-weight: 800;
+  color: #e62229;
+  border-bottom: 1px dashed #dcd0b8;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.strip-caption-text {
   font-family: 'Caveat', cursive;
-  font-size: clamp(15px, 4vw, 18px);
+  font-size: clamp(16px, 4.2vw, 19px);
   color: #2b1816;
   font-weight: 700;
-  box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+  line-height: 1.35;
+  margin: 0;
 }
 
 /* ==========================================================================
@@ -675,7 +678,7 @@
 }
 
 /* ==========================================================================
-   【专属惊喜巧思 2：2x2 英寸柯达纸夹幻灯片刮刮乐 (Kodachrome Slide Mount)】
+   【2x2 柯达幻灯片纸夹刮刮乐 (Kodachrome Slide Mount)】
    ========================================================================== */
 .slide-mount-scratch-wrapper {
   margin: 28px auto 20px;
