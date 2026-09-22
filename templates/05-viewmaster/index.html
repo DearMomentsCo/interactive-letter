@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=real_viewmaster_overhaul" />
+  <link rel="stylesheet" href="style.css?v=vm_v2_authentic" />
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   <div class="letter-viewport" data-theme="viewmaster">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 【彻底重塑 1：70/80 年代底片硬卡纸封套包装 (带圆形透明开窗)】 -->
+      <!-- 【彻底重构 1：80 年代底片硬卡纸封套包装 (圆窗透视底片轮盘)】 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <div class="sleeve-kodak-stripes"></div>
@@ -69,7 +69,7 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 【彻底重塑 2：暗房幻灯放映档案纸主体】 -->
+      <!-- 【彻底重构 2：暗房放映档案纸主体】 -->
       <article class="letter-sheet" id="letterSheet">
         
         <!-- 四角暗房校准十字线 -->
@@ -78,7 +78,7 @@
         <span class="darkroom-cross-bl">+</span>
         <span class="darkroom-cross-br">+</span>
 
-        <!-- 幻灯档案抬标栏 (绝非街机条) -->
+        <!-- 幻灯档案抬标栏 -->
         <div class="slide-archive-meta-strip">
           <div><span class="archive-red-stamp">REEL NO. 05</span> STEREO 3D</div>
           <div id="frameCounterText">7 APERTURES // FULL FOCUS</div>
@@ -95,19 +95,20 @@
           <span class="salutation-transcription-label" id="letterSalutation"></span>
         </div>
 
-        <!-- 【彻底重塑 3：高保真 3D 实体红色双筒塑料观片机与机械扳手连杆】 -->
+        <!-- 【彻底重构 3：高保真 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
         <div class="viewmaster-master-rig">
           
-          <!-- 顶部外露 7 孔白色底片盘 -->
+          <!-- 顶部外露 7 孔柯达幻灯片转盘 (Detailed 7-Aperture Reel) -->
           <div class="viewmaster-exposed-disc-wrap">
             <div class="viewmaster-reel-wheel" id="reelWheel">
-              <div class="reel-film-chip chip-1"></div>
-              <div class="reel-film-chip chip-2"></div>
-              <div class="reel-film-chip chip-3"></div>
-              <div class="reel-film-chip chip-4"></div>
-              <div class="reel-film-chip chip-5"></div>
-              <div class="reel-film-chip chip-6"></div>
-              <div class="reel-film-chip chip-7"></div>
+              <div class="reel-center-spindle-hole"></div>
+              <div class="reel-film-chip chip-1">1</div>
+              <div class="reel-film-chip chip-2">2</div>
+              <div class="reel-film-chip chip-3">3</div>
+              <div class="reel-film-chip chip-4">4</div>
+              <div class="reel-film-chip chip-5">5</div>
+              <div class="reel-film-chip chip-6">6</div>
+              <div class="reel-film-chip chip-7">7</div>
             </div>
           </div>
 
@@ -116,8 +117,17 @@
             <div class="viewer-disc-slot-lip"></div>
             <div class="viewer-embossed-brand">VIEW·MASTER</div>
 
+            <!-- 【专属惊喜巧思 1：左侧微距光学对焦滚轮】 -->
+            <div class="viewer-focus-wheel-rig" id="focusWheel" title="Click to adjust optical focus!">
+              <div class="focus-knurl-line"></div>
+              <div class="focus-knurl-line"></div>
+              <div class="focus-knurl-line"></div>
+              <div class="focus-knurl-line"></div>
+            </div>
+            <div class="focus-guide-hint">FOCUS ⌖</div>
+
             <!-- 右侧导轨与金属下压活动扳手 -->
-            <div class="viewer-advance-lever-slot" id="advanceLeverSlot" title="Click to pull lever!">
+            <div class="viewer-advance-lever-slot" id="advanceLeverSlot" title="Click to pull advance lever!">
               <div class="lever-track-groove"></div>
               <div class="lever-plunger-arm" id="leverArm">
                 <div class="lever-metal-post"></div>
@@ -129,7 +139,7 @@
             <!-- 双眼橡胶取景目镜暗室 -->
             <div class="viewer-binocular-visor-box">
               <div class="viewmaster-slide-stage">
-                <!-- 真实物理快门叶片闭合遮光层 -->
+                <!-- 真实物理黑色快门叶片闭合层 -->
                 <div class="viewmaster-shutter-blade" id="shutterBlade"></div>
                 <!-- 胶卷过曝光斑 -->
                 <div class="viewmaster-light-leak" id="lightLeak"></div>
@@ -144,7 +154,7 @@
 
         </div>
 
-        <!-- 打字机手稿正文排版 -->
+        <!-- 打字机放映解说手稿正文 -->
         <div class="viewmaster-letter-content">
           <span class="slide-log-tag">● PROJECTED MEMORY // ARCHIVE LOG:</span>
           <div class="letter-body-text" id="letterBody">
@@ -154,7 +164,7 @@
 
         <div class="letter-closing" id="letterClosing"></div>
 
-        <!-- 【专属 2x2 柯达纸夹幻灯片刮刮乐 (Kodachrome Slide Mount)】 -->
+        <!-- 【专属惊喜巧思 2：2x2 柯达幻灯片纸夹刮刮乐 (Kodachrome Slide Mount)】 -->
         <div class="slide-mount-scratch-wrapper" id="scratchSection">
           <div class="slide-mount-frame">
             <div class="slide-mount-header-text">KODACHROME TRANSPARENCY</div>
@@ -186,7 +196,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=real_viewmaster_overhaul"></script>
+  <script src="data.js?v=vm_v2_authentic"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -225,37 +235,55 @@
       return audioCtx;
     }
 
+    // 复合切片音：沉重棘轮推进 (Thud-Chunk) + 弹簧到位卡嗒 (Spring Snap)
     function playViewMasterRatchetSound() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
 
-        // 1. 沉重的棘轮推进顿挫音 (Thud-Chunk)
         const osc1 = ctx.createOscillator();
         const gain1 = ctx.createGain();
         osc1.type = 'triangle';
-        osc1.frequency.setValueAtTime(150, now);
-        osc1.frequency.exponentialRampToValueAtTime(35, now + 0.1);
-        gain1.gain.setValueAtTime(0.85, now);
-        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+        osc1.frequency.setValueAtTime(160, now);
+        osc1.frequency.exponentialRampToValueAtTime(32, now + 0.11);
+        gain1.gain.setValueAtTime(0.9, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
         osc1.connect(gain1);
         gain1.connect(ctx.destination);
         osc1.start(now);
-        osc1.stop(now + 0.1);
+        osc1.stop(now + 0.11);
 
-        // 2. 弹簧卡爪到位卡嗒声 (Spring Metal Snap)
         const osc2 = ctx.createOscillator();
         const gain2 = ctx.createGain();
         osc2.type = 'square';
-        osc2.frequency.setValueAtTime(1450, now + 0.08);
-        osc2.frequency.exponentialRampToValueAtTime(260, now + 0.15);
+        osc2.frequency.setValueAtTime(1550, now + 0.08);
+        osc2.frequency.exponentialRampToValueAtTime(280, now + 0.16);
         gain2.gain.setValueAtTime(0.01, now);
-        gain2.gain.setValueAtTime(0.45, now + 0.08);
-        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+        gain2.gain.setValueAtTime(0.5, now + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
         osc2.connect(gain2);
         gain2.connect(ctx.destination);
         osc2.start(now + 0.08);
-        osc2.stop(now + 0.15);
+        osc2.stop(now + 0.16);
+      } catch(e) {}
+    }
+
+    // 对焦滚轮齿轮卡嗒音
+    function playFocusClickSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(820, now);
+        osc.frequency.exponentialRampToValueAtTime(1240, now + 0.05);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
       } catch(e) {}
     }
 
@@ -278,7 +306,7 @@
     }
 
     /* ==========================================================================
-       【核心机械交互：按压导轨扳手 ➔ 快门叶片闭合 ➔ 圆盘旋转 ➔ 漏光切片】
+       【核心机械交互：按压导轨扳手 ➔ 快门闭合 ➔ 圆盘旋转 ➔ 漏光切片】
        ========================================================================== */
     const advanceSlot = document.getElementById('advanceLeverSlot');
     const reelWheel = document.getElementById('reelWheel');
@@ -289,25 +317,24 @@
       if (isAdvancing) return;
       isAdvancing = true;
 
-      // 1. 扳手顺着导轨压下
       advanceSlot.classList.add('is-pressed');
       playViewMasterRatchetSound();
 
-      // 2. 物理黑色快门瞬间遮光闭合！(重度物理感)
+      // 1. 物理黑色快门瞬间遮光闭合
       shutterBlade.classList.add('is-closed');
 
-      // 3. 白色胶卷盘旋转 51.4 度
+      // 2. 白色胶卷盘精准旋转 51.4 度
       reelAngle += 51.4;
       reelWheel.style.transform = `translateX(-50%) rotate(${reelAngle}deg)`;
 
       setTimeout(() => {
-        // 4. 换出下一帧照片
+        // 3. 换出下一帧照片
         if (photosList.length > 0) {
           currentSlideIdx = (currentSlideIdx + 1) % photosList.length;
           renderSlide(currentSlideIdx);
         }
 
-        // 5. 快门重新拉开，伴随胶卷漏光过曝
+        // 4. 快门重新拉开，伴随胶卷漏光
         shutterBlade.classList.remove('is-closed');
         lightLeak.classList.add('is-leaking');
         advanceSlot.classList.remove('is-pressed');
@@ -324,6 +351,23 @@
     advanceSlot.addEventListener('click', (e) => {
       e.stopPropagation();
       advanceFrame();
+    });
+
+    /* ==========================================================================
+       【专属惊喜巧思 1：点击左侧齿轮切换微距光学对焦】
+       ========================================================================== */
+    const focusWheel = document.getElementById('focusWheel');
+    let isDreamyFocus = false;
+
+    focusWheel.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playFocusClickSound();
+      isDreamyFocus = !isDreamyFocus;
+      slideImg.classList.toggle('is-dreamy-focus', isDreamyFocus);
+
+      // 齿轮微动动画
+      focusWheel.style.transform = 'translateY(3px)';
+      setTimeout(() => focusWheel.style.transform = '', 120);
     });
 
     // 刮刮乐
@@ -478,7 +522,6 @@
       canvas.width = w;
       canvas.height = h;
 
-      // 深褐琥珀色感光乳剂底片层
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#2d140e');
       grad.addColorStop(0.5, '#4a2016');
@@ -486,7 +529,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
 
-      // 35mm 胶卷两侧方形打孔齿
       ctx.fillStyle = "#ffffff";
       for (let x = 8; x < w - 8; x += 18) {
         ctx.fillRect(x, 4, 10, 5);
