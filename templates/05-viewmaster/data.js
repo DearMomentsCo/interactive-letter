@@ -3,10 +3,10 @@
    独立数据文件 - 仅供 templates/05-viewmaster/ 使用
    ========================================================================== */
 const LETTER_DATA = {
-  passcode: "1939", // View-Master 专利诞生年份密码
+  passcode: "1939", // View-Master 诞生年份密码
   fontType: "Montserrat",
 
-  envelopeNote: "✦ VIEW-MASTER REEL NO. 05 ✦",
+  envelopeNote: "✦ VIEW-MASTER 3D REEL NO. 05 ✦",
   waxSealMonogram: "📸",
 
   dateText: "REEL DATE // 2026.09.22",
@@ -19,7 +19,7 @@ Looking through this reel of our memories, every single frame reminds me how bri
 Let's pull the lever, click past the static, and snap our hearts back into sharp, vibrant focus together. I'm so sorry, and I love you endlessly.`,
   closing: "Forever focused on you ♡\nYour Silly Human",
 
-  // 专属 7 帧底片圆盘照片库（支持下压拨杆轮播）
+  // 专属 7 帧底片圆盘照片库
   photos: [
     {
       url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
@@ -38,10 +38,10 @@ Let's pull the lever, click past the static, and snap our hearts back into sharp
   // 浪漫温暖的木吉他背景曲
   audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
 
-  // 柯达 35mm 胶卷底片刮刮乐
+  // 专属 2x2 柯达幻灯片刮刮乐
   enableScratch: true,
-  scratchHint: "✦ SCRATCH 35MM FILM STRIP TO REVEAL HIDDEN FRAME ✦",
-  scratchSecret: "SECRET FRAME: A Lifetime of Late-Night Talks & Infinite Cuddles ♡",
+  scratchHint: "✦ SCRATCH TO REVEAL NEGATIVE ✦",
+  scratchSecret: "SECRET NEGATIVE: A Lifetime of Late-Night Talks & Infinite Cuddles ♡",
 
   // 光学对焦逃跑问答
   enableRunaway: true,
