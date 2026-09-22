@@ -1,52 +1,111 @@
 /* ==========================================================================
-   THEME 05: 复古双筒观片镜款 (VINTAGE VIEW-MASTER 3D REEL)
-   独立样式库 - 仅对 templates/05-viewmaster/ 生效，绝不影响其他模板
+   THEME 05: 经典双筒观片镜款 (VINTAGE VIEW-MASTER 3D REEL)
+   绝对物理隔离样式库 - 仅对 templates/05-viewmaster/ 生效，绝不污染其他模板
    ========================================================================== */
 
-/* 1. 视口背景：深红褐与光学暗室调 */
+/* 1. 视口背景：复古暗房温暖深褐色暗调 */
 .letter-viewport[data-theme="viewmaster"] {
-  background: radial-gradient(ellipse at 50% 35%, #2c1b18 0%, #170d0b 75%, #0a0504 100%);
-  color: #212529;
+  background: radial-gradient(ellipse at 50% 35%, #2a1b18 0%, #170d0b 75%, #0a0504 100%);
+  color: #2b1816;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
   perspective: 1200px;
 }
 
-/* 2. 底片收纳封套信封 (Disc Sleeve Envelope) */
+/* ==========================================================================
+   【彻底重塑 1：70/80 年代原装正方硬卡纸底片收纳封套 (Disc Sleeve Pouch)】
+   彻底告别普通三角信封，带有中央透视圆窗与撕拉口
+   ========================================================================== */
 [data-theme="viewmaster"] .envelope-wrapper {
-  background: #fdfaf3;
-  border-radius: 12px;
+  background: #fbf6ec;
+  border-radius: 16px;
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.95),
-    0 0 30px rgba(230, 34, 41, 0.25);
-  border: 2.5px solid #d90429;
+    0 0 30px rgba(230, 34, 41, 0.3);
+  border: 3px solid #33221f;
   position: relative;
+  overflow: visible;
 }
 
 [data-theme="viewmaster"] .envelope-body {
-  border-radius: 12px;
-  background: linear-gradient(145deg, #fffbf5 0%, #f4eee1 100%);
-  outline: 2px dashed #e63946;
-  outline-offset: -7px;
+  border-radius: 14px;
+  background: 
+    linear-gradient(135deg, rgba(230, 34, 41, 0.08) 0%, transparent 40%),
+    linear-gradient(145deg, #fffcf7 0%, #f4ede0 100%);
+  border: 2px solid #e0d5c1;
+  position: relative;
 }
 
-[data-theme="viewmaster"] .envelope-corner-star {
+/* 封套正面的红黄柯达复古斜切装饰标条 */
+.sleeve-kodak-stripes {
   position: absolute;
-  color: #e62229;
-  font-size: clamp(10px, 2.4vw, 12px);
-  font-weight: 900;
+  top: 14px;
+  left: -3px;
+  width: 90px;
+  height: 8px;
+  background: #e62229;
+  box-shadow: 0 8px 0 #ffbe0b;
+  border-radius: 0 4px 4px 0;
+  pointer-events: none;
 }
-[data-theme="viewmaster"] .star-tl { top: 9px; left: 10px; }
-[data-theme="viewmaster"] .star-tr { top: 9px; right: 10px; }
-[data-theme="viewmaster"] .star-bl { bottom: 9px; left: 10px; }
-[data-theme="viewmaster"] .star-br { bottom: 9px; right: 10px; }
 
+/* 封套中央真实的圆形透视开窗 (Die-Cut Window) */
+.sleeve-peek-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(100px, 26vw, 130px);
+  height: clamp(100px, 26vw, 130px);
+  border-radius: 50%;
+  border: 3px dashed #e62229;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(240, 230, 215, 0.7) 100%);
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.25), 0 0 15px rgba(255, 190, 11, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* 开窗内隐约透出的微缩 7 孔底片轮盘插画 */
+.sleeve-peek-reel-graphic {
+  width: 82%;
+  height: 82%;
+  border-radius: 50%;
+  border: 1.5px solid #33221f;
+  background: #ffffff;
+  position: relative;
+  animation: peekReelSlowTurn 20s infinite linear;
+}
+
+@keyframes peekReelSlowTurn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.peek-spoke-chip {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 10px;
+  height: 14px;
+  background: #2b1816;
+  border-radius: 2px;
+  margin-left: -5px;
+}
+.peek-c1 { transform: rotate(0deg); }
+.peek-c2 { transform: rotate(72deg); }
+.peek-c3 { transform: rotate(144deg); }
+.peek-c4 { transform: rotate(216deg); }
+.peek-c5 { transform: rotate(288deg); }
+
+/* 封套顶部撕拉盖折页 (Pouch Top Flap) */
 [data-theme="viewmaster"] .envelope-flap {
-  background: linear-gradient(180deg, #ffffff 0%, #faede8 100%);
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
-  border-bottom: 2.5px solid #d90429;
+  background: linear-gradient(180deg, #fdfbf7 0%, #faeee0 100%);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
+  border-bottom: 2.5px solid #e62229;
 }
 
-/* 3. 凸透镜光学火漆封印（饱满无损 3D 红心） */
+/* 封口采用 3D 凸面透镜胶卷火漆 (Lens Seal) */
 [data-theme="viewmaster"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5c7c 0%, #e62229 55%, #8b0000 100%);
@@ -54,8 +113,8 @@
   box-shadow: 
     0 12px 28px rgba(0, 0, 0, 0.85),
     0 0 0 2px #e62229,
-    0 0 22px rgba(230, 34, 41, 0.6),
-    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    0 0 24px rgba(230, 34, 41, 0.7),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
     inset 0 -2px 4px rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
@@ -77,11 +136,11 @@
 }
 
 [data-theme="viewmaster"] .envelope-open-hint {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Courier New', monospace;
   font-weight: 800;
-  letter-spacing: clamp(1.5px, 0.4vw, 2.5px);
-  font-size: clamp(8.5px, 2.2vw, 10px);
-  color: #ffccd5;
+  letter-spacing: clamp(1px, 0.3vw, 2px);
+  font-size: clamp(8px, 2.1vw, 9.5px);
+  color: #ffbe0b;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
@@ -106,16 +165,16 @@
   filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
 }
 
-/* 5. 柯达暖白冲印卡纸底纹信纸 */
+/* ==========================================================================
+   【彻底重塑 2：暗房幻灯放映档案纸 (彻底删除 HUD/Marquee/RPG 气泡)】
+   ========================================================================== */
 [data-theme="viewmaster"] .letter-sheet {
   background-color: #fbf9f4;
-  /* 微弱底片感光卡纸颗粒 */
-  background-image: 
-    linear-gradient(rgba(215, 203, 185, 0.35) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(215, 203, 185, 0.35) 1px, transparent 1px);
-  background-size: 20px 20px;
-  color: #212529;
-  border: 3px solid #332724;
+  /* 暖调暗房感光纸质纹理 */
+  background-image: radial-gradient(#dfd6c5 1px, transparent 1px);
+  background-size: 14px 14px;
+  color: #2b1816;
+  border: 3px solid #33221f;
   outline: 2px solid #e62229;
   outline-offset: -8px;
   box-shadow: 
@@ -123,281 +182,300 @@
     0 15px 30px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
+  padding: clamp(22px, 5.5vw, 36px) clamp(16px, 4.5vw, 28px);
 }
 
-/* 顶部胶卷 HUD 抬头栏 */
-.reel-hud-header {
-  background: #332724;
-  border-radius: 4px;
-  padding: 6px 12px;
-  margin-bottom: 16px;
+/* 四角暗房校准十字线 (Darkroom Registration Marks) */
+.darkroom-cross-tl, .darkroom-cross-tr, .darkroom-cross-bl, .darkroom-cross-br {
+  position: absolute;
+  color: #e62229;
+  font-family: monospace;
+  font-weight: 900;
+  font-size: 13px;
+  opacity: 0.7;
+}
+.darkroom-cross-tl { top: 12px; left: 14px; }
+.darkroom-cross-tr { top: 12px; right: 14px; }
+.darkroom-cross-bl { bottom: 12px; left: 14px; }
+.darkroom-cross-br { bottom: 12px; right: 14px; }
+
+/* 纯正幻灯档案顶部条 (非 HUD 街机条) */
+.slide-archive-meta-strip {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
+  border-bottom: 2px solid #33221f;
+  padding-bottom: 8px;
+  margin-bottom: 18px;
   font-family: 'Courier New', monospace;
+  font-size: clamp(7.5px, 2vw, 9px);
   font-weight: 800;
-  font-size: clamp(8px, 2.2vw, 10px);
-  color: #ffbe0b;
-  box-shadow: 2px 2px 0px #e62229;
-  letter-spacing: 1px;
+  color: #6c757d;
+  letter-spacing: 0.5px;
 }
 
-.hud-item { display: flex; align-items: center; gap: 4px; }
-.hud-val { color: #ffffff; }
-
-/* 幻灯片铭牌大标题展板 */
-.viewmaster-title-marquee {
-  position: relative;
-  background: #ffffff;
-  border: 2.5px solid #332724;
-  border-radius: 6px;
-  padding: 16px 14px 12px;
-  margin: 12px 0 20px 0;
-  box-shadow: 3px 3px 0px #e62229;
-  text-align: center;
-}
-
-.marquee-badge-top {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
+.archive-red-stamp {
   background: #e62229;
   color: #ffffff;
-  border: 1.5px solid #332724;
+  padding: 3px 8px;
   border-radius: 3px;
-  padding: 3px 12px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(7.5px, 2vw, 8.5px);
+  font-weight: 900;
+}
+
+/* 摄影展专属标题 (非方块跑马灯) */
+.exhibition-title-block {
+  text-align: center;
+  margin: 14px 0 20px;
+}
+
+.exhibition-subtitle-pill {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-size: clamp(8px, 2.1vw, 9.5px);
   font-weight: 800;
-  letter-spacing: 1.2px;
-  white-space: nowrap;
-  box-shadow: 1px 1px 0px #332724;
+  color: #e62229;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
 }
 
 [data-theme="viewmaster"] .letter-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(16px, 4.5vw, 22px);
+  font-size: clamp(18px, 4.8vw, 24px);
   font-weight: 900;
-  line-height: 1.35;
+  line-height: 1.3;
   color: #2b1816;
-  text-align: center;
-  margin: 6px 0 10px;
-  letter-spacing: 1.2px;
-  text-shadow: 2px 2px 0px #ffbe0b, 3.5px 3.5px 0px #e62229;
+  letter-spacing: 1px;
+  margin: 4px 0 8px;
+  text-transform: uppercase;
 }
 
-.marquee-meta-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1.5px dashed #e0d5c1;
-  padding-top: 8px;
-  margin-top: 6px;
+.exhibition-date-badge {
   font-family: 'Courier New', monospace;
-  font-size: clamp(8px, 2.1vw, 9.5px);
-  color: #6c757d;
+  font-size: clamp(8px, 2.1vw, 9px);
+  color: #8c7365;
   font-weight: 700;
-}
-
-.reel-frame-pill {
-  color: #e62229;
-  background: #ffe5e7;
-  border: 1px solid #e62229;
-  padding: 2px 8px;
-  border-radius: 2px;
 }
 
 /* 称呼便签 */
-.salutation-film-wrap {
-  display: inline-block;
-  background: #fff8eb;
-  border-left: 3.5px solid #e62229;
-  border: 1.5px solid #332724;
-  border-left-width: 4px;
-  padding: 5px 16px;
-  box-shadow: 2px 2px 0px #332724;
-  margin-bottom: 16px;
-  transform: rotate(-1deg);
+.salutation-transcription-block {
+  margin-bottom: 18px;
 }
 
-.salutation-film-label {
+.salutation-transcription-label {
   font-family: 'Caveat', cursive;
-  font-size: clamp(18px, 4.8vw, 22px);
+  font-size: clamp(20px, 5.2vw, 24px);
   font-weight: 700;
   color: #2b1816;
+  display: inline-block;
+  border-bottom: 2px dashed #e62229;
+  padding-bottom: 2px;
 }
 
 /* ==========================================================================
-   【核心 3D 拟物台：实体红塑料观片镜 + 顶部露出的 7 孔白色底片圆盘】
+   【彻底重塑 3：高保真 3D 实体红色双筒塑料观片机与机械扳手机构】
+   双目隆起轮廓 + 中央鼻梁凹陷 + 外部旋转大底片盘 + 侧边导轨拉杆
    ========================================================================== */
-.viewmaster-3d-station {
+.viewmaster-master-rig {
   position: relative;
   width: 100%;
-  max-width: 350px;
-  margin: clamp(55px, 12vw, 65px) auto clamp(28px, 6vw, 36px) auto;
-  padding: 16px 14px 20px;
+  max-width: 360px;
+  margin: clamp(65px, 14vw, 85px) auto clamp(28px, 6vw, 36px) auto;
   text-align: center;
   box-sizing: border-box;
   z-index: 2;
 }
 
-/* 顶部外露的圆形白色 7 孔胶卷盘 (Reel Disc) */
-.reel-disc-assembly {
+/* 1. 顶部高高外露的真实 3D 白色圆形 7 孔胶卷盘 (Reel Disc) */
+.viewmaster-exposed-disc-wrap {
   position: absolute;
-  top: -46px;
+  top: -56px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 90px;
+  width: 210px;
+  height: 95px;
   overflow: hidden;
-  z-index: 1;
+  z-index: 1; /* 位于后层暗仓之上，但位于观片机机身之前 */
   pointer-events: none;
 }
 
-.reel-disc-3d {
+.viewmaster-reel-wheel {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 190px;
-  height: 190px;
+  width: 200px;
+  height: 200px;
   transform: translateX(-50%) rotate(0deg);
   background: #ffffff;
-  border: 2px solid #332724;
+  border: 2px solid #33221f;
   border-radius: 50%;
   box-shadow: 
-    0 6px 14px rgba(0, 0, 0, 0.3),
-    inset 0 0 8px rgba(0,0,0,0.1);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 10px rgba(0,0,0,0.12);
+  transition: transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1.25);
 }
 
-/* 圆盘上的 7 个幻灯片透视微缩小窗 */
-.reel-spoke {
+/* 底片盘上的 7 个彩色幻灯片透视小窗 */
+.reel-film-chip {
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 50%;
   width: 18px;
   height: 24px;
-  background: #2b1816;
-  border: 1px solid #ffbe0b;
+  background: #1a0e0c;
+  border: 1.5px solid #ffbe0b;
   border-radius: 2px;
   margin-left: -9px;
   box-shadow: inset 0 0 3px #000;
 }
-.spoke-1 { transform: rotate(0deg) translateY(0); }
-.spoke-2 { transform: rotate(51.4deg) translateY(0); }
-.spoke-3 { transform: rotate(102.8deg) translateY(0); }
-.spoke-4 { transform: rotate(154.2deg) translateY(0); }
-.spoke-5 { transform: rotate(205.7deg) translateY(0); }
-.spoke-6 { transform: rotate(257.1deg) translateY(0); }
-.spoke-7 { transform: rotate(308.5deg) translateY(0); }
+.chip-1 { transform: rotate(0deg); }
+.chip-2 { transform: rotate(51.4deg); }
+.chip-3 { transform: rotate(102.8deg); }
+.chip-4 { transform: rotate(154.2deg); }
+.chip-5 { transform: rotate(205.7deg); }
+.chip-6 { transform: rotate(257.1deg); }
+.chip-7 { transform: rotate(308.5deg); }
 
-/* 观片镜大红机身 (Classic Red Fisher-Price Plastic Model) */
-.viewmaster-housing-body {
+/* 2. 真实 3D 红色双筒注塑机身 (带双眼圆弧与鼻梁凹槽) */
+.viewmaster-plastic-chassis {
   position: relative;
   width: 100%;
-  background: linear-gradient(180deg, #ff333a 0%, #e62229 55%, #b71117 100%);
-  border: 3px solid #332724;
-  border-radius: 24px 24px 36px 36px;
-  padding: 16px 14px 18px;
+  background: linear-gradient(180deg, #ff363d 0%, #e62229 50%, #ad1017 100%);
+  border: 3.5px solid #33221f;
+  /* 塑造 View-Master 经典的双目隆起与弧度倒角 */
+  border-radius: 28px 28px 40px 40px;
+  padding: 16px 14px 20px;
   box-shadow: 
-    0 18px 40px rgba(0, 0, 0, 0.55),
-    inset 0 3px 4px rgba(255, 255, 255, 0.75),
-    inset 0 -4px 6px rgba(0, 0, 0, 0.4);
+    0 22px 45px rgba(0, 0, 0, 0.6),
+    inset 0 3px 3px rgba(255, 255, 255, 0.8),
+    inset 3px 0 3px rgba(255, 255, 255, 0.4),
+    inset -3px 0 3px rgba(0, 0, 0, 0.4),
+    inset 0 -5px 8px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   z-index: 3;
 }
 
-/* 机身上部卡槽缝 (Slot Opening) */
-.viewer-top-slot-cut {
-  width: 78%;
-  height: 8px;
-  background: #180d0b;
+/* 机顶插卡口深黑缝隙 */
+.viewer-disc-slot-lip {
+  width: 82%;
+  height: 9px;
+  background: #110807;
   border-radius: 4px;
-  margin: -6px auto 14px auto;
-  box-shadow: inset 0 2px 4px #000, 0 1px 1px rgba(255,255,255,0.4);
+  margin: -8px auto 14px auto;
+  box-shadow: inset 0 3px 5px #000, 0 1px 1px rgba(255,255,255,0.4);
 }
 
-/* 右侧活动金属切片拨杆 (Advance Lever) */
-.viewer-advance-lever {
+/* 浮雕 VIEW-MASTER 官方铭文 */
+.viewer-embossed-brand {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8px;
+  font-weight: 900;
+  color: #ffccd0;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
+}
+
+/* 3. 右侧导轨金属切片机械扳手 (The Mechanical Advance Lever) */
+.viewer-advance-lever-slot {
   position: absolute;
-  right: -24px;
-  top: 40px;
-  width: 32px;
-  height: 52px;
+  right: -26px;
+  top: 36px;
+  width: 36px;
+  height: 64px;
   cursor: pointer;
-  z-index: 4;
-  transform-origin: 0% 15%;
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 5;
   user-select: none;
 }
 
-.lever-stem {
-  width: 10px;
-  height: 40px;
-  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #a8a8a8 100%);
-  border: 1.5px solid #332724;
-  border-radius: 3px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+/* 嵌入外壳的深色金属滑动槽 */
+.lever-track-groove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 52px;
+  background: #1b110f;
+  border: 1.5px solid #33221f;
+  border-radius: 7px;
+  box-shadow: inset 0 2px 5px #000;
 }
 
-.lever-knob {
+/* 活动金属扳手本体 (Pivot Arm) */
+.lever-plunger-arm {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 26px;
+  height: 38px;
+  transform-origin: 5px 6px;
+  transition: transform 0.14s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+.lever-metal-post {
+  width: 10px;
+  height: 26px;
+  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #9e9e9e 100%);
+  border: 1.5px solid #33221f;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.lever-thumb-knob {
   position: absolute;
   bottom: 0;
   left: -4px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #8b0000 100%);
-  border: 1.5px solid #332724;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+  background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #75040a 100%);
+  border: 1.5px solid #33221f;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 2px #fff;
 }
 
-/* 拨杆点击按下动作 */
-.viewer-advance-lever:active,
-.viewer-advance-lever.is-pressed {
-  transform: rotate(32deg);
+/* 点击下压扳手动作 */
+.viewer-advance-lever-slot:active .lever-plunger-arm,
+.viewer-advance-lever-slot.is-pressed .lever-plunger-arm {
+  transform: translateY(22px) rotate(26deg);
 }
 
-.lever-guide-hint {
+.lever-pull-tag-hint {
   position: absolute;
-  right: -36px;
-  top: 100px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 7.5px;
+  right: -38px;
+  top: 110px;
+  font-family: 'Courier New', monospace;
+  font-size: 8px;
   font-weight: 800;
   color: #e62229;
-  background: #fff;
-  border: 1px solid #332724;
-  padding: 2px 5px;
+  background: #ffffff;
+  border: 1.5px solid #33221f;
+  padding: 2px 6px;
   border-radius: 3px;
   white-space: nowrap;
-  animation: leverHintHop 1.2s infinite ease-in-out;
+  animation: leverTagBounce 1.2s infinite ease-in-out;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
 
-@keyframes leverHintHop {
+@keyframes leverTagBounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(4px); }
 }
 
-/* 双眼黑色橡胶取景目镜 (Binocular Eyepieces) */
-.viewer-eyepieces-visor {
-  background: #1a1312;
-  border-radius: 16px;
+/* 4. 双筒双目取景光学暗室 (Binocular Oculars Chamber) */
+.viewer-binocular-visor-box {
+  background: #170d0b;
+  border-radius: 18px;
   padding: 12px 14px;
-  border: 2px solid #332724;
-  box-shadow: inset 0 4px 8px rgba(0,0,0,0.8), 0 2px 2px rgba(255,255,255,0.25);
+  border: 2.5px solid #33221f;
+  box-shadow: inset 0 5px 12px rgba(0,0,0,0.9), 0 2px 2px rgba(255,255,255,0.2);
   position: relative;
   overflow: hidden;
 }
 
 /* 幻灯片放映全画幅窗口 */
-.slide-optical-chamber {
+.viewmaster-slide-stage {
   position: relative;
   width: 100%;
-  height: 190px;
+  height: 200px;
   background: #000000;
   border-radius: 10px;
   border: 2px solid #54413c;
@@ -407,77 +485,92 @@
   justify-content: center;
 }
 
-.slide-photo-img {
+.slide-kodak-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: contrast(108%) saturate(115%); /* 柯达胶片饱和色调 */
+  filter: contrast(108%) saturate(118%);
 }
 
-/* 镜头反光高光弧 */
-.lens-reflection-arc {
+/* 镜头凸透镜反光光晕弧 */
+.lens-reflection-highlight {
   position: absolute;
-  top: -20px;
-  left: -20px;
-  width: 140px;
-  height: 140px;
+  top: -25px;
+  left: -25px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 60%);
   pointer-events: none;
 }
 
-/* 切换胶片瞬间的复古漏光动效 (Light Leak) */
-.light-leak-overlay {
+/* 【关键机械细节：切片时的物理黑色快门叶片闭合 (Black Shutter Blade)】 */
+.viewmaster-shutter-blade {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(255, 150, 50, 0.85) 0%, rgba(255, 50, 100, 0.6) 45%, transparent 80%);
+  background: #000000;
   opacity: 0;
   pointer-events: none;
-  z-index: 5;
-  transition: opacity 0.08s ease;
+  z-index: 10;
+  transition: opacity 0.06s ease;
 }
 
-.light-leak-overlay.is-leaking {
+.viewmaster-shutter-blade.is-closed {
   opacity: 1;
 }
 
-/* 幻灯片下方的手写旁白小卡 */
-.slide-caption-card {
+/* 快门拉开后的瞬间胶片过曝光晕 (Light Leak) */
+.viewmaster-light-leak {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 140, 40, 0.85) 0%, rgba(255, 40, 90, 0.6) 45%, transparent 75%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9;
+  transition: opacity 0.12s ease;
+}
+
+.viewmaster-light-leak.is-leaking {
+  opacity: 1;
+}
+
+/* 幻灯片手写说明标签 (Slide Caption Label) */
+.slide-handwritten-caption {
   margin-top: 10px;
-  background: #fffdfa;
-  border: 1.5px solid #332724;
+  background: #ffffff;
+  border: 1.5px solid #33221f;
   border-radius: 4px;
   padding: 6px 12px;
   font-family: 'Caveat', cursive;
-  font-size: clamp(14px, 3.8vw, 17px);
+  font-size: clamp(15px, 4vw, 18px);
   color: #2b1816;
   font-weight: 700;
   box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
 }
 
-/* 8. 正文与打字机 */
+/* ==========================================================================
+   【打字机手稿正文排版】
+   ========================================================================== */
 .viewmaster-letter-content {
-  margin: 22px 0 16px 0;
-  padding: 16px 14px;
+  margin: 24px 0 16px 0;
+  padding: 18px 16px;
   background: #ffffff;
-  border: 2px solid #332724;
+  border: 2px solid #33221f;
+  border-left: 5px solid #e62229;
   border-radius: 6px;
-  box-shadow: 3px 3px 0px #e62229;
+  box-shadow: 3px 3px 0px #33221f;
+  position: relative;
 }
 
-.slide-speaker-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #332724;
-  color: #ffbe0b;
+.slide-log-tag {
   font-family: 'Courier New', monospace;
   font-weight: 800;
   font-size: 8px;
-  padding: 4px 8px;
-  border-radius: 3px;
+  color: #e62229;
+  letter-spacing: 1px;
   margin-bottom: 12px;
+  display: block;
 }
 
 [data-theme="viewmaster"] .letter-body-text {
@@ -501,7 +594,7 @@
 
 [data-theme="viewmaster"] .letter-closing {
   font-family: 'Caveat', cursive;
-  font-size: clamp(18px, 4.5vw, 22px);
+  font-size: clamp(19px, 4.8vw, 23px);
   font-weight: 700;
   line-height: 1.5;
   text-align: right;
@@ -509,46 +602,83 @@
   color: #e62229;
 }
 
-/* 9. 【专属柯达 35mm 胶卷底片刮刮乐 (带走纸齿孔与帧号)】 */
-[data-theme="viewmaster"] .scratch-hint-text {
-  color: #6c757d;
-  font-family: 'Courier New', monospace;
-  font-size: clamp(8.5px, 2.2vw, 10px);
-  font-weight: 800;
-  letter-spacing: 0.8px;
-  margin-bottom: 10px;
+/* ==========================================================================
+   【彻底重塑：专属 2x2 英寸柯达纸夹幻灯片刮刮乐 (Kodachrome Slide Mount)】
+   完全区别于前四款的所有刮刮乐！
+   ========================================================================== */
+.slide-mount-scratch-wrapper {
+  margin: 28px auto 20px;
+  max-width: 320px;
 }
 
-[data-theme="viewmaster"] .scratch-card-box {
-  border-radius: 4px;
-  border: 2.5px solid #2b1816;
-  outline: 2px dashed #ffbe0b;
-  outline-offset: -6px;
-  background: #110d0c;
-  box-shadow: 3px 3px 0px #e62229;
-  position: relative;
-  overflow: hidden;
-}
-
-/* 移除遮挡文字的 emoji 伪元素 */
-[data-theme="viewmaster"] .scratch-card-box::before,
-[data-theme="viewmaster"] .scratch-card-box::after {
-  display: none !important;
-}
-
-[data-theme="viewmaster"] .scratch-secret-reveal {
-  font-family: 'Courier New', monospace;
-  color: #ffbe0b;
-  font-weight: 800;
-  font-size: clamp(10px, 2.6vw, 12px);
-  line-height: 1.5;
-  background: #1e1311;
-  padding: 18px 22px !important;
-  box-sizing: border-box;
+.slide-mount-frame {
+  background: #ffffff;
+  border: 3px solid #33221f;
+  border-radius: 8px;
+  padding: 12px 14px 14px;
+  box-shadow: 4px 4px 0px #e62229, 0 10px 20px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-/* 10. 光学对焦逃跑问答 */
+.slide-mount-header-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 9px;
+  color: #e62229;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+/* 模拟 2x2 幻灯片中间的感光胶片窗口 */
+.slide-mount-window {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  background: #140b09;
+  border: 2px solid #33221f;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scratch-secret-reveal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: clamp(9.5px, 2.5vw, 11px);
+  color: #ffbe0b;
+  background: #241411;
+  padding: 12px;
+  box-sizing: border-box;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.scratch-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  cursor: crosshair;
+}
+
+.slide-mount-footer-text {
+  font-family: 'Courier New', monospace;
+  font-weight: 800;
+  font-size: 7.5px;
+  color: #6c757d;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   【双向光学对焦逃跑问答 (Focus Switch)】
+   ========================================================================== */
 [data-theme="viewmaster"] .runaway-section {
   border-top: 2px dashed #d9cfbe;
   padding-top: 24px;
@@ -558,7 +688,7 @@
 [data-theme="viewmaster"] .runaway-question {
   font-family: 'Montserrat', sans-serif;
   color: #2b1816;
-  font-size: clamp(12px, 3vw, 14px);
+  font-size: clamp(12px, 3.2vw, 14px);
   font-weight: 800;
   margin-bottom: 20px;
 }
@@ -566,9 +696,9 @@
 [data-theme="viewmaster"] .btn-yes {
   background: #e62229;
   color: #ffffff;
-  border: 2px solid #332724;
+  border: 2px solid #33221f;
   border-radius: 6px;
-  box-shadow: 3px 3px 0px #332724;
+  box-shadow: 3px 3px 0px #33221f;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: clamp(9.5px, 2.4vw, 11px);
@@ -577,9 +707,9 @@
 [data-theme="viewmaster"] .btn-no {
   background: #e9ecef;
   color: #495057;
-  border: 2px solid #332724;
+  border: 2px solid #33221f;
   border-radius: 6px;
-  box-shadow: 3px 3px 0px #332724;
+  box-shadow: 3px 3px 0px #33221f;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
   font-size: clamp(9.5px, 2.4vw, 11px);
@@ -594,7 +724,6 @@
   font-weight: 800;
 }
 
-/* 底部胶卷冲印工作室质检标印章 */
 .film-studio-footer-stamp {
   text-align: center;
   margin-top: 24px;
