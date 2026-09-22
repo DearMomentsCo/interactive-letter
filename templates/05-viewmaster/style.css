@@ -12,30 +12,42 @@
 }
 
 /* ==========================================================================
-   【彻底重塑 1：70/80 年代原装正方硬卡纸底片收纳封套 (Disc Sleeve Pouch)】
-   彻底告别普通三角信封，带有中央透视圆窗与撕拉口
+   【强制粉碎三角信封：重构为 80 年代正方硬卡纸底片封套袋 (Disc Sleeve Pouch)】
    ========================================================================== */
+
+/* 1. 彻底清除 core.css 的三角折叠伪元素 */
+[data-theme="viewmaster"] .envelope-body::before,
+[data-theme="viewmaster"] .envelope-body::after,
+[data-theme="viewmaster"] .envelope-wrapper::before,
+[data-theme="viewmaster"] .envelope-wrapper::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+
+/* 2. 封套主体：复古硬卡纸正方包装袋 */
 [data-theme="viewmaster"] .envelope-wrapper {
-  background: #fbf6ec;
-  border-radius: 16px;
+  background: #fbf6ec !important;
+  border-radius: 18px !important;
   box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.95),
-    0 0 30px rgba(230, 34, 41, 0.3);
-  border: 3px solid #33221f;
-  position: relative;
-  overflow: visible;
+    0 32px 85px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(217, 4, 41, 0.3) !important;
+  border: 3.5px solid #2b1816 !important;
+  position: relative !important;
+  overflow: visible !important;
 }
 
 [data-theme="viewmaster"] .envelope-body {
-  border-radius: 14px;
+  border-radius: 14px !important;
   background: 
     linear-gradient(135deg, rgba(230, 34, 41, 0.08) 0%, transparent 40%),
-    linear-gradient(145deg, #fffcf7 0%, #f4ede0 100%);
-  border: 2px solid #e0d5c1;
-  position: relative;
+    linear-gradient(145deg, #fffcf7 0%, #f4ede0 100%) !important;
+  border: 2px solid #e0d5c1 !important;
+  position: relative !important;
+  overflow: visible !important;
 }
 
-/* 封套正面的红黄柯达复古斜切装饰标条 */
+/* 封套正面的红黄柯达复古标条 */
 .sleeve-kodak-stripes {
   position: absolute;
   top: 14px;
@@ -66,7 +78,6 @@
   pointer-events: none;
 }
 
-/* 开窗内隐约透出的微缩 7 孔底片轮盘插画 */
 .sleeve-peek-reel-graphic {
   width: 82%;
   height: 82%;
@@ -98,14 +109,19 @@
 .peek-c4 { transform: rotate(216deg); }
 .peek-c5 { transform: rotate(288deg); }
 
-/* 封套顶部撕拉盖折页 (Pouch Top Flap) */
+/* 3. 彻底重设顶部平口盖 (彻底消灭三角形) */
 [data-theme="viewmaster"] .envelope-flap {
-  background: linear-gradient(180deg, #fdfbf7 0%, #faeee0 100%);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
-  border-bottom: 2.5px solid #e62229;
+  width: 100% !important;
+  height: 70px !important;
+  border: none !important;
+  border-bottom: 3.5px solid #e62229 !important;
+  border-radius: 14px 14px 0 0 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f4ebd9 100%) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35) !important;
+  transform-origin: top center !important;
 }
 
-/* 封口采用 3D 凸面透镜胶卷火漆 (Lens Seal) */
+/* 4. 封口凸透镜火漆印 (3D 饱满红心) */
 [data-theme="viewmaster"] .wax-seal {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #ff5c7c 0%, #e62229 55%, #8b0000 100%);
@@ -139,7 +155,7 @@
   font-family: 'Courier New', monospace;
   font-weight: 800;
   letter-spacing: clamp(1px, 0.3vw, 2px);
-  font-size: clamp(8px, 2.1vw, 9.5px);
+  font-size: clamp(8.5px, 2.2vw, 10px);
   color: #ffbe0b;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
@@ -166,11 +182,10 @@
 }
 
 /* ==========================================================================
-   【彻底重塑 2：暗房幻灯放映档案纸 (彻底删除 HUD/Marquee/RPG 气泡)】
+   【暗房放映档案信纸：彻底拔除 HUD 街机条/方块跑马灯】
    ========================================================================== */
 [data-theme="viewmaster"] .letter-sheet {
   background-color: #fbf9f4;
-  /* 暖调暗房感光纸质纹理 */
   background-image: radial-gradient(#dfd6c5 1px, transparent 1px);
   background-size: 14px 14px;
   color: #2b1816;
@@ -185,7 +200,6 @@
   padding: clamp(22px, 5.5vw, 36px) clamp(16px, 4.5vw, 28px);
 }
 
-/* 四角暗房校准十字线 (Darkroom Registration Marks) */
 .darkroom-cross-tl, .darkroom-cross-tr, .darkroom-cross-bl, .darkroom-cross-br {
   position: absolute;
   color: #e62229;
@@ -199,7 +213,6 @@
 .darkroom-cross-bl { bottom: 12px; left: 14px; }
 .darkroom-cross-br { bottom: 12px; right: 14px; }
 
-/* 纯正幻灯档案顶部条 (非 HUD 街机条) */
 .slide-archive-meta-strip {
   display: flex;
   justify-content: space-between;
@@ -222,7 +235,6 @@
   font-weight: 900;
 }
 
-/* 摄影展专属标题 (非方块跑马灯) */
 .exhibition-title-block {
   text-align: center;
   margin: 14px 0 20px;
@@ -256,7 +268,6 @@
   font-weight: 700;
 }
 
-/* 称呼便签 */
 .salutation-transcription-block {
   margin-bottom: 18px;
 }
@@ -272,29 +283,28 @@
 }
 
 /* ==========================================================================
-   【彻底重塑 3：高保真 3D 实体红色双筒塑料观片机与机械扳手机构】
-   双目隆起轮廓 + 中央鼻梁凹陷 + 外部旋转大底片盘 + 侧边导轨拉杆
+   【重构 2：真实 3D 红色双筒注塑观片机与机械扳手机构】
    ========================================================================== */
 .viewmaster-master-rig {
   position: relative;
   width: 100%;
   max-width: 360px;
-  margin: clamp(65px, 14vw, 85px) auto clamp(28px, 6vw, 36px) auto;
+  margin: clamp(75px, 16vw, 95px) auto clamp(28px, 6vw, 36px) auto;
   text-align: center;
   box-sizing: border-box;
   z-index: 2;
 }
 
-/* 1. 顶部高高外露的真实 3D 白色圆形 7 孔胶卷盘 (Reel Disc) */
+/* 1. 真实详细的 7 孔柯达幻灯片转盘 (Detailed 7-Aperture Reel) */
 .viewmaster-exposed-disc-wrap {
   position: absolute;
-  top: -56px;
+  top: -68px;
   left: 50%;
   transform: translateX(-50%);
-  width: 210px;
-  height: 95px;
+  width: 220px;
+  height: 105px;
   overflow: hidden;
-  z-index: 1; /* 位于后层暗仓之上，但位于观片机机身之前 */
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -302,30 +312,50 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 200px;
-  height: 200px;
+  width: 210px;
+  height: 210px;
   transform: translateX(-50%) rotate(0deg);
-  background: #ffffff;
-  border: 2px solid #33221f;
+  background: radial-gradient(circle at center, #ffffff 0%, #f4ede2 85%, #d8caa7 100%);
+  border: 2.5px solid #33221f;
   border-radius: 50%;
   box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.35),
-    inset 0 0 10px rgba(0,0,0,0.12);
+    0 10px 24px rgba(0, 0, 0, 0.4),
+    inset 0 0 12px rgba(0,0,0,0.15);
   transition: transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1.25);
 }
 
-/* 底片盘上的 7 个彩色幻灯片透视小窗 */
+/* 中心六角齿轮卡孔 */
+.reel-center-spindle-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  background: #33221f;
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  border: 1.5px solid #ffbe0b;
+}
+
+/* 底片盘上的 7 组带黑边框的彩色透明幻灯片小窗与帧号 */
 .reel-film-chip {
   position: absolute;
   top: 8px;
   left: 50%;
-  width: 18px;
-  height: 24px;
+  width: 20px;
+  height: 26px;
   background: #1a0e0c;
-  border: 1.5px solid #ffbe0b;
+  border: 2px solid #222;
   border-radius: 2px;
-  margin-left: -9px;
-  box-shadow: inset 0 0 3px #000;
+  margin-left: -10px;
+  box-shadow: inset 0 0 4px #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 7px;
+  font-weight: 900;
+  color: #ffbe0b;
 }
 .chip-1 { transform: rotate(0deg); }
 .chip-2 { transform: rotate(51.4deg); }
@@ -335,36 +365,35 @@
 .chip-6 { transform: rotate(257.1deg); }
 .chip-7 { transform: rotate(308.5deg); }
 
-/* 2. 真实 3D 红色双筒注塑机身 (带双眼圆弧与鼻梁凹槽) */
+/* 2. 真实 3D 红色双筒注塑外壳 (双眼隆起圆弧与鼻梁凹槽) */
 .viewmaster-plastic-chassis {
   position: relative;
   width: 100%;
   background: linear-gradient(180deg, #ff363d 0%, #e62229 50%, #ad1017 100%);
   border: 3.5px solid #33221f;
-  /* 塑造 View-Master 经典的双目隆起与弧度倒角 */
-  border-radius: 28px 28px 40px 40px;
-  padding: 16px 14px 20px;
+  /* 雕塑双筒目镜的隆起倒角 */
+  border-radius: 32px 32px 42px 42px;
+  padding: 18px 14px 22px;
   box-shadow: 
-    0 22px 45px rgba(0, 0, 0, 0.6),
-    inset 0 3px 3px rgba(255, 255, 255, 0.8),
+    0 24px 50px rgba(0, 0, 0, 0.65),
+    inset 0 4px 4px rgba(255, 255, 255, 0.85),
     inset 3px 0 3px rgba(255, 255, 255, 0.4),
     inset -3px 0 3px rgba(0, 0, 0, 0.4),
-    inset 0 -5px 8px rgba(0, 0, 0, 0.5);
+    inset 0 -6px 10px rgba(0, 0, 0, 0.55);
   box-sizing: border-box;
   z-index: 3;
 }
 
-/* 机顶插卡口深黑缝隙 */
+/* 机顶深黑卡槽口 */
 .viewer-disc-slot-lip {
   width: 82%;
   height: 9px;
   background: #110807;
   border-radius: 4px;
-  margin: -8px auto 14px auto;
+  margin: -8px auto 12px auto;
   box-shadow: inset 0 3px 5px #000, 0 1px 1px rgba(255,255,255,0.4);
 }
 
-/* 浮雕 VIEW-MASTER 官方铭文 */
 .viewer-embossed-brand {
   font-family: 'Montserrat', sans-serif;
   font-size: 8px;
@@ -375,45 +404,43 @@
   text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
 }
 
-/* 3. 右侧导轨金属切片机械扳手 (The Mechanical Advance Lever) */
+/* 3. 右侧导轨金属活动扳手 (Advance Lever) */
 .viewer-advance-lever-slot {
   position: absolute;
-  right: -26px;
+  right: -28px;
   top: 36px;
-  width: 36px;
-  height: 64px;
+  width: 38px;
+  height: 68px;
   cursor: pointer;
   z-index: 5;
   user-select: none;
 }
 
-/* 嵌入外壳的深色金属滑动槽 */
 .lever-track-groove {
   position: absolute;
   top: 0;
   left: 0;
   width: 14px;
-  height: 52px;
+  height: 56px;
   background: #1b110f;
   border: 1.5px solid #33221f;
   border-radius: 7px;
-  box-shadow: inset 0 2px 5px #000;
+  box-shadow: inset 0 3px 6px #000;
 }
 
-/* 活动金属扳手本体 (Pivot Arm) */
 .lever-plunger-arm {
   position: absolute;
   top: 0;
   left: 2px;
   width: 26px;
-  height: 38px;
+  height: 42px;
   transform-origin: 5px 6px;
   transition: transform 0.14s cubic-bezier(0.2, 0.85, 0.25, 1);
 }
 
 .lever-metal-post {
   width: 10px;
-  height: 26px;
+  height: 28px;
   background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #9e9e9e 100%);
   border: 1.5px solid #33221f;
   border-radius: 3px;
@@ -423,25 +450,25 @@
 .lever-thumb-knob {
   position: absolute;
   bottom: 0;
-  left: -4px;
-  width: 18px;
-  height: 18px;
+  left: -5px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #75040a 100%);
   border: 1.5px solid #33221f;
   box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 2px #fff;
 }
 
-/* 点击下压扳手动作 */
+/* 下压扳手动作 */
 .viewer-advance-lever-slot:active .lever-plunger-arm,
 .viewer-advance-lever-slot.is-pressed .lever-plunger-arm {
-  transform: translateY(22px) rotate(26deg);
+  transform: translateY(26px) rotate(28deg);
 }
 
 .lever-pull-tag-hint {
   position: absolute;
-  right: -38px;
-  top: 110px;
+  right: -42px;
+  top: 114px;
   font-family: 'Courier New', monospace;
   font-size: 8px;
   font-weight: 800;
@@ -460,7 +487,50 @@
   50% { transform: translateY(4px); }
 }
 
-/* 4. 双筒双目取景光学暗室 (Binocular Oculars Chamber) */
+/* ==========================================================================
+   【专属惊喜巧思 1：左侧实体微距光学对焦滚轮 (Focus Wheel)】
+   ========================================================================== */
+.viewer-focus-wheel-rig {
+  position: absolute;
+  left: -16px;
+  top: 60px;
+  width: 18px;
+  height: 48px;
+  background: linear-gradient(180deg, #444 0%, #111 50%, #444 100%);
+  border: 1.5px solid #33221f;
+  border-radius: 4px;
+  box-shadow: -3px 3px 6px rgba(0,0,0,0.5), inset 0 0 3px #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 3px 0;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.focus-knurl-line {
+  height: 2px;
+  background: #888;
+  border-radius: 1px;
+}
+
+.focus-guide-hint {
+  position: absolute;
+  left: -48px;
+  top: 114px;
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  font-weight: 800;
+  color: #33221f;
+  background: #ffbe0b;
+  border: 1px solid #33221f;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* 4. 双筒双目取景暗室与真实黑色快门叶片 */
 .viewer-binocular-visor-box {
   background: #170d0b;
   border-radius: 18px;
@@ -471,7 +541,6 @@
   overflow: hidden;
 }
 
-/* 幻灯片放映全画幅窗口 */
 .viewmaster-slide-stage {
   position: relative;
   width: 100%;
@@ -491,9 +560,14 @@
   object-fit: cover;
   display: block;
   filter: contrast(108%) saturate(118%);
+  transition: filter 0.3s ease;
 }
 
-/* 镜头凸透镜反光光晕弧 */
+/* 光学调焦柔化状态 */
+.slide-kodak-photo.is-dreamy-focus {
+  filter: contrast(105%) saturate(120%) blur(2.5px) brightness(1.08) !important;
+}
+
 .lens-reflection-highlight {
   position: absolute;
   top: -25px;
@@ -505,7 +579,7 @@
   pointer-events: none;
 }
 
-/* 【关键机械细节：切片时的物理黑色快门叶片闭合 (Black Shutter Blade)】 */
+/* 真实物理黑色快门叶片闭合 */
 .viewmaster-shutter-blade {
   position: absolute;
   inset: 0;
@@ -513,14 +587,13 @@
   opacity: 0;
   pointer-events: none;
   z-index: 10;
-  transition: opacity 0.06s ease;
+  transition: opacity 0.05s ease;
 }
 
 .viewmaster-shutter-blade.is-closed {
   opacity: 1;
 }
 
-/* 快门拉开后的瞬间胶片过曝光晕 (Light Leak) */
 .viewmaster-light-leak {
   position: absolute;
   inset: 0;
@@ -535,7 +608,6 @@
   opacity: 1;
 }
 
-/* 幻灯片手写说明标签 (Slide Caption Label) */
 .slide-handwritten-caption {
   margin-top: 10px;
   background: #ffffff;
@@ -550,7 +622,7 @@
 }
 
 /* ==========================================================================
-   【打字机手稿正文排版】
+   【打字机放映解说手稿正文】
    ========================================================================== */
 .viewmaster-letter-content {
   margin: 24px 0 16px 0;
@@ -603,8 +675,7 @@
 }
 
 /* ==========================================================================
-   【彻底重塑：专属 2x2 英寸柯达纸夹幻灯片刮刮乐 (Kodachrome Slide Mount)】
-   完全区别于前四款的所有刮刮乐！
+   【专属惊喜巧思 2：2x2 英寸柯达纸夹幻灯片刮刮乐 (Kodachrome Slide Mount)】
    ========================================================================== */
 .slide-mount-scratch-wrapper {
   margin: 28px auto 20px;
@@ -629,7 +700,6 @@
   margin-bottom: 8px;
 }
 
-/* 模拟 2x2 幻灯片中间的感光胶片窗口 */
 .slide-mount-window {
   position: relative;
   width: 100%;
@@ -677,7 +747,7 @@
 }
 
 /* ==========================================================================
-   【双向光学对焦逃跑问答 (Focus Switch)】
+   【双向光学对焦逃跑问答】
    ========================================================================== */
 [data-theme="viewmaster"] .runaway-section {
   border-top: 2px dashed #d9cfbe;
