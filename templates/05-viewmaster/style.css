@@ -12,7 +12,8 @@
 }
 
 /* ==========================================================================
-   【重塑 1：暖色暗房相纸信封 (比例规整 + 避光红标绝不截断)】
+   【彻底重塑 1：经典黄金比例欧式深 V 暗房相纸信封 (Euro-Flap Envelope)】
+   比例自然舒适 (420px × 270px)，彻底消除折痕错位
    ========================================================================== */
 [data-theme="viewmaster"] .envelope-body::before,
 [data-theme="viewmaster"] .envelope-body::after,
@@ -24,36 +25,55 @@
 }
 
 [data-theme="viewmaster"] .envelope-wrapper {
-  background: #fbf5e8 !important;
-  border-radius: 14px !important;
+  width: 90% !important;
+  max-width: 420px !important;
+  height: 270px !important; /* 经典自然信封黄金比例 */
+  margin: 0 auto !important;
+  background: #ecdcc4 !important;
+  border-radius: 12px !important;
   box-shadow: 
-    0 32px 85px rgba(0, 0, 0, 0.95),
+    0 30px 80px rgba(0, 0, 0, 0.95),
     0 0 35px rgba(217, 4, 41, 0.25) !important;
-  border: 3.5px solid #2b1816 !important;
+  border: 3px solid #2b1816 !important;
   position: relative !important;
   overflow: visible !important;
-  max-width: 440px !important; /* 修正信封长宽比例 */
-  margin: 0 auto;
 }
 
 [data-theme="viewmaster"] .envelope-body {
-  border-radius: 10px !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 9px !important;
   background: 
-    linear-gradient(135deg, rgba(230, 34, 41, 0.05) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(230, 34, 41, 0.04) 0%, transparent 50%),
     linear-gradient(145deg, #fbf5e8 0%, #ecdcc4 100%) !important;
-  border: 2px solid #c9b493 !important;
+  border: 1.5px solid #d4c3aa !important;
   position: relative !important;
-  min-height: 250px !important;
+  box-sizing: border-box;
 }
 
-/* 暗房相纸袋红色避光标识（置于左下角开阔区，绝不会被翻盖截断） */
+/* 优雅深 V 翻盖：自然下倾至 145px，角度流畅舒展 */
+[data-theme="viewmaster"] .envelope-flap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 146px !important;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 100%) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f5ebda 70%, #e2d1ba 100%) !important;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)) !important;
+  border: none !important;
+  transform-origin: top center !important;
+  z-index: 3 !important;
+}
+
+/* 避光相纸标签：平整安放在左下角开阔区 */
 .darkroom-mailer-header {
   position: absolute;
-  bottom: 16px;
-  left: 18px;
+  bottom: 14px;
+  left: 16px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   pointer-events: none;
   z-index: 2;
 }
@@ -62,67 +82,76 @@
   background: #e62229;
   color: #ffffff;
   font-family: 'Courier New', monospace;
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 900;
-  padding: 3px 8px;
+  padding: 2.5px 7px;
   border-radius: 2px;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   display: inline-block;
   width: fit-content;
 }
 
 .darkroom-stamp-text {
   font-family: 'Courier New', monospace;
-  font-size: 7px;
+  font-size: 6.5px;
   font-weight: 800;
   color: #7d654c;
   letter-spacing: 0.5px;
 }
 
-/* 封套平口翻盖 */
-[data-theme="viewmaster"] .envelope-flap {
-  width: 100% !important;
-  height: 72px !important;
-  border: none !important;
-  border-bottom: 3.5px solid #e62229 !important;
-  border-radius: 10px 10px 0 0 !important;
-  background: linear-gradient(180deg, #ffffff 0%, #ebdcc7 100%) !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35) !important;
-  transform-origin: top center !important;
+/* ==========================================================================
+   【重塑 2：火漆位置严丝合缝锁定在 V 尖角处 + 真实 3D 黄铜光圈火漆印】
+   ========================================================================== */
+[data-theme="viewmaster"] .wax-seal-wrapper {
+  position: absolute !important;
+  top: 146px !important; /* 精准压在 V 字尖端！接口天衣无缝 */
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 5 !important;
 }
 
-/* 【高保真 3D 金属相机光圈火漆印 (Metallic Aperture Iris Seal)】 */
+/* 3D 蜡印红泥熔边底座 (带有机熔边质感) */
 [data-theme="viewmaster"] .wax-seal {
-  width: clamp(54px, 14vw, 64px);
-  height: clamp(54px, 14vw, 64px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ff4d6d 0%, #c9182b 55%, #6a040f 100%);
-  border: 3px solid #ffbe0b;
+  width: clamp(56px, 14vw, 64px);
+  height: clamp(56px, 14vw, 64px);
+  border-radius: 50% 48% 52% 49% / 49% 52% 48% 51%;
+  background: radial-gradient(circle at 35% 30%, #ff4d6d 0%, #c9182b 50%, #75040a 100%);
   box-shadow: 
-    0 14px 30px rgba(0, 0, 0, 0.85),
-    0 0 0 2.5px #c9182b,
-    0 0 28px rgba(230, 34, 41, 0.75),
-    inset 0 3px 5px rgba(255, 255, 255, 0.9),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.75);
+    0 12px 28px rgba(0, 0, 0, 0.8),
+    0 0 0 2px #9e0b1d,
+    0 0 24px rgba(230, 34, 41, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   animation: seal-pulse 2.8s infinite ease-in-out;
+  cursor: pointer;
 }
 
 @keyframes seal-pulse {
   0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.06); filter: brightness(1.15); }
+  50% { transform: scale(1.05); filter: brightness(1.12); }
 }
 
-/* 8片金属光圈叶片图标 */
-.aperture-lens-svg {
-  width: clamp(28px, 7vw, 34px);
-  height: clamp(28px, 7vw, 34px);
-  fill: none;
-  stroke: #ffd166;
-  stroke-width: 1.8;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+/* 内嵌黄铜金属质感圆盘与 8 叶片机械光圈浮雕 */
+.brass-aperture-coin {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe082 0%, #d4a373 60%, #8c5a2b 100%);
+  border: 1.5px solid #ffbe0b;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(255,255,255,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 真实 8 弧线光圈叶片 SVG 图腾 */
+.aperture-blades-svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.7));
 }
 
 [data-theme="viewmaster"] .envelope-open-hint {
@@ -257,7 +286,7 @@
 }
 
 /* ==========================================================================
-   【核心 3D 实体红色双筒观片机机构】
+   【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】
    ========================================================================== */
 .viewmaster-master-rig {
   position: relative;
@@ -269,7 +298,7 @@
   z-index: 2;
 }
 
-/* 1. 【彻底清除外溢脏黑阴影：高保真实体底片转盘容器】 */
+/* 1. 【清爽纯正的白色底片转盘容器 (彻底消灭两侧多余灰阴影)】 */
 .viewmaster-exposed-disc-wrap {
   position: absolute;
   top: -72px;
@@ -280,10 +309,9 @@
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
-  background: transparent; /* 确保无多余阴影外溢 */
+  background: transparent !important;
 }
 
-/* 干净精致的白色圆盘（移除外溢黑阴影） */
 .viewmaster-reel-wheel {
   position: absolute;
   top: 0;
@@ -294,7 +322,7 @@
   background: radial-gradient(circle at center, #ffffff 0%, #f7f1e6 75%, #ebe0cc 100%);
   border: 2px solid #33221f;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* 彻底清除突兀阴影 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* 干净微阴影，无外溢黑晕 */
   transition: transform 0.38s cubic-bezier(0.2, 0.85, 0.3, 1.25);
 }
 
@@ -332,7 +360,7 @@
   border: 1px solid #ffbe0b;
 }
 
-/* 【真实彩色幻灯片小窗：由 JS 动态计算角度环形排列】 */
+/* 动态生成的彩色反转片小窗 */
 .dynamic-slide-chip {
   position: absolute;
   top: 50%;
@@ -353,7 +381,6 @@
   box-sizing: border-box;
 }
 
-/* 小窗内的微缩透光反转片色块 */
 .slide-chip-film-gel {
   width: 16px;
   height: 14px;
@@ -369,7 +396,7 @@
   line-height: 1;
 }
 
-/* 2. 真实 3D 红色注塑观片机外壳 */
+/* 2. 真实 3D 红色注塑观片机身 */
 .viewmaster-plastic-chassis {
   position: relative;
   width: 100%;
@@ -406,10 +433,10 @@
   text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
 }
 
-/* 3. 【加大加粗版：右侧导轨活动扳手】完全右移，绝无遮挡 */
+/* 3. 【加大加粗扳手：完全右移，绝无遮挡】 */
 .viewer-advance-lever-slot {
   position: absolute;
-  right: -38px; /* 充分右移 */
+  right: -38px;
   top: 32px;
   width: 48px;
   height: 84px;
@@ -569,7 +596,7 @@
   z-index: 1;
 }
 
-/* 初始模糊状态 (需点击对焦齿轮锐化) */
+/* 初始模糊状态 (每次切片自动重置为失焦模糊) */
 .slide-kodak-photo {
   position: relative;
   max-width: 100%;
@@ -627,7 +654,7 @@
 }
 
 /* ==========================================================================
-   【慢速 1.4 秒匀速吐出实体信息字条】
+   【慢速 1.4 秒匀速滑出实体解说字条】
    ========================================================================== */
 .dispenser-slot-wrapper {
   margin-top: 14px;
@@ -655,7 +682,6 @@
   box-sizing: border-box;
   box-shadow: 0 8px 18px rgba(0,0,0,0.25);
   transform-origin: top center;
-  /* 1.4 秒缓速平滑吐出 */
   animation: slideOutSlipSlow 1.4s cubic-bezier(0.12, 0.75, 0.15, 1) forwards;
 }
 
