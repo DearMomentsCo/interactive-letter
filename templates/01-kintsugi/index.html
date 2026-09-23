@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- 强制破除缓存版本标识 -->
+  <link rel="stylesheet" href="style.css?v=kintsugi_100_perfect" />
 </head>
 <body>
 
@@ -77,7 +78,7 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 【通用组件：3D 翻转 + 幻灯片播放器】 -->
+        <!-- 3D 翻转 + 幻灯片播放器 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
@@ -161,7 +162,7 @@
     </div>
   </div>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=kintsugi_100_perfect"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -169,13 +170,11 @@
     document.getElementById('letterSalutation').innerText = LETTER_DATA.salutation || '';
     document.getElementById('letterClosing').innerText = LETTER_DATA.closing || '';
 
-    // 字体切换
     if (LETTER_DATA.fontType) {
       document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
 
-    // 【全局通用相册引擎：支持 1-N 张照片播放与自动隐藏控件】
     const photoCard = document.getElementById('photoCard');
     const frontImg = document.getElementById('frontPhotoImg');
     const backCaption = document.getElementById('backCaptionText');
@@ -194,7 +193,6 @@
         backCaption.innerText = photosList[index].caption || '';
         pageIndicator.innerText = `${index + 1} / ${photosList.length}`;
       }
-
       renderPhoto(0);
 
       photoCard.addEventListener('click', function(e) {
@@ -210,7 +208,6 @@
           currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
           renderPhoto(currentPhotoIdx);
         });
-
         nextBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
@@ -221,14 +218,12 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
-    // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
-    // 逃跑问答设置
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -236,7 +231,6 @@
       document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
     }
 
-    // 密码锁
     const overlay = document.getElementById('passcodeOverlay');
     if (!LETTER_DATA.passcode) {
       overlay.classList.add('is-unlocked');
@@ -266,7 +260,6 @@
       }
     }
 
-    // 音频
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
