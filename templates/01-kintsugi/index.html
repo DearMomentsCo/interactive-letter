@@ -11,8 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 强制破除缓存版本标识 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_100_perfect" />
+  <!-- 防缓存版本标记 -->
+  <link rel="stylesheet" href="style.css?v=kintsugi_dove_reveal_v1" />
 </head>
 <body>
 
@@ -78,9 +78,25 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 3D 翻转 + 幻灯片播放器 -->
+        <!-- 【3D 翻转 + 和平鸽掀开金纱帷幕相册】 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
+            
+            <!-- 和平鸽掀幕转场特效层 -->
+            <div class="dove-curtain-stage" id="doveCurtainStage">
+              <div class="curtain-veil-left"></div>
+              <div class="curtain-veil-right"></div>
+              <div class="peace-dove-messenger">
+                <svg viewBox="0 0 40 40" class="peace-dove-svg">
+                  <!-- 衔着橄榄枝的金色和平鸽 -->
+                  <path d="M12 24 C14 20, 18 16, 26 14 C28 10, 32 8, 36 8 C34 12, 32 15, 30 18 C34 20, 38 24, 38 27 C34 26, 30 24, 26 23 C22 26, 17 28, 12 28 Z" fill="#ffd700"/>
+                  <path d="M22 17 C20 12, 16 9, 10 9 C12 13, 16 16, 20 18 Z" fill="#ffeaa7"/>
+                  <path d="M9 25 Q6 23 5 20 Q8 21 9 25 Z" fill="#8bc34a"/>
+                  <circle cx="33" cy="11" r="1.2" fill="#1c1a17"/>
+                </svg>
+              </div>
+            </div>
+
             <div class="photo-flip-inner">
               <div class="photo-card-front">
                 <img id="frontPhotoImg" src="" alt="Memory Photo" />
@@ -162,7 +178,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_100_perfect"></script>
+  <script src="data.js?v=kintsugi_dove_reveal_v1"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -175,6 +191,9 @@
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
 
+    /* ==========================================================================
+       【相册引擎 + 和平鸽掀幕转场机制】
+       ========================================================================== */
     const photoCard = document.getElementById('photoCard');
     const frontImg = document.getElementById('frontPhotoImg');
     const backCaption = document.getElementById('backCaptionText');
@@ -182,9 +201,43 @@
     const pageIndicator = document.getElementById('photoPageIndicator');
     const prevBtn = document.getElementById('prevPhotoBtn');
     const nextBtn = document.getElementById('nextPhotoBtn');
+    const doveCurtainStage = document.getElementById('doveCurtainStage');
 
     let currentPhotoIdx = 0;
     const photosList = LETTER_DATA.photos || [];
+    let isTransitioning = false;
+
+    // Web Audio 空灵金钟微鸣声
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playDoveChime() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const freqs = [659.25, 783.99, 1046.5]; // E5, G5, C6
+        freqs.forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.15, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.8);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.8);
+        });
+      } catch(e) {}
+    }
 
     if (photosList.length > 0) {
       function renderPhoto(index) {
@@ -200,30 +253,60 @@
         this.classList.toggle('is-flipped');
       });
 
+      // 和平鸽掀幕转场函数
+      function transitionToPhoto(nextIndex) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        playDoveChime();
+
+        // 1. 鸽子飞入，金纱闭合
+        doveCurtainStage.classList.add('is-revealing');
+        doveCurtainStage.classList.add('is-draped');
+
+        // 2. 幕布合拢瞬间替换照片
+        setTimeout(() => {
+          currentPhotoIdx = nextIndex;
+          renderPhoto(currentPhotoIdx);
+
+          // 3. 鸽子掠过，金纱向两边掀开，露出新相片
+          doveCurtainStage.classList.remove('is-draped');
+
+          setTimeout(() => {
+            doveCurtainStage.classList.remove('is-revealing');
+            isTransitioning = false;
+          }, 500);
+
+        }, 320);
+      }
+
       if (photosList.length <= 1) {
         navControls.style.display = 'none';
       } else {
         prevBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          currentPhotoIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
-          renderPhoto(currentPhotoIdx);
+          const targetIdx = (currentPhotoIdx - 1 + photosList.length) % photosList.length;
+          transitionToPhoto(targetIdx);
         });
+
         nextBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          currentPhotoIdx = (currentPhotoIdx + 1) % photosList.length;
-          renderPhoto(currentPhotoIdx);
+          const targetIdx = (currentPhotoIdx + 1) % photosList.length;
+          transitionToPhoto(targetIdx);
         });
       }
     } else {
       document.getElementById('photosSection').style.display = 'none';
     }
 
+    // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
     }
 
+    // 逃跑问答设置
     if (!LETTER_DATA.enableRunaway) {
       document.getElementById('runawaySection').style.display = 'none';
     } else {
@@ -231,6 +314,7 @@
       document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
     }
 
+    // 密码锁
     const overlay = document.getElementById('passcodeOverlay');
     if (!LETTER_DATA.passcode) {
       overlay.classList.add('is-unlocked');
@@ -260,6 +344,7 @@
       }
     }
 
+    // 音频自动播放与开关控制
     const audio = document.getElementById('bgAudio');
     const audioBtn = document.getElementById('audioToggleBtn');
     if (LETTER_DATA.audioUrl) {
@@ -288,11 +373,14 @@
       if (isLetterOpened) return;
       isLetterOpened = true;
 
+      getAudioContext();
       createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight / 2, 50);
 
       setTimeout(() => {
         container.classList.add('is-opened');
-        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.audioUrl) {
+          audio.play().catch(() => {});
+        }
         if (LETTER_DATA.enableScratch) initScratchCard();
         startSmartTypewriter(LETTER_DATA.body);
       }, 380);
@@ -542,7 +630,6 @@
         pCtx.fillStyle = s.color;
         pCtx.shadowColor = '#ffeaa7';
         pCtx.shadowBlur = 8;
-        pCtx.drawFourPointStar = drawFourPointStar;
         drawFourPointStar(pCtx, 0, 0, 4, s.size, s.size * 0.35);
         pCtx.restore();
       }
