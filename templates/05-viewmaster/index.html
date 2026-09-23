@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=vm_v3_eject_strip" />
+  <link rel="stylesheet" href="style.css?v=real_aperture_and_focus" />
 </head>
 <body>
 
@@ -38,9 +38,13 @@
   <div class="letter-viewport" data-theme="viewmaster">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 【重构 1：复古柯达暗房显影相纸信封 (封口相机光圈火漆印)】 -->
+      <!-- 【重构 1：暖色暗房相纸信封 (带避光红标与相机镜头光圈 3D 火漆)】 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
+          <div class="darkroom-mailer-header">
+            <span class="darkroom-red-tag">DARKROOM MAIL</span>
+            <span class="darkroom-stamp-text">DO NOT EXPOSE TO LIGHT</span>
+          </div>
           <span class="envelope-corner-star star-tl">✦</span>
           <span class="envelope-corner-star star-tr">✦</span>
           <span class="envelope-corner-star star-bl">✦</span>
@@ -51,8 +55,11 @@
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            <!-- 3D 相机镜头光圈 8 叶片图标 -->
+            <svg class="aperture-lens-svg" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke-width="2"/>
+              <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"/>
+              <circle cx="12" cy="12" r="3" fill="#ffffff" stroke="none"/>
             </svg>
           </div>
         </div>
@@ -61,7 +68,7 @@
         <div class="envelope-burst-stage" id="burstStage"></div>
       </div>
 
-      <!-- 【暗房放映档案纸主体】 -->
+      <!-- 暗房放映档案纸主体 -->
       <article class="letter-sheet" id="letterSheet">
         
         <!-- 四角暗房校准十字线 -->
@@ -90,18 +97,43 @@
         <!-- 【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
         <div class="viewmaster-master-rig">
           
-          <!-- 顶部外露 7 孔柯达幻灯片转盘 (带齿孔与六角轮毂) -->
+          <!-- 【顶部外露真实彩色幻灯底片盘 (彻底删除黑色齿轮)】 -->
           <div class="viewmaster-exposed-disc-wrap">
             <div class="viewmaster-reel-wheel" id="reelWheel">
               <div class="reel-outer-drive-notches"></div>
-              <div class="reel-center-spindle-hole"></div>
-              <div class="reel-film-chip chip-1">1</div>
-              <div class="reel-film-chip chip-2">2</div>
-              <div class="reel-film-chip chip-3">3</div>
-              <div class="reel-film-chip chip-4">4</div>
-              <div class="reel-film-chip chip-5">5</div>
-              <div class="reel-film-chip chip-6">6</div>
-              <div class="reel-film-chip chip-7">7</div>
+              <div class="reel-center-label-ring">
+                <div class="reel-center-spindle-hole"></div>
+              </div>
+              
+              <!-- 7 扇真实的彩色幻灯底片小窗 -->
+              <div class="reel-film-chip chip-1">
+                <div class="chip-inner-photo-tint" style="background:#e76f51;"></div>
+                <span class="chip-frame-no">1</span>
+              </div>
+              <div class="reel-film-chip chip-2">
+                <div class="chip-inner-photo-tint" style="background:#2a9d8f;"></div>
+                <span class="chip-frame-no">2</span>
+              </div>
+              <div class="reel-film-chip chip-3">
+                <div class="chip-inner-photo-tint" style="background:#f4a261;"></div>
+                <span class="chip-frame-no">3</span>
+              </div>
+              <div class="reel-film-chip chip-4">
+                <div class="chip-inner-photo-tint" style="background:#e63946;"></div>
+                <span class="chip-frame-no">4</span>
+              </div>
+              <div class="reel-film-chip chip-5">
+                <div class="chip-inner-photo-tint" style="background:#457b9d;"></div>
+                <span class="chip-frame-no">5</span>
+              </div>
+              <div class="reel-film-chip chip-6">
+                <div class="chip-inner-photo-tint" style="background:#a8dadc;"></div>
+                <span class="chip-frame-no">6</span>
+              </div>
+              <div class="reel-film-chip chip-7">
+                <div class="chip-inner-photo-tint" style="background:#e9c46a;"></div>
+                <span class="chip-frame-no">7</span>
+              </div>
             </div>
           </div>
 
@@ -110,7 +142,7 @@
             <div class="viewer-disc-slot-lip"></div>
             <div class="viewer-embossed-brand">VIEW·MASTER</div>
 
-            <!-- 【左侧微距对焦齿轮：初始模糊，引导点击对焦】 -->
+            <!-- 【左侧微距对焦滚轮：开场失焦 & 每次切片失焦，引导点击】 -->
             <div class="viewer-focus-wheel-rig" id="focusWheel" title="Click to adjust optical focus!">
               <div class="focus-knurl-line"></div>
               <div class="focus-knurl-line"></div>
@@ -132,19 +164,16 @@
             <!-- 双眼橡胶取景目镜暗室 -->
             <div class="viewer-binocular-visor-box">
               <div class="viewmaster-slide-stage">
-                <!-- 漫反射虚化环境背景 (提升横屏与竖屏照片氛围) -->
                 <div class="slide-ambient-blur-backdrop" id="ambientBackdrop"></div>
-                <!-- 快门闭合遮光层 -->
                 <div class="viewmaster-shutter-blade" id="shutterBlade"></div>
-                <!-- 胶卷过曝光斑 -->
                 <div class="viewmaster-light-leak" id="lightLeak"></div>
-                <!-- 智能光学自适应核心照片 (绝对不切头不切脚) -->
+                <!-- 智能光学自适应核心照片 (绝对不切头不切脚，默认失焦) -->
                 <img class="slide-kodak-photo" id="slidePhotoImg" src="" alt="View-Master 3D Slide Photo" />
                 <div class="lens-reflection-highlight"></div>
               </div>
             </div>
 
-            <!-- 【专属惊喜巧思：底部吐出的实体解说字条】 -->
+            <!-- 【慢速温润吐出的专属实体信息字条】 -->
             <div class="dispenser-slot-wrapper">
               <div class="dispenser-eject-slot"></div>
               <div class="ejected-caption-strip" id="captionStrip">
@@ -202,7 +231,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=vm_v3_eject_strip"></script>
+  <script src="data.js?v=real_aperture_and_focus"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -222,16 +251,27 @@
     const shutterBlade = document.getElementById('shutterBlade');
     const lightLeak = document.getElementById('lightLeak');
 
+    const focusWheel = document.getElementById('focusWheel');
+    const focusGuideHint = document.getElementById('focusGuideHint');
+    let isInFocus = false; // 初始为失焦状态
+
     function renderSlide(index) {
       if (photosList.length === 0) return;
       const photo = photosList[index];
       slideImg.src = photo.url;
       ambientBackdrop.style.backgroundImage = `url('${photo.url}')`;
 
-      // 重新触发纸条吐出动画
+      // 【核心体验】：每换一张照片，重置为模糊失焦！
+      isInFocus = false;
+      slideImg.classList.remove('is-in-focus');
+      focusGuideHint.innerText = "⌖ TAP FOCUS";
+      focusGuideHint.style.background = "#ffbe0b";
+      focusGuideHint.style.color = "#33221f";
+
+      // 重新触发 1.3s 慢速吐字条动画
       captionStrip.style.animation = 'none';
-      void captionStrip.offsetWidth; // 触发回流重置
-      captionStrip.style.animation = 'slideOutSlip 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.25) forwards';
+      void captionStrip.offsetWidth;
+      captionStrip.style.animation = 'slideOutSlipSlow 1.3s cubic-bezier(0.1, 0.7, 0.1, 1) forwards';
 
       stripFrameTag.innerText = `SLIDE FRAME #${index + 1}`;
       stripCaptionText.innerText = photo.caption || '';
@@ -285,7 +325,6 @@
       } catch(e) {}
     }
 
-    // 对焦齿轮卡嗒声与清脆提示音
     function playFocusClickSound() {
       try {
         const ctx = getAudioContext();
@@ -323,7 +362,7 @@
     }
 
     /* ==========================================================================
-       【核心机械交互：按压扳手 ➔ 快门闭合 ➔ 转盘旋转 ➔ 吐出新字条】
+       【核心机械交互：按压扳手 ➔ 快门闭合 ➔ 转盘旋转 ➔ 慢速吐出新字条】
        ========================================================================== */
     const advanceSlot = document.getElementById('advanceLeverSlot');
     const reelWheel = document.getElementById('reelWheel');
@@ -337,21 +376,19 @@
       advanceSlot.classList.add('is-pressed');
       playViewMasterRatchetSound();
 
-      // 1. 物理快门叶片闭合遮光
+      // 快门叶片瞬间闭合
       shutterBlade.classList.add('is-closed');
 
-      // 2. 详细底片转盘精准旋转一格 (51.4 度)
+      // 胶卷盘精准旋转一格
       reelAngle += 51.4;
       reelWheel.style.transform = `translateX(-50%) rotate(${reelAngle}deg)`;
 
       setTimeout(() => {
-        // 3. 换出下一张照片并缓缓吐出新字条
         if (photosList.length > 0) {
           currentSlideIdx = (currentSlideIdx + 1) % photosList.length;
-          renderSlide(currentSlideIdx);
+          renderSlide(currentSlideIdx); // 自动重设为模糊失焦并缓缓吐字条！
         }
 
-        // 4. 快门重新拉开，伴随胶卷漏光
         shutterBlade.classList.remove('is-closed');
         lightLeak.classList.add('is-leaking');
         advanceSlot.classList.remove('is-pressed');
@@ -371,12 +408,8 @@
     });
 
     /* ==========================================================================
-       【核心交互：左侧对焦滚轮 (初始模糊 ➔ 点击锐化清晰)】
+       【核心交互：点击对焦齿轮 ➔ 瞬间对焦清晰】
        ========================================================================== */
-    const focusWheel = document.getElementById('focusWheel');
-    const focusGuideHint = document.getElementById('focusGuideHint');
-    let isInFocus = false; // 初始默认模糊失焦
-
     focusWheel.addEventListener('click', (e) => {
       e.stopPropagation();
       playFocusClickSound();
@@ -436,7 +469,7 @@
           if (entered === LETTER_DATA.passcode) {
             overlay.classList.add('is-unlocked');
           } else {
-            errorEl.innerText = "WRONG CODE! RETRY.";
+            errorEl.innerText = "WRONG CODE! CHECK REEL SLEEVE.";
             inputs.forEach(i => i.value = '');
             inputs[0].focus();
           }
