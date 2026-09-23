@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_ceremonial_curtain_v2" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_white_dove_veil_v3" />
 </head>
 <body>
 
@@ -78,46 +78,63 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 【3D 翻转 + 和平鸽掀开金缎幕布相册】 -->
+        <!-- 【大画幅 3D 翻转 + 白玉金纱与 3D 纯白和平鸽相册】 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             
-            <!-- 和平鸽掀幕转场特效层 -->
+            <!-- 飘逸清爽白玉金纱与纯白和平鸽转场层 -->
             <div class="dove-curtain-stage" id="doveCurtainStage">
               <div class="curtain-veil-left"></div>
               <div class="curtain-veil-right"></div>
               
-              <!-- 莳绘金箔和平鸽（精细立体羽翼与橄榄枝） -->
+              <!-- 纯白立体 3D 雕塑感和平鸽 -->
               <div class="peace-dove-messenger">
-                <svg viewBox="0 0 100 80" class="peace-dove-svg">
-                  <!-- 柔和背光阴影 -->
-                  <path d="M25,48 C32,38 45,30 65,26 C72,16 82,12 92,12 C86,22 80,28 75,34 C84,38 92,46 90,52 C82,50 72,46 64,44 C54,52 42,58 28,58 Z" fill="#b38728"/>
-                  <!-- 金箔主体 -->
-                  <path d="M24,46 C30,36 44,28 64,24 C70,14 80,10 90,10 C84,20 78,26 73,32 C82,36 90,44 88,50 C80,48 70,44 62,42 C52,50 40,56 26,56 Z" fill="url(#goldFoilGradient)"/>
-                  <!-- 舒展的翅膀羽毛 -->
-                  <path d="M52,32 C48,20 38,12 22,12 C28,20 38,28 48,34 Z" fill="#ffeaa7"/>
-                  <path d="M42,28 C38,18 30,12 18,12 C22,18 30,24 38,30 Z" fill="#fcedc5"/>
-                  <!-- 嘴衔碧绿橄榄枝 -->
-                  <path d="M18,48 Q10,44 8,38 Q14,40 18,48 Z" fill="#4caf50"/>
-                  <path d="M12,42 Q6,46 4,40 Q10,38 12,42 Z" fill="#81c784"/>
-                  <!-- 鸽眼微珠 -->
-                  <circle cx="82" cy="16" r="2" fill="#1c1a17"/>
-                  <circle cx="82.5" cy="15.5" r="0.8" fill="#ffffff"/>
+                <svg viewBox="0 0 120 100" class="peace-dove-svg">
                   <defs>
-                    <linearGradient id="goldFoilGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#fff5c0" />
-                      <stop offset="40%" stop-color="#ffd700" />
-                      <stop offset="80%" stop-color="#c59b27" />
-                      <stop offset="100%" stop-color="#8c6a18" />
+                    <!-- 鸽羽多层柔和珍珠白渐变 -->
+                    <linearGradient id="doveBodyGrad" x1="20%" y1="10%" x2="80%" y2="90%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="65%" stop-color="#f5f5f7" />
+                      <stop offset="100%" stop-color="#d6d6dc" />
+                    </linearGradient>
+                    <linearGradient id="doveWingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="50%" stop-color="#edf0f5" />
+                      <stop offset="100%" stop-color="#c9ced8" />
+                    </linearGradient>
+                    <linearGradient id="oliveLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#84a98c" />
+                      <stop offset="100%" stop-color="#354f52" />
                     </linearGradient>
                   </defs>
+
+                  <!-- 尾羽与底翼阴影层 -->
+                  <path d="M22,62 C34,50 48,42 70,36 C80,24 92,18 106,18 C98,30 92,38 86,46 C96,50 106,60 102,68 C92,66 80,60 72,56 C60,66 46,74 28,74 Z" fill="#b0b5c0" opacity="0.35"/>
+                  
+                  <!-- 白鸽身体主干 (丰满流线) -->
+                  <path d="M26,58 C36,46 52,38 74,34 C82,22 96,16 108,16 C100,28 92,36 86,44 C96,48 106,58 104,64 C94,62 82,56 74,52 C62,62 48,70 30,70 Z" fill="url(#doveBodyGrad)"/>
+                  
+                  <!-- 展翅主翼 (上层羽毛层叠反光) -->
+                  <path d="M60,40 C54,24 42,12 20,12 C28,24 40,34 54,42 Z" fill="url(#doveWingGrad)"/>
+                  <path d="M48,34 C44,22 34,14 18,14 C22,22 32,30 42,36 Z" fill="#ffffff"/>
+                  <path d="M38,30 C34,22 26,16 14,16 C18,22 24,28 32,34 Z" fill="#f8f9fa"/>
+                  
+                  <!-- 嘴衔翠绿立体橄榄枝 -->
+                  <path d="M110,22 Q118,20 124,14" fill="none" stroke="#6b705c" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M116,19 Q118,14 123,15 Q120,20 116,19 Z" fill="url(#oliveLeafGrad)"/>
+                  <path d="M121,17 Q125,12 128,15 Q124,19 121,17 Z" fill="url(#oliveLeafGrad)"/>
+                  
+                  <!-- 琥珀鸽喙与明亮眼眸 -->
+                  <polygon points="106,21 112,23 106,25" fill="#f4a261"/>
+                  <circle cx="98" cy="22" r="2.2" fill="#212529"/>
+                  <circle cx="98.7" cy="21.3" r="0.9" fill="#ffffff"/>
                 </svg>
               </div>
             </div>
 
             <div class="photo-flip-inner">
               <div class="photo-card-front">
-                <!-- 漫反射光晕底衬 (用于横屏或长竖屏照片的四周柔和填充) -->
+                <!-- 漫反射光晕底衬 -->
                 <div class="photo-ambient-blur" id="photoAmbientBlur"></div>
                 <img id="frontPhotoImg" src="" alt="Memory Photo" />
               </div>
@@ -198,7 +215,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_ceremonial_curtain_v2"></script>
+  <script src="data.js?v=kintsugi_white_dove_veil_v3"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -212,7 +229,7 @@
     }
 
     /* ==========================================================================
-       【相册引擎 + 智能自适应 + 和平鸽金纱慢速仪式感转场】
+       【相册引擎 + 智能自适应 + 纯白和平鸽与清透金纱转场】
        ========================================================================== */
     const photoCard = document.getElementById('photoCard');
     const frontImg = document.getElementById('frontPhotoImg');
@@ -228,7 +245,7 @@
     const photosList = LETTER_DATA.photos || [];
     let isTransitioning = false;
 
-    // Web Audio 空灵温润的金钵微鸣声
+    // Web Audio 空灵纯净的金磬微鸣声
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -245,18 +262,18 @@
         const ctx = getAudioContext();
         const now = ctx.currentTime;
         
-        // 528Hz 金色愈合频率微鸣
+        // 528Hz 金缮空灵治愈频率
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
         osc.frequency.setValueAtTime(528, now);
         osc.frequency.exponentialRampToValueAtTime(1056, now + 0.15);
-        gain.gain.setValueAtTime(0.22, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
-        osc.stop(now + 1.6);
+        osc.stop(now + 1.8);
       } catch(e) {}
     }
 
@@ -276,31 +293,31 @@
         this.classList.toggle('is-flipped');
       });
 
-      // 慢速从容的和平鸽掀幕函数 (1.4s)
+      // 慢速 1.4 秒清爽飘逸白鸽转场
       function transitionToPhoto(nextIndex) {
         if (isTransitioning) return;
         isTransitioning = true;
 
         playRinGongChime();
 
-        // 1. 幕布徐徐向内合拢，金鸽展翅掠入
+        // 1. 半透明金纱帷幕向内合拢，白鸽展翅掠入
         doveCurtainStage.classList.add('is-revealing');
         doveCurtainStage.classList.add('is-draped');
 
-        // 2. 幕布完全遮蔽瞬间替换照片 (500ms)
+        // 2. 帷幕完全遮蔽瞬间替换照片 (500ms)
         setTimeout(() => {
           currentPhotoIdx = nextIndex;
           renderPhoto(currentPhotoIdx);
 
-          // 3. 鸽子掠过中心，金纱向两旁优雅舒展掀开 (600ms)
+          // 3. 白鸽掠过中心，纱幔向两边轻盈掀开 (600ms)
           setTimeout(() => {
             doveCurtainStage.classList.remove('is-draped');
 
-            // 4. 彻底完成转场
+            // 4. 彻底完成转场并释放锁
             setTimeout(() => {
               doveCurtainStage.classList.remove('is-revealing');
               isTransitioning = false;
-            }, 650);
+            }, 680);
 
           }, 150);
 
