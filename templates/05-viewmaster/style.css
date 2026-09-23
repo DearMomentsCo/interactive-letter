@@ -12,8 +12,7 @@
 }
 
 /* ==========================================================================
-   【彻底重塑 1：经典黄金比例欧式深 V 暗房相纸信封 (Euro-Flap Envelope)】
-   比例自然舒适 (420px × 270px)，彻底消除折痕错位
+   【重塑 1：欧式深 V 暗房相纸信封 (典雅比例 420px × 260px)】
    ========================================================================== */
 [data-theme="viewmaster"] .envelope-body::before,
 [data-theme="viewmaster"] .envelope-body::after,
@@ -25,15 +24,15 @@
 }
 
 [data-theme="viewmaster"] .envelope-wrapper {
-  width: 90% !important;
-  max-width: 420px !important;
-  height: 270px !important; /* 经典自然信封黄金比例 */
+  width: 92% !important;
+  max-width: 430px !important;
+  height: 265px !important;
   margin: 0 auto !important;
-  background: #ecdcc4 !important;
-  border-radius: 12px !important;
+  background: #fbf5e8 !important;
+  border-radius: 14px !important;
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(217, 4, 41, 0.25) !important;
+    0 0 35px rgba(217, 4, 41, 0.22) !important;
   border: 3px solid #2b1816 !important;
   position: relative !important;
   overflow: visible !important;
@@ -42,7 +41,7 @@
 [data-theme="viewmaster"] .envelope-body {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 9px !important;
+  border-radius: 10px !important;
   background: 
     linear-gradient(135deg, rgba(230, 34, 41, 0.04) 0%, transparent 50%),
     linear-gradient(145deg, #fbf5e8 0%, #ecdcc4 100%) !important;
@@ -51,22 +50,22 @@
   box-sizing: border-box;
 }
 
-/* 优雅深 V 翻盖：自然下倾至 145px，角度流畅舒展 */
+/* 欧式深 V 翻盖：自然下倾至 138px，过渡优雅顺畅 */
 [data-theme="viewmaster"] .envelope-flap {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 146px !important;
+  height: 138px !important;
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%) !important;
-  background: linear-gradient(180deg, #ffffff 0%, #f5ebda 70%, #e2d1ba 100%) !important;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f6ecdc 70%, #e5d4bb 100%) !important;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)) !important;
   border: none !important;
   transform-origin: top center !important;
   z-index: 3 !important;
 }
 
-/* 避光相纸标签：平整安放在左下角开阔区 */
+/* 暗房避光纸袋标签：置于左下角开阔区，绝无遮挡 */
 .darkroom-mailer-header {
   position: absolute;
   bottom: 14px;
@@ -100,28 +99,29 @@
 }
 
 /* ==========================================================================
-   【重塑 2：火漆位置严丝合缝锁定在 V 尖角处 + 真实 3D 黄铜光圈火漆印】
+   【重塑 2：高定古典相机烫金火漆印 (Vintage Camera & Heart Wax Seal)】
+   彻底消除黄色怪异圆盘，纯正深酒红手工熔蜡 + 烫金相机爱心浮雕
    ========================================================================== */
 [data-theme="viewmaster"] .wax-seal-wrapper {
   position: absolute !important;
-  top: 146px !important; /* 精准压在 V 字尖端！接口天衣无缝 */
+  top: 138px !important; /* 严丝合缝压在 V 字尖端！*/
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   z-index: 5 !important;
 }
 
-/* 3D 蜡印红泥熔边底座 (带有机熔边质感) */
+/* 手工熔蜡深酒红底座（带真实有机波浪熔边） */
 [data-theme="viewmaster"] .wax-seal {
   width: clamp(56px, 14vw, 64px);
   height: clamp(56px, 14vw, 64px);
-  border-radius: 50% 48% 52% 49% / 49% 52% 48% 51%;
-  background: radial-gradient(circle at 35% 30%, #ff4d6d 0%, #c9182b 50%, #75040a 100%);
+  border-radius: 48% 52% 49% 51% / 52% 49% 51% 48%;
+  background: radial-gradient(circle at 35% 30%, #a81c2d 0%, #730d19 55%, #42040c 100%);
+  border: 1.5px solid #4a060e;
   box-shadow: 
     0 12px 28px rgba(0, 0, 0, 0.8),
-    0 0 0 2px #9e0b1d,
-    0 0 24px rgba(230, 34, 41, 0.65),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.7);
+    0 0 20px rgba(168, 28, 45, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,24 +134,24 @@
   50% { transform: scale(1.05); filter: brightness(1.12); }
 }
 
-/* 内嵌黄铜金属质感圆盘与 8 叶片机械光圈浮雕 */
-.brass-aperture-coin {
+/* 蜡印下压印痕坑槽 */
+.wax-depressed-cavity {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffe082 0%, #d4a373 60%, #8c5a2b 100%);
-  border: 1.5px solid #ffbe0b;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 1px 2px rgba(255,255,255,0.4);
+  background: radial-gradient(circle at 38% 35%, #590913 0%, #330208 100%);
+  border: 1px dashed rgba(255, 215, 0, 0.4);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.85), 0 1px 1px rgba(255,255,255,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 真实 8 弧线光圈叶片 SVG 图腾 */
-.aperture-blades-svg {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.7));
+/* 古典复古旁轴相机与爱心镜头烫金浮雕 */
+.seal-camera-svg {
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.85));
 }
 
 [data-theme="viewmaster"] .envelope-open-hint {
@@ -298,7 +298,7 @@
   z-index: 2;
 }
 
-/* 1. 【清爽纯正的白色底片转盘容器 (彻底消灭两侧多余灰阴影)】 */
+/* 顶部外露动态幻灯转盘 (两侧干净无阴影) */
 .viewmaster-exposed-disc-wrap {
   position: absolute;
   top: -72px;
@@ -322,7 +322,7 @@
   background: radial-gradient(circle at center, #ffffff 0%, #f7f1e6 75%, #ebe0cc 100%);
   border: 2px solid #33221f;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* 干净微阴影，无外溢黑晕 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   transition: transform 0.38s cubic-bezier(0.2, 0.85, 0.3, 1.25);
 }
 
@@ -389,14 +389,15 @@
 }
 
 .slide-chip-number {
-  font-family: monospace;
-  font-size: 6.5px;
+  font-family: 'Montserrat', monospace, sans-serif;
+  font-size: 7.5px;
   font-weight: 900;
   color: #ffbe0b;
+  text-shadow: 0 1px 2px #000;
   line-height: 1;
 }
 
-/* 2. 真实 3D 红色注塑观片机身 */
+/* 2. 真实 3D 红色注塑机身 */
 .viewmaster-plastic-chassis {
   position: relative;
   width: 100%;
@@ -433,7 +434,7 @@
   text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
 }
 
-/* 3. 【加大加粗扳手：完全右移，绝无遮挡】 */
+/* 3. 右侧导轨活动扳手 */
 .viewer-advance-lever-slot {
   position: absolute;
   right: -38px;
