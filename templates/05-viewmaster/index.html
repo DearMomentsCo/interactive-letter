@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=real_dynamic_reel" />
+  <link rel="stylesheet" href="style.css?v=euro_v_aperture" />
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   <div class="letter-viewport" data-theme="viewmaster">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 【重构 1：暖色暗房相纸信封 (避光红标置于左下角开阔区，绝不遮挡)】 -->
+      <!-- 【重构 1：黄金比例欧式深 V 暗房相纸信封】 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <div class="darkroom-mailer-header">
@@ -47,16 +47,33 @@
           </div>
         </div>
 
+        <!-- 纯正欧式深 V 翻盖 -->
         <div class="envelope-flap"></div>
 
+        <!-- 【重构 2：压在 V 尖角上的 3D 黄铜相机光圈叶片火漆印】 -->
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 3D 金属相机镜头 8 叶片光圈图腾 -->
-            <svg class="aperture-lens-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke="#ffd166" stroke-width="2"/>
-              <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94" stroke="#ffd166"/>
-              <circle cx="12" cy="12" r="3.2" fill="#ffd166" stroke="none"/>
-            </svg>
+            <div class="brass-aperture-coin">
+              <!-- 真实的相机镜头 8 叶片光圈图腾 -->
+              <svg class="aperture-blades-svg" viewBox="0 0 100 100">
+                <!-- 外圈焦距刻度圆环 -->
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#6d4c2b" stroke-width="2" stroke-dasharray="2, 4"/>
+                <!-- 8 片重叠螺旋光圈叶片 -->
+                <g fill="#4a2e1b" stroke="#8c5a2b" stroke-width="1.5">
+                  <path d="M50 15 C60 25, 75 35, 78 50 L65 52 C60 40, 50 30, 42 22 Z"/>
+                  <path d="M78 28 C82 42, 85 58, 78 72 L67 65 C72 54, 72 42, 65 35 Z"/>
+                  <path d="M85 50 C80 65, 70 78, 55 82 L53 70 C63 65, 70 55, 72 45 Z"/>
+                  <path d="M72 72 C58 82, 42 85, 28 78 L35 67 C44 72, 56 72, 65 65 Z"/>
+                  <path d="M50 85 C35 80, 22 70, 18 55 L30 53 C35 63, 45 70, 55 72 Z"/>
+                  <path d="M28 72 C22 58, 18 42, 25 28 L36 35 C31 44, 31 56, 38 65 Z"/>
+                  <path d="M15 50 C20 35, 30 22, 45 18 L47 30 C37 35, 30 45, 28 55 Z"/>
+                  <path d="M28 28 C42 18, 58 15, 72 22 L65 33 C56 28, 44 28, 35 35 Z"/>
+                </g>
+                <!-- 光圈中央孔径与红宝石小核心 -->
+                <polygon points="50,38 60,45 58,58 46,62 38,52 42,42" fill="#2b1816"/>
+                <circle cx="50" cy="50" r="4.5" fill="#e62229"/>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -93,14 +110,14 @@
         <!-- 【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
         <div class="viewmaster-master-rig">
           
-          <!-- 【顶部外露真实动态彩色幻灯底片盘 (彻底清除脏黑阴影)】 -->
+          <!-- 顶部外露动态彩色幻灯底片盘 (彻底清除脏黑阴影) -->
           <div class="viewmaster-exposed-disc-wrap">
             <div class="viewmaster-reel-wheel" id="reelWheel">
               <div class="reel-outer-drive-notches"></div>
               <div class="reel-center-label-ring">
                 <div class="reel-spindle-hub"></div>
               </div>
-              <!-- 动态照片幻灯小窗容器 (由 JS 依据照片数量自动生成与布局) -->
+              <!-- 动态照片幻灯小窗容器 -->
               <div id="dynamicChipsContainer"></div>
             </div>
           </div>
@@ -132,7 +149,7 @@
             <!-- 双眼橡胶取景目镜暗室 -->
             <div class="viewer-binocular-visor-box">
               <div class="viewmaster-slide-stage">
-                <!-- 漫反射虚化环境背景 (提升横屏与竖屏照片氛围) -->
+                <!-- 漫反射虚化环境背景 -->
                 <div class="slide-ambient-blur-backdrop" id="ambientBackdrop"></div>
                 <div class="viewmaster-shutter-blade" id="shutterBlade"></div>
                 <div class="viewmaster-light-leak" id="lightLeak"></div>
@@ -200,7 +217,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=real_dynamic_reel"></script>
+  <script src="data.js?v=euro_v_aperture"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -246,7 +263,6 @@
         const chip = document.createElement('div');
         chip.className = 'dynamic-slide-chip';
         
-        // 精准将底片贴合在 216px 圆盘周缘
         const angle = stepAngle * i;
         chip.style.transform = `rotate(${angle}deg) translateY(-80px)`;
 
@@ -389,7 +405,7 @@
       setTimeout(() => {
         if (photosList.length > 0) {
           currentSlideIdx = (currentSlideIdx + 1) % photosList.length;
-          renderSlide(currentSlideIdx); // 自动重设为模糊失焦并缓缓吐字条！
+          renderSlide(currentSlideIdx);
         }
 
         shutterBlade.classList.remove('is-closed');
