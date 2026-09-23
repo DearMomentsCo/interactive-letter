@@ -1,14 +1,16 @@
 /* ==========================================================================
    THEME 01: 金缮修复和解款 (KINTSUGI) - 专属艺术美学
+   绝对物理隔离样式库 - 仅对 templates/01-kintsugi/ 生效
    ========================================================================== */
 
+/* 1. 视口背景：深邃曜石玄黑与微金光泽 */
 .letter-viewport[data-theme="kintsugi"] {
   background: radial-gradient(ellipse at 50% 38%, #20242e 0%, #111317 75%, #08090b 100%);
   color: #2b2621;
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-/* 信封设计 */
+/* 2. 和纸金箔信封 */
 [data-theme="kintsugi"] .envelope-wrapper {
   background: #222630;
   border-radius: 10px;
@@ -79,7 +81,7 @@
   opacity: 0.9;
 }
 
-/* 信纸主体 */
+/* 3. 信纸主体 */
 [data-theme="kintsugi"] .letter-sheet {
   background-color: #fdfaf3 !important;
   background-image: 
@@ -163,7 +165,7 @@
 }
 
 /* ==========================================================================
-   【彻底修复 1：相册容器锁定黄金比例高度，绝不压缩坍塌】
+   【4. 智能相框：自适应 9:16、横屏与任意画幅，锁定高度绝不坍塌】
    ========================================================================== */
 [data-theme="kintsugi"] .photo-slider-wrapper {
   margin: clamp(16px, 4vw, 22px) auto;
@@ -175,9 +177,8 @@
 
 [data-theme="kintsugi"] .photo-flip-card {
   width: 100%;
-  /* 强制锁定相框高度为 210px，即使图片未加载也永不变成扁条 */
-  height: clamp(190px, 48vw, 225px) !important;
-  min-height: 190px !important;
+  height: clamp(200px, 50vw, 230px) !important;
+  min-height: 200px !important;
   perspective: 1000px;
   position: relative;
   margin: 0 auto;
@@ -198,18 +199,36 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: #ffffff;
+  background: #1c1a17; /* 深邃底衬，衬托金边与画面 */
   border: 1.5px solid rgba(212, 175, 55, 0.8);
-  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4.5px #d4af37, 0 14px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4.5px #d4af37, 0 14px 30px rgba(0,0,0,0.18);
   border-radius: 6px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* 留白环境漫反射光晕：横屏或长竖屏时柔和打底 */
+.photo-ambient-blur {
+  position: absolute;
+  inset: -15px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.5) saturate(1.2);
+  opacity: 0.75;
+  z-index: 1;
+}
+
+/* 核心照片：智能适应 (contain)，100% 完整显示不切头切边 */
 [data-theme="kintsugi"] .photo-card-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain !important;
   display: block;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
 [data-theme="kintsugi"] .photo-card-back {
@@ -221,6 +240,7 @@
   padding: 18px;
   box-sizing: border-box;
   text-align: center;
+  z-index: 3;
 }
 
 [data-theme="kintsugi"] .photo-caption-text {
@@ -279,46 +299,52 @@
 }
 
 /* ==========================================================================
-   【新增亮点：和平鸽金纱揭幕转场 (Peace Dove & Golden Silk Veil)】
+   【5. 升级版：真实织金缎面幕布 + 莳绘金鸽慢速转场】
+   节奏舒展 (1.4s)，质感契合金缮与和解公文语境
    ========================================================================== */
 .dove-curtain-stage {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 20;
   overflow: hidden;
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
-/* 激活转场 */
 .dove-curtain-stage.is-revealing {
   opacity: 1;
 }
 
-/* 左右两扇柔软华贵的金纱帷幕 */
+/* 带有垂直褶皱光影的织金缎面幕布 (Pleated Silk) */
 .curtain-veil-left,
 .curtain-veil-right {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 52%;
-  background: linear-gradient(135deg, rgba(251, 240, 205, 0.96) 0%, rgba(212, 175, 55, 0.92) 50%, rgba(143, 110, 40, 0.95) 100%);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+  width: 53%;
+  /* 模拟细腻的真丝垂坠与纵向褶皱反光 */
+  background: 
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.18) 0px, transparent 6px, rgba(0,0,0,0.15) 12px, transparent 18px),
+    linear-gradient(135deg, #fcedc5 0%, #d4af37 40%, #9e7b29 80%, #5e4612 100%);
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  transition: transform 0.65s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
+/* 门襟处的刺绣金边 */
 .curtain-veil-left {
   left: 0;
   transform: translateX(-105%);
+  border-right: 2px solid #fff3a8;
 }
 
 .curtain-veil-right {
   right: 0;
   transform: translateX(105%);
+  border-left: 2px solid #fff3a8;
 }
 
-/* 闭合帷幕阶段 */
+/* 幕布闭合形态 */
 .dove-curtain-stage.is-draped .curtain-veil-left {
   transform: translateX(0%);
 }
@@ -326,22 +352,25 @@
   transform: translateX(0%);
 }
 
-/* 掀幕的金色和平鸽 */
+/* 放大、立体的莳绘金色和平鸽 */
 .peace-dove-messenger {
   position: absolute;
-  left: -50px;
+  left: -80px;
   top: 50%;
-  width: 44px;
-  height: 44px;
+  width: 68px;
+  height: 68px;
   transform: translateY(-50%) scale(0.6);
-  filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.8));
-  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7));
+  /* 1.1 秒从容掠过画面 */
+  transition: transform 1.05s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease;
   opacity: 0;
+  z-index: 25;
 }
 
+/* 鸽子随幕布飞入中央并稍作回旋 */
 .dove-curtain-stage.is-draped .peace-dove-messenger {
   opacity: 1;
-  transform: translate(160px, -50%) scale(1.1);
+  transform: translate(210px, -50%) scale(1.12);
 }
 
 .peace-dove-svg {
@@ -349,7 +378,7 @@
   height: 100%;
 }
 
-/* 和解免死券 */
+/* 6. 和解免死券 */
 [data-theme="kintsugi"] .apology-vouchers-container {
   margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
   position: relative;
@@ -450,7 +479,7 @@
   border-style: solid;
 }
 
-/* 正文流体字体 */
+/* 7. 正文流体字体 */
 [data-theme="kintsugi"] .letter-body-text {
   font-size: clamp(15px, 4.1vw, 17px);
   line-height: clamp(1.9, 5vw, 2.05);
@@ -487,7 +516,7 @@
   z-index: 2;
 }
 
-/* 刮刮乐 */
+/* 8. 刮刮乐 */
 [data-theme="kintsugi"] .scratch-hint-text {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
@@ -532,7 +561,7 @@
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 逃跑问答 */
+/* 9. 逃跑问答 */
 [data-theme="kintsugi"] .runaway-section {
   border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
   padding-top: 24px;
