@@ -79,7 +79,7 @@
   opacity: 0.9;
 }
 
-/* 信纸主体（原版米白微质感纸面） */
+/* 信纸主体 */
 [data-theme="kintsugi"] .letter-sheet {
   background-color: #fdfaf3 !important;
   background-image: 
@@ -162,41 +162,191 @@
   z-index: 2;
 }
 
-/* 播放器金缮专属配色 */
+/* ==========================================================================
+   【彻底修复 1：相册容器锁定黄金比例高度，绝不压缩坍塌】
+   ========================================================================== */
+[data-theme="kintsugi"] .photo-slider-wrapper {
+  margin: clamp(16px, 4vw, 22px) auto;
+  max-width: 320px;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+[data-theme="kintsugi"] .photo-flip-card {
+  width: 100%;
+  /* 强制锁定相框高度为 210px，即使图片未加载也永不变成扁条 */
+  height: clamp(190px, 48vw, 225px) !important;
+  min-height: 190px !important;
+  perspective: 1000px;
+  position: relative;
+  margin: 0 auto;
+}
+
+[data-theme="kintsugi"] .photo-flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 [data-theme="kintsugi"] .photo-card-front,
 [data-theme="kintsugi"] .photo-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
   background: #ffffff;
-  border: 1px solid rgba(212, 175, 55, 0.7);
-  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4px #d4af37, 0 12px 28px rgba(0,0,0,0.12);
-  border-radius: 4px;
+  border: 1.5px solid rgba(212, 175, 55, 0.8);
+  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4.5px #d4af37, 0 14px 30px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+[data-theme="kintsugi"] .photo-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 [data-theme="kintsugi"] .photo-card-back {
   background: #fbf7ee;
   color: #634714;
-  font-size: clamp(12.5px, 3.4vw, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+[data-theme="kintsugi"] .photo-caption-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(14px, 3.8vw, 16px);
+  line-height: 1.5;
+  color: #634714;
+  margin: 0;
 }
 
 [data-theme="kintsugi"] .photo-flip-hint {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.4vw, 10.5px);
+  font-size: clamp(8.5px, 2.3vw, 10px);
   letter-spacing: 1.5px;
   margin-top: 10px;
+  text-align: center;
+}
+
+[data-theme="kintsugi"] .photo-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
 }
 
 [data-theme="kintsugi"] .photo-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   border: 1px solid #d4af37;
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(212, 175, 55, 0.15);
   color: #7a5a17;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
 [data-theme="kintsugi"] .photo-nav-btn:hover {
-  background: rgba(212, 175, 55, 0.28);
+  background: rgba(212, 175, 55, 0.35);
+  transform: scale(1.08);
 }
 
 [data-theme="kintsugi"] .photo-page-indicator {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  font-weight: 700;
   color: #8c6a22;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   【新增亮点：和平鸽金纱揭幕转场 (Peace Dove & Golden Silk Veil)】
+   ========================================================================== */
+.dove-curtain-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* 激活转场 */
+.dove-curtain-stage.is-revealing {
+  opacity: 1;
+}
+
+/* 左右两扇柔软华贵的金纱帷幕 */
+.curtain-veil-left,
+.curtain-veil-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  background: linear-gradient(135deg, rgba(251, 240, 205, 0.96) 0%, rgba(212, 175, 55, 0.92) 50%, rgba(143, 110, 40, 0.95) 100%);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.curtain-veil-left {
+  left: 0;
+  transform: translateX(-105%);
+}
+
+.curtain-veil-right {
+  right: 0;
+  transform: translateX(105%);
+}
+
+/* 闭合帷幕阶段 */
+.dove-curtain-stage.is-draped .curtain-veil-left {
+  transform: translateX(0%);
+}
+.dove-curtain-stage.is-draped .curtain-veil-right {
+  transform: translateX(0%);
+}
+
+/* 掀幕的金色和平鸽 */
+.peace-dove-messenger {
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%) scale(0.6);
+  filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.8));
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+  opacity: 0;
+}
+
+.dove-curtain-stage.is-draped .peace-dove-messenger {
+  opacity: 1;
+  transform: translate(160px, -50%) scale(1.1);
+}
+
+.peace-dove-svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* 和解免死券 */
