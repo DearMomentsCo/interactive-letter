@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=real_aperture_and_focus" />
+  <link rel="stylesheet" href="style.css?v=real_dynamic_reel" />
 </head>
 <body>
 
@@ -38,28 +38,24 @@
   <div class="letter-viewport" data-theme="viewmaster">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 【重构 1：暖色暗房相纸信封 (带避光红标与相机镜头光圈 3D 火漆)】 -->
+      <!-- 【重构 1：暖色暗房相纸信封 (避光红标置于左下角开阔区，绝不遮挡)】 -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <div class="darkroom-mailer-header">
-            <span class="darkroom-red-tag">DARKROOM MAIL</span>
-            <span class="darkroom-stamp-text">DO NOT EXPOSE TO LIGHT</span>
+            <span class="darkroom-red-tag">DARKROOM PHOTO MAILER</span>
+            <span class="darkroom-stamp-text">DO NOT EXPOSE TO LIGHT // SENSITIVE FILM</span>
           </div>
-          <span class="envelope-corner-star star-tl">✦</span>
-          <span class="envelope-corner-star star-tr">✦</span>
-          <span class="envelope-corner-star star-bl">✦</span>
-          <span class="envelope-corner-star star-br">✦</span>
         </div>
 
         <div class="envelope-flap"></div>
 
         <div class="wax-seal-wrapper">
           <div class="wax-seal" id="waxSealBtn">
-            <!-- 3D 相机镜头光圈 8 叶片图标 -->
+            <!-- 3D 金属相机镜头 8 叶片光圈图腾 -->
             <svg class="aperture-lens-svg" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" stroke-width="2"/>
-              <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"/>
-              <circle cx="12" cy="12" r="3" fill="#ffffff" stroke="none"/>
+              <circle cx="12" cy="12" r="10" stroke="#ffd166" stroke-width="2"/>
+              <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94" stroke="#ffd166"/>
+              <circle cx="12" cy="12" r="3.2" fill="#ffd166" stroke="none"/>
             </svg>
           </div>
         </div>
@@ -80,7 +76,7 @@
         <!-- 幻灯档案抬标栏 -->
         <div class="slide-archive-meta-strip">
           <div><span class="archive-red-stamp">REEL NO. 05</span> STEREO 3D</div>
-          <div id="frameCounterText">7 APERTURES // FULL FOCUS</div>
+          <div id="frameCounterText">ARCHIVE // FULL FOCUS</div>
         </div>
 
         <!-- 摄影展专属标题 -->
@@ -97,43 +93,15 @@
         <!-- 【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】 -->
         <div class="viewmaster-master-rig">
           
-          <!-- 【顶部外露真实彩色幻灯底片盘 (彻底删除黑色齿轮)】 -->
+          <!-- 【顶部外露真实动态彩色幻灯底片盘 (彻底清除脏黑阴影)】 -->
           <div class="viewmaster-exposed-disc-wrap">
             <div class="viewmaster-reel-wheel" id="reelWheel">
               <div class="reel-outer-drive-notches"></div>
               <div class="reel-center-label-ring">
-                <div class="reel-center-spindle-hole"></div>
+                <div class="reel-spindle-hub"></div>
               </div>
-              
-              <!-- 7 扇真实的彩色幻灯底片小窗 -->
-              <div class="reel-film-chip chip-1">
-                <div class="chip-inner-photo-tint" style="background:#e76f51;"></div>
-                <span class="chip-frame-no">1</span>
-              </div>
-              <div class="reel-film-chip chip-2">
-                <div class="chip-inner-photo-tint" style="background:#2a9d8f;"></div>
-                <span class="chip-frame-no">2</span>
-              </div>
-              <div class="reel-film-chip chip-3">
-                <div class="chip-inner-photo-tint" style="background:#f4a261;"></div>
-                <span class="chip-frame-no">3</span>
-              </div>
-              <div class="reel-film-chip chip-4">
-                <div class="chip-inner-photo-tint" style="background:#e63946;"></div>
-                <span class="chip-frame-no">4</span>
-              </div>
-              <div class="reel-film-chip chip-5">
-                <div class="chip-inner-photo-tint" style="background:#457b9d;"></div>
-                <span class="chip-frame-no">5</span>
-              </div>
-              <div class="reel-film-chip chip-6">
-                <div class="chip-inner-photo-tint" style="background:#a8dadc;"></div>
-                <span class="chip-frame-no">6</span>
-              </div>
-              <div class="reel-film-chip chip-7">
-                <div class="chip-inner-photo-tint" style="background:#e9c46a;"></div>
-                <span class="chip-frame-no">7</span>
-              </div>
+              <!-- 动态照片幻灯小窗容器 (由 JS 依据照片数量自动生成与布局) -->
+              <div id="dynamicChipsContainer"></div>
             </div>
           </div>
 
@@ -164,6 +132,7 @@
             <!-- 双眼橡胶取景目镜暗室 -->
             <div class="viewer-binocular-visor-box">
               <div class="viewmaster-slide-stage">
+                <!-- 漫反射虚化环境背景 (提升横屏与竖屏照片氛围) -->
                 <div class="slide-ambient-blur-backdrop" id="ambientBackdrop"></div>
                 <div class="viewmaster-shutter-blade" id="shutterBlade"></div>
                 <div class="viewmaster-light-leak" id="lightLeak"></div>
@@ -173,7 +142,7 @@
               </div>
             </div>
 
-            <!-- 【慢速温润吐出的专属实体信息字条】 -->
+            <!-- 【慢速 1.4 秒温润吐出的专属实体信息字条】 -->
             <div class="dispenser-slot-wrapper">
               <div class="dispenser-eject-slot"></div>
               <div class="ejected-caption-strip" id="captionStrip">
@@ -231,7 +200,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=real_aperture_and_focus"></script>
+  <script src="data.js?v=real_dynamic_reel"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -255,6 +224,42 @@
     const focusGuideHint = document.getElementById('focusGuideHint');
     let isInFocus = false; // 初始为失焦状态
 
+    /* ==========================================================================
+       【核心算法：根据照片实际数量动态生成彩色幻灯底片圆盘】
+       ========================================================================== */
+    const dynamicContainer = document.getElementById('dynamicChipsContainer');
+    const reelWheel = document.getElementById('reelWheel');
+    let stepAngle = 360 / Math.max(photosList.length, 1);
+    let currentReelAngle = 0;
+
+    const filmGelColors = [
+      '#e76f51', '#2a9d8f', '#f4a261', '#e63946', 
+      '#457b9d', '#a8dadc', '#e9c46a', '#d62828', '#0077b6'
+    ];
+
+    function buildDynamicReel() {
+      dynamicContainer.innerHTML = '';
+      const total = photosList.length;
+      if (total === 0) return;
+
+      for (let i = 0; i < total; i++) {
+        const chip = document.createElement('div');
+        chip.className = 'dynamic-slide-chip';
+        
+        // 精准将底片贴合在 216px 圆盘周缘
+        const angle = stepAngle * i;
+        chip.style.transform = `rotate(${angle}deg) translateY(-80px)`;
+
+        const color = filmGelColors[i % filmGelColors.length];
+        chip.innerHTML = `
+          <div class="slide-chip-film-gel" style="background:${color};"></div>
+          <span class="slide-chip-number">${i + 1}</span>
+        `;
+        dynamicContainer.appendChild(chip);
+      }
+    }
+    buildDynamicReel();
+
     function renderSlide(index) {
       if (photosList.length === 0) return;
       const photo = photosList[index];
@@ -268,14 +273,14 @@
       focusGuideHint.style.background = "#ffbe0b";
       focusGuideHint.style.color = "#33221f";
 
-      // 重新触发 1.3s 慢速吐字条动画
+      // 重新触发 1.4s 慢速吐字条动画
       captionStrip.style.animation = 'none';
       void captionStrip.offsetWidth;
-      captionStrip.style.animation = 'slideOutSlipSlow 1.3s cubic-bezier(0.1, 0.7, 0.1, 1) forwards';
+      captionStrip.style.animation = 'slideOutSlipSlow 1.4s cubic-bezier(0.12, 0.75, 0.15, 1) forwards';
 
       stripFrameTag.innerText = `SLIDE FRAME #${index + 1}`;
       stripCaptionText.innerText = photo.caption || '';
-      frameCounter.innerText = `FRAME ${index + 1} OF ${Math.max(7, photosList.length)} // STEREO 3D`;
+      frameCounter.innerText = `FRAME ${index + 1} OF ${photosList.length} // STEREO 3D`;
     }
     renderSlide(0);
 
@@ -365,8 +370,6 @@
        【核心机械交互：按压扳手 ➔ 快门闭合 ➔ 转盘旋转 ➔ 慢速吐出新字条】
        ========================================================================== */
     const advanceSlot = document.getElementById('advanceLeverSlot');
-    const reelWheel = document.getElementById('reelWheel');
-    let reelAngle = 0;
     let isAdvancing = false;
 
     function advanceFrame() {
@@ -379,9 +382,9 @@
       // 快门叶片瞬间闭合
       shutterBlade.classList.add('is-closed');
 
-      // 胶卷盘精准旋转一格
-      reelAngle += 51.4;
-      reelWheel.style.transform = `translateX(-50%) rotate(${reelAngle}deg)`;
+      // 动态胶卷盘精准旋转一步
+      currentReelAngle += stepAngle;
+      reelWheel.style.transform = `translateX(-50%) rotate(${currentReelAngle}deg)`;
 
       setTimeout(() => {
         if (photosList.length > 0) {
