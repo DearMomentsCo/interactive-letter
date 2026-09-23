@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ORDER 001 - CUSTOMER DATA (2 张照片 + 专属本地音频)
+   THEME 01: 金缮修复和解款 - 官方演示数据
    ========================================================================== */
 const LETTER_DATA = {
   passcode: "0928",
@@ -16,20 +16,20 @@ const LETTER_DATA = {
 Like kintsugi, I know we can heal and become even stronger together. I love you more than words can say.`,
   closing: "Forever yours,\nSarah ♡",
 
-  // 【照片列表：必须与你上传到此文件夹的文件名完全一致】
+  // 专属高清水彩光影照片（绝不压缩、完美撑起相框）
   photos: [
     {
-      url: "photo1.jpg",
+      url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
       caption: "Our first trip to the beach ♡"
     },
     {
-      url: "photo2.jpg",
+      url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&auto=format&fit=crop&q=80",
       caption: "That cozy rainy night in Kyoto ♡"
     }
   ],
 
-  // 【专属音频：直接填写本地文件名，不要带 http 网址】
-  audioUrl: "audio.mp3",
+  // 浪漫温暖的治愈系钢琴曲（高品质在线直链，绝不静音）
+  audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
 
   enableScratch: true,
   scratchHint: "✦ POLISH THE GOLDEN SEAM TO HEAL ✦",
