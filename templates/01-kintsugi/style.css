@@ -1,35 +1,35 @@
 /* ==========================================================================
-   THEME 01: 金缮修复和解款 (KINTSUGI) - 专属艺术美学
-   ========================================================================== */
+   THEME 01: 金缮修复和解款 (KINTSUGI) - 专属艺术美学
+   ========================================================================== */
 
 .letter-viewport[data-theme="kintsugi"] {
-  background: radial-gradient(ellipse at 50% 38%, #20242e 0%, #111317 75%, #08090b 100%);
-  color: #2b2621;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: radial-gradient(ellipse at 50% 38%, #20242e 0%, #111317 75%, #08090b 100%);
+  color: #2b2621;
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 /* 信封设计 */
 [data-theme="kintsugi"] .envelope-wrapper {
-  background: #222630;
-  border-radius: 10px;
-  box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(212, 175, 55, 0.16);
-  border: 1px solid rgba(212, 175, 55, 0.45);
+  background: #222630;
+  border-radius: 10px;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.45);
 }
 
 [data-theme="kintsugi"] .envelope-body {
-  border-radius: 10px;
-  background: linear-gradient(145deg, #272b35 0%, #191b22 100%);
-  outline: 1px solid rgba(212, 175, 55, 0.25);
-  outline-offset: -6px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #272b35 0%, #191b22 100%);
+  outline: 1px solid rgba(212, 175, 55, 0.25);
+  outline-offset: -6px;
 }
 
 [data-theme="kintsugi"] .envelope-corner-star {
-  position: absolute;
-  color: #d4af37;
-  font-size: clamp(9px, 2.2vw, 11px);
-  opacity: 0.85;
+  position: absolute;
+  color: #d4af37;
+  font-size: clamp(9px, 2.2vw, 11px);
+  opacity: 0.85;
 }
 [data-theme="kintsugi"] .star-tl { top: 9px; left: 10px; }
 [data-theme="kintsugi"] .star-tr { top: 9px; right: 10px; }
@@ -37,381 +37,381 @@
 [data-theme="kintsugi"] .star-br { bottom: 9px; right: 10px; }
 
 [data-theme="kintsugi"] .envelope-flap {
-  background: linear-gradient(180deg, #2e3340 0%, #1c1f26 100%);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
-  border-bottom: 1.5px solid #d4af37;
+  background: linear-gradient(180deg, #2e3340 0%, #1c1f26 100%);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+  border-bottom: 1.5px solid #d4af37;
 }
 
 .letter-container.is-opened [data-theme="kintsugi"] .envelope-flap {
-  transform: rotateX(180deg);
-  z-index: 1;
+  transform: rotateX(180deg);
+  z-index: 1;
 }
 
 /* 火漆印 */
 [data-theme="kintsugi"] .wax-seal {
-  border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
-  background: radial-gradient(circle at 35% 30%, #fbedbf 0%, #c5a059 45%, #8f6e28 85%, #5a4313 100%);
-  border: 1.5px solid #fff2bf;
-  box-shadow: 
-    0 10px 22px rgba(0, 0, 0, 0.85),
-    0 0 16px rgba(212, 175, 55, 0.6),
-    inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
-  animation: seal-breathe 2.8s infinite ease-in-out;
+  border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
+  background: radial-gradient(circle at 35% 30%, #fbedbf 0%, #c5a059 45%, #8f6e28 85%, #5a4313 100%);
+  border: 1.5px solid #fff2bf;
+  box-shadow: 
+    0 10px 22px rgba(0, 0, 0, 0.85),
+    0 0 16px rgba(212, 175, 55, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+  animation: seal-breathe 2.8s infinite ease-in-out;
 }
 
 @keyframes seal-breathe {
-  0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.05); filter: brightness(1.15) drop-shadow(0 0 10px rgba(212, 175, 55, 0.8)); }
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.15) drop-shadow(0 0 10px rgba(212, 175, 55, 0.8)); }
 }
 
 [data-theme="kintsugi"] .seal-heart-svg {
-  width: clamp(18px, 4.5vw, 22px);
-  height: clamp(18px, 4.5vw, 22px);
-  fill: #fff9e6;
-  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5));
+  width: clamp(18px, 4.5vw, 22px);
+  height: clamp(18px, 4.5vw, 22px);
+  fill: #fff9e6;
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5));
 }
 
 [data-theme="kintsugi"] .envelope-open-hint {
-  font-family: 'Cinzel', serif;
-  letter-spacing: clamp(2px, 0.6vw, 3px);
-  color: #c5a059;
-  opacity: 0.9;
+  font-family: 'Cinzel', serif;
+  letter-spacing: clamp(2px, 0.6vw, 3px);
+  color: #c5a059;
+  opacity: 0.9;
 }
 
-/* 信纸主体 */
+/* 信纸主体（原版米白微质感纸面） */
 [data-theme="kintsugi"] .letter-sheet {
-  background-color: #fdfaf3;
-  background-image: 
-    radial-gradient(#e5dbcb 0.8px, transparent 0.8px),
-    radial-gradient(#f0e7d7 0.8px, #fdfaf3 0.8px);
-  background-size: 16px 16px;
-  background-position: 0 0, 8px 8px;
-  color: #2b2521;
-  border: 1.5px solid #d4af37;
-  outline: 1px solid rgba(197, 160, 89, 0.5);
-  outline-offset: -8px;
-  box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.75),
-    0 0 40px rgba(212, 175, 55, 0.15);
+  background-color: #fdfaf3 !important;
+  background-image: 
+    radial-gradient(#e5dbcb 0.8px, transparent 0.8px),
+    radial-gradient(#f0e7d7 0.8px, #fdfaf3 0.8px) !important;
+  background-size: 16px 16px !important;
+  background-position: 0 0, 8px 8px !important;
+  color: #2b2521 !important;
+  border: 1.5px solid #d4af37 !important;
+  outline: 1px solid rgba(197, 160, 89, 0.5) !important;
+  outline-offset: -8px !important;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(212, 175, 55, 0.15) !important;
 }
 
 [data-theme="kintsugi"] .letter-watermark-svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: clamp(180px, 50vw, 260px);
-  height: clamp(180px, 50vw, 260px);
-  opacity: 0.095;
-  pointer-events: none;
-  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(180px, 50vw, 260px);
+  height: clamp(180px, 50vw, 260px);
+  opacity: 0.095;
+  pointer-events: none;
+  z-index: 1;
 }
 
 [data-theme="kintsugi"] .apology-badge-header {
-  text-align: center;
-  margin-bottom: clamp(12px, 3vw, 18px);
-  position: relative;
-  z-index: 2;
+  text-align: center;
+  margin-bottom: clamp(12px, 3vw, 18px);
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .apology-badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px clamp(12px, 3vw, 18px);
-  border: 1px solid #d4af37;
-  border-radius: 24px;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.3vw, 10.5px);
-  font-weight: 700;
-  letter-spacing: clamp(1.5px, 0.5vw, 2.5px);
-  color: #7a5a17;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.04) 100%);
-  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px clamp(12px, 3vw, 18px);
+  border: 1px solid #d4af37;
+  border-radius: 24px;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-weight: 700;
+  letter-spacing: clamp(1.5px, 0.5vw, 2.5px);
+  color: #7a5a17;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.04) 100%);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.1);
 }
 
 [data-theme="kintsugi"] .letter-title {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(19px, 5.2vw, 24px);
-  letter-spacing: clamp(1.5px, 0.6vw, 3px);
-  color: #6d4b14;
-  text-align: center;
-  margin: 10px 0 14px;
-  position: relative;
-  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(19px, 5.2vw, 24px);
+  letter-spacing: clamp(1.5px, 0.6vw, 3px);
+  color: #6d4b14;
+  text-align: center;
+  margin: 10px 0 14px;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .letter-date {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(10.5px, 2.8vw, 12px);
-  color: #8c734b;
-  text-align: right;
-  margin-bottom: 12px;
-  position: relative;
-  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10.5px, 2.8vw, 12px);
+  color: #8c734b;
+  text-align: right;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .letter-salutation {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(14px, 3.8vw, 16.5px);
-  font-weight: 700;
-  color: #5c4310;
-  margin-bottom: 14px;
-  position: relative;
-  z-index: 2;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 3.8vw, 16.5px);
+  font-weight: 700;
+  color: #5c4310;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
 }
 
 /* 播放器金缮专属配色 */
 [data-theme="kintsugi"] .photo-card-front,
 [data-theme="kintsugi"] .photo-card-back {
-  background: #ffffff;
-  border: 1px solid rgba(212, 175, 55, 0.7);
-  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4px #d4af37, 0 12px 28px rgba(0,0,0,0.12);
-  border-radius: 4px;
+  background: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 0 3px #fdfaf2, 0 0 0 4px #d4af37, 0 12px 28px rgba(0,0,0,0.12);
+  border-radius: 4px;
 }
 
 [data-theme="kintsugi"] .photo-card-back {
-  background: #fbf7ee;
-  color: #634714;
-  font-size: clamp(12.5px, 3.4vw, 14px);
+  background: #fbf7ee;
+  color: #634714;
+  font-size: clamp(12.5px, 3.4vw, 14px);
 }
 
 [data-theme="kintsugi"] .photo-flip-hint {
-  color: #8c6a22;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.4vw, 10.5px);
-  letter-spacing: 1.5px;
-  margin-top: 10px;
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.4vw, 10.5px);
+  letter-spacing: 1.5px;
+  margin-top: 10px;
 }
 
 [data-theme="kintsugi"] .photo-nav-btn {
-  border: 1px solid #d4af37;
-  background: rgba(212, 175, 55, 0.12);
-  color: #7a5a17;
+  border: 1px solid #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  color: #7a5a17;
 }
 
 [data-theme="kintsugi"] .photo-nav-btn:hover {
-  background: rgba(212, 175, 55, 0.28);
+  background: rgba(212, 175, 55, 0.28);
 }
 
 [data-theme="kintsugi"] .photo-page-indicator {
-  color: #8c6a22;
+  color: #8c6a22;
 }
 
 /* 和解免死券 */
 [data-theme="kintsugi"] .apology-vouchers-container {
-  margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
-  position: relative;
-  z-index: 2;
+  margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .voucher-section-title {
-  text-align: center;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(9px, 2.3vw, 10.5px);
-  letter-spacing: 1.8px;
-  color: #9e7d3b;
-  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  letter-spacing: 1.8px;
+  color: #9e7d3b;
+  margin-bottom: 10px;
 }
 
 [data-theme="kintsugi"] .vouchers-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 330px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 330px;
+  margin: 0 auto;
 }
 
 [data-theme="kintsugi"] .apology-voucher-card {
-  position: relative;
-  background: #f9f4e8;
-  border: 1px dashed #d4af37;
-  border-radius: 6px;
-  padding: 10px 14px 10px clamp(36px, 9vw, 44px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  user-select: none;
-  overflow: hidden;
+  position: relative;
+  background: #f9f4e8;
+  border: 1px dashed #d4af37;
+  border-radius: 6px;
+  padding: 10px 14px 10px clamp(36px, 9vw, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
+  overflow: hidden;
 }
 
 [data-theme="kintsugi"] .apology-voucher-card::before,
 [data-theme="kintsugi"] .apology-voucher-card::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 12px;
-  height: 12px;
-  background-color: #fdfaf3;
-  border: 1px solid #d4af37;
-  border-radius: 50%;
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #fdfaf3;
+  border: 1px solid #d4af37;
+  border-radius: 50%;
 }
 [data-theme="kintsugi"] .apology-voucher-card::before { left: -6px; }
 [data-theme="kintsugi"] .apology-voucher-card::after { right: -6px; }
 
 [data-theme="kintsugi"] .voucher-icon {
-  position: absolute;
-  left: 12px;
-  font-size: clamp(14px, 3.8vw, 17px);
+  position: absolute;
+  left: 12px;
+  font-size: clamp(14px, 3.8vw, 17px);
 }
 
 [data-theme="kintsugi"] .voucher-info {
-  text-align: left;
+  text-align: left;
 }
 [data-theme="kintsugi"] .voucher-name {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(11px, 2.9vw, 12px);
-  font-weight: 700;
-  color: #634714;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(11px, 2.9vw, 12px);
+  font-weight: 700;
+  color: #634714;
 }
 [data-theme="kintsugi"] .voucher-desc {
-  font-size: clamp(10px, 2.6vw, 11px);
-  font-style: italic;
-  color: #8c734b;
-  margin-top: 2px;
+  font-size: clamp(10px, 2.6vw, 11px);
+  font-style: italic;
+  color: #8c734b;
+  margin-top: 2px;
 }
 
 [data-theme="kintsugi"] .voucher-stamp {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(9.5px, 2.5vw, 10.5px);
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  color: #a32a2a;
-  border: 1.5px solid #a32a2a;
-  padding: 3px 8px;
-  border-radius: 4px;
-  transform: rotate(-10deg) scale(0);
-  opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
-  white-space: nowrap;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9.5px, 2.5vw, 10.5px);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #a32a2a;
+  border: 1.5px solid #a32a2a;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transform: rotate(-10deg) scale(0);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  white-space: nowrap;
 }
 
 [data-theme="kintsugi"] .apology-voucher-card.is-claimed .voucher-stamp {
-  transform: rotate(-10deg) scale(1);
-  opacity: 1;
+  transform: rotate(-10deg) scale(1);
+  opacity: 1;
 }
 
 [data-theme="kintsugi"] .apology-voucher-card.is-claimed {
-  background: #f3ecdb;
-  border-style: solid;
+  background: #f3ecdb;
+  border-style: solid;
 }
 
 /* 正文流体字体 */
 [data-theme="kintsugi"] .letter-body-text {
-  font-size: clamp(15px, 4.1vw, 17px);
-  line-height: clamp(1.9, 5vw, 2.05);
-  color: #302822;
-  min-height: 120px;
-  position: relative;
-  z-index: 2;
-  margin-bottom: 20px;
+  font-size: clamp(15px, 4.1vw, 17px);
+  line-height: clamp(1.9, 5vw, 2.05);
+  color: #302822;
+  min-height: 120px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
 }
 
 [data-theme="kintsugi"] .typewriter-cursor {
-  display: inline-block;
-  width: 2px;
-  height: clamp(16px, 4vw, 19px);
-  background-color: #c5a059;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  animation: cursor-blink 0.8s infinite;
+  display: inline-block;
+  width: 2px;
+  height: clamp(16px, 4vw, 19px);
+  background-color: #c5a059;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s infinite;
 }
 
 @keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 [data-theme="kintsugi"] .letter-closing {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-style: italic;
-  font-size: clamp(16px, 4.3vw, 18px);
-  text-align: right;
-  margin-top: 24px;
-  color: #5c4310;
-  position: relative;
-  z-index: 2;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(16px, 4.3vw, 18px);
+  text-align: right;
+  margin-top: 24px;
+  color: #5c4310;
+  position: relative;
+  z-index: 2;
 }
 
 /* 刮刮乐 */
 [data-theme="kintsugi"] .scratch-hint-text {
-  color: #8c6a22;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(10px, 2.7vw, 11px);
-  letter-spacing: 2px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10px, 2.7vw, 11px);
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 [data-theme="kintsugi"] .scratch-card-box {
-  border-radius: 6px;
-  border: 1.5px solid #d4af37;
-  outline: 1px solid rgba(197, 160, 89, 0.35);
-  outline-offset: -5px;
-  background: #fbf8f0;
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.08),
-    inset 0 0 16px rgba(212, 175, 55, 0.1);
+  border-radius: 6px;
+  border: 1.5px solid #d4af37;
+  outline: 1px solid rgba(197, 160, 89, 0.35);
+  outline-offset: -5px;
+  background: #fbf8f0;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 0 16px rgba(212, 175, 55, 0.1);
 }
 
 [data-theme="kintsugi"] .scratch-card-box::before,
 [data-theme="kintsugi"] .scratch-card-box::after {
-  content: "✦";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #d4af37;
-  font-size: clamp(9px, 2.4vw, 11px);
-  text-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
-  z-index: 5;
-  pointer-events: none;
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d4af37;
+  font-size: clamp(9px, 2.4vw, 11px);
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+  z-index: 5;
+  pointer-events: none;
 }
 [data-theme="kintsugi"] .scratch-card-box::before { left: 12px; }
 [data-theme="kintsugi"] .scratch-card-box::after { right: 12px; }
 
 [data-theme="kintsugi"] .scratch-secret-reveal {
-  font-family: 'Cinzel', serif;
-  color: #735316;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  background: #fdfaf2;
-  font-size: clamp(13px, 3.5vw, 15px);
+  font-family: 'Cinzel', serif;
+  color: #735316;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  background: #fdfaf2;
+  font-size: clamp(13px, 3.5vw, 15px);
 }
 
 /* 逃跑问答 */
 [data-theme="kintsugi"] .runaway-section {
-  border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
-  padding-top: 24px;
-  position: relative;
-  z-index: 2;
+  border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
+  padding-top: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 [data-theme="kintsugi"] .runaway-question {
-  font-family: 'Cinzel', serif;
-  color: #5c4310;
-  font-size: clamp(15px, 4vw, 16.5px);
-  margin-bottom: 18px;
+  font-family: 'Cinzel', serif;
+  color: #5c4310;
+  font-size: clamp(15px, 4vw, 16.5px);
+  margin-bottom: 18px;
 }
 
 [data-theme="kintsugi"] .btn-yes {
-  background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%);
-  color: #ffffff;
-  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
 }
 
 [data-theme="kintsugi"] .btn-no {
-  background: #e6dfd1;
-  color: #665a4c;
+  background: #e6dfd1;
+  color: #665a4c;
 }
 
 [data-theme="kintsugi"] .runaway-success-modal {
-  background: #fbf7ee;
-  border: 1px solid #d4af37;
-  color: #7a5a17;
-  font-family: 'Cinzel', serif;
-  font-size: clamp(13.5px, 3.6vw, 15px);
+  background: #fbf7ee;
+  border: 1px solid #d4af37;
+  color: #7a5a17;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(13.5px, 3.6vw, 15px);
 }
