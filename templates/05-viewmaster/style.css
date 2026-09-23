@@ -12,7 +12,8 @@
 }
 
 /* ==========================================================================
-   【重塑 1：欧式深 V 暗房相纸信封 (典雅比例 420px × 260px)】
+   【手机端完美自适应：欧式深 V 暗房相纸信封 (aspect-ratio: 1.56 / 1)】
+   彻底消除固定高度导致的怪异方筒形，手机与电脑端比例一致
    ========================================================================== */
 [data-theme="viewmaster"] .envelope-body::before,
 [data-theme="viewmaster"] .envelope-body::after,
@@ -24,14 +25,17 @@
 }
 
 [data-theme="viewmaster"] .envelope-wrapper {
-  width: 92% !important;
-  max-width: 430px !important;
-  height: 265px !important;
+  width: 90% !important;
+  max-width: 400px !important;
+  /* 响应式黄金比例自适应：在任何手机屏幕上都优雅舒展 */
+  aspect-ratio: 1.56 / 1 !important;
+  height: auto !important;
+  min-height: unset !important;
   margin: 0 auto !important;
   background: #fbf5e8 !important;
-  border-radius: 14px !important;
+  border-radius: 12px !important;
   box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.95),
+    0 28px 75px rgba(0, 0, 0, 0.95),
     0 0 35px rgba(217, 4, 41, 0.22) !important;
   border: 3px solid #2b1816 !important;
   position: relative !important;
@@ -41,7 +45,8 @@
 [data-theme="viewmaster"] .envelope-body {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 10px !important;
+  min-height: unset !important;
+  border-radius: 9px !important;
   background: 
     linear-gradient(135deg, rgba(230, 34, 41, 0.04) 0%, transparent 50%),
     linear-gradient(145deg, #fbf5e8 0%, #ecdcc4 100%) !important;
@@ -50,13 +55,13 @@
   box-sizing: border-box;
 }
 
-/* 欧式深 V 翻盖：自然下倾至 138px，过渡优雅顺畅 */
+/* 欧式深 V 翻盖：自然下倾至 52%，在任何手机屏幕都严密交汇 */
 [data-theme="viewmaster"] .envelope-flap {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
-  height: 138px !important;
+  height: 52% !important;
   clip-path: polygon(0% 0%, 100% 0%, 50% 100%) !important;
   background: linear-gradient(180deg, #ffffff 0%, #f6ecdc 70%, #e5d4bb 100%) !important;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)) !important;
@@ -65,11 +70,11 @@
   z-index: 3 !important;
 }
 
-/* 暗房避光纸袋标签：置于左下角开阔区，绝无遮挡 */
+/* 避光标签：固定于左下角 */
 .darkroom-mailer-header {
   position: absolute;
-  bottom: 14px;
-  left: 16px;
+  bottom: 10px;
+  left: 12px;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -81,9 +86,9 @@
   background: #e62229;
   color: #ffffff;
   font-family: 'Courier New', monospace;
-  font-size: 7.5px;
+  font-size: clamp(6.5px, 1.8vw, 7.5px);
   font-weight: 900;
-  padding: 2.5px 7px;
+  padding: 2px 6px;
   border-radius: 2px;
   letter-spacing: 0.8px;
   display: inline-block;
@@ -92,28 +97,25 @@
 
 .darkroom-stamp-text {
   font-family: 'Courier New', monospace;
-  font-size: 6.5px;
+  font-size: clamp(5.5px, 1.6vw, 6.5px);
   font-weight: 800;
   color: #7d654c;
   letter-spacing: 0.5px;
 }
 
-/* ==========================================================================
-   【重塑 2：高定古典相机烫金火漆印 (Vintage Camera & Heart Wax Seal)】
-   彻底消除黄色怪异圆盘，纯正深酒红手工熔蜡 + 烫金相机爱心浮雕
-   ========================================================================== */
+/* 【火漆位置严密咬合于深 V 顶点 (top: 52%)】 */
 [data-theme="viewmaster"] .wax-seal-wrapper {
   position: absolute !important;
-  top: 138px !important; /* 严丝合缝压在 V 字尖端！*/
+  top: 52% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   z-index: 5 !important;
 }
 
-/* 手工熔蜡深酒红底座（带真实有机波浪熔边） */
+/* 手工深酒红熔蜡火漆印 */
 [data-theme="viewmaster"] .wax-seal {
-  width: clamp(56px, 14vw, 64px);
-  height: clamp(56px, 14vw, 64px);
+  width: clamp(52px, 13vw, 62px);
+  height: clamp(52px, 13vw, 62px);
   border-radius: 48% 52% 49% 51% / 52% 49% 51% 48%;
   background: radial-gradient(circle at 35% 30%, #a81c2d 0%, #730d19 55%, #42040c 100%);
   border: 1.5px solid #4a060e;
@@ -134,10 +136,9 @@
   50% { transform: scale(1.05); filter: brightness(1.12); }
 }
 
-/* 蜡印下压印痕坑槽 */
 .wax-depressed-cavity {
-  width: 44px;
-  height: 44px;
+  width: 80%;
+  height: 80%;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 35%, #590913 0%, #330208 100%);
   border: 1px dashed rgba(255, 215, 0, 0.4);
@@ -147,10 +148,9 @@
   justify-content: center;
 }
 
-/* 古典复古旁轴相机与爱心镜头烫金浮雕 */
 .seal-camera-svg {
-  width: 30px;
-  height: 30px;
+  width: 70%;
+  height: 70%;
   filter: drop-shadow(0 1px 2px rgba(0,0,0,0.85));
 }
 
@@ -158,7 +158,7 @@
   font-family: 'Courier New', monospace;
   font-weight: 800;
   letter-spacing: clamp(1px, 0.3vw, 2px);
-  font-size: clamp(8.5px, 2.2vw, 10px);
+  font-size: clamp(8px, 2.1vw, 9.5px);
   color: #ffbe0b;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
 }
@@ -200,7 +200,7 @@
     0 15px 30px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
-  padding: clamp(22px, 5.5vw, 36px) clamp(16px, 4.5vw, 28px);
+  padding: clamp(20px, 5vw, 32px) clamp(12px, 3.5vw, 24px);
 }
 
 .darkroom-cross-tl, .darkroom-cross-tr, .darkroom-cross-bl, .darkroom-cross-br {
@@ -286,26 +286,30 @@
 }
 
 /* ==========================================================================
-   【核心 3D 实体红色双筒塑料观片机与机械连杆切片系统】
+   【手机端防遮挡重构：观片机安全视口居中布局】
+   左右预留充足活动空间，扳手与对焦齿轮绝不被屏幕截断
    ========================================================================== */
 .viewmaster-master-rig {
   position: relative;
   width: 100%;
   max-width: 350px;
-  margin: clamp(80px, 18vw, 100px) auto clamp(28px, 6vw, 36px) auto;
+  margin: clamp(75px, 16vw, 95px) auto clamp(26px, 5vw, 34px) auto;
   text-align: center;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   z-index: 2;
 }
 
-/* 顶部外露动态幻灯转盘 (两侧干净无阴影) */
+/* 顶部动态幻灯转盘 */
 .viewmaster-exposed-disc-wrap {
   position: absolute;
-  top: -72px;
+  top: -68px;
   left: 50%;
   transform: translateX(-50%);
-  width: 224px;
-  height: 105px;
+  width: 216px;
+  height: 100px;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
@@ -316,8 +320,8 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 216px;
-  height: 216px;
+  width: 206px;
+  height: 206px;
   transform: translateX(-50%) rotate(0deg);
   background: radial-gradient(circle at center, #ffffff 0%, #f7f1e6 75%, #ebe0cc 100%);
   border: 2px solid #33221f;
@@ -339,8 +343,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 66px;
-  height: 66px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
   background: #ffffff;
   border: 1.5px solid #e62229;
@@ -352,8 +356,8 @@
 }
 
 .reel-spindle-hub {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   background: #33221f;
   border-radius: 50%;
   box-shadow: inset 0 2px 3px #000;
@@ -365,10 +369,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 22px;
-  height: 28px;
-  margin-top: -14px;
-  margin-left: -11px;
+  width: 20px;
+  height: 26px;
+  margin-top: -13px;
+  margin-left: -10px;
   background: #110d0c;
   border: 1.5px solid #33221f;
   border-radius: 2.5px;
@@ -382,156 +386,74 @@
 }
 
 .slide-chip-film-gel {
-  width: 16px;
-  height: 14px;
+  width: 14px;
+  height: 13px;
   border-radius: 1px;
   box-shadow: inset 0 0 2px rgba(0,0,0,0.7);
 }
 
 .slide-chip-number {
   font-family: 'Montserrat', monospace, sans-serif;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 900;
   color: #ffbe0b;
   text-shadow: 0 1px 2px #000;
   line-height: 1;
 }
 
-/* 2. 真实 3D 红色注塑机身 */
+/* 【关键优化：机身在手机端收敛至 270px 左右，为两侧留出绝对开阔空间】 */
 .viewmaster-plastic-chassis {
   position: relative;
-  width: 100%;
+  width: clamp(260px, 75vw, 286px);
   background: linear-gradient(180deg, #ff363d 0%, #e62229 50%, #ad1017 100%);
-  border: 3.5px solid #33221f;
-  border-radius: 32px 32px 42px 42px;
-  padding: 18px 14px 20px;
+  border: 3px solid #33221f;
+  border-radius: 28px 28px 36px 36px;
+  padding: 16px 12px 18px;
   box-shadow: 
-    0 24px 50px rgba(0, 0, 0, 0.65),
-    inset 0 4px 4px rgba(255, 255, 255, 0.85),
+    0 22px 46px rgba(0, 0, 0, 0.65),
+    inset 0 3px 3px rgba(255, 255, 255, 0.85),
     inset 3px 0 3px rgba(255, 255, 255, 0.4),
     inset -3px 0 3px rgba(0, 0, 0, 0.4),
-    inset 0 -6px 10px rgba(0, 0, 0, 0.55);
+    inset 0 -5px 8px rgba(0, 0, 0, 0.55);
   box-sizing: border-box;
   z-index: 3;
 }
 
 .viewer-disc-slot-lip {
   width: 82%;
-  height: 9px;
+  height: 8px;
   background: #110807;
   border-radius: 4px;
-  margin: -8px auto 12px auto;
+  margin: -6px auto 10px auto;
   box-shadow: inset 0 3px 5px #000, 0 1px 1px rgba(255,255,255,0.4);
 }
 
 .viewer-embossed-brand {
   font-family: 'Montserrat', sans-serif;
-  font-size: 8px;
+  font-size: 7.5px;
   font-weight: 900;
   color: #ffccd0;
   letter-spacing: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   text-shadow: 0 1px 1px #800000, 0 -1px 0 rgba(255,255,255,0.6);
 }
 
-/* 3. 右侧导轨活动扳手 */
-.viewer-advance-lever-slot {
-  position: absolute;
-  right: -38px;
-  top: 32px;
-  width: 48px;
-  height: 84px;
-  cursor: pointer;
-  z-index: 10;
-  user-select: none;
-}
-
-.lever-track-groove {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 16px;
-  height: 72px;
-  background: #1b110f;
-  border: 2px solid #33221f;
-  border-radius: 8px;
-  box-shadow: inset 0 3px 6px #000;
-}
-
-.lever-plunger-arm {
-  position: absolute;
-  top: 0;
-  left: 2px;
-  width: 34px;
-  height: 54px;
-  transform-origin: 6px 8px;
-  transition: transform 0.14s cubic-bezier(0.2, 0.85, 0.25, 1);
-}
-
-.lever-metal-post {
-  width: 12px;
-  height: 40px;
-  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #8e8e8e 100%);
-  border: 1.5px solid #33221f;
-  border-radius: 3px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-}
-
-.lever-thumb-knob {
-  position: absolute;
-  bottom: 0;
-  left: -7px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #75040a 100%);
-  border: 2px solid #33221f;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.5), inset 0 2px 2px #fff;
-}
-
-.viewer-advance-lever-slot:active .lever-plunger-arm,
-.viewer-advance-lever-slot.is-pressed .lever-plunger-arm {
-  transform: translateY(32px) rotate(32deg);
-}
-
-.lever-pull-tag-hint {
-  position: absolute;
-  right: -16px;
-  bottom: -22px;
-  font-family: 'Courier New', monospace;
-  font-size: 8px;
-  font-weight: 800;
-  color: #e62229;
-  background: #ffffff;
-  border: 1.5px solid #33221f;
-  padding: 3px 6px;
-  border-radius: 3px;
-  white-space: nowrap;
-  animation: leverTagBounce 1.2s infinite ease-in-out;
-  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-}
-
-@keyframes leverTagBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
-}
-
-/* 4. 左侧对焦滚轮 */
+/* 【左侧对焦滚轮：在手机端内收，标签置于正下方，绝不超边】 */
 .viewer-focus-wheel-rig {
   position: absolute;
-  left: -20px;
-  top: 56px;
-  width: 22px;
-  height: 56px;
+  left: -18px;
+  top: 48px;
+  width: 18px;
+  height: 52px;
   background: linear-gradient(180deg, #444 0%, #111 50%, #444 100%);
-  border: 2px solid #33221f;
-  border-radius: 5px;
-  box-shadow: -4px 4px 8px rgba(0,0,0,0.5), inset 0 0 3px #fff;
+  border: 1.5px solid #33221f;
+  border-radius: 4px;
+  box-shadow: -3px 3px 6px rgba(0,0,0,0.5), inset 0 0 2px #fff;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 4px 0;
+  padding: 3px 0;
   box-sizing: border-box;
   z-index: 10;
 }
@@ -544,31 +466,115 @@
 
 .focus-guide-hint {
   position: absolute;
-  left: -24px;
-  bottom: -24px;
+  left: 50%;
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
   font-family: 'Courier New', monospace;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 800;
   color: #33221f;
   background: #ffbe0b;
   border: 1px solid #33221f;
-  padding: 3px 6px;
+  padding: 2px 4px;
   border-radius: 3px;
   white-space: nowrap;
   animation: pulseFocusHint 1.4s infinite ease-in-out;
 }
 
 @keyframes pulseFocusHint {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.06); }
+}
+
+/* 【右侧活动扳手：内收至安全距离，标签置于正下方，绝不遮挡照片】 */
+.viewer-advance-lever-slot {
+  position: absolute;
+  right: -26px;
+  top: 30px;
+  width: 32px;
+  height: 72px;
+  cursor: pointer;
+  z-index: 10;
+  user-select: none;
+}
+
+.lever-track-groove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 62px;
+  background: #1b110f;
+  border: 1.5px solid #33221f;
+  border-radius: 7px;
+  box-shadow: inset 0 3px 6px #000;
+}
+
+.lever-plunger-arm {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 28px;
+  height: 48px;
+  transform-origin: 5px 6px;
+  transition: transform 0.14s cubic-bezier(0.2, 0.85, 0.25, 1);
+}
+
+.lever-metal-post {
+  width: 10px;
+  height: 34px;
+  background: linear-gradient(90deg, #d3d3d3 0%, #ffffff 40%, #8e8e8e 100%);
+  border: 1.5px solid #33221f;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+}
+
+.lever-thumb-knob {
+  position: absolute;
+  bottom: 0;
+  left: -6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff5c7c 0%, #e62229 60%, #75040a 100%);
+  border: 1.5px solid #33221f;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 2px 2px #fff;
+}
+
+.viewer-advance-lever-slot:active .lever-plunger-arm,
+.viewer-advance-lever-slot.is-pressed .lever-plunger-arm {
+  transform: translateY(28px) rotate(30deg);
+}
+
+.lever-pull-tag-hint {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 4px);
+  transform: translateX(-50%);
+  font-family: 'Courier New', monospace;
+  font-size: 7.5px;
+  font-weight: 800;
+  color: #e62229;
+  background: #ffffff;
+  border: 1px solid #33221f;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+  animation: leverTagBounce 1.2s infinite ease-in-out;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+@keyframes leverTagBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(3px); }
 }
 
 /* 5. 取景暗室与智能自适应 */
 .viewer-binocular-visor-box {
   background: #170d0b;
-  border-radius: 18px;
-  padding: 12px 14px;
-  border: 2.5px solid #33221f;
+  border-radius: 16px;
+  padding: 10px 12px;
+  border: 2px solid #33221f;
   box-shadow: inset 0 5px 12px rgba(0,0,0,0.9), 0 2px 2px rgba(255,255,255,0.2);
   position: relative;
   overflow: hidden;
@@ -577,10 +583,10 @@
 .viewmaster-slide-stage {
   position: relative;
   width: 100%;
-  height: 205px;
+  height: 185px;
   background: #080403;
-  border-radius: 10px;
-  border: 2px solid #54413c;
+  border-radius: 8px;
+  border: 1.5px solid #54413c;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -597,7 +603,7 @@
   z-index: 1;
 }
 
-/* 初始模糊状态 (每次切片自动重置为失焦模糊) */
+/* 初始模糊状态 */
 .slide-kodak-photo {
   position: relative;
   max-width: 100%;
@@ -618,8 +624,8 @@
   position: absolute;
   top: -25px;
   left: -25px;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
   pointer-events: none;
@@ -654,11 +660,9 @@
   opacity: 1;
 }
 
-/* ==========================================================================
-   【慢速 1.4 秒匀速滑出实体解说字条】
-   ========================================================================== */
+/* 慢速 1.4 秒匀速滑出实体解说字条 */
 .dispenser-slot-wrapper {
-  margin-top: 14px;
+  margin-top: 12px;
   position: relative;
   width: 100%;
 }
@@ -677,17 +681,17 @@
   border: 1.5px solid #33221f;
   border-top: none;
   border-radius: 0 0 6px 6px;
-  padding: 10px 14px 12px;
+  padding: 8px 12px 10px;
   margin: -2px auto 0 auto;
-  width: 84%;
+  width: 86%;
   box-sizing: border-box;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.22);
   transform-origin: top center;
   animation: slideOutSlipSlow 1.4s cubic-bezier(0.12, 0.75, 0.15, 1) forwards;
 }
 
 @keyframes slideOutSlipSlow {
-  0% { transform: translateY(-30px) scaleY(0.1); opacity: 0; }
+  0% { transform: translateY(-28px) scaleY(0.1); opacity: 0; }
   25% { opacity: 0.85; }
   100% { transform: translateY(0) scaleY(1); opacity: 1; }
 }
@@ -696,17 +700,17 @@
   display: flex;
   justify-content: space-between;
   font-family: 'Courier New', monospace;
-  font-size: 7.5px;
+  font-size: 7px;
   font-weight: 800;
   color: #e62229;
   border-bottom: 1px dashed #dcd0b8;
-  padding-bottom: 4px;
-  margin-bottom: 6px;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
 }
 
 .strip-caption-text {
   font-family: 'Caveat', cursive;
-  font-size: clamp(16px, 4.2vw, 19px);
+  font-size: clamp(15px, 4vw, 18px);
   color: #2b1816;
   font-weight: 700;
   line-height: 1.35;
@@ -717,8 +721,8 @@
    【打字机放映解说手稿正文】
    ========================================================================== */
 .viewmaster-letter-content {
-  margin: 24px 0 16px 0;
-  padding: 18px 16px;
+  margin: 22px 0 16px 0;
+  padding: 16px 14px;
   background: #ffffff;
   border: 2px solid #33221f;
   border-left: 5px solid #e62229;
