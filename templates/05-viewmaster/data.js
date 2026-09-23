@@ -9,7 +9,7 @@ const LETTER_DATA = {
   envelopeNote: "✦ VIEW-MASTER 3D REEL NO. 05 ✦",
   waxSealMonogram: "📸",
 
-  dateText: "REEL DATE // 2026.09.22",
+  dateText: "REEL DATE // 2026.09.23",
   headline: "OUR STORY IN FULL FOCUS",
   salutation: "To My Favorite View,",
   body: `Sometimes in the rush of life, our picture gets a little blurry. We bump into careless words, static noise, and small misunderstandings that make us lose sight of the big picture.
@@ -19,19 +19,19 @@ Looking through this reel of our memories, every single frame reminds me how bri
 Let's pull the lever, click past the static, and snap our hearts back into sharp, vibrant focus together. I'm so sorry, and I love you endlessly.`,
   closing: "Forever focused on you ♡\nYour Silly Human",
 
-  // 专属 7 帧底片圆盘照片库
+  // 专属底片圆盘照片库（纯净文本，帧号由算法动态匹配）
   photos: [
     {
       url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
-      caption: "FRAME 1 OF 7: The sunset where everything felt magical ♡"
+      caption: "The sunset where everything felt magical ♡"
     },
     {
       url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&auto=format&fit=crop&q=80",
-      caption: "FRAME 2 OF 7: Laughing uncontrollably in the coffee shop ☕"
+      caption: "Laughing uncontrollably in the coffee shop ☕"
     },
     {
       url: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format&fit=crop&q=80",
-      caption: "FRAME 3 OF 7: Under the stars, hand in hand forever ✨"
+      caption: "Under the stars, hand in hand forever ✨"
     }
   ],
 
