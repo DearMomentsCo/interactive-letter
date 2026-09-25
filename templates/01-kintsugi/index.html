@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_dove_pulling_veil_v4" />
+  <link rel="stylesheet" href="style.css?v=porcelain_dove_silk_v5" />
 </head>
 <body>
 
@@ -78,58 +78,77 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 【大画幅 3D 翻转 + 白鸽衔真丝轻纱拉开相册】 -->
+        <!-- 【大画幅相册 + 白瓷金羽白鸽衔真丝拉开转场】 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             
-            <!-- 【核心舞台：和平鸽叼着轻纱缓缓拉开】 -->
+            <!-- 核心舞台：白瓷白鸽叼真丝拉开 -->
             <div class="dove-pull-stage" id="dovePullStage">
-              <!-- 白玉真丝幕布主体 -->
+              <!-- 白玉蝉翼真丝薄纱 -->
               <div class="drag-silk-sheet"></div>
+
+              <!-- 飘落的白金微羽 -->
+              <svg class="feather-particle feather-1" viewBox="0 0 30 30" width="22" height="22">
+                <path d="M5,25 Q15,15 25,5 Q20,18 5,25 Z" fill="#ffffff" opacity="0.85"/>
+                <path d="M7,23 Q16,16 23,7" stroke="#ffd700" stroke-width="0.8" fill="none"/>
+              </svg>
+              <svg class="feather-particle feather-2" viewBox="0 0 30 30" width="18" height="18">
+                <path d="M5,25 Q15,15 25,5 Q20,18 5,25 Z" fill="#fdfcf7" opacity="0.75"/>
+                <path d="M7,23 Q16,16 23,7" stroke="#ffd700" stroke-width="0.7" fill="none"/>
+              </svg>
               
-              <!-- 叼着金绳的纯白 3D 和平鸽载体 -->
+              <!-- 白瓷立体浮雕白鸽与金丝绳流苏组合体 -->
               <div class="pulling-dove-carrier">
-                <svg viewBox="0 0 130 110" class="pull-dove-svg">
+                <svg viewBox="0 0 140 120" class="pull-dove-svg">
                   <defs>
-                    <linearGradient id="doveBodyGrad" x1="20%" y1="10%" x2="80%" y2="90%">
+                    <!-- 白瓷多层微漫反射渐变 -->
+                    <radialGradient id="porcelainGrad" cx="40%" cy="35%" r="65%">
                       <stop offset="0%" stop-color="#ffffff" />
-                      <stop offset="60%" stop-color="#f5f5f7" />
-                      <stop offset="100%" stop-color="#d6d6dc" />
-                    </linearGradient>
-                    <linearGradient id="doveWingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="65%" stop-color="#f6f7fa" />
+                      <stop offset="90%" stop-color="#e3e6ed" />
+                      <stop offset="100%" stop-color="#c5cbd6" />
+                    </radialGradient>
+                    <linearGradient id="wingShadowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stop-color="#ffffff" />
-                      <stop offset="50%" stop-color="#edf0f5" />
-                      <stop offset="100%" stop-color="#c9ced8" />
+                      <stop offset="60%" stop-color="#eaedf2" />
+                      <stop offset="100%" stop-color="#b8bfcc" />
                     </linearGradient>
-                    <linearGradient id="goldRibbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#fff4b8" />
+                    <linearGradient id="goldKintsugiThread" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#fff8d6" />
                       <stop offset="50%" stop-color="#ffd700" />
-                      <stop offset="100%" stop-color="#b38728" />
+                      <stop offset="100%" stop-color="#997316" />
                     </linearGradient>
                   </defs>
 
-                  <!-- 衔着的受力金绳与流苏 (从鸽喙延伸至幕布左侧咬合点) -->
-                  <path d="M96,36 Q80,50 64,68" fill="none" stroke="url(#goldRibbonGrad)" stroke-width="3" stroke-linecap="round"/>
-                  <circle cx="64" cy="68" r="4.5" fill="#d4af37"/>
-                  <path d="M64,68 L60,82 M64,68 L64,84 M64,68 L68,82" stroke="#b38728" stroke-width="1.8"/>
+                  <!-- 嘴衔编织金绳与真丝流苏 (紧紧连结在幕布左侧) -->
+                  <path d="M102,40 Q84,54 66,74" fill="none" stroke="url(#goldKintsugiThread)" stroke-width="3.5" stroke-linecap="round"/>
+                  <circle cx="66" cy="74" r="5" fill="#ffd700"/>
+                  <path d="M66,74 L61,90 M66,74 L66,93 M66,74 L71,90" stroke="#b38728" stroke-width="2"/>
 
-                  <!-- 鸽尾羽阴影 -->
-                  <path d="M15,68 C26,56 40,48 62,42 C72,30 84,24 98,24 C90,36 84,44 78,52 C88,56 98,66 94,74 C84,72 72,66 64,62 C52,72 38,80 20,80 Z" fill="#9da3af" opacity="0.3"/>
+                  <!-- 柔和背光环境阴影 -->
+                  <path d="M22,72 C32,60 48,50 72,44 C82,30 96,24 110,24 C102,36 94,44 88,54 C100,58 112,68 108,76 C96,74 82,66 74,62 C60,74 44,82 24,82 Z" fill="#9da3af" opacity="0.25"/>
                   
-                  <!-- 白鸽主干 -->
-                  <path d="M18,64 C28,52 44,44 66,40 C74,28 88,22 100,22 C92,34 84,42 78,50 C88,54 98,64 96,70 C86,68 74,62 66,58 C54,68 40,76 22,76 Z" fill="url(#doveBodyGrad)"/>
+                  <!-- 白瓷白鸽身体主干 (流线雕塑感) -->
+                  <path d="M24,68 C34,56 50,46 74,42 C84,28 98,22 112,22 C104,34 96,42 90,52 C102,56 114,66 110,72 C98,70 84,64 76,60 C62,72 46,80 26,80 Z" fill="url(#porcelainGrad)" stroke="rgba(255,255,255,0.8)" stroke-width="0.8"/>
                   
-                  <!-- 振翅羽翼 (带独立起伏动画) -->
-                  <g class="dove-wing-animated">
-                    <path d="M52,46 C46,30 34,18 12,18 C20,30 32,40 46,48 Z" fill="url(#doveWingGrad)"/>
-                    <path d="M40,40 C36,28 26,20 10,20 C14,28 24,36 34,42 Z" fill="#ffffff"/>
-                    <path d="M30,36 C26,28 18,22 6,22 C10,28 16,34 24,40 Z" fill="#f8f9fa"/>
+                  <!-- 舒展的白瓷雕塑上翼 (层叠羽翼，不剧烈扇动，展现高贵滑翔) -->
+                  <g>
+                    <!-- 下层羽翼阴影 -->
+                    <path d="M62,48 C54,30 40,16 14,16 C22,30 36,42 52,52 Z" fill="url(#wingShadowGrad)"/>
+                    <!-- 中层主羽 (白瓷高光) -->
+                    <path d="M48,42 C44,28 32,18 10,18 C16,28 28,38 40,46 Z" fill="#ffffff"/>
+                    <!-- 顶层羽尖金缮微刻金线 -->
+                    <path d="M38,36 C34,24 24,18 8,20 C14,26 22,34 30,40 Z" fill="#fafbfd"/>
+                    <path d="M14,16 Q24,24 38,32" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.75"/>
                   </g>
                   
-                  <!-- 琥珀喙部 (紧紧衔着金绳) -->
-                  <polygon points="98,34 105,37 98,40" fill="#f4a261"/>
-                  <circle cx="90" cy="34" r="2.2" fill="#212529"/>
-                  <circle cx="90.8" cy="33.3" r="0.9" fill="#ffffff"/>
+                  <!-- 金色鸽喙 (稳固咬合受力金绳) -->
+                  <polygon points="106,37 114,40 106,44" fill="#e0a96d"/>
+                  <polygon points="106,39 111,40 106,42" fill="#ffd700"/>
+                  
+                  <!-- 灵动深眸 -->
+                  <circle cx="98" cy="37" r="2.4" fill="#1c1a17"/>
+                  <circle cx="98.8" cy="36.2" r="0.9" fill="#ffffff"/>
                 </svg>
               </div>
             </div>
@@ -216,7 +235,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_dove_pulling_veil_v4"></script>
+  <script src="data.js?v=porcelain_dove_silk_v5"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -230,7 +249,7 @@
     }
 
     /* ==========================================================================
-       【相册引擎 + 和平鸽叼轻纱拉开转场】
+       【相册引擎 + 白瓷金羽白鸽衔真丝拉开转场】
        ========================================================================== */
     const photoCard = document.getElementById('photoCard');
     const frontImg = document.getElementById('frontPhotoImg');
@@ -246,7 +265,7 @@
     const photosList = LETTER_DATA.photos || [];
     let isTransitioning = false;
 
-    // Web Audio 空灵温润的金钵微鸣声
+    // Web Audio 真实合成：真丝拂动沙沙声 + 528Hz 空灵磬钟微鸣
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -258,21 +277,53 @@
       return audioCtx;
     }
 
-    function playRinGongChime() {
+    function playSilkRustleAndChime() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
-        
+
+        // 1. 真丝拂动轻柔沙沙声 (Soft Silk Whoosh)
+        const dur = 0.65;
+        const bufferSize = ctx.sampleRate * dur;
+        const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(800, now);
+        filter.frequency.exponentialRampToValueAtTime(1600, now + 0.25);
+        filter.frequency.exponentialRampToValueAtTime(600, now + dur);
+        filter.Q.value = 2.5;
+
+        const noiseGain = ctx.createGain();
+        noiseGain.gain.setValueAtTime(0.01, now);
+        noiseGain.gain.linearRampToValueAtTime(0.12, now + 0.15);
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+        noise.connect(filter);
+        filter.connect(noiseGain);
+        noiseGain.connect(ctx.destination);
+
+        noise.start(now);
+        noise.stop(now + dur);
+
+        // 2. 528Hz 治愈空灵磬钟余音 (Crystal Bell Resonance)
         const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
+        const chimeGain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(528, now);
-        osc.frequency.exponentialRampToValueAtTime(1056, now + 0.15);
-        gain.gain.setValueAtTime(0.2, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
+        osc.frequency.setValueAtTime(528, now + 0.1);
+        osc.frequency.exponentialRampToValueAtTime(1056, now + 0.25);
+        chimeGain.gain.setValueAtTime(0.18, now + 0.1);
+        chimeGain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+        osc.connect(chimeGain);
+        chimeGain.connect(ctx.destination);
+        osc.start(now + 0.1);
         osc.stop(now + 1.8);
       } catch(e) {}
     }
@@ -293,32 +344,32 @@
         this.classList.toggle('is-flipped');
       });
 
-      // 核心交互：和平鸽叼着轻纱缓缓拉开转场 (1.35s)
+      // 核心交互：白瓷白鸽衔金绳·将白玉真丝缓缓拉开转场 (1.45s 典雅物理阻尼)
       function transitionToPhoto(nextIndex) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        playRinGongChime();
+        playSilkRustleAndChime();
 
-        // 1. 幕布迅速覆盖当前照片，白鸽准备就位
+        // 1. 薄纱覆于相框，白鸽衔绳就位
         dovePullStage.classList.remove('is-dragging');
         dovePullStage.classList.add('is-active');
 
-        // 2. 幕布盖住的第 100ms 瞬间把底层换成新照片
+        // 2. 遮蔽瞬间无缝换图
         setTimeout(() => {
           currentPhotoIdx = nextIndex;
           renderPhoto(currentPhotoIdx);
 
-          // 3. 白鸽振翅衔着金丝绳，把整面轻纱优雅向右上拉开！
+          // 3. 白鸽向右上方优雅滑翔，将整块白玉薄纱缓缓拉离画面，微羽飘落！
           setTimeout(() => {
             dovePullStage.classList.add('is-dragging');
 
-            // 4. 幕布完全拉离视野，重置并释放操作锁
+            // 4. 动画完全结束，平稳重置
             setTimeout(() => {
               dovePullStage.classList.remove('is-active');
               dovePullStage.classList.remove('is-dragging');
               isTransitioning = false;
-            }, 1350);
+            }, 1450);
 
           }, 80);
 
