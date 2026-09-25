@@ -1,16 +1,16 @@
 /* ==========================================================================
-   THEME 01: 金缮修复和解款 (KINTSUGI) - 专属艺术美学
-   绝对物理隔离样式库 - 仅对 templates/01-kintsugi/ 生效
+   THEME 01: KINTSUGI - EXCLUSIVE FINE ART RECONCILIATION
+   Physical Isolation Stylesheet - templates/01-kintsugi/ only
    ========================================================================== */
 
-/* 1. 视口背景：深邃曜石玄黑与微金光泽 */
+/* 1. Viewport Background: Obsidian Deep Tone with Ambient Gold Glow */
 .letter-viewport[data-theme="kintsugi"] {
   background: radial-gradient(ellipse at 50% 38%, #20242e 0%, #111317 75%, #08090b 100%);
   color: #2b2621;
   font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-/* 2. 和纸金箔信封 */
+/* 2. Envelope Construction */
 [data-theme="kintsugi"] .envelope-wrapper {
   background: #222630;
   border-radius: 10px;
@@ -49,7 +49,7 @@
   z-index: 1;
 }
 
-/* 经典呼吸熔金火漆印 */
+/* Golden Breathing Wax Seal */
 [data-theme="kintsugi"] .wax-seal {
   border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
   background: radial-gradient(circle at 35% 30%, #fbedbf 0%, #c5a059 45%, #8f6e28 85%, #5a4313 100%);
@@ -82,7 +82,7 @@
   opacity: 0.9;
 }
 
-/* 3. 信纸主体（原版雅致米白和纸纹理） */
+/* 3. Letter Sheet Construction */
 [data-theme="kintsugi"] .letter-sheet {
   background-color: #fdfaf3 !important;
   background-image: 
@@ -166,7 +166,7 @@
 }
 
 /* ==========================================================================
-   【4. 相册：黄金比例锁定 + 自适应 9:16 / 横屏全画幅】
+   4. Gallery Frame: Gold Rim & Auto Aspect-Ratio (9:16 & Landscape)
    ========================================================================== */
 [data-theme="kintsugi"] .photo-slider-wrapper {
   margin: clamp(18px, 4.5vw, 24px) auto;
@@ -293,7 +293,7 @@
 }
 
 /* ==========================================================================
-   【5. 原版和解免死券】
+   5. Apology Vouchers Cards
    ========================================================================== */
 [data-theme="kintsugi"] .apology-vouchers-container {
   margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
@@ -395,7 +395,7 @@
   border-style: solid;
 }
 
-/* 6. 正文流体字体 */
+/* 6. Typography & Letter Text */
 [data-theme="kintsugi"] .letter-body-text {
   font-size: clamp(15px, 4.1vw, 17px);
   line-height: clamp(1.9, 5vw, 2.05);
@@ -432,7 +432,7 @@
   z-index: 2;
 }
 
-/* 7. 原版金箔刮刮乐 */
+/* 7. Gold Foil Scratch Card */
 [data-theme="kintsugi"] .scratch-hint-text {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
@@ -477,54 +477,102 @@
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 8. 原版和解逃跑问答 */
+/* ==========================================================================
+   8. Full Robust YES / NO Interactive Section (100% Guaranteed Display)
+   ========================================================================== */
 [data-theme="kintsugi"] .runaway-section {
   border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
-  padding-top: 24px;
+  padding-top: 26px;
+  margin-top: 30px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  text-align: center;
+  display: block !important;
 }
 
 [data-theme="kintsugi"] .runaway-question {
   font-family: 'Cinzel', serif;
   color: #5c4310;
-  font-size: clamp(15px, 4vw, 16.5px);
+  font-size: clamp(14px, 3.8vw, 17px);
+  font-weight: 700;
+  letter-spacing: 1px;
   margin-bottom: 18px;
+  display: block;
+}
+
+[data-theme="kintsugi"] .runaway-buttons-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px;
+  position: relative;
+  min-height: 48px;
+  margin-bottom: 20px;
 }
 
 [data-theme="kintsugi"] .btn-yes {
-  background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%);
-  color: #ffffff;
-  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+  background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #fff2bf !important;
+  padding: 9px 24px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+  transition: transform 0.2s ease;
+}
+
+[data-theme="kintsugi"] .btn-yes:hover {
+  transform: scale(1.06);
 }
 
 [data-theme="kintsugi"] .btn-no {
-  background: #e6dfd1;
-  color: #665a4c;
+  background: #eae2d3 !important;
+  color: #665a4c !important;
+  border: 1.5px solid #c9bea9 !important;
+  padding: 9px 24px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease;
 }
 
 [data-theme="kintsugi"] .runaway-success-modal {
   background: #fbf7ee;
-  border: 1px solid #d4af37;
+  border: 1.5px solid #d4af37;
   color: #7a5a17;
   font-family: 'Cinzel', serif;
-  font-size: clamp(13.5px, 3.6vw, 15px);
+  font-size: clamp(12.5px, 3.4vw, 14.5px);
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin: 12px auto;
+  max-width: 320px;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.2);
 }
 
 /* ==========================================================================
-   【9. 专属高级巧思：在 Yes/No 下方的 3D 泥金凹印捺印和好台】
+   9. Exclusive Feature: 3D Debossed Human Thumbprint Altar (Below YES/NO)
+   No Chinese characters - 100% Western Elegance & True Dermatoglyphics
    ========================================================================== */
 .reconciliation-fingerprint-station {
-  margin: 32px auto 14px auto;
-  max-width: 320px;
+  margin: 24px auto 14px auto;
+  max-width: 340px;
   text-align: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.3);
 }
 
 .fingerprint-station-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(8.5px, 2.2vw, 10px);
+  font-size: clamp(9px, 2.3vw, 10.5px);
   font-weight: 700;
   letter-spacing: 2px;
   color: #8c6a22;
@@ -534,22 +582,22 @@
 .fingerprint-station-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
-  font-size: clamp(11.5px, 3vw, 13px);
+  font-size: clamp(12px, 3.2vw, 13.5px);
   color: #9e7d3b;
   margin-bottom: 14px;
 }
 
-/* 3D 和纸凹陷指印台 (物理内凹阴影 + 柔和金光边) */
+/* 3D Debossed Washi Altar */
 .human-thumb-debossed-altar {
   position: relative;
-  width: 76px;
-  height: 104px;
+  width: 80px;
+  height: 110px;
   margin: 0 auto;
-  border-radius: 38px / 52px;
-  background: #f5eedf;
+  border-radius: 40px / 55px;
+  background: #f4ecdc;
   border: 1.5px dashed #c5a059;
   box-shadow: 
-    inset 0 4px 10px rgba(0, 0, 0, 0.15),
+    inset 0 4px 10px rgba(0, 0, 0, 0.16),
     inset 0 -2px 6px rgba(255, 255, 255, 0.9),
     0 1px 2px rgba(255, 255, 255, 0.6);
   cursor: pointer;
@@ -565,36 +613,36 @@
 .human-thumb-debossed-altar:hover {
   border-color: #d4af37;
   box-shadow: 
-    inset 0 4px 10px rgba(0, 0, 0, 0.12),
-    0 0 14px rgba(212, 175, 55, 0.35);
+    inset 0 4px 10px rgba(0, 0, 0, 0.14),
+    0 0 16px rgba(212, 175, 55, 0.35);
 }
 
 .human-thumb-debossed-altar:active,
 .human-thumb-debossed-altar.is-pressed {
   transform: scale(0.96) translateY(2px);
   box-shadow: 
-    inset 0 6px 14px rgba(0, 0, 0, 0.22),
-    0 0 20px rgba(212, 175, 55, 0.55);
+    inset 0 6px 14px rgba(0, 0, 0, 0.24),
+    0 0 22px rgba(212, 175, 55, 0.6);
 }
 
-/* 真实解剖级人类指纹 SVG 容器 */
+/* Anatomical Human Fingerprint Vector */
 .human-fingerprint-vector {
-  width: 58px;
-  height: 84px;
+  width: 62px;
+  height: 90px;
   display: block;
 }
 
-/* 未按印时：隐约可见的微凹浅痕 */
+/* Unstamped State: Subdued Embossed Indentation */
 .dermatoglyphic-ridge {
   fill: none;
   stroke: rgba(184, 150, 80, 0.22);
   stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke 0.45s ease, filter 0.45s ease, opacity 0.45s ease;
+  transition: stroke 0.45s ease, filter 0.45s ease;
 }
 
-/* 按印后：立体泥金吃纸显影 (纯正金漆质感) */
+/* Stamped State: Rich Liquid Gold Penetration */
 .human-thumb-debossed-altar.is-stamped .dermatoglyphic-ridge {
   stroke: #cda83e;
   filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8)) drop-shadow(0 -0.5px 0.5px rgba(0, 0, 0, 0.45));
@@ -603,7 +651,7 @@
 .human-thumb-debossed-altar.is-stamped .ridge-gold-highlight {
   stroke: #ffd700 !important;
   stroke-width: 1.5;
-  filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.8));
+  filter: drop-shadow(0 0 2.5px rgba(255, 215, 0, 0.9));
 }
 
 .human-thumb-debossed-altar.is-stamped {
@@ -612,7 +660,6 @@
   pointer-events: none;
 }
 
-/* 捺印提示文字 */
 .thumbprint-status-label {
   font-family: 'Cinzel', serif;
   font-size: clamp(8px, 2.1vw, 9.5px);
@@ -623,25 +670,26 @@
   transition: color 0.3s ease;
 }
 
-/* 伴随指纹显影的朱砂印章 (庄重和好信印) */
+/* English Official Pledge Wax Seal (Zero Chinese) */
 .covenant-cinnabar-stamp {
   position: absolute;
   top: 50%;
-  right: -22px;
+  right: -24px;
   transform: translateY(-50%) rotate(-12deg) scale(0);
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border: 1.8px solid #a82020;
-  border-radius: 4px;
+  border-radius: 50%;
   color: #a82020;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Cinzel', serif;
-  font-size: 8px;
+  font-size: 7px;
   font-weight: 900;
   line-height: 1.15;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   box-shadow: inset 0 0 4px rgba(168, 32, 32, 0.2);
   opacity: 0;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.28), opacity 0.4s ease;
