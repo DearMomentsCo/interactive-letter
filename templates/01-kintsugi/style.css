@@ -557,20 +557,20 @@
 }
 
 /* ==========================================================================
-   9. Exclusive Feature: 3D Debossed Human Thumbprint Altar (Below YES/NO)
-   No Chinese characters - 100% Western Elegance & True Dermatoglyphics
+   9. 【专属巧思：双人倾斜指纹合成爱心 (Double Thumbprint Heart)】
+   1:1 还原参考图效果：真实人体指纹肌理，零中文纯西式高定
    ========================================================================== */
-.reconciliation-fingerprint-station {
-  margin: 24px auto 14px auto;
+.thumbprint-heart-altar {
+  margin: 28px auto 16px auto;
   max-width: 340px;
   text-align: center;
   position: relative;
   z-index: 3;
-  padding-top: 18px;
-  border-top: 1px dashed rgba(212, 175, 55, 0.3);
+  padding-top: 20px;
+  border-top: 1.5px dashed rgba(212, 175, 55, 0.35);
 }
 
-.fingerprint-station-title {
+.heart-altar-title {
   font-family: 'Cinzel', serif;
   font-size: clamp(9px, 2.3vw, 10.5px);
   font-weight: 700;
@@ -579,88 +579,111 @@
   margin-bottom: 4px;
 }
 
-.fingerprint-station-subtitle {
+.heart-altar-subtitle {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: clamp(12px, 3.2vw, 13.5px);
   color: #9e7d3b;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
-/* 3D Debossed Washi Altar */
-.human-thumb-debossed-altar {
+/* 和纸双人指纹爱心拓印台 (带内凹阴影与金色呼吸提示) */
+.dual-thumb-pad-stage {
   position: relative;
-  width: 80px;
-  height: 110px;
+  width: 170px;
+  height: 155px;
   margin: 0 auto;
-  border-radius: 40px / 55px;
-  background: #f4ecdc;
-  border: 1.5px dashed #c5a059;
+  background: #fbf6ec;
+  border: 1.5px dashed #c9a55c;
+  border-radius: 12px;
   box-shadow: 
-    inset 0 4px 10px rgba(0, 0, 0, 0.16),
-    inset 0 -2px 6px rgba(255, 255, 255, 0.9),
-    0 1px 2px rgba(255, 255, 255, 0.6);
+    inset 0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 6px rgba(255, 255, 255, 0.8),
+    0 4px 14px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-.human-thumb-debossed-altar:hover {
+.dual-thumb-pad-stage:hover {
   border-color: #d4af37;
   box-shadow: 
-    inset 0 4px 10px rgba(0, 0, 0, 0.14),
-    0 0 16px rgba(212, 175, 55, 0.35);
+    inset 0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 18px rgba(212, 175, 55, 0.35);
 }
 
-.human-thumb-debossed-altar:active,
-.human-thumb-debossed-altar.is-pressed {
-  transform: scale(0.96) translateY(2px);
-  box-shadow: 
-    inset 0 6px 14px rgba(0, 0, 0, 0.24),
-    0 0 22px rgba(212, 175, 55, 0.6);
+.dual-thumb-pad-stage:active {
+  transform: scale(0.97);
 }
 
-/* Anatomical Human Fingerprint Vector */
-.human-fingerprint-vector {
-  width: 62px;
-  height: 90px;
+/* 核心两枚指纹交叠的 SVG 容器 */
+.thumbprint-heart-svg {
+  width: 145px;
+  height: 130px;
   display: block;
 }
 
-/* Unstamped State: Subdued Embossed Indentation */
-.dermatoglyphic-ridge {
+/* 真实解剖级人类指纹脊线 (Dermatoglyphic Ridges) */
+.human-ridge {
   fill: none;
-  stroke: rgba(184, 150, 80, 0.22);
-  stroke-width: 1.35;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke 0.45s ease, filter 0.45s ease;
 }
 
-/* Stamped State: Rich Liquid Gold Penetration */
-.human-thumb-debossed-altar.is-stamped .dermatoglyphic-ridge {
-  stroke: #cda83e;
-  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8)) drop-shadow(0 -0.5px 0.5px rgba(0, 0, 0, 0.45));
+/* 左侧指纹：写信人预设拓印 (朱砂深红质感 + 细微金晕渗透) */
+.sender-print-ridge {
+  stroke: #c22d2d;
+  stroke-width: 1.35;
+  opacity: 0.88;
 }
 
-.human-thumb-debossed-altar.is-stamped .ridge-gold-highlight {
+/* 右侧指纹未按印状态：半透明浅灰金提示点阵与外廓 */
+.recipient-print-ridge {
+  stroke: rgba(184, 150, 80, 0.25);
+  stroke-width: 1.25;
+  transition: stroke 0.45s ease, opacity 0.45s ease, filter 0.45s ease;
+}
+
+.recipient-hint-glow {
+  animation: pulseSlot 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseSlot {
+  0%, 100% { opacity: 0.25; stroke: rgba(184, 150, 80, 0.25); }
+  50% { opacity: 0.65; stroke: rgba(212, 175, 55, 0.7); }
+}
+
+/* 捺印完成：右侧指纹饱满显影，并在两枚指纹交错处泛起纯金光泽 */
+.dual-thumb-pad-stage.is-completed .recipient-print-ridge {
+  stroke: #c22d2d !important;
+  stroke-width: 1.35;
+  opacity: 0.88 !important;
+}
+
+/* 交汇处金缮融合金光 */
+.dual-thumb-pad-stage.is-completed .heart-center-kintsugi-seam {
   stroke: #ffd700 !important;
-  stroke-width: 1.5;
-  filter: drop-shadow(0 0 2.5px rgba(255, 215, 0, 0.9));
+  stroke-width: 2.2 !important;
+  filter: drop-shadow(0 0 4px #ffd700) drop-shadow(0 0 8px rgba(255, 215, 0, 0.8)) !important;
+  opacity: 1 !important;
 }
 
-.human-thumb-debossed-altar.is-stamped {
+.dual-thumb-pad-stage.is-completed {
   border-style: solid;
   border-color: #d4af37;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.05),
+    0 0 22px rgba(212, 175, 55, 0.45);
   pointer-events: none;
 }
 
-.thumbprint-status-label {
+/* 底部状态提示 */
+.heart-status-label {
   font-family: 'Cinzel', serif;
   font-size: clamp(8px, 2.1vw, 9.5px);
   letter-spacing: 1.5px;
@@ -670,14 +693,14 @@
   transition: color 0.3s ease;
 }
 
-/* English Official Pledge Wax Seal (Zero Chinese) */
-.covenant-cinnabar-stamp {
+/* 纯英文官方和解印章 (100% 欧美西方排版) */
+.covenant-official-stamp {
   position: absolute;
   top: 50%;
-  right: -24px;
-  transform: translateY(-50%) rotate(-12deg) scale(0);
-  width: 48px;
-  height: 48px;
+  right: -28px;
+  transform: translateY(-50%) rotate(-14deg) scale(0);
+  width: 52px;
+  height: 52px;
   border: 1.8px solid #a82020;
   border-radius: 50%;
   color: #a82020;
@@ -686,18 +709,18 @@
   align-items: center;
   justify-content: center;
   font-family: 'Cinzel', serif;
-  font-size: 7px;
+  font-size: 6.8px;
   font-weight: 900;
   line-height: 1.15;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   box-shadow: inset 0 0 4px rgba(168, 32, 32, 0.2);
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.28), opacity 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.28), opacity 0.4s ease;
   pointer-events: none;
 }
 
-.human-thumb-debossed-altar.is-stamped + .thumbprint-status-label + .covenant-cinnabar-stamp,
-.human-thumb-debossed-altar.is-stamped ~ .covenant-cinnabar-stamp {
-  transform: translateY(-50%) rotate(-12deg) scale(1);
+.dual-thumb-pad-stage.is-completed ~ .covenant-official-stamp,
+.dual-thumb-pad-stage.is-completed + .heart-status-label + .covenant-official-stamp {
+  transform: translateY(-50%) rotate(-14deg) scale(1);
   opacity: 0.92;
 }
