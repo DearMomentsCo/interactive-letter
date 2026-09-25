@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_real_fingerprint_v11" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_english_fingerprint_v12" />
 </head>
 <body>
 
@@ -148,38 +148,38 @@
           </div>
         </div>
 
-        <!-- 原版和解问答 -->
+        <!-- 【原版和解问答：YES / NO 必须完好保留】 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
-            <button class="btn-yes" id="btnYes">Yes ♡</button>
-            <button class="btn-no" id="btnNo">No</button>
+            <button class="btn-yes" id="btnYes">YES ♡</button>
+            <button class="btn-no" id="btnNo">NO</button>
           </div>
           <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
         </div>
 
         <!-- ==========================================================================
-             【专属高级巧思：在 Yes/No 下方的 3D 泥金凹印捺印和好台】
+             【专属高级巧思：在 YES/NO 下方的 3D 泥金指纹捺印台 (纯英文西方语境)】
              ========================================================================== -->
         <div class="reconciliation-fingerprint-station">
-          <div class="fingerprint-station-title">✦ SEAL OF RECONCILIATION ✦</div>
-          <div class="fingerprint-station-subtitle">"若愿既往不咎，请在此捺下温存指印"</div>
+          <div class="fingerprint-station-title">✦ THE GOLDEN THUMBPRINT PLEDGE ✦</div>
+          <div class="fingerprint-station-subtitle">"If you choose to forgive, press your thumbprint below to seal our bond."</div>
           
           <div style="position:relative; display:inline-block;">
             <!-- 3D 和纸凹槽印台 -->
-            <div class="human-thumb-debossed-altar" id="humanThumbAltar" title="Tap to press your thumbprint">
-              <!-- 人类真实箕形/斗形纹生物指纹形态学建模 -->
+            <div class="human-thumb-debossed-altar" id="humanThumbAltar" title="Press thumbprint to seal pledge">
+              <!-- 人类真实箕形/斗形纹解剖学级指纹 -->
               <svg viewBox="0 0 60 84" class="human-fingerprint-vector">
-                <!-- 外围环绕脊线 -->
+                <!-- 外轮廓真皮层脊线 -->
                 <path class="dermatoglyphic-ridge" d="M 30,5 C 16,5 8,17 8,36 C 8,56 16,72 30,78 C 44,72 52,56 52,36 C 52,17 44,5 30,5 Z" />
                 <path class="dermatoglyphic-ridge" d="M 30,10 C 19,10 12,20 12,37 C 12,53 19,67 30,73 C 41,67 48,53 48,37 C 48,20 41,10 30,10 Z" />
-                <!-- 中层真实分叉与转折脊线 (Loops with Natural Bifurcations) -->
+                <!-- 真实转折与分叉脊线 (Loops & Bifurcations) -->
                 <path class="dermatoglyphic-ridge" d="M 30,15 C 22,15 16,24 16,39 C 16,50 20,62 30,67 C 39,62 44,50 44,39 C 44,24 38,15 30,15 Z" />
                 <path class="dermatoglyphic-ridge" d="M 30,20 C 25,20 20,28 20,40 C 20,48 24,57 30,61 C 36,57 40,48 40,40 C 40,28 35,20 30,20 Z" />
-                <!-- 核心斗形旋转涡纹 (Anatomical Core Whorl) -->
+                <!-- 核心指纹斗形旋转涡纹 (Central Whorl) -->
                 <path class="dermatoglyphic-ridge ridge-gold-highlight" d="M 28,26 C 24,28 24,36 26,42 C 28,48 34,51 34,44 C 34,37 32,32 29,32 C 27,32 27,37 29,39" />
                 <path class="dermatoglyphic-ridge ridge-gold-highlight" d="M 32,29 C 34,32 35,38 32,43 C 30,46 27,45 28,41" />
-                <!-- 底部三角汇聚点与断点纹理 (Delta & Island Ridges) -->
+                <!-- 底部三角汇聚区 (Delta & Bridge Ridges) -->
                 <path class="dermatoglyphic-ridge" d="M 14,48 C 17,54 22,60 27,64" />
                 <path class="dermatoglyphic-ridge" d="M 46,48 C 43,54 38,60 33,64" />
                 <path class="dermatoglyphic-ridge" d="M 16,32 C 17,37 19,41 23,43" />
@@ -188,9 +188,11 @@
               </svg>
             </div>
 
-            <!-- 伴随显影的朱砂印章 -->
+            <!-- 纯英文朱砂和解印章 (零中文字) -->
             <div class="covenant-cinnabar-stamp" id="cinnabarStamp">
-              永修<br/>旧好
+              <span>OFFICIAL</span>
+              <span>PLEDGE</span>
+              <span>MENDED</span>
             </div>
           </div>
 
@@ -202,7 +204,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_real_fingerprint_v11"></script>
+  <script src="data.js?v=kintsugi_english_fingerprint_v12"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -296,7 +298,6 @@
       } catch(e) {}
     }
 
-    // 捺印深沉触觉音 (Tactile Impression Thud)
     function playImpressionThudSound() {
       try {
         const ctx = getAudioContext();
@@ -313,7 +314,6 @@
         osc.start(now);
         osc.stop(now + 0.14);
 
-        // 伴随温暖的 F大调长音尾韵
         playAcousticPianoKey(349.23, now + 0.04, 0.45); // F4
         playAcousticPianoKey(523.25, now + 0.08, 0.38); // C5
       } catch(e) {}
@@ -389,7 +389,41 @@
     }
 
     /* ==========================================================================
-       【交互：3D 泥金凹印捺印和好台】
+       【互动 1：YES / NO 和解问答机制】
+       ========================================================================== */
+    const runawaySection = document.getElementById('runawaySection');
+    const runawayQuestion = document.getElementById('runawayQuestion');
+    const runawaySuccessModal = document.getElementById('runawaySuccessModal');
+    const btnNo = document.getElementById('btnNo');
+    const btnYes = document.getElementById('btnYes');
+
+    if (!LETTER_DATA.enableRunaway) {
+      runawaySection.style.display = 'none';
+    } else {
+      runawayQuestion.innerText = LETTER_DATA.runawayQuestion || "WILL YOU FORGIVE ME?";
+      runawaySuccessModal.innerText = LETTER_DATA.runawaySuccessMessage || "✦ THANK YOU FOR CHOOSING LOVE ♡ ✦";
+    }
+
+    function runaway(e) {
+      e.stopPropagation();
+      const x = (Math.random() - 0.5) * 220;
+      const y = (Math.random() - 0.5) * 130;
+      btnNo.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    btnNo.addEventListener('mouseover', runaway);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
+
+    btnYes.addEventListener('click', (e) => {
+      e.stopPropagation();
+      runawaySuccessModal.style.display = 'block';
+      btnNo.style.display = 'none';
+      btnYes.style.transform = 'scale(1.08)';
+      playRomanticPianoChord();
+      createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 50);
+    });
+
+    /* ==========================================================================
+       【互动 2：在 YES/NO 下方的 3D 泥金指纹捺印台】
        ========================================================================== */
     const thumbAltar = document.getElementById('humanThumbAltar');
     const thumbStatus = document.getElementById('thumbStatusLabel');
@@ -400,13 +434,12 @@
       if (isThumbStamped) return;
       isThumbStamped = true;
 
-      // 触觉震动
       if (navigator.vibrate) navigator.vibrate([35]);
 
       playImpressionThudSound();
 
       thumbAltar.classList.add('is-stamped');
-      thumbStatus.innerText = "✦ COVENANT SEALED IN GOLD ♡ ✦";
+      thumbStatus.innerText = "✦ COVENANT SEALED IN GOLD FOREVER ♡ ✦";
       thumbStatus.style.color = "#d4af37";
 
       const rect = thumbAltar.getBoundingClientRect();
@@ -418,14 +451,6 @@
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
-    }
-
-    // 逃跑问答设置
-    if (!LETTER_DATA.enableRunaway) {
-      document.getElementById('runawaySection').style.display = 'none';
-    } else {
-      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
-      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
     }
 
     // 密码锁
@@ -589,28 +614,6 @@
       window.addEventListener('touchend', () => isScratching = false);
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
-
-    const btnNo = document.getElementById('btnNo');
-    const btnYes = document.getElementById('btnYes');
-    const modal = document.getElementById('runawaySuccessModal');
-
-    function runaway(e) {
-      e.stopPropagation();
-      const x = (Math.random() - 0.5) * 220;
-      const y = (Math.random() - 0.5) * 130;
-      btnNo.style.transform = `translate(${x}px, ${y}px)`;
-    }
-    btnNo.addEventListener('mouseover', runaway);
-    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
-
-    btnYes.addEventListener('click', (e) => {
-      e.stopPropagation();
-      modal.style.display = 'block';
-      btnNo.style.display = 'none';
-      btnYes.style.transform = 'scale(1.1)';
-      playRomanticPianoChord();
-      createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 60);
-    });
 
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
