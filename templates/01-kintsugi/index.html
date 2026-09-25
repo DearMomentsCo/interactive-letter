@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_heart_glow_v14" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_real_heart_v15" />
 </head>
 <body>
 
@@ -160,7 +160,7 @@
 
         <!-- ==========================================================================
              【专属高级巧思：双人指纹合心 · 长按底部发光蔓延转红】
-             位于 YES/NO 正下方 · 参考图真实人体指纹肌理 · 纯西式高定
+             1:1 复刻参考图 1 真实人体高密度肌理 · 纯西式高定
              ========================================================================== -->
         <div class="thumbprint-heart-altar">
           <div class="heart-altar-title">✦ THE DOUBLE THUMBPRINT HEART ✦</div>
@@ -169,73 +169,17 @@
           <div style="position:relative; display:inline-block;">
             
             <!-- 3D 拓印台容器 -->
-            <div class="dual-thumb-pad-stage" id="dualThumbPad" title="Press & hold to ignite and seal in red">
+            <div class="dual-thumb-pad-stage" id="dualThumbPad" title="Press & hold to ignite our heart">
               <div class="thumbprint-stack-box">
 
-                <!-- 1. 底层：左侧预设炭黑指纹 + 右侧微光引导 -->
-                <svg viewBox="0 0 160 140" class="thumbprint-heart-svg fingerprint-layer-base">
-                  <!-- 左侧：写信人预设真墨炭黑指纹 -->
-                  <g transform="translate(68, 85) rotate(-26) translate(-30, -42)">
-                    <path class="human-ridge base-sender-print" d="M 30,6 C 16,6 8,18 8,36 C 8,56 16,72 30,78 C 44,72 52,56 52,36 C 52,18 44,6 30,6 Z" />
-                    <path class="human-ridge base-sender-print" d="M 30,11 C 19,11 12,21 12,37 C 12,53 19,67 30,73 C 41,67 48,53 48,37 C 48,21 41,11 30,11 Z" />
-                    <path class="human-ridge base-sender-print" d="M 30,16 C 22,16 16,25 16,39 C 16,50 20,62 30,67 C 39,62 44,50 44,39 C 44,25 38,16 30,16 Z" />
-                    <path class="human-ridge base-sender-print" d="M 30,21 C 25,21 20,29 20,40 C 20,48 24,57 30,61 C 36,57 40,48 40,40 C 40,29 35,21 30,21 Z" />
-                    <path class="human-ridge base-sender-print" d="M 28,27 C 24,29 24,37 26,43 C 28,48 34,51 34,44 C 34,37 32,32 29,32 C 27,32 27,37 29,39" />
-                    <path class="human-ridge base-sender-print" d="M 32,30 C 34,33 35,39 32,44 C 30,47 27,45 28,42" />
-                    <path class="human-ridge base-sender-print" d="M 14,49 C 17,55 22,61 27,65" />
-                    <path class="human-ridge base-sender-print" d="M 46,49 C 43,55 38,61 33,65" />
-                    <path class="human-ridge base-sender-print" d="M 16,33 C 17,38 19,42 23,44" />
-                    <path class="human-ridge base-sender-print" d="M 44,33 C 43,38 41,42 37,44" />
-                    <path class="human-ridge base-sender-print" d="M 27,71 Q 30,74 33,71" />
-                  </g>
+                <!-- 1. 底层：左侧预设真墨炭黑指纹 + 右侧微光虚线引导 (Procedural Canvas) -->
+                <canvas class="fp-image fp-base-layer" id="fpBaseCanvas" width="350" height="314"></canvas>
 
-                  <!-- 右侧：收信人微光虚线等待 -->
-                  <g transform="translate(92, 85) rotate(26) translate(-30, -42)">
-                    <path class="human-ridge base-recipient-guide" d="M 30,6 C 16,6 8,18 8,36 C 8,56 16,72 30,78 C 44,72 52,56 52,36 C 52,18 44,6 30,6 Z" />
-                    <path class="human-ridge base-recipient-guide" d="M 30,11 C 19,11 12,21 12,37 C 12,53 19,67 30,73 C 41,67 48,53 48,37 C 48,21 41,11 30,11 Z" />
-                    <path class="human-ridge base-recipient-guide" d="M 30,16 C 22,16 16,25 16,39 C 16,50 20,62 30,67 C 39,62 44,50 44,39 C 44,25 38,16 30,16 Z" />
-                    <path class="human-ridge base-recipient-guide" d="M 30,21 C 25,21 20,29 20,40 C 20,48 24,57 30,61 C 36,57 40,48 40,40 C 40,29 35,21 30,21 Z" />
-                  </g>
-                </svg>
+                <!-- 2. 上层：自下而上蔓延的纯正朱砂红指纹层 (Procedural Canvas) -->
+                <canvas class="fp-image fp-active-layer" id="fpActiveCanvas" width="350" height="314"></canvas>
 
-                <!-- 2. 上层：自下而上蔓延的纯正朱砂红指纹层 -->
-                <svg viewBox="0 0 160 140" class="thumbprint-heart-svg fingerprint-layer-active" id="activeRedLayer">
-                  <!-- 左侧指纹（转红） -->
-                  <g transform="translate(68, 85) rotate(-26) translate(-30, -42)">
-                    <path class="human-ridge active-crimson-print" d="M 30,6 C 16,6 8,18 8,36 C 8,56 16,72 30,78 C 44,72 52,56 52,36 C 52,18 44,6 30,6 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,11 C 19,11 12,21 12,37 C 12,53 19,67 30,73 C 41,67 48,53 48,37 C 48,21 41,11 30,11 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,16 C 22,16 16,25 16,39 C 16,50 20,62 30,67 C 39,62 44,50 44,39 C 44,25 38,16 30,16 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,21 C 25,21 20,29 20,40 C 20,48 24,57 30,61 C 36,57 40,48 40,40 C 40,29 35,21 30,21 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 28,27 C 24,29 24,37 26,43 C 28,48 34,51 34,44 C 34,37 32,32 29,32 C 27,32 27,37 29,39" />
-                    <path class="human-ridge active-crimson-print" d="M 32,30 C 34,33 35,39 32,44 C 30,47 27,45 28,42" />
-                    <path class="human-ridge active-crimson-print" d="M 14,49 C 17,55 22,61 27,65" />
-                    <path class="human-ridge active-crimson-print" d="M 46,49 C 43,55 38,61 33,65" />
-                    <path class="human-ridge active-crimson-print" d="M 16,33 C 17,38 19,42 23,44" />
-                    <path class="human-ridge active-crimson-print" d="M 44,33 C 43,38 41,42 37,44" />
-                    <path class="human-ridge active-crimson-print" d="M 27,71 Q 30,74 33,71" />
-                  </g>
-
-                  <!-- 右侧指纹（转红） -->
-                  <g transform="translate(92, 85) rotate(26) translate(-30, -42)">
-                    <path class="human-ridge active-crimson-print" d="M 30,6 C 16,6 8,18 8,36 C 8,56 16,72 30,78 C 44,72 52,56 52,36 C 52,18 44,6 30,6 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,11 C 19,11 12,21 12,37 C 12,53 19,67 30,73 C 41,67 48,53 48,37 C 48,21 41,11 30,11 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,16 C 22,16 16,25 16,39 C 16,50 20,62 30,67 C 39,62 44,50 44,39 C 44,25 38,16 30,16 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 30,21 C 25,21 20,29 20,40 C 20,48 24,57 30,61 C 36,57 40,48 40,40 C 40,29 35,21 30,21 Z" />
-                    <path class="human-ridge active-crimson-print" d="M 28,27 C 24,29 24,37 26,43 C 28,48 34,51 34,44 C 34,37 32,32 29,32 C 27,32 27,37 29,39" />
-                    <path class="human-ridge active-crimson-print" d="M 32,30 C 34,33 35,39 32,44 C 30,47 27,45 28,42" />
-                    <path class="human-ridge active-crimson-print" d="M 14,49 C 17,55 22,61 27,65" />
-                    <path class="human-ridge active-crimson-print" d="M 46,49 C 43,55 38,61 33,65" />
-                    <path class="human-ridge active-crimson-print" d="M 16,33 C 17,38 19,42 23,44" />
-                    <path class="human-ridge active-crimson-print" d="M 44,33 C 43,38 41,42 37,44" />
-                    <path class="human-ridge active-crimson-print" d="M 27,71 Q 30,74 33,71" />
-                  </g>
-
-                  <!-- 中央融接金缮熔金缝隙 -->
-                  <path class="human-ridge active-kintsugi-gold-seam" d="M 80,48 Q 78,75 80,105 Q 81,118 80,126" stroke-linecap="round" />
-                </svg>
-
-                <!-- 3. 发光前锋线 -->
-                <div class="fingerprint-luminous-wave" id="luminousWave"></div>
+                <!-- 3. 发光波峰线 -->
+                <div class="fp-glow-wavefront" id="luminousWave"></div>
 
               </div>
             </div>
@@ -256,7 +200,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_heart_glow_v14"></script>
+  <script src="data.js?v=kintsugi_real_heart_v15"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -270,7 +214,126 @@
     }
 
     /* ==========================================================================
-       【声学引擎：三角钢琴触键和弦 + 捺印朱砂深沉触感音】
+       【高精度解剖级人体双指纹生成引擎（1:1 复刻参考图 1）】
+       ========================================================================== */
+    function renderRealisticFingerprintHeart() {
+      const baseCanvas = document.getElementById('fpBaseCanvas');
+      const activeCanvas = document.getElementById('fpActiveCanvas');
+      if (!baseCanvas || !activeCanvas) return;
+
+      const bCtx = baseCanvas.getContext('2d');
+      const aCtx = activeCanvas.getContext('2d');
+      const W = baseCanvas.width;
+      const H = baseCanvas.height;
+
+      // 清空
+      bCtx.clearRect(0, 0, W, H);
+      aCtx.clearRect(0, 0, W, H);
+
+      // 单个拇指高密脊线绘制函数 (52 道细密脊线 + 真实起伏与微断点)
+      function drawThumbRings(ctx, cx, cy, tiltDeg, strokeColor, lineWidth = 2.0, isGuide = false) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate((tiltDeg * Math.PI) / 180);
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        const numRings = isGuide ? 24 : 52;
+        const step = isGuide ? 2 : 1;
+
+        for (let r = 2; r < numRings; r += step) {
+          const rx = r * 2.75 + 3.0;
+          const ry = r * 3.95 + 4.5;
+          const numPts = 120 + r * 3;
+
+          ctx.beginPath();
+          let isDrawing = true;
+          let cutStart = (r * 17) % (numPts - 25);
+          let cutLen = 6 + (r % 5);
+
+          for (let p = 0; p <= numPts; p++) {
+            const t = (p / numPts) * Math.PI * 2;
+            // 真实人体指纹微起伏扰动
+            const wobble = 0.7 * Math.sin(5 * t + r) + 0.4 * Math.cos(9 * t + r * 1.5) + 0.25 * Math.sin(17 * t);
+            const asymY = 1.0 + 0.12 * Math.sin(t);
+            const asymX = 1.0 - 0.06 * Math.cos(t);
+
+            const lx = (rx + wobble) * Math.cos(t) * asymX;
+            const ly = (ry + wobble) * Math.sin(t) * asymY;
+
+            // 偶尔产生真实断裂（Minutiae 细节点）
+            if (!isGuide && r % 4 === 1 && p >= cutStart && p <= cutStart + cutLen) {
+              if (isDrawing) {
+                isDrawing = false;
+              }
+              continue;
+            }
+
+            if (!isDrawing) {
+              ctx.moveTo(lx, ly);
+              isDrawing = true;
+            } else if (p === 0) {
+              ctx.moveTo(lx, ly);
+            } else {
+              ctx.lineTo(lx, ly);
+            }
+          }
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // 心形边缘自然吃墨蒙版
+      function applyHeartClip(ctx) {
+        ctx.beginPath();
+        // 参数心形方程
+        const pts = 260;
+        for (let i = 0; i <= pts; i++) {
+          const t = (i / pts) * Math.PI * 2;
+          const bNoise = 1.0 + 0.015 * (Math.sin(23 * t) + Math.cos(37 * t));
+          const hx = 175 + 16 * Math.pow(Math.sin(t), 3) * 8.6 * bNoise;
+          const hy = 156 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 8.6 * bNoise;
+          if (i === 0) ctx.moveTo(hx, hy);
+          else ctx.lineTo(hx, hy);
+        }
+        ctx.closePath();
+        ctx.clip();
+      }
+
+      // 1. 绘制底层 (Base): 左侧真墨炭黑 (#25221f)，右侧浅金引导线
+      bCtx.save();
+      applyHeartClip(bCtx);
+      // 左拇指：炭墨深黑
+      drawThumbRings(bCtx, 128, 142, -26, '#23201d', 1.85);
+      // 右拇指：微弱金痕引导
+      drawThumbRings(bCtx, 222, 142, 26, 'rgba(197, 160, 89, 0.35)', 1.5, true);
+      bCtx.restore();
+
+      // 2. 绘制激活层 (Active): 左右两枚拇指全为纯正朱砂红 (#c22d2d)，重叠区域更深，中央金缮熔接
+      aCtx.save();
+      applyHeartClip(aCtx);
+      // 左拇指：朱砂深红
+      drawThumbRings(aCtx, 128, 142, -26, '#c22d2d', 1.95);
+      // 右拇指：朱砂深红
+      drawThumbRings(aCtx, 222, 142, 26, '#c22d2d', 1.95);
+      // 中央重叠增强与微金光
+      aCtx.strokeStyle = 'rgba(255, 215, 0, 0.45)';
+      aCtx.lineWidth = 2.0;
+      aCtx.beginPath();
+      aCtx.moveTo(175, 55);
+      aCtx.quadraticCurveTo(172, 115, 175, 150);
+      aCtx.stroke();
+      aCtx.restore();
+    }
+
+    // 页面载入时立即绘制高精指纹
+    window.addEventListener('DOMContentLoaded', renderRealisticFingerprintHeart);
+    setTimeout(renderRealisticFingerprintHeart, 100);
+
+    /* ==========================================================================
+       【声学引擎：三角钢琴触键和弦 + 手机双重物理触感 (iOS声学振膜 + 安卓马达)】
        ========================================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -350,24 +413,27 @@
       } catch(e) {}
     }
 
-    function playImpressionThudSound() {
+    // 手机双模物理触感脉冲：安卓马达 + iOS声学振膜微位移
+    function triggerPhoneHapticImpulse(pattern = [35]) {
+      // 1. 安卓物理马达
+      if ('vibrate' in navigator) {
+        try { navigator.vibrate(pattern); } catch(e) {}
+      }
+      // 2. 55Hz 声学极低频触觉脉冲 (扬声器声波物理微冲程，iPhone 同样能明显感受指尖微麻感)
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(140, now);
-        osc.frequency.exponentialRampToValueAtTime(45, now + 0.14);
-        gain.gain.setValueAtTime(0.65, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+        osc.frequency.setValueAtTime(55, now);
+        osc.frequency.exponentialRampToValueAtTime(30, now + 0.08);
+        gain.gain.setValueAtTime(0.95, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(now);
-        osc.stop(now + 0.14);
-
-        playAcousticPianoKey(349.23, now + 0.04, 0.45); // F4
-        playAcousticPianoKey(523.25, now + 0.08, 0.38); // C5
+        osc.stop(now + 0.08);
       } catch(e) {}
     }
 
@@ -441,7 +507,7 @@
     }
 
     /* ==========================================================================
-       【互动 1：YES / NO 和解问答机制 (100% 完整保留)】
+       【互动 1：YES / NO 问答机制 (100% 完整展现)】
        ========================================================================== */
     const runawaySection = document.getElementById('runawaySection');
     const runawayQuestion = document.getElementById('runawayQuestion');
@@ -471,6 +537,7 @@
       btnNo.style.display = 'none';
       btnYes.style.transform = 'scale(1.08)';
       playRomanticPianoChord();
+      triggerPhoneHapticImpulse([30, 40]);
       createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 50);
     });
 
@@ -478,36 +545,36 @@
        【互动 2：双人指纹合心 · 长按底部发光蔓延转红核心引擎】
        ========================================================================== */
     const dualThumbPad = document.getElementById('dualThumbPad');
-    const activeRedLayer = document.getElementById('activeRedLayer');
+    const activeCanvasEl = document.getElementById('fpActiveCanvas');
     const luminousWave = document.getElementById('luminousWave');
     const heartStatus = document.getElementById('heartStatusLabel');
     
     let isHeartCompleted = false;
     let holdTimer = null;
     let holdProgress = 0; // 0 ~ 100
-    const HOLD_DURATION = 1800; // 按住 1.8 秒满
-    const STEP_INTERVAL = 25; // 25ms 刷新一次
+    const HOLD_DURATION = 1800; // 长按 1.8 秒注满
+    const STEP_INTERVAL = 25;
 
     function updateGlowProgress(pct) {
-      // 1. 从底部向上切除遮罩 (inset Top: 100% -> 0%)
+      // 1. 从爱心底部自下而上推移遮罩 (inset Top: 100% -> 0%)
       const insetTop = Math.max(0, 100 - pct);
-      activeRedLayer.style.clipPath = `inset(${insetTop}% 0 0 0)`;
+      activeCanvasEl.style.clipPath = `inset(${insetTop}% 0 0 0)`;
 
-      // 2. 发光波峰线跟随向上推进 (0px -> -140px)
-      const moveDistance = (pct / 100) * 140;
+      // 2. 发光波峰线跟随向上推进 (0px -> -155px)
+      const moveDistance = (pct / 100) * 155;
       luminousWave.style.transform = `translateY(-${moveDistance}px)`;
     }
 
     function startHeartPress(e) {
       if (isHeartCompleted) return;
-      e.preventDefault();
       getAudioContext();
+
+      // 即刻唤醒触觉
+      triggerPhoneHapticImpulse([35]);
 
       luminousWave.style.opacity = '1';
       heartStatus.innerText = "✦ BREATHING WARMTH INTO OUR HEART... ✦";
       heartStatus.style.color = "#d4af37";
-
-      if (navigator.vibrate) navigator.vibrate([25]);
 
       clearInterval(holdTimer);
       holdTimer = setInterval(() => {
@@ -546,14 +613,19 @@
       heartStatus.innerText = "✦ TWO HEARTS IGNITED & MENDED IN RED ♡ ✦";
       heartStatus.style.color = "#c22d2d";
 
-      if (navigator.vibrate) navigator.vibrate([35, 60, 90]);
-      playImpressionThudSound();
+      // 达成震动与深沉钢琴尾韵
+      triggerPhoneHapticImpulse([40, 50, 90]);
+      
+      const ctx = getAudioContext();
+      const now = ctx.currentTime;
+      playAcousticPianoKey(349.23, now + 0.05, 0.45); // F4
+      playAcousticPianoKey(523.25, now + 0.1, 0.38);  // C5
 
       const rect = dualThumbPad.getBoundingClientRect();
       createGoldenUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
     }
 
-    // 绑定多端触控与指针事件
+    // 绑定多端触控与指针事件 (不拦截系统手势，保证安卓与 iOS 触感畅通)
     dualThumbPad.addEventListener('pointerdown', startHeartPress);
     window.addEventListener('pointerup', cancelHeartPress);
     window.addEventListener('pointercancel', cancelHeartPress);
