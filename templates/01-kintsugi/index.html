@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_real_heart_v15" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_exact_alamy_v16" />
 </head>
 <body>
 
@@ -148,7 +148,7 @@
           </div>
         </div>
 
-        <!-- 【原版和解问答：YES / NO 完整保留】 -->
+        <!-- 【原版和解问答：YES / NO 完整清晰展现】 -->
         <div class="runaway-section" id="runawaySection">
           <div class="runaway-question" id="runawayQuestion"></div>
           <div class="runaway-buttons-wrapper">
@@ -159,8 +159,8 @@
         </div>
 
         <!-- ==========================================================================
-             【专属高级巧思：双人指纹合心 · 长按底部发光蔓延转红】
-             1:1 复刻参考图 1 真实人体高密度肌理 · 纯西式高定
+             【专属高级巧思：双人指纹合心 · 1:1 还原参考图 1 真实肌理】
+             位于 YES/NO 正下方 · 初始仅有单指纹 · 纯西式高定
              ========================================================================== -->
         <div class="thumbprint-heart-altar">
           <div class="heart-altar-title">✦ THE DOUBLE THUMBPRINT HEART ✦</div>
@@ -169,22 +169,54 @@
           <div style="position:relative; display:inline-block;">
             
             <!-- 3D 拓印台容器 -->
-            <div class="dual-thumb-pad-stage" id="dualThumbPad" title="Press & hold to ignite our heart">
+            <div class="dual-thumb-pad-stage" id="dualThumbPad" title="Press & hold to ignite and seal in red">
               <div class="thumbprint-stack-box">
 
-                <!-- 1. 底层：左侧预设真墨炭黑指纹 + 右侧微光虚线引导 (Procedural Canvas) -->
-                <canvas class="fp-image fp-base-layer" id="fpBaseCanvas" width="350" height="314"></canvas>
+                <!-- 核心双指纹爱心 SVG (1:1 参考图生物纹理建模) -->
+                <svg viewBox="0 0 200 180" class="thumbprint-heart-svg">
+                  <defs>
+                    <!-- 参考图 1 的标准心形剪裁轮廓 -->
+                    <clipPath id="heartClip">
+                      <path d="M 100,165 C 100,165 24,120 22,65 C 20,32 50,18 80,30 C 92,35 100,48 100,48 C 100,48 108,35 120,30 C 150,18 180,32 178,65 C 176,120 100,165 100,165 Z" />
+                    </clipPath>
 
-                <!-- 2. 上层：自下而上蔓延的纯正朱砂红指纹层 (Procedural Canvas) -->
-                <canvas class="fp-image fp-active-layer" id="fpActiveCanvas" width="350" height="314"></canvas>
+                    <!-- 左拇指高密真实生物脊线 (倾斜 -25 度) -->
+                    <path id="leftThumbData" d="M72.7,74.5L72.4,75.0L72.4,75.6L72.4,76.2L72.6,76.8L72.8,77.4L73.2,78.0L73.6,78.5L74.1,78.8L74.6,79.1L75.2,79.2L75.7,79.2L76.2,79.1L76.7,78.9L77.0,78.5L77.3,78.0L77.4,77.4L77.4,76.8L77.2,76.2L76.9,75.6L76.6,75.0L76.2,74.5L75.7,74.1L75.2,73.8L74.6,73.6M69.4,73.1L68.8,74.1L68.8,75.2L68.8,76.4L69.1,77.6L69.6,78.7L70.4,79.8L71.2,80.7L72.2,81.4L73.2,81.9L74.4,82.2L75.4,82.2L76.5,81.9L77.4,81.5L78.2,80.8L78.7,79.8L78.9,78.7L78.8,77.6L78.4,76.4L77.8,75.2L77.1,74.1L76.4,73.1L75.4,72.4L74.4,71.7L73.3,71.3M66.1,71.6L65.2,73.2L65.1,74.9L65.2,76.6L65.7,78.4L66.4,80.0L67.6,81.6L68.8,83.0L70.3,84.1L71.8,84.8L73.5,85.2L75.2,85.2L76.7,84.8L78.1,84.1L79.3,83.1L80.1,81.7L80.4,80.1L80.2,78.4L79.6,76.6L78.7,74.9L77.7,73.2L76.6,71.6L75.1,70.6L73.5,69.6L71.9,69.0M62.8,70.1L61.7,72.2L61.5,74.5L61.6,76.8L62.2,79.1L63.2,81.4L64.7,83.4L66.4,85.2L68.4,86.7L70.5,87.7L72.7,88.2L74.9,88.2L77.0,87.7L78.8,86.8L80.4,85.4L81.5,83.6L81.9,81.4L81.7,79.2L80.8,76.9L79.6,74.6L78.2,72.3L76.7,70.2L74.8,68.8L72.7,67.5L70.6,66.7M59.6,68.7L58.1,71.3L57.9,74.1L58.0,77.0L58.8,79.9L60.0,82.7L61.9,85.2L64.0,87.5L66.5,89.3L69.1,90.6L71.9,91.2L74.6,91.2L77.2,90.6L79.5,89.5L81.5,87.8L82.8,85.5L83.4,82.8L83.1,79.9L82.0,77.1L80.5,74.2L78.8,71.4L76.9,68.8L74.5,67.0L71.9,65.4L69.3,64.4M56.3,67.2L54.6,70.3L54.2,73.7L54.4,77.2L55.3,80.7L56.9,84.1L59.0,87.1L61.6,89.7L64.6,92.0L67.8,93.5L71.1,94.2L74.3,94.2L77.5,93.5L80.2,92.1L82.6,90.1L84.2,87.4L84.8,84.1L84.5,80.7L83.2,77.3L81.4,73.8L79.3,70.5L77.1,67.3L74.2,65.3L71.1,63.3L67.9,62.1M53.0,65.7L51.0,69.4L50.6,73.3L50.8,77.4L51.9,81.4L53.7,85.4L56.2,88.9L59.2,92.0L62.7,94.6L66.4,96.4L70.2,97.2L74.0,97.2L77.7,96.4L80.9,94.8L83.7,92.4L85.6,89.3L86.3,85.4L85.9,81.5L84.4,77.4L82.3,73.5L79.9,69.6L77.2,65.9L73.9,63.5L70.3,61.2L66.6,59.8M49.7,64.2L47.5,68.5L47.0,73.0L47.2,77.6L48.5,82.2L50.5,86.7L53.3,90.7L56.8,94.2L60.8,97.2L65.1,99.2L69.4,100.2L73.7,100.2L78.0,99.2L81.6,97.5L84.8,94.7L86.9,91.2L87.8,86.8L87.4,82.3L85.6,77.6L83.1,73.1L80.4,68.7L77.4,64.5L73.6,61.8L69.5,59.1L65.3,57.5M46.5,62.7L43.9,67.5L43.4,72.6L43.6,77.8L45.0,83.0L47.3,88.0L50.5,92.5L54.4,96.5L58.9,99.8L63.7,102.1L68.6,103.2L73.4,103.2L78.2,102.1L82.3,100.1L85.8,97.0L88.3,93.1L89.2,88.1L88.8,83.0L86.8,77.8L84.0,72.7L81.0,67.8L77.6,63.1L73.3,60.0L68.7,57.0L64.0,55.2" />
 
-                <!-- 3. 发光波峰线 -->
+                    <!-- 右拇指高密真实生物脊线 (倾斜 +25 度) -->
+                    <path id="rightThumbData" d="M127.3,74.5L127.6,75.0L127.6,75.6L127.6,76.2L127.4,76.8L127.2,77.4L126.8,78.0L126.4,78.5L125.9,78.8L125.4,79.1L124.8,79.2L124.3,79.2L123.8,79.1L123.3,78.9L123.0,78.5L122.7,78.0L122.6,77.4L122.6,76.8L122.8,76.2L123.1,75.6L123.4,75.0L123.8,74.5L124.3,74.1L124.8,73.8L125.4,73.6M130.6,73.1L131.2,74.1L131.2,75.2L131.2,76.4L130.9,77.6L130.4,78.7L129.6,79.8L128.8,80.7L127.8,81.4L126.8,81.9L125.6,82.2L124.6,82.2L123.5,81.9L122.6,81.5L121.8,80.8L121.3,79.8L121.1,78.7L121.2,77.6L121.6,76.4L122.2,75.2L122.9,74.1L123.6,73.1L124.6,72.4L125.6,71.7L126.7,71.3M133.9,71.6L134.8,73.2L134.9,74.9L134.8,76.6L134.3,78.4L133.6,80.0L132.4,81.6L131.2,83.0L129.7,84.1L128.2,84.8L126.5,85.2L124.8,85.2L123.3,84.8L121.9,84.1L120.7,83.1L119.9,81.7L119.6,80.1L119.8,78.4L120.4,76.6L121.3,74.9L122.3,73.2L123.4,71.6L124.9,70.6L126.5,69.6L128.1,69.0M137.2,70.1L138.3,72.2L138.5,74.5L138.4,76.8L137.8,79.1L136.8,81.4L135.3,83.4L133.6,85.2L131.6,86.7L129.5,87.7L127.3,88.2L125.1,88.2L123.0,87.7L121.2,86.8L119.6,85.4L118.5,83.6L118.1,81.4L118.3,79.2L119.2,76.9L120.4,74.6L121.8,72.3L123.3,70.2L125.2,68.8L127.3,67.5L129.4,66.7M140.4,68.7L141.9,71.3L142.1,74.1L142.0,77.0L141.2,79.9L140.0,82.7L138.1,85.2L136.0,87.5L133.5,89.3L130.9,90.6L128.1,91.2L125.4,91.2L122.8,90.6L120.5,89.5L118.5,87.8L117.2,85.5L116.6,82.8L116.9,79.9L118.0,77.1L119.5,74.2L121.2,71.4L123.1,68.8L125.5,67.0L128.1,65.4L130.7,64.4M143.7,67.2L145.4,70.3L145.8,73.7L145.6,77.2L144.7,80.7L143.1,84.1L141.0,87.1L138.4,89.7L135.4,92.0L132.2,93.5L128.9,94.2L125.7,94.2L122.5,93.5L119.8,92.1L117.4,90.1L115.8,87.4L115.2,84.1L115.5,80.7L116.8,77.3L118.6,73.8L120.7,70.5L122.9,67.3L125.8,65.3L128.9,63.3L132.1,62.1M147.0,65.7L149.0,69.4L149.4,73.3L149.2,77.4L148.1,81.4L146.3,85.4L143.8,88.9L140.8,92.0L137.3,94.6L133.6,96.4L129.8,97.2L126.0,97.2L122.3,96.4L119.1,94.8L116.3,92.4L114.4,89.3L113.7,85.4L114.1,81.5L115.6,77.4L117.7,73.5L120.1,69.6L122.8,65.9L126.1,63.5L129.7,61.2L133.4,59.8M150.3,64.2L152.5,68.5L153.0,73.0L152.8,77.6L151.5,82.2L149.5,86.7L146.7,90.7L143.2,94.2L139.2,97.2L134.9,99.2L130.6,100.2L126.3,100.2L122.0,99.2L118.4,97.5L115.2,94.7L113.1,91.2L112.2,86.8L112.6,82.3L114.4,77.6L116.9,73.1L119.6,68.7L122.6,64.5L126.4,61.8L130.5,59.1L134.7,57.5M153.5,62.7L156.1,67.5L156.6,72.6L156.4,77.8L155.0,83.0L152.7,88.0L149.5,92.5L145.6,96.5L141.1,99.8L136.3,102.1L131.4,103.2L126.6,103.2L121.8,102.1L117.7,100.1L114.2,97.0L111.7,93.1L110.8,88.1L111.2,83.0L113.2,77.8L116.0,72.7L119.0,67.8L122.4,63.1L126.7,60.0L131.3,57.0L136.0,55.2" />
+                  </defs>
+
+                  <!-- 裁剪在心形内的双指纹结构 -->
+                  <g clip-path="url(#heartClip)">
+                    
+                    <!-- 1. 底层：初始状态【仅显示左侧送信人的墨黑指纹】 -->
+                    <g id="layerBlackBase">
+                      <!-- 左侧送信人真墨炭黑指纹 -->
+                      <use href="#leftThumbData" class="ridge-ink-black" />
+                      <!-- 右侧收信人指纹初始完全隐藏 (opacity: 0) -->
+                      <use href="#rightThumbData" class="ridge-ink-black" id="rightBlackPrint" />
+                    </g>
+
+                    <!-- 2. 激活层：自底部向上蔓延的饱满朱砂红指纹层 (参考图 1 效果) -->
+                    <g id="crimsonActiveLayer">
+                      <use href="#leftThumbData" class="ridge-ink-red" />
+                      <use href="#rightThumbData" class="ridge-ink-red" />
+                    </g>
+                  </g>
+
+                  <!-- 右侧空白槽引导虚线 (提示读信人按此) -->
+                  <path id="rightSlotGuide" d="M 100,48 C 108,35 120,30 C 150,18 180,32 178,65 C 176,120 100,165" 
+                        fill="none" stroke="#d4af37" stroke-width="1.6" stroke-dasharray="4,4" opacity="0.65" />
+                </svg>
+
+                <!-- 随长按自底向上推移的金红发光波前锋 -->
                 <div class="fp-glow-wavefront" id="luminousWave"></div>
 
               </div>
             </div>
 
-            <!-- 纯西式官方和解印章 (零中文) -->
+            <!-- 纯西式官方和解印章 (100% 欧美西方排版 · 零中文) -->
             <div class="covenant-official-stamp" id="covenantStamp">
               <span>OFFICIAL</span>
               <span>PLEDGE</span>
@@ -200,7 +232,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_real_heart_v15"></script>
+  <script src="data.js?v=kintsugi_exact_alamy_v16"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -212,125 +244,6 @@
       document.getElementById('letterBody').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
       document.getElementById('letterClosing').style.fontFamily = `"${LETTER_DATA.fontType}", Georgia, serif`;
     }
-
-    /* ==========================================================================
-       【高精度解剖级人体双指纹生成引擎（1:1 复刻参考图 1）】
-       ========================================================================== */
-    function renderRealisticFingerprintHeart() {
-      const baseCanvas = document.getElementById('fpBaseCanvas');
-      const activeCanvas = document.getElementById('fpActiveCanvas');
-      if (!baseCanvas || !activeCanvas) return;
-
-      const bCtx = baseCanvas.getContext('2d');
-      const aCtx = activeCanvas.getContext('2d');
-      const W = baseCanvas.width;
-      const H = baseCanvas.height;
-
-      // 清空
-      bCtx.clearRect(0, 0, W, H);
-      aCtx.clearRect(0, 0, W, H);
-
-      // 单个拇指高密脊线绘制函数 (52 道细密脊线 + 真实起伏与微断点)
-      function drawThumbRings(ctx, cx, cy, tiltDeg, strokeColor, lineWidth = 2.0, isGuide = false) {
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate((tiltDeg * Math.PI) / 180);
-        ctx.strokeStyle = strokeColor;
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-
-        const numRings = isGuide ? 24 : 52;
-        const step = isGuide ? 2 : 1;
-
-        for (let r = 2; r < numRings; r += step) {
-          const rx = r * 2.75 + 3.0;
-          const ry = r * 3.95 + 4.5;
-          const numPts = 120 + r * 3;
-
-          ctx.beginPath();
-          let isDrawing = true;
-          let cutStart = (r * 17) % (numPts - 25);
-          let cutLen = 6 + (r % 5);
-
-          for (let p = 0; p <= numPts; p++) {
-            const t = (p / numPts) * Math.PI * 2;
-            // 真实人体指纹微起伏扰动
-            const wobble = 0.7 * Math.sin(5 * t + r) + 0.4 * Math.cos(9 * t + r * 1.5) + 0.25 * Math.sin(17 * t);
-            const asymY = 1.0 + 0.12 * Math.sin(t);
-            const asymX = 1.0 - 0.06 * Math.cos(t);
-
-            const lx = (rx + wobble) * Math.cos(t) * asymX;
-            const ly = (ry + wobble) * Math.sin(t) * asymY;
-
-            // 偶尔产生真实断裂（Minutiae 细节点）
-            if (!isGuide && r % 4 === 1 && p >= cutStart && p <= cutStart + cutLen) {
-              if (isDrawing) {
-                isDrawing = false;
-              }
-              continue;
-            }
-
-            if (!isDrawing) {
-              ctx.moveTo(lx, ly);
-              isDrawing = true;
-            } else if (p === 0) {
-              ctx.moveTo(lx, ly);
-            } else {
-              ctx.lineTo(lx, ly);
-            }
-          }
-          ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      // 心形边缘自然吃墨蒙版
-      function applyHeartClip(ctx) {
-        ctx.beginPath();
-        // 参数心形方程
-        const pts = 260;
-        for (let i = 0; i <= pts; i++) {
-          const t = (i / pts) * Math.PI * 2;
-          const bNoise = 1.0 + 0.015 * (Math.sin(23 * t) + Math.cos(37 * t));
-          const hx = 175 + 16 * Math.pow(Math.sin(t), 3) * 8.6 * bNoise;
-          const hy = 156 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 8.6 * bNoise;
-          if (i === 0) ctx.moveTo(hx, hy);
-          else ctx.lineTo(hx, hy);
-        }
-        ctx.closePath();
-        ctx.clip();
-      }
-
-      // 1. 绘制底层 (Base): 左侧真墨炭黑 (#25221f)，右侧浅金引导线
-      bCtx.save();
-      applyHeartClip(bCtx);
-      // 左拇指：炭墨深黑
-      drawThumbRings(bCtx, 128, 142, -26, '#23201d', 1.85);
-      // 右拇指：微弱金痕引导
-      drawThumbRings(bCtx, 222, 142, 26, 'rgba(197, 160, 89, 0.35)', 1.5, true);
-      bCtx.restore();
-
-      // 2. 绘制激活层 (Active): 左右两枚拇指全为纯正朱砂红 (#c22d2d)，重叠区域更深，中央金缮熔接
-      aCtx.save();
-      applyHeartClip(aCtx);
-      // 左拇指：朱砂深红
-      drawThumbRings(aCtx, 128, 142, -26, '#c22d2d', 1.95);
-      // 右拇指：朱砂深红
-      drawThumbRings(aCtx, 222, 142, 26, '#c22d2d', 1.95);
-      // 中央重叠增强与微金光
-      aCtx.strokeStyle = 'rgba(255, 215, 0, 0.45)';
-      aCtx.lineWidth = 2.0;
-      aCtx.beginPath();
-      aCtx.moveTo(175, 55);
-      aCtx.quadraticCurveTo(172, 115, 175, 150);
-      aCtx.stroke();
-      aCtx.restore();
-    }
-
-    // 页面载入时立即绘制高精指纹
-    window.addEventListener('DOMContentLoaded', renderRealisticFingerprintHeart);
-    setTimeout(renderRealisticFingerprintHeart, 100);
 
     /* ==========================================================================
        【声学引擎：三角钢琴触键和弦 + 手机双重物理触感 (iOS声学振膜 + 安卓马达)】
@@ -413,21 +326,21 @@
       } catch(e) {}
     }
 
-    // 手机双模物理触感脉冲：安卓马达 + iOS声学振膜微位移
+    // 手机双模触感：安卓物理马达 + iPhone声学极低频微冲程 (真切指尖触感)
     function triggerPhoneHapticImpulse(pattern = [35]) {
       // 1. 安卓物理马达
-      if ('vibrate' in navigator) {
-        try { navigator.vibrate(pattern); } catch(e) {}
+      if (window.navigator && window.navigator.vibrate) {
+        try { window.navigator.vibrate(pattern); } catch(e) {}
       }
-      // 2. 55Hz 声学极低频触觉脉冲 (扬声器声波物理微冲程，iPhone 同样能明显感受指尖微麻感)
+      // 2. 58Hz 声学极低频触觉脉冲 (扬声器声波物理微冲程，iPhone 同样能明显感受指尖微麻感)
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(55, now);
-        osc.frequency.exponentialRampToValueAtTime(30, now + 0.08);
+        osc.frequency.setValueAtTime(58, now);
+        osc.frequency.exponentialRampToValueAtTime(32, now + 0.08);
         gain.gain.setValueAtTime(0.95, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
         osc.connect(gain);
@@ -542,10 +455,12 @@
     });
 
     /* ==========================================================================
-       【互动 2：双人指纹合心 · 长按底部发光蔓延转红核心引擎】
+       【互动 2：双人指纹合心 · 初始单黑指纹 -> 长按底部发光蔓延转红】
        ========================================================================== */
     const dualThumbPad = document.getElementById('dualThumbPad');
-    const activeCanvasEl = document.getElementById('fpActiveCanvas');
+    const rightBlackPrint = document.getElementById('rightBlackPrint');
+    const rightSlotGuide = document.getElementById('rightSlotGuide');
+    const crimsonActiveLayer = document.getElementById('crimsonActiveLayer');
     const luminousWave = document.getElementById('luminousWave');
     const heartStatus = document.getElementById('heartStatusLabel');
     
@@ -558,7 +473,7 @@
     function updateGlowProgress(pct) {
       // 1. 从爱心底部自下而上推移遮罩 (inset Top: 100% -> 0%)
       const insetTop = Math.max(0, 100 - pct);
-      activeCanvasEl.style.clipPath = `inset(${insetTop}% 0 0 0)`;
+      crimsonActiveLayer.style.clipPath = `inset(${insetTop}% 0 0 0)`;
 
       // 2. 发光波峰线跟随向上推进 (0px -> -155px)
       const moveDistance = (pct / 100) * 155;
@@ -569,7 +484,11 @@
       if (isHeartCompleted) return;
       getAudioContext();
 
-      // 即刻唤醒触觉
+      // 1. 按下瞬间：右侧指纹在读者手指下显现，虚线引导淡出
+      rightBlackPrint.style.opacity = '1';
+      rightSlotGuide.style.opacity = '0';
+
+      // 2. 触发即时物理触感
       triggerPhoneHapticImpulse([35]);
 
       luminousWave.style.opacity = '1';
@@ -591,13 +510,15 @@
       if (isHeartCompleted) return;
       clearInterval(holdTimer);
 
-      // 若未蓄满松手，光芒渐次退回底部
+      // 若未蓄满松手，光芒渐次退回底部，右侧指纹隐去恢复等待
       holdTimer = setInterval(() => {
         holdProgress -= 5;
         if (holdProgress <= 0) {
           holdProgress = 0;
           clearInterval(holdTimer);
           luminousWave.style.opacity = '0';
+          rightBlackPrint.style.opacity = '0';
+          rightSlotGuide.style.opacity = '0.65';
           heartStatus.innerText = "✦ HOLD THUMB ON HEART TO IGNITE (1.8s) ✦";
           heartStatus.style.color = "#9e7d3b";
         }
@@ -610,7 +531,7 @@
       isHeartCompleted = true;
 
       dualThumbPad.classList.add('is-completed');
-      heartStatus.innerText = "✦ TWO HEARTS IGNITED & MENDED IN RED ♡ ✦";
+      heartStatus.innerText = "✦ TWO HEARTS JOINED & MENDED IN RED ♡ ✦";
       heartStatus.style.color = "#c22d2d";
 
       // 达成震动与深沉钢琴尾韵
@@ -625,10 +546,15 @@
       createGoldenUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
     }
 
-    // 绑定多端触控与指针事件 (不拦截系统手势，保证安卓与 iOS 触感畅通)
-    dualThumbPad.addEventListener('pointerdown', startHeartPress);
-    window.addEventListener('pointerup', cancelHeartPress);
-    window.addEventListener('pointercancel', cancelHeartPress);
+    // 绑定多端触控与指针事件 (不拦截默认行为，确保移动端马达与触感顺畅)
+    dualThumbPad.addEventListener('touchstart', (e) => {
+      startHeartPress(e);
+    }, { passive: true });
+    window.addEventListener('touchend', cancelHeartPress);
+    window.addEventListener('touchcancel', cancelHeartPress);
+
+    dualThumbPad.addEventListener('mousedown', startHeartPress);
+    window.addEventListener('mouseup', cancelHeartPress);
 
     // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
