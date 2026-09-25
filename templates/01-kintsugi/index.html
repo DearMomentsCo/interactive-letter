@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_optical_gilded_v7" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_grand_piano_v8" />
 </head>
 <body>
 
@@ -164,7 +164,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_optical_gilded_v7"></script>
+  <script src="data.js?v=kintsugi_grand_piano_v8"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -178,7 +178,7 @@
     }
 
     /* ==========================================================================
-       【相册引擎 + 暗房微溶光影与金边呼吸协同逻辑】
+       【相册引擎 + 原声高定三角钢琴触键和弦音效】
        ========================================================================== */
     const photoCard = document.getElementById('photoCard');
     const photoCardFront = document.getElementById('photoCardFront');
@@ -194,7 +194,7 @@
     const photosList = LETTER_DATA.photos || [];
     let isTransitioning = false;
 
-    // Web Audio 空灵纯净的水晶磬音
+    // Web Audio 音频上下文
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -206,22 +206,84 @@
       return audioCtx;
     }
 
-    function playCrystalChime() {
+    // 单个钢琴按键声学物理合成器 (琴毡击打 + 谐波衰减 + 共鸣箱滤波)
+    function playAcousticPianoKey(freq, startTime, velocity = 0.5) {
+      const ctx = getAudioContext();
+
+      // 1. 琴槌击弦瞬态噪波 (Hammer Felt Impact)
+      const hammerDuration = 0.012;
+      const bufferSize = Math.floor(ctx.sampleRate * hammerDuration);
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.25));
+      }
+      const hammerSource = ctx.createBufferSource();
+      hammerSource.buffer = noiseBuffer;
+      const hammerFilter = ctx.createBiquadFilter();
+      hammerFilter.type = 'lowpass';
+      hammerFilter.frequency.setValueAtTime(1400, startTime);
+      const hammerGain = ctx.createGain();
+      hammerGain.gain.setValueAtTime(velocity * 0.14, startTime);
+      hammerGain.gain.exponentialRampToValueAtTime(0.0001, startTime + hammerDuration);
+      hammerSource.connect(hammerFilter);
+      hammerFilter.connect(hammerGain);
+      hammerGain.connect(ctx.destination);
+      hammerSource.start(startTime);
+
+      // 2. 真实钢琴琴弦泛音列 (Fundamental + Overtones with natural damping)
+      const partials = [
+        { mult: 1, gain: 1.0, decay: 2.3 },
+        { mult: 2, gain: 0.52, decay: 1.6 },
+        { mult: 3, gain: 0.26, decay: 1.1 },
+        { mult: 4, gain: 0.12, decay: 0.7 },
+        { mult: 5, gain: 0.05, decay: 0.42 }
+      ];
+
+      // 琴箱共鸣低通滤波
+      const bodyFilter = ctx.createBiquadFilter();
+      bodyFilter.type = 'lowpass';
+      bodyFilter.frequency.setValueAtTime(freq * 3.8, startTime);
+      bodyFilter.frequency.exponentialRampToValueAtTime(freq * 1.3, startTime + 2.0);
+
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(velocity * 0.22, startTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 2.3);
+
+      bodyFilter.connect(noteGain);
+      noteGain.connect(ctx.destination);
+
+      partials.forEach(p => {
+        // 三弦微失谐 (Natural Piano Chorus Effect)
+        [-0.8, 0.8].forEach(detune => {
+          const osc = ctx.createOscillator();
+          const pGain = ctx.createGain();
+
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq * p.mult, startTime);
+          osc.detune.setValueAtTime(detune, startTime);
+
+          pGain.gain.setValueAtTime(p.gain * 0.5, startTime);
+          pGain.gain.exponentialRampToValueAtTime(0.0001, startTime + p.decay);
+
+          osc.connect(pGain);
+          pGain.connect(bodyFilter);
+
+          osc.start(startTime);
+          osc.stop(startTime + p.decay);
+        });
+      });
+    }
+
+    // 浪漫印象派大七度钢琴轻拂和弦 (C5 ➔ E5 ➔ B5)
+    function playRomanticPianoChord() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
-
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(528, now);
-        osc.frequency.exponentialRampToValueAtTime(1056, now + 0.16);
-        gain.gain.setValueAtTime(0.18, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 1.8);
+        // 柔和琶音掠过琴键，优雅高贵
+        playAcousticPianoKey(523.25, now, 0.42);         // C5
+        playAcousticPianoKey(659.25, now + 0.035, 0.38); // E5
+        playAcousticPianoKey(987.77, now + 0.070, 0.46); // B5 (空灵的大七度音)
       } catch(e) {}
     }
 
@@ -241,12 +303,13 @@
         this.classList.toggle('is-flipped');
       });
 
-      // 核心交互：金箔边框呼吸泛芒 + 相片暗房光影微溶 (0.85s)
+      // 核心交互：金箔边框呼吸泛芒 + 相片暗房光影微溶 + 治愈钢琴和弦 (0.85s)
       function transitionToPhoto(nextIndex) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        playCrystalChime();
+        // 奏响治愈钢琴和弦
+        playRomanticPianoChord();
 
         // 1. 金箔边框开始呼吸微亮，照片景深微溶淡出 (0ms)
         photoCardFront.classList.add('is-gold-breathing');
