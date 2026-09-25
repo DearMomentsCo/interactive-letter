@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_grand_piano_v8" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_flagship_v9" />
 </head>
 <body>
 
@@ -38,7 +38,7 @@
   <div class="letter-viewport" data-theme="kintsugi">
     <div class="letter-container" id="letterContainer">
       
-      <!-- 1. 信封 -->
+      <!-- 1. 信封 (专属巧思：红金双色真丝水引绳结) -->
       <div class="envelope-wrapper" id="envelopeWrapper">
         <div class="envelope-body">
           <span class="envelope-corner-star star-tl">✦</span>
@@ -49,15 +49,28 @@
 
         <div class="envelope-flap"></div>
 
-        <div class="wax-seal-wrapper">
-          <div class="wax-seal" id="waxSealBtn">
-            <svg class="seal-heart-svg" viewBox="0 0 24 24">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </div>
+        <!-- 水引绳结解印器 -->
+        <div class="mizuhiki-cord-wrapper" id="mizuhikiBtn" title="Untie Mizuhiki Knot to Unseal">
+          <svg viewBox="0 0 140 80" class="mizuhiki-cord-svg">
+            <defs>
+              <linearGradient id="goldCordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffe082"/>
+                <stop offset="50%" stop-color="#ffd700"/>
+                <stop offset="100%" stop-color="#b8860b"/>
+              </linearGradient>
+            </defs>
+            <!-- 贯穿两端的水引结绳条带 -->
+            <path d="M 0,40 Q 50,42 70,40 T 140,40" stroke="url(#goldCordGrad)" stroke-width="2.8" fill="none"/>
+            <path d="M 0,44 Q 50,46 70,44 T 140,44" stroke="#b82626" stroke-width="2" fill="none"/>
+            <!-- 结切（Musubikiri）中心闭环结 -->
+            <path d="M 50,40 C 42,20 62,15 70,30 C 78,15 98,20 90,40 C 98,60 78,65 70,50 C 62,65 42,60 50,40 Z" fill="none" stroke="url(#goldCordGrad)" stroke-width="3"/>
+            <path d="M 54,42 C 48,25 64,22 70,33 C 76,22 92,25 86,42 C 92,58 76,60 70,49 C 64,60 48,58 54,42 Z" fill="none" stroke="#b82626" stroke-width="2"/>
+            <!-- 核心金圈封物 -->
+            <circle cx="70" cy="41" r="5" fill="#ffd700"/>
+          </svg>
         </div>
 
-        <div class="envelope-open-hint">✦ TAP SEAL TO UNSEAL ✦</div>
+        <div class="envelope-open-hint">✦ UNTIE MIZUHIKI TO UNSEAL ✦</div>
       </div>
 
       <!-- 2. 信纸主体 -->
@@ -78,12 +91,39 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
+        <!-- 【专属巧思 2：掌心温存·长按 3 秒注金愈合仪式】 -->
+        <div class="golden-touch-altar">
+          <div class="altar-guide-text" id="touchGuideText">✦ HOLD TOUCH TO MEND CRACKS WITH GOLD (3s) ✦</div>
+          <div class="touch-vessel-tablet" id="touchTablet">
+            <!-- 环形进度圈 -->
+            <svg class="touch-progress-ring" viewBox="0 0 132 132">
+              <circle class="progress-track" cx="66" cy="66" r="60"/>
+              <circle class="progress-bar-gold" id="touchProgressBar" cx="66" cy="66" r="60"/>
+            </svg>
+            <!-- 裂纹瓷心 (金漆流淌) -->
+            <svg viewBox="0 0 100 100" class="vessel-heart-svg">
+              <defs>
+                <linearGradient id="goldVeinFlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff5c0" />
+                  <stop offset="50%" stop-color="#ffd700" />
+                  <stop offset="100%" stop-color="#c59b27" />
+                </linearGradient>
+              </defs>
+              <!-- 陶盘底心 -->
+              <path d="M 50,22 C 32,8 8,24 16,52 C 22,72 50,86 50,86 C 50,86 78,72 84,52 C 92,24 68,8 50,22 Z" fill="#1e1c18" stroke="#544738" stroke-width="2"/>
+              <!-- 裂缝路径 (长按时由短变长充盈) -->
+              <path class="vein-stream" id="vein1" d="M 50,22 Q 42,42 50,56 T 50,86" stroke="url(#goldVeinFlow)" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path class="vein-stream" id="vein2" d="M 28,34 Q 42,42 50,56" stroke="url(#goldVeinFlow)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <path class="vein-stream" id="vein3" d="M 72,36 Q 58,48 50,56" stroke="url(#goldVeinFlow)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+
         <!-- 【大画幅相册：金边呼吸微芒 + 暗房光影微溶】 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
             <div class="photo-flip-inner">
               <div class="photo-card-front" id="photoCardFront">
-                <!-- 漫反射光晕底衬 -->
                 <div class="photo-ambient-blur" id="photoAmbientBlur"></div>
                 <img id="frontPhotoImg" src="" alt="Memory Photo" />
               </div>
@@ -150,21 +190,51 @@
           </div>
         </div>
 
-        <!-- 逃跑互动问答 -->
-        <div class="runaway-section" id="runawaySection">
-          <div class="runaway-question" id="runawayQuestion"></div>
-          <div class="runaway-buttons-wrapper">
-            <button class="btn-yes" id="btnYes">Yes ♡</button>
-            <button class="btn-no" id="btnNo">No</button>
+        <!-- 【专属巧思 3：双人金箔指纹合印·正式和解公约】 -->
+        <div class="reconciliation-covenant-box" id="covenantSection">
+          <div class="covenant-title">✦ PACT OF RECONCILIATION ✦</div>
+          <div class="covenant-subtitle">"Mended with gold, stronger and more precious than before."</div>
+          
+          <div class="fingerprint-altar-row">
+            <!-- 写信人的金指纹 -->
+            <div class="fingerprint-slot">
+              <div class="print-pad sender-pad">
+                <svg viewBox="0 0 60 80" class="sender-print-svg">
+                  <!-- 雅致金指纹纹理 -->
+                  <path d="M30,10 C18,10 12,22 12,38 C12,54 20,68 30,70 C40,68 48,54 48,38 C48,22 42,10 30,10 Z M30,18 C38,18 42,26 42,38 C42,50 36,62 30,64 C24,62 18,50 18,38 C18,26 22,18 30,18 Z" fill="none" stroke="#d4af37" stroke-width="1.6"/>
+                  <path d="M30,26 C34,26 36,32 36,38 C36,44 33,54 30,56 C27,54 24,44 24,38 C24,32 26,26 30,26 Z" fill="none" stroke="#ffd700" stroke-width="1.8"/>
+                </svg>
+              </div>
+              <div class="print-signer-name">SARAH ♡</div>
+            </div>
+
+            <!-- 中央金缮心型印痕 -->
+            <div class="covenant-fused-seam" id="covenantFusedSeam">✦</div>
+
+            <!-- 收信人捺印点 -->
+            <div class="fingerprint-slot">
+              <div class="print-pad recipient-pad" id="recipientPrintPad" title="Tap to Seal Covenant">
+                <svg viewBox="0 0 60 80" class="recipient-print-svg" id="recipientPrintSvg">
+                  <path d="M30,10 C18,10 12,22 12,38 C12,54 20,68 30,70 C40,68 48,54 48,38 C48,22 42,10 30,10 Z M30,18 C38,18 42,26 42,38 C42,50 36,62 30,64 C24,62 18,50 18,38 C18,26 22,18 30,18 Z" fill="none" stroke="#ffd700" stroke-width="1.8"/>
+                  <path d="M30,26 C34,26 36,32 36,38 C36,44 33,54 30,56 C27,54 24,44 24,38 C24,32 26,26 30,26 Z" fill="none" stroke="#ffbe0b" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="print-signer-name" id="recipientSignerTag">TAP TO SEAL</div>
+            </div>
           </div>
-          <div class="runaway-success-modal" id="runawaySuccessModal" style="display:none;"></div>
+
+          <!-- 朱砂篆刻印章 -->
+          <div class="covenant-vermilion-seal" id="vermilionSeal">
+            永修<br/>旧好
+          </div>
         </div>
+
       </article>
 
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_grand_piano_v8"></script>
+  <script src="data.js?v=kintsugi_flagship_v9"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -178,23 +248,8 @@
     }
 
     /* ==========================================================================
-       【相册引擎 + 原声高定三角钢琴触键和弦音效】
+       【声学引擎：原声三角钢琴和弦 + 治愈金钵音 + 朱砂印章沉实音】
        ========================================================================== */
-    const photoCard = document.getElementById('photoCard');
-    const photoCardFront = document.getElementById('photoCardFront');
-    const frontImg = document.getElementById('frontPhotoImg');
-    const ambientBlur = document.getElementById('photoAmbientBlur');
-    const backCaption = document.getElementById('backCaptionText');
-    const navControls = document.getElementById('photoNavControls');
-    const pageIndicator = document.getElementById('photoPageIndicator');
-    const prevBtn = document.getElementById('prevPhotoBtn');
-    const nextBtn = document.getElementById('nextPhotoBtn');
-
-    let currentPhotoIdx = 0;
-    const photosList = LETTER_DATA.photos || [];
-    let isTransitioning = false;
-
-    // Web Audio 音频上下文
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -206,11 +261,9 @@
       return audioCtx;
     }
 
-    // 单个钢琴按键声学物理合成器 (琴毡击打 + 谐波衰减 + 共鸣箱滤波)
+    // 浪漫德彪西三角钢琴触键琶音 (C5-E5-B5)
     function playAcousticPianoKey(freq, startTime, velocity = 0.5) {
       const ctx = getAudioContext();
-
-      // 1. 琴槌击弦瞬态噪波 (Hammer Felt Impact)
       const hammerDuration = 0.012;
       const bufferSize = Math.floor(ctx.sampleRate * hammerDuration);
       const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
@@ -231,16 +284,13 @@
       hammerGain.connect(ctx.destination);
       hammerSource.start(startTime);
 
-      // 2. 真实钢琴琴弦泛音列 (Fundamental + Overtones with natural damping)
       const partials = [
         { mult: 1, gain: 1.0, decay: 2.3 },
         { mult: 2, gain: 0.52, decay: 1.6 },
         { mult: 3, gain: 0.26, decay: 1.1 },
-        { mult: 4, gain: 0.12, decay: 0.7 },
-        { mult: 5, gain: 0.05, decay: 0.42 }
+        { mult: 4, gain: 0.12, decay: 0.7 }
       ];
 
-      // 琴箱共鸣低通滤波
       const bodyFilter = ctx.createBiquadFilter();
       bodyFilter.type = 'lowpass';
       bodyFilter.frequency.setValueAtTime(freq * 3.8, startTime);
@@ -254,38 +304,186 @@
       noteGain.connect(ctx.destination);
 
       partials.forEach(p => {
-        // 三弦微失谐 (Natural Piano Chorus Effect)
         [-0.8, 0.8].forEach(detune => {
           const osc = ctx.createOscillator();
           const pGain = ctx.createGain();
-
           osc.type = 'sine';
           osc.frequency.setValueAtTime(freq * p.mult, startTime);
           osc.detune.setValueAtTime(detune, startTime);
-
           pGain.gain.setValueAtTime(p.gain * 0.5, startTime);
           pGain.gain.exponentialRampToValueAtTime(0.0001, startTime + p.decay);
-
           osc.connect(pGain);
           pGain.connect(bodyFilter);
-
           osc.start(startTime);
           osc.stop(startTime + p.decay);
         });
       });
     }
 
-    // 浪漫印象派大七度钢琴轻拂和弦 (C5 ➔ E5 ➔ B5)
     function playRomanticPianoChord() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
-        // 柔和琶音掠过琴键，优雅高贵
         playAcousticPianoKey(523.25, now, 0.42);         // C5
         playAcousticPianoKey(659.25, now + 0.035, 0.38); // E5
-        playAcousticPianoKey(987.77, now + 0.070, 0.46); // B5 (空灵的大七度音)
+        playAcousticPianoKey(987.77, now + 0.070, 0.46); // B5
       } catch(e) {}
     }
+
+    // 528Hz 金缮愈合频率金钵音
+    function playMendedChime() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(528, now);
+        osc.frequency.exponentialRampToValueAtTime(1056, now + 0.18);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 2.4);
+      } catch(e) {}
+    }
+
+    // 朱砂印章盖落沉木声 (Stamp Thud)
+    function playSealStampSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(120, now);
+        osc.frequency.exponentialRampToValueAtTime(30, now + 0.12);
+        gain.gain.setValueAtTime(0.7, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } catch(e) {}
+    }
+
+    /* ==========================================================================
+       【交互 1：水引真丝金结解印开箱】
+       ========================================================================== */
+    const container = document.getElementById('letterContainer');
+    const mizuhikiBtn = document.getElementById('mizuhikiBtn');
+    let isLetterOpened = false;
+
+    mizuhikiBtn.addEventListener('click', (e) => {
+      if (isLetterOpened) return;
+      isLetterOpened = true;
+
+      getAudioContext();
+      playRomanticPianoChord();
+      createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight / 2, 45);
+
+      mizuhikiBtn.style.opacity = '0';
+      mizuhikiBtn.style.transform = 'translate(-50%, -50%) scale(1.2)';
+
+      setTimeout(() => {
+        container.classList.add('is-opened');
+        if (LETTER_DATA.audioUrl) audio.play().catch(() => {});
+        if (LETTER_DATA.enableScratch) initScratchCard();
+        startSmartTypewriter(LETTER_DATA.body);
+      }, 400);
+    });
+
+    /* ==========================================================================
+       【交互 2：长按 3 秒注金愈合仪式】
+       ========================================================================== */
+    const touchTablet = document.getElementById('touchTablet');
+    const progressBar = document.getElementById('touchProgressBar');
+    const guideText = document.getElementById('touchGuideText');
+    const veins = [document.getElementById('vein1'), document.getElementById('vein2'), document.getElementById('vein3')];
+
+    let pressTimer = null;
+    let pressStartTime = 0;
+    const REQUIRED_PRESS_TIME = 2800; // 约 2.8 秒充满
+    let isMendedCompleted = false;
+
+    function startPressing(e) {
+      if (isMendedCompleted) return;
+      e.preventDefault();
+      getAudioContext();
+
+      touchTablet.classList.add('is-pressing');
+      pressStartTime = Date.now();
+
+      // 手机轻微触觉反馈
+      if (navigator.vibrate) navigator.vibrate([20]);
+
+      pressTimer = setInterval(() => {
+        const elapsed = Date.now() - pressStartTime;
+        const progress = Math.min(elapsed / REQUIRED_PRESS_TIME, 1);
+
+        // 环形进度条前移 (396 -> 0)
+        progressBar.style.strokeDashoffset = 396 * (1 - progress);
+
+        // 裂痕金漆流淌充盈 (200 -> 0)
+        veins.forEach(v => {
+          v.style.strokeDashoffset = 200 * (1 - progress);
+        });
+
+        if (progress >= 1) {
+          finishMending();
+        }
+      }, 30);
+    }
+
+    function cancelPressing() {
+      if (isMendedCompleted) return;
+      clearInterval(pressTimer);
+      touchTablet.classList.remove('is-pressing');
+      progressBar.style.strokeDashoffset = 396;
+      veins.forEach(v => v.style.strokeDashoffset = 200);
+    }
+
+    function finishMending() {
+      clearInterval(pressTimer);
+      isMendedCompleted = true;
+
+      touchTablet.classList.remove('is-pressing');
+      touchTablet.classList.add('is-mended');
+      progressBar.style.strokeDashoffset = 0;
+      veins.forEach(v => v.style.strokeDashoffset = 0);
+
+      guideText.innerText = "✦ MENDED WITH GOLD // ETERNAL BOND RESTORED ♡ ✦";
+      guideText.style.color = "#d4af37";
+
+      playMendedChime();
+      if (navigator.vibrate) navigator.vibrate([40, 60, 100]);
+
+      const rect = touchTablet.getBoundingClientRect();
+      createGoldenUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
+    }
+
+    touchTablet.addEventListener('mousedown', startPressing);
+    window.addEventListener('mouseup', cancelPressing);
+    touchTablet.addEventListener('touchstart', startPressing, { passive: false });
+    window.addEventListener('touchend', cancelPressing);
+
+    /* ==========================================================================
+       【相册引擎 + 原声三角钢琴触键和弦音效】
+       ========================================================================== */
+    const photoCard = document.getElementById('photoCard');
+    const photoCardFront = document.getElementById('photoCardFront');
+    const frontImg = document.getElementById('frontPhotoImg');
+    const ambientBlur = document.getElementById('photoAmbientBlur');
+    const backCaption = document.getElementById('backCaptionText');
+    const navControls = document.getElementById('photoNavControls');
+    const pageIndicator = document.getElementById('photoPageIndicator');
+    const prevBtn = document.getElementById('prevPhotoBtn');
+    const nextBtn = document.getElementById('nextPhotoBtn');
+
+    let currentPhotoIdx = 0;
+    const photosList = LETTER_DATA.photos || [];
+    let isTransitioning = false;
 
     if (photosList.length > 0) {
       function renderPhoto(index) {
@@ -303,30 +501,24 @@
         this.classList.toggle('is-flipped');
       });
 
-      // 核心交互：金箔边框呼吸泛芒 + 相片暗房光影微溶 + 治愈钢琴和弦 (0.85s)
       function transitionToPhoto(nextIndex) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        // 奏响治愈钢琴和弦
         playRomanticPianoChord();
 
-        // 1. 金箔边框开始呼吸微亮，照片景深微溶淡出 (0ms)
         photoCardFront.classList.add('is-gold-breathing');
         frontImg.classList.add('is-dissolving');
         ambientBlur.classList.add('is-dissolving');
 
-        // 2. 在微溶至半透明的瞬间无缝切换底层照片 (380ms)
         setTimeout(() => {
           currentPhotoIdx = nextIndex;
           renderPhoto(currentPhotoIdx);
 
-          // 3. 新照片清澈显影，金光柔和微敛 (480ms)
           setTimeout(() => {
             frontImg.classList.remove('is-dissolving');
             ambientBlur.classList.remove('is-dissolving');
 
-            // 4. 边框恢复平时雅致微金，释放操作锁 (850ms)
             setTimeout(() => {
               photoCardFront.classList.remove('is-gold-breathing');
               isTransitioning = false;
@@ -356,19 +548,47 @@
       document.getElementById('photosSection').style.display = 'none';
     }
 
+    /* ==========================================================================
+       【交互 3：双人金箔指纹合印·正式和解公约】
+       ========================================================================== */
+    const recipientPad = document.getElementById('recipientPrintPad');
+    const recipientTag = document.getElementById('recipientSignerTag');
+    const fusedSeam = document.getElementById('covenantFusedSeam');
+    const vermilionSeal = document.getElementById('vermilionSeal');
+    let isCovenantSealed = false;
+
+    recipientPad.addEventListener('click', (e) => {
+      if (isCovenantSealed) return;
+      isCovenantSealed = true;
+
+      recipientPad.classList.add('is-pressed');
+      recipientTag.innerText = "SEALED ♡";
+      recipientTag.style.color = "#d4af37";
+
+      playRomanticPianoChord();
+
+      // 金漆接缝融合成爱心
+      setTimeout(() => {
+        fusedSeam.classList.add('is-fused');
+        fusedSeam.innerText = "♡";
+
+        // 朱砂古印盖下！
+        setTimeout(() => {
+          playSealStampSound();
+          vermilionSeal.classList.add('is-stamped');
+
+          const rect = recipientPad.getBoundingClientRect();
+          createGoldenUnsealBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 40);
+        }, 350);
+
+      }, 400);
+    });
+
     // 刮刮乐设置
     if (!LETTER_DATA.enableScratch) {
       document.getElementById('scratchComponent').style.display = 'none';
     } else {
       document.getElementById('scratchSecretReveal').innerText = LETTER_DATA.scratchSecret;
-    }
-
-    // 逃跑问答设置
-    if (!LETTER_DATA.enableRunaway) {
-      document.getElementById('runawaySection').style.display = 'none';
-    } else {
-      document.getElementById('runawayQuestion').innerText = LETTER_DATA.runawayQuestion;
-      document.getElementById('runawaySuccessModal').innerText = LETTER_DATA.runawaySuccessMessage;
     }
 
     // 密码锁
@@ -422,27 +642,6 @@
       }
     }
 
-    const container = document.getElementById('letterContainer');
-    const envelope = document.getElementById('envelopeWrapper');
-    let isLetterOpened = false;
-
-    envelope.addEventListener('click', (e) => {
-      if (isLetterOpened) return;
-      isLetterOpened = true;
-
-      getAudioContext();
-      createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight / 2, 50);
-
-      setTimeout(() => {
-        container.classList.add('is-opened');
-        if (LETTER_DATA.audioUrl) {
-          audio.play().catch(() => {});
-        }
-        if (LETTER_DATA.enableScratch) initScratchCard();
-        startSmartTypewriter(LETTER_DATA.body);
-      }, 380);
-    });
-
     let typewriterTimer = null;
     let isTypingFinished = false;
     const textContainer = document.getElementById('typewriterText');
@@ -452,10 +651,7 @@
       if (!fullText) return;
       let currentIndex = 0;
       const totalLen = fullText.length;
-
-      let typingSpeed = 35;
-      if (totalLen > 500) typingSpeed = 10;
-      else if (totalLen > 250) typingSpeed = 18;
+      let typingSpeed = totalLen > 500 ? 10 : (totalLen > 250 ? 18 : 35);
 
       typewriterTimer = setInterval(() => {
         if (currentIndex < totalLen) {
@@ -532,27 +728,6 @@
       window.addEventListener('touchend', () => isScratching = false);
       canvas.addEventListener('touchmove', scratch, { passive: true });
     }
-
-    const btnNo = document.getElementById('btnNo');
-    const btnYes = document.getElementById('btnYes');
-    const modal = document.getElementById('runawaySuccessModal');
-
-    function runaway(e) {
-      e.stopPropagation();
-      const x = (Math.random() - 0.5) * 220;
-      const y = (Math.random() - 0.5) * 130;
-      btnNo.style.transform = `translate(${x}px, ${y}px)`;
-    }
-    btnNo.addEventListener('mouseover', runaway);
-    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); runaway(e); });
-
-    btnYes.addEventListener('click', (e) => {
-      e.stopPropagation();
-      modal.style.display = 'block';
-      btnNo.style.display = 'none';
-      btnYes.style.transform = 'scale(1.1)';
-      createGoldenUnsealBurst(window.innerWidth / 2, window.innerHeight * 0.7, 60);
-    });
 
     const pCanvas = document.getElementById('particle-canvas');
     const pCtx = pCanvas.getContext('2d');
