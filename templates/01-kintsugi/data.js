@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEME 01: 金缮修复和解款 - 旗舰演示数据
+   THEME 01: KINTSUGI - EXCLUSIVE ENGLISH DATA (ZERO CHINESE)
    ========================================================================== */
 const LETTER_DATA = {
   passcode: "0928",
@@ -10,13 +10,13 @@ const LETTER_DATA = {
 
   dateText: "September 28, 2026",
   salutation: "Dear Liam,",
-  headline: "I'M SO SORRY",
+  headline: "I'M TRULY SORRY",
   body: `I hate that we went to bed angry last night. You mean the world to me, and my stubbornness got the best of me.
 
 Like kintsugi, I know we can heal and become even stronger together. I love you more than words can say.`,
   closing: "Forever yours,\nSarah ♡",
 
-  // 专属高清水彩光影照片
+  // High-Resolution Demonstration Photos
   photos: [
     {
       url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
@@ -28,10 +28,15 @@ Like kintsugi, I know we can heal and become even stronger together. I love you 
     }
   ],
 
-  // 浪漫温暖的治愈系钢琴曲
+  // Background Acoustic Music (Direct Reliable Stream)
   audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
 
   enableScratch: true,
   scratchHint: "✦ POLISH THE GOLDEN SEAM TO HEAL ✦",
-  scratchSecret: "Forgive me? Movie night & pizza on me! ♡"
+  scratchSecret: "Forgive me? Movie night & pizza on me! ♡",
+
+  // 100% Fully Enabled English Runaway Interaction
+  enableRunaway: true,
+  runawayQuestion: "WILL YOU FORGIVE ME AND LET US MEND?",
+  runawaySuccessMessage: "✦ Thank you for choosing love. We are whole again ♡ ✦"
 };
