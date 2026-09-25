@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_gold_vein_v6" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_optical_gilded_v7" />
 </head>
 <body>
 
@@ -78,44 +78,12 @@
         <h1 class="letter-title" id="letterHeadline"></h1>
         <div class="letter-salutation" id="letterSalutation"></div>
 
-        <!-- 【大画幅相册 + 东方流金裂痕弥合愈合转场】 -->
+        <!-- 【大画幅相册：金边呼吸微芒 + 暗房光影微溶】 -->
         <div class="photo-slider-wrapper" id="photosSection">
           <div class="photo-flip-card" id="photoCard">
-            
-            <!-- 核心舞台：流金裂痕弥合舞台 -->
-            <div class="kintsugi-mending-stage" id="mendingStage">
-              <!-- 金雾微光漫射背景 -->
-              <div class="mending-gold-bloom"></div>
-
-              <!-- 金缮冰裂纹路径 (精细分支结构) -->
-              <svg viewBox="0 0 370 300" class="mending-seam-svg">
-                <defs>
-                  <linearGradient id="moltenGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fff8d1" />
-                    <stop offset="35%" stop-color="#ffd700" />
-                    <stop offset="70%" stop-color="#e5b839" />
-                    <stop offset="100%" stop-color="#9e7a1b" />
-                  </linearGradient>
-                </defs>
-                <!-- 主裂缝 (宛如重器开裂) -->
-                <path class="molten-gold-vein" stroke="url(#moltenGoldGrad)" stroke-width="3.5" fill="none"
-                      d="M -10,130 Q 80,120 140,165 T 220,135 T 290,185 Q 330,170 380,210" />
-                <!-- 向上分岔裂纹 -->
-                <path class="molten-gold-vein" stroke="url(#moltenGoldGrad)" stroke-width="2.2" fill="none"
-                      d="M 140,165 Q 165,95 230,70" />
-                <!-- 向下分岔裂纹 -->
-                <path class="molten-gold-vein" stroke="url(#moltenGoldGrad)" stroke-width="2" fill="none"
-                      d="M 220,135 Q 235,210 210,270" />
-              </svg>
-
-              <!-- 悬浮闪烁金箔光尘 -->
-              <div class="gold-leaf-particle leaf-p1"></div>
-              <div class="gold-leaf-particle leaf-p2"></div>
-              <div class="gold-leaf-particle leaf-p3"></div>
-            </div>
-
             <div class="photo-flip-inner">
-              <div class="photo-card-front">
+              <div class="photo-card-front" id="photoCardFront">
+                <!-- 漫反射光晕底衬 -->
                 <div class="photo-ambient-blur" id="photoAmbientBlur"></div>
                 <img id="frontPhotoImg" src="" alt="Memory Photo" />
               </div>
@@ -196,7 +164,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_gold_vein_v6"></script>
+  <script src="data.js?v=kintsugi_optical_gilded_v7"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -210,9 +178,10 @@
     }
 
     /* ==========================================================================
-       【相册引擎 + 东方流金裂缝愈合转场逻辑】
+       【相册引擎 + 暗房微溶光影与金边呼吸协同逻辑】
        ========================================================================== */
     const photoCard = document.getElementById('photoCard');
+    const photoCardFront = document.getElementById('photoCardFront');
     const frontImg = document.getElementById('frontPhotoImg');
     const ambientBlur = document.getElementById('photoAmbientBlur');
     const backCaption = document.getElementById('backCaptionText');
@@ -220,13 +189,12 @@
     const pageIndicator = document.getElementById('photoPageIndicator');
     const prevBtn = document.getElementById('prevPhotoBtn');
     const nextBtn = document.getElementById('nextPhotoBtn');
-    const mendingStage = document.getElementById('mendingStage');
 
     let currentPhotoIdx = 0;
     const photosList = LETTER_DATA.photos || [];
     let isTransitioning = false;
 
-    // Web Audio 纯正东方金钵（磬）空灵余音
+    // Web Audio 空灵纯净的水晶磬音
     let audioCtx = null;
     function getAudioContext() {
       if (!audioCtx) {
@@ -238,35 +206,22 @@
       return audioCtx;
     }
 
-    function playKintsugiRinBell() {
+    function playCrystalChime() {
       try {
         const ctx = getAudioContext();
         const now = ctx.currentTime;
 
-        // 528Hz 金色愈合纯音基频
-        const osc1 = ctx.createOscillator();
-        const gain1 = ctx.createGain();
-        osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(528, now);
-        osc1.frequency.exponentialRampToValueAtTime(1056, now + 0.18);
-        gain1.gain.setValueAtTime(0.24, now);
-        gain1.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
-        osc1.connect(gain1);
-        gain1.connect(ctx.destination);
-        osc1.start(now);
-        osc1.stop(now + 1.8);
-
-        // 泛音清透微光 (Shimmering Harmonics)
-        const osc2 = ctx.createOscillator();
-        const gain2 = ctx.createGain();
-        osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(1584, now + 0.05);
-        gain2.gain.setValueAtTime(0.06, now + 0.05);
-        gain2.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
-        osc2.connect(gain2);
-        gain2.connect(ctx.destination);
-        osc2.start(now + 0.05);
-        osc2.stop(now + 1.2);
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(528, now);
+        osc.frequency.exponentialRampToValueAtTime(1056, now + 0.16);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.8);
       } catch(e) {}
     }
 
@@ -286,42 +241,37 @@
         this.classList.toggle('is-flipped');
       });
 
-      // 核心交互：流金裂痕蔓延 ➔ 熔金弥合 ➔ 新片显影 (1.3s)
+      // 核心交互：金箔边框呼吸泛芒 + 相片暗房光影微溶 (0.85s)
       function transitionToPhoto(nextIndex) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        playKintsugiRinBell();
+        playCrystalChime();
 
-        // 1. 舞台就绪，裂缝中金漆开始快速流淌流动 (0ms)
-        mendingStage.classList.add('is-active');
-        mendingStage.classList.add('is-flowing');
+        // 1. 金箔边框开始呼吸微亮，照片景深微溶淡出 (0ms)
+        photoCardFront.classList.add('is-gold-breathing');
+        frontImg.classList.add('is-dissolving');
+        ambientBlur.classList.add('is-dissolving');
 
-        // 2. 金漆愈合扩散，泛起温润金雾微光遮蔽画面 (320ms)
+        // 2. 在微溶至半透明的瞬间无缝切换底层照片 (380ms)
         setTimeout(() => {
-          mendingStage.classList.add('is-blooming');
+          currentPhotoIdx = nextIndex;
+          renderPhoto(currentPhotoIdx);
 
-          // 3. 在金芒鼎盛处无缝更换底图 (520ms)
+          // 3. 新照片清澈显影，金光柔和微敛 (480ms)
           setTimeout(() => {
-            currentPhotoIdx = nextIndex;
-            renderPhoto(currentPhotoIdx);
+            frontImg.classList.remove('is-dissolving');
+            ambientBlur.classList.remove('is-dissolving');
 
-            // 4. 金光微敛，裂缝弥合平复，露出崭新照片 (750ms)
+            // 4. 边框恢复平时雅致微金，释放操作锁 (850ms)
             setTimeout(() => {
-              mendingStage.classList.remove('is-blooming');
-              mendingStage.classList.remove('is-flowing');
+              photoCardFront.classList.remove('is-gold-breathing');
+              isTransitioning = false;
+            }, 380);
 
-              // 5. 彻底平息重置 (1250ms)
-              setTimeout(() => {
-                mendingStage.classList.remove('is-active');
-                isTransitioning = false;
-              }, 400);
+          }, 100);
 
-            }, 230);
-
-          }, 200);
-
-        }, 320);
+        }, 380);
       }
 
       if (photosList.length <= 1) {
