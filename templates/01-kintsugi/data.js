@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEME 01: 金缮修复和解款 - 官方演示数据
+   THEME 01: 金缮修复和解款 - 旗舰演示数据
    ========================================================================== */
 const LETTER_DATA = {
   passcode: "0928",
@@ -16,7 +16,7 @@ const LETTER_DATA = {
 Like kintsugi, I know we can heal and become even stronger together. I love you more than words can say.`,
   closing: "Forever yours,\nSarah ♡",
 
-  // 专属高清水彩光影照片（绝不压缩、完美撑起相框）
+  // 专属高清水彩光影照片
   photos: [
     {
       url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&auto=format&fit=crop&q=80",
@@ -28,14 +28,10 @@ Like kintsugi, I know we can heal and become even stronger together. I love you 
     }
   ],
 
-  // 浪漫温暖的治愈系钢琴曲（高品质在线直链，绝不静音）
+  // 浪漫温暖的治愈系钢琴曲
   audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-9835.mp3",
 
   enableScratch: true,
   scratchHint: "✦ POLISH THE GOLDEN SEAM TO HEAL ✦",
-  scratchSecret: "Forgive me? Movie night & pizza on me! ♡",
-
-  enableRunaway: true,
-  runawayQuestion: "Will you forgive your silly girl?",
-  runawaySuccessMessage: "Yay! Best boyfriend ever! Hugs incoming ♡"
+  scratchSecret: "Forgive me? Movie night & pizza on me! ♡"
 };
