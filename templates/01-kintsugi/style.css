@@ -165,7 +165,7 @@
 }
 
 /* ==========================================================================
-   【4. 大画幅艺术装裱相框：370px 宽幅体量，自适应 9:16、横屏全画幅】
+   【4. 大画幅艺术装裱相框：金箔呼吸边框 + 暗房微溶光影】
    ========================================================================== */
 [data-theme="kintsugi"] .photo-slider-wrapper {
   margin: clamp(20px, 5vw, 26px) auto;
@@ -192,6 +192,7 @@
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 核心相框：高定双层金漆装裱 */
 [data-theme="kintsugi"] .photo-card-front,
 [data-theme="kintsugi"] .photo-card-back {
   position: absolute;
@@ -199,26 +200,44 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: #181613;
+  background: #171512;
   border: 1.5px solid rgba(212, 175, 55, 0.85);
-  box-shadow: 0 0 0 3.5px #fdfaf2, 0 0 0 5.5px #d4af37, 0 16px 36px rgba(0,0,0,0.22);
+  box-shadow: 
+    0 0 0 3.5px #fdfaf2, 
+    0 0 0 5.5px #d4af37, 
+    0 16px 36px rgba(0, 0, 0, 0.22);
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* 平滑的边框呼吸光晕过渡 */
+  transition: box-shadow 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.65s ease;
 }
 
+/* 【关键交互：切片时金箔边框泛起呼吸温润微芒】 */
+[data-theme="kintsugi"] .photo-card-front.is-gold-breathing {
+  border-color: #ffe082 !important;
+  box-shadow: 
+    0 0 0 3.5px #fffdf7, 
+    0 0 0 6px #ffd700, 
+    0 0 28px rgba(212, 175, 55, 0.65), 
+    0 20px 42px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* 留白环境光晕打底 */
 .photo-ambient-blur {
   position: absolute;
   inset: -15px;
   background-size: cover;
   background-position: center;
-  filter: blur(20px) brightness(0.48) saturate(1.25);
+  filter: blur(22px) brightness(0.48) saturate(1.2);
   opacity: 0.8;
   z-index: 1;
+  transition: opacity 0.5s ease;
 }
 
+/* 核心照片：暗房微溶光学显影 (Optical Dissolve) */
 [data-theme="kintsugi"] .photo-card-front img {
   position: relative;
   max-width: 100%;
@@ -226,7 +245,22 @@
   object-fit: contain !important;
   display: block;
   z-index: 2;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+  opacity: 1;
+  filter: blur(0px) brightness(1);
+  transform: scale(1);
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), filter 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 换片瞬间：照片微柔化与轻微高光微溶 */
+[data-theme="kintsugi"] .photo-card-front img.is-dissolving {
+  opacity: 0.15;
+  filter: blur(6px) brightness(1.15) contrast(95%);
+  transform: scale(0.98);
+}
+
+.photo-ambient-blur.is-dissolving {
+  opacity: 0.3;
 }
 
 [data-theme="kintsugi"] .photo-card-back {
@@ -296,92 +330,7 @@
   letter-spacing: 1px;
 }
 
-/* ==========================================================================
-   【5. 东方纯粹美学：流金裂纹弥合舞台 (Liquid Gold Seam Mending)】
-   纯粹光影、金漆流淌、古瓷重光转场，彻底告别具象假鸟
-   ========================================================================== */
-.kintsugi-mending-stage {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 25;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.kintsugi-mending-stage.is-active {
-  opacity: 1;
-}
-
-/* 金雾流光背景扩散层 (过渡遮蔽层) */
-.mending-gold-bloom {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 48% 45%, rgba(255, 235, 150, 0.92) 0%, rgba(212, 175, 55, 0.75) 50%, rgba(30, 24, 18, 0.85) 100%);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  opacity: 0;
-  transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.kintsugi-mending-stage.is-blooming .mending-gold-bloom {
-  opacity: 1;
-}
-
-/* 优雅蔓延的金缮冰裂纹 SVG */
-.mending-seam-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-/* 熔融流体金漆流动路径 */
-.molten-gold-vein {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 6px #ffd700) drop-shadow(0 0 16px rgba(255, 215, 0, 0.85));
-  transition: stroke-dashoffset 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.kintsugi-mending-stage.is-flowing .molten-gold-vein {
-  stroke-dashoffset: 0;
-}
-
-/* 裂缝周遭漂浮的金箔微粒 */
-.gold-leaf-particle {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff7c2 0%, #ffd700 70%, #d4af37 100%);
-  box-shadow: 0 0 8px #ffd700;
-  opacity: 0;
-  transform: scale(0.2);
-}
-
-@keyframes leafSparkle {
-  0% { opacity: 0; transform: scale(0.2) translateY(0); }
-  50% { opacity: 1; transform: scale(1.2) translateY(-14px); }
-  100% { opacity: 0; transform: scale(0.5) translateY(-28px); }
-}
-
-.kintsugi-mending-stage.is-flowing .leaf-p1 {
-  left: 35%; top: 40%; width: 4px; height: 4px;
-  animation: leafSparkle 0.9s 0.1s ease-out forwards;
-}
-.kintsugi-mending-stage.is-flowing .leaf-p2 {
-  left: 55%; top: 30%; width: 6px; height: 6px;
-  animation: leafSparkle 1.1s 0.2s ease-out forwards;
-}
-.kintsugi-mending-stage.is-flowing .leaf-p3 {
-  left: 65%; top: 60%; width: 5px; height: 5px;
-  animation: leafSparkle 1s 0.15s ease-out forwards;
-}
-
-/* 6. 和解免死券 */
+/* 5. 和解免死券 */
 [data-theme="kintsugi"] .apology-vouchers-container {
   margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
   position: relative;
@@ -482,7 +431,7 @@
   border-style: solid;
 }
 
-/* 7. 正文流体字体 */
+/* 6. 正文流体字体 */
 [data-theme="kintsugi"] .letter-body-text {
   font-size: clamp(15px, 4.1vw, 17px);
   line-height: clamp(1.9, 5vw, 2.05);
@@ -519,7 +468,7 @@
   z-index: 2;
 }
 
-/* 8. 刮刮乐 */
+/* 7. 刮刮乐 */
 [data-theme="kintsugi"] .scratch-hint-text {
   color: #8c6a22;
   font-family: 'Cinzel', serif;
@@ -564,7 +513,7 @@
   font-size: clamp(13px, 3.5vw, 15px);
 }
 
-/* 9. 逃跑问答 */
+/* 8. 逃跑问答 */
 [data-theme="kintsugi"] .runaway-section {
   border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
   padding-top: 24px;
