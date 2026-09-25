@@ -1,342 +1,757 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+/* ==========================================================================
+   THEME 01: KINTSUGI - EXCLUSIVE FINE ART RECONCILIATION
+   Physical Isolation Stylesheet - templates/01-kintsugi/ only
+   ========================================================================== */
+
+/* 1. Viewport Background: Obsidian Deep Tone with Ambient Gold Glow */
+.letter-viewport[data-theme="kintsugi"] {
+  background: radial-gradient(ellipse at 50% 38%, #20242e 0%, #111317 75%, #08090b 100%);
+  color: #2b2621;
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0c0d10;
+/* 2. Envelope Construction */
+[data-theme="kintsugi"] .envelope-wrapper {
+  background: #222630;
+  border-radius: 10px;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+[data-theme="kintsugi"] .envelope-body {
+  border-radius: 10px;
+  background: linear-gradient(145deg, #272b35 0%, #191b22 100%);
+  outline: 1px solid rgba(212, 175, 55, 0.25);
+  outline-offset: -6px;
+}
+
+[data-theme="kintsugi"] .envelope-corner-star {
+  position: absolute;
+  color: #d4af37;
+  font-size: clamp(9px, 2.2vw, 11px);
+  opacity: 0.85;
+}
+[data-theme="kintsugi"] .star-tl { top: 9px; left: 10px; }
+[data-theme="kintsugi"] .star-tr { top: 9px; right: 10px; }
+[data-theme="kintsugi"] .star-bl { bottom: 9px; left: 10px; }
+[data-theme="kintsugi"] .star-br { bottom: 9px; right: 10px; }
+
+[data-theme="kintsugi"] .envelope-flap {
+  background: linear-gradient(180deg, #2e3340 0%, #1c1f26 100%);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+  border-bottom: 1.5px solid #d4af37;
+}
+
+.letter-container.is-opened [data-theme="kintsugi"] .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+/* Golden Breathing Wax Seal */
+[data-theme="kintsugi"] .wax-seal {
+  border-radius: 49% 51% 52% 48% / 51% 49% 51% 49%;
+  background: radial-gradient(circle at 35% 30%, #fbedbf 0%, #c5a059 45%, #8f6e28 85%, #5a4313 100%);
+  border: 1.5px solid #fff2bf;
+  box-shadow: 
+    0 10px 22px rgba(0, 0, 0, 0.85),
+    0 0 16px rgba(212, 175, 55, 0.6),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+  animation: seal-breathe 2.8s infinite ease-in-out;
+  cursor: pointer;
+}
+
+@keyframes seal-breathe {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.15) drop-shadow(0 0 10px rgba(212, 175, 55, 0.8)); }
+}
+
+[data-theme="kintsugi"] .seal-heart-svg {
+  width: clamp(18px, 4.5vw, 22px);
+  height: clamp(18px, 4.5vw, 22px);
+  fill: #fff9e6;
+  filter: drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.5));
+}
+
+[data-theme="kintsugi"] .envelope-open-hint {
   font-family: 'Cinzel', serif;
-  color: #2b2623;
-  overflow-x: hidden;
-  padding: 20px 12px;
-  position: relative;
+  letter-spacing: clamp(2px, 0.6vw, 3px);
+  color: #c5a059;
+  opacity: 0.9;
 }
 
-/* 背景星光颗粒 */
-.stars-bg {
-  position: fixed;
-  inset: 0;
+/* 3. Letter Sheet Construction */
+[data-theme="kintsugi"] .letter-sheet {
+  background-color: #fdfaf3 !important;
   background-image: 
-    radial-gradient(1.5px 1.5px at 20px 30px, #e6c887, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 120px 80px, #ffffff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 240px 190px, #d4af37, rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 320px 290px, #e8d098, rgba(0,0,0,0));
-  background-repeat: repeat;
-  background-size: 360px 360px;
-  opacity: 0.35;
+    radial-gradient(#e5dbcb 0.8px, transparent 0.8px),
+    radial-gradient(#f0e7d7 0.8px, #fdfaf3 0.8px) !important;
+  background-size: 16px 16px !important;
+  background-position: 0 0, 8px 8px !important;
+  color: #2b2521 !important;
+  border: 1.5px solid #d4af37 !important;
+  outline: 1px solid rgba(197, 160, 89, 0.5) !important;
+  outline-offset: -8px !important;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.75),
+    0 0 40px rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-theme="kintsugi"] .letter-watermark-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(180px, 50vw, 260px);
+  height: clamp(180px, 50vw, 260px);
+  opacity: 0.095;
   pointer-events: none;
+  z-index: 1;
 }
 
-/* 顶部静音按钮 */
-.audio-toggle {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  background: rgba(255, 255, 255, 0.9);
-  color: #2a2523;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  z-index: 100;
-}
-.audio-toggle:hover {
-  transform: scale(1.05);
-  border-color: #d4af37;
-}
-
-/* 典雅复古卡片主体 */
-.letter-card {
-  width: 100%;
-  max-width: 460px;
-  background: #fbf8f2;
-  border-radius: 8px;
-  padding: 42px 28px 36px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(212, 175, 55, 0.25);
+.apology-badge-header {
   text-align: center;
+  margin-bottom: clamp(12px, 3vw, 18px);
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
-/* 标题区 */
-.main-title {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #2c2523;
-  margin-bottom: 22px;
-  line-height: 1.5;
-}
-
-/* 选择按钮 */
-.choice-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 26px;
-}
-
-.btn {
+.apology-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px clamp(12px, 3vw, 18px);
+  border: 1px solid #d4af37;
+  border-radius: 24px;
   font-family: 'Cinzel', serif;
-  font-size: 0.82rem;
-  letter-spacing: 1.5px;
-  padding: 10px 28px;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-weight: 700;
+  letter-spacing: clamp(1.5px, 0.5vw, 2.5px);
+  color: #7a5a17;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0.04) 100%);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.1);
+}
+
+[data-theme="kintsugi"] .letter-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(19px, 5.2vw, 24px);
+  letter-spacing: clamp(1.5px, 0.6vw, 3px);
+  color: #6d4b14;
+  text-align: center;
+  margin: 10px 0 14px;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="kintsugi"] .letter-date {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10.5px, 2.8vw, 12px);
+  color: #8c734b;
+  text-align: right;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="kintsugi"] .letter-salutation {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(14px, 3.8vw, 16.5px);
+  font-weight: 700;
+  color: #5c4310;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   4. Gallery Frame: Gold Rim & Auto Aspect-Ratio (9:16 & Landscape)
+   ========================================================================== */
+[data-theme="kintsugi"] .photo-slider-wrapper {
+  margin: clamp(18px, 4.5vw, 24px) auto;
+  max-width: 340px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="kintsugi"] .photo-flip-card {
+  width: 100%;
+  height: clamp(225px, 56vw, 270px) !important;
+  min-height: 225px !important;
+  perspective: 1000px;
+  position: relative;
+  margin: 0 auto;
+}
+
+[data-theme="kintsugi"] .photo-flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="kintsugi"] .photo-card-front,
+[data-theme="kintsugi"] .photo-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  box-shadow: 
+    0 0 0 3px #fdfaf2, 
+    0 0 0 4.5px #d4af37, 
+    0 12px 28px rgba(0, 0, 0, 0.12);
   border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.btn-yes {
-  background: #c39a38;
-  color: #ffffff;
-  border: 1px solid #b38b2e;
-  box-shadow: 0 4px 12px rgba(195, 154, 56, 0.3);
-}
-.btn-yes:hover {
-  background: #b28a2f;
-  transform: translateY(-1px);
-}
-
-.btn-no {
-  background: #eadecd;
-  color: #7d7268;
-  border: 1px solid #d9ccb9;
-}
-
-/* 装饰分割线 */
-.ornament-divider {
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin: 10px 0 24px;
-}
-.ornament-divider .line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(195, 154, 56, 0.4), transparent);
-}
-.ornament-divider .diamond {
-  font-size: 0.6rem;
-  color: #c39a38;
 }
 
-/* 副标题与指引文字 */
-.sub-title {
-  font-size: 0.78rem;
-  letter-spacing: 2.2px;
-  color: #3e3733;
-  margin-bottom: 8px;
-  font-weight: 600;
+[data-theme="kintsugi"] .photo-card-front img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain !important;
+  display: block;
+  transition: opacity 0.35s ease;
 }
 
-.instruction-text {
+[data-theme="kintsugi"] .photo-card-front img.is-changing {
+  opacity: 0.2;
+}
+
+[data-theme="kintsugi"] .photo-card-back {
+  background: #fbf7ee;
+  color: #634714;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+[data-theme="kintsugi"] .photo-caption-text {
   font-family: 'Playfair Display', serif;
   font-style: italic;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: #8f7f70;
-  margin-bottom: 22px;
-  min-height: 38px;
-  transition: color 0.5s ease;
+  font-size: clamp(13px, 3.6vw, 15px);
+  line-height: 1.5;
+  color: #634714;
+  margin: 0;
 }
 
-/* 交互触控板卡槽 */
-.thumbprint-touchpad {
-  position: relative;
-  width: 250px;
-  height: 230px;
-  margin: 0 auto;
-  border-radius: 16px;
-  background: #faf6ee;
-  border: 1.5px dashed rgba(205, 170, 102, 0.55);
+[data-theme="kintsugi"] .photo-flip-hint {
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.4vw, 10.5px);
+  letter-spacing: 1.5px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+[data-theme="kintsugi"] .photo-nav-controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  touch-action: none;
-  overflow: visible;
-  transition: border-color 0.4s ease;
+  gap: 16px;
+  margin-top: 8px;
 }
 
-/* 长按进度边框 */
-.progress-ring {
+[data-theme="kintsugi"] .photo-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #d4af37;
+  background: rgba(212, 175, 55, 0.12);
+  color: #7a5a17;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+[data-theme="kintsugi"] .photo-nav-btn:hover {
+  background: rgba(212, 175, 55, 0.28);
+  transform: scale(1.08);
+}
+
+[data-theme="kintsugi"] .photo-page-indicator {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: #8c6a22;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   5. Apology Vouchers Cards
+   ========================================================================== */
+[data-theme="kintsugi"] .apology-vouchers-container {
+  margin: clamp(20px, 5vw, 28px) auto clamp(22px, 5vw, 30px);
+  position: relative;
+  z-index: 2;
+}
+
+[data-theme="kintsugi"] .voucher-section-title {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  letter-spacing: 1.8px;
+  color: #9e7d3b;
+  margin-bottom: 10px;
+}
+
+[data-theme="kintsugi"] .vouchers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+[data-theme="kintsugi"] .apology-voucher-card {
+  position: relative;
+  background: #f9f4e8;
+  border: 1px dashed #d4af37;
+  border-radius: 6px;
+  padding: 10px 14px 10px clamp(36px, 9vw, 44px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
+  overflow: hidden;
+}
+
+[data-theme="kintsugi"] .apology-voucher-card::before,
+[data-theme="kintsugi"] .apology-voucher-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #fdfaf3;
+  border: 1px solid #d4af37;
+  border-radius: 50%;
+}
+[data-theme="kintsugi"] .apology-voucher-card::before { left: -6px; }
+[data-theme="kintsugi"] .apology-voucher-card::after { right: -6px; }
+
+[data-theme="kintsugi"] .voucher-icon {
+  position: absolute;
+  left: 12px;
+  font-size: clamp(14px, 3.8vw, 17px);
+}
+
+[data-theme="kintsugi"] .voucher-info {
+  text-align: left;
+}
+[data-theme="kintsugi"] .voucher-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(11px, 2.9vw, 12px);
+  font-weight: 700;
+  color: #634714;
+}
+[data-theme="kintsugi"] .voucher-desc {
+  font-size: clamp(10px, 2.6vw, 11px);
+  font-style: italic;
+  color: #8c734b;
+  margin-top: 2px;
+}
+
+[data-theme="kintsugi"] .voucher-stamp {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9.5px, 2.5vw, 10.5px);
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #a32a2a;
+  border: 1.5px solid #a32a2a;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transform: rotate(-10deg) scale(0);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+[data-theme="kintsugi"] .apology-voucher-card.is-claimed .voucher-stamp {
+  transform: rotate(-10deg) scale(1);
+  opacity: 1;
+}
+
+[data-theme="kintsugi"] .apology-voucher-card.is-claimed {
+  background: #f3ecdb;
+  border-style: solid;
+}
+
+/* 6. Typography & Letter Text */
+[data-theme="kintsugi"] .letter-body-text {
+  font-size: clamp(15px, 4.1vw, 17px);
+  line-height: clamp(1.9, 5vw, 2.05);
+  color: #302822;
+  min-height: 120px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+[data-theme="kintsugi"] .typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: clamp(16px, 4vw, 19px);
+  background-color: #c5a059;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: cursor-blink 0.8s infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+[data-theme="kintsugi"] .letter-closing {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(16px, 4.3vw, 18px);
+  text-align: right;
+  margin-top: 24px;
+  color: #5c4310;
+  position: relative;
+  z-index: 2;
+}
+
+/* 7. Gold Foil Scratch Card */
+[data-theme="kintsugi"] .scratch-hint-text {
+  color: #8c6a22;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(10px, 2.7vw, 11px);
+  letter-spacing: 2px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+[data-theme="kintsugi"] .scratch-card-box {
+  border-radius: 6px;
+  border: 1.5px solid #d4af37;
+  outline: 1px solid rgba(197, 160, 89, 0.35);
+  outline-offset: -5px;
+  background: #fbf8f0;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    inset 0 0 16px rgba(212, 175, 55, 0.1);
+}
+
+[data-theme="kintsugi"] .scratch-card-box::before,
+[data-theme="kintsugi"] .scratch-card-box::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d4af37;
+  font-size: clamp(9px, 2.4vw, 11px);
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.5);
+  z-index: 5;
+  pointer-events: none;
+}
+[data-theme="kintsugi"] .scratch-card-box::before { left: 12px; }
+[data-theme="kintsugi"] .scratch-card-box::after { right: 12px; }
+
+[data-theme="kintsugi"] .scratch-secret-reveal {
+  font-family: 'Cinzel', serif;
+  color: #735316;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  background: #fdfaf2;
+  font-size: clamp(13px, 3.5vw, 15px);
+}
+
+/* ==========================================================================
+   8. Full Robust YES / NO Interactive Section (Always Clean & Visible)
+   ========================================================================== */
+[data-theme="kintsugi"] .runaway-section {
+  border-top: 1.5px dashed rgba(197, 160, 89, 0.4);
+  padding-top: 26px;
+  margin-top: 30px;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: block !important;
+}
+
+[data-theme="kintsugi"] .runaway-question {
+  font-family: 'Cinzel', serif;
+  color: #5c4310;
+  font-size: clamp(14px, 3.8vw, 17px);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  display: block;
+}
+
+[data-theme="kintsugi"] .runaway-buttons-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px;
+  position: relative;
+  min-height: 48px;
+  margin-bottom: 20px;
+}
+
+[data-theme="kintsugi"] .btn-yes {
+  background: linear-gradient(135deg, #d4af37 0%, #a67f1e 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #fff2bf !important;
+  padding: 9px 24px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+  transition: transform 0.2s ease;
+}
+
+[data-theme="kintsugi"] .btn-yes:hover {
+  transform: scale(1.06);
+}
+
+[data-theme="kintsugi"] .btn-no {
+  background: #eae2d3 !important;
+  color: #665a4c !important;
+  border: 1.5px solid #c9bea9 !important;
+  padding: 9px 24px;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+[data-theme="kintsugi"] .runaway-success-modal {
+  background: #fbf7ee;
+  border: 1.5px solid #d4af37;
+  color: #7a5a17;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(12.5px, 3.4vw, 14.5px);
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin: 12px auto;
+  max-width: 320px;
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.2);
+}
+
+/* ==========================================================================
+   9. 【专属巧思：双人完整指纹合成爱心 · 零切角 · 真实肌理与金光转红】
+   ========================================================================== */
+.thumbprint-heart-altar {
+  margin: 28px auto 16px auto;
+  max-width: 350px;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+  padding-top: 22px;
+  border-top: 1.5px dashed rgba(212, 175, 55, 0.35);
+}
+
+.heart-altar-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(9px, 2.3vw, 10.5px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #8c6a22;
+  margin-bottom: 4px;
+}
+
+.heart-altar-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(12px, 3.2vw, 13.5px);
+  color: #9e7d3b;
+  margin-bottom: 16px;
+}
+
+/* 和纸凹印拓印台 */
+.dual-thumb-pad-stage {
+  position: relative;
+  width: 220px;
+  height: 200px;
+  margin: 0 auto;
+  background: #fbf6ec;
+  border: 1.5px dashed #c9a55c;
+  border-radius: 14px;
+  box-shadow: 
+    inset 0 4px 12px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 6px rgba(255, 255, 255, 0.9),
+    0 4px 16px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dual-thumb-pad-stage:hover {
+  border-color: #d4af37;
+  box-shadow: 
+    inset 0 4px 12px rgba(0, 0, 0, 0.08),
+    0 0 18px rgba(212, 175, 55, 0.35);
+}
+
+.dual-thumb-pad-stage:active {
+  transform: scale(0.97);
+}
+
+/* 核心叠合容器 (宽高充盈，绝不切角) */
+.thumbprint-stack-box {
+  position: relative;
+  width: 200px;
+  height: 180px;
+}
+
+/* 矢量指纹 SVG */
+.thumbprint-heart-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-}
-.progress-border {
-  fill: none;
-  stroke: #c22929;
-  stroke-width: 3.5;
-  stroke-dasharray: 960;
-  stroke-dashoffset: 960;
-  transition: stroke-dashoffset 0.1s linear;
-}
-
-/* 爱心指纹定位容器 */
-.heart-prints-container {
-  position: relative;
-  width: 210px;
-  height: 195px;
-  pointer-events: none;
-}
-
-/* 两个指纹共用样式 - 无任何切边，完整人类指纹 */
-.print-wrapper {
-  position: absolute;
-  width: 135px;
-  height: 175px;
-  bottom: 12px;
-  transition: all 0.65s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.fingerprint-svg {
-  width: 100%;
-  height: 100%;
+  display: block;
   overflow: visible;
 }
-.fingerprint-svg path {
+
+/* 真实高密人体指纹脊线 */
+.ridge-ink-black {
+  stroke: #22201e !important;
+  stroke-width: 1.45px;
   fill: none;
-  stroke-width: 2.1;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke 0.65s ease, opacity 0.65s ease;
 }
 
-/* 左侧送信人指纹：完整倾斜 -24°，与右侧中心自然相交 */
-.print-sender {
-  left: 10px;
-  transform-origin: 65% 75%;
-  transform: rotate(-24deg);
-}
-.print-sender .fingerprint-svg path {
-  stroke: #1e1b18; /* 真实古墨黑色 */
-  opacity: 0.95;
+.ridge-ink-gold {
+  stroke: #ffd700 !important;
+  stroke-width: 1.55px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.75));
 }
 
-/* 右侧读信人指纹：向右倾斜 +24°，初始微光闪烁引导按压 */
-.print-receiver {
-  right: 10px;
-  transform-origin: 35% 75%;
-  transform: rotate(24deg);
-}
-.print-receiver .fingerprint-svg path {
-  stroke: #c22929;
-  opacity: 0.22;
+.ridge-ink-red {
+  stroke: #c22d2d !important;
+  stroke-width: 1.55px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* 引导呼吸动效 */
-.touch-guiding .print-receiver {
-  animation: recipientBreathe 2.4s infinite ease-in-out;
+/* 初始状态：右侧指纹为完整透明虚影 */
+#rightGoldMask {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.08s linear;
 }
 
-@keyframes recipientBreathe {
-  0%, 100% {
-    filter: drop-shadow(0 0 2px rgba(194, 41, 41, 0.15));
-    opacity: 0.2;
-  }
-  50% {
-    filter: drop-shadow(0 0 10px rgba(194, 41, 41, 0.7));
-    opacity: 0.6;
-  }
+/* 右侧指纹待按压时的微光呼吸引导线 */
+.ridge-ink-guide {
+  stroke: rgba(197, 160, 89, 0.38) !important;
+  stroke-width: 1.35px;
+  stroke-dasharray: 4, 3;
+  fill: none;
+  animation: guidePulse 2.2s infinite ease-in-out;
 }
 
-/* ================= 按印完成后状态 (参考图四、图五) ================= */
-.mended-state .print-wrapper {
-  mix-blend-mode: multiply; /* 交叉区域自然叠色加深 */
+@keyframes guidePulse {
+  0%, 100% { opacity: 0.3; stroke: rgba(197, 160, 89, 0.3); }
+  50% { opacity: 0.85; stroke: rgba(212, 175, 55, 0.85); }
 }
 
-/* 左侧变深红 */
-.mended-state .print-sender .fingerprint-svg path {
-  stroke: #bd1f1f;
-  opacity: 0.92;
-}
-
-/* 右侧变饱满红，两枚指纹交织成完整爱心 */
-.mended-state .print-receiver {
-  animation: none;
-  filter: drop-shadow(0 2px 8px rgba(189, 31, 31, 0.3));
-}
-.mended-state .print-receiver .fingerprint-svg path {
-  stroke: #c72424;
-  opacity: 0.92;
-}
-
-/* 官方誓约印章 */
-.pledge-seal {
-  position: absolute;
-  right: -10px;
-  bottom: -10px;
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  border: 2px solid #be2222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(251, 248, 242, 0.88);
-  box-shadow: 0 4px 10px rgba(190, 34, 34, 0.2);
-  transform: scale(0) rotate(-25deg);
+/* 1.8秒后最终纯正朱砂红爱心图层 (初始 100% 隐藏) */
+#crimsonHeartLayer {
   opacity: 0;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: multiply;
+}
+
+/* 达成 1.8 秒完成态 */
+.dual-thumb-pad-stage.is-completed {
+  border-style: solid;
+  border-color: #d4af37;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.05),
+    0 0 26px rgba(212, 175, 55, 0.45);
   pointer-events: none;
 }
-.seal-inner {
-  font-size: 0.46rem;
+
+.dual-thumb-pad-stage.is-completed #crimsonHeartLayer {
+  opacity: 1 !important;
+}
+
+.dual-thumb-pad-stage.is-completed #leftBlackPrint,
+.dual-thumb-pad-stage.is-completed #rightGuidePrint,
+.dual-thumb-pad-stage.is-completed #rightGoldMask {
+  opacity: 0 !important;
+}
+
+/* 底部状态提示文案 */
+.heart-status-label {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(8px, 2.1vw, 9.5px);
+  letter-spacing: 1.5px;
+  color: #9e7d3b;
+  margin-top: 10px;
   font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.8px;
-  color: #be2222;
-  text-align: center;
+  transition: color 0.3s ease;
+}
+
+/* 纯西式官方和解印章 (100% 欧美西方排版 · 零中文) */
+.covenant-official-stamp {
+  position: absolute;
+  top: 50%;
+  right: -24px;
+  transform: translateY(-50%) rotate(-14deg) scale(0);
+  width: 52px;
+  height: 52px;
+  border: 1.8px solid #a82020;
+  border-radius: 50%;
+  color: #a82020;
   display: flex;
   flex-direction: column;
-}
-
-.pledge-seal.stamped {
-  opacity: 0.95;
-  transform: scale(1) rotate(-12deg);
-}
-
-/* 底部提示词 */
-.bottom-prompt {
-  font-size: 0.68rem;
-  letter-spacing: 1.6px;
-  color: #a18e7e;
-  margin-top: 18px;
-  font-weight: 600;
-  transition: color 0.4s ease;
-}
-
-.mended-state-prompt {
-  color: #b92020 !important;
-  font-weight: 700;
-}
-
-/* 粒子爆炸浮动 */
-.heart-sparkle {
-  position: absolute;
-  font-size: 14px;
-  color: #c22929;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 6.8px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.6px;
+  box-shadow: inset 0 0 4px rgba(168, 32, 32, 0.2);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.28), opacity 0.4s ease;
   pointer-events: none;
-  animation: floatUp 1.2s forwards ease-out;
 }
-@keyframes floatUp {
-  0% { transform: translate(0, 0) scale(0.6); opacity: 1; }
-  100% { transform: translate(var(--tx), var(--ty)) scale(1.4); opacity: 0; }
+
+.dual-thumb-pad-stage.is-completed ~ .covenant-official-stamp,
+.dual-thumb-pad-stage.is-completed + .heart-status-label + .covenant-official-stamp {
+  transform: translateY(-50%) rotate(-14deg) scale(1);
+  opacity: 0.92;
 }
