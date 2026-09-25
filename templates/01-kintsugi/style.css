@@ -557,7 +557,7 @@
 }
 
 /* ==========================================================================
-   9. 【专属巧思：双人完整指纹合成爱心 · 零切角 · 真实肌理与金光转红】
+   9. 【高奢专属巧思：参考图 1:1 双人指纹合心 · 初始左黑右金 · 长按蔓延转红】
    ========================================================================== */
 .thumbprint-heart-altar {
   margin: 28px auto 16px auto;
@@ -586,10 +586,10 @@
   margin-bottom: 16px;
 }
 
-/* 和纸凹印拓印台 */
+/* 3D 和纸压印拓印台 (Letterpress 物理内凹阴影) */
 .dual-thumb-pad-stage {
   position: relative;
-  width: 220px;
+  width: 250px;
   height: 200px;
   margin: 0 auto;
   background: #fbf6ec;
@@ -622,78 +622,63 @@
   transform: scale(0.97);
 }
 
-/* 核心叠合容器 (宽高充盈，绝不切角) */
+/* 核心叠合容器 (绝不裁切、完整呈现 240x180 比例) */
 .thumbprint-stack-box {
   position: relative;
-  width: 200px;
-  height: 180px;
+  width: 220px;
+  height: 164px;
 }
 
-/* 矢量指纹 SVG */
-.thumbprint-heart-svg {
+/* 高清真实指纹原图层 */
+.fp-heart-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  pointer-events: none;
   display: block;
-  overflow: visible;
 }
 
-/* 真实高密人体指纹脊线 */
-.ridge-ink-black {
-  stroke: #22201e !important;
-  stroke-width: 1.45px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+/* 1. 底层：初始状态（左侧真墨炭黑，右侧微光金线） */
+.fp-base-img {
+  z-index: 1;
+  opacity: 1;
 }
 
-.ridge-ink-gold {
-  stroke: #ffd700 !important;
-  stroke-width: 1.55px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.75));
+/* 右侧引导虚影轻微呼吸 */
+.guide-pulsing {
+  animation: guideBreathe 2.4s infinite ease-in-out;
 }
 
-.ridge-ink-red {
-  stroke: #c22d2d !important;
-  stroke-width: 1.55px;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+@keyframes guideBreathe {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.2)); opacity: 0.9; }
+  50% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.75)); opacity: 1; }
 }
 
-/* 初始状态：右侧指纹为完整透明虚影 */
-#rightGoldMask {
+/* 2. 上层：1:1 参考图原版深红爱心层（初始由底部遮蔽 100%） */
+.fp-active-img {
+  z-index: 2;
   clip-path: inset(100% 0 0 0);
   transition: clip-path 0.08s linear;
 }
 
-/* 右侧指纹待按压时的微光呼吸引导线 */
-.ridge-ink-guide {
-  stroke: rgba(197, 160, 89, 0.38) !important;
-  stroke-width: 1.35px;
-  stroke-dasharray: 4, 3;
-  fill: none;
-  animation: guidePulse 2.2s infinite ease-in-out;
-}
-
-@keyframes guidePulse {
-  0%, 100% { opacity: 0.3; stroke: rgba(197, 160, 89, 0.3); }
-  50% { opacity: 0.85; stroke: rgba(212, 175, 55, 0.85); }
-}
-
-/* 1.8秒后最终纯正朱砂红爱心图层 (初始 100% 隐藏) */
-#crimsonHeartLayer {
+/* 3. 随长按自底向上推移的发光波峰线 */
+.fp-glow-wavefront {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 0px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(255, 245, 180, 0.95) 0%, rgba(220, 38, 38, 0.8) 50%, rgba(220, 38, 38, 0) 80%);
+  filter: blur(5px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
-  mix-blend-mode: multiply;
+  z-index: 3;
+  transform: translateY(0);
 }
 
-/* 达成 1.8 秒完成态 */
+/* 4. 1.8秒后最终达成完成态：完全展现参考图原版红色爱心 */
 .dual-thumb-pad-stage.is-completed {
   border-style: solid;
   border-color: #d4af37;
@@ -703,13 +688,16 @@
   pointer-events: none;
 }
 
-.dual-thumb-pad-stage.is-completed #crimsonHeartLayer {
-  opacity: 1 !important;
+.dual-thumb-pad-stage.is-completed .fp-active-img {
+  clip-path: inset(0 0 0 0) !important;
 }
 
-.dual-thumb-pad-stage.is-completed #leftBlackPrint,
-.dual-thumb-pad-stage.is-completed #rightGuidePrint,
-.dual-thumb-pad-stage.is-completed #rightGoldMask {
+.dual-thumb-pad-stage.is-completed .fp-base-img {
+  opacity: 0 !important;
+  transition: opacity 0.4s ease;
+}
+
+.dual-thumb-pad-stage.is-completed .fp-glow-wavefront {
   opacity: 0 !important;
 }
 
