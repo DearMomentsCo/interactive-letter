@@ -4,510 +4,454 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Till Death Do Us Part</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../core.css?v=1.0.1">
-  <link rel="stylesheet" href="style.css?v=1.0.1">
+  <link rel="stylesheet" href="style.css?v=1.0.0">
 </head>
 <body>
-  <canvas id="ambient-canvas"></canvas>
 
-  <audio id="bg-audio" preload="auto" loop></audio>
-  <button id="audio-toggle" class="audio-btn" aria-label="Toggle Audio">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M9 18V5l12-2v13"></path>
-      <circle cx="6" cy="18" r="3"></circle>
-      <circle cx="18" cy="16" r="3"></circle>
-    </svg>
-  </button>
+  <!-- Background Ambience Canvas -->
+  <canvas id="fogCanvas" class="fog-canvas"></canvas>
 
-  <!-- Passcode Layer -->
-  <div id="passcode-overlay" class="overlay-passcode">
-    <svg class="passcode-crest" viewBox="0 0 100 100" fill="none" stroke="#c4b5c7" stroke-width="2">
-      <path d="M50 15 L50 85 M25 35 L75 35"/>
-      <circle cx="50" cy="35" r="8"/>
-      <path d="M35 60 Q50 48 65 60"/>
-    </svg>
-    <div class="passcode-title">Sanctum Locked</div>
-    <div class="passcode-subtitle">Enter the 4-digit code to awake eternity</div>
-    <div id="pin-box" class="pin-inputs">
-      <input type="tel" inputmode="numeric" maxlength="1" class="pin-digit" autofocus>
-      <input type="tel" inputmode="numeric" maxlength="1" class="pin-digit">
-      <input type="tel" inputmode="numeric" maxlength="1" class="pin-digit">
-      <input type="tel" inputmode="numeric" maxlength="1" class="pin-digit">
+  <!-- Passcode Modal Gate -->
+  <div id="lockOverlay" class="lock-overlay">
+    <div class="lock-box">
+      <div class="lock-title">ENTER CIPHER</div>
+      <div class="pin-inputs">
+        <input type="tel" maxlength="1" class="pin-digit" inputmode="numeric" autofocus>
+        <input type="tel" maxlength="1" class="pin-digit" inputmode="numeric">
+        <input type="tel" maxlength="1" class="pin-digit" inputmode="numeric">
+        <input type="tel" maxlength="1" class="pin-digit" inputmode="numeric">
+      </div>
+      <div class="lock-hint">FOUR DIGITS TO UNSEAL</div>
     </div>
   </div>
 
-  <!-- Viewport Main Container -->
-  <div class="viewport-container">
+  <!-- Primary Interactive Scene -->
+  <main class="stage">
     
-    <!-- Coffin Ceremony -->
-    <div class="coffin-stage">
-      <div class="coffin-box" id="coffin-box">
-        
-        <!-- Interior velvet & hands -->
-        <div class="coffin-interior">
-          <div class="hands-chamber">
-            <svg class="skeletal-hands-svg" id="skeletal-hands" viewBox="0 0 300 320">
-              <!-- Left Skeletal Hand -->
-              <g id="hand-left" fill="none" stroke="#ddd2e0" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M40 260 L85 200 L110 160"/>
-                <path d="M110 160 L140 145 L155 140"/>
-                <path d="M110 160 L145 160 L165 160"/>
-                <path d="M105 170 L140 180 L160 180"/>
-                <path d="M95 180 L125 200 L140 205"/>
-                <circle cx="110" cy="160" r="3" fill="#ddd2e0"/>
-                <circle cx="140" cy="145" r="2.5" fill="#ddd2e0"/>
-                <circle cx="145" cy="160" r="2.5" fill="#ddd2e0"/>
-              </g>
+    <header class="header-area">
+      <div id="dateText" class="date-pill"></div>
+      <h1 id="headline" class="main-headline"></h1>
+    </header>
 
-              <!-- Right Skeletal Hand -->
-              <g id="hand-right" fill="none" stroke="#f1e6f5" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M260 260 L215 200 L190 160"/>
-                <path d="M190 160 L160 145 L145 140"/>
-                <path d="M190 160 L155 160 L135 160"/>
-                <path d="M195 170 L160 180 L140 180"/>
-                <path d="M205 180 L175 200 L160 205"/>
-                <circle cx="190" cy="160" r="3" fill="#f1e6f5"/>
-                <circle cx="160" cy="145" r="2.5" fill="#f1e6f5"/>
-                <circle cx="155" cy="160" r="2.5" fill="#f1e6f5"/>
-              </g>
-
-              <!-- Thorny Rose Vines (Reveals on clasp) -->
-              <g id="rose-vines" opacity="0" stroke="#8b0e2f" stroke-width="3" fill="none">
-                <path d="M150 135 Q135 150 150 165 Q165 180 150 195"/>
-                <circle cx="150" cy="135" r="5" fill="#e6194b"/>
-                <circle cx="150" cy="165" r="4" fill="#8b0e2f"/>
-                <circle cx="150" cy="195" r="6" fill="#e6194b"/>
-              </g>
+    <!-- Victorian Coffin Object -->
+    <div id="coffinContainer" class="coffin-container">
+      
+      <!-- Velvet Interior -->
+      <div class="coffin-body">
+        <div class="coffin-velvet">
+          
+          <div class="hands-stage">
+            <!-- Left Hand Skeleton SVG -->
+            <svg class="skeleton-hand hand-left" viewBox="0 0 100 140" fill="none" stroke="#f0edf7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 50 135 L 50 95 M 42 135 L 42 98 M 58 135 L 58 98" stroke="#9d98a6"/>
+              <!-- Wrist bones -->
+              <ellipse cx="50" cy="90" rx="14" ry="6" fill="#1b1921"/>
+              <!-- Fingers -->
+              <path d="M 40 85 C 32 70, 25 55, 20 40 C 18 35, 22 28, 28 32 C 34 36, 38 60, 42 80"/>
+              <path d="M 46 84 C 44 60, 42 35, 45 15 C 46 10, 52 10, 54 16 C 56 35, 52 65, 50 84"/>
+              <path d="M 52 84 C 55 62, 58 38, 64 22 C 66 17, 72 18, 72 24 C 70 42, 62 66, 56 84"/>
+              <path d="M 56 86 C 65 72, 75 58, 85 48 C 89 44, 94 48, 91 54 C 82 68, 70 82, 60 88"/>
+              <!-- Thumb -->
+              <path d="M 38 88 C 28 85, 15 88, 8 95 C 4 99, 8 104, 14 102 C 24 98, 34 94, 38 92"/>
             </svg>
 
-            <div class="hands-hold-hint" id="hands-hint">PRESS & HOLD RIGHT HAND<br>TO CLASP FOREVER</div>
-            <div class="hold-progress-bar">
-              <div class="hold-progress-fill" id="hold-progress"></div>
-            </div>
-          </div>
-        </div>
+            <!-- Blooming Gothic Rose -->
+            <svg class="rose-bloom" viewBox="0 0 100 100" fill="none">
+              <circle cx="50" cy="50" r="18" fill="#8b001c"/>
+              <path d="M 50 32 C 38 32 30 42 30 52 C 30 64 42 72 50 78 C 58 72 70 64 70 52 C 70 42 62 32 50 32 Z" fill="#b30024" opacity="0.8"/>
+              <path d="M 40 45 C 45 38 55 38 60 45 C 62 52 56 60 50 64 C 44 60 38 52 40 45 Z" fill="#e6194b"/>
+              <path d="M 28 50 Q 20 54 18 64 Q 26 62 32 56" stroke="#2d5a27" stroke-width="2" fill="#1b3817"/>
+              <path d="M 72 50 Q 80 54 82 64 Q 74 62 68 56" stroke="#2d5a27" stroke-width="2" fill="#1b3817"/>
+            </svg>
 
-        <!-- Coffin Lid (Cover) -->
-        <div class="coffin-lid" id="coffin-lid">
-          <div class="bone-seal" id="seal-trigger">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
-              <path d="M12 2v20M7 8h10"/>
-              <circle cx="12" cy="8" r="2" fill="#fff"/>
+            <!-- Right Hand Skeleton SVG -->
+            <svg id="handRight" class="skeleton-hand hand-right hand-pulse" viewBox="0 0 100 140" fill="none" stroke="#f0edf7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 50 135 L 50 95 M 42 135 L 42 98 M 58 135 L 58 98" stroke="#9d98a6"/>
+              <ellipse cx="50" cy="90" rx="14" ry="6" fill="#1b1921"/>
+              <path d="M 60 85 C 68 70, 75 55, 80 40 C 82 35, 78 28, 72 32 C 66 36, 62 60, 58 80"/>
+              <path d="M 54 84 C 56 60, 58 35, 55 15 C 54 10, 48 10, 46 16 C 44 35, 48 65, 50 84"/>
+              <path d="M 48 84 C 45 62, 42 38, 36 22 C 34 17, 28 18, 28 24 C 30 42, 38 66, 44 84"/>
+              <path d="M 44 86 C 35 72, 25 58, 15 48 C 11 44, 6 48, 9 54 C 18 68, 30 82, 40 88"/>
+              <path d="M 62 88 C 72 85, 85 88, 92 95 C 96 99, 92 104, 86 102 C 76 98, 66 94, 62 92"/>
             </svg>
           </div>
-          <div class="lid-hint">Unseal Casket</div>
-        </div>
 
-      </div>
-    </div>
-
-    <!-- Parchment Letter Section -->
-    <div class="scroll-section" id="scroll-section">
-      <div class="parchment-sheet">
-        <header class="letter-header">
-          <div class="letter-date" id="render-date"></div>
-          <div class="letter-headline" id="render-headline"></div>
-        </header>
-        <div class="letter-salutation" id="render-salutation"></div>
-        <div class="letter-body" id="render-body" title="Click to reveal full text immediately"></div>
-        <div class="letter-closing">
-          <div id="render-closing"></div>
-          <div id="render-signature" style="font-weight: 700; margin-top: 4px;"></div>
-        </div>
-      </div>
-
-      <!-- 3D Photo Album -->
-      <div class="album-section" id="album-section">
-        <div class="photo-card-wrap" id="photo-card">
-          <div class="photo-card-inner" id="photo-inner">
-            <div class="photo-face photo-front">
-              <img id="photo-img" src="" alt="Moment">
+          <!-- Hold Progress for Mobile / Desktop -->
+          <div class="hold-ring">
+            <div class="ring-track">
+              <div id="ringFill" class="ring-fill"></div>
             </div>
-            <div class="photo-face photo-back">
-              <p id="photo-caption"></p>
-            </div>
+            <span class="hold-text">HOLD TO SEAL VOW</span>
           </div>
-        </div>
-        <div class="album-controls">
-          <button class="album-nav-btn" id="prev-photo">← Previous</button>
-          <span style="font-size: 0.75rem; letter-spacing: 0.15em; color: #8f8294;">TAP PHOTO TO FLIP</span>
-          <button class="album-nav-btn" id="next-photo">Next →</button>
+
         </div>
       </div>
 
-      <!-- Scratch Secret -->
-      <div class="scratch-container" id="scratch-section">
-        <div class="scratch-secret" id="scratch-text"></div>
-        <canvas id="scratch-canvas"></canvas>
-      </div>
-
-      <!-- Runaway Question -->
-      <div class="runaway-box" id="runaway-section">
-        <div class="runaway-q" id="runaway-question"></div>
-        <div class="runaway-btns">
-          <button class="btn-choice btn-yes" id="btn-yes">YES</button>
-          <button class="btn-choice btn-no" id="btn-no">NO</button>
+      <!-- Sliding Coffin Lid -->
+      <div id="coffinLid" class="coffin-lid">
+        <div class="lid-crest">
+          <div class="cross-seal">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#f0edf7">
+              <path d="M10 2 H14 V7 H19 V11 H14 V22 H10 V11 H5 V7 H10 Z"/>
+            </svg>
+          </div>
+          <div class="lid-instruction">TAP WAX TO UNSEAL</div>
         </div>
-        <div class="success-banner" id="success-banner"></div>
       </div>
 
     </div>
 
-  </div>
+    <!-- Parchment Letter Emerges After Vow -->
+    <article id="parchmentScroll" class="parchment-scroll">
+      <div id="letterSalutation" class="scroll-salutation"></div>
+      <div id="letterBody" class="scroll-body"></div>
+      
+      <!-- Photo Carousel -->
+      <section id="photoGallery" class="scroll-gallery"></section>
 
-  <script src="data.js?v=1.0.1"></script>
+      <!-- Scratch-off Secret Block -->
+      <section id="scratchSection" class="scratch-block">
+        <div class="scratch-header" id="scratchTitle"></div>
+        <div class="scratch-canvas-wrap">
+          <div id="scratchSecret" class="scratch-secret"></div>
+          <canvas id="scratchCanvas"></canvas>
+        </div>
+      </section>
+
+      <div id="letterClosing" class="scroll-closing"></div>
+      <div id="letterSignature" class="scroll-signature"></div>
+
+      <!-- Runaway Button Section -->
+      <section id="vowSection" class="vow-section">
+        <div id="vowQuestion" class="vow-question"></div>
+        <div class="vow-buttons">
+          <button id="btnYes" class="vow-btn vow-btn-yes">YES, FOREVER</button>
+          <button id="btnNo" class="vow-btn vow-btn-no">NEVER</button>
+        </div>
+        <div id="vowSuccess" class="vow-success"></div>
+      </section>
+    </article>
+
+  </main>
+
+  <!-- External Script Reference -->
+  <script src="data.js?v=1.0.0"></script>
   <script>
-    (function () {
-      const data = window.LETTER_DATA;
-      if (!data) return;
+    /* Audio & Haptic Synthesizer (Zero External File Dependencies) */
+    const SoundEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.ctx = new AudioContext();
+        }
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+      },
+      // Heavy Oak Coffin Creak / Slide
+      playCoffinOpen() {
+        this.init();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(65, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(35, this.ctx.currentTime + 0.8);
+        
+        gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.8);
 
-      // 1. Dual Haptic Touch Engine (Android Vibrate + iOS 55Hz Diaphragm Pulse)
-      const hapticAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      function triggerHaptic(duration = 45) {
-        if (navigator.vibrate) {
-          navigator.vibrate(duration);
-        } else if (hapticAudioCtx) {
-          try {
-            if (hapticAudioCtx.state === 'suspended') hapticAudioCtx.resume();
-            const osc = hapticAudioCtx.createOscillator();
-            const gain = hapticAudioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(55, hapticAudioCtx.currentTime); // 55Hz low displacement
-            gain.gain.setValueAtTime(0.3, hapticAudioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, hapticAudioCtx.currentTime + (duration / 1000));
-            osc.connect(gain);
-            gain.connect(hapticAudioCtx.destination);
-            osc.start();
-            osc.stop(hapticAudioCtx.currentTime + (duration / 1000));
-          } catch(e) {}
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.8);
+        this.haptic(40);
+      },
+      // Clasping Bone & Resonant Bell
+      playClasp() {
+        this.init();
+        // High resonance bell
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(260, this.ctx.currentTime + 1.6);
+        
+        gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 1.6);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start();
+        osc.stop(this.ctx.currentTime + 1.6);
+
+        // Low frequency thud for iOS tactile illusion
+        const subOsc = this.ctx.createOscillator();
+        const subGain = this.ctx.createGain();
+        subOsc.type = 'sine';
+        subOsc.frequency.setValueAtTime(55, this.ctx.currentTime);
+        subGain.gain.setValueAtTime(0.8, this.ctx.currentTime);
+        subGain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.25);
+        subOsc.connect(subGain);
+        subGain.connect(this.ctx.destination);
+        subOsc.start();
+        subOsc.stop(this.ctx.currentTime + 0.25);
+
+        this.haptic([60, 40, 80]);
+      },
+      // Dual-mode Haptic
+      haptic(pattern) {
+        if ('vibrate' in navigator) {
+          try { navigator.vibrate(pattern); } catch(e){}
         }
       }
+    };
 
-      // 2. Audio Engine
-      const audio = document.getElementById('bg-audio');
-      const audioBtn = document.getElementById('audio-toggle');
-      if (data.audioUrl) {
-        audio.src = data.audioUrl;
-        audioBtn.addEventListener('click', () => {
-          if (audio.paused) {
-            audio.play().catch(() => {});
-            audioBtn.classList.add('rotating');
-          } else {
-            audio.pause();
-            audioBtn.classList.remove('rotating');
-          }
+    /* Subtle Atmospheric Fog Particles */
+    function initAtmosphere() {
+      const canvas = document.getElementById('fogCanvas');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const particles = Array.from({ length: 35 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2.5 + 0.5,
+        dx: (Math.random() - 0.5) * 0.3,
+        dy: -Math.random() * 0.4 - 0.1,
+        alpha: Math.random() * 0.6 + 0.2
+      }));
+
+      function render() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => {
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.y < 0) p.y = h;
+          if (p.x < 0) p.x = w;
+          if (p.x > w) p.x = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200, 190, 220, ${p.alpha})`;
+          ctx.fill();
         });
-      } else {
-        audioBtn.style.display = 'none';
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    /* Core Initialization */
+    document.addEventListener('DOMContentLoaded', () => {
+      initAtmosphere();
+
+      // 1. Data Ingestion
+      document.getElementById('dateText').textContent = letterData.dateText;
+      document.getElementById('headline').textContent = letterData.headline;
+      document.getElementById('letterSalutation').textContent = letterData.salutation;
+      document.getElementById('letterBody').textContent = letterData.body;
+      document.getElementById('letterClosing').textContent = letterData.closing;
+      document.getElementById('letterSignature').textContent = letterData.signature;
+
+      if (letterData.fontType) {
+        document.getElementById('parchmentScroll').style.fontFamily = `"${letterData.fontType}", serif`;
       }
 
-      // 3. Passcode Engine
-      const passOverlay = document.getElementById('passcode-overlay');
-      const pinInputs = document.querySelectorAll('.pin-digit');
-      if (!data.passcode || data.passcode.trim() === "") {
-        passOverlay.classList.add('hidden');
+      // Render Photo Gallery
+      const gallery = document.getElementById('photoGallery');
+      if (letterData.photos && letterData.photos.length > 0) {
+        letterData.photos.forEach(p => {
+          const card = document.createElement('div');
+          card.className = 'polaroid-card';
+          card.innerHTML = `
+            <img class="polaroid-img" src="${p.url}" alt="Memory" loading="lazy">
+            <div class="polaroid-caption">${p.caption}</div>
+          `;
+          gallery.appendChild(card);
+        });
       } else {
-        pinInputs.forEach((input, idx) => {
+        gallery.style.display = 'none';
+      }
+
+      // 2. Passcode Logic
+      const lockOverlay = document.getElementById('lockOverlay');
+      if (!letterData.passcode || letterData.passcode.trim() === '') {
+        lockOverlay.classList.add('unlocked');
+      } else {
+        const inputs = document.querySelectorAll('.pin-digit');
+        inputs.forEach((input, index) => {
           input.addEventListener('input', (e) => {
-            if (e.target.value.length === 1 && idx < pinInputs.length - 1) {
-              pinInputs[idx + 1].focus();
+            if (e.target.value.length === 1 && index < inputs.length - 1) {
+              inputs[index + 1].focus();
             }
             checkPin();
           });
           input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !input.value && idx > 0) {
-              pinInputs[idx - 1].focus();
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+              inputs[index - 1].focus();
             }
           });
         });
-      }
 
-      function checkPin() {
-        const entered = Array.from(pinInputs).map(i => i.value).join('');
-        if (entered.length === 4) {
-          if (entered === data.passcode) {
-            triggerHaptic(60);
-            passOverlay.classList.add('hidden');
-            if (data.audioUrl && audio.paused) {
-              audio.play().then(() => audioBtn.classList.add('rotating')).catch(() => {});
+        function checkPin() {
+          const entered = Array.from(inputs).map(i => i.value).join('');
+          if (entered.length === 4) {
+            if (entered === letterData.passcode) {
+              SoundEngine.playCoffinOpen();
+              lockOverlay.classList.add('unlocked');
+            } else {
+              SoundEngine.haptic(200);
+              inputs.forEach(i => i.value = '');
+              inputs[0].focus();
             }
-          } else {
-            triggerHaptic(120);
-            document.getElementById('pin-box').classList.add('shake-error');
-            setTimeout(() => {
-              document.getElementById('pin-box').classList.remove('shake-error');
-              pinInputs.forEach(i => i.value = '');
-              pinInputs[0].focus();
-            }, 500);
           }
         }
       }
 
-      // 4. Coffin Lid Opening
-      const coffinLid = document.getElementById('coffin-lid');
-      const sealTrigger = document.getElementById('seal-trigger');
-      sealTrigger.addEventListener('click', () => {
-        triggerHaptic(50);
-        coffinLid.classList.add('opened');
+      // 3. Coffin Lid Click
+      const coffin = document.getElementById('coffinContainer');
+      const coffinLid = document.getElementById('coffinLid');
+      coffinLid.addEventListener('click', () => {
+        SoundEngine.playCoffinOpen();
+        coffin.classList.add('open');
       });
 
-      // 5. Hands Clasp & Rose Bloom Interaction (1.8s hold)
-      const handsSvg = document.getElementById('skeletal-hands');
-      const holdProgress = document.getElementById('hold-progress');
-      const handsHint = document.getElementById('hands-hint');
-      const roseVines = document.getElementById('rose-vines');
-      const scrollSection = document.getElementById('scroll-section');
-
+      // 4. Skeleton Hand Hold Interaction (1.8s)
+      const handRight = document.getElementById('handRight');
+      const ringFill = document.getElementById('ringFill');
+      const parchment = document.getElementById('parchmentScroll');
       let holdTimer = null;
-      let holdProgressVal = 0;
-      let clasped = false;
+      let holdProgress = 0;
+      let hasClasped = false;
 
       function startHold(e) {
-        if (clasped || !coffinLid.classList.contains('opened')) return;
+        if (hasClasped || !coffin.classList.contains('open')) return;
         e.preventDefault();
-        holdProgressVal = 0;
+        SoundEngine.init();
+        holdProgress = 0;
+        ringFill.style.width = '0%';
+        
         holdTimer = setInterval(() => {
-          holdProgressVal += 5.5; // ~1.8 seconds to reach 100%
-          holdProgress.style.width = Math.min(holdProgressVal, 100) + '%';
-          if (holdProgressVal >= 100) {
+          holdProgress += 4;
+          ringFill.style.width = holdProgress + '%';
+          if (holdProgress % 20 === 0) SoundEngine.haptic(15);
+
+          if (holdProgress >= 100) {
             clearInterval(holdTimer);
-            finishClasp();
+            sealVow();
           }
-        }, 100);
+        }, 72); // ~1.8 seconds total
       }
 
       function cancelHold() {
-        if (clasped) return;
+        if (hasClasped) return;
         clearInterval(holdTimer);
-        holdProgressVal = 0;
-        holdProgress.style.width = '0%';
+        holdProgress = 0;
+        ringFill.style.width = '0%';
       }
 
-      function finishClasp() {
-        clasped = true;
-        triggerHaptic(100);
-        document.getElementById('hand-left').style.transform = 'translateX(25px)';
-        document.getElementById('hand-right').style.transform = 'translateX(-25px)';
-        roseVines.style.transition = 'opacity 1.2s ease';
-        roseVines.style.opacity = '1';
-        handsHint.innerHTML = "✦ VOW SEALED IN BONE ✦";
-        handsHint.style.color = "var(--rose-glow)";
+      function sealVow() {
+        hasClasped = true;
+        coffin.classList.add('clasped');
+        SoundEngine.playClasp();
         
         setTimeout(() => {
-          scrollSection.classList.add('active');
-          startTypewriter();
-          scrollSection.scrollIntoView({ behavior: 'smooth' });
+          parchment.classList.add('revealed');
+          initScratch();
+          parchment.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 1200);
       }
 
-      handsSvg.addEventListener('mousedown', startHold);
-      handsSvg.addEventListener('touchstart', startHold, { passive: false });
+      handRight.addEventListener('mousedown', startHold);
       window.addEventListener('mouseup', cancelHold);
+      handRight.addEventListener('touchstart', startHold, { passive: false });
       window.addEventListener('touchend', cancelHold);
 
-      // 6. Parchment Render & Typewriter
-      document.getElementById('render-date').textContent = data.dateText;
-      document.getElementById('render-headline').textContent = data.headline;
-      document.getElementById('render-salutation').textContent = data.salutation;
-      document.getElementById('render-closing').textContent = data.closing;
-      document.getElementById('render-signature').textContent = data.signature || "";
-
-      const bodyEl = document.getElementById('render-body');
-      let typeIndex = 0;
-      let typeTimeout = null;
-      let typingCompleted = false;
-
-      function startTypewriter() {
-        if (typingCompleted) return;
-        const text = data.body || "";
-        const speed = Math.max(15, Math.min(45, 12000 / (text.length || 1)));
-
-        function tick() {
-          if (typeIndex < text.length) {
-            bodyEl.textContent += text.charAt(typeIndex);
-            typeIndex++;
-            typeTimeout = setTimeout(tick, speed);
-          } else {
-            typingCompleted = true;
-          }
-        }
-        tick();
-      }
-
-      bodyEl.addEventListener('click', () => {
-        clearTimeout(typeTimeout);
-        bodyEl.textContent = data.body || "";
-        typingCompleted = true;
-      });
-
-      // 7. 3D Flip Photo Album
-      let photoIdx = 0;
-      const photoCard = document.getElementById('photo-card');
-      const photoInner = document.getElementById('photo-inner');
-      const photoImg = document.getElementById('photo-img');
-      const photoCaption = document.getElementById('photo-caption');
-
-      function updatePhoto() {
-        if (!data.photos || data.photos.length === 0) {
-          document.getElementById('album-section').style.display = 'none';
+      // 5. Scratch Canvas
+      function initScratch() {
+        const scratchSec = document.getElementById('scratchSection');
+        if (!letterData.enableScratch) {
+          scratchSec.style.display = 'none';
           return;
         }
-        photoInner.classList.remove('flipped');
-        photoImg.src = data.photos[photoIdx].url;
-        photoCaption.textContent = data.photos[photoIdx].caption;
-      }
-      updatePhoto();
+        document.getElementById('scratchTitle').textContent = letterData.scratchTitle;
+        document.getElementById('scratchSecret').textContent = letterData.scratchSecret;
 
-      photoCard.addEventListener('click', () => {
-        photoInner.classList.toggle('flipped');
-        triggerHaptic(30);
-      });
+        const canvas = document.getElementById('scratchCanvas');
+        const ctx = canvas.getContext('2d');
+        const wrap = canvas.parentElement;
+        canvas.width = wrap.offsetWidth;
+        canvas.height = wrap.offsetHeight;
 
-      document.getElementById('prev-photo').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (data.photos && data.photos.length > 0) {
-          photoIdx = (photoIdx - 1 + data.photos.length) % data.photos.length;
-          updatePhoto();
+        ctx.fillStyle = '#26222b';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Gothic Pattern overlay on scratch layer
+        ctx.fillStyle = '#3a3342';
+        for (let i = 0; i < canvas.width; i += 24) {
+          ctx.fillRect(i, 0, 1, canvas.height);
         }
-      });
 
-      document.getElementById('next-photo').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (data.photos && data.photos.length > 0) {
-          photoIdx = (photoIdx + 1) % data.photos.length;
-          updatePhoto();
-        }
-      });
-
-      // 8. Scratch-off Layer
-      if (data.enableScratch) {
-        document.getElementById('scratch-text').textContent = data.scratchSecret;
-        const sCanvas = document.getElementById('scratch-canvas');
-        const sCtx = sCanvas.getContext('2d');
-        let isDrawing = false;
-        let cleared = false;
-
-        function initScratchCanvas() {
-          sCanvas.width = sCanvas.offsetWidth;
-          sCanvas.height = sCanvas.offsetHeight;
-          sCtx.fillStyle = '#2b212f';
-          sCtx.fillRect(0, 0, sCanvas.width, sCanvas.height);
-          sCtx.fillStyle = '#c4b5c7';
-          sCtx.font = '12px Cinzel, serif';
-          sCtx.textAlign = 'center';
-          sCtx.fillText('✦ SCRATCH TO REVEAL SECRET ✦', sCanvas.width / 2, sCanvas.height / 2 + 4);
-        }
-        setTimeout(initScratchCanvas, 300);
+        let isScratching = false;
 
         function scratch(e) {
-          if (!isDrawing || cleared) return;
-          const rect = sCanvas.getBoundingClientRect();
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-          const x = clientX - rect.left;
-          const y = clientY - rect.top;
+          if (!isScratching) return;
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+          const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
 
-          sCtx.globalCompositeOperation = 'destination-out';
-          sCtx.beginPath();
-          sCtx.arc(x, y, 22, 0, Math.PI * 2);
-          sCtx.fill();
-          triggerHaptic(15);
-          checkScratchPercent();
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, 18, 0, Math.PI * 2);
+          ctx.fill();
+          SoundEngine.haptic(8);
         }
 
-        function checkScratchPercent() {
-          const imgData = sCtx.getImageData(0, 0, sCanvas.width, sCanvas.height);
-          let transparent = 0;
-          for (let i = 3; i < imgData.data.length; i += 16) {
-            if (imgData.data[i] === 0) transparent++;
-          }
-          if (transparent > (imgData.data.length / 16) * 0.45) {
-            cleared = true;
-            sCanvas.style.transition = 'opacity 0.6s ease';
-            sCanvas.style.opacity = '0';
-            setTimeout(() => sCanvas.remove(), 600);
-          }
-        }
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        window.addEventListener('mouseup', () => isScratching = false);
+        canvas.addEventListener('mousemove', scratch);
 
-        sCanvas.addEventListener('mousedown', () => isDrawing = true);
-        sCanvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); });
-        window.addEventListener('mouseup', () => isDrawing = false);
-        window.addEventListener('touchend', () => isDrawing = false);
-        sCanvas.addEventListener('mousemove', scratch);
-        sCanvas.addEventListener('touchmove', scratch);
-      } else {
-        document.getElementById('scratch-section').style.display = 'none';
+        canvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: false });
+        window.addEventListener('touchend', () => isScratching = false);
+        canvas.addEventListener('touchmove', scratch, { passive: false });
       }
 
-      // 9. Runaway Valentine Interaction
-      if (data.enableRunaway) {
-        document.getElementById('runaway-question').textContent = data.runawayQuestion;
-        const noBtn = document.getElementById('btn-no');
-        const yesBtn = document.getElementById('btn-yes');
-        const successBanner = document.getElementById('success-banner');
+      // 6. Runaway Button Interaction
+      const vowSec = document.getElementById('vowSection');
+      if (letterData.enableRunaway) {
+        document.getElementById('vowQuestion').textContent = letterData.runawayQuestion;
+        const btnYes = document.getElementById('btnYes');
+        const btnNo = document.getElementById('btnNo');
+        const vowSuccess = document.getElementById('vowSuccess');
 
-        function teleportNo() {
-          triggerHaptic(30);
-          const maxDisplacement = 90;
-          const randX = (Math.random() - 0.5) * maxDisplacement * 2;
-          const randY = (Math.random() - 0.5) * maxDisplacement;
-          noBtn.style.transform = `translate(${randX}px, ${randY}px)`;
+        btnNo.addEventListener('mouseover', evade);
+        btnNo.addEventListener('touchstart', evade);
+
+        function evade(e) {
+          e.preventDefault();
+          const offsetX = (Math.random() - 0.5) * 160;
+          const offsetY = (Math.random() - 0.5) * 80;
+          btnNo.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+          SoundEngine.haptic(20);
         }
 
-        noBtn.addEventListener('mouseenter', teleportNo);
-        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); teleportNo(); });
-
-        yesBtn.addEventListener('click', () => {
-          triggerHaptic(80);
-          successBanner.textContent = data.runawaySuccessMessage;
-          successBanner.style.display = 'block';
-          noBtn.style.display = 'none';
-          yesBtn.style.transform = 'scale(1.08)';
+        btnYes.addEventListener('click', () => {
+          SoundEngine.playClasp();
+          btnNo.style.display = 'none';
+          btnYes.style.display = 'none';
+          document.getElementById('vowQuestion').style.display = 'none';
+          vowSuccess.textContent = letterData.runawaySuccessMessage;
+          vowSuccess.style.display = 'block';
         });
       } else {
-        document.getElementById('runaway-section').style.display = 'none';
+        vowSec.style.display = 'none';
       }
-
-      // 10. Ambient Dust Canvas
-      const ambCanvas = document.getElementById('ambient-canvas');
-      const ambCtx = ambCanvas.getContext('2d');
-      let particles = [];
-
-      function resizeAmb() {
-        ambCanvas.width = window.innerWidth;
-        ambCanvas.height = window.innerHeight;
-      }
-      window.addEventListener('resize', resizeAmb);
-      resizeAmb();
-
-      for (let i = 0; i < 40; i++) {
-        particles.push({
-          x: Math.random() * ambCanvas.width,
-          y: Math.random() * ambCanvas.height,
-          radius: Math.random() * 1.5 + 0.5,
-          speedY: -(Math.random() * 0.4 + 0.1),
-          alpha: Math.random() * 0.5 + 0.2
-        });
-      }
-
-      function animateAmb() {
-        ambCtx.clearRect(0, 0, ambCanvas.width, ambCanvas.height);
-        particles.forEach(p => {
-          p.y += p.speedY;
-          if (p.y < 0) p.y = ambCanvas.height;
-          ambCtx.beginPath();
-          ambCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ambCtx.fillStyle = `rgba(215, 195, 225, ${p.alpha})`;
-          ambCtx.fill();
-        });
-        requestAnimationFrame(animateAmb);
-      }
-      animateAmb();
-
-    })();
+    });
   </script>
 </body>
 </html>
