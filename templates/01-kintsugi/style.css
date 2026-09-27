@@ -586,11 +586,11 @@
   margin-bottom: 16px;
 }
 
-/* 和纸凹印拓印台 (Letterpress 物理内凹阴影) */
+/* 和纸凹印拓印台 (充盈高度，确保下部尖角 100% 完整容纳) */
 .dual-thumb-pad-stage {
   position: relative;
   width: 250px;
-  height: 200px;
+  height: 220px;
   margin: 0 auto;
   background: #fbf6ec;
   border: 1.5px dashed #c9a55c;
@@ -622,14 +622,17 @@
   transform: scale(0.97);
 }
 
-/* 核心叠合容器 (完美容纳参考图 608:455 原版黄金比例) */
+/* 核心叠合容器 (严格维持图一 610:455 的真实高宽比) */
 .thumbprint-stack-box {
   position: relative;
   width: 220px;
   height: 164px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 高清真实指纹原图层画布 */
+/* 高清真实指纹原图画布 (绝对禁止裁剪，完整展现底尖) */
 .fp-heart-canvas {
   position: absolute;
   inset: 0;
@@ -639,7 +642,7 @@
   display: block;
 }
 
-/* 1. 底层：初始状态（左侧真墨炭黑，右侧微光金线虚影） */
+/* 1. 底层：初始状态（左瓣真墨炭黑，右瓣微光金线虚影） */
 .fp-base-canvas {
   z-index: 1;
   opacity: 1;
