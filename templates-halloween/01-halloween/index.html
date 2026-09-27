@@ -8,27 +8,24 @@
   <!-- Google Typography Suite -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800;900&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css?v=gothic_casket_1.0.0" />
+  <link rel="stylesheet" href="style.css?v=gothic_casket_2.0.0" />
 </head>
 <body>
 
-  <!-- Floating Ash & Spectral Ember Simulation -->
+  <!-- Floating Ash, Cobwebs & Spectral Embers -->
   <canvas id="particleCanvas" class="particle-canvas"></canvas>
 
+  <!-- Background Music Player Controller -->
   <audio id="bgAudio" loop preload="auto"></audio>
+  <button id="audioController" class="audio-controller" title="Toggle Gothic Ambient">♫</button>
 
-  <!-- 1. Crypt Vault Passcode Gate -->
+  <!-- 1. Passcode Screen -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
-      <div class="vault-screw screw-tl"></div>
-      <div class="vault-screw screw-tr"></div>
-      <div class="vault-screw screw-bl"></div>
-      <div class="vault-screw screw-br"></div>
-
-      <div class="passcode-title">ENTER 4-DIGIT CRYPT CODE</div>
+      <div class="passcode-title">ENTER 4-DIGIT CRYPT CIPHER</div>
       <div class="passcode-inputs">
         <input type="password" maxlength="1" class="passcode-digit" inputmode="numeric" autofocus />
         <input type="password" maxlength="1" class="passcode-digit" inputmode="numeric" />
@@ -39,186 +36,200 @@
     </div>
   </div>
 
-  <!-- 2. Master Viewport Stage -->
-  <div class="letter-viewport">
-    
-    <!-- Gothic Mechanical Status Bar -->
-    <div class="gothic-status-bar">
-      <span class="status-tag-left">● SEALED // ANNO DOMINI</span>
-      <span class="status-tag-right" id="statusDate">OCTOBER 31, 2026</span>
+  <!-- Master Interactive Viewport -->
+  <div class="master-viewport">
+
+    <!-- Atmospheric Gothic Status Bar -->
+    <div class="status-pill-bar">
+      <span class="status-indicator">● ALL HALLOWS' EVE</span>
+      <span class="status-date" id="statusDate">OCTOBER 31, 2026</span>
     </div>
 
-    <!-- 3. Heavy Victorian Skeuomorphic Coffin Station -->
-    <div class="coffin-station" id="coffinStation">
-      <div class="coffin-physical-casket">
-        
-        <!-- Wood Rim Layer -->
-        <div class="coffin-rim-layer"></div>
-
-        <!-- Cast Tarnished Silver Metal Corners -->
-        <svg class="cast-corner corner-tl" viewBox="0 0 40 40">
-          <path d="M0,0 L40,0 L35,10 L10,10 L10,35 L0,40 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="16" cy="16" r="3" fill="#302d38"/>
-        </svg>
-        <svg class="cast-corner corner-tr" viewBox="0 0 40 40">
-          <path d="M40,0 L0,0 L5,10 L30,10 L30,35 L40,40 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="24" cy="16" r="3" fill="#302d38"/>
-        </svg>
-        <svg class="cast-corner corner-ml" viewBox="0 0 40 40">
-          <path d="M0,0 L40,0 L35,10 L10,10 L10,35 L0,40 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="16" cy="16" r="3" fill="#302d38"/>
-        </svg>
-        <svg class="cast-corner corner-mr" viewBox="0 0 40 40">
-          <path d="M40,0 L0,0 L5,10 L30,10 L30,35 L40,40 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="24" cy="16" r="3" fill="#302d38"/>
-        </svg>
-        <svg class="cast-corner corner-bl" viewBox="0 0 40 40">
-          <path d="M0,40 L40,40 L35,30 L10,30 L10,5 L0,0 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="16" cy="24" r="3" fill="#302d38"/>
-        </svg>
-        <svg class="cast-corner corner-br" viewBox="0 0 40 40">
-          <path d="M40,40 L0,40 L5,30 L30,30 L30,5 L40,0 Z" fill="#b8b5c4" stroke="#433f4d" stroke-width="1.5"/>
-          <circle cx="24" cy="24" r="3" fill="#302d38"/>
-        </svg>
-
-        <!-- Deep Tufted Velvet Bed -->
-        <div class="velvet-cushion-bed">
-          
-          <div class="skeleton-crypt-arena">
-            <!-- Left Anatomical Skeleton Arm (SVG Precision) -->
-            <svg class="skeletal-arm arm-left" viewBox="0 0 120 180" fill="none">
-              <!-- Radius & Ulna with Joint Shading -->
-              <path d="M 52 175 L 52 120 M 42 175 L 42 124 M 62 175 L 62 124" stroke="#e8e6f0" stroke-width="3" stroke-linecap="round"/>
-              <ellipse cx="52" cy="115" rx="18" ry="7" fill="#1b1922" stroke="#e8e6f0" stroke-width="2"/>
-              <!-- Metacarpals & Phalanges -->
-              <path d="M 40 110 C 30 90, 20 70, 16 52 C 14 45, 18 36, 26 40 C 34 46, 40 76, 44 104" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
-              <path d="M 48 108 C 46 76, 42 45, 46 20 C 47 13, 54 13, 57 20 C 60 45, 55 82, 53 108" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-              <path d="M 56 108 C 60 80, 64 48, 72 28 C 75 22, 82 23, 82 30 C 80 52, 70 82, 62 108" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
-              <path d="M 62 110 C 72 92, 84 74, 96 62 C 101 57, 107 62, 103 70 C 92 88, 78 106, 68 114" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-              <!-- Opposable Thumb -->
-              <path d="M 38 114 C 26 110, 10 114, 4 122 C 0 127, 4 133, 12 131 C 24 126, 34 120, 38 118" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-            </svg>
-
-            <!-- Blooming Crimson Rose with Thorns -->
-            <svg class="gothic-rose-bloom" viewBox="0 0 120 120" fill="none">
-              <!-- Thorny Vines -->
-              <path d="M 20 70 Q 35 60 60 60 Q 85 60 100 70" stroke="#1c3818" stroke-width="3.5" stroke-linecap="round"/>
-              <path d="M 35 62 L 30 54 M 80 62 L 85 54" stroke="#1c3818" stroke-width="2.5" stroke-linecap="round"/>
-              <!-- Layered Rose Petals -->
-              <circle cx="60" cy="55" r="22" fill="#610415"/>
-              <path d="M 60 33 C 44 33 34 45 34 58 C 34 72 48 82 60 88 C 72 82 86 72 86 58 C 86 45 76 33 60 33 Z" fill="#990b24"/>
-              <path d="M 48 50 C 54 42 66 42 72 50 C 75 58 68 68 60 72 C 52 68 45 58 48 50 Z" fill="#cc1234"/>
-              <path d="M 54 54 C 57 50 63 50 66 54 C 68 58 64 63 60 65 C 56 63 52 58 54 54 Z" fill="#ff2a5f"/>
-            </svg>
-
-            <!-- Right Anatomical Skeleton Arm -->
-            <svg class="skeletal-arm arm-right arm-right-pulse" id="handRightBtn" viewBox="0 0 120 180" fill="none">
-              <path d="M 68 175 L 68 120 M 78 175 L 78 124 M 58 175 L 58 124" stroke="#e8e6f0" stroke-width="3" stroke-linecap="round"/>
-              <ellipse cx="68" cy="115" rx="18" ry="7" fill="#1b1922" stroke="#e8e6f0" stroke-width="2"/>
-              <path d="M 80 110 C 90 90, 100 70, 104 52 C 106 45, 102 36, 94 40 C 86 46, 80 76, 76 104" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
-              <path d="M 72 108 C 74 76, 78 45, 74 20 C 73 13, 66 13, 63 20 C 60 45, 65 82, 67 108" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-              <path d="M 64 108 C 60 80, 56 48, 48 28 C 45 22, 38 23, 38 30 C 40 52, 50 82, 58 108" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
-              <path d="M 58 110 C 48 92, 36 74, 24 62 C 19 57, 13 62, 17 70 C 28 88, 42 106, 52 114" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-              <path d="M 82 114 C 94 110, 110 114, 116 122 C 120 127, 116 133, 108 131 C 96 126, 86 120, 82 118" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-            </svg>
-          </div>
-
-          <!-- Tactile Hold Gauge -->
-          <div class="hold-pact-console">
-            <div class="hold-meter-track">
-              <div class="hold-meter-fill" id="holdMeterFill"></div>
-            </div>
-            <span class="hold-meter-text">✦ HOLD HAND TO SEAL ETERNAL VOW ✦</span>
-          </div>
-
-        </div>
-
-        <!-- Coffin Sliding Solid Wood Lid -->
-        <div class="coffin-lid-casket" id="coffinLid">
-          <div class="lid-gothic-panel">
-            <div class="wax-cross-seal">
-              <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff">
-                <path d="M10 2 H14 V7 H19 V11 H14 V22 H10 V11 H5 V7 H10 Z"/>
-              </svg>
-            </div>
-            <div class="lid-unseal-hint">✦ TAP CROSS TO UNSEAL ✦</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 4. Rising Parchment Scroll (J-Card Inspired Tactile Delivery) -->
-    <article class="parchment-sheet" id="parchmentSheet">
+    <!-- ==========================================================================
+         ACT 1: THE VICTORIAN COFFIN & BONE CLASP (First Screen Only)
+         ========================================================================== -->
+    <section class="act-coffin-stage" id="actCoffinStage">
       
-      <div class="parchment-date" id="parchmentDate"></div>
-      <h1 class="parchment-title" id="parchmentHeadline"></h1>
-      <div class="parchment-subheadline" id="parchmentSubHeadline"></div>
+      <div class="coffin-station" id="coffinStation">
+        <div class="coffin-physical-casket">
+          <div class="coffin-rim-layer"></div>
 
-      <!-- Washi Tape Salutation Ribbon -->
-      <div class="tape-salutation-box">
-        <span class="tape-salutation-text" id="parchmentSalutation"></span>
-      </div>
+          <!-- Victorian Cast Metal Ornaments -->
+          <svg class="coffin-corner-ornament co-tl" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
+          <svg class="coffin-corner-ornament co-tr" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
+          <svg class="coffin-corner-ornament co-ml" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
+          <svg class="coffin-corner-ornament co-mr" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
+          <svg class="coffin-corner-ornament co-bl" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
+          <svg class="coffin-corner-ornament co-br" viewBox="0 0 30 30">
+            <path d="M0,0 L30,0 L24,8 L8,8 L8,24 L0,30 Z" fill="#b0a9bd" stroke="#3a3344" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="2.5" fill="#201a29"/>
+          </svg>
 
-      <!-- 3D Flip Polaroid Photo Album -->
-      <div class="photo-album-casket" id="photoAlbumSection">
-        <div class="photo-flip-frame" id="photoFlipCard">
-          <div class="photo-flip-inner">
-            <div class="photo-card-side photo-card-front">
-              <img id="frontPhotoImg" src="" alt="Crypt Memory Photo" />
-            </div>
-            <div class="photo-card-side photo-card-back">
-              <p class="photo-caption-gothic" id="backCaptionText"></p>
+          <!-- Deep Tufted Velvet Bed -->
+          <div class="velvet-cushion-bed">
+            <div class="skeleton-hands-stage">
+              
+              <!-- Left Anatomical Skeleton Hand (With bone shading & volume) -->
+              <svg class="skeletal-hand hand-left" viewBox="0 0 100 150">
+                <path d="M 44 145 L 44 100 M 34 145 L 34 102 M 54 145 L 54 102" stroke="#d5d0e2" stroke-width="3" stroke-linecap="round"/>
+                <!-- Carpal bones -->
+                <ellipse cx="44" cy="95" rx="16" ry="6" fill="#171221" stroke="#e8e4f5" stroke-width="2"/>
+                <!-- Detailed jointed fingers -->
+                <path d="M 34 90 C 26 72, 16 55, 12 38 C 10 32, 16 26, 22 30 C 28 35, 34 62, 38 86" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M 40 88 C 38 60, 36 32, 40 12 C 41 6, 48 6, 50 12 C 52 32, 48 65, 46 88" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+                <path d="M 48 88 C 52 64, 56 36, 62 20 C 64 15, 70 16, 70 22 C 68 40, 60 65, 54 88" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M 54 90 C 62 74, 72 58, 82 48 C 86 44, 91 48, 88 54 C 79 68, 68 84, 60 92" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+                <!-- Opposable Thumb -->
+                <path d="M 32 94 C 22 90, 8 94, 2 100 C -2 104, 2 109, 8 108 C 18 104, 28 100, 32 98" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+              </svg>
+
+              <!-- Blooming Gothic Rose -->
+              <svg class="gothic-rose-bloom" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="18" fill="#5c0617"/>
+                <path d="M 50 28 C 36 28 28 40 28 52 C 28 66 40 74 50 80 C 60 74 72 66 72 52 C 72 40 64 28 50 28 Z" fill="#990b24"/>
+                <path d="M 40 45 C 45 36 55 36 60 45 C 64 52 56 62 50 66 C 44 62 36 52 40 45 Z" fill="#d90429"/>
+                <path d="M 46 48 C 48 44 52 44 54 48 C 56 52 52 56 50 58 C 48 56 44 52 46 48 Z" fill="#ff2a5f"/>
+              </svg>
+
+              <!-- Right Anatomical Skeleton Hand -->
+              <svg class="skeletal-hand hand-right hand-pulse" id="handRightBtn" viewBox="0 0 100 150">
+                <path d="M 56 145 L 56 100 M 66 145 L 66 102 M 46 145 L 46 102" stroke="#d5d0e2" stroke-width="3" stroke-linecap="round"/>
+                <ellipse cx="56" cy="95" rx="16" ry="6" fill="#171221" stroke="#e8e4f5" stroke-width="2"/>
+                <path d="M 66 90 C 74 72, 84 55, 88 38 C 90 32, 84 26, 78 30 C 72 35, 66 62, 62 86" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M 60 88 C 62 60, 64 32, 60 12 C 59 6, 52 6, 50 12 C 48 32, 52 65, 54 88" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+                <path d="M 52 88 C 48 64, 44 36, 38 20 C 36 15, 30 16, 30 22 C 32 40, 40 65, 46 88" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M 46 90 C 38 74, 28 58, 18 48 C 14 44, 9 48, 12 54 C 21 68, 32 84, 40 92" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+                <path d="M 68 94 C 78 90, 92 94, 98 100 C 102 104, 98 109, 92 108 C 82 104, 72 100, 68 98" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+              </svg>
+
             </div>
           </div>
+
+          <!-- Solid Wood Sliding Coffin Lid -->
+          <div class="coffin-lid-casket" id="coffinLid">
+            <div class="lid-crest-center">
+              <div class="wax-cross-seal">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M10 2 H14 V7 H19 V11 H14 V22 H10 V11 H5 V7 H10 Z"/>
+                </svg>
+              </div>
+              <div class="lid-unseal-hint">✦ TAP CROSS TO UNSEAL ✦</div>
+            </div>
+          </div>
+
         </div>
-        <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP MEMORY ✦</div>
+      </div>
+
+      <!-- Tactile Hold Gauge Console -->
+      <div class="hold-gauge-box">
+        <div class="hold-meter-track">
+          <div class="hold-meter-fill" id="holdMeterFill"></div>
+        </div>
+        <span class="hold-meter-hint">✦ PRESS & HOLD SKELETON HAND TO SEAL VOW ✦</span>
+      </div>
+
+      <!-- Surprise Transition Button to Act 2 -->
+      <button class="enter-crypt-btn" id="enterCryptBtn">✦ ENTER THE CRYPT ✦</button>
+
+    </section>
+
+    <!-- ==========================================================================
+         ACT 2: GOTHIC ANCIENT PARCHMENT LETTER (Independent Screen)
+         ========================================================================== -->
+    <article class="act-letter-stage" id="actLetterStage">
+      <div class="gothic-parchment-sheet">
         
-        <div class="photo-nav-rack" id="photoNavRack">
-          <button class="photo-nav-btn" id="prevPhotoBtn">‹</button>
-          <span class="photo-page-num" id="photoPageIndicator">1 / 1</span>
-          <button class="photo-nav-btn" id="nextPhotoBtn">›</button>
+        <!-- Interactive Candle Surprise Altar -->
+        <div class="gothic-candle-altar" id="candleAltar" title="Click to blow or relight candle!">
+          <div class="candle-wax-stick">
+            <div class="candle-wick"></div>
+            <div class="candle-flame" id="candleFlame"></div>
+          </div>
+          <span class="candle-hint">✦ CANDLE OF ETERNITY (TAP TO BLOW) ✦</span>
         </div>
+
+        <div class="parchment-date" id="parchmentDate"></div>
+        <h1 class="parchment-title" id="parchmentHeadline"></h1>
+        <div class="parchment-subheadline" id="parchmentSubHeadline"></div>
+
+        <!-- Washi Tape Ribbon Salutation -->
+        <div class="salutation-ribbon">
+          <span class="salutation-text" id="parchmentSalutation"></span>
+        </div>
+
+        <!-- 3D Flip Polaroid Photo Album -->
+        <div class="photo-album-casket" id="photoAlbumSection">
+          <div class="photo-flip-frame" id="photoFlipCard">
+            <div class="photo-flip-inner">
+              <div class="photo-card-side photo-card-front">
+                <img id="frontPhotoImg" src="" alt="Crypt Memory" />
+              </div>
+              <div class="photo-card-side photo-card-back">
+                <p class="photo-caption-gothic" id="backCaptionText"></p>
+              </div>
+            </div>
+          </div>
+          <div class="photo-flip-hint">✦ TAP PHOTO TO FLIP MEMORY ✦</div>
+          <div class="photo-nav-rack" id="photoNavRack">
+            <button class="photo-nav-btn" id="prevPhotoBtn">‹</button>
+            <span class="photo-page-num" id="photoPageIndicator">1 / 1</span>
+            <button class="photo-nav-btn" id="nextPhotoBtn">›</button>
+          </div>
+        </div>
+
+        <!-- Typewriter Letter Body -->
+        <div class="letter-body-area" id="letterBodyArea">
+          <span id="typewriterText"></span><span class="gothic-typewriter-cursor" id="typewriterCursor"></span>
+        </div>
+
+        <div class="letter-closing-line" id="letterClosing"></div>
+        <div class="letter-signature-script" id="letterSignature"></div>
+
+        <!-- Gothic Tomb Ash Scratch-Off Vault -->
+        <section class="scratch-gothic-vault" id="scratchSection">
+          <div class="scratch-vault-label" id="scratchHintText"></div>
+          <div class="scratch-casket-frame">
+            <div class="scratch-secret-text" id="scratchSecretReveal"></div>
+            <canvas class="scratch-canvas-top" id="scratchCanvas"></canvas>
+          </div>
+        </section>
+
+        <!-- Runaway Mechanical Vow Gate -->
+        <section class="runaway-gothic-gate" id="runawaySection">
+          <div class="runaway-gate-question" id="runawayQuestion"></div>
+          <div class="runaway-gate-buttons">
+            <button class="btn-gate-yes" id="btnYes">YES, FOREVER ✦</button>
+            <button class="btn-gate-no" id="btnNo">NEVER</button>
+          </div>
+          <div class="gate-success-banner" id="gateSuccessBanner"></div>
+        </section>
+
       </div>
-
-      <!-- Typewriter Letter Body -->
-      <div class="letter-body-area" id="letterBodyArea">
-        <span id="typewriterText"></span><span class="gothic-typewriter-cursor" id="typewriterCursor"></span>
-      </div>
-
-      <div class="letter-closing-line" id="letterClosing"></div>
-      <div class="letter-signature-script" id="letterSignature"></div>
-
-      <!-- Gothic Scratch-Off Ashes Vault -->
-      <section class="scratch-gothic-vault" id="scratchSection">
-        <div class="scratch-vault-label" id="scratchHintText"></div>
-        <div class="scratch-casket-frame">
-          <div class="scratch-secret-text" id="scratchSecretReveal"></div>
-          <canvas class="scratch-canvas-top" id="scratchCanvas"></canvas>
-        </div>
-      </section>
-
-      <!-- Runaway Mechanical Vow Gate -->
-      <section class="runaway-gothic-gate" id="runawaySection">
-        <div class="runaway-gate-question" id="runawayQuestion"></div>
-        <div class="runaway-gate-buttons">
-          <button class="btn-gate-yes" id="btnYes">YES, FOREVER ✦</button>
-          <button class="btn-gate-no" id="btnNo">NEVER</button>
-        </div>
-        <div class="gate-success-banner" id="gateSuccessBanner"></div>
-      </section>
-
     </article>
 
   </div>
 
-  <script src="data.js?v=gothic_casket_1.0.0"></script>
+  <script src="data.js?v=gothic_casket_2.0.0"></script>
   <script>
     /* ==========================================================================
-       GOTHIC ACOUSTIC & PHYSICAL HAPTIC SOUND ENGINE
-       Synthesizes realistic oak friction, church bell resonance & 55Hz iOS strike.
+       GOTHIC ACOUSTIC & HAPTIC PHYSICAL SOUND ENGINE
        ========================================================================== */
-    const GothicSoundEngine = {
+    const SoundEngine = {
       ctx: null,
       getAudio() {
         if (!this.ctx) {
@@ -230,41 +241,37 @@
         }
         return this.ctx;
       },
-      // Heavy Oak Hinge Slide & Friction
-      playCasketOpen() {
+      // Deep Wood Oak Slide
+      playOakSlide() {
         try {
           const ctx = this.getAudio();
           const now = ctx.currentTime;
-          
-          const osc1 = ctx.createOscillator();
-          const gain1 = ctx.createGain();
-          osc1.type = 'sawtooth';
-          osc1.frequency.setValueAtTime(80, now);
-          osc1.frequency.exponentialRampToValueAtTime(32, now + 0.9);
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(85, now);
+          osc.frequency.exponentialRampToValueAtTime(32, now + 0.85);
 
-          gain1.gain.setValueAtTime(0.01, now);
-          gain1.gain.linearRampToValueAtTime(0.35, now + 0.15);
-          gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.35, now + 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
 
-          osc1.connect(gain1);
-          gain1.connect(ctx.destination);
-          osc1.start(now);
-          osc1.stop(now + 0.9);
-
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.85);
           this.haptic(50);
         } catch(e) {}
       },
-      // Sacred Bone Clasp, Cathedral Resonator & iOS 55Hz Thud
-      playBoneClasp() {
+      // Cathedral Bell & 55Hz Bone Strike
+      playClaspBell() {
         try {
           const ctx = this.getAudio();
           const now = ctx.currentTime;
-
-          // Cathedral Chime Resonance
           const oscBell = ctx.createOscillator();
           const bellGain = ctx.createGain();
           oscBell.type = 'sine';
-          oscBell.frequency.setValueAtTime(587.33, now); // D5 Key
+          oscBell.frequency.setValueAtTime(587.33, now);
           oscBell.frequency.exponentialRampToValueAtTime(293.66, now + 2.2);
 
           bellGain.gain.setValueAtTime(0.45, now);
@@ -275,7 +282,7 @@
           oscBell.start(now);
           oscBell.stop(now + 2.2);
 
-          // 55Hz Sub-Bass Impulse for physical iOS speaker excursion
+          // 55Hz Sub-Bass Impulse for physical iOS speaker stroke
           const sub = ctx.createOscillator();
           const subGain = ctx.createGain();
           sub.type = 'sine';
@@ -291,7 +298,7 @@
           this.haptic([80, 40, 120]);
         } catch(e) {}
       },
-      // Scratching Rustle
+      // Scratch Tick
       playScratchTick() {
         try {
           const ctx = this.getAudio();
@@ -302,7 +309,7 @@
           osc.frequency.setValueAtTime(800 + Math.random() * 400, now);
           osc.frequency.exponentialRampToValueAtTime(100, now + 0.03);
 
-          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.setValueAtTime(0.1, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
 
           osc.connect(gain);
@@ -312,7 +319,6 @@
           this.haptic(10);
         } catch(e) {}
       },
-      // Dual-mode Haptic Protocol (Android Motor + Web Fallback)
       haptic(pattern) {
         if ('vibrate' in navigator) {
           try { navigator.vibrate(pattern); } catch(e) {}
@@ -320,7 +326,7 @@
       }
     };
 
-    /* Atmospheric Embers Particle Renderer */
+    /* Atmospheric Embers Particle Canvas */
     function initAtmosphere() {
       const canvas = document.getElementById('particleCanvas');
       const ctx = canvas.getContext('2d');
@@ -332,14 +338,14 @@
         h = canvas.height = window.innerHeight;
       });
 
-      const embers = Array.from({ length: 32 }, () => ({
+      const embers = Array.from({ length: 35 }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: Math.random() * 2 + 0.8,
+        r: Math.random() * 2.2 + 0.6,
         vy: -(Math.random() * 0.45 + 0.15),
         vx: (Math.random() - 0.5) * 0.25,
         alpha: Math.random() * 0.5 + 0.2,
-        color: Math.random() > 0.4 ? '#ff2a5f' : '#dcd6ea'
+        color: Math.random() > 0.4 ? '#ff2a5f' : '#bcaed0'
       }));
 
       function render() {
@@ -364,11 +370,11 @@
       render();
     }
 
-    /* Core Application Initialization */
+    /* Core Initialization */
     document.addEventListener('DOMContentLoaded', () => {
       initAtmosphere();
 
-      // 1. Data Source Ingestion
+      // 1. Data Ingestion
       document.getElementById('statusDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('parchmentDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('parchmentHeadline').innerText = letterData.headline || "TILL DEATH DO US PART";
@@ -381,58 +387,30 @@
         document.getElementById('letterBodyArea').style.fontFamily = `"${letterData.fontType}", Georgia, serif`;
       }
 
-      // 2. Audio Setup
+      // 2. Audio Player Logic
       const bgAudio = document.getElementById('bgAudio');
+      const audioBtn = document.getElementById('audioController');
+      let isMusicPlaying = false;
+
       if (letterData.audioUrl) {
         bgAudio.src = letterData.audioUrl;
-      }
-
-      // 3. 3D Polaroid Photo Album Setup
-      const photoCard = document.getElementById('photoFlipCard');
-      const frontImg = document.getElementById('frontPhotoImg');
-      const backCaption = document.getElementById('backCaptionText');
-      const navRack = document.getElementById('photoNavRack');
-      const pageIndicator = document.getElementById('photoPageIndicator');
-      const prevBtn = document.getElementById('prevPhotoBtn');
-      const nextBtn = document.getElementById('nextPhotoBtn');
-
-      let currentPhotoIdx = 0;
-      const photoList = letterData.photos || [];
-
-      if (photoList.length > 0) {
-        function renderPhoto(idx) {
-          photoCard.classList.remove('is-flipped');
-          frontImg.src = photoList[idx].url;
-          backCaption.innerText = photoList[idx].caption || "";
-          pageIndicator.innerText = `${idx + 1} / ${photoList.length}`;
-        }
-        renderPhoto(0);
-
-        photoCard.addEventListener('click', (e) => {
-          e.stopPropagation();
-          photoCard.classList.toggle('is-flipped');
-          GothicSoundEngine.haptic(25);
+        audioBtn.addEventListener('click', () => {
+          if (isMusicPlaying) {
+            bgAudio.pause();
+            audioBtn.classList.remove('is-playing');
+            isMusicPlaying = false;
+          } else {
+            bgAudio.play().then(() => {
+              audioBtn.classList.add('is-playing');
+              isMusicPlaying = true;
+            }).catch(() => {});
+          }
         });
-
-        if (photoList.length <= 1) {
-          navRack.style.display = 'none';
-        } else {
-          prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentPhotoIdx = (currentPhotoIdx - 1 + photoList.length) % photoList.length;
-            renderPhoto(currentPhotoIdx);
-          });
-          nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentPhotoIdx = (currentPhotoIdx + 1) % photoList.length;
-            renderPhoto(currentPhotoIdx);
-          });
-        }
       } else {
-        document.getElementById('photoAlbumSection').style.display = 'none';
+        audioBtn.style.display = 'none';
       }
 
-      // 4. Passcode Gate System
+      // 3. Passcode Gate System
       const overlay = document.getElementById('passcodeOverlay');
       if (!letterData.passcode) {
         overlay.classList.add('is-unlocked');
@@ -457,11 +435,11 @@
           const entered = Array.from(inputs).map(i => i.value).join('');
           if (entered.length === 4) {
             if (entered === letterData.passcode) {
-              GothicSoundEngine.playCasketOpen();
+              SoundEngine.playOakSlide();
               overlay.classList.add('is-unlocked');
             } else {
               errorEl.innerText = "THE CIPHER REJECTS YOUR TOUCH";
-              GothicSoundEngine.haptic([100, 50, 100]);
+              SoundEngine.haptic([100, 50, 100]);
               inputs.forEach(i => i.value = '');
               inputs[0].focus();
             }
@@ -469,20 +447,25 @@
         }
       }
 
-      // 5. Coffin Opening & Mechanical Unsealing
+      // 4. Coffin Unsealing (Click Wax Cross)
       const coffinStation = document.getElementById('coffinStation');
       const coffinLid = document.getElementById('coffinLid');
 
       coffinLid.addEventListener('click', () => {
-        GothicSoundEngine.playCasketOpen();
+        SoundEngine.playOakSlide();
         coffinStation.classList.add('is-opened');
-        if (letterData.audioUrl) bgAudio.play().catch(() => {});
+        if (letterData.audioUrl && !isMusicPlaying) {
+          bgAudio.play().then(() => {
+            audioBtn.classList.add('is-playing');
+            isMusicPlaying = true;
+          }).catch(() => {});
+        }
       });
 
-      // 6. Skeleton Hand Hold Interaction (1.8s Continuous Touch)
+      // 5. Skeleton Hand Clasp (1.8s Continuous Touch)
       const handRightBtn = document.getElementById('handRightBtn');
       const holdMeter = document.getElementById('holdMeterFill');
-      const parchmentSheet = document.getElementById('parchmentSheet');
+      const enterCryptBtn = document.getElementById('enterCryptBtn');
       let holdTimer = null;
       let progress = 0;
       let isVowSealed = false;
@@ -496,13 +479,13 @@
         holdTimer = setInterval(() => {
           progress += 5;
           holdMeter.style.width = progress + '%';
-          if (progress % 20 === 0) GothicSoundEngine.haptic(15);
+          if (progress % 20 === 0) SoundEngine.haptic(15);
 
           if (progress >= 100) {
             clearInterval(holdTimer);
             sealVow();
           }
-        }, 90); // ~1.8 seconds full duration
+        }, 90);
       }
 
       function cancelHold() {
@@ -515,14 +498,12 @@
       function sealVow() {
         isVowSealed = true;
         coffinStation.classList.add('is-clasped');
-        GothicSoundEngine.playBoneClasp();
+        SoundEngine.playClaspBell();
 
+        // Reveal the Portal Button to Transition to Act 2
         setTimeout(() => {
-          parchmentSheet.classList.add('is-revealed');
-          if (letterData.enableScratch) initAshesScratch();
-          startTypewriter(letterData.body);
-          parchmentSheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 1300);
+          enterCryptBtn.style.display = 'block';
+        }, 1200);
       }
 
       handRightBtn.addEventListener('mousedown', startHold);
@@ -530,7 +511,79 @@
       handRightBtn.addEventListener('touchstart', startHold, { passive: false });
       window.addEventListener('touchend', cancelHold);
 
-      // 7. Intelligent Typewriter Engine (with click-to-skip)
+      // 6. Act 1 to Act 2 Smooth Screen Transition
+      const actCoffin = document.getElementById('actCoffinStage');
+      const actLetter = document.getElementById('actLetterStage');
+
+      enterCryptBtn.addEventListener('click', () => {
+        SoundEngine.playOakSlide();
+        actCoffin.classList.add('is-dismissed');
+        
+        setTimeout(() => {
+          actLetter.classList.add('is-revealed');
+          if (letterData.enableScratch) initAshesScratch();
+          startTypewriter(letterData.body);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 600);
+      });
+
+      // 7. Interactive Candle Surprise
+      const candleAltar = document.getElementById('candleAltar');
+      const candleFlame = document.getElementById('candleFlame');
+      let isFlameLit = true;
+
+      candleAltar.addEventListener('click', () => {
+        isFlameLit = !isFlameLit;
+        candleFlame.style.opacity = isFlameLit ? '1' : '0';
+        SoundEngine.haptic(30);
+      });
+
+      // 8. 3D Polaroid Photo Album
+      const photoCard = document.getElementById('photoFlipCard');
+      const frontImg = document.getElementById('frontPhotoImg');
+      const backCaption = document.getElementById('backCaptionText');
+      const navRack = document.getElementById('photoNavRack');
+      const pageIndicator = document.getElementById('photoPageIndicator');
+      const prevBtn = document.getElementById('prevPhotoBtn');
+      const nextBtn = document.getElementById('nextPhotoBtn');
+
+      let currentPhotoIdx = 0;
+      const photoList = letterData.photos || [];
+
+      if (photoList.length > 0) {
+        function renderPhoto(idx) {
+          photoCard.classList.remove('is-flipped');
+          frontImg.src = photoList[idx].url;
+          backCaption.innerText = photoList[idx].caption || "";
+          pageIndicator.innerText = `${idx + 1} / ${photoList.length}`;
+        }
+        renderPhoto(0);
+
+        photoCard.addEventListener('click', (e) => {
+          e.stopPropagation();
+          photoCard.classList.toggle('is-flipped');
+          SoundEngine.haptic(25);
+        });
+
+        if (photoList.length <= 1) {
+          navRack.style.display = 'none';
+        } else {
+          prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentPhotoIdx = (currentPhotoIdx - 1 + photoList.length) % photoList.length;
+            renderPhoto(currentPhotoIdx);
+          });
+          nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentPhotoIdx = (currentPhotoIdx + 1) % photoList.length;
+            renderPhoto(currentPhotoIdx);
+          });
+        }
+      } else {
+        document.getElementById('photoAlbumSection').style.display = 'none';
+      }
+
+      // 9. Typewriter Engine
       let typewriterTimer = null;
       let isFinishedTyping = false;
       const textContainer = document.getElementById('typewriterText');
@@ -566,7 +619,7 @@
         cursor.style.display = 'none';
       }
 
-      // 8. Ashes Scratch-Off Canvas
+      // 10. Ashes Scratch-Off Canvas
       function initAshesScratch() {
         const scratchSec = document.getElementById('scratchSection');
         if (!letterData.enableScratch) {
@@ -581,20 +634,18 @@
         const ctx = canvas.getContext('2d');
         const frame = canvas.parentElement;
         const w = frame.clientWidth || 320;
-        const h = frame.clientHeight || 84;
+        const h = frame.clientHeight || 86;
         canvas.width = w;
         canvas.height = h;
 
-        // Rich Charcoal & Ash Texture
         const grad = ctx.createLinearGradient(0, 0, w, h);
-        grad.addColorStop(0, '#1c1822');
-        grad.addColorStop(0.5, '#2b2633');
-        grad.addColorStop(1, '#0e0b12');
+        grad.addColorStop(0, '#1c1524');
+        grad.addColorStop(0.5, '#2e243b');
+        grad.addColorStop(1, '#100c16');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, w, h);
 
-        // Gothic Pattern Lines
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
         for (let i = 0; i < w; i += 4) {
           for (let j = 0; j < h; j += 4) {
             if (Math.random() > 0.5) ctx.fillRect(i, j, 1, 1);
@@ -603,13 +654,13 @@
 
         ctx.strokeStyle = '#e6194b';
         ctx.lineWidth = 1.5;
-        ctx.strokeRect(12, 10, w - 24, h - 20);
+        ctx.strokeRect(10, 8, w - 20, h - 16);
 
         ctx.fillStyle = '#f0edf7';
         ctx.font = 'bold 10px Montserrat, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('✦ SCRATCH TO UNCOVER VOW ✦', w / 2, h / 2);
+        ctx.fillText('✦ SCRATCH THE CRYPT ASHES ✦', w / 2, h / 2);
 
         let isScratching = false;
         function scratch(e) {
@@ -621,7 +672,7 @@
           ctx.beginPath();
           ctx.arc(clientX - rect.left, clientY - rect.top, 20, 0, Math.PI * 2);
           ctx.fill();
-          GothicSoundEngine.playScratchTick();
+          SoundEngine.playScratchTick();
         }
 
         canvas.addEventListener('mousedown', () => isScratching = true);
@@ -632,7 +683,7 @@
         canvas.addEventListener('touchmove', scratch, { passive: true });
       }
 
-      // 9. Runaway Mechanical Vow Gate
+      // 11. Runaway Vow Gate
       const runawaySec = document.getElementById('runawaySection');
       if (letterData.enableRunaway) {
         document.getElementById('runawayQuestion').innerText = letterData.runawayQuestion;
@@ -642,10 +693,10 @@
 
         function evade(e) {
           e.preventDefault();
-          const x = (Math.random() - 0.5) * 200;
-          const y = (Math.random() - 0.5) * 100;
+          const x = (Math.random() - 0.5) * 180;
+          const y = (Math.random() - 0.5) * 90;
           btnNo.style.transform = `translate(${x}px, ${y}px)`;
-          GothicSoundEngine.haptic(25);
+          SoundEngine.haptic(25);
         }
 
         btnNo.addEventListener('mouseover', evade);
@@ -653,7 +704,7 @@
 
         btnYes.addEventListener('click', (e) => {
           e.stopPropagation();
-          GothicSoundEngine.playBoneClasp();
+          SoundEngine.playClaspBell();
           btnNo.style.display = 'none';
           btnYes.style.display = 'none';
           document.getElementById('runawayQuestion').style.display = 'none';
