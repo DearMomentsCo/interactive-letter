@@ -557,7 +557,7 @@
 }
 
 /* ==========================================================================
-   9. 【专属巧思：100% 还原参考图二原图 · 绝对居中 · 初始左黑右金 · 长按转红】
+   9. 【专属巧思：100% 还原参考图原版真实爱心指纹 · 居中显示 · 零切角】
    ========================================================================== */
 .thumbprint-heart-altar {
   margin: 28px auto 16px auto;
@@ -586,11 +586,11 @@
   margin-bottom: 16px;
 }
 
-/* 和纸凹印拓印台 (完美正方比例，保证指纹垂直水平绝对居中，尖角完整) */
+/* 和纸凹印拓印台：增大高度至 260px，确保下尖收口完整容纳，四边安全留白 */
 .dual-thumb-pad-stage {
   position: relative;
   width: 250px;
-  height: 230px;
+  height: 260px;
   margin: 0 auto;
   background: #fbf6ec;
   border: 1.5px dashed #c9a55c;
@@ -622,17 +622,17 @@
   transform: scale(0.97);
 }
 
-/* 核心叠合容器 (610:455 图二原图标准比例，居中置放) */
+/* 核心叠合容器：严格保持图二 610:455 比例，绝对居中 */
 .thumbprint-stack-box {
   position: relative;
-  width: 215px;
-  height: 160px;
+  width: 210px;
+  height: 157px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 高清真实指纹原图画布 */
+/* 高清真实指纹原图画布 (绝无裁剪溢出) */
 .fp-heart-canvas {
   position: absolute;
   inset: 0;
@@ -654,8 +654,8 @@
 }
 
 @keyframes guideBreathe {
-  0%, 100% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.2)); opacity: 0.9; }
-  50% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.75)); opacity: 1; }
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(212, 175, 55, 0.25)); opacity: 0.9; }
+  50% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.85)); opacity: 1; }
 }
 
 /* 2. 上层：1:1 参考图原版深红爱心（初始由底部遮蔽 100%） */
