@@ -557,7 +557,7 @@
 }
 
 /* ==========================================================================
-   9. 【专属巧思：100% 原版参考图双指纹合心 · 初始左黑右金 · 长按转红】
+   9. 【专属巧思：100% 还原参考图二原图 · 绝对居中 · 初始左黑右金 · 长按转红】
    ========================================================================== */
 .thumbprint-heart-altar {
   margin: 28px auto 16px auto;
@@ -586,11 +586,11 @@
   margin-bottom: 16px;
 }
 
-/* 和纸凹印拓印台 (充盈高度，确保下部尖角 100% 完整容纳) */
+/* 和纸凹印拓印台 (完美正方比例，保证指纹垂直水平绝对居中，尖角完整) */
 .dual-thumb-pad-stage {
   position: relative;
   width: 250px;
-  height: 220px;
+  height: 230px;
   margin: 0 auto;
   background: #fbf6ec;
   border: 1.5px dashed #c9a55c;
@@ -622,17 +622,17 @@
   transform: scale(0.97);
 }
 
-/* 核心叠合容器 (严格维持图一 610:455 的真实高宽比) */
+/* 核心叠合容器 (610:455 图二原图标准比例，居中置放) */
 .thumbprint-stack-box {
   position: relative;
-  width: 220px;
-  height: 164px;
+  width: 215px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 高清真实指纹原图画布 (绝对禁止裁剪，完整展现底尖) */
+/* 高清真实指纹原图画布 */
 .fp-heart-canvas {
   position: absolute;
   inset: 0;
