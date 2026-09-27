@@ -1,0 +1,554 @@
+/* ==========================================================================
+   01-HALLOWEEN: TILL DEATH DO US PART
+   Victorian Gothic Sandboxed Stylesheet
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0a070c;
+  --coffin-wood: #18121a;
+  --coffin-border: #3d2c42;
+  --silver-accent: #c4b5c7;
+  --velvet-deep: #1e0924;
+  --velvet-glow: #381245;
+  --rose-crimson: #8b0e2f;
+  --rose-glow: #e6194b;
+  --parchment-bg: #f5eedb;
+  --parchment-burn: #3a2717;
+  --text-dark: #2b1f1d;
+  --font-serif: 'Cinzel', 'Playfair Display', serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg-dark);
+  color: #f1e9f3;
+  font-family: var(--font-serif);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ambient Dust & Mist Canvas */
+#ambient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* App Wrapper */
+.viewport-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* Passcode Layer */
+.overlay-passcode {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 7, 12, 0.96);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.overlay-passcode.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.passcode-crest {
+  width: 68px;
+  height: 68px;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 14px rgba(224, 185, 235, 0.3));
+}
+
+.passcode-title {
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--silver-accent);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.passcode-subtitle {
+  font-size: 0.8rem;
+  color: #7b6f80;
+  margin-bottom: 32px;
+  letter-spacing: 0.1em;
+}
+
+.pin-inputs {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.pin-digit {
+  width: 50px;
+  height: 62px;
+  border-radius: 8px;
+  border: 1px solid var(--coffin-border);
+  background: rgba(24, 18, 26, 0.8);
+  color: #fff;
+  font-size: 1.8rem;
+  text-align: center;
+  outline: none;
+  font-family: monospace;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.pin-digit:focus {
+  border-color: var(--silver-accent);
+  box-shadow: 0 0 12px rgba(196, 181, 199, 0.3);
+}
+
+.shake-error {
+  animation: shake 0.45s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
+}
+
+/* Audio Control */
+.audio-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(24, 18, 26, 0.85);
+  border: 1px solid var(--coffin-border);
+  color: var(--silver-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.audio-btn.rotating svg {
+  animation: rotateDisc 6s linear infinite;
+}
+
+@keyframes rotateDisc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Coffin Ceremony Area */
+.coffin-stage {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.coffin-box {
+  width: 280px;
+  height: 480px;
+  position: relative;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 28%, 82% 100%, 18% 100%, 0% 28%);
+  background: var(--coffin-wood);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 30px #000;
+  border: 2px solid var(--coffin-border);
+  cursor: pointer;
+  transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.coffin-interior {
+  position: absolute;
+  inset: 12px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 28%, 82% 100%, 18% 100%, 0% 28%);
+  background: radial-gradient(circle at 50% 40%, var(--velvet-glow), var(--velvet-deep));
+  box-shadow: inset 0 0 25px #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.coffin-lid {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 28%, 82% 100%, 18% 100%, 0% 28%);
+  background: linear-gradient(135deg, #231b26 0%, #150f18 100%);
+  border: 2px solid var(--coffin-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+  transform-origin: top left;
+  z-index: 15;
+}
+
+.coffin-lid.opened {
+  transform: rotate(-105deg) translateY(-40px) scale(0.95);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.bone-seal {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #521822 0%, #200408 100%);
+  border: 2px solid #8e2b3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(139, 14, 47, 0.5);
+  cursor: pointer;
+  animation: pulseSeal 2.8s ease-in-out infinite;
+}
+
+@keyframes pulseSeal {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.3)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 16px rgba(220, 38, 38, 0.7)); }
+}
+
+.lid-hint {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #9f8c9b;
+  margin-top: 18px;
+}
+
+/* Hands Clasp Ritual */
+.hands-chamber {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.skeletal-hands-svg {
+  width: 220px;
+  height: 240px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hands-hold-hint {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--silver-accent);
+  margin-top: 14px;
+  text-align: center;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.hold-progress-bar {
+  width: 140px;
+  height: 3px;
+  background: rgba(255,255,255,0.15);
+  margin-top: 10px;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hold-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--rose-glow);
+  box-shadow: 0 0 8px var(--rose-glow);
+  transition: width 0.1s linear;
+}
+
+/* Parchment Letter Layer */
+.scroll-section {
+  width: 100%;
+  max-width: 460px;
+  margin-top: 40px;
+  display: none;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.scroll-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.parchment-sheet {
+  background: var(--parchment-bg);
+  color: var(--text-dark);
+  padding: 36px 26px;
+  border-radius: 4px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8), inset 0 0 60px rgba(85, 52, 22, 0.35);
+  border: 1px solid #d4c2a5;
+  position: relative;
+}
+
+.parchment-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(78, 51, 28, 0.4);
+  pointer-events: none;
+}
+
+.letter-header {
+  text-align: center;
+  border-bottom: 1px solid rgba(58, 39, 23, 0.25);
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+
+.letter-date {
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: #6d5440;
+}
+
+.letter-headline {
+  font-size: 1.35rem;
+  letter-spacing: 0.15em;
+  margin-top: 6px;
+  font-weight: 700;
+  color: #2b171a;
+}
+
+.letter-salutation {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.letter-body {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  min-height: 120px;
+  cursor: pointer;
+  white-space: pre-wrap;
+}
+
+.letter-closing {
+  margin-top: 26px;
+  text-align: right;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* 3D Photo Album */
+.album-section {
+  margin-top: 36px;
+  width: 100%;
+}
+
+.photo-card-wrap {
+  width: 100%;
+  height: 380px;
+  perspective: 1000px;
+  position: relative;
+  cursor: pointer;
+}
+
+.photo-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.photo-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.photo-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  border: 6px solid #fff;
+}
+
+.photo-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-back {
+  background: #fbf7ee;
+  color: var(--text-dark);
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  text-align: center;
+  font-style: italic;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.album-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.album-nav-btn {
+  background: rgba(24, 18, 26, 0.7);
+  border: 1px solid var(--coffin-border);
+  color: var(--silver-accent);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Scratch Card */
+.scratch-container {
+  margin-top: 36px;
+  width: 100%;
+  position: relative;
+  background: #19121a;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--coffin-border);
+  height: 130px;
+}
+
+.scratch-secret {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  color: #e8d7ea;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background: radial-gradient(circle, #2d1333 0%, #150a18 100%);
+}
+
+#scratch-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* Runaway Question */
+.runaway-box {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  min-height: 140px;
+}
+
+.runaway-q {
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 24px;
+  color: var(--silver-accent);
+}
+
+.runaway-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.btn-choice {
+  padding: 12px 26px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+}
+
+.btn-yes {
+  background: var(--rose-crimson);
+  color: #fff;
+  border: 1px solid var(--rose-glow);
+  box-shadow: 0 0 16px rgba(139, 14, 47, 0.4);
+}
+
+.btn-no {
+  background: rgba(30, 20, 32, 0.9);
+  color: #a497a8;
+  border: 1px solid var(--coffin-border);
+  position: relative;
+}
+
+.success-banner {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(139, 14, 47, 0.25);
+  border: 1px solid var(--rose-glow);
+  color: #ffd6e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: none;
+  letter-spacing: 0.15em;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
