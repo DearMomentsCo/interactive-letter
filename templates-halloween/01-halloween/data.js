@@ -1,48 +1,44 @@
 /**
- * 01-HALLOWEEN: TILL DEATH DO US PART
- * Customization Configuration (Demo Data - Desensitized)
- * Strictly 1:1 mapped to future Tally Form fields.
+ * Till Death (01-halloween) - Configuration Data Source
+ * 1:1 Mapping ready for future Tally Customization Form
  */
-window.LETTER_DATA = {
-  // 1. Passcode Lock (4 digits, empty string "" disables lock)
-  passcode: "0928",
+const letterData = {
+  // Passcode gate (Leave empty "" to disable)
+  passcode: "1031",
 
-  // 2. Letter Header & Metadata
-  dateText: "OCTOBER 31, 2026",
+  // Core Heading & Meta
+  dateText: "ALL HALLOWS' EVE, 2026",
   headline: "TILL DEATH DO US PART",
-  salutation: "My Beloved Dearest,",
+  subHeadline: "A solemn pact etched across eternity",
 
-  // 3. Body Content (Supports standard paragraph text)
-  body: "In this realm and every life hereafter, my soul recognizes yours before my eyes even open. Time may wither the flesh, stars may collapse into quiet dust, but what binds us is written in bones that outlast eternity. Every heartbeat of mine was made to echo beside yours in the quiet dark.",
+  // Main Letter Content
+  salutation: "My Eternal Dearest,",
+  body: "They say nothing in this fleeting realm lasts forever, yet here we stand—bound by a vow that mocks the passage of time itself.\n\nThrough every shadow and every flicker of twilight, my devotion remains unyielding. Not even the silence of the earth can part what has been so deeply woven into bone and breath.\n\nTake my hand, now and into the quiet forever.",
+  closing: "Eternally yours to the marrow,",
+  signature: "Your Devoted",
 
-  // 4. Letter Closing & Signature
-  closing: "Eternally entwined to the bone,",
-  signature: "Your Devoted Spirit",
-
-  // 5. Typography Choice ('Cinzel', 'Playfair Display', or 'Cormorant Garamond')
+  // Typography Preference ("Playfair Display", "Cinzel", "Cormorant Garamond")
   fontType: "Cinzel",
 
-  // 6. Background Audio Stream URL (Royalty-free romantic gothic cello demo)
-  audioUrl: "https://assets.mixkit.co/music/preview/mixkit-sad-and-melancholic-cello-soundtrack-697.mp3",
-
-  // 7. Photo Album (Demo placeholders - No buyer privacy exposed)
+  // Polaroid Gallery (Dual-sided cards with handwritten memories)
   photos: [
     {
-      url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-      caption: "Our first autumn dance under the pale silver moon."
+      url: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=80",
+      caption: "Our first twilight under the whispering pines, 2024"
     },
     {
-      url: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80",
-      caption: "In the shadow of ancient ruins, where promise became forever."
+      url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+      caption: "A midnight vow etched beneath the autumn moon"
     }
   ],
 
-  // 8. Secret Scratch-off Layer
+  // Scratch-off Secret Compartment
   enableScratch: true,
-  scratchSecret: "✦ When the final bell tolls, I will find you in the dark. ✦",
+  scratchTitle: "A SECRET CARVED IN SHADOW",
+  scratchSecret: "✦ Even in the cold silence of the tomb, I would seek you out again. ✦",
 
-  // 9. Playful Question & Answer
+  // Eternal Vow Interactive Prompt
   enableRunaway: true,
-  runawayQuestion: "WILL YOU BE MY VALENTINE IN THE AFTERLIFE?",
-  runawaySuccessMessage: "✦ ETERNITY IS OURS ♡ TILL THE END OF TIME ✦"
+  runawayQuestion: "WILL YOU WALK INTO THE AFTERLIFE WITH ME?",
+  runawaySuccessMessage: "✦ Eternity is sealed. Our shadows are one. ✦"
 };
