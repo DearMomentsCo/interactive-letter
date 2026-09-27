@@ -1,6 +1,7 @@
 /**
- * Till Death (01-halloween) - Configuration Data Source
+ * TILL DEATH DO US PART (01-halloween)
  * 1:1 Mapping ready for future Tally Customization Form
+ * Zero hardcoded buyer data. All strings English & gothic luxury calibrated.
  */
 const letterData = {
   // Passcode gate (Leave empty "" to disable)
@@ -9,36 +10,39 @@ const letterData = {
   // Core Heading & Meta
   dateText: "ALL HALLOWS' EVE, 2026",
   headline: "TILL DEATH DO US PART",
-  subHeadline: "A solemn pact etched across eternity",
+  subHeadline: "AN ETERNAL PACT SEALED BEYOND THE SHADOWS",
 
   // Main Letter Content
-  salutation: "My Eternal Dearest,",
-  body: "They say nothing in this fleeting realm lasts forever, yet here we stand—bound by a vow that mocks the passage of time itself.\n\nThrough every shadow and every flicker of twilight, my devotion remains unyielding. Not even the silence of the earth can part what has been so deeply woven into bone and breath.\n\nTake my hand, now and into the quiet forever.",
-  closing: "Eternally yours to the marrow,",
-  signature: "Your Devoted",
+  salutation: "My Eternal Beloved,",
+  body: "They say nothing in this fleeting realm withstands the test of time, yet our souls remain bound by a pact that mocks eternity itself.\n\nThrough every fading breath and every cold whisper of twilight, my devotion to you stays unyielding. Neither distance nor the silence of the grave could ever part what is woven into our very marrow.\n\nTake my hand across the velvet dark, today and into the quiet forever.",
+  closing: "Eternally yours to the bone,",
+  signature: "Your Devoted Wraith",
 
-  // Typography Preference ("Playfair Display", "Cinzel", "Cormorant Garamond")
+  // Typography Preference ("Cinzel", "Playfair Display", "Cormorant Garamond")
   fontType: "Cinzel",
 
-  // Polaroid Gallery (Dual-sided cards with handwritten memories)
+  // Background Audio direct stream (Leave empty "" for synthetic acoustic soundscapes only)
+  audioUrl: "",
+
+  // Full-bleed Victorian Dual-Sided Photo Gallery
   photos: [
     {
       url: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=80",
-      caption: "Our first twilight under the whispering pines, 2024"
+      caption: "Under the whispering pines where we first bound our souls. ✦ 2024"
     },
     {
       url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
-      caption: "A midnight vow etched beneath the autumn moon"
+      caption: "A midnight vow etched beneath the silver crescent moon."
     }
   ],
 
-  // Scratch-off Secret Compartment
+  // Victorian Coffin Scratch-off Layer
   enableScratch: true,
-  scratchTitle: "A SECRET CARVED IN SHADOW",
-  scratchSecret: "✦ Even in the cold silence of the tomb, I would seek you out again. ✦",
+  scratchHint: "✦ SCRATCH THE ASHES TO REVEAL THE HIDDEN VOW ✦",
+  scratchSecret: "✦ Even if the stars turn to ash, I would search the underworld to find you again. ✦",
 
-  // Eternal Vow Interactive Prompt
+  // Runaway Mechanical Vow Gate
   enableRunaway: true,
   runawayQuestion: "WILL YOU WALK INTO THE AFTERLIFE WITH ME?",
-  runawaySuccessMessage: "✦ Eternity is sealed. Our shadows are one. ✦"
+  runawaySuccessMessage: "✦ THE VOW IS SEALED. TWO SHADOWS BECOME ONE ETERNITY. ✦"
 };
