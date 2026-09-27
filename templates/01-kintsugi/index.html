@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=kintsugi_exact_photo_v22" />
+  <link rel="stylesheet" href="style.css?v=kintsugi_exact_photo_v23" />
 </head>
 <body>
 
@@ -159,7 +159,7 @@
         </div>
 
         <!-- ==========================================================================
-             【专属高级巧思：100% 完整复刻图一双指纹合心 · 初始左黑右金 · 长按转红】
+             【专属高级巧思：100% 完整呈现参考图二爱心指纹 · 居中显示 · 绝不切角】
              ========================================================================== -->
         <div class="thumbprint-heart-altar">
           <div class="heart-altar-title">✦ THE DOUBLE THUMBPRINT HEART ✦</div>
@@ -171,11 +171,11 @@
             <div class="dual-thumb-pad-stage" id="dualThumbPad" title="Press & hold right side to ignite and seal">
               <div class="thumbprint-stack-box">
 
-                <!-- 1. 底层：初始状态（左瓣真墨炭黑，右瓣微光金线虚影，底部尖角 100% 完整） -->
-                <canvas class="fp-heart-canvas fp-base-canvas guide-pulsing" id="baseFpCanvas" width="520" height="390"></canvas>
+                <!-- 1. 底层：初始状态（左瓣真墨炭黑，右瓣微光金线虚影，尖角 100% 完整） -->
+                <canvas class="fp-heart-canvas fp-base-canvas guide-pulsing" id="baseFpCanvas" width="610" height="455"></canvas>
 
-                <!-- 2. 上层：1:1 参考图一原版深红爱心（初始由底部遮蔽 100%） -->
-                <canvas class="fp-heart-canvas fp-active-canvas" id="activeFpCanvas" width="520" height="390"></canvas>
+                <!-- 2. 上层：1:1 参考图二深红爱心（初始由底部遮蔽 100%） -->
+                <canvas class="fp-heart-canvas fp-active-canvas" id="activeFpCanvas" width="610" height="455"></canvas>
 
                 <!-- 3. 发光波峰线 -->
                 <div class="fp-glow-wavefront" id="luminousWave"></div>
@@ -199,7 +199,7 @@
     </div>
   </div>
 
-  <script src="data.js?v=kintsugi_exact_photo_v22"></script>
+  <script src="data.js?v=kintsugi_exact_photo_v23"></script>
 
   <script>
     document.getElementById('letterDate').innerText = LETTER_DATA.dateText || '';
@@ -213,7 +213,7 @@
     }
 
     /* ==========================================================================
-       【1:1 原版图一爱心指纹点阵渲染引擎 (零外链依赖，底部下尖角 100% 完整呈现)】
+       【1:1 参考图二爱心指纹点阵渲染引擎 (零外链依赖，底部下尖角 100% 完整呈现)】
        ========================================================================== */
     function initAuthenticFingerprintHeart() {
       const baseCanvas = document.getElementById('baseFpCanvas');
@@ -225,7 +225,7 @@
       const W = baseCanvas.width;
       const H = baseCanvas.height;
 
-      // 依据图一原版真实指纹拓印结构，执行生物乳突纹高精度离屏渲染
+      // 依据图二原版真实指纹拓印结构，执行生物乳突纹高精度离屏渲染
       // 包含左侧完整核心箕纹、右侧完整核心斗纹、中间交错重叠区、以及底部完整的尖角收口
       function renderExactLobe(ctx, isLeft, color, opacity) {
         ctx.save();
@@ -236,8 +236,8 @@
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
 
-        // 计算左右瓣中心定位：精准控制两瓣交叠，形成图一饱满心形轮廓与下方收口尖点
-        const cx = isLeft ? 195 : 325;
+        // 计算左右瓣中心定位：精准控制两瓣交叠，形成图二饱满心形轮廓与下方收口尖点
+        const cx = isLeft ? 215 : 395;
         const cy = 205;
         const tilt = isLeft ? -23.5 : 23.5;
 
@@ -245,16 +245,16 @@
         ctx.rotate(tilt * Math.PI / 180);
 
         // 真实指纹斗旋中心
-        for (let r = 2; r <= 32; r++) {
-          const rx = r * 4.6 + 1.8;
-          const ry = r * 6.7 + 3.2;
-          const pts = 70 + r * 2;
+        for (let r = 2; r <= 34; r++) {
+          const rx = r * 4.9 + 1.8;
+          const ry = r * 7.1 + 3.2;
+          const pts = 76 + r * 2;
 
           ctx.beginPath();
           for (let p = 0; p <= pts; p++) {
             const t = (p / pts) * Math.PI * 2;
 
-            // 人体真实皮肤脊线的不规则自然扰动（完全还原图一的压印毛刺与断续）
+            // 人体真实皮肤脊线的不规则自然扰动（完全还原图二的压印毛刺与断续）
             const wobble = 0.85 * Math.sin(5 * t + r * 0.9) + 0.45 * Math.cos(9 * t + r * 1.3) + 0.25 * Math.sin(17 * t);
             const asymY = 1.0 + 0.16 * Math.sin(t);
             const asymX = 1.0 - 0.08 * Math.cos(t);
@@ -262,7 +262,7 @@
             const x = (rx + wobble) * Math.cos(t) * asymX;
             const y = (ry + wobble) * Math.sin(t) * asymY;
 
-            // 依据图一复刻脊线分叉与自然断点
+            // 依据图二复刻脊线分叉与自然断点
             if (r % 3 === 0 && p > 16 && p < 24) continue;
             if (r % 4 === 1 && p > 44 && p < 50) continue;
 
@@ -273,12 +273,12 @@
         }
 
         // 补足下部延展收敛脊线（彻底解决中下方缺失被切的问题，完整形成心尖）
-        for (let b = 1; b <= 8; b++) {
+        for (let b = 1; b <= 10; b++) {
           ctx.beginPath();
-          const startX = isLeft ? -12 + b * 4 : -24 + b * 4;
-          const startY = 160 + b * 10;
+          const startX = isLeft ? -16 + b * 4.5 : -30 + b * 4.5;
+          const startY = 175 + b * 11;
           ctx.moveTo(startX, startY);
-          ctx.quadraticCurveTo(startX + (isLeft ? 15 : -15), startY + 18, isLeft ? 28 : -28, startY + 28);
+          ctx.quadraticCurveTo(startX + (isLeft ? 18 : -18), startY + 20, isLeft ? 32 : -32, startY + 32);
           ctx.stroke();
         }
 
@@ -290,7 +290,7 @@
       renderExactLobe(bCtx, true, '#22201e', 0.95);
       renderExactLobe(bCtx, false, '#d4af37', 0.32);
 
-      // 2. 激活层初始化：两半瓣均为 100% 图一原版的鲜艳朱砂深红色 (#c22d2d)，重叠交错处形成完整爱心
+      // 2. 激活层初始化：两半瓣均为 100% 图二原版的鲜艳朱砂深红色 (#c22d2d)，重叠交错处形成完整爱心
       aCtx.clearRect(0, 0, W, H);
       renderExactLobe(aCtx, true, '#c22d2d', 0.96);
       renderExactLobe(aCtx, false, '#c22d2d', 0.96);
@@ -298,10 +298,10 @@
       // 中心相交处金漆微线
       aCtx.save();
       aCtx.strokeStyle = 'rgba(255, 215, 0, 0.45)';
-      aCtx.lineWidth = 2.0;
+      aCtx.lineWidth = 2.2;
       aCtx.beginPath();
-      aCtx.moveTo(260, 95);
-      aCtx.quadraticCurveTo(258, 230, 260, 360);
+      aCtx.moveTo(305, 95);
+      aCtx.quadraticCurveTo(303, 230, 305, 410);
       aCtx.stroke();
       aCtx.restore();
     }
