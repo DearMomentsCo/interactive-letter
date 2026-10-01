@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
 :root {
-  --bg-deep: #060508;
+  --bg-deep: #050407;
+  --stone-dark: #1b1922;
+  --stone-mid: #2b2736;
+  --stone-light: #524b61;
   --crimson-blood: #8f081e;
   --crimson-glow: #ff1e56;
   --parchment-base: #f7f1e1;
-  --parchment-border: #2c1a0e;
   --ink-primary: #181412;
-  --gold-accent: #d4af37;
+  --candle-flame: #ffbe0b;
 }
 
 * {
@@ -27,15 +29,15 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Atmospheric Background Fog */
+/* Atmospheric Graveyard Mist Background */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 15%, rgba(106, 53, 133, 0.28) 0%, transparent 60%),
-    radial-gradient(circle at 50% 85%, rgba(143, 8, 30, 0.22) 0%, transparent 65%),
-    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
+    radial-gradient(circle at 50% 20%, rgba(76, 43, 99, 0.35) 0%, transparent 60%),
+    radial-gradient(circle at 50% 85%, rgba(143, 8, 30, 0.25) 0%, transparent 65%),
+    radial-gradient(circle at 50% 50%, transparent 35%, rgba(0, 0, 0, 0.95) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -59,7 +61,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Floating Audio Toggle */
+/* Audio Floating Controller */
 .audio-toggle-btn {
   position: fixed;
   top: 18px;
@@ -173,9 +175,9 @@ body::before {
 }
 
 /* ==========================================================================
-   ACT 1: SKEUOMORPHIC VICTORIAN COFFIN (GOLDEN RATIO & ANATOMICAL BONES)
+   ACT 1: THE GRAVEYARD TOMBSTONE & RISING SKELETON HAND
    ========================================================================== */
-.act-coffin-view {
+.act-graveyard-view {
   width: 100%;
   max-width: 420px;
   display: flex;
@@ -184,19 +186,19 @@ body::before {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.act-coffin-view.is-exited {
+.act-graveyard-view.is-exited {
   opacity: 0;
   transform: scale(0.9) translateY(-40px);
   pointer-events: none;
   display: none;
 }
 
-.coffin-hero-meta {
+.graveyard-meta-header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
-.coffin-hero-sub {
+.graveyard-meta-sub {
   font-family: 'Montserrat', sans-serif;
   font-size: 9.5px;
   letter-spacing: 3px;
@@ -206,7 +208,7 @@ body::before {
   text-shadow: 0 0 12px rgba(255, 51, 102, 0.7);
 }
 
-.coffin-hero-title {
+.graveyard-meta-title {
   font-size: clamp(18px, 4.8vw, 24px);
   letter-spacing: 3.5px;
   font-weight: 900;
@@ -215,216 +217,130 @@ body::before {
   -webkit-text-fill-color: transparent;
 }
 
-/* Master Victorian Coffin Casket Structure */
-.coffin-physical-stage {
+/* Physical Gravestone Scene Viewport */
+.graveyard-scene-viewport {
   position: relative;
-  width: min(84vw, 320px);
+  width: min(86vw, 340px);
   height: min(65vh, 470px);
   margin: 0 auto;
-  perspective: 1200px;
-}
-
-/* Master SVG Casket Shell */
-.coffin-casket-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(143, 8, 30, 0.35));
-}
-
-/* Coffin Sliding Lid Layer */
-.coffin-lid-overlay {
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
-  z-index: 20;
-  transition: transform 1.2s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.8s ease;
-}
-
-.coffin-physical-stage.is-opened .coffin-lid-overlay {
-  transform: translateY(-115%) rotate(-4deg);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Wax Seal Button on Lid */
-.lid-seal-wrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  pointer-events: none;
+  justify-content: flex-end;
 }
 
-.lid-seal-btn {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ff2a5f 0%, #a80a29 50%, #3d020e 95%);
-  border: 2px solid #ff758c;
-  box-shadow: 
-    0 10px 24px rgba(0, 0, 0, 0.9),
-    0 0 25px rgba(255, 42, 95, 0.7),
-    inset 0 0 0 3px rgba(0, 0, 0, 0.4),
-    inset 0 0 0 5px rgba(255, 255, 255, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: sealPulse 2.8s infinite ease-in-out;
+/* The Grand Gravestone SVG */
+.tombstone-casket-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(143, 8, 30, 0.3));
+  cursor: pointer;
 }
 
-@keyframes sealPulse {
-  0%, 100% { transform: scale(1); filter: brightness(1); }
-  50% { transform: scale(1.06); filter: brightness(1.2); }
+/* Engraved Text that Glows on Click */
+.engraved-vow-text {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  fill: #736980;
+  text-anchor: middle;
+  transition: all 1.2s ease;
 }
 
-.lid-seal-prompt {
-  margin-top: 14px;
+.tomb-engraved-date {
   font-family: 'Montserrat', sans-serif;
   font-size: 9px;
-  font-weight: 800;
   letter-spacing: 2px;
-  color: #ffd1dc;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
-  white-space: nowrap;
+  font-weight: 700;
+  fill: #5a5166;
+  text-anchor: middle;
+  transition: all 1.2s ease;
 }
 
-/* Hands Arena Inside Velvet Bed */
-.hands-interactive-arena {
+.graveyard-scene-viewport.is-lit .engraved-vow-text {
+  fill: #ffccd5;
+  filter: drop-shadow(0 0 8px rgba(255, 30, 86, 0.9));
+}
+
+.graveyard-scene-viewport.is-lit .tomb-engraved-date {
+  fill: #ff85a1;
+}
+
+/* Candlesticks Flicker Animation */
+.candle-glow {
+  animation: flickerCandle 1.8s infinite alternate ease-in-out;
+}
+@keyframes flickerCandle {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 10px #ffbe0b); }
+}
+
+/* The 3D Anatomical Skeleton Hand Rising from Soil */
+.rising-hand-stage {
   position: absolute;
-  top: 18%;
-  left: 8%;
-  width: 84%;
-  height: 58%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 5;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(140px);
+  width: 220px;
+  height: 240px;
+  opacity: 0;
   pointer-events: none;
+  z-index: 10;
+  transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
 }
 
-.arm-svg-box {
-  width: 48%;
-  height: 100%;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.9));
-  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.arm-left {
-  transform: translateX(-4px) rotate(-4deg);
-}
-
-.arm-right {
-  transform: translateX(4px) rotate(4deg);
+.graveyard-scene-viewport.is-risen .rising-hand-stage {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
   pointer-events: auto;
   cursor: pointer;
 }
 
-/* Glowing Pulsing Animation on Right Bone Hand */
-.arm-right-pulse {
-  animation: boneTouchGlow 2.2s infinite ease-in-out;
+/* Soil Mound & Flying Dirt Clods */
+.soil-mound-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 15;
+  pointer-events: none;
 }
 
-@keyframes boneTouchGlow {
+/* Glowing Pulsing Touch Affordance on Hand */
+.rising-hand-pulse {
+  animation: handBeckon 2.4s infinite ease-in-out;
+}
+
+@keyframes handBeckon {
   0%, 100% {
-    transform: translateX(4px) rotate(4deg) scale(1);
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.9));
+    transform: scale(1);
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.9));
   }
   50% {
-    transform: translateX(2px) rotate(2deg) scale(1.05);
-    filter: drop-shadow(0 0 20px rgba(255, 30, 86, 0.8)) drop-shadow(0 6px 12px rgba(0,0,0,0.9));
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 25px rgba(255, 30, 86, 0.85)) drop-shadow(0 8px 16px rgba(0,0,0,0.9));
   }
 }
 
-/* Clasped Hands State */
-.coffin-physical-stage.is-clasped .arm-left {
-  transform: translateX(36px) rotate(16deg);
-}
-
-.coffin-physical-stage.is-clasped .arm-right {
-  transform: translateX(-36px) rotate(-16deg);
-  animation: none;
-}
-
-/* Blooming Blood Rose */
-.rose-bloom-cluster {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0) rotate(-30deg);
-  width: 90px;
-  height: 90px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 10;
-  filter: drop-shadow(0 0 22px rgba(255, 30, 86, 0.85)) drop-shadow(0 8px 16px rgba(0,0,0,0.95));
-  transition: transform 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
-}
-
-.coffin-physical-stage.is-clasped .rose-bloom-cluster {
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  opacity: 1;
-}
-
-/* Prominent Hold Gauge at Bottom of Casket (Fully visible, unclipped) */
-.hold-gauge-bottom {
-  position: absolute;
-  bottom: 22px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 76%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0;
-  z-index: 12;
-  transition: opacity 0.5s ease;
-  pointer-events: none;
-}
-
-.coffin-physical-stage.is-opened .hold-gauge-bottom {
-  opacity: 1;
-}
-
-.coffin-physical-stage.is-clasped .hold-gauge-bottom {
-  opacity: 0;
-}
-
-.hold-meter-track {
-  width: 100%;
-  height: 7px;
-  background: #08060b;
-  border: 1px solid #63507a;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px #000;
-}
-
-.hold-meter-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #ff0055, #ff758c);
-  box-shadow: 0 0 10px rgba(255, 0, 85, 0.8);
-  transition: width 0.08s linear;
-}
-
-.hold-meter-text {
+/* Interactive Clasp/Touch Prompt */
+.tomb-interactive-hint {
+  margin-top: 14px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 8.5px;
+  font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   color: #ffccd5;
-  text-shadow: 0 1px 4px #000;
-  white-space: nowrap;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  text-align: center;
+  min-height: 20px;
 }
 
-/* Proceed to Act 2 Button */
+/* Proceed to Letter Button */
 .proceed-letter-btn {
-  margin-top: 24px;
+  margin-top: 20px;
   background: linear-gradient(180deg, #8a0c24 0%, #4a0311 100%);
   color: #fff;
   border: 1.5px solid #ff3366;
