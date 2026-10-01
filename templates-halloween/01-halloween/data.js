@@ -11,6 +11,10 @@ const letterData = {
   headline: "TILL DEATH DO US PART",
   subHeadline: "AN ETERNAL PACT SEALED BEYOND THE GRAVE",
 
+  // Tombstone Carved Words (Revealed on Tombstone Touch)
+  tombEpitaph: "REST IN ETERNAL DEVOTION",
+  tombEngravingYear: "1892 — FOREVER",
+
   // Main Letter Content
   salutation: "To My Eternal Beloved,",
   body: "They say nothing in this fleeting realm withstands the test of time, yet our souls remain bound by a pact that mocks eternity itself.\n\nThrough every fading breath and every cold whisper of autumn twilight, my devotion to you stays unyielding. Neither distance nor the silence of the earth could ever part what is woven into our very marrow.\n\nTake my hand across the velvet dark, today and into the quiet forever.",
