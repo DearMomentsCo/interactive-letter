@@ -5,25 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Till Death Do Us Part</title>
 
-  <!-- Google Typography Suite -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <link rel="stylesheet" href="style.css?v=engraved_art_701" />
+  <!-- 版本号刷新防缓存 -->
+  <link rel="stylesheet" href="style.css?v=gothic_real_art_v2" />
 </head>
 <body>
 
-  <!-- Floating Atmosphere Canvas -->
   <canvas id="particleCanvas" class="particle-canvas"></canvas>
   <div id="burstStage" class="burst-stage"></div>
 
-  <!-- Music Engine -->
   <audio id="bgAudio" loop preload="auto"></audio>
   <button id="audioToggleBtn" class="audio-toggle-btn" title="Toggle Gothic Melody">🎵</button>
 
-  <!-- Passcode Gate -->
   <div class="passcode-overlay" id="passcodeOverlay">
     <div class="passcode-box">
       <div class="passcode-title">ENTER 4-DIGIT CRYPT CIPHER</div>
@@ -40,7 +37,7 @@
   <main class="main-stage">
 
     <!-- ==========================================================================
-         ACT 1: SKEUOMORPHIC ENGRAVED TOMBSTONE & REAL ANATOMICAL BONE HAND
+         ACT 1: 高精度 3D 哥特风化墓碑 + 写实解剖级骨手与真红玫瑰
          ========================================================================== -->
     <section class="act-tomb-view" id="actTombView">
       
@@ -49,22 +46,20 @@
         <h1 class="tomb-hero-title" id="headlineHero">TILL DEATH DO US PART</h1>
       </div>
 
-      <!-- Master Gravestone Stage -->
       <div class="tomb-stage-container" id="tombStageContainer">
         
-        <!-- 3D Weathered Stone Gravestone with Chiseled Bevels -->
+        <!-- 3D 风化石材质感墓碑 SVG -->
         <svg class="tombstone-master-svg" id="tombstoneMasterSvg" viewBox="0 0 340 460" fill="none">
           <defs>
-            <!-- Stone Shading Gradients -->
             <linearGradient id="stoneFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4e485a"/>
-              <stop offset="25%" stop-color="#2c2736"/>
-              <stop offset="65%" stop-color="#181521"/>
+              <stop offset="0%" stop-color="#4a4254"/>
+              <stop offset="25%" stop-color="#2a2434"/>
+              <stop offset="65%" stop-color="#181420"/>
               <stop offset="100%" stop-color="#0a0810"/>
             </linearGradient>
             <linearGradient id="stoneBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#383244"/>
-              <stop offset="100%" stop-color="#120f18"/>
+              <stop offset="0%" stop-color="#383042"/>
+              <stop offset="100%" stop-color="#120e18"/>
             </linearGradient>
             <radialGradient id="candleFlames" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#ffbe0b" stop-opacity="1"/>
@@ -72,152 +67,173 @@
               <stop offset="100%" stop-color="#ff006e" stop-opacity="0"/>
             </radialGradient>
             <filter id="heavyStoneShadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity="0.95"/>
+              <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.95"/>
             </filter>
           </defs>
 
-          <!-- 1. Pedestal Bottom Layers (Stepped Solid Bases) -->
+          <!-- 基座台阶 -->
           <rect x="20" y="415" width="300" height="25" rx="3" fill="#14111c" stroke="#483f56" stroke-width="2"/>
           <rect x="42" y="390" width="256" height="25" rx="2" fill="url(#stoneBevelGrad)" stroke="#3d354a" stroke-width="2"/>
 
-          <!-- 2. Arched Gothic Slab (3D Bevel with Left Highlight & Right Shadow) -->
-          <!-- Right Extruded Side (Depth Thickness) -->
+          <!-- 墓碑侧立面厚度（3D 景深拉伸） -->
           <path d="M 68 140 C 68 55, 272 55, 272 140 L 278 145 L 278 390 L 272 390 Z" fill="#0c0a11"/>
           
-          <!-- Front Stone Face -->
+          <!-- 墓碑正面 -->
           <path d="M 62 390 L 62 140 C 62 45, 278 45, 278 140 L 278 390 Z" fill="url(#stoneFaceGrad)" stroke="#584e68" stroke-width="2.5" filter="url(#heavyStoneShadow)"/>
 
-          <!-- Recessed Inset Arch with Cross-Hatch Shading -->
+          <!-- 内凹雕刻拱圈与素描排线 -->
           <path d="M 76 380 L 76 145 C 76 65, 264 65, 264 145 L 264 380 Z" fill="#110e16" stroke="#332c3e" stroke-width="2" stroke-dasharray="6,4"/>
 
-          <!-- Heavy Chiseled Gothic Cross -->
+          <!-- 哥特立体雕琢十字架 -->
           <g filter="url(#heavyStoneShadow)">
             <path d="M 160 85 H 180 V 105 H 202 V 122 H 180 V 165 H 160 V 122 H 138 V 105 H 160 Z" fill="#241f2d" stroke="#5a4e6c" stroke-width="1.6"/>
-            <!-- Bevel line on cross -->
             <path d="M 160 85 L 170 95 L 170 165 M 138 105 L 150 113 L 202 113" stroke="#41384e" stroke-width="1"/>
           </g>
 
-          <!-- Weathered Deep Stone Cracks & Erosion Marks -->
+          <!-- 真实岩石破裂风化刻痕 -->
           <path d="M 88 115 L 112 140 L 102 160 L 126 182" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
           <path d="M 252 185 L 232 208 L 244 228" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
           <path d="M 170 330 L 182 355 L 176 370" stroke="#251e2e" stroke-width="1.6" stroke-linecap="round"/>
 
-          <!-- Deep Chiseled Epitaph -->
+          <!-- 碑文 -->
           <text x="170" y="240" class="tomb-engraved-text" id="tombEpitaphText">REST IN ETERNAL DEVOTION</text>
           <text x="170" y="270" class="tomb-engraved-sub" id="tombEngravingYear">1892 — FOREVER</text>
 
-          <!-- Flanking Candlesticks with Wax Drippings -->
+          <!-- 两侧带烛泪烛光 -->
           <g>
-            <!-- Left Candle -->
             <path d="M 34 390 L 34 345 C 34 343, 38 342, 42 342 C 46 342, 50 343, 50 345 L 50 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
             <path d="M 38 350 Q 36 365 37 375" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Left Flame -->
             <path d="M 42 340 Q 38 325 42 316 Q 47 325 42 340 Z" fill="url(#candleFlames)"/>
-            <circle cx="42" cy="328" r="14" fill="url(#candleFlames)" opacity="0.35"/>
+            <circle cx="42" cy="328" r="14" fill="url(#candleFlames)" opacity="0.4"/>
 
-            <!-- Right Candle -->
             <path d="M 290 390 L 290 345 C 290 343, 294 342, 298 342 C 302 342, 306 343, 306 345 L 306 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
             <path d="M 302 348 Q 304 362 303 372" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-            <!-- Right Flame -->
             <path d="M 298 340 Q 294 325 298 316 Q 303 325 298 340 Z" fill="url(#candleFlames)"/>
-            <circle cx="298" cy="328" r="14" fill="url(#candleFlames)" opacity="0.35"/>
+            <circle cx="298" cy="328" r="14" fill="url(#candleFlames)" opacity="0.4"/>
           </g>
-
         </svg>
 
-        <!-- 3. Rising Anatomical Engraving Skeleton Hand with Rose -->
+        <!-- ==========================================================================
+             【重点升级：解剖级蚀刻版画骨手 + 层次逼真的带刺哥特立体玫瑰】
+             ========================================================================== -->
         <div class="anatomical-hand-stage" id="anatomicalHandStage">
-          <svg class="hand-hatch-pulse" viewBox="0 0 240 280" fill="none" style="width:100%; height:100%;">
+          <svg class="hand-hatch-pulse" viewBox="0 0 250 300" fill="none" style="width:100%; height:100%;">
             <defs>
-              <!-- Bone Gradient Base -->
-              <linearGradient id="ivoryBoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <!-- 象牙做旧骨质渐变 -->
+              <linearGradient id="boneRealIvory" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="35%" stop-color="#ede7db"/>
-                <stop offset="70%" stop-color="#b8b09d"/>
-                <stop offset="100%" stop-color="#5a5245"/>
+                <stop offset="30%" stop-color="#ece4d4"/>
+                <stop offset="70%" stop-color="#b8ad96"/>
+                <stop offset="100%" stop-color="#5a4e3c"/>
               </linearGradient>
-              <filter id="boneOccFilter" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="2" dy="5" stdDeviation="3.5" flood-color="#000000" flood-opacity="0.95"/>
+
+              <!-- 哥特深红天鹅绒玫瑰渐变 -->
+              <radialGradient id="roseCoreGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ff1a4b"/>
+                <stop offset="40%" stop-color="#b00624"/>
+                <stop offset="85%" stop-color="#540210"/>
+                <stop offset="100%" stop-color="#240106"/>
+              </radialGradient>
+
+              <filter id="skeletalShading" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.95"/>
               </filter>
             </defs>
 
-            <!-- Forearm Bone Pair (Radius & Ulna with Anatomical Flaring) -->
-            <path d="M 104 275 C 104 225, 102 185, 106 155 C 108 148, 114 148, 114 155 C 112 185, 114 225, 114 275 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2" filter="url(#boneOccFilter)"/>
-            <!-- Ulna Shaft Hatching -->
-            <path d="M 106 170 L 112 173 M 106 185 L 112 188 M 106 200 L 112 203 M 106 215 L 112 218 M 106 230 L 112 233" stroke="#332a22" stroke-width="1.2"/>
+            <!-- 1. 前臂双骨（尺骨与桡骨）解剖形体 -->
+            <g filter="url(#skeletalShading)">
+              <!-- 尺骨 (左前臂骨) -->
+              <path d="M 108 285 C 108 235, 106 195, 110 160 C 113 152, 118 152, 118 160 C 116 195, 118 235, 118 285 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
+              <!-- 尺骨细密排线 -->
+              <path d="M 110 180 L 116 183 M 110 195 L 116 198 M 110 210 L 116 213 M 110 225 L 116 228 M 110 240 L 116 243 M 110 255 L 116 258" stroke="#332a22" stroke-width="1.2"/>
 
-            <path d="M 126 275 C 126 225, 128 185, 124 155 C 122 148, 116 148, 116 155 C 118 185, 116 225, 116 275 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2" filter="url(#boneOccFilter)"/>
-            <!-- Radius Shaft Hatching -->
-            <path d="M 118 170 L 124 173 M 118 185 L 124 188 M 118 200 L 124 203 M 118 215 L 124 218 M 118 230 L 124 233" stroke="#332a22" stroke-width="1.2"/>
-
-            <!-- Carpal Wrist Bones (Anatomical Cluster of 8 interlocking bones) -->
-            <g filter="url(#boneOccFilter)">
-              <ellipse cx="116" cy="148" rx="24" ry="11" fill="#2d241d" stroke="#1a1412" stroke-width="2"/>
-              <circle cx="103" cy="148" r="4.5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="112" cy="148" r="5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="121" cy="148" r="5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="129" cy="148" r="4" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
+              <!-- 桡骨 (右前臂骨) -->
+              <path d="M 132 285 C 132 235, 134 195, 128 160 C 126 152, 121 152, 121 160 C 123 195, 121 235, 121 285 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
+              <!-- 桡骨细密排线 -->
+              <path d="M 123 180 L 129 183 M 123 195 L 129 198 M 123 210 L 129 213 M 123 225 L 129 228 M 123 240 L 129 243 M 123 255 L 129 258" stroke="#332a22" stroke-width="1.2"/>
             </g>
 
-            <!-- Thumb (Metacarpal + Proximal + Distal Phalanx with Cross-Hatching) -->
-            <g filter="url(#boneOccFilter)">
-              <path d="M 96 145 C 85 140, 75 142, 65 148 C 62 151, 65 156, 70 155 C 80 152, 90 152, 96 152 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="65" cy="148" r="4" fill="#3a3026"/>
-              <path d="M 65 148 C 55 155, 45 165, 38 178 C 35 183, 40 186, 44 182 C 50 172, 60 162, 68 152 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- Thumb hatching -->
-              <path d="M 46 172 L 50 168 M 52 165 L 56 161 M 72 150 L 76 146" stroke="#332a22" stroke-width="1"/>
+            <!-- 2. 腕骨小关节群 (真实 8 块互锁骨) -->
+            <g filter="url(#skeletalShading)">
+              <ellipse cx="122" cy="154" rx="26" ry="12" fill="#2d241d" stroke="#1a1412" stroke-width="2"/>
+              <circle cx="108" cy="154" r="5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="118" cy="154" r="5.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="128" cy="154" r="5.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="136" cy="154" r="4.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
             </g>
 
-            <!-- Index Finger (Curved Tense Grasping Arcs) -->
-            <g filter="url(#boneOccFilter)">
-              <path d="M 102 140 C 95 110, 88 85, 78 65 C 75 60, 82 56, 86 60 C 94 78, 102 105, 108 140 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="78" cy="65" r="4.5" fill="#3a3026"/>
-              <path d="M 78 65 C 72 50, 62 38, 52 30 C 48 26, 52 22, 56 25 C 68 34, 78 48, 84 62 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- Index hatching -->
-              <path d="M 85 85 L 91 88 M 82 72 L 88 75 M 65 42 L 70 45" stroke="#332a22" stroke-width="1"/>
+            <!-- 3. 五指真实关节体块（膨大骨节与指尖鹰爪张力） -->
+            <!-- 拇指 -->
+            <g filter="url(#skeletalShading)">
+              <path d="M 100 150 C 88 144, 76 148, 66 156 C 62 160, 66 166, 72 164 C 84 160, 94 158, 100 158 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="66" cy="156" r="4.5" fill="#3a3026"/>
+              <path d="M 66 156 C 54 165, 42 178, 34 192 C 30 198, 36 202, 42 196 C 50 184, 60 172, 70 160 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- 拇指排线 -->
+              <path d="M 44 186 L 49 181 M 52 177 L 57 172 M 76 158 L 81 153" stroke="#332a22" stroke-width="1"/>
             </g>
 
-            <!-- Middle Finger (Tallest, Hooked Tension with Deep Joints) -->
-            <g filter="url(#boneOccFilter)">
-              <path d="M 114 138 C 112 100, 110 68, 106 42 C 104 36, 112 34, 115 38 C 118 65, 120 100, 122 138 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2"/>
-              <circle cx="106" cy="42" r="5" fill="#3a3026"/>
-              <path d="M 106 42 C 104 28, 102 16, 98 6 C 96 2, 102 0, 105 4 C 110 14, 113 28, 114 40 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- Middle hatching -->
-              <path d="M 110 75 L 116 77 M 108 58 L 114 60 M 102 24 L 108 26" stroke="#332a22" stroke-width="1.2"/>
+            <!-- 食指 -->
+            <g filter="url(#skeletalShading)">
+              <path d="M 108 145 C 98 112, 90 85, 78 62 C 74 56, 82 52, 86 56 C 96 76, 105 106, 114 145 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="78" cy="62" r="5" fill="#3a3026"/>
+              <path d="M 78 62 C 70 46, 58 32, 48 24 C 44 20, 48 15, 53 19 C 67 29, 78 44, 85 59 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <path d="M 88 88 L 94 91 M 84 72 L 90 75 M 64 42 L 70 45" stroke="#332a22" stroke-width="1"/>
             </g>
 
-            <!-- Ring Finger -->
-            <g filter="url(#boneOccFilter)">
-              <path d="M 125 140 C 130 105, 136 78, 142 55 C 144 50, 151 52, 149 57 C 142 80, 136 108, 131 140 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="142" cy="55" r="4.5" fill="#3a3026"/>
-              <path d="M 142 55 C 148 42, 156 32, 166 24 C 170 20, 174 25, 170 29 C 160 38, 152 48, 147 60 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- Ring hatching -->
-              <path d="M 132 85 L 138 88 M 138 68 L 144 71 M 154 40 L 160 43" stroke="#332a22" stroke-width="1"/>
+            <!-- 中指 (最长、屈曲有力) -->
+            <g filter="url(#skeletalShading)">
+              <path d="M 120 142 C 117 100, 114 65, 110 38 C 107 31, 116 29, 119 34 C 123 63, 126 100, 128 142 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
+              <circle cx="110" cy="38" r="5.5" fill="#3a3026"/>
+              <path d="M 110 38 C 107 22, 104 10, 100 2 C 97 -2, 105 -3, 108 1 C 115 12, 118 25, 119 36 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <path d="M 114 78 L 121 80 M 112 58 L 119 60 M 106 22 L 113 24" stroke="#332a22" stroke-width="1.2"/>
             </g>
 
-            <!-- Pinky Finger (Curved Articulated Little Finger) -->
-            <g filter="url(#boneOccFilter)">
-              <path d="M 134 144 C 145 118, 156 95, 168 75 C 171 70, 177 74, 174 79 C 162 100, 150 122, 140 146 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="168" cy="75" r="4" fill="#3a3026"/>
-              <path d="M 168 75 C 178 62, 190 52, 202 44 C 206 41, 209 46, 206 50 C 194 58, 182 70, 174 82 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- Pinky hatching -->
-              <path d="M 150 108 L 156 112 M 160 92 L 166 96 M 184 62 L 190 66" stroke="#332a22" stroke-width="1"/>
+            <!-- 无名指 -->
+            <g filter="url(#skeletalShading)">
+              <path d="M 132 145 C 138 106, 145 78, 152 52 C 155 46, 163 48, 160 54 C 152 79, 145 108, 139 145 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="152" cy="52" r="5" fill="#3a3026"/>
+              <path d="M 152 52 C 158 38, 168 26, 178 18 C 182 14, 186 20, 182 24 C 171 34, 162 45, 157 58 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <path d="M 140 88 L 147 91 M 147 70 L 154 73 M 165 38 L 172 41" stroke="#332a22" stroke-width="1"/>
             </g>
 
-            <!-- Held Blood Rose (Gothic Velvet Red with Vine Thorns) -->
-            <g transform="translate(86, 52) scale(0.75)" filter="url(#boneOccFilter)">
-              <path d="M 22 75 Q 35 62 55 60 Q 75 62 88 75" stroke="#162e14" stroke-width="4.5" stroke-linecap="round"/>
-              <path d="M 32 66 L 25 56 M 75 66 L 82 56" stroke="#162e14" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="55" cy="52" r="24" fill="#590312" stroke="#1a1412" stroke-width="2"/>
-              <path d="M 55 24 C 36 24 24 38 24 55 C 24 72 40 84 55 90 C 70 84 86 72 86 55 C 86 38 74 24 55 24 Z" fill="#94051e"/>
-              <path d="M 40 46 C 48 35 62 35 70 46 C 74 56 65 68 55 74 C 45 68 36 56 40 46 Z" fill="#cc0c2e"/>
-              <path d="M 48 50 C 52 44 58 44 62 50 C 64 56 59 62 55 64 C 51 62 46 56 48 50 Z" fill="#ff2a5f"/>
+            <!-- 小指 -->
+            <g filter="url(#skeletalShading)">
+              <path d="M 142 150 C 154 122, 166 96, 180 74 C 184 68, 190 73, 187 78 C 173 101, 160 126, 149 152 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="180" cy="74" r="4.5" fill="#3a3026"/>
+              <path d="M 180 74 C 190 60, 204 49, 216 40 C 220 37, 224 43, 220 47 C 207 56, 194 69, 186 82 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
+              <path d="M 160 112 L 167 116 M 172 94 L 179 98 M 198 60 L 205 64" stroke="#332a22" stroke-width="1"/>
+            </g>
+
+            <!-- ==========================================================================
+                 【核心改造：真正的 3D 哥特暗红重瓣玫瑰与荆棘藤蔓】
+                 ========================================================================== -->
+            <g transform="translate(85, 45) scale(0.9)" filter="url(#skeletalShading)">
+              <!-- 荆棘藤蔓 -->
+              <path d="M 18 80 Q 32 68 55 64 Q 78 68 92 80" stroke="#122410" stroke-width="5" stroke-linecap="round"/>
+              <path d="M 28 72 L 20 62 M 78 72 L 86 62" stroke="#122410" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M 38 68 L 34 54 M 68 68 L 74 54" stroke="#1c3818" stroke-width="3" stroke-linecap="round"/>
+
+              <!-- 外层大花瓣暗部底盘 -->
+              <path d="M 55 18 C 30 18, 12 34, 12 56 C 12 78, 34 94, 55 100 C 76 94, 98 78, 98 56 C 98 34, 80 18, 55 18 Z" fill="#2d0208" stroke="#140104" stroke-width="2"/>
+
+              <!-- 中层立体交叠翻卷花瓣 -->
+              <path d="M 24 48 C 20 68, 38 88, 55 94 C 42 80, 36 62, 38 46 Z" fill="url(#roseCoreGrad)"/>
+              <path d="M 86 48 C 90 68, 72 88, 55 94 C 68 80, 74 62, 72 46 Z" fill="url(#roseCoreGrad)"/>
+              
+              <!-- 顶部与核心包裹卷心花瓣 -->
+              <path d="M 55 24 C 36 24, 28 38, 38 58 C 46 44, 64 44, 72 58 C 82 38, 74 24, 55 24 Z" fill="#91061e"/>
+              <path d="M 40 46 C 46 36, 64 36, 70 46 C 76 58, 65 72, 55 78 C 45 72, 34 58, 40 46 Z" fill="#c40a2a"/>
+              <path d="M 46 50 C 50 42, 60 42, 64 50 C 68 60, 60 68, 55 70 C 50 68, 42 60, 46 50 Z" fill="#e61338"/>
+              
+              <!-- 真实高光折边 -->
+              <path d="M 50 52 Q 55 46 60 52" stroke="#ff6b8b" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M 42 42 Q 55 32 68 42" stroke="#ff476f" stroke-width="1.8" stroke-linecap="round"/>
             </g>
 
           </svg>
         </div>
 
-        <!-- 4. Mound of Dark Earth / Soil Layer (Layered Clods & Rubble) -->
+        <!-- 4. 堆叠泥土与碎石层 -->
         <svg viewBox="0 0 340 70" fill="none" style="position:absolute; bottom:0; left:0; width:100%; height:70px; z-index:15; pointer-events:none;">
           <defs>
             <linearGradient id="soilBase" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -227,9 +243,7 @@
             </linearGradient>
           </defs>
           <ellipse cx="170" cy="52" rx="146" ry="18" fill="#080504"/>
-          <!-- Soil Mound Base -->
           <path d="M 22 70 Q 70 35 170 30 Q 270 35 318 70 Z" fill="url(#soilBase)" stroke="#1a110a" stroke-width="1.5"/>
-          <!-- Chunky Mud & Rock Clods -->
           <ellipse cx="110" cy="44" rx="14" ry="7" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
           <ellipse cx="230" cy="46" rx="16" ry="8" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
           <ellipse cx="168" cy="38" rx="20" ry="8" fill="#3d2a1e" stroke="#120c07" stroke-width="1.2"/>
@@ -241,16 +255,13 @@
 
       </div>
 
-      <!-- Action Prompt -->
       <div class="tomb-action-prompt" id="tombActionPrompt">✦ TAP THE TOMBSTONE TO SUMMON DEVOTION ✦</div>
-
-      <!-- Proceed Button -->
       <button class="proceed-letter-btn" id="proceedLetterBtn">✦ TAKE THE ROSE & READ OUR LETTER ✦</button>
 
     </section>
 
     <!-- ==========================================================================
-         ACT 2: GOTHIC PARCHMENT (STANDALONE IMMERSIVE LETTER)
+         ACT 2: 独立实体羊皮纸长信与所有定制组件
          ========================================================================== -->
     <article class="act-parchment-view" id="actParchmentView">
       
@@ -258,12 +269,10 @@
       <h1 class="letter-main-title" id="letterHeadline"></h1>
       <div class="letter-sub-title" id="letterSubHeadline"></div>
 
-      <!-- Salutation Ribbon -->
       <div class="tape-salutation-box">
         <span class="tape-salutation-text" id="letterSalutation"></span>
       </div>
 
-      <!-- 3D Flip Polaroid Photo Album -->
       <div class="photo-flip-stage" id="photoFlipStage">
         <div class="photo-flip-card" id="photoFlipCard">
           <div class="photo-flip-inner">
@@ -284,7 +293,6 @@
         </div>
       </div>
 
-      <!-- Typewriter Body -->
       <div class="letter-body-text" id="letterBodyText">
         <span id="typewriterText"></span><span class="typewriter-cursor" id="typewriterCursor"></span>
       </div>
@@ -292,7 +300,6 @@
       <div class="letter-closing-line" id="letterClosing"></div>
       <div class="letter-signature-script" id="letterSignature"></div>
 
-      <!-- Exclusive Blood Oath Seal Interaction -->
       <div class="blood-pact-station">
         <div class="blood-pact-title" id="bloodOathTitle">✦ SEAL OUR BLOOD PACT ✦</div>
         <div class="blood-pact-hint" id="bloodOathHint">PRESS THUMB TO LEAVE AN ETERNAL MARK</div>
@@ -300,7 +307,6 @@
         <div class="blood-stamp-result" id="bloodStampResult"></div>
       </div>
 
-      <!-- Gravestone Scratch-Off Vault -->
       <section class="scratch-tomb-vault" id="scratchSection">
         <div class="scratch-vault-label" id="scratchHintText"></div>
         <div class="scratch-vault-frame">
@@ -309,7 +315,6 @@
         </div>
       </section>
 
-      <!-- Runaway Mechanical Question -->
       <section class="runaway-gate-section" id="runawaySection">
         <div class="runaway-gate-question" id="runawayQuestion"></div>
         <div class="runaway-gate-buttons">
@@ -323,12 +328,8 @@
 
   </main>
 
-  <!-- 防缓存版本标记 -->
-  <script src="data.js?v=engraved_art_701"></script>
+  <script src="data.js?v=gothic_real_art_v2"></script>
   <script>
-    /* ==========================================================================
-       GOTHIC ACOUSTIC & PHYSICAL FEEDBACK ENGINE
-       ========================================================================== */
     const SoundEngine = {
       ctx: null,
       getCtx() {
@@ -339,7 +340,6 @@
         if (this.ctx.state === 'suspended') this.ctx.resume();
         return this.ctx;
       },
-      // Earth Rupture & Heavy Stone Sound
       playEarthRupture() {
         try {
           const ctx = this.getCtx();
@@ -359,7 +359,6 @@
           osc.start(now);
           osc.stop(now + 1.2);
 
-          // 50Hz Sub-bass tactile impulse
           const sub = ctx.createOscillator();
           const subGain = ctx.createGain();
           sub.type = 'sine';
@@ -374,7 +373,6 @@
           this.haptic([60, 40, 90, 40, 120]);
         } catch(e) {}
       },
-      // Resonant Cathedral Bell
       playCathedralBell() {
         try {
           const ctx = this.getCtx();
@@ -403,7 +401,7 @@
       }
     };
 
-    /* Atmospheric Fog Canvas */
+    /* Background Fog */
     const canvas = document.getElementById('particleCanvas');
     const pCtx = canvas.getContext('2d');
     let particles = [];
@@ -481,9 +479,7 @@
       }
     }
 
-    /* Master Controller */
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Ingest Data
       document.getElementById('statusDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('letterDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('headlineHero').innerText = letterData.headline || "TILL DEATH DO US PART";
@@ -503,7 +499,7 @@
         document.getElementById('letterBodyText').style.fontFamily = `"${letterData.fontType}", Georgia, serif`;
       }
 
-      // 2. Audio Control
+      // Audio Control
       const bgAudio = document.getElementById('bgAudio');
       const audioBtn = document.getElementById('audioToggleBtn');
       let isPlayingAudio = false;
@@ -529,7 +525,7 @@
       }
       audioBtn.addEventListener('click', toggleAudio);
 
-      // 3. Passcode Gate
+      // Passcode
       const overlay = document.getElementById('passcodeOverlay');
       if (!letterData.passcode) {
         overlay.classList.add('is-unlocked');
@@ -567,7 +563,7 @@
         }
       }
 
-      // 4. Act 1: Click Tombstone -> Light Words & Raise Skeleton Hand
+      // Act 1: Click Tombstone
       const tombStageContainer = document.getElementById('tombStageContainer');
       const tombstoneSvg = document.getElementById('tombstoneMasterSvg');
       const anatomicalHandStage = document.getElementById('anatomicalHandStage');
@@ -597,7 +593,7 @@
         }
       });
 
-      // 5. Touch the Rising Skeleton Hand -> Reveal Proceed Button
+      // Touch Skeleton Hand -> Show Proceed Button
       anatomicalHandStage.addEventListener('click', (e) => {
         SoundEngine.playCathedralBell();
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.6);
@@ -605,7 +601,7 @@
         proceedBtn.style.display = 'inline-block';
       });
 
-      // 6. Transition: Act 1 to Act 2
+      // Act 1 -> Act 2 Transition
       const actTomb = document.getElementById('actTombView');
       const actLetter = document.getElementById('actParchmentView');
 
@@ -622,7 +618,7 @@
         }, 650);
       });
 
-      // 7. 3D Polaroid Photo Album
+      // Photo Flip
       const photoCard = document.getElementById('photoFlipCard');
       const frontImg = document.getElementById('frontPhotoImg');
       const backCaption = document.getElementById('backCaptionText');
@@ -667,7 +663,7 @@
         document.getElementById('photoFlipStage').style.display = 'none';
       }
 
-      // 8. Smart Typewriter
+      // Typewriter
       let typewriterTimer = null;
       let isDoneTyping = false;
       const textEl = document.getElementById('letterBodyText');
@@ -701,7 +697,7 @@
         cursor.style.display = 'none';
       }
 
-      // 9. Exclusive Surprise: Blood Oath Press
+      // Blood Oath
       const bloodBtn = document.getElementById('bloodStampPress');
       const bloodResult = document.getElementById('bloodStampResult');
       bloodBtn.addEventListener('click', (e) => {
@@ -712,7 +708,7 @@
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.7);
       });
 
-      // 10. Gravestone Scratch-Off
+      // Scratch
       function initTombScratch() {
         const scratchSec = document.getElementById('scratchSection');
         if (!letterData.enableScratch) {
@@ -763,13 +759,13 @@
 
         sCanvas.addEventListener('mousedown', () => isScratching = true);
         window.addEventListener('mouseup', () => isScratching = false);
-        sCanvas.addEventListener('mousemove', scratch);
+        canvas.addEventListener('mousemove', scratch);
         sCanvas.addEventListener('touchstart', (e) => { isScratching = true; scratch(e); }, { passive: true });
         window.addEventListener('touchend', () => isScratching = false);
         sCanvas.addEventListener('touchmove', scratch, { passive: true });
       }
 
-      // 11. Runaway Gate
+      // Runaway Question
       const runawaySec = document.getElementById('runawaySection');
       if (letterData.enableRunaway) {
         document.getElementById('runawayQuestion').innerText = letterData.runawayQuestion;
