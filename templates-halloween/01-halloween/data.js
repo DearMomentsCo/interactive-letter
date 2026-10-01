@@ -1,49 +1,52 @@
-/* ==========================================================================
-   HALLOWEEN THEME 01: TILL DEATH (VICTORIAN GOTHIC ROMANCE)
-   Independent Configuration File (templates-halloween/01-halloween/)
-   ========================================================================== */
-
-const LETTER_DATA = {
-  // 1. Passcode Configuration (4 digits, leave empty "" to disable)
+/**
+ * TILL DEATH DO US PART (01-halloween)
+ * 1:1 Mapping for future Tally Customization Form
+ */
+const letterData = {
+  // Passcode gate (Leave empty "" to disable)
   passcode: "1031",
 
-  // 2. Letter Header & Typography
+  // Core Heading & Meta
   dateText: "ALL HALLOWS' EVE, 2026",
   headline: "TILL DEATH DO US PART",
-  salutation: "My Eternal Soulmate,",
+  subHeadline: "AN ETERNAL PACT SEALED BEYOND THE GRAVE",
 
-  // 3. Typographic Engine (Choose from standard 9 fonts:
-  // "Playfair Display", "Cormorant Garamond", "EB Garamond", "Lora",
-  // "Alegreya", "Cinzel", "Caveat", "Montserrat", "MedievalSharp")
-  fontType: "Cormorant Garamond",
+  // Main Letter Content
+  salutation: "To My Eternal Beloved,",
+  body: "They say nothing in this fleeting realm withstands the test of time, yet our souls remain bound by a pact that mocks eternity itself.\n\nThrough every fading breath and every cold whisper of autumn twilight, my devotion to you stays unyielding. Neither distance nor the silence of the earth could ever part what is woven into our very marrow.\n\nTake my hand across the velvet dark, today and into the quiet forever.",
+  closing: "Eternally yours to the bone,",
+  signature: "Your Devoted Wraith",
 
-  // 4. Letter Body Content (Typewriter effect automatically adapts)
-  body: "In this life and whatever realm awaits beyond, my devotion to you remains unyielding. Like ancient roots entwined beneath the fallen leaves, our souls were bound long before time itself began. Let the shadows lengthen and the cold winds whisper through the hollow night—for in the warmth of your embrace, even eternity seems too short. To the bone, to the heart, forever yours.",
+  // Typography Preference ("Cinzel", "Playfair Display", "Cormorant Garamond")
+  fontType: "Cinzel",
 
-  // 5. Letter Closing
-  closing: "Eternally & faithfully yours,\nAlways by your side",
+  // Background Audio: Direct MP3 link (Buyer can upload audio/recording to GitHub or Catbox)
+  audioUrl: "https://assets.mixkit.co/music/preview/mixkit-horror-mysterious-piano-571.mp3",
 
-  // 6. Audio Engine (Catbox link or audio stream)
-  audioUrl: "https://files.catbox.moe/k3b4t0.mp3",
-
-  // 7. Large-format Photo Gallery (Supports 9:16 mobile portraits)
+  // Victorian Dual-Sided Polaroid Gallery (3D Flip Memory)
   photos: [
     {
-      url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop",
-      caption: "Our shadows walk side by side through the autumn chill."
+      url: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=80",
+      caption: "Under the whispering pines where we first bound our souls. ✦ 2024"
     },
     {
-      url: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop",
-      caption: "A bond forged in mystery, carved into timeless memory."
+      url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+      caption: "A midnight vow etched beneath the silver crescent moon."
     }
   ],
 
-  // 8. Gothic Silver Scratch-off Card
-  enableScratch: true,
-  scratchSecret: "✦ YOU ARE MY ONCE-IN-A-LIFETIME HAUNTING LOVE ✦",
+  // Exclusive Surprise: Blood Oath Interactive Stamp
+  bloodOathTitle: "✦ SEAL OUR BLOOD PACT ✦",
+  bloodOathHint: "PRESS THUMB TO LEAVE AN ETERNAL MARK",
+  bloodOathSuccess: "✦ Bound by Blood & Bone ♡ Forever Sealed ✦",
 
-  // 9. Runaway Decision Interaction
+  // Tombstone Scratch-off Vault
+  enableScratch: true,
+  scratchHint: "✦ SCRATCH THE GRAVESTONE TO REVEAL THE HIDDEN VOW ✦",
+  scratchSecret: "✦ Even if the stars turn to ash, I would search the underworld to find you again. ✦",
+
+  // Runaway Mechanical Vow Question
   enableRunaway: true,
-  runawayQuestion: "WILL YOU WALK WITH ME INTO THE SWEET DARKNESS?",
-  runawaySuccessMessage: "✦ Our pact is sealed. Eternity belongs to us ♡ ✦"
+  runawayQuestion: "WILL YOU WALK INTO THE AFTERLIFE WITH ME?",
+  runawaySuccessMessage: "✦ THE VOW IS SEALED. TWO SHADOWS BECOME ONE ETERNITY. ✦"
 };
