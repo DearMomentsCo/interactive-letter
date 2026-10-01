@@ -1,6 +1,6 @@
 /**
  * TILL DEATH DO US PART (01-halloween)
- * 1:1 Mapping for future Tally Customization Form
+ * 1:1 Mapping ready for future Tally Customization Form
  */
 const letterData = {
   // Passcode gate (Leave empty "" to disable)
@@ -9,9 +9,9 @@ const letterData = {
   // Core Heading & Meta
   dateText: "ALL HALLOWS' EVE, 2026",
   headline: "TILL DEATH DO US PART",
-  subHeadline: "AN ETERNAL PACT SEALED BEYOND THE GRAVE",
+  subHeadline: "AN ETERNAL PACT ETCHED IN BONE & STONE",
 
-  // Tombstone Carved Words (Revealed on Tombstone Touch)
+  // Tombstone Engravings
   tombEpitaph: "REST IN ETERNAL DEVOTION",
   tombEngravingYear: "1892 — FOREVER",
 
@@ -24,7 +24,7 @@ const letterData = {
   // Typography Preference ("Cinzel", "Playfair Display", "Cormorant Garamond")
   fontType: "Cinzel",
 
-  // High-fidelity Gothic Background Audio
+  // Audio Stream
   audioUrl: "https://assets.mixkit.co/music/preview/mixkit-horror-mysterious-piano-571.mp3",
 
   // Dual-Sided Polaroid Gallery (3D Flip Memory)
