@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Till Death Do Us Part</title>
 
+  <!-- 预加载 9 大核心字体库 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;700&family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=MedievalSharp&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
   <!-- 版本号刷新防缓存 -->
-  <link rel="stylesheet" href="style.css?v=gothic_real_art_v2" />
+  <link rel="stylesheet" href="style.css?v=cinema_3d_real_v3" />
 </head>
 <body>
 
@@ -37,7 +38,7 @@
   <main class="main-stage">
 
     <!-- ==========================================================================
-         ACT 1: 高精度 3D 哥特风化墓碑 + 写实解剖级骨手与真红玫瑰
+         ACT 1: 真实 3D 渲染图层架构（墓碑 + 骨手破土升起）
          ========================================================================== -->
     <section class="act-tomb-view" id="actTombView">
       
@@ -46,212 +47,14 @@
         <h1 class="tomb-hero-title" id="headlineHero">TILL DEATH DO US PART</h1>
       </div>
 
+      <!-- 电影级真实图层交互舞台 -->
       <div class="tomb-stage-container" id="tombStageContainer">
         
-        <!-- 3D 风化石材质感墓碑 SVG -->
-        <svg class="tombstone-master-svg" id="tombstoneMasterSvg" viewBox="0 0 340 460" fill="none">
-          <defs>
-            <linearGradient id="stoneFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4a4254"/>
-              <stop offset="25%" stop-color="#2a2434"/>
-              <stop offset="65%" stop-color="#181420"/>
-              <stop offset="100%" stop-color="#0a0810"/>
-            </linearGradient>
-            <linearGradient id="stoneBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#383042"/>
-              <stop offset="100%" stop-color="#120e18"/>
-            </linearGradient>
-            <radialGradient id="candleFlames" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffbe0b" stop-opacity="1"/>
-              <stop offset="55%" stop-color="#fb5607" stop-opacity="0.85"/>
-              <stop offset="100%" stop-color="#ff006e" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="heavyStoneShadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000000" flood-opacity="0.95"/>
-            </filter>
-          </defs>
+        <!-- 背景层：真实 3D 风化墓碑与泥土资产 -->
+        <img src="tombstone.png" class="real-tombstone-layer" id="tombstoneImg" alt="Weathered Tombstone" />
 
-          <!-- 基座台阶 -->
-          <rect x="20" y="415" width="300" height="25" rx="3" fill="#14111c" stroke="#483f56" stroke-width="2"/>
-          <rect x="42" y="390" width="256" height="25" rx="2" fill="url(#stoneBevelGrad)" stroke="#3d354a" stroke-width="2"/>
-
-          <!-- 墓碑侧立面厚度（3D 景深拉伸） -->
-          <path d="M 68 140 C 68 55, 272 55, 272 140 L 278 145 L 278 390 L 272 390 Z" fill="#0c0a11"/>
-          
-          <!-- 墓碑正面 -->
-          <path d="M 62 390 L 62 140 C 62 45, 278 45, 278 140 L 278 390 Z" fill="url(#stoneFaceGrad)" stroke="#584e68" stroke-width="2.5" filter="url(#heavyStoneShadow)"/>
-
-          <!-- 内凹雕刻拱圈与素描排线 -->
-          <path d="M 76 380 L 76 145 C 76 65, 264 65, 264 145 L 264 380 Z" fill="#110e16" stroke="#332c3e" stroke-width="2" stroke-dasharray="6,4"/>
-
-          <!-- 哥特立体雕琢十字架 -->
-          <g filter="url(#heavyStoneShadow)">
-            <path d="M 160 85 H 180 V 105 H 202 V 122 H 180 V 165 H 160 V 122 H 138 V 105 H 160 Z" fill="#241f2d" stroke="#5a4e6c" stroke-width="1.6"/>
-            <path d="M 160 85 L 170 95 L 170 165 M 138 105 L 150 113 L 202 113" stroke="#41384e" stroke-width="1"/>
-          </g>
-
-          <!-- 真实岩石破裂风化刻痕 -->
-          <path d="M 88 115 L 112 140 L 102 160 L 126 182" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
-          <path d="M 252 185 L 232 208 L 244 228" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
-          <path d="M 170 330 L 182 355 L 176 370" stroke="#251e2e" stroke-width="1.6" stroke-linecap="round"/>
-
-          <!-- 碑文 -->
-          <text x="170" y="240" class="tomb-engraved-text" id="tombEpitaphText">REST IN ETERNAL DEVOTION</text>
-          <text x="170" y="270" class="tomb-engraved-sub" id="tombEngravingYear">1892 — FOREVER</text>
-
-          <!-- 两侧带烛泪烛光 -->
-          <g>
-            <path d="M 34 390 L 34 345 C 34 343, 38 342, 42 342 C 46 342, 50 343, 50 345 L 50 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
-            <path d="M 38 350 Q 36 365 37 375" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M 42 340 Q 38 325 42 316 Q 47 325 42 340 Z" fill="url(#candleFlames)"/>
-            <circle cx="42" cy="328" r="14" fill="url(#candleFlames)" opacity="0.4"/>
-
-            <path d="M 290 390 L 290 345 C 290 343, 294 342, 298 342 C 302 342, 306 343, 306 345 L 306 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
-            <path d="M 302 348 Q 304 362 303 372" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M 298 340 Q 294 325 298 316 Q 303 325 298 340 Z" fill="url(#candleFlames)"/>
-            <circle cx="298" cy="328" r="14" fill="url(#candleFlames)" opacity="0.4"/>
-          </g>
-        </svg>
-
-        <!-- ==========================================================================
-             【重点升级：解剖级蚀刻版画骨手 + 层次逼真的带刺哥特立体玫瑰】
-             ========================================================================== -->
-        <div class="anatomical-hand-stage" id="anatomicalHandStage">
-          <svg class="hand-hatch-pulse" viewBox="0 0 250 300" fill="none" style="width:100%; height:100%;">
-            <defs>
-              <!-- 象牙做旧骨质渐变 -->
-              <linearGradient id="boneRealIvory" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="30%" stop-color="#ece4d4"/>
-                <stop offset="70%" stop-color="#b8ad96"/>
-                <stop offset="100%" stop-color="#5a4e3c"/>
-              </linearGradient>
-
-              <!-- 哥特深红天鹅绒玫瑰渐变 -->
-              <radialGradient id="roseCoreGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#ff1a4b"/>
-                <stop offset="40%" stop-color="#b00624"/>
-                <stop offset="85%" stop-color="#540210"/>
-                <stop offset="100%" stop-color="#240106"/>
-              </radialGradient>
-
-              <filter id="skeletalShading" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="2" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.95"/>
-              </filter>
-            </defs>
-
-            <!-- 1. 前臂双骨（尺骨与桡骨）解剖形体 -->
-            <g filter="url(#skeletalShading)">
-              <!-- 尺骨 (左前臂骨) -->
-              <path d="M 108 285 C 108 235, 106 195, 110 160 C 113 152, 118 152, 118 160 C 116 195, 118 235, 118 285 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
-              <!-- 尺骨细密排线 -->
-              <path d="M 110 180 L 116 183 M 110 195 L 116 198 M 110 210 L 116 213 M 110 225 L 116 228 M 110 240 L 116 243 M 110 255 L 116 258" stroke="#332a22" stroke-width="1.2"/>
-
-              <!-- 桡骨 (右前臂骨) -->
-              <path d="M 132 285 C 132 235, 134 195, 128 160 C 126 152, 121 152, 121 160 C 123 195, 121 235, 121 285 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
-              <!-- 桡骨细密排线 -->
-              <path d="M 123 180 L 129 183 M 123 195 L 129 198 M 123 210 L 129 213 M 123 225 L 129 228 M 123 240 L 129 243 M 123 255 L 129 258" stroke="#332a22" stroke-width="1.2"/>
-            </g>
-
-            <!-- 2. 腕骨小关节群 (真实 8 块互锁骨) -->
-            <g filter="url(#skeletalShading)">
-              <ellipse cx="122" cy="154" rx="26" ry="12" fill="#2d241d" stroke="#1a1412" stroke-width="2"/>
-              <circle cx="108" cy="154" r="5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="118" cy="154" r="5.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="128" cy="154" r="5.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
-              <circle cx="136" cy="154" r="4.5" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.5"/>
-            </g>
-
-            <!-- 3. 五指真实关节体块（膨大骨节与指尖鹰爪张力） -->
-            <!-- 拇指 -->
-            <g filter="url(#skeletalShading)">
-              <path d="M 100 150 C 88 144, 76 148, 66 156 C 62 160, 66 166, 72 164 C 84 160, 94 158, 100 158 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="66" cy="156" r="4.5" fill="#3a3026"/>
-              <path d="M 66 156 C 54 165, 42 178, 34 192 C 30 198, 36 202, 42 196 C 50 184, 60 172, 70 160 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <!-- 拇指排线 -->
-              <path d="M 44 186 L 49 181 M 52 177 L 57 172 M 76 158 L 81 153" stroke="#332a22" stroke-width="1"/>
-            </g>
-
-            <!-- 食指 -->
-            <g filter="url(#skeletalShading)">
-              <path d="M 108 145 C 98 112, 90 85, 78 62 C 74 56, 82 52, 86 56 C 96 76, 105 106, 114 145 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="78" cy="62" r="5" fill="#3a3026"/>
-              <path d="M 78 62 C 70 46, 58 32, 48 24 C 44 20, 48 15, 53 19 C 67 29, 78 44, 85 59 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <path d="M 88 88 L 94 91 M 84 72 L 90 75 M 64 42 L 70 45" stroke="#332a22" stroke-width="1"/>
-            </g>
-
-            <!-- 中指 (最长、屈曲有力) -->
-            <g filter="url(#skeletalShading)">
-              <path d="M 120 142 C 117 100, 114 65, 110 38 C 107 31, 116 29, 119 34 C 123 63, 126 100, 128 142 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="2"/>
-              <circle cx="110" cy="38" r="5.5" fill="#3a3026"/>
-              <path d="M 110 38 C 107 22, 104 10, 100 2 C 97 -2, 105 -3, 108 1 C 115 12, 118 25, 119 36 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <path d="M 114 78 L 121 80 M 112 58 L 119 60 M 106 22 L 113 24" stroke="#332a22" stroke-width="1.2"/>
-            </g>
-
-            <!-- 无名指 -->
-            <g filter="url(#skeletalShading)">
-              <path d="M 132 145 C 138 106, 145 78, 152 52 C 155 46, 163 48, 160 54 C 152 79, 145 108, 139 145 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="152" cy="52" r="5" fill="#3a3026"/>
-              <path d="M 152 52 C 158 38, 168 26, 178 18 C 182 14, 186 20, 182 24 C 171 34, 162 45, 157 58 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <path d="M 140 88 L 147 91 M 147 70 L 154 73 M 165 38 L 172 41" stroke="#332a22" stroke-width="1"/>
-            </g>
-
-            <!-- 小指 -->
-            <g filter="url(#skeletalShading)">
-              <path d="M 142 150 C 154 122, 166 96, 180 74 C 184 68, 190 73, 187 78 C 173 101, 160 126, 149 152 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <circle cx="180" cy="74" r="4.5" fill="#3a3026"/>
-              <path d="M 180 74 C 190 60, 204 49, 216 40 C 220 37, 224 43, 220 47 C 207 56, 194 69, 186 82 Z" fill="url(#boneRealIvory)" stroke="#1a1412" stroke-width="1.8"/>
-              <path d="M 160 112 L 167 116 M 172 94 L 179 98 M 198 60 L 205 64" stroke="#332a22" stroke-width="1"/>
-            </g>
-
-            <!-- ==========================================================================
-                 【核心改造：真正的 3D 哥特暗红重瓣玫瑰与荆棘藤蔓】
-                 ========================================================================== -->
-            <g transform="translate(85, 45) scale(0.9)" filter="url(#skeletalShading)">
-              <!-- 荆棘藤蔓 -->
-              <path d="M 18 80 Q 32 68 55 64 Q 78 68 92 80" stroke="#122410" stroke-width="5" stroke-linecap="round"/>
-              <path d="M 28 72 L 20 62 M 78 72 L 86 62" stroke="#122410" stroke-width="3.5" stroke-linecap="round"/>
-              <path d="M 38 68 L 34 54 M 68 68 L 74 54" stroke="#1c3818" stroke-width="3" stroke-linecap="round"/>
-
-              <!-- 外层大花瓣暗部底盘 -->
-              <path d="M 55 18 C 30 18, 12 34, 12 56 C 12 78, 34 94, 55 100 C 76 94, 98 78, 98 56 C 98 34, 80 18, 55 18 Z" fill="#2d0208" stroke="#140104" stroke-width="2"/>
-
-              <!-- 中层立体交叠翻卷花瓣 -->
-              <path d="M 24 48 C 20 68, 38 88, 55 94 C 42 80, 36 62, 38 46 Z" fill="url(#roseCoreGrad)"/>
-              <path d="M 86 48 C 90 68, 72 88, 55 94 C 68 80, 74 62, 72 46 Z" fill="url(#roseCoreGrad)"/>
-              
-              <!-- 顶部与核心包裹卷心花瓣 -->
-              <path d="M 55 24 C 36 24, 28 38, 38 58 C 46 44, 64 44, 72 58 C 82 38, 74 24, 55 24 Z" fill="#91061e"/>
-              <path d="M 40 46 C 46 36, 64 36, 70 46 C 76 58, 65 72, 55 78 C 45 72, 34 58, 40 46 Z" fill="#c40a2a"/>
-              <path d="M 46 50 C 50 42, 60 42, 64 50 C 68 60, 60 68, 55 70 C 50 68, 42 60, 46 50 Z" fill="#e61338"/>
-              
-              <!-- 真实高光折边 -->
-              <path d="M 50 52 Q 55 46 60 52" stroke="#ff6b8b" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M 42 42 Q 55 32 68 42" stroke="#ff476f" stroke-width="1.8" stroke-linecap="round"/>
-            </g>
-
-          </svg>
-        </div>
-
-        <!-- 4. 堆叠泥土与碎石层 -->
-        <svg viewBox="0 0 340 70" fill="none" style="position:absolute; bottom:0; left:0; width:100%; height:70px; z-index:15; pointer-events:none;">
-          <defs>
-            <linearGradient id="soilBase" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#36251b"/>
-              <stop offset="60%" stop-color="#1c120c"/>
-              <stop offset="100%" stop-color="#080504"/>
-            </linearGradient>
-          </defs>
-          <ellipse cx="170" cy="52" rx="146" ry="18" fill="#080504"/>
-          <path d="M 22 70 Q 70 35 170 30 Q 270 35 318 70 Z" fill="url(#soilBase)" stroke="#1a110a" stroke-width="1.5"/>
-          <ellipse cx="110" cy="44" rx="14" ry="7" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
-          <ellipse cx="230" cy="46" rx="16" ry="8" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
-          <ellipse cx="168" cy="38" rx="20" ry="8" fill="#3d2a1e" stroke="#120c07" stroke-width="1.2"/>
-          <circle cx="85" cy="54" r="5" fill="#120c07"/>
-          <circle cx="140" cy="48" r="4" fill="#4d3527"/>
-          <circle cx="198" cy="49" r="4.5" fill="#4d3527"/>
-          <circle cx="260" cy="55" r="5" fill="#120c07"/>
-        </svg>
+        <!-- 动效层：真实解剖骷髅手持暗红玫瑰（从泥土后升起） -->
+        <img src="skeleton-hand.png" class="real-hand-layer" id="skeletonHandImg" alt="Skeleton Hand Holding Rose" />
 
       </div>
 
@@ -261,7 +64,7 @@
     </section>
 
     <!-- ==========================================================================
-         ACT 2: 独立实体羊皮纸长信与所有定制组件
+         ACT 2: 完整高定羊皮纸信件
          ========================================================================== -->
     <article class="act-parchment-view" id="actParchmentView">
       
@@ -328,7 +131,7 @@
 
   </main>
 
-  <script src="data.js?v=gothic_real_art_v2"></script>
+  <script src="data.js?v=cinema_3d_real_v3"></script>
   <script>
     const SoundEngine = {
       ctx: null,
@@ -446,7 +249,7 @@
     }
     renderParticles();
 
-    /* Burst Stage Effects */
+    /* Burst Stage */
     function triggerBurst(originX, originY) {
       const stage = document.getElementById('burstStage');
       const icons = ['🥀', '✨', '🖤', '🌹', '🩸', '✨'];
@@ -489,12 +292,10 @@
       document.getElementById('letterClosing').innerText = letterData.closing || "";
       document.getElementById('letterSignature').innerText = letterData.signature || "";
 
-      document.getElementById('tombEpitaphText').textContent = letterData.tombEpitaph || "REST IN ETERNAL DEVOTION";
-      document.getElementById('tombEngravingYear').textContent = letterData.tombEngravingYear || "1892 — FOREVER";
-
       document.getElementById('bloodOathTitle').innerText = letterData.bloodOathTitle || "✦ SEAL OUR BLOOD PACT ✦";
       document.getElementById('bloodOathHint').innerText = letterData.bloodOathHint || "PRESS THUMB TO LEAVE AN ETERNAL MARK";
 
+      // 动态字体绑定
       if (letterData.fontType) {
         document.getElementById('letterBodyText').style.fontFamily = `"${letterData.fontType}", Georgia, serif`;
       }
@@ -563,15 +364,15 @@
         }
       }
 
-      // Act 1: Click Tombstone
+      // Act 1: 真实 3D 墓碑交互 -> 骨手升起
       const tombStageContainer = document.getElementById('tombStageContainer');
-      const tombstoneSvg = document.getElementById('tombstoneMasterSvg');
-      const anatomicalHandStage = document.getElementById('anatomicalHandStage');
+      const tombstoneImg = document.getElementById('tombstoneImg');
+      const skeletonHandImg = document.getElementById('skeletonHandImg');
       const tombActionPrompt = document.getElementById('tombActionPrompt');
       const proceedBtn = document.getElementById('proceedLetterBtn');
       let isRisen = false;
 
-      tombstoneSvg.addEventListener('click', (e) => {
+      tombstoneImg.addEventListener('click', (e) => {
         if (isRisen) return;
         isRisen = true;
 
@@ -583,7 +384,7 @@
           tombStageContainer.classList.add('is-risen');
           tombActionPrompt.innerText = "✦ TOUCH THE SKELETON HAND TO TAKE THE ROSE ✦";
           SoundEngine.playCathedralBell();
-        }, 550);
+        }, 500);
 
         if (letterData.audioUrl && !isPlayingAudio) {
           bgAudio.play().then(() => {
@@ -593,15 +394,15 @@
         }
       });
 
-      // Touch Skeleton Hand -> Show Proceed Button
-      anatomicalHandStage.addEventListener('click', (e) => {
+      // 触碰真实骨手 -> 显示启信按钮
+      skeletonHandImg.addEventListener('click', (e) => {
         SoundEngine.playCathedralBell();
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.6);
         tombActionPrompt.innerText = "✦ AN ETERNAL PACT IS AWAKENED ✦";
         proceedBtn.style.display = 'inline-block';
       });
 
-      // Act 1 -> Act 2 Transition
+      // 幕间转换：Act 1 -> Act 2
       const actTomb = document.getElementById('actTombView');
       const actLetter = document.getElementById('actParchmentView');
 
@@ -618,7 +419,7 @@
         }, 650);
       });
 
-      // Photo Flip
+      // 照片翻转画廊
       const photoCard = document.getElementById('photoFlipCard');
       const frontImg = document.getElementById('frontPhotoImg');
       const backCaption = document.getElementById('backCaptionText');
@@ -663,7 +464,7 @@
         document.getElementById('photoFlipStage').style.display = 'none';
       }
 
-      // Typewriter
+      // 打字机
       let typewriterTimer = null;
       let isDoneTyping = false;
       const textEl = document.getElementById('letterBodyText');
@@ -697,7 +498,7 @@
         cursor.style.display = 'none';
       }
 
-      // Blood Oath
+      // 血印契约
       const bloodBtn = document.getElementById('bloodStampPress');
       const bloodResult = document.getElementById('bloodStampResult');
       bloodBtn.addEventListener('click', (e) => {
@@ -708,7 +509,7 @@
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.7);
       });
 
-      // Scratch
+      // 刮刮乐
       function initTombScratch() {
         const scratchSec = document.getElementById('scratchSection');
         if (!letterData.enableScratch) {
@@ -765,7 +566,7 @@
         sCanvas.addEventListener('touchmove', scratch, { passive: true });
       }
 
-      // Runaway Question
+      // 逃跑问答
       const runawaySec = document.getElementById('runawaySection');
       if (letterData.enableRunaway) {
         document.getElementById('runawayQuestion').innerText = letterData.runawayQuestion;
