@@ -20,10 +20,10 @@ const letterData = {
   // Typography Preference ("Cinzel", "Playfair Display", "Cormorant Garamond")
   fontType: "Cinzel",
 
-  // Background Audio: Direct MP3 link (Buyer can upload audio/recording to GitHub or Catbox)
+  // High-fidelity Gothic Background Audio
   audioUrl: "https://assets.mixkit.co/music/preview/mixkit-horror-mysterious-piano-571.mp3",
 
-  // Victorian Dual-Sided Polaroid Gallery (3D Flip Memory)
+  // Dual-Sided Polaroid Gallery (3D Flip Memory)
   photos: [
     {
       url: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=80",
@@ -35,7 +35,7 @@ const letterData = {
     }
   ],
 
-  // Exclusive Surprise: Blood Oath Interactive Stamp
+  // Exclusive Surprise: Blood Oath Seal
   bloodOathTitle: "✦ SEAL OUR BLOOD PACT ✦",
   bloodOathHint: "PRESS THUMB TO LEAVE AN ETERNAL MARK",
   bloodOathSuccess: "✦ Bound by Blood & Bone ♡ Forever Sealed ✦",
@@ -45,7 +45,7 @@ const letterData = {
   scratchHint: "✦ SCRATCH THE GRAVESTONE TO REVEAL THE HIDDEN VOW ✦",
   scratchSecret: "✦ Even if the stars turn to ash, I would search the underworld to find you again. ✦",
 
-  // Runaway Mechanical Vow Question
+  // Runaway Mechanical Question
   enableRunaway: true,
   runawayQuestion: "WILL YOU WALK INTO THE AFTERLIFE WITH ME?",
   runawaySuccessMessage: "✦ THE VOW IS SEALED. TWO SHADOWS BECOME ONE ETERNITY. ✦"
