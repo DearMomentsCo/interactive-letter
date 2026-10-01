@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
 :root {
-  --bg-deep: #050407;
-  --stone-dark: #1b1922;
-  --stone-mid: #2b2736;
-  --stone-light: #524b61;
+  --bg-deep: #060508;
+  --stone-dark: #121017;
+  --stone-mid: #25222e;
+  --stone-rim: #4c465a;
   --crimson-blood: #8f081e;
   --crimson-glow: #ff1e56;
   --parchment-base: #f7f1e1;
+  --parchment-burn: #2e1d13;
   --ink-primary: #181412;
-  --candle-flame: #ffbe0b;
 }
 
 * {
@@ -35,8 +35,8 @@ body::before {
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 20%, rgba(76, 43, 99, 0.35) 0%, transparent 60%),
-    radial-gradient(circle at 50% 85%, rgba(143, 8, 30, 0.25) 0%, transparent 65%),
+    radial-gradient(circle at 50% 18%, rgba(85, 48, 110, 0.32) 0%, transparent 58%),
+    radial-gradient(circle at 50% 85%, rgba(143, 8, 30, 0.22) 0%, transparent 65%),
     radial-gradient(circle at 50% 50%, transparent 35%, rgba(0, 0, 0, 0.95) 100%);
   pointer-events: none;
   z-index: 1;
@@ -61,7 +61,7 @@ body::before {
   pointer-events: none;
 }
 
-/* Audio Floating Controller */
+/* Audio Controller */
 .audio-toggle-btn {
   position: fixed;
   top: 18px;
@@ -69,7 +69,7 @@ body::before {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(18, 14, 24, 0.85);
+  background: rgba(18, 14, 24, 0.88);
   border: 1.5px solid #63507a;
   color: #fff;
   font-size: 16px;
@@ -175,9 +175,9 @@ body::before {
 }
 
 /* ==========================================================================
-   ACT 1: THE GRAVEYARD TOMBSTONE & RISING SKELETON HAND
+   ACT 1: SKEUOMORPHIC ENGRAVED TOMBSTONE & REAL ANATOMICAL BONE HAND
    ========================================================================== */
-.act-graveyard-view {
+.act-tomb-view {
   width: 100%;
   max-width: 420px;
   display: flex;
@@ -186,19 +186,19 @@ body::before {
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.act-graveyard-view.is-exited {
+.act-tomb-view.is-exited {
   opacity: 0;
   transform: scale(0.9) translateY(-40px);
   pointer-events: none;
   display: none;
 }
 
-.graveyard-meta-header {
+.tomb-hero-meta {
   text-align: center;
   margin-bottom: 14px;
 }
 
-.graveyard-meta-sub {
+.tomb-hero-sub {
   font-family: 'Montserrat', sans-serif;
   font-size: 9.5px;
   letter-spacing: 3px;
@@ -208,7 +208,7 @@ body::before {
   text-shadow: 0 0 12px rgba(255, 51, 102, 0.7);
 }
 
-.graveyard-meta-title {
+.tomb-hero-title {
   font-size: clamp(18px, 4.8vw, 24px);
   letter-spacing: 3.5px;
   font-weight: 900;
@@ -217,11 +217,11 @@ body::before {
   -webkit-text-fill-color: transparent;
 }
 
-/* Physical Gravestone Scene Viewport */
-.graveyard-scene-viewport {
+/* Tombstone Stage Area */
+.tomb-stage-container {
   position: relative;
   width: min(86vw, 340px);
-  height: min(65vh, 470px);
+  height: min(66vh, 470px);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -229,104 +229,82 @@ body::before {
   justify-content: flex-end;
 }
 
-/* The Grand Gravestone SVG */
-.tombstone-casket-svg {
+.tombstone-master-svg {
   width: 100%;
   height: 100%;
   display: block;
-  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(143, 8, 30, 0.3));
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 25px rgba(143, 8, 30, 0.35));
   cursor: pointer;
 }
 
-/* Engraved Text that Glows on Click */
-.engraved-vow-text {
+/* Inscription Illumination */
+.tomb-engraved-text {
   font-family: 'Cinzel', serif;
   font-size: 13px;
   letter-spacing: 2px;
   font-weight: 800;
-  fill: #736980;
+  fill: #61596e;
   text-anchor: middle;
   transition: all 1.2s ease;
 }
 
-.tomb-engraved-date {
+.tomb-engraved-sub {
   font-family: 'Montserrat', sans-serif;
   font-size: 9px;
   letter-spacing: 2px;
   font-weight: 700;
-  fill: #5a5166;
+  fill: #484154;
   text-anchor: middle;
   transition: all 1.2s ease;
 }
 
-.graveyard-scene-viewport.is-lit .engraved-vow-text {
+.tomb-stage-container.is-lit .tomb-engraved-text {
   fill: #ffccd5;
   filter: drop-shadow(0 0 8px rgba(255, 30, 86, 0.9));
 }
 
-.graveyard-scene-viewport.is-lit .tomb-engraved-date {
+.tomb-stage-container.is-lit .tomb-engraved-sub {
   fill: #ff85a1;
 }
 
-/* Candlesticks Flicker Animation */
-.candle-glow {
-  animation: flickerCandle 1.8s infinite alternate ease-in-out;
-}
-@keyframes flickerCandle {
-  0% { transform: scale(1); opacity: 0.85; }
-  100% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 10px #ffbe0b); }
-}
-
-/* The 3D Anatomical Skeleton Hand Rising from Soil */
-.rising-hand-stage {
+/* Anatomical Cross-Hatched Skeleton Hand Rising Stage */
+.anatomical-hand-stage {
   position: absolute;
-  bottom: 30px;
+  bottom: 24px;
   left: 50%;
-  transform: translateX(-50%) translateY(140px);
-  width: 220px;
-  height: 240px;
+  transform: translateX(-50%) translateY(160px);
+  width: 240px;
+  height: 270px;
   opacity: 0;
   pointer-events: none;
   z-index: 10;
   transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
 }
 
-.graveyard-scene-viewport.is-risen .rising-hand-stage {
+.tomb-stage-container.is-risen .anatomical-hand-stage {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
   pointer-events: auto;
   cursor: pointer;
 }
 
-/* Soil Mound & Flying Dirt Clods */
-.soil-mound-svg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  z-index: 15;
-  pointer-events: none;
+.hand-hatch-pulse {
+  animation: handPulseEngraving 2.4s infinite ease-in-out;
 }
 
-/* Glowing Pulsing Touch Affordance on Hand */
-.rising-hand-pulse {
-  animation: handBeckon 2.4s infinite ease-in-out;
-}
-
-@keyframes handBeckon {
+@keyframes handPulseEngraving {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.9));
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.95));
   }
   50% {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 25px rgba(255, 30, 86, 0.85)) drop-shadow(0 8px 16px rgba(0,0,0,0.9));
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 25px rgba(255, 30, 86, 0.85)) drop-shadow(0 10px 18px rgba(0,0,0,0.95));
   }
 }
 
-/* Interactive Clasp/Touch Prompt */
-.tomb-interactive-hint {
+/* Prompt Hint */
+.tomb-action-prompt {
   margin-top: 14px;
   font-family: 'Montserrat', sans-serif;
   font-size: 9.5px;
@@ -338,7 +316,7 @@ body::before {
   min-height: 20px;
 }
 
-/* Proceed to Letter Button */
+/* Proceed to Act 2 Button */
 .proceed-letter-btn {
   margin-top: 20px;
   background: linear-gradient(180deg, #8a0c24 0%, #4a0311 100%);
@@ -732,7 +710,7 @@ body::before {
   z-index: 2;
 }
 
-/* Runaway Mechanical Vow Question */
+/* Runaway Mechanical Question */
 .runaway-gate-section {
   border-top: 1.5px dashed #7a5f4d;
   padding-top: 26px;
