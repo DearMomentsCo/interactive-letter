@@ -1,16 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
 
 :root {
-  --bg-deep: #060509;
-  --coffin-rim-light: #443c52;
-  --coffin-wood-edge: #231e2c;
-  --coffin-wood-base: #100d14;
-  --velvet-top: #4a154b;
-  --velvet-deep: #130318;
-  --crimson-blood: #a30826;
+  --bg-deep: #060508;
+  --crimson-blood: #8f081e;
   --crimson-glow: #ff1e56;
   --parchment-base: #f7f1e1;
-  --parchment-burn: #2c1a0e;
+  --parchment-border: #2c1a0e;
   --ink-primary: #181412;
   --gold-accent: #d4af37;
 }
@@ -32,20 +27,19 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Atmospheric Moonlit Mist Background */
+/* Atmospheric Background Fog */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 50% 15%, rgba(106, 53, 133, 0.28) 0%, transparent 55%),
-    radial-gradient(circle at 50% 85%, rgba(163, 8, 38, 0.2) 0%, transparent 65%),
-    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.9) 100%);
+    radial-gradient(circle at 50% 15%, rgba(106, 53, 133, 0.28) 0%, transparent 60%),
+    radial-gradient(circle at 50% 85%, rgba(143, 8, 30, 0.22) 0%, transparent 65%),
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
   pointer-events: none;
   z-index: 1;
 }
 
-/* Floating Particles & Burst Stage */
 .particle-canvas {
   position: fixed;
   inset: 0;
@@ -65,16 +59,16 @@ body::before {
   pointer-events: none;
 }
 
-/* Audio Floating Controller */
+/* Floating Audio Toggle */
 .audio-toggle-btn {
   position: fixed;
   top: 18px;
   right: 18px;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: rgba(20, 16, 26, 0.85);
-  border: 1.5px solid #5a4b6c;
+  background: rgba(18, 14, 24, 0.85);
+  border: 1.5px solid #63507a;
   color: #fff;
   font-size: 16px;
   display: flex;
@@ -82,7 +76,7 @@ body::before {
   justify-content: center;
   cursor: pointer;
   z-index: 100;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.8), 0 0 12px rgba(255, 30, 86, 0.35);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.8), 0 0 12px rgba(255, 30, 86, 0.4);
   transition: all 0.3s ease;
 }
 .audio-toggle-btn.is-playing {
@@ -98,8 +92,8 @@ body::before {
 .passcode-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(3, 2, 6, 0.96);
-  backdrop-filter: blur(14px);
+  background: rgba(3, 2, 6, 0.97);
+  backdrop-filter: blur(16px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -118,11 +112,11 @@ body::before {
   width: 100%;
   max-width: 320px;
   background: linear-gradient(160deg, #1d1827 0%, #0a080f 100%);
-  border: 2px solid #554868;
-  border-radius: 10px;
+  border: 2px solid #5a4a70;
+  border-radius: 12px;
   padding: 34px 22px;
   text-align: center;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 30px rgba(163, 8, 38, 0.35);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 35px rgba(143, 8, 30, 0.4);
 }
 
 .passcode-title {
@@ -141,7 +135,7 @@ body::before {
 }
 
 .passcode-digit {
-  width: 46px;
+  width: 48px;
   height: 56px;
   background: #09070d;
   border: 1.5px solid #4a3e5c;
@@ -165,7 +159,7 @@ body::before {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Master Container */
+/* Master Layout */
 .main-stage {
   position: relative;
   z-index: 3;
@@ -175,11 +169,11 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px 60px;
+  padding: 24px 16px 50px;
 }
 
 /* ==========================================================================
-   ACT 1: THE COFFIN EXPERIENCE (FULL SCREEN, ERGONOMIC RATIO)
+   ACT 1: SKEUOMORPHIC VICTORIAN COFFIN (GOLDEN RATIO & ANATOMICAL BONES)
    ========================================================================== */
 .act-coffin-view {
   width: 100%;
@@ -199,197 +193,81 @@ body::before {
 
 .coffin-hero-meta {
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .coffin-hero-sub {
   font-family: 'Montserrat', sans-serif;
-  font-size: 9px;
+  font-size: 9.5px;
   letter-spacing: 3px;
   color: #ff3366;
   font-weight: 800;
   margin-bottom: 6px;
-  text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
+  text-shadow: 0 0 12px rgba(255, 51, 102, 0.7);
 }
 
 .coffin-hero-title {
-  font-size: clamp(17px, 4.6vw, 22px);
-  letter-spacing: 3px;
+  font-size: clamp(18px, 4.8vw, 24px);
+  letter-spacing: 3.5px;
   font-weight: 900;
-  background: linear-gradient(180deg, #ffffff 0%, #b2a9c4 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #b8b0cc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Coffin Casket Structure: Perfectly fits any screen height */
-.coffin-casket-body {
+/* Master Victorian Coffin Casket Structure */
+.coffin-physical-stage {
   position: relative;
   width: min(84vw, 320px);
-  height: min(64vh, 460px);
-  perspective: 1200px;
+  height: min(65vh, 470px);
   margin: 0 auto;
+  perspective: 1200px;
 }
 
-/* 3-Tier Layered Wood Bevel */
-.coffin-bezel-outer {
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(26% 0%, 74% 0%, 100% 25%, 82% 100%, 18% 100%, 0% 25%);
-  background: linear-gradient(135deg, var(--coffin-rim-light) 0%, #16121c 40%, #060507 100%);
-  padding: 6px;
-  box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.95),
-    0 0 35px rgba(163, 8, 38, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.35);
-  border-radius: 6px;
-  display: flex;
-}
-
-.coffin-bezel-inner {
-  position: absolute;
-  inset: 5px;
-  clip-path: polygon(26% 0%, 74% 0%, 100% 25%, 82% 100%, 18% 100%, 0% 25%);
-  background: linear-gradient(180deg, #2c2538 0%, #130f18 60%, #08060a 100%);
-  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(255,255,255,0.15);
-}
-
-/* Deep Tufted Velvet Interior */
-.coffin-velvet-core {
-  position: absolute;
-  inset: 12px;
-  clip-path: polygon(26% 0%, 74% 0%, 100% 25%, 82% 100%, 18% 100%, 0% 25%);
-  background: radial-gradient(ellipse at 50% 35%, var(--velvet-top) 0%, var(--velvet-deep) 75%, #050106 100%);
-  box-shadow: inset 0 0 35px #000000, inset 0 6px 14px rgba(0, 0, 0, 0.95);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.coffin-velvet-core::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
-  background-size: 14px 14px;
-  opacity: 0.35;
-}
-
-/* Hands Area */
-.hands-stage-arena {
-  position: relative;
-  width: 92%;
-  height: 55%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 4px;
-  z-index: 5;
-}
-
-.skeletal-arm-svg {
-  width: 48%;
+/* Master SVG Casket Shell */
+.coffin-casket-svg {
+  width: 100%;
   height: 100%;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.95));
-  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  display: block;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(143, 8, 30, 0.35));
 }
 
-.arm-left {
-  transform: translateX(-6px) rotate(-6deg);
-}
-
-.arm-right {
-  transform: translateX(6px) rotate(6deg);
-  cursor: pointer;
-}
-
-.arm-pulse-hint {
-  animation: skeletonPulse 2.2s infinite ease-in-out;
-}
-
-@keyframes skeletonPulse {
-  0%, 100% {
-    transform: translateX(6px) rotate(6deg) scale(1);
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,0.95));
-  }
-  50% {
-    transform: translateX(2px) rotate(4deg) scale(1.05);
-    filter: drop-shadow(0 0 18px rgba(255, 30, 86, 0.75)) drop-shadow(0 6px 14px rgba(0,0,0,0.95));
-  }
-}
-
-/* Clasping State */
-.coffin-casket-body.is-clasped .arm-left {
-  transform: translateX(34px) rotate(16deg);
-}
-
-.coffin-casket-body.is-clasped .arm-right {
-  transform: translateX(-34px) rotate(-16deg);
-  animation: none;
-}
-
-/* Blooming Blood Rose */
-.rose-bloom-svg {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0) rotate(-30deg);
-  width: 90px;
-  height: 90px;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 10;
-  filter: drop-shadow(0 0 22px rgba(255, 30, 86, 0.85)) drop-shadow(0 8px 16px rgba(0,0,0,0.9));
-  transition: transform 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
-}
-
-.coffin-casket-body.is-clasped .rose-bloom-svg {
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  opacity: 1;
-}
-
-/* Coffin Sliding Solid Wood Lid */
-.coffin-sliding-lid {
+/* Coffin Sliding Lid Layer */
+.coffin-lid-overlay {
   position: absolute;
   inset: 0;
-  clip-path: polygon(26% 0%, 74% 0%, 100% 25%, 82% 100%, 18% 100%, 0% 25%);
-  background: linear-gradient(145deg, #272033 0%, #15111d 45%, #08070c 100%);
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.95),
-    inset 0 2px 4px rgba(255, 255, 255, 0.25),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.9);
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
+  z-index: 20;
   transition: transform 1.2s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.8s ease;
 }
 
-.lid-inner-recess {
-  width: 66%;
-  height: 60%;
-  border: 1.5px solid #4a3e5c;
-  outline: 1px dashed rgba(224, 220, 240, 0.2);
-  outline-offset: -6px;
+.coffin-physical-stage.is-opened .coffin-lid-overlay {
+  transform: translateY(-115%) rotate(-4deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Wax Seal Button on Lid */
+.lid-seal-wrap {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at center, rgba(46, 37, 61, 0.5) 0%, transparent 75%);
+  pointer-events: none;
 }
 
-.wax-cross-seal {
-  width: 70px;
-  height: 70px;
+.lid-seal-btn {
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #ff2a5f 0%, #a80a29 50%, #3d020e 95%);
   border: 2px solid #ff758c;
   box-shadow: 
     0 10px 24px rgba(0, 0, 0, 0.9),
-    0 0 25px rgba(255, 42, 95, 0.65),
+    0 0 25px rgba(255, 42, 95, 0.7),
     inset 0 0 0 3px rgba(0, 0, 0, 0.4),
     inset 0 0 0 5px rgba(255, 255, 255, 0.3);
   display: flex;
@@ -403,56 +281,130 @@ body::before {
   50% { transform: scale(1.06); filter: brightness(1.2); }
 }
 
-.lid-tap-prompt {
-  margin-top: 18px;
+.lid-seal-prompt {
+  margin-top: 14px;
   font-family: 'Montserrat', sans-serif;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 2.2px;
+  letter-spacing: 2px;
   color: #ffd1dc;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
+  white-space: nowrap;
 }
 
-.coffin-casket-body.is-opened .coffin-sliding-lid {
-  transform: translateY(-115%) rotate(-4deg);
-  opacity: 0;
+/* Hands Arena Inside Velvet Bed */
+.hands-interactive-arena {
+  position: absolute;
+  top: 18%;
+  left: 8%;
+  width: 84%;
+  height: 58%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
   pointer-events: none;
 }
 
-/* Hold Console */
-.hold-gauge-panel {
+.arm-svg-box {
+  width: 48%;
+  height: 100%;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.9));
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.arm-left {
+  transform: translateX(-4px) rotate(-4deg);
+}
+
+.arm-right {
+  transform: translateX(4px) rotate(4deg);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Glowing Pulsing Animation on Right Bone Hand */
+.arm-right-pulse {
+  animation: boneTouchGlow 2.2s infinite ease-in-out;
+}
+
+@keyframes boneTouchGlow {
+  0%, 100% {
+    transform: translateX(4px) rotate(4deg) scale(1);
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.9));
+  }
+  50% {
+    transform: translateX(2px) rotate(2deg) scale(1.05);
+    filter: drop-shadow(0 0 20px rgba(255, 30, 86, 0.8)) drop-shadow(0 6px 12px rgba(0,0,0,0.9));
+  }
+}
+
+/* Clasped Hands State */
+.coffin-physical-stage.is-clasped .arm-left {
+  transform: translateX(36px) rotate(16deg);
+}
+
+.coffin-physical-stage.is-clasped .arm-right {
+  transform: translateX(-36px) rotate(-16deg);
+  animation: none;
+}
+
+/* Blooming Blood Rose */
+.rose-bloom-cluster {
   position: absolute;
-  bottom: 24px;
-  width: 80%;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-30deg);
+  width: 90px;
+  height: 90px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 0 22px rgba(255, 30, 86, 0.85)) drop-shadow(0 8px 16px rgba(0,0,0,0.95));
+  transition: transform 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+}
+
+.coffin-physical-stage.is-clasped .rose-bloom-cluster {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* Prominent Hold Gauge at Bottom of Casket (Fully visible, unclipped) */
+.hold-gauge-bottom {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   opacity: 0;
-  z-index: 10;
+  z-index: 12;
   transition: opacity 0.5s ease;
-}
-
-.coffin-casket-body.is-opened .hold-gauge-panel {
-  opacity: 1;
-}
-
-.coffin-casket-body.is-clasped .hold-gauge-panel {
-  opacity: 0;
   pointer-events: none;
 }
 
-.hold-track-bar {
+.coffin-physical-stage.is-opened .hold-gauge-bottom {
+  opacity: 1;
+}
+
+.coffin-physical-stage.is-clasped .hold-gauge-bottom {
+  opacity: 0;
+}
+
+.hold-meter-track {
   width: 100%;
   height: 7px;
   background: #08060b;
-  border: 1px solid #5a4b6c;
+  border: 1px solid #63507a;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: inset 0 2px 4px #000;
 }
 
-.hold-fill-bar {
+.hold-meter-fill {
   width: 0%;
   height: 100%;
   background: linear-gradient(90deg, #ff0055, #ff758c);
@@ -460,18 +412,19 @@ body::before {
   transition: width 0.08s linear;
 }
 
-.hold-guide-text {
+.hold-meter-text {
   font-family: 'Montserrat', sans-serif;
   font-size: 8.5px;
   font-weight: 800;
   letter-spacing: 1.5px;
   color: #ffccd5;
   text-shadow: 0 1px 4px #000;
+  white-space: nowrap;
 }
 
-/* Clasp Transition Button to Act 2 */
-.read-letter-btn {
-  margin-top: 22px;
+/* Proceed to Act 2 Button */
+.proceed-letter-btn {
+  margin-top: 24px;
   background: linear-gradient(180deg, #8a0c24 0%, #4a0311 100%);
   color: #fff;
   border: 1.5px solid #ff3366;
@@ -493,9 +446,9 @@ body::before {
 }
 
 /* ==========================================================================
-   ACT 2: GOTHIC BURNED PARCHMENT (STANDALONE IMMERSIVE LETTER)
+   ACT 2: GOTHIC PARCHMENT (STANDALONE IMMERSIVE LETTER)
    ========================================================================== */
-.act-parchment-letter {
+.act-parchment-view {
   display: none;
   width: 100%;
   max-width: 440px;
@@ -520,13 +473,13 @@ body::before {
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.act-parchment-letter.is-active {
+.act-parchment-view.is-active {
   display: block;
   opacity: 1;
   transform: translateY(0);
 }
 
-.act-parchment-letter::before {
+.act-parchment-view::before {
   content: "";
   position: absolute;
   inset: -5px;
