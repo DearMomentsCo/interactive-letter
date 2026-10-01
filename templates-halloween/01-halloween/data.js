@@ -10,14 +10,12 @@ const letterData = {
   headline: "TILL DEATH DO US PART",
   subHeadline: "AN ETERNAL PACT ETCHED IN BONE & STONE",
 
-  tombEpitaph: "REST IN ETERNAL DEVOTION",
-  tombEngravingYear: "1892 — FOREVER",
-
   salutation: "To My Eternal Beloved,",
-  body: "They say nothing in this fleeting realm withstands the test of time, yet our souls remain bound by a pact that mocks eternity itself.\n\nThrough every fading breath and every cold whisper of autumn twilight, my devotion to you stays unyielding. Neither distance nor the silence of the earth could ever part what is woven into our very marrow.\n\nTake my hand across the velvet dark, today and into the quiet forever.",
+  body: "They say nothing in this fleeting realm withstands the test of time, yet our souls remain bound by a pact that mocks eternity itself.\n\nThrough every fading breath and every cold whisper of autumn twilight, my devotion to you stays unyielding. Neither distance nor the silence of the earth could ever part what is woven into our very marrow.\n\nTake this rose across the velvet dark, today and into the quiet forever.",
   closing: "Eternally yours to the bone,",
   signature: "Your Devoted Wraith",
 
+  // 9 种可选字体默认设置（如需切换只需在此修改名称）
   fontType: "Cormorant Garamond",
 
   audioUrl: "https://files.catbox.moe/k3b4t0.mp3",
