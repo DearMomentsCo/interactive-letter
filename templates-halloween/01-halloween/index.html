@@ -11,8 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400;1,600&family=Montserrat:wght@500;700;800&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../../core.css" />
-  <!-- 防缓存版本标记 -->
-  <link rel="stylesheet" href="style.css?v=graveyard_tomb_501" />
+  <link rel="stylesheet" href="style.css?v=engraved_art_701" />
 </head>
 <body>
 
@@ -41,152 +40,209 @@
   <main class="main-stage">
 
     <!-- ==========================================================================
-         ACT 1: THE GRAVEYARD TOMBSTONE & RISING SKELETON HAND
+         ACT 1: SKEUOMORPHIC ENGRAVED TOMBSTONE & REAL ANATOMICAL BONE HAND
          ========================================================================== -->
-    <section class="act-graveyard-view" id="actGraveyardView">
+    <section class="act-tomb-view" id="actTombView">
       
-      <div class="graveyard-meta-header">
-        <div class="graveyard-meta-sub" id="statusDate">ALL HALLOWS' EVE, 2026</div>
-        <h1 class="graveyard-meta-title" id="headlineHero">TILL DEATH DO US PART</h1>
+      <div class="tomb-hero-meta">
+        <div class="tomb-hero-sub" id="statusDate">ALL HALLOWS' EVE, 2026</div>
+        <h1 class="tomb-hero-title" id="headlineHero">TILL DEATH DO US PART</h1>
       </div>
 
-      <!-- Physical Graveyard Scene Stage -->
-      <div class="graveyard-scene-viewport" id="graveyardScene">
+      <!-- Master Gravestone Stage -->
+      <div class="tomb-stage-container" id="tombStageContainer">
         
-        <!-- Master Gravestone & Candles & Soil SVG -->
-        <svg class="tombstone-casket-svg" id="tombstoneSvg" viewBox="0 0 340 460" fill="none">
+        <!-- 3D Weathered Stone Gravestone with Chiseled Bevels -->
+        <svg class="tombstone-master-svg" id="tombstoneMasterSvg" viewBox="0 0 340 460" fill="none">
           <defs>
-            <!-- Granite Texture Gradients -->
-            <linearGradient id="tombStoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4e4859"/>
-              <stop offset="35%" stop-color="#2c2736"/>
-              <stop offset="70%" stop-color="#191622"/>
+            <!-- Stone Shading Gradients -->
+            <linearGradient id="stoneFaceGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4e485a"/>
+              <stop offset="25%" stop-color="#2c2736"/>
+              <stop offset="65%" stop-color="#181521"/>
               <stop offset="100%" stop-color="#0a0810"/>
             </linearGradient>
-            <linearGradient id="stoneBaseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#3c3647"/>
-              <stop offset="100%" stop-color="#14111c"/>
+            <linearGradient id="stoneBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#383244"/>
+              <stop offset="100%" stop-color="#120f18"/>
             </linearGradient>
-            <radialGradient id="candleGlowGrad" cx="50%" cy="50%" r="50%">
+            <radialGradient id="candleFlames" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#ffbe0b" stop-opacity="1"/>
-              <stop offset="60%" stop-color="#fb5607" stop-opacity="0.8"/>
+              <stop offset="55%" stop-color="#fb5607" stop-opacity="0.85"/>
               <stop offset="100%" stop-color="#ff006e" stop-opacity="0"/>
             </radialGradient>
-            <filter id="shadowFilter" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000000" flood-opacity="0.9"/>
+            <filter id="heavyStoneShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000000" flood-opacity="0.95"/>
             </filter>
           </defs>
 
-          <!-- 1. Stone Tiered Pedestal -->
-          <rect x="25" y="405" width="290" height="25" rx="4" fill="url(#stoneBaseGrad)" stroke="#524861" stroke-width="2"/>
-          <rect x="45" y="380" width="250" height="25" rx="3" fill="url(#stoneBaseGrad)" stroke="#453c52" stroke-width="2"/>
+          <!-- 1. Pedestal Bottom Layers (Stepped Solid Bases) -->
+          <rect x="20" y="415" width="300" height="25" rx="3" fill="#14111c" stroke="#483f56" stroke-width="2"/>
+          <rect x="42" y="390" width="256" height="25" rx="2" fill="url(#stoneBevelGrad)" stroke="#3d354a" stroke-width="2"/>
 
-          <!-- 2. Arched Gothic Tombstone Slab -->
-          <path d="M 60 380 L 60 140 C 60 40, 280 40, 280 140 L 280 380 Z" fill="url(#tombStoneGrad)" stroke="#5c536e" stroke-width="2.5" filter="url(#shadowFilter)"/>
+          <!-- 2. Arched Gothic Slab (3D Bevel with Left Highlight & Right Shadow) -->
+          <!-- Right Extruded Side (Depth Thickness) -->
+          <path d="M 68 140 C 68 55, 272 55, 272 140 L 278 145 L 278 390 L 272 390 Z" fill="#0c0a11"/>
           
-          <!-- Inner Carved Inset Arch -->
-          <path d="M 75 370 L 75 145 C 75 60, 265 60, 265 145 L 265 370 Z" fill="#14121a" stroke="#3d364a" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- Front Stone Face -->
+          <path d="M 62 390 L 62 140 C 62 45, 278 45, 278 140 L 278 390 Z" fill="url(#stoneFaceGrad)" stroke="#584e68" stroke-width="2.5" filter="url(#heavyStoneShadow)"/>
 
-          <!-- Carved Gothic Cross at Top -->
-          <g filter="url(#shadowFilter)">
-            <path d="M 162 90 H 178 V 110 H 198 V 126 H 178 V 170 H 162 V 126 H 142 V 110 H 162 Z" fill="#2d2838" stroke="#685e78" stroke-width="1.5"/>
+          <!-- Recessed Inset Arch with Cross-Hatch Shading -->
+          <path d="M 76 380 L 76 145 C 76 65, 264 65, 264 145 L 264 380 Z" fill="#110e16" stroke="#332c3e" stroke-width="2" stroke-dasharray="6,4"/>
+
+          <!-- Heavy Chiseled Gothic Cross -->
+          <g filter="url(#heavyStoneShadow)">
+            <path d="M 160 85 H 180 V 105 H 202 V 122 H 180 V 165 H 160 V 122 H 138 V 105 H 160 Z" fill="#241f2d" stroke="#5a4e6c" stroke-width="1.6"/>
+            <!-- Bevel line on cross -->
+            <path d="M 160 85 L 170 95 L 170 165 M 138 105 L 150 113 L 202 113" stroke="#41384e" stroke-width="1"/>
           </g>
 
-          <!-- Weathered Stone Cracks -->
-          <path d="M 90 120 L 115 145 L 105 165 L 125 185" stroke="#332d3d" stroke-width="1.8" stroke-linecap="round"/>
-          <path d="M 255 190 L 235 210 L 245 230" stroke="#332d3d" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Weathered Deep Stone Cracks & Erosion Marks -->
+          <path d="M 88 115 L 112 140 L 102 160 L 126 182" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 252 185 L 232 208 L 244 228" stroke="#251e2e" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 170 330 L 182 355 L 176 370" stroke="#251e2e" stroke-width="1.6" stroke-linecap="round"/>
 
-          <!-- Carved Inscription (Text glows on touch) -->
-          <text x="170" y="240" class="engraved-vow-text" id="tombEpitaphText">REST IN ETERNAL DEVOTION</text>
-          <text x="170" y="270" class="tomb-engraved-date" id="tombEngravingYear">1892 — FOREVER</text>
+          <!-- Deep Chiseled Epitaph -->
+          <text x="170" y="240" class="tomb-engraved-text" id="tombEpitaphText">REST IN ETERNAL DEVOTION</text>
+          <text x="170" y="270" class="tomb-engraved-sub" id="tombEngravingYear">1892 — FOREVER</text>
 
-          <!-- Left Flanking Candlesticks -->
-          <g class="candle-glow">
-            <rect x="36" y="340" width="12" height="40" fill="#dedbd2" stroke="#333" stroke-width="1"/>
-            <path d="M 42 338 Q 42 322 42 316 Q 47 330 42 338" fill="url(#candleGlowGrad)"/>
-            <circle cx="42" cy="328" r="14" fill="url(#candleGlowGrad)" opacity="0.4"/>
-          </g>
+          <!-- Flanking Candlesticks with Wax Drippings -->
+          <g>
+            <!-- Left Candle -->
+            <path d="M 34 390 L 34 345 C 34 343, 38 342, 42 342 C 46 342, 50 343, 50 345 L 50 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
+            <path d="M 38 350 Q 36 365 37 375" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Left Flame -->
+            <path d="M 42 340 Q 38 325 42 316 Q 47 325 42 340 Z" fill="url(#candleFlames)"/>
+            <circle cx="42" cy="328" r="14" fill="url(#candleFlames)" opacity="0.35"/>
 
-          <!-- Right Flanking Candlesticks -->
-          <g class="candle-glow" style="animation-delay: 0.8s;">
-            <rect x="292" y="340" width="12" height="40" fill="#dedbd2" stroke="#333" stroke-width="1"/>
-            <path d="M 298 338 Q 298 322 298 316 Q 303 330 298 338" fill="url(#candleGlowGrad)"/>
-            <circle cx="298" cy="328" r="14" fill="url(#candleGlowGrad)" opacity="0.4"/>
+            <!-- Right Candle -->
+            <path d="M 290 390 L 290 345 C 290 343, 294 342, 298 342 C 302 342, 306 343, 306 345 L 306 390 Z" fill="#dedbd2" stroke="#2b2633" stroke-width="1.2"/>
+            <path d="M 302 348 Q 304 362 303 372" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Right Flame -->
+            <path d="M 298 340 Q 294 325 298 316 Q 303 325 298 340 Z" fill="url(#candleFlames)"/>
+            <circle cx="298" cy="328" r="14" fill="url(#candleFlames)" opacity="0.35"/>
           </g>
 
         </svg>
 
-        <!-- 3. Rising 3D Anatomical Skeleton Hand (Breaking Through Soil) -->
-        <div class="rising-hand-stage" id="risingHandStage">
-          <svg class="rising-hand-pulse" viewBox="0 0 200 240" fill="none" style="width:100%; height:100%;">
+        <!-- 3. Rising Anatomical Engraving Skeleton Hand with Rose -->
+        <div class="anatomical-hand-stage" id="anatomicalHandStage">
+          <svg class="hand-hatch-pulse" viewBox="0 0 240 280" fill="none" style="width:100%; height:100%;">
             <defs>
-              <linearGradient id="realBoneLight" x1="0%" y1="0%" x2="100%" y2="100%">
+              <!-- Bone Gradient Base -->
+              <linearGradient id="ivoryBoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="40%" stop-color="#ede8dc"/>
-                <stop offset="75%" stop-color="#b8b09d"/>
-                <stop offset="100%" stop-color="#696152"/>
+                <stop offset="35%" stop-color="#ede7db"/>
+                <stop offset="70%" stop-color="#b8b09d"/>
+                <stop offset="100%" stop-color="#5a5245"/>
               </linearGradient>
-              <filter id="handShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="2" dy="5" stdDeviation="3" flood-color="#000000" flood-opacity="0.95"/>
+              <filter id="boneOccFilter" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="2" dy="5" stdDeviation="3.5" flood-color="#000000" flood-opacity="0.95"/>
               </filter>
             </defs>
 
-            <!-- Forearm Bones (Radius & Ulna) -->
-            <path d="M 90 230 C 90 190, 88 160, 92 135" stroke="url(#realBoneLight)" stroke-width="8" stroke-linecap="round" filter="url(#handShadow)"/>
-            <path d="M 112 230 C 112 190, 110 160, 108 135" stroke="url(#realBoneLight)" stroke-width="8" stroke-linecap="round" filter="url(#handShadow)"/>
+            <!-- Forearm Bone Pair (Radius & Ulna with Anatomical Flaring) -->
+            <path d="M 104 275 C 104 225, 102 185, 106 155 C 108 148, 114 148, 114 155 C 112 185, 114 225, 114 275 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2" filter="url(#boneOccFilter)"/>
+            <!-- Ulna Shaft Hatching -->
+            <path d="M 106 170 L 112 173 M 106 185 L 112 188 M 106 200 L 112 203 M 106 215 L 112 218 M 106 230 L 112 233" stroke="#332a22" stroke-width="1.2"/>
 
-            <!-- Wrist Bones -->
-            <ellipse cx="100" cy="130" rx="22" ry="10" fill="#2d2433" stroke="url(#realBoneLight)" stroke-width="3" filter="url(#handShadow)"/>
+            <path d="M 126 275 C 126 225, 128 185, 124 155 C 122 148, 116 148, 116 155 C 118 185, 116 225, 116 275 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2" filter="url(#boneOccFilter)"/>
+            <!-- Radius Shaft Hatching -->
+            <path d="M 118 170 L 124 173 M 118 185 L 124 188 M 118 200 L 124 203 M 118 215 L 124 218 M 118 230 L 124 233" stroke="#332a22" stroke-width="1.2"/>
 
-            <!-- Index Finger (Grasping Arch) -->
-            <path d="M 86 122 L 72 90 L 60 60 L 52 40" stroke="url(#realBoneLight)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#handShadow)"/>
-            <circle cx="72" cy="90" r="4" fill="#4d4234"/>
-            <circle cx="60" cy="60" r="3.5" fill="#4d4234"/>
+            <!-- Carpal Wrist Bones (Anatomical Cluster of 8 interlocking bones) -->
+            <g filter="url(#boneOccFilter)">
+              <ellipse cx="116" cy="148" rx="24" ry="11" fill="#2d241d" stroke="#1a1412" stroke-width="2"/>
+              <circle cx="103" cy="148" r="4.5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="112" cy="148" r="5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="121" cy="148" r="5" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
+              <circle cx="129" cy="148" r="4" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.5"/>
+            </g>
 
-            <!-- Middle Finger (Tallest, Hooked Forward) -->
-            <path d="M 96 120 L 92 78 L 90 44 L 88 18" stroke="url(#realBoneLight)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#handShadow)"/>
-            <circle cx="92" cy="78" r="4.2" fill="#4d4234"/>
-            <circle cx="90" cy="44" r="3.8" fill="#4d4234"/>
+            <!-- Thumb (Metacarpal + Proximal + Distal Phalanx with Cross-Hatching) -->
+            <g filter="url(#boneOccFilter)">
+              <path d="M 96 145 C 85 140, 75 142, 65 148 C 62 151, 65 156, 70 155 C 80 152, 90 152, 96 152 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="65" cy="148" r="4" fill="#3a3026"/>
+              <path d="M 65 148 C 55 155, 45 165, 38 178 C 35 183, 40 186, 44 182 C 50 172, 60 162, 68 152 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- Thumb hatching -->
+              <path d="M 46 172 L 50 168 M 52 165 L 56 161 M 72 150 L 76 146" stroke="#332a22" stroke-width="1"/>
+            </g>
+
+            <!-- Index Finger (Curved Tense Grasping Arcs) -->
+            <g filter="url(#boneOccFilter)">
+              <path d="M 102 140 C 95 110, 88 85, 78 65 C 75 60, 82 56, 86 60 C 94 78, 102 105, 108 140 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="78" cy="65" r="4.5" fill="#3a3026"/>
+              <path d="M 78 65 C 72 50, 62 38, 52 30 C 48 26, 52 22, 56 25 C 68 34, 78 48, 84 62 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- Index hatching -->
+              <path d="M 85 85 L 91 88 M 82 72 L 88 75 M 65 42 L 70 45" stroke="#332a22" stroke-width="1"/>
+            </g>
+
+            <!-- Middle Finger (Tallest, Hooked Tension with Deep Joints) -->
+            <g filter="url(#boneOccFilter)">
+              <path d="M 114 138 C 112 100, 110 68, 106 42 C 104 36, 112 34, 115 38 C 118 65, 120 100, 122 138 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="2"/>
+              <circle cx="106" cy="42" r="5" fill="#3a3026"/>
+              <path d="M 106 42 C 104 28, 102 16, 98 6 C 96 2, 102 0, 105 4 C 110 14, 113 28, 114 40 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- Middle hatching -->
+              <path d="M 110 75 L 116 77 M 108 58 L 114 60 M 102 24 L 108 26" stroke="#332a22" stroke-width="1.2"/>
+            </g>
 
             <!-- Ring Finger -->
-            <path d="M 108 120 L 115 80 L 122 50 L 128 28" stroke="url(#realBoneLight)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#handShadow)"/>
-            <circle cx="115" cy="80" r="4" fill="#4d4234"/>
-            <circle cx="122" cy="50" r="3.5" fill="#4d4234"/>
-
-            <!-- Pinky Finger -->
-            <path d="M 118 124 L 134 94 L 146 72 L 158 56" stroke="url(#realBoneLight)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round" filter="url(#handShadow)"/>
-            <circle cx="134" cy="94" r="3.5" fill="#4d4234"/>
-            <circle cx="146" cy="72" r="3" fill="#4d4234"/>
-
-            <!-- Thumb (Extended inward) -->
-            <path d="M 80 126 L 62 120 L 44 130 L 32 142" stroke="url(#realBoneLight)" stroke-width="5.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#handShadow)"/>
-            <circle cx="62" cy="120" r="3.8" fill="#4d4234"/>
-            <circle cx="44" cy="130" r="3.2" fill="#4d4234"/>
-
-            <!-- Glowing Blood Rose Held in Hand -->
-            <g transform="translate(70, 40) scale(0.65)" filter="url(#handShadow)">
-              <circle cx="50" cy="50" r="22" fill="#700416"/>
-              <path d="M 50 25 C 34 25 24 38 24 52 C 24 68 38 78 50 85 C 62 78 76 68 76 52 C 76 38 66 25 50 25 Z" fill="#b00624"/>
-              <path d="M 38 45 C 44 36 56 36 62 45 C 65 54 58 64 50 68 C 42 64 35 54 38 45 Z" fill="#e6194b"/>
-              <path d="M 45 49 C 48 45 53 45 55 49 C 57 53 53 58 50 60 C 47 58 43 53 45 49 Z" fill="#ff4d79"/>
+            <g filter="url(#boneOccFilter)">
+              <path d="M 125 140 C 130 105, 136 78, 142 55 C 144 50, 151 52, 149 57 C 142 80, 136 108, 131 140 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="142" cy="55" r="4.5" fill="#3a3026"/>
+              <path d="M 142 55 C 148 42, 156 32, 166 24 C 170 20, 174 25, 170 29 C 160 38, 152 48, 147 60 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- Ring hatching -->
+              <path d="M 132 85 L 138 88 M 138 68 L 144 71 M 154 40 L 160 43" stroke="#332a22" stroke-width="1"/>
             </g>
+
+            <!-- Pinky Finger (Curved Articulated Little Finger) -->
+            <g filter="url(#boneOccFilter)">
+              <path d="M 134 144 C 145 118, 156 95, 168 75 C 171 70, 177 74, 174 79 C 162 100, 150 122, 140 146 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <circle cx="168" cy="75" r="4" fill="#3a3026"/>
+              <path d="M 168 75 C 178 62, 190 52, 202 44 C 206 41, 209 46, 206 50 C 194 58, 182 70, 174 82 Z" fill="url(#ivoryBoneGrad)" stroke="#1a1412" stroke-width="1.8"/>
+              <!-- Pinky hatching -->
+              <path d="M 150 108 L 156 112 M 160 92 L 166 96 M 184 62 L 190 66" stroke="#332a22" stroke-width="1"/>
+            </g>
+
+            <!-- Held Blood Rose (Gothic Velvet Red with Vine Thorns) -->
+            <g transform="translate(86, 52) scale(0.75)" filter="url(#boneOccFilter)">
+              <path d="M 22 75 Q 35 62 55 60 Q 75 62 88 75" stroke="#162e14" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M 32 66 L 25 56 M 75 66 L 82 56" stroke="#162e14" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="55" cy="52" r="24" fill="#590312" stroke="#1a1412" stroke-width="2"/>
+              <path d="M 55 24 C 36 24 24 38 24 55 C 24 72 40 84 55 90 C 70 84 86 72 86 55 C 86 38 74 24 55 24 Z" fill="#94051e"/>
+              <path d="M 40 46 C 48 35 62 35 70 46 C 74 56 65 68 55 74 C 45 68 36 56 40 46 Z" fill="#cc0c2e"/>
+              <path d="M 48 50 C 52 44 58 44 62 50 C 64 56 59 62 55 64 C 51 62 46 56 48 50 Z" fill="#ff2a5f"/>
+            </g>
+
           </svg>
         </div>
 
-        <!-- 4. Mound of Dark Earth / Soil Layer -->
-        <svg class="soil-mound-svg" viewBox="0 0 340 60" fill="none">
-          <ellipse cx="170" cy="45" rx="140" ry="18" fill="#140f0c"/>
-          <ellipse cx="170" cy="40" rx="110" ry="14" fill="#241b16"/>
-          <circle cx="120" cy="38" r="4" fill="#0d0a08"/>
-          <circle cx="210" cy="42" r="5" fill="#0d0a08"/>
-          <circle cx="160" cy="35" r="3" fill="#3b2b22"/>
-          <circle cx="180" cy="36" r="3.5" fill="#3b2b22"/>
+        <!-- 4. Mound of Dark Earth / Soil Layer (Layered Clods & Rubble) -->
+        <svg viewBox="0 0 340 70" fill="none" style="position:absolute; bottom:0; left:0; width:100%; height:70px; z-index:15; pointer-events:none;">
+          <defs>
+            <linearGradient id="soilBase" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#36251b"/>
+              <stop offset="60%" stop-color="#1c120c"/>
+              <stop offset="100%" stop-color="#080504"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="170" cy="52" rx="146" ry="18" fill="#080504"/>
+          <!-- Soil Mound Base -->
+          <path d="M 22 70 Q 70 35 170 30 Q 270 35 318 70 Z" fill="url(#soilBase)" stroke="#1a110a" stroke-width="1.5"/>
+          <!-- Chunky Mud & Rock Clods -->
+          <ellipse cx="110" cy="44" rx="14" ry="7" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
+          <ellipse cx="230" cy="46" rx="16" ry="8" fill="#261912" stroke="#120c07" stroke-width="1.2"/>
+          <ellipse cx="168" cy="38" rx="20" ry="8" fill="#3d2a1e" stroke="#120c07" stroke-width="1.2"/>
+          <circle cx="85" cy="54" r="5" fill="#120c07"/>
+          <circle cx="140" cy="48" r="4" fill="#4d3527"/>
+          <circle cx="198" cy="49" r="4.5" fill="#4d3527"/>
+          <circle cx="260" cy="55" r="5" fill="#120c07"/>
         </svg>
 
       </div>
 
-      <!-- Interactive Prompt -->
-      <div class="tomb-interactive-hint" id="tombHint">✦ TAP THE TOMBSTONE TO SUMMON DEVOTION ✦</div>
+      <!-- Action Prompt -->
+      <div class="tomb-action-prompt" id="tombActionPrompt">✦ TAP THE TOMBSTONE TO SUMMON DEVOTION ✦</div>
 
       <!-- Proceed Button -->
       <button class="proceed-letter-btn" id="proceedLetterBtn">✦ TAKE THE ROSE & READ OUR LETTER ✦</button>
@@ -268,7 +324,7 @@
   </main>
 
   <!-- 防缓存版本标记 -->
-  <script src="data.js?v=graveyard_tomb_501"></script>
+  <script src="data.js?v=engraved_art_701"></script>
   <script>
     /* ==========================================================================
        GOTHIC ACOUSTIC & PHYSICAL FEEDBACK ENGINE
@@ -283,7 +339,7 @@
         if (this.ctx.state === 'suspended') this.ctx.resume();
         return this.ctx;
       },
-      // Earth Rupture & Stone Grind
+      // Earth Rupture & Heavy Stone Sound
       playEarthRupture() {
         try {
           const ctx = this.getCtx();
@@ -291,7 +347,7 @@
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(60, now);
+          osc.frequency.setValueAtTime(65, now);
           osc.frequency.exponentialRampToValueAtTime(25, now + 1.2);
 
           gain.gain.setValueAtTime(0.01, now);
@@ -303,11 +359,11 @@
           osc.start(now);
           osc.stop(now + 1.2);
 
-          // Sub-bass rumble for tactile sensation
+          // 50Hz Sub-bass tactile impulse
           const sub = ctx.createOscillator();
           const subGain = ctx.createGain();
           sub.type = 'sine';
-          sub.frequency.setValueAtTime(45, now);
+          sub.frequency.setValueAtTime(50, now);
           subGain.gain.setValueAtTime(0.9, now);
           subGain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
           sub.connect(subGain);
@@ -318,7 +374,7 @@
           this.haptic([60, 40, 90, 40, 120]);
         } catch(e) {}
       },
-      // Bell Resonance
+      // Resonant Cathedral Bell
       playCathedralBell() {
         try {
           const ctx = this.getCtx();
@@ -427,7 +483,7 @@
 
     /* Master Controller */
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Data Ingestion
+      // 1. Ingest Data
       document.getElementById('statusDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('letterDate').innerText = letterData.dateText || "OCTOBER 31, 2026";
       document.getElementById('headlineHero').innerText = letterData.headline || "TILL DEATH DO US PART";
@@ -447,7 +503,7 @@
         document.getElementById('letterBodyText').style.fontFamily = `"${letterData.fontType}", Georgia, serif`;
       }
 
-      // 2. Audio Setup
+      // 2. Audio Control
       const bgAudio = document.getElementById('bgAudio');
       const audioBtn = document.getElementById('audioToggleBtn');
       let isPlayingAudio = false;
@@ -511,11 +567,11 @@
         }
       }
 
-      // 4. Act 1: Tombstone Tap -> Light Words & Raise Skeleton Hand
-      const graveyardScene = document.getElementById('graveyardScene');
-      const tombstoneSvg = document.getElementById('tombstoneSvg');
-      const risingHandStage = document.getElementById('risingHandStage');
-      const tombHint = document.getElementById('tombHint');
+      // 4. Act 1: Click Tombstone -> Light Words & Raise Skeleton Hand
+      const tombStageContainer = document.getElementById('tombStageContainer');
+      const tombstoneSvg = document.getElementById('tombstoneMasterSvg');
+      const anatomicalHandStage = document.getElementById('anatomicalHandStage');
+      const tombActionPrompt = document.getElementById('tombActionPrompt');
       const proceedBtn = document.getElementById('proceedLetterBtn');
       let isRisen = false;
 
@@ -524,14 +580,14 @@
         isRisen = true;
 
         SoundEngine.playEarthRupture();
-        graveyardScene.classList.add('is-lit');
+        tombStageContainer.classList.add('is-lit');
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.5);
 
         setTimeout(() => {
-          graveyardScene.classList.add('is-risen');
-          tombHint.innerText = "✦ TOUCH THE SKELETON HAND TO TAKE THE ROSE ✦";
+          tombStageContainer.classList.add('is-risen');
+          tombActionPrompt.innerText = "✦ TOUCH THE SKELETON HAND TO TAKE THE ROSE ✦";
           SoundEngine.playCathedralBell();
-        }, 600);
+        }, 550);
 
         if (letterData.audioUrl && !isPlayingAudio) {
           bgAudio.play().then(() => {
@@ -542,21 +598,21 @@
       });
 
       // 5. Touch the Rising Skeleton Hand -> Reveal Proceed Button
-      risingHandStage.addEventListener('click', (e) => {
+      anatomicalHandStage.addEventListener('click', (e) => {
         SoundEngine.playCathedralBell();
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.6);
-        tombHint.innerText = "✦ AN ETERNAL PACT IS AWAKENED ✦";
+        tombActionPrompt.innerText = "✦ AN ETERNAL PACT IS AWAKENED ✦";
         proceedBtn.style.display = 'inline-block';
       });
 
       // 6. Transition: Act 1 to Act 2
-      const actGraveyard = document.getElementById('actGraveyardView');
+      const actTomb = document.getElementById('actTombView');
       const actLetter = document.getElementById('actParchmentView');
 
       proceedBtn.addEventListener('click', (e) => {
         triggerBurst(e.clientX || window.innerWidth / 2, e.clientY || window.innerHeight * 0.5);
         SoundEngine.playEarthRupture();
-        actGraveyard.classList.add('is-exited');
+        actTomb.classList.add('is-exited');
 
         setTimeout(() => {
           actLetter.classList.add('is-active');
